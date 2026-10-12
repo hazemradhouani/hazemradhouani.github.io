@@ -3,10 +3,11 @@
   "order": 7,
   "group": "morocco",
   "filters": [
+    "professional",
     "infrastructure"
   ],
   "title": "Nouvelle Medina Station",
-  "run": "Casablanca",
+  "run": "Yassir Khalil Studio | Casablanca",
   "summary": "Urban train station in Casablanca whose folded, origami-like roof structures the building and modulates daylight.",
   "place": "Casablanca",
   "year": "2025",
@@ -21,6 +22,11 @@
       "label": "Year",
       "value": "March 2025",
       "source": "pdf2025:p36"
+    },
+    {
+      "label": "Office",
+      "value": "Yassir Khalil Studio",
+      "source": "answer:2026-10-12"
     },
     {
       "label": "Type",
@@ -99,6 +105,6 @@
   "role": [],
   "quote": null,
   "honour": null,
-  "office": null,
+  "office": "Yassir Khalil Studio",
   "film": null
 }

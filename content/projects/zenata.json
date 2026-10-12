@@ -33,6 +33,11 @@
       "label": "Type",
       "value": "Regional Rail Station",
       "source": "site"
+    },
+    {
+      "label": "Surface",
+      "value": "7 200 m²",
+      "source": "pdf2025:p8 (PDF figures adopted after the owner confirmed the PDF value for Hay Mohammadi, D26)"
     }
   ],
   "tag": "Yassir Khalil Studio / Competition / 2nd Place",
@@ -112,5 +117,6 @@
   "film": "zenata",
   "date": "2025",
   "role": [],
-  "quote": null
+  "quote": null,
+  "honourSource": "site + answer:2026-10-12"
 }

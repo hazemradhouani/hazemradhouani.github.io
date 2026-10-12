@@ -32,6 +32,11 @@
       "label": "Type",
       "value": "Research and Exhibition Centre",
       "source": "site"
+    },
+    {
+      "label": "Surface",
+      "value": "900 m²",
+      "source": "pdf2025:p21 (D26)"
     }
   ],
   "tag": "ENAU / Academic / Cultural",

@@ -33,6 +33,11 @@
       "label": "Type",
       "value": "RER Station",
       "source": "site"
+    },
+    {
+      "label": "Surface",
+      "value": "600 m²",
+      "source": "answer:2026-10-12"
     }
   ],
   "tag": "Yassir Khalil Studio / Infrastructure / Casablanca",

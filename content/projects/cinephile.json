@@ -32,6 +32,11 @@
       "label": "Type",
       "value": "Cinema Complex",
       "source": "site"
+    },
+    {
+      "label": "Surface",
+      "value": "4 000 m²",
+      "source": "pdf2025:p12 (D26)"
     }
   ],
   "tag": "ENAU / Academic / Cultural",

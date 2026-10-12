@@ -3,10 +3,11 @@
   "order": 8,
   "group": "morocco",
   "filters": [
+    "professional",
     "infrastructure"
   ],
   "title": "Aïn Sebaâ Station",
-  "run": "Casablanca",
+  "run": "Yassir Khalil Studio | Casablanca",
   "summary": "Competition entry for a new two-headed train station in the Aïn Sebaâ industrial zone of Casablanca, linked by an urban footbridge.",
   "place": "Casablanca",
   "year": "2025",
@@ -21,6 +22,11 @@
       "label": "Year",
       "value": "February 2025",
       "source": "pdf2025:p40"
+    },
+    {
+      "label": "Office",
+      "value": "Yassir Khalil Studio",
+      "source": "answer:2026-10-12"
     },
     {
       "label": "Type",
@@ -96,6 +102,6 @@
   "role": [],
   "quote": null,
   "honour": null,
-  "office": null,
+  "office": "Yassir Khalil Studio",
   "film": null
 }
