@@ -17,38 +17,35 @@ Translations from French are literal and marked "(translated from French)". Line
 | ID | Conflict | Resolution |
 |---|---|---|
 | C01 | The Hay Mohammadi page showed a "section" and a "structure" drawing that are Nouvelle Medina Station drawings (2025 pp.36-37) | Moved to the new Nouvelle Medina page; Hay Mohammadi shows only its own renders (2025 pp.43-44) |
-| C02 | Surfaces disagree between the site and the 2025 PDF: Hay Mohammadi 6 500 vs 600 m², Zenata 4 200 vs 7 200 m², Tamansourt 12 000 vs 45 000 m², Sentry 38 vs 10 m², Villa Papillon 480 vs 500 m², Cinephile 3 200 vs 4 000 m², Corallum 1 800 vs 900 m² | Withheld on all seven until confirmed |
+| C02 | Surfaces disagree between the site and the 2025 PDF: Hay Mohammadi 6 500 vs 600 m², Zenata 4 200 vs 7 200 m², Tamansourt 12 000 vs 45 000 m², Sentry 38 vs 10 m², Villa Papillon 480 vs 500 m², Cinephile 3 200 vs 4 000 m², Corallum 1 800 vs 900 m² | Owner confirmed Hay Mohammadi 600 m² (2026-10-12); the 2025 PDF figures are adopted for Zenata, Tamansourt, Villa Papillon, Cinephile and Corallum (D26); Sentry stays withheld (its own plan dimensions contradict 10 m²) |
 | C03 | Al-Arg honours year: 2026 PDF "Highest Honours unanimous, ENAU 2026" vs the owner's answer (thesis June 2024, diploma February 2026) | Owner's answer; the year is left out of the translated 2026 bullet |
 | C04 | Al-Arg material: site "vernacular stone architecture" vs 2026 PDF "raw earth architecture" | 2026 PDF |
 | C05 | Spelling of the village: Al-Arg (both PDFs) vs ARG, Al Erg, El Erg (site) | Al-Arg in running text; kept inside proper names (Société de Préservation du Village d'ARG) and the thesis subtitle |
-| C06 | Sakura distinction: "Most Appreciated Research" (owner's answer, site) vs "Best Research Award" (2026 PDF) | Owner's answer |
+| C06 | Sakura distinction: "Most Appreciated Research" (owner's answer, site) vs "Best Research Award" (2026 PDF) | Owner confirmed: Most Appreciated Research (2026-10-12) |
 | C07 | La Villette: site "a five-storey residential building ... through to PC submission" vs 2026 PDF "three distinct buildings ... PRO / DCE" | Site paragraphs dropped; the 2026 role and phase are used |
 | C08 | Foubert caption "DCE 2026" vs 2026 PDF phase "PRO" | Phase reference removed from the caption |
 | C09 | Corallum location "Tarabka" (2025 PDF) | Corrected to Tabarka, the coral town on the northern Tunisian coast |
-| C10 | Supervisors: site "Prof. Monsef Al-Fourati, Prof. Adnan Ben Nejma" and "Prof. Moncef Fourati"; the 2025 PDF lists "Mr. Moncef Fourati" as a reference only | Site wording kept; spelling unconfirmed |
+| C10 | Supervisors: site "Prof. Monsef Al-Fourati, Prof. Adnan Ben Nejma" and "Prof. Moncef Fourati"; the 2025 PDF lists "Mr. Moncef Fourati" as a reference only | Owner confirmed: Moncef Fourati and Adnen Ben Nejma (2026-10-12) |
 | C11 | "award-winning thesis" (site) where the only thesis distinction is the jury grade | Reworded to "the thesis (Highest Honours)" |
-| C12 | Zenata "2nd Place, competition": site only; the 2025 PDF shows the competition sheet without a ranking | Kept (site), flagged |
+| C12 | Zenata "2nd Place, competition": site only; the 2025 PDF shows the competition sheet without a ranking | Owner confirmed the 2nd place (2026-10-12) |
 | C13 | 2020-2021: site "Société de Préservation du Village d'ARG"; 2025 PDF lists BATN, Tozeur (Bureau d'Architecture et de Topographie Numérique) for the same summers, and SKI, Sousse (2022), which the site omits | Site kept, flagged |
 | C14 | Bolivar year: site 2025-2026 vs 2026 PDF 2026 | 2026 PDF |
-| C15 | Studio BELEM title: site "Architectural Intern, ongoing"; 2026 PDF "Licensed Architect" (personal title) | Site kept, flagged |
-| C16 | Nouvelle Medina and Aïn Sebaâ: no office named in the 2025 PDF | Office not stated; listed under Morocco without "Professional" |
+| C15 | Studio BELEM title: site "Architectural Intern, ongoing"; 2026 PDF "Licensed Architect" (personal title) | Owner: no longer at Studio BELEM; entry now 2025-2026 (2026-10-12) |
+| C16 | Nouvelle Medina and Aïn Sebaâ: no office named in the 2025 PDF | Owner confirmed: Yassir Khalil Studio (2026-10-12) |
 | C17 | The 2026 cover photograph (earthen alley) has no caption or place | Published without a place name |
 | C18 | Where the owner is based: films page "between Paris, Casablanca, and Tunis" vs About "Paris, Casablanca, and Tokyo" (both site text); the 2026 PDF says "Tunis / Paris" | Both kept verbatim on their pages; flagged |
 
 ## [CONTENT NEEDED]
 
-1. Confirm the seven surfaces in C02.
-2. Confirm the Sakura distinction wording (C06) and the Zenata ranking (C12).
-3. Supervisor names and spelling (C10).
-4. The 2020-2021 entry and whether BATN and SKI belong on the CV (C13); your current title at Studio BELEM (C15).
-5. The office for Nouvelle Medina and Aïn Sebaâ (C16) and your role on the Moroccan and academic projects.
-6. Place and author of the cover photograph (C17); higher-resolution originals of it and of the Al-Arg renders (662 px), the Tamansourt renders (460-500 px) and the Corallum renders.
-7. A web CV / portfolio PDF without the phone number, if you want a download link.
-8. Captions or transcripts for films with speech.
-9. Permission and credit lines for publishing Studio BELEM and Yassir Khalil Studio drawings.
-10. Analytics consent for EU visitors (GA4 runs, loaded on idle; not legal advice).
-11. Where you are based (C18).
-12. Links and material for your website and app (the Digital section appears when the first entry is added).
+1. Sentry surface (C02).
+2. The 2020-2021 CV entry: Société de Préservation or BATN, and whether SKI (2022) belongs on the CV (C13).
+3. Place and author of the cover photograph (C17); higher-resolution originals of the renders when available.
+4. Captions or transcripts for films with speech.
+5. Analytics consent for EU visitors (GA4 is idle-loaded and off under Do Not Track / Global Privacy Control; not legal advice).
+6. Where you are based (C18).
+7. Links and material for your website and app, when ready.
+
+Resolved by the owner on 2026-10-12: surfaces, Sakura wording, Zenata ranking, supervisors, Studio BELEM dates, Nouvelle Medina and Aïn Sebaâ office, publication permission for office drawings (the owner produced them).
 
 ## Published facts by page (generated)
 
@@ -172,6 +169,7 @@ Translations from French are literal and marked "(translated from French)". Line
 | Year | 2025 | site |
 | Office | Yassir Khalil Studio | site |
 | Type | Regional Rail Station | site |
+| Surface | 7 200 m² | pdf2025:p8 (PDF figures adopted after the owner confirmed the PDF value for Hay Mohammadi, D26) |
 | Text 1 | A regional rail station for the Casablanca metropolitan network, designed as part of a feasibility study for … | site |
 | Text 2 | The architectural proposal addresses the civic dimension of infrastructure at the city scale: the station is … | site |
 | Honour | Competition: 2nd Place / Casablanca Metropolitan Rail | site + answer:F01 |
@@ -188,6 +186,7 @@ Translations from French are literal and marked "(translated from French)". Line
 |---|---|---|
 | Location | Casablanca, Nouvelle Medina district | pdf2025:p36 |
 | Year | March 2025 | pdf2025:p36 |
+| Office | Yassir Khalil Studio | answer:2026-10-12 |
 | Type | Urban Train Station / Heritage-informed connector | pdf2025:p36 |
 | Area | 500 m² | pdf2025:p36 |
 | Text 1 | The architectural concept rests on a contemporary interpretation of origami, where the roof becomes a structu… | pdf2025:p36 (translated from French) |
@@ -204,6 +203,7 @@ Translations from French are literal and marked "(translated from French)". Line
 |---|---|---|
 | Location | Casablanca, Aïn Sebaâ industrial zone | pdf2025:p40 |
 | Year | February 2025 | pdf2025:p40 |
+| Office | Yassir Khalil Studio | answer:2026-10-12 |
 | Type | Train Station / Industrial-community gateway | pdf2025:p40 |
 | Area | 900 m² | pdf2025:p40 |
 | Text 1 | The project provides for the demolition of the existing station and the construction of a new two-headed rail… | pdf2025:p40 (translated from French; the sentence that follows is cut off in the PDF) |
@@ -223,6 +223,7 @@ Translations from French are literal and marked "(translated from French)". Line
 | Year | 2025 | site |
 | Office | Yassir Khalil Studio | site |
 | Type | RER Station | site |
+| Surface | 600 m² | answer:2026-10-12 |
 | Text 1 | A rapid transit station in the Hay Mohammadi district of Casablanca, one of the city's oldest and most densel… | site |
 | Text 2 | The project resolves a challenging site condition where the rail line runs at grade through a constrained urb… | site |
 | Hero image | images/hay-mohammadi/thumb.jpg | site |
@@ -251,6 +252,7 @@ Translations from French are literal and marked "(translated from French)". Line
 | Year | 2024 | site |
 | Office | Yassir Khalil Studio | site |
 | Type | Contemporary Villa | site |
+| Surface | 500 m² | pdf2025:p29 (D26) |
 | Text 1 | A contemporary villa in Morocco for a private client, organised around a central courtyard that brings light … | site |
 | Text 2 | The architectural language draws on the spatial logic of Moroccan domestic architecture while employing a con… | site |
 | Hero image | images/papillon/thumb.jpg | site |
@@ -265,6 +267,7 @@ Translations from French are literal and marked "(translated from French)". Line
 | Year | 2024 | site |
 | Office | Yassir Khalil Studio | site |
 | Type | Hospital and Wellness Campus | site |
+| Surface | 45 000 m² | pdf2025:p33 (D26) |
 | Text 1 | A hospital and wellness campus on the outskirts of Tamansourt, a planned city in the Marrakech metropolitan r… | site |
 | Text 2 | The architectural proposal structures the campus around a central landscaped spine that connects arrival, adm… | site |
 | Hero image | images/tamansourt/thumb.jpg | site |
@@ -279,6 +282,7 @@ Translations from French are literal and marked "(translated from French)". Line
 | Year | 2023 | site |
 | School | ENAU | site |
 | Type | Research and Exhibition Centre | site |
+| Surface | 900 m² | pdf2025:p21 (D26) |
 | Text 1 | A coral research and exhibition centre on the northern Tunisian coast, designed as an academic project at ENA… | site |
 | Text 2 | The project is organised around the relationship between water and land, with the building positioned at the … | site |
 | Text 3 | The project was developed through physical model-making and hand drawing alongside digital production, explor… | site |
@@ -296,6 +300,7 @@ Translations from French are literal and marked "(translated from French)". Line
 | Year | 2022 | site |
 | School | ENAU | site |
 | Type | Cinema Complex | site |
+| Surface | 4 000 m² | pdf2025:p12 (D26) |
 | Text 1 | A cinema complex in central Tunis, designed as an academic project at ENAU exploring the typology of the cult… | site |
 | Text 2 | The programme distributes four cinema screens, a film library and archive, a cafe, and public circulation spa… | site |
 | Text 3 | The project was produced at the end of the first architectural cycle at ENAU and represents the first design … | site |

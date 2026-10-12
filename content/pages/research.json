@@ -11,15 +11,34 @@
     "cover": "images/books/thesis-cover.png",
     "coverAlt": "Cover of the thesis Between the Poetics of Place and the Value of Heritage, Hazem Radhouani, ENAU 2024",
     "spec": [
-      { "label": "Institution", "value": "ENAU | Université de Carthage", "source": "site" },
-      { "label": "Supervisors", "value": "Prof. Monsef Al-Fourati | Prof. Adnan Ben Nejma", "source": "site (spelling unconfirmed, ledger C10)" },
-      { "label": "Distinction", "value": "Mention Très Bien à l'unanimité | June 2024", "lang": "fr", "source": "site + answer:F01" }
+      {
+        "label": "Institution",
+        "value": "ENAU | Université de Carthage",
+        "source": "site"
+      },
+      {
+        "label": "Supervisors",
+        "value": "Prof. Moncef Fourati | Prof. Adnen Ben Nejma",
+        "source": "answer:2026-10-12"
+      },
+      {
+        "label": "Distinction",
+        "value": "Mention Très Bien à l'unanimité | June 2024",
+        "lang": "fr",
+        "source": "site + answer:F01"
+      }
     ],
     "abstract": "In Between the Poetics of Place and the Value of Heritage, I trace the silent dialogue between clay walls and desert light in Al-Arg village, where every curve of adobe and joint of stone carries the memory of generations. Taken on a journey through space and time, this mémoire d'architecture unearths the sensory bond villagers share with their landscape, reveals how humble materials embody sustainability, and weaves in my own childhood recollections among Al-Arg's lost courtyards. More than a study of form, it is a tribute to a living heritage, an invitation to rediscover a place where earth and sky converse, and a blueprint for nurturing the delicate harmony that sustains both community and craft.",
     "abstractSource": "pdf2025:p46 (line-break hyphens removed)",
     "text": [
-      { "text": "Degree thesis in architecture submitted at the National School of Architecture and Urban Planning of Tunis, Université de Carthage. Awarded Highest Honours with a unanimous jury. The project proposes a rehabilitation strategy for the abandoned ksar village of Al-Arg in the Jérid oasis system of southern Tunisia, working simultaneously across territorial, urban, and architectural scales.", "source": "site (spelling Al-Arg, ledger C05)" },
-      { "text": "The research draws on heritage documentation carried out with the Société de Préservation du Village d'ARG over two years prior to the thesis, grounding the design work in direct material knowledge of the site. The theoretical framework engages the Italian school of urban morphology and the practices of Carlo Scarpa and Giorgio Grassi.", "source": "site" }
+      {
+        "text": "Degree thesis in architecture submitted at the National School of Architecture and Urban Planning of Tunis, Université de Carthage. Awarded Highest Honours with a unanimous jury. The project proposes a rehabilitation strategy for the abandoned ksar village of Al-Arg in the Jérid oasis system of southern Tunisia, working simultaneously across territorial, urban, and architectural scales.",
+        "source": "site (spelling Al-Arg, ledger C05)"
+      },
+      {
+        "text": "The research draws on heritage documentation carried out with the Société de Préservation du Village d'ARG over two years prior to the thesis, grounding the design work in direct material knowledge of the site. The theoretical framework engages the Italian school of urban morphology and the practices of Carlo Scarpa and Giorgio Grassi.",
+        "source": "site"
+      }
     ],
     "honour": "Highest Honours | Unanimous jury | ENAU, Université de Carthage | June 2024",
     "read": "https://heyzine.com/flip-book/d04892dd54.html",
@@ -32,13 +51,31 @@
     "cover": "images/books/report-cover.png",
     "coverAlt": "Cover of the internship report, Hazem Radhouani, Paris, Casablanca, Tokyo, 2026",
     "spec": [
-      { "label": "Host organisations", "value": "Studio BELEM, Paris | Yassir Khalil Studio, Casablanca", "source": "site" },
-      { "label": "Research", "value": "Sakura Science Program, Tokyo | Most Appreciated Research | 2025", "source": "site + answer:F02" },
-      { "label": "Supervisor", "value": "Prof. Moncef Fourati | February 2026", "source": "site (spelling unconfirmed, ledger C10)" }
+      {
+        "label": "Host organisations",
+        "value": "Studio BELEM, Paris | Yassir Khalil Studio, Casablanca",
+        "source": "site"
+      },
+      {
+        "label": "Research",
+        "value": "Sakura Science Program, Tokyo | Most Appreciated Research | 2025",
+        "source": "site + answer:F02"
+      },
+      {
+        "label": "Supervisor",
+        "value": "Prof. Moncef Fourati | February 2026",
+        "source": "answer:2026-10-12"
+      }
     ],
     "text": [
-      { "text": "Internship report documenting professional architectural practice across three cities between 2024 and 2026. The report covers project work at Studio BELEM in Paris (residential rehabilitation, mixed-use, and heritage projects within the ABF regulatory framework) and at Yassir Khalil Studio in Casablanca, across infrastructure, residential, and healthcare programmes.", "source": "site (dashes replaced by parentheses)" },
-      { "text": "A chapter is dedicated to research conducted within the Sakura Science Program in Japan, 2025, for which the Most Appreciated Research distinction was received. The report is submitted in partial fulfilment of the requirements for the National Architecture Diploma at ENAU, Université de Carthage.", "source": "site" }
+      {
+        "text": "Internship report documenting professional architectural practice across three cities between 2024 and 2026. The report covers project work at Studio BELEM in Paris (residential rehabilitation, mixed-use, and heritage projects within the ABF regulatory framework) and at Yassir Khalil Studio in Casablanca, across infrastructure, residential, and healthcare programmes.",
+        "source": "site (dashes replaced by parentheses)"
+      },
+      {
+        "text": "A chapter is dedicated to research conducted within the Sakura Science Program in Japan, 2025, for which the Most Appreciated Research distinction was received. The report is submitted in partial fulfilment of the requirements for the National Architecture Diploma at ENAU, Université de Carthage.",
+        "source": "site"
+      }
     ],
     "read": "https://heyzine.com/flip-book/8d862ba791.html"
   },

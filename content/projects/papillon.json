@@ -33,6 +33,11 @@
       "label": "Type",
       "value": "Contemporary Villa",
       "source": "site"
+    },
+    {
+      "label": "Surface",
+      "value": "500 m²",
+      "source": "pdf2025:p29 (D26)"
     }
   ],
   "tag": "Yassir Khalil Studio / Residential / Marrakech",

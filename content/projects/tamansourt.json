@@ -33,6 +33,11 @@
       "label": "Type",
       "value": "Hospital and Wellness Campus",
       "source": "site"
+    },
+    {
+      "label": "Surface",
+      "value": "45 000 m²",
+      "source": "pdf2025:p33 (D26)"
     }
   ],
   "tag": "Yassir Khalil Studio / Healthcare / Feasibility and schematic design",

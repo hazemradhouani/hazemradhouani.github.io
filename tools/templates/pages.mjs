@@ -228,7 +228,7 @@ export function about(site, d, ctx) {
     : html`<input id="cf-${id}" name="${id}" type="${type}" required aria-describedby="cf-${id}-err"${attrs(extra)}>`}<p class="field__error" id="cf-${id}-err" hidden></p></div>`;
   const body = html`<div class="wrap">
 <header class="about-head">
-<div class="about-head__bio"><h1 class="page-title">About</h1><p>${d.bio}</p></div>
+<div class="about-head__bio"><p class="print-only print-name">${P.name} | ${P.jobTitle}</p><p class="print-only">${P.line} ${P.email} | ${P.linkedin.replace('https://www.', '')} | ${site.origin.replace('https://', '')}${site.base}</p><h1 class="page-title">About</h1><p>${d.bio}</p><p class="no-print"><a class="button" href="${p}files/hazem-radhouani-cv.pdf" download>Download CV (PDF)</a></p></div>
 <figure class="about-head__portrait"><div class="media">${picture(d.portrait, { alt: d.portraitAlt, sizes: '(min-width: 64rem) 20rem, 70vw', prefix: p, priority: true })}</div></figure>
 </header>
 <div class="cv">

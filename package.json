@@ -9,7 +9,8 @@
     "serve": "node tools/serve.mjs . 8090",
     "qa": "node tools/qa.mjs",
     "perf": "node tools/perf.cjs",
-    "og": "node tools/og.mjs"
+    "og": "node tools/og.mjs",
+    "cv": "node tools/cv.mjs"
   },
   "devDependencies": {
     "axe-core": "4.10.3",

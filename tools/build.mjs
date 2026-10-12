@@ -33,7 +33,6 @@ const personLd = {
   '@context': 'https://schema.org', '@type': 'Person', '@id': abs('#person'), name: site.person.name, jobTitle: site.person.jobTitle,
   description: site.person.line, url: abs(''), email: `mailto:${site.person.email}`, image: abs('images/portrait.jpg'), sameAs: [site.person.linkedin],
   alumniOf: { '@type': 'CollegeOrUniversity', name: 'École Nationale d’Architecture et d’Urbanisme de Tunis (ENAU), Université de Carthage' },
-  worksFor: { '@type': 'Organization', name: 'Studio BELEM' },
   knowsAbout: ['Heritage documentation', 'Architectural survey', 'Earthen architecture', 'Vernacular architecture', 'Heritage rehabilitation', 'BIM', 'Revit', 'Unreal Engine', 'D5 Render'],
   knowsLanguage: ['ar', 'fr', 'en'],
   award: ['Highest Honours, National Architecture Diploma, ENAU, 2026', 'Highest Honours, Final Year Architectural Thesis, ENAU, 2024', 'Most Appreciated Research, Sakura Science Program, 2025']
