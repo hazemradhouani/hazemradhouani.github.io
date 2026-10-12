@@ -1,0 +1,7 @@
+# Owner's source portfolios: kept locally as content sources, not published
+/*.pdf
+# Local Claude Code settings
+/.claude/
+# Tooling scratch output
+/tools/.cache/
+node_modules/
