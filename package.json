@@ -1,0 +1,18 @@
+{
+  "name": "hazem-radhouani-portfolio",
+  "private": true,
+  "description": "Static portfolio site generated from content/*.json. The site itself has no runtime dependencies.",
+  "type": "module",
+  "scripts": {
+    "build": "node tools/build.mjs",
+    "media": "node tools/media.mjs",
+    "serve": "node tools/serve.mjs . 8090",
+    "qa": "node tools/qa.mjs",
+    "perf": "node tools/perf.cjs",
+    "og": "node tools/og.mjs"
+  },
+  "devDependencies": {
+    "axe-core": "4.10.3",
+    "playwright-core": "1.56.1"
+  }
+}
