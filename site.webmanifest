@@ -1,0 +1,27 @@
+{
+  "name": "Hazem Radhouani",
+  "short_name": "H. Radhouani",
+  "start_url": "/portfolio/",
+  "scope": "/portfolio/",
+  "display": "browser",
+  "background_color": "#15110E",
+  "theme_color": "#15110E",
+  "icons": [
+    {
+      "src": "images/brand/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "images/brand/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "images/brand/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
