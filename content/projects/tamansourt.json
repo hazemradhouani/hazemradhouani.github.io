@@ -1,0 +1,77 @@
+{
+  "slug": "tamansourt",
+  "order": 12,
+  "group": "morocco",
+  "filters": [
+    "professional",
+    "healthcare"
+  ],
+  "title": "Tamansourt Campus",
+  "run": "Yassir Khalil Studio | Tamansourt",
+  "summary": "Hospital and wellness campus organised around a landscaped spine, at feasibility and schematic design level, Yassir Khalil Studio.",
+  "place": "Tamansourt",
+  "year": "2024",
+  "descriptor": "Healthcare | hospital and wellness campus",
+  "office": "Yassir Khalil Studio",
+  "spec": [
+    {
+      "label": "Location",
+      "value": "Tamansourt, Morocco",
+      "source": "site"
+    },
+    {
+      "label": "Year",
+      "value": "2024",
+      "source": "site"
+    },
+    {
+      "label": "Office",
+      "value": "Yassir Khalil Studio",
+      "source": "site"
+    },
+    {
+      "label": "Type",
+      "value": "Hospital and Wellness Campus",
+      "source": "site"
+    }
+  ],
+  "tag": "Yassir Khalil Studio / Healthcare / Feasibility and schematic design",
+  "narrative": [
+    {
+      "text": "A hospital and wellness campus on the outskirts of Tamansourt, a planned city in the Marrakech metropolitan region. The programme combines a general hospital, a specialist wellness centre, and ancillary support facilities on a greenfield site, with the master plan organised to allow phased construction while maintaining functional coherence at each stage.",
+      "source": "site"
+    },
+    {
+      "text": "The architectural proposal structures the campus around a central landscaped spine that connects arrival, administration, and clinical zones in a legible sequence. Patient wards are oriented to maximise natural light and ventilation while minimising solar gain in the summer months. The wellness centre is separated from the hospital by a planted courtyard, creating a clear spatial and experiential distinction between the two programmes. The project was developed by the team at Yassir Khalil Studio at feasibility and schematic design level, with full BIM coordination between architectural and engineering disciplines.",
+      "source": "site"
+    }
+  ],
+  "hero": {
+    "src": "images/tamansourt/thumb.jpg",
+    "alt": "Render of the Tamansourt hospital and wellness campus",
+    "credit": null
+  },
+  "figures": [
+    {
+      "src": "images/tamansourt/tamansourt-render-aerial.jpg",
+      "title": "Render, Campus Aerial",
+      "caption": "Aerial render. Fan-shaped master plan. Curved hospital ward wings arranged around the central landscaped spine. Perimeter road with structured parking. Wellness centre separated from clinical zones by planted courtyard. Terracotta-toned facade system responsive to the Moroccan climate. Greenfield site within the Tamansourt planned development. Yassir Khalil Studio. 2024.",
+      "alt": "Aerial render of Tamansourt Campus, fan-shaped master plan with curved ward wings, central spine and landscaped courtyards within the arid Marrakech plain",
+      "kind": "render",
+      "source": "site"
+    },
+    {
+      "src": "images/tamansourt/tamansourt-render-facade.jpg",
+      "title": "Render, Street Facade",
+      "caption": "Street facade render. Main hospital block. Rammed earth-toned masonry cladding. Deep-set windows reducing solar gain on east and west orientations. Stepped balcony volumes articulating the patient ward floors. Corner condition with exposed concrete structural frame. Glazed ground-floor entrance and waiting zone. Clear sky, arid landscape character of the Marrakech plateau.",
+      "alt": "Street-level render of Tamansourt Campus main facade, rammed earth-toned masonry, deep recessed windows, stepped balcony volumes and clear sky",
+      "kind": "render",
+      "source": "site"
+    }
+  ],
+  "date": "2024",
+  "role": [],
+  "quote": null,
+  "honour": null,
+  "film": null
+}

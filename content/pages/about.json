@@ -1,0 +1,38 @@
+{
+  "title": "About | Hazem Radhouani, architect",
+  "description": "Hazem Radhouani, architect (National Architecture Diploma, Highest Honours, ENAU 2026). Experience at Studio BELEM, Paris, and Yassir Khalil Studio, Casablanca; Sakura Science Program research in Japan.",
+  "og": "images/og/about.jpg",
+  "portrait": "images/portrait.jpg",
+  "portraitAlt": "Portrait of Hazem Radhouani",
+  "bio": "Architect graduated with Highest Honours (ENAU, 2026), drawn to the architecture of the existing: the inhabited, the deteriorated, the overlooked. My practice spans Paris, Casablanca, and Tokyo, cities where I have read how buildings hold memory, resist erasure, and remain rooted in place. I am determined to make heritage rehabilitation a speciality, and the breadth of my work reflects that commitment at every scale, from regional rail infrastructure in Morocco to residential rehabilitation in Paris and comparative heritage research in Japan.",
+  "experience": [
+    { "when": "2025 - present", "what": "Studio BELEM | Paris", "role": "Architectural Intern | Ongoing", "text": "Residential, cultural, and rehabilitation projects from sketch to building permit. Full BIM production; coordination with structural and MEP consultants; French regulatory framework, PC, ABF prescriptions, listed monuments.", "source": "site" },
+    { "when": "2025", "what": "Sakura Science Program | Japan", "role": "Saga University & Waseda University | Invited researcher | Sole Tunisian representative", "text": "Competitive international selection, Japanese government-funded. Intensive workshops on historic district rehabilitation and adaptive reuse. Comparative analysis: North African medinas and Japanese machiya, focused on spatial identity and heritage resilience. Most Appreciated Research.", "source": "site + answer:F02" },
+    { "when": "2024 - 2025", "what": "Yassir Khalil Studio | Casablanca", "role": "Architectural Intern | Full time", "text": "Co-authored feasibility study and concept for a regional RER-type rail hub: urban integration, multimodal circulation, structural coordination. BIM deliverables in Revit; coordination with Moroccan municipal authorities and engineering offices.", "source": "site" },
+    { "when": "2023", "what": "2ADP Salim Ben Rejeb Architectes | Tunis", "role": "Architectural Intern", "text": "Technical drawings and documentation for residential and civic projects (AutoCAD, ArchiCAD). Client presentation renders.", "source": "site" },
+    { "when": "2020 - 2021", "what": "Société de Préservation du Village d'ARG | Tunisia", "role": "Intern & Volunteer", "text": "Field surveys and heritage assessment of an abandoned village, foundational documentation for the thesis (Highest Honours).", "source": "site (wording 'award-winning thesis' replaced, ledger C11)" }
+  ],
+  "education": [
+    { "when": "Feb. 2026", "what": "National Architecture Diploma (DNA) | Master's equivalent", "role": "ENAU, Université de Carthage, Tunis | 11 February 2026", "text": "Highest Honours", "source": "site + pdf2026:p28" },
+    { "when": "June 2024", "what": "Final Year Architectural Thesis", "role": "ENAU, Université de Carthage | 14 June 2024", "text": "Thesis: Between the Poetics of Place and the Value of Heritage. Unanimous jury. Highest Honours", "source": "site + answer:F01" },
+    { "when": "2018 - 2020", "what": "First Cycle Diploma | Bachelor's equivalent", "role": "ENAU, Université de Carthage, Tunis", "text": "With Distinction", "source": "site" }
+  ],
+  "distinctions": [
+    { "when": "2026", "what": "Highest Honours | Unanimous Jury", "role": "National Architecture Diploma | ENAU, Université de Carthage", "source": "site" },
+    { "when": "2025", "what": "Most Appreciated Research", "role": "Sakura Science Program | Saga University & Waseda University, Japan", "source": "site + answer:F02" },
+    { "when": "2025", "what": "2nd Place | Competition", "role": "Zenata Station | Casablanca Metropolitan Rail, Morocco", "source": "site (not in the PDFs, ledger C12)" },
+    { "when": "2024", "what": "Highest Honours | Unanimous Jury", "role": "Final Year Architectural Thesis | ENAU, Université de Carthage", "source": "site" }
+  ],
+  "skills": [
+    { "group": "BIM and design", "items": ["Revit", "ArchiCAD", "AutoCAD", "Rhino", "Grasshopper"] },
+    { "group": "Visualisation", "items": ["D5 Render", "Unreal Engine", "Photoshop", "Illustrator"] },
+    { "group": "Documentation", "items": ["InDesign", "Office Suite"] },
+    { "group": "Motion", "items": ["After Effects", "Premiere Pro"] }
+  ],
+  "languages": [
+    { "name": "Arabic", "level": "Native" },
+    { "name": "French", "level": "Fluent" },
+    { "name": "English", "level": "Fluent" }
+  ],
+  "form": { "action": "https://formsubmit.co/ajax/hazemradhouani@gmail.com", "subjectPrefix": "Portfolio enquiry from " }
+}

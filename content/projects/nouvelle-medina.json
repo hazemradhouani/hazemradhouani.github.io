@@ -1,0 +1,104 @@
+{
+  "slug": "nouvelle-medina",
+  "order": 7,
+  "group": "morocco",
+  "filters": [
+    "infrastructure"
+  ],
+  "title": "Nouvelle Medina Station",
+  "run": "Casablanca",
+  "summary": "Urban train station in Casablanca whose folded, origami-like roof structures the building and modulates daylight.",
+  "place": "Casablanca",
+  "year": "2025",
+  "descriptor": "Infrastructure | urban train station",
+  "spec": [
+    {
+      "label": "Location",
+      "value": "Casablanca, Nouvelle Medina district",
+      "source": "pdf2025:p36"
+    },
+    {
+      "label": "Year",
+      "value": "March 2025",
+      "source": "pdf2025:p36"
+    },
+    {
+      "label": "Type",
+      "value": "Urban Train Station | Heritage-informed connector",
+      "source": "pdf2025:p36"
+    },
+    {
+      "label": "Area",
+      "value": "500 m²",
+      "source": "pdf2025:p36"
+    }
+  ],
+  "tag": "La nouvelle gare Nouvelle Medina / Plans, facades and sections / Scale 1:200",
+  "narrative": [
+    {
+      "text": "The architectural concept rests on a contemporary interpretation of origami, where the roof becomes a structuring element, both functional and expressive. Composed of dynamic folds, it generates a volume in tension that seems to unfold towards the public space, expressing the notion of movement inherent to travel.",
+      "source": "pdf2025:p36 (translated from French)"
+    },
+    {
+      "text": "This play of facets allows a subtle modulation of natural light through the interior spaces, while optimising rainwater runoff and solar protection. The glazed facade, in dialogue with this sculptural roof, ensures transparency and lightness, reinforcing the porosity between the city and the platforms. This architectural composition, both fluid and assertive, gives the station a strong identity, where structure and aesthetics merge in a dynamic balance.",
+      "source": "pdf2025:p36 (translated from French)"
+    }
+  ],
+  "hero": {
+    "src": "images/nouvelle-medina/nouvelle-medina-night-section.jpg",
+    "alt": "Night section-render of Nouvelle Medina Station through the platforms",
+    "credit": null,
+    "source": "pdf2025:p35"
+  },
+  "figures": [
+    {
+      "src": "images/nouvelle-medina/nouvelle-medina-structure-sheet.jpg",
+      "title": "Massing and structure",
+      "caption": "Massing axonometric. Exploded structure: building envelope (roof) in white HPL; steel roof framing; beam system; HEA columns anchored in concrete footings; building envelope (facade) in white HPL; glazed facade.",
+      "alt": "White massing axonometric of the station and exploded axonometric of its structure",
+      "kind": "drawing",
+      "source": "pdf2025:p36 (labels translated from French)",
+      "size": "full"
+    },
+    {
+      "src": "images/nouvelle-medina/nouvelle-medina-plans-elevation.jpg",
+      "title": "Plans and long elevation",
+      "caption": "Platform level plan -06.50 m. Ground floor plan +0.15 m. Roof plan +08.50 m. Long elevation.",
+      "alt": "Plans of the station at platform, ground and roof levels, and its long elevation",
+      "kind": "drawing",
+      "source": "pdf2025:p37 (translated from French)",
+      "size": "full"
+    },
+    {
+      "src": "images/nouvelle-medina/nouvelle-medina-sections-flows.jpg",
+      "title": "Sections and passenger flows",
+      "caption": "Section BB'. Elevation. Passenger flows: station, intermodal pedestrian flows, access to the platforms, exit from the platforms, vertical connection between station and platforms.",
+      "alt": "Section BB, elevation and passenger flow axonometric of the station",
+      "kind": "drawing",
+      "source": "pdf2025:p38 (translated from French)",
+      "size": "narrow"
+    },
+    {
+      "title": "Views",
+      "caption": "Platform and street views.",
+      "kind": "render",
+      "items": [
+        {
+          "src": "images/nouvelle-medina/nouvelle-medina-platform-render.jpg",
+          "alt": "Render of the station above the platforms"
+        },
+        {
+          "src": "images/nouvelle-medina/nouvelle-medina-street-render.jpg",
+          "alt": "Street render of the station frontage"
+        }
+      ],
+      "source": "pdf2025:p38"
+    }
+  ],
+  "date": "2025",
+  "role": [],
+  "quote": null,
+  "honour": null,
+  "office": null,
+  "film": null
+}

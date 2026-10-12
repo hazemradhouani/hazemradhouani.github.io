@@ -1,0 +1,158 @@
+{
+  "slug": "bolivar",
+  "order": 2,
+  "group": "paris",
+  "filters": [
+    "professional",
+    "heritage",
+    "residential"
+  ],
+  "title": "Bolivar",
+  "run": "Studio BELEM | Paris 19th",
+  "summary": "Heavy rehabilitation of a dense Paris block into a hotel and student residence, carried to the 2026 building permit at Studio BELEM.",
+  "place": "Paris 19th",
+  "year": "2026",
+  "descriptor": "Rehabilitation | hotel and student residence",
+  "office": "Studio BELEM",
+  "role": [
+    {
+      "text": "3D modeling and graphic production from a single model structured by phases (demolition, retention, new construction), ensuring consistency across all graphic documents of the planning permission submission.",
+      "source": "pdf2026:p17"
+    },
+    {
+      "text": "Mixed programme, hotel + student residence | heavy rehabilitation of a dense urban block, Paris 19th. Project launched in 2023, suspended, then resumed and carried through to the building permit submission in 2026.",
+      "source": "pdf2026:p17 (translated from French)"
+    },
+    {
+      "text": "Scope of work including selective demolitions, rooftop extensions, green roofs, and complete restructuring of vertical circulation.",
+      "source": "pdf2026:p17"
+    }
+  ],
+  "spec": [
+    {
+      "label": "Project type",
+      "value": "Rehabilitation / Student Residence",
+      "source": "pdf2026:p17"
+    },
+    {
+      "label": "Phase",
+      "value": "Planning Permission",
+      "source": "pdf2026:p17"
+    },
+    {
+      "label": "Year",
+      "value": "2026 / Professional",
+      "source": "pdf2026:p17"
+    },
+    {
+      "label": "Location",
+      "value": "32-34 Av. Simon Bolivar, Paris 19th",
+      "source": "pdf2026:p17"
+    },
+    {
+      "label": "Office",
+      "value": "Studio BELEM",
+      "source": "pdf2026:p17"
+    },
+    {
+      "label": "Surface",
+      "value": "2 800 m²",
+      "source": "site"
+    }
+  ],
+  "tag": "Studio BELEM / Rehabilitation / Ongoing",
+  "narrative": [
+    {
+      "text": "A mixed-use programme combining a boutique hotel and a student residence on a complex urban site adjacent to the Bolivar metro station. The project navigates a dual occupancy logic: the hotel seeks an urban and transient relationship with the city, while the student housing requires durability, community, and a domestic scale within the same envelope.",
+      "source": "site"
+    },
+    {
+      "text": "The building section resolves this tension vertically, with hotel rooms occupying the lower floors at street level and student accommodation arranged around a shared interior courtyard at the upper levels. The facade system is designed to read as a coherent architectural gesture while modulating its openings and materiality to signal the change in programme. The project involves significant coordination with structural engineers and the urban planning authority.",
+      "source": "site"
+    }
+  ],
+  "hero": {
+    "src": "images/bolivar/bolivar-courtyard-render.jpg",
+    "alt": "Courtyard render of the Bolivar hotel and student residence with planted terraces",
+    "credit": "Render: Studio BELEM",
+    "source": "pdf2026:p17"
+  },
+  "figures": [
+    {
+      "title": "Volumes",
+      "caption": "Volumes to be demolished. Retained volumes. Raised and lowered volumes.",
+      "kind": "drawing",
+      "items": [
+        {
+          "src": "images/bolivar/bolivar-volumes-demolished.jpg",
+          "alt": "Volume diagram: volumes to be demolished"
+        },
+        {
+          "src": "images/bolivar/bolivar-volumes-retained.jpg",
+          "alt": "Volume diagram: retained volumes"
+        },
+        {
+          "src": "images/bolivar/bolivar-volumes-raised-lowered.jpg",
+          "alt": "Volume diagram: raised and lowered volumes"
+        }
+      ],
+      "source": "pdf2026:p18"
+    },
+    {
+      "src": "images/bolivar/bolivar-street-render.jpg",
+      "title": "Street view",
+      "caption": "",
+      "alt": "Street render of the Bolivar building on avenue Simon Bolivar",
+      "kind": "render",
+      "credit": "Render: Studio BELEM",
+      "source": "pdf2026:p18"
+    },
+    {
+      "src": "images/bolivar/bolivar-west-facade.jpg",
+      "title": "West facade",
+      "caption": "West Facade | Avenue Simon Bolivar.",
+      "alt": "West facade drawing on avenue Simon Bolivar with its material legend",
+      "kind": "drawing",
+      "source": "pdf2026:p19",
+      "size": "wide"
+    },
+    {
+      "title": "Vegetation",
+      "caption": "Roof and vegetation plan. Vegetation section | stratification by climatic zone.",
+      "kind": "drawing",
+      "items": [
+        {
+          "src": "images/bolivar/bolivar-roof-vegetation-plan.jpg",
+          "alt": "Roof plan with green roofs and vegetation"
+        },
+        {
+          "src": "images/bolivar/bolivar-vegetation-section.jpg",
+          "alt": "Vegetation section stratified by climatic zone"
+        }
+      ],
+      "source": "pdf2026:p20"
+    },
+    {
+      "src": "images/bolivar/bolivar-longitudinal-section-aa.jpg",
+      "title": "Longitudinal section AA",
+      "caption": "Longitudinal section AA. Project and retained existing structure.",
+      "alt": "Longitudinal section AA through the hotel and student residence, project and retained existing structure",
+      "kind": "drawing",
+      "source": "pdf2026:p21",
+      "size": "full"
+    },
+    {
+      "src": "images/bolivar/bolivar-aerial-render-2026.jpg",
+      "title": "Aerial view",
+      "caption": "",
+      "alt": "Aerial render of the Bolivar block with green rooftop terraces",
+      "kind": "render",
+      "credit": "Render: Studio BELEM",
+      "source": "pdf2026:p22"
+    }
+  ],
+  "date": "2026",
+  "quote": null,
+  "honour": null,
+  "film": null
+}

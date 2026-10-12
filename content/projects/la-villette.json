@@ -1,0 +1,137 @@
+{
+  "slug": "la-villette",
+  "order": 5,
+  "group": "paris",
+  "filters": [
+    "professional",
+    "heritage",
+    "residential"
+  ],
+  "title": "La Villette",
+  "run": "Studio BELEM | Paris 19th",
+  "summary": "PRO and DCE construction drawings for the rehabilitation of a block of three buildings in Paris 19th, including an ABF-listed building.",
+  "place": "Paris 19th",
+  "year": "2025-2026",
+  "descriptor": "Rehabilitation | PRO/DCE drawings",
+  "office": "Studio BELEM",
+  "quote": {
+    "text": "Here, drawings don’t communicate | they contractualize.",
+    "source": "pdf2026:p3"
+  },
+  "role": [
+    {
+      "text": "Development of the DCE detail booklet: interior and exterior joinery, systematic indexing of secondary works elements.",
+      "source": "pdf2026:p3"
+    },
+    {
+      "text": "Residential and commercial rehabilitation of a block of three distinct buildings | Paris 19th, ABF-listed building. Combined constraints: absolute NGF levels, ERP classification, PLU zoning, ABF prescriptions, PPRI constraints.",
+      "source": "pdf2026:p3 (translated from French)"
+    }
+  ],
+  "spec": [
+    {
+      "label": "Project type",
+      "value": "Residential and Commercial / Rehabilitation",
+      "source": "pdf2026:p3"
+    },
+    {
+      "label": "Phase",
+      "value": "PRO / DCE",
+      "source": "pdf2026:p3"
+    },
+    {
+      "label": "Year",
+      "value": "2025-2026 / Professional",
+      "source": "pdf2026:p3"
+    },
+    {
+      "label": "Location",
+      "value": "190 av. Jean Jaurès, Paris 19th",
+      "source": "pdf2026:p3"
+    },
+    {
+      "label": "Office",
+      "value": "Studio BELEM",
+      "source": "pdf2026:p3"
+    },
+    {
+      "label": "Surface",
+      "value": "940 m²",
+      "source": "site"
+    }
+  ],
+  "tag": "Studio BELEM / Phase PRO/EXE / PLU | ABF | ERP | PPRI",
+  "narrative": [],
+  "hero": {
+    "src": "images/la-villette/la-villette-street-render.jpg",
+    "alt": "Street render of the La Villette rehabilitation on avenue Jean Jaurès, with a shopfront on the ground floor",
+    "credit": "Render: Studio BELEM",
+    "source": "pdf2026:p3"
+  },
+  "figures": [
+    {
+      "src": "images/la-villette/la-villette-gate-detail.jpg",
+      "title": "Access gate and entry door",
+      "caption": "Access Gate 5UP + Main Entry Door 1UP | North Elevation Building A.",
+      "alt": "Construction detail of the access gate and entry door: elevation, section, plan and north elevation of building A",
+      "kind": "drawing",
+      "source": "pdf2026:p4",
+      "size": "wide"
+    },
+    {
+      "title": "Facade module",
+      "caption": "Facade module Building C | constructive axonometric. Module details | sections and elevations.",
+      "kind": "drawing",
+      "items": [
+        {
+          "src": "images/la-villette/la-villette-facade-module-axonometric.jpg",
+          "alt": "Constructive axonometric of the facade module of building C"
+        },
+        {
+          "src": "images/la-villette/la-villette-module-details.jpg",
+          "alt": "Sections and elevations of the facade module details"
+        }
+      ],
+      "source": "pdf2026:p5"
+    },
+    {
+      "src": "images/la-villette/la-villette-courtyard-render.jpg",
+      "title": "Courtyard",
+      "caption": "",
+      "alt": "Render of the courtyard between the buildings",
+      "kind": "render",
+      "credit": "Render: Studio BELEM",
+      "source": "pdf2026:p5"
+    },
+    {
+      "src": "images/la-villette/la-villette-window-balustrade.jpg",
+      "title": "Window balustrade",
+      "caption": "Window balustrade | section A2 and axonometric.",
+      "alt": "Section A2, axonometric, elevation and plans of the window balustrade",
+      "kind": "drawing",
+      "source": "pdf2026:p6",
+      "size": "wide"
+    },
+    {
+      "src": "images/la-villette/la-villette-site-plan.jpg",
+      "title": "Site plan",
+      "caption": "Site plan | Buildings A, B, and C.",
+      "alt": "Site plan of buildings A, B and C around the patio",
+      "kind": "drawing",
+      "source": "pdf2026:p7",
+      "size": "wide"
+    },
+    {
+      "src": "images/la-villette/la-villette-aerial-render.jpg",
+      "title": "Aerial view",
+      "caption": "Aerial view | reading of the three buildings A, B and C.",
+      "alt": "Aerial render of the three buildings A, B and C",
+      "kind": "render",
+      "credit": "Render: Studio BELEM",
+      "source": "pdf2026:p8"
+    }
+  ],
+  "date": "2026",
+  "honour": null,
+  "film": null
+}

@@ -1,0 +1,101 @@
+{
+  "slug": "ain-sebaa",
+  "order": 8,
+  "group": "morocco",
+  "filters": [
+    "infrastructure"
+  ],
+  "title": "Aïn Sebaâ Station",
+  "run": "Casablanca",
+  "summary": "Competition entry for a new two-headed train station in the Aïn Sebaâ industrial zone of Casablanca, linked by an urban footbridge.",
+  "place": "Casablanca",
+  "year": "2025",
+  "descriptor": "Infrastructure | train station, competition",
+  "spec": [
+    {
+      "label": "Location",
+      "value": "Casablanca, Aïn Sebaâ industrial zone",
+      "source": "pdf2025:p40"
+    },
+    {
+      "label": "Year",
+      "value": "February 2025",
+      "source": "pdf2025:p40"
+    },
+    {
+      "label": "Type",
+      "value": "Train Station | Industrial-community gateway",
+      "source": "pdf2025:p40"
+    },
+    {
+      "label": "Area",
+      "value": "900 m²",
+      "source": "pdf2025:p40"
+    }
+  ],
+  "tag": "Competition entry / Concours n°S053/PLGV / Phase II",
+  "narrative": [
+    {
+      "text": "The project provides for the demolition of the existing station and the construction of a new two-headed rail infrastructure, organised around a main hub located on the major axis and a secondary hub positioned on the secondary axis.",
+      "source": "pdf2025:p40 (translated from French; the sentence that follows is cut off in the PDF)"
+    },
+    {
+      "text": "An urban footbridge will be integrated to ensure a fluid and safe connection between the two sides of the railway tracks, facilitating the movement of pedestrians and cyclists while improving intermodality with other means of transport. The platforms include underground accesses to guarantee fluid circulation and the safety of users.",
+      "source": "pdf2025:p42 (translated from French)"
+    },
+    {
+      "text": "The architecture of the project rests on a roof with clean lines, designed to provide optimal protection while offering a recognisable visual identity. The use of materials adapted to technical and climatic requirements guarantees the durability and efficiency of the structure.",
+      "source": "pdf2025:p42 (translated from French)"
+    }
+  ],
+  "hero": {
+    "src": "images/ain-sebaa/ain-sebaa-render-screen.jpg",
+    "alt": "Render of Aïn Sebaâ Station with X-shaped columns and a patterned screen",
+    "credit": null,
+    "source": "pdf2025:p39"
+  },
+  "figures": [
+    {
+      "src": "images/ain-sebaa/ain-sebaa-concept-sheet.jpg",
+      "title": "Main and secondary buildings",
+      "caption": "Main building and secondary building. Flow study. Exploded structure.",
+      "alt": "Renders of the main and secondary station buildings, flow study plan and exploded structure",
+      "kind": "drawing",
+      "source": "pdf2025:p40 (labels translated from French)",
+      "size": "narrow"
+    },
+    {
+      "src": "images/ain-sebaa/ain-sebaa-plans-elevations.jpg",
+      "title": "Plans, elevation and section",
+      "caption": "Ground floor plans, main and secondary station buildings. Elevation East. Section West.",
+      "alt": "Ground floor plans of the two station buildings, east elevation and west section",
+      "kind": "drawing",
+      "source": "pdf2025:p41 (translated from French)",
+      "size": "full"
+    },
+    {
+      "src": "images/ain-sebaa/ain-sebaa-section-flows.jpg",
+      "title": "Section and flows",
+      "caption": "Section A-A. Passenger flow axonometric.",
+      "alt": "Section A-A and passenger flow axonometric of the station",
+      "kind": "drawing",
+      "source": "pdf2025:p42",
+      "size": "narrow"
+    },
+    {
+      "src": "images/ain-sebaa/ain-sebaa-panorama.jpg",
+      "title": "Panorama",
+      "caption": "",
+      "alt": "Panoramic render of the station along the tracks",
+      "kind": "render",
+      "source": "pdf2025:p41",
+      "size": "full"
+    }
+  ],
+  "date": "2025",
+  "role": [],
+  "quote": null,
+  "honour": null,
+  "office": null,
+  "film": null
+}

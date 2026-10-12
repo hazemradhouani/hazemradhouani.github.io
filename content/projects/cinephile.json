@@ -1,0 +1,106 @@
+{
+  "slug": "cinephile",
+  "order": 14,
+  "group": "academic",
+  "filters": [
+    "academic",
+    "cultural"
+  ],
+  "title": "Cinephile",
+  "run": "ENAU | Tunis",
+  "summary": "Cinema complex in central Tunis designed around a covered interior street, an academic project at ENAU.",
+  "place": "Tunis, Belvédère",
+  "year": "2022",
+  "descriptor": "Cultural | cinema complex",
+  "spec": [
+    {
+      "label": "Location",
+      "value": "Tunis, Belvédère",
+      "source": "site + pdf2025:p12"
+    },
+    {
+      "label": "Year",
+      "value": "2022",
+      "source": "site"
+    },
+    {
+      "label": "School",
+      "value": "ENAU",
+      "source": "site"
+    },
+    {
+      "label": "Type",
+      "value": "Cinema Complex",
+      "source": "site"
+    }
+  ],
+  "tag": "ENAU / Academic / Cultural",
+  "narrative": [
+    {
+      "text": "A cinema complex in central Tunis, designed as an academic project at ENAU exploring the typology of the cultural institution as a piece of urban fabric. The project responds to a site at the intersection of the medina and the colonial city, a condition that demands a building capable of speaking to two distinct urban grammars without resolving them into a false synthesis.",
+      "source": "site"
+    },
+    {
+      "text": "The programme distributes four cinema screens, a film library and archive, a cafe, and public circulation spaces across a building that is simultaneously urban and introverted. The primary public space is a covered interior street that runs through the building from one facade to the other, accessible outside of cinema hours and acting as a shortcut through the block. This device allows the building to contribute to the pedestrian life of the neighbourhood rather than withdrawing from it.",
+      "source": "site"
+    },
+    {
+      "text": "The project was produced at the end of the first architectural cycle at ENAU and represents the first design work at urban scale, engaging seriously with questions of site, programme, and the relationship between architecture and the city.",
+      "source": "site"
+    }
+  ],
+  "hero": {
+    "src": "images/cinephile/cinephile-site-aerial.jpg",
+    "alt": "Aerial massing render of the Cinephile site in Tunis, the cinema highlighted in pink within the city fabric",
+    "credit": null,
+    "source": "pdf2025:p11"
+  },
+  "figures": [
+    {
+      "src": "images/cinephile/cinephile-renders.jpg",
+      "title": "Renders, Interior Spaces",
+      "caption": "Left: public lobby and interior street, warm concrete volumes, oblique incisions, deep cast shadows. Centre: main auditorium, patterned timber acoustic ceiling, classical seating rake, stage framing. Bottom left: site plan, building footprint within the Tunis urban block. Right: exploded axonometric showing structural floor system and programme layering across all levels.",
+      "alt": "Cinephile renders, public lobby, main auditorium, site plan and exploded axonometry",
+      "kind": "render",
+      "source": "site"
+    },
+    {
+      "src": "images/cinephile/cinephile-site-study.jpg",
+      "title": "Site Study",
+      "caption": "Urban site study. Site at the corner of the medina and the colonial grid. Belvedere park to the south. Place de l'Afrique bus station to the north-east. Palestine metro station to the north-west. Pedestrian desire lines (dotted red) and vehicular routes mapped. Existing programme highlighted in orange.",
+      "alt": "3D urban site study, corner between medina and colonial grid, Belvedere park, pedestrian routes and transit connections",
+      "kind": "drawing",
+      "source": "site"
+    },
+    {
+      "src": "images/cinephile/cinephile-sketches.jpg",
+      "title": "Design Sketches",
+      "caption": "Concept sketches. Early exploration of section logic and vertical programme organisation. Circulation strategy through the building as an interior public street. Structural grid and screen volumes developed in pencil and ink.",
+      "alt": "Hand sketches exploring section logic, circulation strategy and structural grid",
+      "kind": "render",
+      "source": "site"
+    },
+    {
+      "src": "images/cinephile/cinephile-plan-n01.jpg",
+      "title": "Ground Floor Plan, N01",
+      "caption": "Ground floor N01. Four cinema screens distributed symmetrically around the central covered lobby. Ticketing and public foyer at centre. Film library and archive to the north. Technical core and sanitary block at service edges. Screen entrances stepped along the east–west public axis. Scale 1:200.",
+      "alt": "Ground floor plan N01, four cinema screens, public lobby, film library, technical core",
+      "kind": "drawing",
+      "source": "site"
+    },
+    {
+      "src": "images/cinephile/cinephile-section-facade.jpg",
+      "title": "Section and Facade",
+      "caption": "Left: transversal section. Acoustic ceiling geometry in the main auditorium, programme floor distribution, facade layering and four construction detail zones. Right: facade elevation. Diamond-pattern aluminium cladding, vertical circulation tower, double-skin glass envelope.",
+      "alt": "Transversal section and facade elevation, acoustic ceiling geometry, diamond-pattern aluminium cladding, double-skin glass envelope",
+      "kind": "drawing",
+      "source": "site"
+    }
+  ],
+  "date": "2022",
+  "role": [],
+  "quote": null,
+  "honour": null,
+  "office": null,
+  "film": null
+}

@@ -1,0 +1,76 @@
+{
+  "slug": "sentry",
+  "order": 10,
+  "group": "morocco",
+  "filters": [
+    "professional"
+  ],
+  "title": "Sentry",
+  "run": "Yassir Khalil Studio | Casablanca",
+  "summary": "Guard pavilion at the entry threshold of Casablanca Finance City, in perforated steel, at Yassir Khalil Studio.",
+  "place": "Casablanca Finance City",
+  "year": "2024",
+  "descriptor": "Small scale | guard pavilion",
+  "office": "Yassir Khalil Studio",
+  "spec": [
+    {
+      "label": "Location",
+      "value": "Casablanca Finance City",
+      "source": "site + pdf2025:p25"
+    },
+    {
+      "label": "Year",
+      "value": "2024",
+      "source": "site"
+    },
+    {
+      "label": "Office",
+      "value": "Yassir Khalil Studio",
+      "source": "site"
+    },
+    {
+      "label": "Type",
+      "value": "Guard Pavilion",
+      "source": "site"
+    }
+  ],
+  "tag": "Yassir Khalil Studio / Small scale / Casablanca Finance City",
+  "narrative": [
+    {
+      "text": "A guard pavilion at Casablanca Finance City, the major financial district developed on the edge of Casablanca. The building performs within an extremely constrained footprint: access control, covered waiting, and a clear visual presence that marks the entry threshold to the complex.",
+      "source": "site"
+    },
+    {
+      "text": "The pavilion is positioned at the boundary between the public road and the controlled domain, its geometry derived from this threshold condition. The structure is detailed to respond to the urban and institutional scale of Casablanca Finance City, with a compact material palette and a folded roof profile that gives the building a precise, legible silhouette.",
+      "source": "site"
+    }
+  ],
+  "hero": {
+    "src": "images/sentry/thumb.jpg",
+    "alt": "Render of the Sentry guard pavilion, Casablanca Finance City",
+    "credit": null
+  },
+  "figures": [
+    {
+      "src": "images/sentry/sentry-render.jpg",
+      "title": "Render, Aerial View",
+      "caption": "Aerial render. Guard pavilion at Casablanca Finance City. Folded roof plane in perforated steel sheeting. Perforated dark metal cladding on three sides, glazed entry face. Vehicle lane and access control threshold. Casablanca. 2024.",
+      "alt": "Aerial render of Sentry gatehouse pavilion, folded perforated metal roof, dark cladding, planted estate perimeter and vehicle approach lane",
+      "kind": "render",
+      "source": "site"
+    },
+    {
+      "src": "images/sentry/sentry-section.jpg",
+      "title": "Section B-B",
+      "caption": "Section B-B. Ceiling height 2.90 m at the entry face tapering to 1.09 m at the low eave. Sloped structural roof profile in reinforced concrete. Glazed entry door and guard desk positioned at the high end. Insulated roof construction with 14 cm build-up at ridge. Foundation and floor slab at grade.",
+      "alt": "Section B-B of Sentry gatehouse, 2.90m ceiling height at entry, 1.09m at eave, sloped structural roof profile, glazed door and guard desk position",
+      "kind": "drawing",
+      "source": "site"
+    }
+  ],
+  "film": "sentry",
+  "date": "2024",
+  "role": [],
+  "quote": null,
+  "honour": null
+}

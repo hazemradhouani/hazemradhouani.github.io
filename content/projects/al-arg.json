@@ -1,0 +1,135 @@
+{
+  "slug": "al-arg",
+  "order": 1,
+  "group": "academic",
+  "filters": [
+    "academic",
+    "heritage"
+  ],
+  "title": "Al-Arg",
+  "run": "Architecture thesis",
+  "summary": "Heritage conservation and rehabilitation of an abandoned raw-earth village in the Tunisian Jérid. Architecture thesis, ENAU, Highest Honours.",
+  "place": "Hammat Djérid, Tunisia",
+  "year": "2023-2024",
+  "descriptor": "Heritage conservation | rehabilitation",
+  "quote": {
+    "text": "Look before building.",
+    "source": "pdf2026:p23"
+  },
+  "role": [
+    {
+      "text": "A village in the Tunisian Jérid region | raw earth architecture never previously documented. Multiple on-site survey campaigns conducted: measurements, documentary photography, interviews with former inhabitants.",
+      "source": "pdf2026:p23"
+    },
+    {
+      "text": "Complete reconstruction of the spatial logic | siting, natural ventilation, hierarchy of spaces. It led to a rehabilitation project and a published thesis, Highest Honours, unanimous jury | ENAU.",
+      "source": "pdf2026:p23 (translated from French; year omitted, see ledger C03)"
+    },
+    {
+      "text": "International distinction: Most Appreciated Research | Sakura Science Program, Tokyo 2025. The only Tunisian participant selected.",
+      "source": "pdf2026:p23 (translated from French; award name per answer F02)"
+    }
+  ],
+  "spec": [
+    {
+      "label": "Project type",
+      "value": "Heritage Conservation / Rehabilitation",
+      "source": "pdf2026:p23"
+    },
+    {
+      "label": "Year",
+      "value": "2023-2024 / Published",
+      "source": "pdf2026:p23"
+    },
+    {
+      "label": "Location",
+      "value": "Al-Arg, Hammat Djérid, Tozeur Governorate, Tunisia",
+      "source": "pdf2026:p23"
+    },
+    {
+      "label": "School",
+      "value": "ENAU, University of Carthage",
+      "source": "pdf2026:p28"
+    },
+    {
+      "label": "Surface",
+      "value": "Village: 1.4 ha",
+      "source": "site"
+    }
+  ],
+  "tag": "Architecture Thesis / Highest Honours Unanimous / ENAU Carthage / Sakura Science Program, Japan 2025 / Most Appreciated Research",
+  "narrative": [
+    {
+      "text": "Degree thesis awarded Highest Honours with a unanimous jury at ENAU, Université de Carthage, 2024. The project proposes a strategy for the rehabilitation of the village of Al-Arg, an abandoned settlement in the Tunisian interior whose population evacuated over the course of the twentieth century, leaving behind an intact but deteriorating fabric of raw earth architecture.",
+      "source": "site (spelling Al-Arg per pdf2026; material per pdf2026:p23, ledger C04)"
+    },
+    {
+      "text": "The thesis operates at three scales simultaneously: a territorial analysis of the conditions that produced the abandonment, an urban proposal for the reactivation of the village as a place of memory, culture, and temporary dwelling, and an architectural intervention on a key building within the fabric. The research draws on the theories of Carlo Scarpa, Giorgio Grassi, and the Italian school of urban morphology, and proposes a practice of rehabilitation that listens to the existing before adding anything new.",
+      "source": "site"
+    },
+    {
+      "text": "The project was founded on field surveys and heritage documentation carried out with the Société de Préservation du Village d'ARG over two years prior to the thesis, grounding the design work in direct material knowledge of the site.",
+      "source": "site"
+    }
+  ],
+  "honour": "Highest Honours | Unanimous jury | ENAU, University of Carthage | June 2024",
+  "hero": {
+    "src": "images/al-arg/al-arg-aerial-sunset.jpg",
+    "alt": "Aerial render of the rehabilitated Al-Arg village at sunset, earth volumes and open courtyards among palm groves",
+    "credit": null,
+    "caption": "Aerial view of the rehabilitated project at sunset. Reading of the reconstituted urban fabric, open courtyards, and earth volumes within the oasis landscape.",
+    "source": "pdf2026:p27"
+  },
+  "figures": [
+    {
+      "src": "images/al-arg/al-arg-territory-map-2026.jpg",
+      "title": "Territory",
+      "caption": "Site map | Al-Arg within the Jérid. Reading of the oasis territory as a system | water, road, inhabited fabric.",
+      "alt": "Map of the Jérid oasis territory around Al-Arg: roads, water and inhabited fabric, towards the new oasis, the town, Tozeur, Tamaghzah, Chott El Gharsa and Oasis Chamsa",
+      "kind": "drawing",
+      "source": "pdf2026:p24",
+      "size": "wide"
+    },
+    {
+      "src": "images/al-arg/al-arg-plans-section.jpg",
+      "title": "Village and building, existing and proposed",
+      "caption": "Site plan | existing state. Site plan | rehabilitation proposal. Ground floor plan | existing state. Ground floor plan | proposed. Longitudinal section A-A. Sequential reading of spaces | thresholds, courtyards, covered passages.",
+      "alt": "Site plans and ground floor plans of Al-Arg in the existing state and the rehabilitation proposal, exploded axonometric of three levels, and longitudinal section A-A",
+      "kind": "drawing",
+      "source": "pdf2026:p25",
+      "size": "full"
+    },
+    {
+      "title": "Atmosphere",
+      "caption": "Entry approach through palm threshold and ochre perimeter wall at evening light. Stone and earth wall, raw materiality, rammed construction, cast shadow rhythm. Courtyard threshold, arched entry, merlonated perimeter wall, dry vegetation and ancient stone.",
+      "kind": "render",
+      "items": [
+        {
+          "src": "images/al-arg/al-arg-render-palms.jpg",
+          "alt": "Render of the entry approach through palms towards the ochre perimeter wall at evening light"
+        },
+        {
+          "src": "images/al-arg/al-arg-render-walls.jpg",
+          "alt": "Render of stone and earth walls in raking light"
+        },
+        {
+          "src": "images/al-arg/al-arg-render-courtyard.jpg",
+          "alt": "Render of a courtyard threshold with an arched entry and a merlonated perimeter wall"
+        }
+      ],
+      "source": "pdf2026:p23 (images), site (caption)"
+    },
+    {
+      "src": "images/al-arg/al-arg-axonometrics-structures.jpg",
+      "title": "Structures",
+      "caption": "Exploded axonometrics | three levels of reading. Accessible roof, ventilation void, inhabited level. Structure 01. Timber frame | palm wood joists and posts, accessible roof. Structure 02. Claustra screen and shading | solar filtering device, lightweight cladding. Structure 03. Ventilation void | natural thermal chimney integrated into the earth masonry.",
+      "alt": "Three exploded axonometrics of the rehabilitated building and three structural details: palm wood timber frame, claustra screen, ventilation void",
+      "kind": "drawing",
+      "source": "pdf2026:p26",
+      "size": "wide"
+    }
+  ],
+  "date": "2024",
+  "office": null,
+  "film": null
+}
