@@ -70,15 +70,14 @@
     };
 
     document.addEventListener('click', function (e) {
-      var a = e.target.closest('a[data-viewer]');
+      var a = e.target.closest('[data-viewer]');
       if (!a || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
       e.preventDefault();
-      opener = a.getAttribute('tabindex') === '-1'
-        ? a.closest('.fig').querySelector('.fig__zoom') || a
-        : a;
+      var sheetEl = a.closest('.sheet');
+      opener = a.tagName === 'A' ? a : (sheetEl && sheetEl.querySelector('.zoom')) || a;
       vImg = vImg || ensureImg(stage);
       setSources(vImg, a.getAttribute('data-avif'), a.getAttribute('data-webp'));
-      vImg.src = a.getAttribute('href');
+      vImg.src = a.getAttribute('href') || a.getAttribute('data-href');
       vImg.alt = a.getAttribute('data-alt') || '';
       var w = +a.getAttribute('data-w');
       var h = +a.getAttribute('data-h');
@@ -288,13 +287,13 @@
       data.append('_replyto', values.email);
 
       form.setAttribute('aria-busy', 'true');
-      btn.disabled = true;
+      btn.setAttribute('aria-disabled', 'true');
       btnLabel.textContent = 'Sending…';
       say('', false);
 
       var done = function (msg, isError) {
         form.removeAttribute('aria-busy');
-        btn.disabled = false;
+        btn.removeAttribute('aria-disabled');
         btnLabel.textContent = 'Send';
         say(msg, isError);
       };
@@ -317,7 +316,8 @@
   /* ------------------------------------------------------------ analytics
      GA4 is loaded once the page is idle, so it never competes with the first render. */
   var ga = document.documentElement.getAttribute('data-ga');
-  if (ga) {
+  var optOut = navigator.doNotTrack === '1' || window.doNotTrack === '1' || navigator.globalPrivacyControl === true;
+  if (ga && !optOut) {
     window.dataLayer = window.dataLayer || [];
     window.gtag = function () { window.dataLayer.push(arguments); };
     window.gtag('js', new Date());

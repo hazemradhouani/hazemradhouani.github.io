@@ -50,3 +50,17 @@ Targets: LCP < 2.5 s, CLS < 0.1, total before interaction ≤ 900 KB: **met on e
 - **Screen readers** (NVDA, VoiceOver): not run; semantics checked by axe and by hand (landmarks, one h1 per page, labelled dialogs, alt on every image, `lang="ar"`/`lang="fr"` on foreign text).
 - **Real FormSubmit delivery**: not sent (it would email the owner); the request payload is unchanged from the verified September version.
 - **Live GitHub Pages**: checked after merge (see the PR).
+
+## 5. Independent review (subagent, read-only) and fixes
+| Severity | Finding | Fix | Verified |
+|---|---|---|---|
+| Critical | Clicking a drawing image threw (stale `.fig` selectors), so the viewer did not open | Selector updated to `.sheet` / `.zoom` | Image click opens the viewer (scripted) |
+| High | Single-figure alt text sat inside an `aria-hidden` link | Image wrapper is now a non-link `div[data-viewer]`; the "Full size" link stays the keyboard and no-JS path | axe 0; markup checked |
+| High | Focus ring 2.5:1 inside the dark viewer | `.viewer :focus-visible` uses the cover accent (6.0:1) | CSS |
+| High (confirmed) | `object-fit` frames did not fill: `<picture>` had no height | Frame pictures carry `height: 100%` | Frame height = image height on every home frame at 375 and 1440, and on openers |
+| Medium | Figure titles at the same level as the section heading | Figure titles are `h3` | QA run |
+| Medium | Viewer stage label without a role; submit button lost focus while sending | `role="group"`; `aria-disabled` instead of `disabled` | Code |
+| Medium | GA4 without any opt-out | Not loaded when Do Not Track or Global Privacy Control is on (consent itself remains [CONTENT NEEDED]) | Code |
+| Medium | Films meta description called Sentry a station; "based in" differs between pages | Wording fixed; location conflict logged as C18 | Ledger |
+
+Full QA re-run after the fixes: all 21 URLs clean at six widths, axe 0 violations.

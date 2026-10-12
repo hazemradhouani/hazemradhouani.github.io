@@ -33,6 +33,7 @@ Translations from French are literal and marked "(translated from French)". Line
 | C15 | Studio BELEM title: site "Architectural Intern, ongoing"; 2026 PDF "Licensed Architect" (personal title) | Site kept, flagged |
 | C16 | Nouvelle Medina and Aïn Sebaâ: no office named in the 2025 PDF | Office not stated; listed under Morocco without "Professional" |
 | C17 | The 2026 cover photograph (earthen alley) has no caption or place | Published without a place name |
+| C18 | Where the owner is based: films page "between Paris, Casablanca, and Tunis" vs About "Paris, Casablanca, and Tokyo" (both site text); the 2026 PDF says "Tunis / Paris" | Both kept verbatim on their pages; flagged |
 
 ## [CONTENT NEEDED]
 
@@ -46,4 +47,5 @@ Translations from French are literal and marked "(translated from French)". Line
 8. Captions or transcripts for films with speech.
 9. Permission and credit lines for publishing Studio BELEM and Yassir Khalil Studio drawings.
 10. Analytics consent for EU visitors (GA4 runs, loaded on idle; not legal advice).
-11. Links and material for your website and app (the Digital section appears when the first entry is added).
+11. Where you are based (C18).
+12. Links and material for your website and app (the Digital section appears when the first entry is added).

@@ -30,7 +30,7 @@ function sheetSet(f, n, ctx) {
     return html`<a class="set__cell${f.kind === 'drawing' ? ' plate' : ''}" href="${p}${it.src}" data-viewer data-title="${t}" data-alt="${it.alt}" data-w="${w}" data-h="${h}" data-avif="${big.avif}" data-webp="${big.webp}" style="--native: ${w}px"><span class="vh">Open ${t} full size</span>${img}</a>`;
   });
   return html`<figure class="sheet sheet--set sheet--${f.kind}" id="fig-${n}" style="--cols: ${cols}">
-<div class="sheet__head"><h2 class="sheet__title">${f.title}</h2><span class="caps muted">Fig. ${n}</span></div>
+<div class="sheet__head"><h3 class="sheet__title">${f.title}</h3><span class="caps muted">Fig. ${n}</span></div>
 <div class="set">${cells}</div>
 ${when(f.caption || f.credit, () => html`<figcaption class="cap"><span class="cap__text">${inline(f.caption)}${when(f.credit, () => html` <span class="credit">${f.credit}.</span>`)}</span></figcaption>`)}
 </figure>`;
@@ -49,8 +49,8 @@ export function sheet(f, n, ctx) {
     ? html`<div class="plate" style="--native: ${w}px">${img}</div>`
     : html`<div class="media media--render" style="--native: ${w}px">${img}</div>`;
   return html`<figure class="sheet sheet--${f.kind} sheet--${size}" id="${id}">
-<div class="sheet__head"><h2 class="sheet__title">${f.title}</h2><span class="caps muted">Fig. ${n}</span></div>
-<a class="figlink" href="${p}${f.src}" data-viewer data-title="${title}" data-alt="${f.alt}" data-w="${w}" data-h="${h}" data-avif="${big.avif}" data-webp="${big.webp}" tabindex="-1" aria-hidden="true">${media}</a>
+<div class="sheet__head"><h3 class="sheet__title">${f.title}</h3><span class="caps muted">Fig. ${n}</span></div>
+<div class="figlink" data-href="${p}${f.src}" data-viewer data-title="${title}" data-alt="${f.alt}" data-w="${w}" data-h="${h}" data-avif="${big.avif}" data-webp="${big.webp}">${media}</div>
 <figcaption class="cap"><span class="cap__text">${inline(f.caption)}${when(f.credit, () => html` <span class="credit">${f.credit}.</span>`)}</span><a class="zoom" href="${p}${f.src}" data-viewer data-title="${title}" data-alt="${f.alt}" data-w="${w}" data-h="${h}" data-avif="${big.avif}" data-webp="${big.webp}">${icon('arrows-out', p)}Full size<span class="vh">: ${title}</span></a></figcaption>
 </figure>`;
 }

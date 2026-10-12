@@ -101,7 +101,7 @@ ${when(ctx.viewer, () => html`<dialog class="viewer" id="viewer" aria-labelledby
 <form method="dialog"><button class="viewer__btn" type="submit" autofocus>Close${icon('x', p)}</button></form>
 </div>
 </div>
-<div class="viewer__stage" tabindex="0" aria-label="Image, scroll or drag to pan">
+<div class="viewer__stage" tabindex="0" role="group" aria-label="Image, scroll or drag to pan">
 </div>
 </dialog>`)}
 </body>
