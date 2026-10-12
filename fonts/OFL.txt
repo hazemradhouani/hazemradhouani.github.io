@@ -1,16 +1,17 @@
-Fonts in this folder are unmodified WOFF2 subsets served by Google Fonts (Latin and Latin Extended),
-self-hosted so the site makes no third-party font request.
+Fonts in this folder
 
-  archivo-latin.woff2, archivo-latin-ext.woff2
-    Archivo (variable: weight 100-900, width 62-125), Version 2.001
-    Copyright 2020 The Archivo Project Authors (https://github.com/Omnibus-Type/Archivo)
+EB Garamond (variable, wght 400-800; roman and italic; Latin and Latin-Ext subsets)
+Copyright 2017 The EB Garamond Project Authors (https://github.com/octaviopardo/EBGaramond12) EBGaramond-Italic[wght].ttf: Copyright 2017 The EB Garamond Project Authors (https://github.com/octaviopardo/EBGaramond12)
+Files: eb-garamond-*.woff2, from @fontsource-variable/eb-garamond 5.3.0, unmodified.
 
-  ibm-plex-mono-latin-400.woff2, ibm-plex-mono-latin-ext-400.woff2
-    IBM Plex Mono Regular, Version 2.3
-    Copyright 2017 IBM Corp. All rights reserved.
+IBM Plex Sans (variable, wght 100-700; roman; Latin and Latin-Ext subsets)
+Copyright 2019 IBM Corp. All rights reserved. IBMPlexSans-Italic[wdth,wght].ttf: Copyright 2019 IBM Corp. All rights reserved.
+Files: ibm-plex-sans-*.woff2, from @fontsource-variable/ibm-plex-sans 5.3.0, unmodified.
 
-Both families are licensed under the SIL Open Font License, Version 1.1.
+Both are licensed under the SIL Open Font License, Version 1.1:
 
+
+This Font Software is licensed under the SIL Open Font License, Version 1.1.
 This license is copied below, and is also available with a FAQ at:
 http://scripts.sil.org/OFL
 

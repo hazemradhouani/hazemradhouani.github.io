@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Maskable / touch icon: same construction as mark.svg (arch 0.8 w/h, plumb 0.29 h, baseline 64/44 of arch), inside the 80% safe zone -->
+  <rect width="512" height="512" fill="#15110E"/>
+  <g fill="none" stroke="#EDE7DC" stroke-width="7">
+    <path d="M186 335V230a70 70 0 0 1 140 0v105"/>
+    <path d="M256 160v51"/>
+    <path d="M154 335h204"/>
+  </g>
+</svg>

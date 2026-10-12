@@ -6,7 +6,26 @@
   'use strict';
 
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
-  var fine = window.matchMedia('(hover: hover) and (pointer: fine)');
+
+  /* placeholder <picture><img> is created on first use, so the markup has no src-less image */
+  var ensureImg = function (box) {
+    var img = box.querySelector("img");
+    if (!img) { var pic = document.createElement("picture"); img = document.createElement("img"); img.alt = ""; img.decoding = "async"; pic.appendChild(img); box.appendChild(pic); }
+    return img;
+  };
+
+  /* <picture> sources are created on demand so the markup never carries empty srcsets */
+  var setSources = function (img, avif, webp) {
+    var pic = img.parentNode;
+    Array.prototype.slice.call(pic.querySelectorAll('source')).forEach(function (s) { pic.removeChild(s); });
+    [['image/avif', avif], ['image/webp', webp]].forEach(function (t) {
+      if (!t[1]) return;
+      var s = document.createElement('source');
+      s.type = t[0];
+      s.srcset = t[1];
+      pic.insertBefore(s, img);
+    });
+  };
 
   /* ------------------------------------------------------------ menu (phones)
      Chromium opens the dialog natively through commandfor/command; other browsers
@@ -33,9 +52,7 @@
   var viewer = document.getElementById('viewer');
   if (viewer && typeof viewer.showModal === 'function') {
     var stage = viewer.querySelector('.viewer__stage');
-    var vImg = stage.querySelector('img');
-    var vAvif = stage.querySelector('source[type="image/avif"]');
-    var vWebp = stage.querySelector('source[type="image/webp"]');
+    var vImg = null;
     var vTitle = viewer.querySelector('.viewer__title');
     var vToggle = viewer.querySelector('[data-viewer-toggle]');
     var opener = null;
@@ -59,8 +76,8 @@
       opener = a.getAttribute('tabindex') === '-1'
         ? a.closest('.fig').querySelector('.fig__zoom') || a
         : a;
-      vAvif.srcset = a.getAttribute('data-avif') || '';
-      vWebp.srcset = a.getAttribute('data-webp') || '';
+      vImg = vImg || ensureImg(stage);
+      setSources(vImg, a.getAttribute('data-avif'), a.getAttribute('data-webp'));
       vImg.src = a.getAttribute('href');
       vImg.alt = a.getAttribute('data-alt') || '';
       var w = +a.getAttribute('data-w');
@@ -71,7 +88,7 @@
       viewer.showModal();
     });
     vToggle.addEventListener('click', function () { setActual(!viewer.classList.contains('is-actual')); });
-    vImg.addEventListener('dblclick', function () { setActual(!viewer.classList.contains('is-actual')); });
+    stage.addEventListener('dblclick', function () { setActual(!viewer.classList.contains('is-actual')); });
     viewer.addEventListener('close', function () {
       if (opener) opener.focus();
       opener = null;
@@ -146,9 +163,7 @@
     var preview = document.querySelector('.preview');
     var wideFine = window.matchMedia('(min-width: 1280px) and (hover: hover) and (pointer: fine)');
     if (preview) {
-      var pAvif = preview.querySelector('source[type="image/avif"]');
-      var pWebp = preview.querySelector('source[type="image/webp"]');
-      var pImg = preview.querySelector('img');
+      var pImg = null;
       var pCap = preview.querySelector('.preview__cap');
       var active = null;
       var show = function (row) {
@@ -156,8 +171,8 @@
         if (active) active.classList.remove('is-active');
         active = row;
         row.classList.add('is-active');
-        pAvif.srcset = row.getAttribute('data-avif');
-        pWebp.srcset = row.getAttribute('data-webp');
+        pImg = pImg || ensureImg(preview.querySelector('.media'));
+        setSources(pImg, row.getAttribute('data-avif'), row.getAttribute('data-webp'));
         pImg.src = row.getAttribute('data-src');
         pImg.width = +row.getAttribute('data-w');
         pImg.height = +row.getAttribute('data-h');
@@ -298,4 +313,22 @@
         });
     });
   });
+
+  /* ------------------------------------------------------------ analytics
+     GA4 is loaded once the page is idle, so it never competes with the first render. */
+  var ga = document.documentElement.getAttribute('data-ga');
+  if (ga) {
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function () { window.dataLayer.push(arguments); };
+    window.gtag('js', new Date());
+    window.gtag('config', ga);
+    var loadGa = function () {
+      var s = document.createElement('script');
+      s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(ga);
+      document.head.appendChild(s);
+    };
+    var idle = function () { if ('requestIdleCallback' in window) window.requestIdleCallback(loadGa, { timeout: 4000 }); else setTimeout(loadGa, 2000); };
+    if (document.readyState === 'complete') idle(); else window.addEventListener('load', idle, { once: true });
+  }
 })();
