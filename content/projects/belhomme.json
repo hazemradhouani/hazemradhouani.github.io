@@ -1,0 +1,152 @@
+{
+  "slug": "belhomme",
+  "order": 3,
+  "group": "paris",
+  "filters": [
+    "professional",
+    "heritage",
+    "residential"
+  ],
+  "title": "Belhomme",
+  "run": "Studio BELEM | Paris 18th",
+  "summary": "Rehabilitation and rooftop extension of a corner building in Paris 18th, documented from a full survey of the existing facades.",
+  "place": "Paris 18th",
+  "year": "2025-2026",
+  "descriptor": "Rehabilitation | residential and commercial",
+  "office": "Studio BELEM",
+  "quote": {
+    "text": "A project does not belong to its brief | it belongs to its site. Sometimes, you have to wait until the site is ready.",
+    "source": "pdf2026:p9"
+  },
+  "role": [
+    {
+      "text": "Production of all graphic documents from two separate digital models | existing and proposed | linked within a single reference file, ensuring consistency across demolition plans, regulatory sections, and facade elevations of the planning permission submission.",
+      "source": "pdf2026:p9"
+    },
+    {
+      "text": "Originating from the Titi Barbès competition won by Studio BELEM in 2021 | residential and commercial rehabilitation and rooftop extension, boulevard Rochechouart, Paris 18th arrondissement. Project halted following a land ownership dispute, which delayed the permit submission for four years.",
+      "source": "pdf2026:p9"
+    }
+  ],
+  "spec": [
+    {
+      "label": "Project type",
+      "value": "Rehabilitation / Residential and Commercial",
+      "source": "pdf2026:p9"
+    },
+    {
+      "label": "Phase",
+      "value": "Planning Permission",
+      "source": "pdf2026:p9"
+    },
+    {
+      "label": "Year",
+      "value": "2025-2026 / Professional",
+      "source": "pdf2026:p9"
+    },
+    {
+      "label": "Location",
+      "value": "1-3 rue Belhomme, Paris 18th",
+      "source": "pdf2026:p9"
+    },
+    {
+      "label": "Office",
+      "value": "Studio BELEM",
+      "source": "pdf2026:p9"
+    },
+    {
+      "label": "Surface",
+      "value": "260 m²",
+      "source": "site"
+    }
+  ],
+  "tag": "Studio BELEM / From the Titi Barbès competition (2021) / Resumed under a new client | SNC HEMACLE / Ongoing",
+  "narrative": [
+    {
+      "text": "A corner residential building in Paris, its particular condition at the intersection of two streets creating a geometry that generates both problems and opportunities: obtuse room angles, a chamfered corner that reads as a landmark on the block, and party wall situations on two sides that require careful structural dialogue with adjacent buildings.",
+      "source": "site"
+    },
+    {
+      "text": "The rehabilitation addresses the envelope, the common areas, and the redistribution of the upper-floor apartments. The chamfered corner is treated as the compositional centre of the facade renovation, reinforcing its urban role. The project was conducted within the ABF regulatory framework, requiring close coordination with the heritage authority throughout the design and permitting stages.",
+      "source": "site"
+    }
+  ],
+  "hero": {
+    "src": "images/belhomme/belhomme-corner-render.jpg",
+    "alt": "Corner render of the Belhomme building at rue Belhomme and boulevard Rochechouart",
+    "credit": "Render: Studio BELEM",
+    "source": "pdf2026:p9"
+  },
+  "figures": [
+    {
+      "src": "images/belhomme/belhomme-existing-facades-survey.jpg",
+      "title": "Existing facades survey",
+      "caption": "Facades. Complete existing elevation | reading of architectural mouldings, gutters, chimneys, and joinery. Survey base prior to selective demolition.",
+      "alt": "Survey elevations of all the existing facades with mouldings, gutters, chimneys and joinery",
+      "kind": "drawing",
+      "source": "pdf2026:p10",
+      "size": "full"
+    },
+    {
+      "src": "images/belhomme/belhomme-demolition-plans.jpg",
+      "title": "Demolition plans",
+      "caption": "Demolition plans | S1 - N05. Strict coding: retained existing (black), demolition (red hatched), floor/roof demolition (solid red).",
+      "alt": "Seven demolition plans from level S1 to N05, retained parts in black and demolitions in red",
+      "kind": "drawing",
+      "source": "pdf2026:p10",
+      "size": "full"
+    },
+    {
+      "title": "Regulatory sections",
+      "caption": "PLU Section | Rue Belhomme. Verification of the regulatory building envelope, facade height, footprint, and rear setback. PLU Section | Boulevard Rochechouart Facade. Same regulatory logic at the corner | reading of the maximum allowable total height.",
+      "kind": "drawing",
+      "items": [
+        {
+          "src": "images/belhomme/belhomme-plu-section-rue-belhomme.jpg",
+          "alt": "PLU section, rue Belhomme"
+        },
+        {
+          "src": "images/belhomme/belhomme-plu-section-rue-belhomme-detailed.jpg",
+          "alt": "Detailed PLU section, rue Belhomme"
+        },
+        {
+          "src": "images/belhomme/belhomme-plu-section-rochechouart.jpg",
+          "alt": "PLU section, boulevard Rochechouart"
+        },
+        {
+          "src": "images/belhomme/belhomme-plu-elevation-rochechouart.jpg",
+          "alt": "PLU elevation, boulevard Rochechouart facade"
+        }
+      ],
+      "source": "pdf2026:p11"
+    },
+    {
+      "title": "Plans",
+      "caption": "Plan N00 | Ground floor level. Plan N02 | Standard apartment layout.",
+      "kind": "drawing",
+      "items": [
+        {
+          "src": "images/belhomme/belhomme-plan-n00.jpg",
+          "alt": "Ground floor plan N00"
+        },
+        {
+          "src": "images/belhomme/belhomme-plan-n02.jpg",
+          "alt": "Plan N02, standard apartment layout"
+        }
+      ],
+      "source": "pdf2026:p12"
+    },
+    {
+      "src": "images/belhomme/belhomme-courtyard-render-2026.jpg",
+      "title": "Courtyard",
+      "caption": "",
+      "alt": "Render of the Belhomme courtyard facade",
+      "kind": "render",
+      "credit": "Render: Studio BELEM",
+      "source": "pdf2026:p12"
+    }
+  ],
+  "date": "2026",
+  "honour": null,
+  "film": null
+}

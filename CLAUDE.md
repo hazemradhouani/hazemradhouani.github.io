@@ -12,12 +12,14 @@ Architect specializing in heritage documentation and earthen/vernacular architec
 ## Hard rules
 - Content truth: never invent projects, clients, awards, dates, metrics, quotes, or descriptions. Use only content already in the repo or content I provide. Mark gaps as [CONTENT NEEDED: description] and list them.
 - Read before modifying: never edit a file you have not read in this session.
-- Work on a branch named flagship-upgrade. Never commit to main, never force-push, never delete files or assets without asking me first.
-- Hosting is static (GitHub Pages). Do not introduce anything requiring a server, paid service, or API key without asking.
+- Work on a branch named flagship-upgrade. Never commit directly to main and never force-push. Work reaches main only through a pull request from flagship-upgrade, which Claude merges once the QA gates in "Quality bar" pass.
+- Never delete untracked originals (for example the portfolio PDFs). A tracked file may be removed when it is superseded, because git history can restore it; log every removal in docs/flagship/decision-log.md.
+- Hosting is static (GitHub Pages). Do not introduce anything requiring a server, paid service, or API key. If one would clearly help, record it in the decision log as a recommendation instead.
 - No hardcoded secrets. No new dependency without stating why it is needed and its size cost.
 - No invented APIs, config keys, or library features. If a library version or API may have changed, check current docs or the installed package source. Label anything unchecked as UNVERIFIED.
-- Stakes rule: low-stakes, reversible choices (naming, minor spacing) get a one-line assumption and proceed. High-stakes choices (design direction, information architecture, content changes, deleting anything, build tooling changes, deploy config) stop and ask me one specific question.
-- If two of my requirements conflict, surface it immediately. Do not resolve it silently.
+- Decision authority: I delegate every decision to Claude. Do not ask me for permission or confirmation. Take the best decision for the website (design direction, information architecture, content structure, build tooling, deploy config, naming, everything) and proceed. Record each significant decision, with its reason and the alternatives rejected, in docs/flagship/decision-log.md.
+- If two of my requirements conflict, resolve the conflict with the best option, log the conflict and the resolution in the decision log, and mention it in the next progress report.
+- Content questions only I can answer (facts, permissions, missing material) are never guessed: publish nothing in their place, mark them [CONTENT NEEDED: description] and keep working.
 - "Should work" is not "verified". Every report states what was actually tested, how, and what was not.
 
 ## Quality bar

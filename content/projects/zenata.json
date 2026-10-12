@@ -1,0 +1,116 @@
+{
+  "slug": "zenata",
+  "order": 6,
+  "group": "morocco",
+  "filters": [
+    "professional",
+    "infrastructure"
+  ],
+  "title": "Zenata Station",
+  "run": "Yassir Khalil Studio | Casablanca",
+  "summary": "Regional rail station and multimodal interchange for the Casablanca metropolitan network, developed at Yassir Khalil Studio.",
+  "place": "Casablanca",
+  "year": "2025",
+  "descriptor": "Infrastructure | regional rail station",
+  "office": "Yassir Khalil Studio",
+  "spec": [
+    {
+      "label": "Location",
+      "value": "Casablanca, Zenata eco-city",
+      "source": "site + pdf2025:p8"
+    },
+    {
+      "label": "Year",
+      "value": "2025",
+      "source": "site"
+    },
+    {
+      "label": "Office",
+      "value": "Yassir Khalil Studio",
+      "source": "site"
+    },
+    {
+      "label": "Type",
+      "value": "Regional Rail Station",
+      "source": "site"
+    }
+  ],
+  "tag": "Yassir Khalil Studio / Competition / 2nd Place",
+  "narrative": [
+    {
+      "text": "A regional rail station for the Casablanca metropolitan network, designed as part of a feasibility study for a new RER-type line connecting the eastern suburbs of Casablanca to the city centre. The station serves as a multimodal interchange, integrating intercity rail, bus, and soft mobility within a single covered structure at the edge of the Zenata industrial and residential development zone.",
+      "source": "site"
+    },
+    {
+      "text": "The architectural proposal addresses the civic dimension of infrastructure at the city scale: the station is designed to be legible from the highway approach and to create a covered public space that functions beyond train times as a place of urban activity. The project was developed at Yassir Khalil Studio with Hazem co-authoring the structural coordination and the organisation of passenger flows, and was recognised with second place in the competition organised by the Casablanca metropolitan transport authority.",
+      "source": "site"
+    }
+  ],
+  "honour": "Competition: 2nd Place | Casablanca Metropolitan Rail",
+  "hero": {
+    "src": "images/zenata/zenata-platform-render.jpg",
+    "alt": "Render of Zenata Station from the platform, its cantilevered hall above the tracks",
+    "credit": null,
+    "source": "pdf2025:p7"
+  },
+  "figures": [
+    {
+      "src": "images/zenata/zenata-elevation.jpg",
+      "title": "Long elevation",
+      "caption": "Long elevation. Levels +0.15, +7.30, +16.00 and +27.00.",
+      "alt": "Long elevation of Zenata Station with its stayed roof",
+      "kind": "drawing",
+      "source": "pdf2025:p8",
+      "size": "full"
+    },
+    {
+      "src": "images/zenata/zenata-plans.jpg",
+      "title": "Plans",
+      "caption": "Level +00.00. Level +04.20. Level +07.75.",
+      "alt": "Plans of Zenata Station at levels +00.00, +04.20 and +07.75",
+      "kind": "drawing",
+      "source": "pdf2025:p9",
+      "size": "full"
+    },
+    {
+      "title": "Interiors",
+      "caption": "Hall, concourse and the station at dusk.",
+      "kind": "render",
+      "items": [
+        {
+          "src": "images/zenata/zenata-hall-render.jpg",
+          "alt": "Render of the station hall"
+        },
+        {
+          "src": "images/zenata/zenata-concourse-render.jpg",
+          "alt": "Render of the concourse with passengers"
+        },
+        {
+          "src": "images/zenata/zenata-dusk-render.jpg",
+          "alt": "Render of the station hall at dusk"
+        }
+      ],
+      "source": "pdf2025:p10"
+    },
+    {
+      "src": "images/zenata/zenata-exterior-render.jpg",
+      "title": "Exterior",
+      "caption": "",
+      "alt": "Exterior render of Zenata Station",
+      "kind": "render",
+      "source": "pdf2025:p10"
+    },
+    {
+      "src": "images/zenata/zenata-programme-section.jpg",
+      "title": "Programme and Longitudinal Section",
+      "caption": "Top: programme N01, service level, colour-coded zoning of technical and support spaces: commerce, cleaning, technical rooms, lockers, prayer rooms with ablution areas (male and female), sanitary facilities. Centre: programme N02, main passenger concourse, back office, commercial units, ticketing hall, sales zone, boarding area, group welcome space. Bottom: longitudinal section, rail at grade +0.15 m. Passenger concourse at +7.30 m. Upper glazed level at +16.00 m. Canopy peak at +27.00 m. Stratified passenger flow across all levels within the single covered civic structure.",
+      "alt": "Zenata Station programme plans N01 and N02 and longitudinal section, colour-coded zoning and full section from rail level to canopy",
+      "kind": "drawing",
+      "source": "site"
+    }
+  ],
+  "film": "zenata",
+  "date": "2025",
+  "role": [],
+  "quote": null
+}

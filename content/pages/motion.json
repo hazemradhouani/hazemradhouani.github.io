@@ -1,0 +1,31 @@
+{
+  "title": "Films and motion | Hazem Radhouani",
+  "description": "Architectural films of the Sentry pavilion and the Sidi Maarouf and Zenata stations, and motion graphic reels by Hazem Radhouani, architect and motion designer.",
+  "og": "images/og/motion.jpg",
+  "intro": "Architectural film and motion graphic design. After Effects / Illustrator / 2024-2026.",
+  "filmsTitle": "Architectural films",
+  "filmsIntro": "Architectural renders and animations produced alongside project development.",
+  "films": [
+    { "id": "film-sentry", "slug": "sentry", "title": "Sentry", "label": "Arch Film | Morocco | 2024", "w": 1280, "h": 720, "text": "Guard pavilion at Casablanca Finance City. Threshold and access control explored through precise camera movement and material rendering.", "project": "sentry" },
+    { "id": "film-sidi-maarouf", "slug": "sidi-maarouf", "title": "Sidi Maarouf Station", "label": "Arch Film | Morocco | 2025", "w": 1280, "h": 720, "text": "Sidi Maarouf RER station, Casablanca. Canopy structure, passenger flows, and the spatial character of the covered public concourse.", "project": null },
+    { "id": "film-zenata", "slug": "zenata", "title": "Zenata Station", "label": "Arch Film | Morocco | 2025", "w": 1280, "h": 720, "text": "Regional rail station. Structural canopy, covered concourse, and multimodal interchange at the edge of Casablanca. Competition: 2nd place.", "project": "zenata" }
+  ],
+  "reelsTitle": "Motion graphic reels",
+  "reels": [
+    { "id": "reel-beelove", "slug": "beelove", "title": "Beelove", "label": "Motion Reel | 2025", "w": 1280, "h": 720, "text": "Organic rhythm and pattern through the geometry of bees. Golden ratios, structured movement, and choreographed transitions in After Effects." },
+    { "id": "reel-glitch", "slug": "glitch", "title": "Trying the Glitch Effect", "label": "Motion Reel | 2025", "w": 640, "h": 352, "text": "Digital distortion as graphic language. Signal corruption, chromatic aberration, and scan-line noise as expressive technique in After Effects." },
+    { "id": "reel-planets", "slug": "planets", "title": "Planets", "label": "Motion Reel | 2026", "w": 1280, "h": 720, "text": "Orbital mechanics and gravitational choreography rendered in geometric abstraction. Slow, precise movement informed by celestial bodies." }
+  ],
+  "aboutTitle": "I set ideas into motion.",
+  "about": [
+    "I am an architect and motion designer based between Paris, Casablanca, and Tunis. My motion work grows directly from architectural practice. A background in reading space, structure, and material informs how I think about timing, camera, and the choreography of ideas on screen.",
+    "I work in Adobe After Effects and Adobe Illustrator, and trained through the School of Motion curriculum, a rigorous education that shaped my understanding of easing, anticipation, and the principles that make movement feel right rather than simply correct.",
+    "My output ranges from architectural visualisation, where precision and spatial coherence are paramount, to motion graphic reels exploring pattern, texture, and abstraction as a graphic language of their own."
+  ],
+  "tools": [
+    { "name": "After Effects", "text": "Animation | Compositing | Motion Graphics" },
+    { "name": "Adobe Illustrator", "text": "Vector | Graphic Design | Asset Creation" },
+    { "name": "School of Motion", "text": "Animation Bootcamp | Motion Design Principles" },
+    { "name": "Cinema 4D | D5 Render", "text": "Architectural Visualisation | Rendering" }
+  ]
+}

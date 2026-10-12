@@ -1,0 +1,148 @@
+{
+  "slug": "foubert",
+  "order": 4,
+  "group": "paris",
+  "filters": [
+    "professional",
+    "new-build",
+    "residential"
+  ],
+  "title": "Foubert",
+  "run": "Studio BELEM | Paris 13th",
+  "summary": "New residential building in dense Paris fabric: facade design and detailing in aged red eco-brick at Studio BELEM.",
+  "place": "Paris 13th",
+  "year": "2026",
+  "descriptor": "New construction | residential",
+  "office": "Studio BELEM",
+  "quote": {
+    "text": "Building new in Paris is also a responsibility toward the existing urban fabric.",
+    "source": "pdf2026:p13"
+  },
+  "role": [
+    {
+      "text": "Facade design and definition of architectural detailing | aged red eco-brick, claustra screen, brick bonding, joinery. Perspectives will be updated at the EXE phase.",
+      "source": "pdf2026:p13"
+    },
+    {
+      "text": "New residential construction in dense urban fabric | PLU constraints, height envelope and setback regulations, Paris 13th arrondissement. Main facade in aged solid red eco-brick type «fjord soda» | claustra screen, brick bonding, corner details.",
+      "source": "pdf2026:p13 (typo \"Mayn\" corrected)"
+    },
+    {
+      "text": "Demonstrated mastery: structural engineer coordination, complete layer-by-layer documentation.",
+      "source": "pdf2026:p13"
+    }
+  ],
+  "spec": [
+    {
+      "label": "Project type",
+      "value": "Residential / New Construction",
+      "source": "pdf2026:p13"
+    },
+    {
+      "label": "Phase",
+      "value": "PRO",
+      "source": "pdf2026:p13"
+    },
+    {
+      "label": "Year",
+      "value": "2026 / Professional",
+      "source": "pdf2026:p13"
+    },
+    {
+      "label": "Location",
+      "value": "1bis-3 passage Foubert, Paris 13th",
+      "source": "pdf2026:p13"
+    },
+    {
+      "label": "Office",
+      "value": "Studio BELEM",
+      "source": "pdf2026:p13"
+    },
+    {
+      "label": "Surface",
+      "value": "420 m²",
+      "source": "site"
+    }
+  ],
+  "tag": "Studio BELEM / New housing / PLU Paris",
+  "narrative": [
+    {
+      "text": "A new residential building on an infill plot in central Paris, designed within the constraints of the PLU local urban plan and the Paris architectural guidelines for new construction in a dense historic context. The project addresses the street alignment, manages the transition between party walls of differing heights, and produces a facade composition that speaks to its immediate neighbours without imitation.",
+      "source": "site"
+    },
+    {
+      "text": "The programme distributes six residential units across four levels with a shared courtyard at ground floor. The structural system is concrete with masonry infill, detailed in Revit for direct handover to the engineer. All PC documentation was prepared by the team at Studio BELEM with Hazem contributing from concept through to technical drawings and regulatory compliance checks.",
+      "source": "site"
+    }
+  ],
+  "hero": {
+    "src": "images/foubert/foubert-brick-render.jpg",
+    "alt": "Render of the Foubert residential building in aged red brick with a claustra screen",
+    "credit": "Render: Studio BELEM",
+    "source": "pdf2026:p13"
+  },
+  "figures": [
+    {
+      "src": "images/foubert/foubert-west-facade.jpg",
+      "title": "West facade",
+      "caption": "West Facade | Passage Foubert. Eco-brick cladding Fjord Soda red aged, wood joinery, metal mesh guardrails RAL 9007, red metal frames RAL 3014. Scale 1:100.",
+      "alt": "West facade drawing of the Foubert building on passage Foubert",
+      "kind": "drawing",
+      "source": "pdf2026:p14 + site",
+      "size": "wide"
+    },
+    {
+      "title": "Details",
+      "caption": "Attic terrace detail. Street-facing window detail.",
+      "kind": "drawing",
+      "items": [
+        {
+          "src": "images/foubert/foubert-attic-terrace-detail.jpg",
+          "alt": "Attic terrace construction detail"
+        },
+        {
+          "src": "images/foubert/foubert-street-window-detail.jpg",
+          "alt": "Street-facing window construction detail"
+        }
+      ],
+      "source": "pdf2026:p14"
+    },
+    {
+      "src": "images/foubert/foubert-east-facade.jpg",
+      "title": "East facade",
+      "caption": "East Facade | Passage Foubert. Terrace accesses at upper levels, apartment entries at grade. Same material language from garden side.",
+      "alt": "East facade drawing of the Foubert building",
+      "kind": "drawing",
+      "source": "pdf2026:p15 + site",
+      "size": "wide"
+    },
+    {
+      "title": "Green roof",
+      "caption": "Green roof terrace detail 1. Green roof terrace detail 2.",
+      "kind": "drawing",
+      "items": [
+        {
+          "src": "images/foubert/foubert-green-roof-detail-1.jpg",
+          "alt": "Green roof terrace construction detail 1"
+        },
+        {
+          "src": "images/foubert/foubert-green-roof-detail-2.jpg",
+          "alt": "Green roof terrace construction detail 2"
+        }
+      ],
+      "source": "pdf2026:p15"
+    },
+    {
+      "src": "images/foubert/foubert-aerial-render.jpg",
+      "title": "Aerial view",
+      "caption": "Aerial view of the completed project.",
+      "alt": "Aerial render of the completed Foubert building",
+      "kind": "render",
+      "credit": "Render: Studio BELEM",
+      "source": "pdf2026:p16"
+    }
+  ],
+  "date": "2026",
+  "honour": null,
+  "film": null
+}

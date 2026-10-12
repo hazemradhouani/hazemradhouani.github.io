@@ -1,0 +1,86 @@
+{
+  "slug": "papillon",
+  "order": 11,
+  "group": "morocco",
+  "filters": [
+    "professional",
+    "residential"
+  ],
+  "title": "Villa Papillon",
+  "run": "Yassir Khalil Studio | Marrakech",
+  "summary": "Contemporary courtyard villa in the Marrakech Palmeraie, developed in Revit at Yassir Khalil Studio.",
+  "place": "Marrakech, Palmeraie",
+  "year": "2024",
+  "descriptor": "Residential | contemporary villa",
+  "office": "Yassir Khalil Studio",
+  "spec": [
+    {
+      "label": "Location",
+      "value": "Marrakech, Palmeraie",
+      "source": "pdf2025:p29"
+    },
+    {
+      "label": "Year",
+      "value": "2024",
+      "source": "site"
+    },
+    {
+      "label": "Office",
+      "value": "Yassir Khalil Studio",
+      "source": "site"
+    },
+    {
+      "label": "Type",
+      "value": "Contemporary Villa",
+      "source": "site"
+    }
+  ],
+  "tag": "Yassir Khalil Studio / Residential / Marrakech",
+  "narrative": [
+    {
+      "text": "A contemporary villa in Morocco for a private client, organised around a central courtyard that brings light and ventilation to the interior while maintaining privacy from the street. The plan unfolds from a compressed entry sequence into generous living spaces that open progressively toward the garden and pool on the south side, calibrating the relationship between interior, semi-exterior, and exterior according to the daily rhythms of occupation and the seasonal movement of the sun.",
+      "source": "site"
+    },
+    {
+      "text": "The architectural language draws on the spatial logic of Moroccan domestic architecture while employing a contemporary material palette: reinforced concrete structure with white plaster, raw stone from the region, and timber elements. The villa was designed and produced in Revit at Yassir Khalil Studio, with Hazem responsible for the architectural development and client coordination from schematic design through to construction documentation.",
+      "source": "site"
+    }
+  ],
+  "hero": {
+    "src": "images/papillon/thumb.jpg",
+    "alt": "Render of Villa Papillon, contemporary villa, Marrakech",
+    "credit": null
+  },
+  "figures": [
+    {
+      "src": "images/papillon/papillon-plans.jpg",
+      "title": "Plans",
+      "caption": "Level +00.00. Level +04.70.",
+      "alt": "Plans of Villa Papillon at levels +00.00 and +04.70",
+      "kind": "drawing",
+      "source": "pdf2025:p30",
+      "size": "wide"
+    },
+    {
+      "title": "Views",
+      "caption": "Terracotta and white volumes around the garden and pool.",
+      "kind": "render",
+      "items": [
+        {
+          "src": "images/papillon/papillon-render-terracotta.jpg",
+          "alt": "Render of a white volume over a terracotta wall among palms"
+        },
+        {
+          "src": "images/papillon/papillon-render-entrance.jpg",
+          "alt": "Render of the villa with its glazed corner and terracotta volume"
+        }
+      ],
+      "source": "pdf2025:p31"
+    }
+  ],
+  "date": "2024",
+  "role": [],
+  "quote": null,
+  "honour": null,
+  "film": null
+}

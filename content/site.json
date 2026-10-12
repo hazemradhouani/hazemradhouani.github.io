@@ -1,0 +1,48 @@
+{
+  "$comment": "Site-wide content. Every fact carries a source key (see docs/flagship/content-ledger.md). Edit here, then run: node tools/build.mjs",
+  "origin": "https://hazemradhouani.github.io",
+  "base": "/portfolio/",
+  "lang": "en",
+  "siteName": "Hazem Radhouani",
+  "themeColor": "#15110E",
+  "ga4": "G-S61QWV2ZRE",
+  "googleSiteVerification": "-RpzxjbAYzM2EPvzRWvclvAFbUdq5-gsDAD_FswL7Lc",
+  "person": {
+    "name": "Hazem Radhouani",
+    "jobTitle": "Architect",
+    "line": "Architect specialising in heritage documentation and earthen architecture.",
+    "strengths": "Survey and documentation, BIM delivery in Revit, and visualisation in Unreal Engine and D5 Render.",
+    "credential": "National Architecture Diploma, Highest Honours | ENAU 2026",
+    "email": "hazemradhouani@gmail.com",
+    "linkedin": "https://www.linkedin.com/in/hazem-radhouani-b36616319/",
+    "sources": { "line": "claude-md", "strengths": "claude-md", "credential": "site:about + answer:F01", "email": "site", "linkedin": "site + pdf2025:p48" }
+  },
+  "nav": [
+    { "id": "work", "label": "Work", "href": "architecture.html" },
+    { "id": "research", "label": "Research", "href": "books.html" },
+    { "id": "about", "label": "About", "href": "about.html" },
+    { "id": "contact", "label": "Contact", "href": "about.html#contact" }
+  ],
+  "footerNav": [
+    { "label": "Work", "href": "architecture.html" },
+    { "label": "Research", "href": "books.html" },
+    { "label": "About", "href": "about.html" },
+    { "label": "Films and motion", "href": "motion.html" }
+  ],
+  "groups": [
+    { "id": "paris", "label": "Professional | Paris" },
+    { "id": "morocco", "label": "Professional | Morocco" },
+    { "id": "academic", "label": "Academic | ENAU, University of Carthage" }
+  ],
+  "filters": [
+    { "id": "all", "label": "All" },
+    { "id": "professional", "label": "Professional" },
+    { "id": "academic", "label": "Academic" },
+    { "id": "heritage", "label": "Heritage and rehabilitation" },
+    { "id": "new-build", "label": "New build" },
+    { "id": "infrastructure", "label": "Infrastructure" },
+    { "id": "residential", "label": "Residential" },
+    { "id": "cultural", "label": "Cultural" },
+    { "id": "healthcare", "label": "Healthcare" }
+  ]
+}

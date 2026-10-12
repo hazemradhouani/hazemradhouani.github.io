@@ -1,0 +1,97 @@
+{
+  "slug": "corallum",
+  "order": 13,
+  "group": "academic",
+  "filters": [
+    "academic",
+    "cultural"
+  ],
+  "title": "Corallum",
+  "run": "ENAU | Tabarka",
+  "summary": "Coral research and exhibition centre on the northern Tunisian coast, an academic project at ENAU.",
+  "place": "Tabarka, Tunisia",
+  "year": "2023",
+  "descriptor": "Cultural | research and exhibition centre",
+  "spec": [
+    {
+      "label": "Location",
+      "value": "Tabarka, Tunisia",
+      "source": "pdf2025:p21 (\"Tarabka\", typo corrected, ledger C09)"
+    },
+    {
+      "label": "Year",
+      "value": "2023",
+      "source": "site"
+    },
+    {
+      "label": "School",
+      "value": "ENAU",
+      "source": "site"
+    },
+    {
+      "label": "Type",
+      "value": "Research and Exhibition Centre",
+      "source": "site"
+    }
+  ],
+  "tag": "ENAU / Academic / Cultural",
+  "narrative": [
+    {
+      "text": "A coral research and exhibition centre on the northern Tunisian coast, designed as an academic project at ENAU to explore the relationship between scientific infrastructure and public space in a coastal landscape. The programme brings together a marine biology research laboratory, an exhibition space accessible to the public, and an outdoor platform for observation and education.",
+      "source": "site"
+    },
+    {
+      "text": "The project is organised around the relationship between water and land, with the building positioned at the edge of the sea on a rocky promontory. The research facilities are embedded into the topography, partially submerged to control temperature and light, while the public exhibition spaces rise above the rock to offer views of the sea. The structural system is reinforced concrete cast against rock formwork, with openings calibrated to frame specific views and filter the intense coastal light.",
+      "source": "site"
+    },
+    {
+      "text": "The project was developed through physical model-making and hand drawing alongside digital production, exploring the tectonic possibilities of a building built in and with the materials of its site.",
+      "source": "site"
+    }
+  ],
+  "hero": {
+    "src": "images/corallum/thumb.jpg",
+    "alt": "Render of the Corallum coral research and exhibition centre",
+    "credit": null
+  },
+  "figures": [
+    {
+      "src": "images/corallum/corallum-renders.jpg",
+      "title": "Renders",
+      "caption": "Top: interior, fluid spatial sequence within the exhibition shell, white concrete curves, diffused natural light from above, inhabited surface with figures. Bottom: exterior, folded and vertically striated facade rising from a shallow reflecting pool at its base, northern Tunisian coastal site.",
+      "alt": "Corallum renders, fluid interior public space and exterior coastal facade with water reflection",
+      "kind": "render",
+      "source": "site"
+    },
+    {
+      "src": "images/corallum/corallum-site.jpg",
+      "title": "Site",
+      "caption": "Site axonometric. Urban coastal context. Building site highlighted at the seafront edge, at the boundary between the built fabric and the sea. Coastal topography, road network, and existing built grain legible. Research and exhibition programme positioned to maximise sea access and public visibility from the town.",
+      "alt": "Corallum urban coastal site axonometric, building position at the seafront edge of a Tunisian coastal town",
+      "kind": "drawing",
+      "source": "site"
+    },
+    {
+      "src": "images/corallum/corallum-volume-research.jpg",
+      "title": "Formal Research, Volume",
+      "caption": "Volume research. Six phases of formal generation. Phase 01: verticality, spiral section, rotational energy. Phase 02: transformation, radial expansion from a point. Helical form, double curvature torsional surface. 2D expansion, lateral spread from a central axis. Phase 03: guided, constrained growth within a field. Phase 04: pseudo-sinusoidal, wave rhythm, undulating surface. Restrict movement, contained vertical extrusion. Change the rhythm, layered sinusoidal displacement.",
+      "alt": "Corallum volume research, six phases of formal generation",
+      "kind": "drawing",
+      "source": "site"
+    },
+    {
+      "src": "images/corallum/corallum-facade-research.jpg",
+      "title": "Formal Research, Facade",
+      "caption": "Facade orientations. Three proposals each tested in plan, section and axonometric. Option 1: sliding parallel to the east, perpendicular to the south, lateral displacement, raking light. Option 2: overlapping parallel to the north, perpendicular to the east, layered screens, filtered diffuse light. Option 3: pulling perpendicular to the west, deep reveals, controlled west exposure. Each option modulates interior light quality and coastal view framing differently.",
+      "alt": "Corallum facade research, three orientations: sliding, overlapping and pulling",
+      "kind": "drawing",
+      "source": "site"
+    }
+  ],
+  "date": "2023",
+  "role": [],
+  "quote": null,
+  "honour": null,
+  "office": null,
+  "film": null
+}

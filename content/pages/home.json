@@ -1,0 +1,108 @@
+{
+  "title": "Hazem Radhouani | Architect, heritage documentation and earthen architecture",
+  "description": "Hazem Radhouani, architect specialising in heritage documentation and earthen architecture. Survey and documentation, BIM delivery in Revit, and visualisation in Unreal Engine and D5 Render.",
+  "og": "images/og/home.jpg",
+  "cover": {
+    "image": "images/cover/alley.jpg",
+    "alt": "Black and white photograph of an earthen alley between rubble walls, with two lit doorways, in a ruined village",
+    "source": "pdf2026:p1 (cover photograph, uncredited)"
+  },
+  "manifesto": {
+    "quote": "Look before building.",
+    "text": "A village in the Tunisian Jérid region | raw earth architecture never previously documented. Multiple on-site survey campaigns conducted: measurements, documentary photography, interviews with former inhabitants.",
+    "attribution": "Al-Arg, architecture thesis",
+    "href": "projects/project-al-arg.html",
+    "source": "pdf2026:p23"
+  },
+  "flagship": {
+    "project": "al-arg",
+    "title": "Al-Arg",
+    "line": "The ruined village that founded the conviction.",
+    "text": "The thesis operates at three scales simultaneously: a territorial analysis of the conditions that produced the abandonment, an urban proposal for the reactivation of the village as a place of memory, culture, and temporary dwelling, and an architectural intervention on a key building within the fabric.",
+    "hero": {
+      "image": "images/al-arg/al-arg-aerial-sunset.jpg",
+      "alt": "Aerial render of the rehabilitated Al-Arg village at sunset, earth volumes and open courtyards among palm groves"
+    },
+    "scales": [
+      {
+        "label": "Territorial",
+        "caption": "Site map | Al-Arg within the Jérid. Reading of the oasis territory as a system | water, road, inhabited fabric.",
+        "image": "images/opt/al-arg/scales-territorial.jpg",
+        "alt": "Territory map of the Jérid oasis around Al-Arg, roads, water and inhabited fabric"
+      },
+      {
+        "label": "Urban",
+        "caption": "Site plan | rehabilitation proposal.",
+        "image": "images/opt/al-arg/scales-urban.jpg",
+        "alt": "Site plan of the Al-Arg rehabilitation proposal"
+      },
+      {
+        "label": "Architectural",
+        "caption": "Ground floor plan | proposed",
+        "image": "images/opt/al-arg/scales-architectural.jpg",
+        "alt": "Proposed ground floor plan of the rehabilitated building"
+      }
+    ],
+    "sources": {
+      "line": "pdf2026:p2",
+      "text": "site:project-al-arg",
+      "captions": "pdf2026:p24-25"
+    }
+  },
+  "selected": [
+    "la-villette",
+    "bolivar",
+    "zenata",
+    "belhomme",
+    "nouvelle-medina",
+    "corallum"
+  ],
+  "proofs": [
+    {
+      "name": "Survey and documentation",
+      "text": "Facades. Complete existing elevation | reading of architectural mouldings, gutters, chimneys, and joinery. Survey base prior to selective demolition.",
+      "context": "Belhomme, Paris 18th | Studio BELEM",
+      "project": "belhomme",
+      "image": "images/belhomme/belhomme-existing-facades-survey.jpg",
+      "alt": "Existing facade survey elevations and selective demolition plans of the Belhomme building",
+      "kind": "drawing",
+      "source": "pdf2026:p10"
+    },
+    {
+      "name": "BIM delivery",
+      "text": "Development of the DCE detail booklet: interior and exterior joinery, systematic indexing of secondary works elements.",
+      "context": "La Villette, Paris 19th | Studio BELEM",
+      "tools": "Revit | ArchiCAD | Rhino | Grasshopper",
+      "project": "la-villette",
+      "image": "images/la-villette/la-villette-gate-detail.jpg",
+      "alt": "Construction detail of the access gate and entry door, north elevation of building A",
+      "kind": "drawing",
+      "source": "pdf2026:p3, pdf2026:p28 (tools)"
+    },
+    {
+      "name": "Visualisation",
+      "text": "Courtyard threshold, arched entry, merlonated perimeter wall, dry vegetation and ancient stone.",
+      "context": "Al-Arg | architecture thesis",
+      "tools": "D5 Render | Unreal Engine",
+      "project": "al-arg",
+      "image": "images/al-arg/al-arg-render-courtyard.jpg",
+      "alt": "Render of a courtyard threshold with an arched entry and a merlonated perimeter wall",
+      "kind": "render",
+      "source": "site:project-al-arg (caption), pdf2026:p28 (tools)"
+    }
+  ],
+  "research": {
+    "title": "Between the Poetics of Place and the Value of Heritage",
+    "titleAr": "بين شاعرية المكان و قيمة الأثر",
+    "meta": "Architecture thesis | ENAU, University of Carthage | Highest Honours, unanimous jury, June 2024",
+    "award": "Sakura Science Program, Japan 2025 | Most Appreciated Research",
+    "cover": "images/books/thesis-cover.png",
+    "coverAlt": "Cover of the thesis Between the Poetics of Place and the Value of Heritage",
+    "sources": {
+      "title": "site:books + pdf2025:p3",
+      "titleAr": "pdf2025:p46",
+      "meta": "site:books + answer:F01",
+      "award": "answer:F02"
+    }
+  }
+}

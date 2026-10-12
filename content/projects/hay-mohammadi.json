@@ -1,0 +1,85 @@
+{
+  "slug": "hay-mohammadi",
+  "order": 9,
+  "group": "morocco",
+  "filters": [
+    "professional",
+    "infrastructure"
+  ],
+  "title": "Hay Mohammadi Station",
+  "run": "Yassir Khalil Studio | Casablanca",
+  "summary": "Rapid transit station and covered public concourse in the Hay Mohammadi district of Casablanca, at Yassir Khalil Studio.",
+  "place": "Casablanca",
+  "year": "2025",
+  "descriptor": "Infrastructure | rapid transit station",
+  "office": "Yassir Khalil Studio",
+  "spec": [
+    {
+      "label": "Location",
+      "value": "Casablanca, Hay Mohammadi",
+      "source": "site + pdf2025:p43"
+    },
+    {
+      "label": "Year",
+      "value": "2025",
+      "source": "site"
+    },
+    {
+      "label": "Office",
+      "value": "Yassir Khalil Studio",
+      "source": "site"
+    },
+    {
+      "label": "Type",
+      "value": "RER Station",
+      "source": "site"
+    }
+  ],
+  "tag": "Yassir Khalil Studio / Infrastructure / Casablanca",
+  "narrative": [
+    {
+      "text": "A rapid transit station in the Hay Mohammadi district of Casablanca, one of the city's oldest and most densely inhabited popular neighbourhoods. The station is embedded within a complex urban fabric and is designed to act as a civic infrastructure in a double sense: functional as a transport node and spatial as a public threshold for a district that has historically lacked investment in its public realm.",
+      "source": "site"
+    },
+    {
+      "text": "The project resolves a challenging site condition where the rail line runs at grade through a constrained urban corridor, requiring the station building to negotiate between the rail platform level and the existing street network. The covered concourse is designed to extend the street life of the neighbourhood into the station itself, with the canopy structure creating a sheltered public space that is active throughout the day. The project was produced in Revit with full structural and services coordination at Yassir Khalil Studio.",
+      "source": "site"
+    }
+  ],
+  "hero": {
+    "src": "images/hay-mohammadi/thumb.jpg",
+    "alt": "Render of Hay Mohammadi Station, Casablanca",
+    "credit": null
+  },
+  "figures": [
+    {
+      "src": "images/hay-mohammadi/hay-mohammadi-render.jpg",
+      "title": "Render, Aerial View",
+      "caption": "Aerial render. White diamond canopy covering the passenger concourse and rail platform at grade. Bus shelters and soft mobility connections along the boulevard. Landscaped perimeter integrating the station into the dense Hay Mohammadi neighbourhood. Yassir Khalil Studio. 2025.",
+      "alt": "Aerial render of Hay Mohammadi Station, white diamond canopy over the rail platform, bus shelters, parking and palm-lined boulevard",
+      "kind": "render",
+      "source": "site"
+    },
+    {
+      "title": "Street views",
+      "caption": "Station Hay Mohammadi, street frontage and entrance.",
+      "kind": "render",
+      "items": [
+        {
+          "src": "images/hay-mohammadi/hay-mohammadi-render-street.jpg",
+          "alt": "Render of Hay Mohammadi Station from the street, white folded roof and patterned screen"
+        },
+        {
+          "src": "images/hay-mohammadi/hay-mohammadi-render-entrance.jpg",
+          "alt": "Render of the station entrance with its sign"
+        }
+      ],
+      "source": "pdf2025:p44"
+    }
+  ],
+  "date": "2025",
+  "role": [],
+  "quote": null,
+  "honour": null,
+  "film": null
+}
