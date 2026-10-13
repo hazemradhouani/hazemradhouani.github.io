@@ -82,7 +82,7 @@ ${body}
 <p class="site-footer__links"><a href="${P.linkedin}" target="_blank" rel="noopener">LinkedIn<span class="vh"> (opens in a new tab)</span></a><a href="${p}files/hazem-radhouani-cv.pdf">CV (PDF)</a></p>
 <div class="site-footer__base">
 <nav aria-label="Footer"><ul role="list">${site.footerNav.map((n) => html`<li><a href="${p}${n.href}">${n.label}</a></li>`)}</ul></nav>
-<p>&copy; 2026 ${P.name} | Set in EB Garamond and IBM Plex Sans</p>
+<p>&copy; 2026 ${P.name}</p>
 </div>
 </div>
 </footer>
@@ -96,7 +96,7 @@ ${body}
 ${when(ctx.viewer, () => html`<dialog class="viewer" id="viewer" aria-labelledby="viewer-title">
 <div class="viewer__top"><span class="viewer__count" aria-hidden="true"></span><p class="viewer__title" id="viewer-title"></p><form method="dialog"><button class="viewer__btn" type="submit" autofocus>close${icon('x', p)}</button></form></div>
 <div class="viewer__stage" tabindex="0" role="group" aria-roledescription="image viewer" aria-label="Full-size image. Arrow keys: previous and next; double click or the actual size button: zoom"></div>
-<div class="viewer__bottom"><button class="viewer__btn" type="button" data-viewer-toggle aria-pressed="false"><span>actual size</span></button><div class="viewer__nav"><button class="viewer__btn" type="button" data-viewer-prev aria-label="Previous image">${icon('arrow-left', p)}</button><button class="viewer__btn" type="button" data-viewer-next aria-label="Next image">${icon('arrow-right', p)}</button></div></div>
+<div class="viewer__bottom"><button class="viewer__btn" type="button" data-viewer-toggle><span>actual size</span></button><div class="viewer__nav"><button class="viewer__btn" type="button" data-viewer-prev aria-label="Previous image">${icon('arrow-left', p)}</button><button class="viewer__btn" type="button" data-viewer-next aria-label="Next image">${icon('arrow-right', p)}</button></div></div>
 </dialog>`)}
 </body>
 </html>

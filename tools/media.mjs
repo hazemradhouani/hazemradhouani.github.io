@@ -30,6 +30,13 @@ for (const rel of sources) {
     const base = path.basename(stem) + '-';
     for (const f of fs.readdirSync(path.dirname(stem))) if (f.startsWith(base) && /^\d+\.(avif|webp)$/.test(f.slice(base.length))) fs.unlinkSync(path.join(path.dirname(stem), f));
   }
+  // a width is current only if its WebP is newer than the source; widths above the native one are stale
+  const srcTime = fs.statSync(path.join(ROOT, rel)).mtimeMs;
+  const dir = path.dirname(stem), base = path.basename(stem) + '-';
+  if (fs.existsSync(dir)) for (const f of fs.readdirSync(dir)) {
+    const m = f.startsWith(base) && /^(\d+)\.(avif|webp)$/.exec(f.slice(base.length));
+    if (m && (+m[1] > w || fs.statSync(path.join(dir, f)).mtimeMs < srcTime)) fs.unlinkSync(path.join(dir, f));
+  }
   const have = new Set(variants(rel));
   const todo = want.filter((x) => !have.has(x));
   if (!todo.length) continue;

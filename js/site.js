@@ -22,7 +22,7 @@
       b.addEventListener('click', function () { opener = b; if (!nativeCommand && !menu.open) menu.showModal(); });
     });
     menu.addEventListener('click', function (e) { if (e.target.closest('a')) menu.close(); });
-    menu.addEventListener('close', function () { (opener || menuButtons[0]).focus(); });
+    menu.addEventListener('close', function () { (opener && !opener.closest('[inert]') ? opener : menuButtons[0]).focus(); });
     var wide = window.matchMedia('(min-width: 48rem)');
     var onWide = function () { if (wide.matches && menu.open) menu.close(); };
     if (wide.addEventListener) wide.addEventListener('change', onWide);
@@ -34,9 +34,9 @@
   var bar = document.getElementById('bar');
   var header = document.querySelector('.site-header');
   if (bar && header) {
-    var shown = false, lastY = window.scrollY, ticking = false;
+    var shown = false, anchor = window.scrollY, ticking = false, quietUntil = 0;
     var setBar = function (on) {
-      if (on === shown) return;
+      if (on === shown || (!on && bar.contains(document.activeElement))) return;
       shown = on;
       bar.classList.toggle('is-shown', on);
       if (on) bar.removeAttribute('inert'); else bar.setAttribute('inert', '');
@@ -47,13 +47,15 @@
       requestAnimationFrame(function () {
         ticking = false;
         var y = window.scrollY;
-        if (y < header.offsetHeight + 400) setBar(false);
-        else if (y < lastY - 8) setBar(true);
-        else if (y > lastY + 8) setBar(false);
-        lastY = y;
+        if (y < header.offsetHeight + 400) { setBar(false); anchor = y; return; }
+        if (y > anchor) { anchor = y; setBar(false); }              // going down: follow, keep hidden
+        else if (y < anchor - 40 && Date.now() > quietUntil) setBar(true);  // 40px back up: show
       });
     }, { passive: true });
-    document.addEventListener('focusin', function (e) { if (!bar.contains(e.target)) setBar(false); });
+    document.addEventListener('focusin', function (e) {
+      if (bar.contains(e.target) || e.target.closest('dialog')) return;
+      quietUntil = Date.now() + 600; anchor = window.scrollY; setBar(false);
+    });
   }
 
   /* ------------------------------------------------------------ arrival (hierarchy)
@@ -78,6 +80,10 @@
         });
       });
     }, { rootMargin: '0px 0px -6% 0px' });
+    document.addEventListener('focusin', function (e) {
+      var t = e.target.closest && e.target.closest('.rv:not(.is-in)'); if (!t) return;
+      var g = t.closest('[data-rv]') || t; targetsOf(g).forEach(function (x) { x.style.transition = 'none'; x.classList.add('is-in'); });
+    });
     groups.forEach(function (el) {
       if (el.getBoundingClientRect().top < window.innerHeight) return;
       targetsOf(el).forEach(function (t, i) { t.classList.add('rv'); t.style.setProperty('--i', String(i)); });
@@ -136,9 +142,11 @@
       return el;
     };
     var label = function () {
-      vTitle.textContent = info(cur).title;
+      var it = info(cur);
+      vTitle.textContent = it.title + ', image ' + (cur + 1) + ' of ' + links.length;
       vCount.textContent = (cur + 1) + ' / ' + links.length;
-      vPrev.disabled = cur === 0; vNext.disabled = cur === links.length - 1;
+      vPrev.setAttribute('aria-disabled', String(cur === 0)); vNext.setAttribute('aria-disabled', String(cur === links.length - 1));
+      vToggle.hidden = fit(it).s >= 1;
     };
     var animate = function (el, from, to, dur) {
       el.style.transform = tf(to);
@@ -146,16 +154,14 @@
       return el.animate([{ transform: tf(from) }, { transform: tf(to) }], { duration: dur || DUR, easing: spring() }).finished.catch(function () {});
     };
     var resetToggle = function () {
-      actual = false; viewer.classList.remove('is-actual');
-      vToggle.setAttribute('aria-pressed', 'false'); vToggle.querySelector('span').textContent = 'actual size';
+      actual = false; viewer.classList.remove('is-actual'); vToggle.querySelector('span').textContent = 'actual size';
     };
     var setActual = function (on) {
-      if (!img) return;
+      if (!img || busy) return;
       var it = info(cur);
       if (on && fit(it).s >= 1) return;                       // already at native pixels
       actual = on;
       viewer.classList.toggle('is-actual', on);
-      vToggle.setAttribute('aria-pressed', String(on));
       vToggle.querySelector('span').textContent = on ? 'fit to screen' : 'actual size';
       if (on) {
         img.style.transform = 'none'; img.style.position = 'relative';
@@ -169,7 +175,8 @@
     };
     var show = function (k, dir) {                            // move between figures: a short crossfade
       if (k < 0 || k >= links.length || k === cur || busy) return;
-      var old = img; cur = k; resetToggle();
+      var old = img, prev = cur; cur = k; resetToggle();
+      if (old) { old.style.position = ''; old.style.transform = tf(fit(info(prev))); }   // leaving actual size: fade out from its fitted place
       stage.scrollLeft = 0; stage.scrollTop = 0;
       var it = info(k); img = makeImg(it); img.style.transform = tf(fit(it)); stage.appendChild(img); label();
       if (reduce.matches || !img.animate) { if (old) old.remove(); return; }
@@ -190,6 +197,7 @@
     };
     var closeViewer = function () {
       if (busy || !viewer.open) return;
+      closeTarget();
       var it = info(cur);
       var target = actual ? null : sourceRect(it);
       if (!target || reduce.matches) { viewer.close(); return; }
@@ -210,13 +218,15 @@
     viewer.addEventListener('cancel', function (e) { e.preventDefault(); closeViewer(); });
     viewer.addEventListener('close', function () {
       stage.textContent = ''; img = null; cur = -1; busy = false;
-      if (returnTo) { returnTo.focus({ preventScroll: true }); returnTo = null; }
+      if (returnTo) { var r = returnTo.getBoundingClientRect(); returnTo.focus({ preventScroll: r.bottom > 0 && r.top < window.innerHeight }); returnTo = null; }
     });
     vPrev.addEventListener('click', function () { show(cur - 1, -1); });
     vNext.addEventListener('click', function () { show(cur + 1, 1); });
+    var closeTarget = function () { returnTo = links[cur] || returnTo; };
     vToggle.addEventListener('click', function () { setActual(!actual); });
     stage.addEventListener('dblclick', function () { setActual(!actual); });
     viewer.addEventListener('keydown', function (e) {
+      if (actual || e.altKey || e.ctrlKey || e.metaKey || e.shiftKey) return;
       if (e.key === 'ArrowRight') { e.preventDefault(); show(cur + 1, 1); }
       else if (e.key === 'ArrowLeft') { e.preventDefault(); show(cur - 1, -1); }
     });

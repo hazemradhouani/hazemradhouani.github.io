@@ -32,6 +32,8 @@ for (const f of fs.readdirSync(path.join(ROOT, 'content/projects'))) {
 }
 for (const s of conf.extra || []) targets.add(s);
 for (const s of Object.keys(conf.exclude || {})) targets.delete(s);
+// an excluded drawing must not keep an old cutout (the build would still use it)
+for (const s of Object.keys(conf.exclude || {})) { const c = path.join(ROOT, cutFor(s)); if (fs.existsSync(c)) { fs.unlinkSync(c); console.log(`removed stale cutout of excluded ${s}`); } }
 const list = [...targets].filter((s) => !only.length || only.some((o) => s.startsWith(o))).sort();
 
 const decode = (rel, w, h) => {

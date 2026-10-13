@@ -176,7 +176,7 @@
   .center .measure { margin-inline: auto; }
   /* centred text stays short: on phones a paragraph runs past three lines, so it reads from a left edge */
   @media (max-width: 47.99rem) { .center .measure { text-align: left; } }
-  .prose { display: grid; gap: 1em; max-width: var(--measure); margin-inline: auto; text-align: left; }
+  .prose { display: grid; gap: 1em; text-align: left; }  /* fills its span: the span is the measure, the edges stay on grid lines */
   .stack > * + * { margin-top: var(--s4); }
   .stack-s > * + * { margin-top: var(--s2); }
   .credit { color: var(--ink-2); }
@@ -214,12 +214,12 @@
   @media (min-width: 48rem) { .site-header .menu-button { display: none; } }
 
   /* compact bar (wayfinding on long pages): slides in on scroll-up, hidden and inert otherwise */
-  .bar { position: fixed; inset: 0 0 auto; z-index: 20; height: var(--bar-h); background: rgb(255 255 255 / 0.86);
+  .bar { position: fixed; inset: 0 0 auto; z-index: 20; min-height: var(--bar-h); background: rgb(255 255 255 / 0.86);
     -webkit-backdrop-filter: blur(16px) saturate(1.4); backdrop-filter: blur(16px) saturate(1.4);
     box-shadow: 0 1px 0 var(--line); transform: translateY(-101%); visibility: hidden;
     transition: transform var(--t-bar) var(--ease-out), visibility 0s linear var(--t-bar); }
   .bar.is-shown { transform: none; visibility: visible; transition: transform var(--t-bar) var(--ease-out), visibility 0s; }
-  .bar__in { height: 100%; display: flex; align-items: center; justify-content: space-between; gap: var(--s5); }
+  .bar__in { min-height: var(--bar-h); display: flex; align-items: center; justify-content: space-between; gap: var(--s5); }
   .bar .nav ul { gap: 0 var(--s5); }
   .bar .nav a { font-size: 1.0625rem; }
   @media (max-width: 47.99rem) { .bar .nav { display: none; } }
@@ -260,6 +260,8 @@
   @media (min-width: 48rem) { .cells { grid-template-columns: repeat(var(--n8, 2), minmax(0, 1fr)); } }
   @media (min-width: 64rem) { .cells { grid-template-columns: repeat(var(--n, 3), minmax(0, 1fr)); } }
   .cells > .cell { margin: 0; display: grid; justify-items: center; align-content: end; }
+  /* a drawing series keeps one scale: each drawing takes the share of its cell that its pixels give it */
+  .cells--scale > .cell > .nw { width: var(--sc, 100%); }
   /* two rows per cell (image, then caption or text): the images share a bottom line, the texts a top line */
   .cells--2 { row-gap: var(--s4); }
   .cells--2 > .cell { grid-row: span 2; grid-template-rows: subgrid; align-content: normal; justify-items: stretch; }
@@ -271,6 +273,7 @@
   /* spec: label and value meeting on the centre axis */
   .spec { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); gap: var(--s1) var(--s4); align-items: baseline; }
   @media (min-width: 48rem) { .spec { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); column-gap: var(--s5); } }
+  @media (max-width: 29.99rem) { .spec { grid-template-columns: minmax(0, 1fr); } .spec dt, .spec dd { text-align: center; } .spec dt:not(:first-child) { margin-top: var(--s2); } }
   .spec dt { text-align: right; font-family: var(--sans); font-size: var(--fs-label); font-weight: 600; letter-spacing: var(--tr-caps);
     text-transform: uppercase; color: var(--ink-2); }
   .spec dd { text-align: left; font-size: var(--fs-cap); }
@@ -278,7 +281,7 @@
   /* viewer: opens from the clicked image and returns into it (same path, D38) */
   .viewer { position: fixed; inset: 0; width: 100%; height: 100%; background: transparent; color: var(--ink); overflow: hidden; }
   .viewer::backdrop { background: var(--bg); }  /* opaque: transparent drawings must not show the page through */
-  .viewer__stage { position: absolute; inset: var(--bar-h) 0 4.5rem; overflow: hidden; overscroll-behavior: contain; touch-action: none; }
+  .viewer__stage { position: absolute; inset: var(--bar-h) 0 4.5rem; overflow: hidden; overscroll-behavior: contain; touch-action: pan-y pinch-zoom; }
   .viewer.is-actual .viewer__stage { overflow: auto; touch-action: pan-x pan-y; cursor: grab; }
   .viewer__stage.is-dragging { cursor: grabbing; }
   .viewer__img { position: absolute; left: 0; top: 0; max-width: none; transform-origin: 0 0; }
@@ -286,7 +289,7 @@
     gap: var(--s4); padding-inline: var(--margin); }
   .viewer__top { top: 0; height: var(--bar-h); }
   .viewer__bottom { bottom: 0; height: 4.5rem; }
-  .viewer__title { flex: 1; min-width: 0; text-align: center; font-size: var(--fs-cap); color: var(--ink-2); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .viewer__title { flex: 1; min-width: 0; text-align: center; font-size: var(--fs-cap); line-height: 1.3; color: var(--ink-2); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
   .viewer__count { font-family: var(--sans); font-size: var(--fs-label); letter-spacing: var(--tr-caps); color: var(--ink-2); min-width: 4.5rem;
     font-variant-numeric: tabular-nums; }
   .viewer__btn { display: inline-flex; align-items: center; justify-content: center; gap: var(--s2); min-height: 2.75rem; min-width: 2.75rem;
@@ -294,7 +297,8 @@
     transition: color var(--t-hover) var(--ease-out), transform var(--t-press) var(--ease-out); }
   .viewer__btn:hover { color: var(--ink-2); }
   .viewer__btn:active { transform: scale(0.98); }
-  .viewer__btn[disabled] { opacity: 0.35; cursor: default; }
+  .viewer__btn[aria-disabled="true"] { opacity: 0.35; cursor: default; }
+  .viewer__stage:focus-visible { outline-offset: -4px; }
   .viewer__btn svg { width: 1.125rem; height: 1.125rem; }
   .viewer__nav { display: flex; gap: var(--s2); min-width: 4.5rem; justify-content: flex-end; }
 
@@ -387,7 +391,7 @@
 
   /* research */
   .book__ar { font-size: var(--fs-lead); line-height: 1.6; color: var(--ink-2); }
-  .abstract { font-style: italic; font-size: var(--fs-lead); line-height: 1.5; }
+  .abstract { font-style: italic; }
 
   /* about: a CV whose two columns sit on grid lines (subgrid of the text span) */
   .cv { display: grid; grid-template-columns: subgrid; }
@@ -463,5 +467,6 @@
     .cv__what p { font-size: 9pt; }
     .cv__h { font-size: 10pt; }
     a { text-decoration: none; }
+    .rv { opacity: 1 !important; transform: none !important; }
   }
 }

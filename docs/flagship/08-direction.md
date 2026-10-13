@@ -123,7 +123,7 @@ Never: autoplay, parallax, scroll-jacking or smooth-scroll libraries, custom cur
 ## Pages
 - **Home:** identity → Al-Arg aerial (LCP) → "Look before building." → Al-Arg at three scales → selected work in justified pairs → capabilities (4+4+4) → research (the thesis as an object) → footer.
 - **Work:** a centred index grouped by place → 14 chapters (hero, centred title and metadata, one justified row, link).
-- **Project:** hero (plate or hero pair) → centred title and spec → quote → role and narrative → figures → film → next project.
+- **Project:** office | place label and title → hero (plate or hero pair) and its caption → descriptor, spec and tag → quote → role and narrative → figures (drawing series at one scale) → film → next project (image first).
 - **Research**, **About**, **Motion** and **404** use the same system.
 
 ## Brand

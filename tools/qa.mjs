@@ -20,7 +20,7 @@ let gateFails = 0;
 {
   const rd = (p) => JSON.parse(fs.readFileSync(path.join(REPO, p), 'utf8'));
   const SKIP = new Set(['source', 'sources', 'og', '$comment', 'id', 'slug', 'group', 'filters', 'order', 'kind', 'size', 'fit', 'lang', 'film',
-    'project', 'coverSource', 'abstractSource', 'date', 'action', 'href', 'case', 'title']);
+    'project', 'coverSource', 'abstractSource', 'date', 'action', 'href', 'case']);
   const strings = (v, key = '', out = []) => {
     if (SKIP.has(key) || /Source$/.test(key)) return out;
     if (typeof v === 'string') { if (v.length > 2 && !/^(images|videos|files|projects)\/|\.(jpe?g|png|webp|mp4)$/i.test(v)) out.push(v); }
@@ -79,6 +79,8 @@ for (const url of urls) {
         if (Math.abs(b.width / b.height - w / h) / (w / h) > 0.01) out.crop.push(`${src} ${Math.round(b.width)}x${Math.round(b.height)} vs ${w}x${h}`);
         if (getComputedStyle(img).objectFit === 'cover') out.crop.push(`${src} object-fit: cover`);
         if (b.width > w + 1) out.upscale.push(`${src} ${Math.round(b.width)}px > ${w}px`);
+        // the file actually served (a derivative) must have the master's ratio, or the browser stretches it
+        if (img.complete && img.naturalWidth && Math.abs(img.naturalWidth / img.naturalHeight - w / h) / (w / h) > 0.02) out.crop.push(`${img.currentSrc.split('/').pop()} served ratio ${img.naturalWidth}x${img.naturalHeight} vs ${w}x${h}`);
       }
       // grid: every block placed on a .g sits between column lines (1px tolerance)
       for (const g of document.querySelectorAll('.g')) {
@@ -143,3 +145,5 @@ for (const url of urls) {
 fs.writeFileSync(path.join(here, '.cache', 'qa-report.json'), JSON.stringify(report, null, 2));
 await browser.close();
 console.log(gateFails ? `Field gates: ${gateFails} failure(s)` : 'Field gates: all pass (crop, upscale, grid, palette, alpha, content coverage)');
+const failed = report.some((r) => r.overflow.length || r.brokenImgs.length || r.console.length || r.axe[375]?.length || r.axe[1440]?.length);
+if (gateFails || failed) process.exitCode = 1;

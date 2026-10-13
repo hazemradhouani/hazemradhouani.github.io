@@ -12,7 +12,7 @@ const lines = (...xs) => xs.filter(Boolean).map((x, i) => html`${i ? html`<br>` 
 const spec = (rows) => html`<dl class="spec in">${rows.map((s) => html`<dt>${s.label}</dt><dd${attrs({ lang: s.lang })}>${s.value}</dd>`)}</dl>`;
 
 // an image group that is also a link to its project: out of the tab order; the title link carries the name
-const linked = (href, markup) => html`<a class="card" href="${href}" tabindex="-1" aria-hidden="true">${markup}</a>`;
+const linked = (href, markup) => html`<a class="card" href="${href}" tabindex="-1">${markup}</a>`;
 
 /* ------------------------------------------------------------------ home */
 export function home(site, d, projects, ctx) {
@@ -33,7 +33,7 @@ export function home(site, d, projects, ctx) {
   const pairs = [];
   for (let i = 0; i < sel.length; i += 2) pairs.push(sel.slice(i, i + 2));
   const pairRow = (pair) => row(pair.map((x) => ({ x, rel: x.hero.src, alt: '', title: x.title, vt: vtHero(x), href: projectHref(x, p),
-    label: html`<span class="card__t title" style="view-transition-name: ${vtTitle(x)}">${x.title}</span>` })), {
+    label: html`<h3 class="card__t title" style="view-transition-name: ${vtTitle(x)}">${x.title}</h3>` })), {
     prefix: p, after: (it) => html`<p class="meta">${lines(it.x.descriptor, `${it.x.place} | ${it.x.year}`, it.x.hero.credit ? html`<span class="credit">${it.x.hero.credit}</span>` : '')}</p>` });
 
   // capabilities: each proven by one document, the documents standing on one line
@@ -70,7 +70,7 @@ export function home(site, d, projects, ctx) {
 <div class="s-text center"><h2 class="h1" id="flagship-h" style="view-transition-name: ${vtTitle(flp)}">${fl.title}</h2><p class="lead in">${fl.line}</p></div>
 <div class="s-narrow in"><div class="prose"><p>${fl.text}</p></div></div>
 <p class="s-text center in">${more(projectHref(flp, p), 'Read the case study', p)}</p>
-${cells(scaleItems, { prefix: p, after: scaleCap, cls: 'block' })}
+${cells(scaleItems, { prefix: p, zoom: false, after: scaleCap, cls: 'block' })}
 </section>
 
 <section class="chapter wrap g" aria-labelledby="selected-h">
@@ -136,7 +136,7 @@ export function work(site, projects, ctx) {
 <header class="intro wrap g">
 <div class="s-text center"><h1 class="h1">Work</h1><p class="lead in">Places already alive. ${projects.length} projects in Paris, Morocco and Tunisia, from 2022 to 2026.</p></div>
 <nav class="s-wide block index center" aria-label="Projects by place">
-${groups.map((g) => html`<div><h2 id="g-${g.id}">${g.label}</h2><ul role="list" aria-labelledby="g-${g.id}">${g.items.map((x) => html`<li><a href="#${x.slug}">${x.title}</a></li>`)}</ul></div>`)}
+${groups.map((g) => html`<div><p class="label" id="g-${g.id}">${g.label}</p><ul role="list" aria-labelledby="g-${g.id}">${g.items.map((x) => html`<li><a href="#${x.slug}">${x.title}</a></li>`)}</ul></div>`)}
 </nav>
 </header>
 ${chapters.map((c) => c.html)}`;
@@ -161,11 +161,10 @@ export function project(site, x, projects, ctx) {
   const body = html`
 <article class="case">
 <header class="case-head">
+<div class="intro wrap g"><div class="s-text center"><p class="label">${x.run}</p><h1 class="h1 in" style="view-transition-name: ${vtTitle(x)}">${x.title}</h1></div></div>
 <div class="lead-fig wrap g"><div class="s-${h.span}">${h.html}</div>${when(cap, () => html`<p class="cap s-narrow">${cap}</p>`)}</div>
 <div class="case-head__text wrap g"><div class="s-text center">
-<p class="label">${x.run}</p>
-<h1 class="h1 in" style="view-transition-name: ${vtTitle(x)}">${x.title}</h1>
-<p class="lead in">${x.descriptor}</p>
+<p class="lead">${x.descriptor}</p>
 ${spec(x.spec)}
 <p class="meta case-head__tag">${x.tag}</p>
 </div></div>
@@ -174,10 +173,11 @@ ${when(x.quote, () => html`<section class="block wrap g" aria-label="In the arch
 ${when(x.role.length, () => html`<section class="block wrap g" aria-labelledby="role-h"><div class="s-narrow"><div class="prose"><h2 class="label" id="role-h">Role</h2><ul class="role" role="list">${x.role.map((r) => html`<li>${r.text}</li>`)}</ul></div></div></section>`)}
 ${when(x.narrative.length || x.honour, () => html`<section class="block wrap g" aria-labelledby="about-h"><div class="s-narrow"><div class="prose"><h2 class="label" id="about-h">Project</h2>${x.narrative.map((t) => html`<p>${t.text}</p>`)}${when(x.honour, () => html`<p class="label honour">${x.honour}</p>`)}</div></div></section>`)}
 ${when(figs.length, () => html`<section aria-labelledby="sheets-h"><h2 class="vh" id="sheets-h">Drawings and images</h2>${figs.map((f, k) => figure(f, k + 1, ctx))}</section>`)}
-${when(film, () => html`<section class="block wrap g" aria-labelledby="film-h" data-rv><div class="s-${filmSpan} film"><video controls preload="none" playsinline poster="${p}videos/web/${film.slug}-poster.webp" width="${film.w}" height="${film.h}" aria-describedby="film-desc"><source src="${p}videos/web/${film.slug}.mp4" type="video/mp4"><a href="${p}videos/web/${film.slug}.mp4">Download the film (MP4)</a></video></div><div class="s-text center in"><h2 class="title" id="film-h">Film</h2><p class="label">${film.label}</p><p class="meta in measure" id="film-desc">${film.text}</p></div></section>`)}
+${when(film, () => html`<section class="block wrap g" aria-labelledby="film-h" data-rv><div class="s-${filmSpan} film"><video controls preload="none" playsinline poster="${p}videos/web/${film.slug}-poster.webp" width="${film.w}" height="${film.h}" aria-labelledby="film-h" aria-describedby="film-desc"><source src="${p}videos/web/${film.slug}.mp4" type="video/mp4"><a href="${p}videos/web/${film.slug}.mp4">Download the film (MP4)</a></video></div><div class="s-text center in"><h2 class="title" id="film-h">Film</h2><p class="label">${film.label}</p><p class="meta in measure" id="film-desc">${film.text}</p></div></section>`)}
 <nav class="chapter wrap g" aria-label="Next project">
-<div class="s-text center"><p class="label">Next project</p><p class="title in"><a href="${projectHref(next, p)}" rel="next" style="view-transition-name: ${vtTitle(next)}">${next.title}</a></p><p class="meta">${next.descriptor}<br>${next.place} | ${next.year}</p></div>
+<p class="s-text center label">Next project</p>
 <div class="s-${nh.span} next__media" data-rv>${linked(projectHref(next, p), nh.html)}</div>
+<div class="s-text center chapter__text"><p class="title"><a href="${projectHref(next, p)}" rel="next" style="view-transition-name: ${vtTitle(next)}">${next.title}</a></p><p class="meta">${next.descriptor}<br>${next.place} | ${next.year}</p></div>
 <p class="s-text center in">${more(p + 'architecture.html', 'All work', p, { dir: 'left' })}</p>
 </nav>
 </article>`;
@@ -284,7 +284,7 @@ ${field('message', 'Message', 'textarea')}
 export function motion(site, d, projects, ctx) {
   const p = ctx.prefix;
   const by = Object.fromEntries(projects.map((x) => [x.slug, x]));
-  const player = (f) => html`<video controls preload="none" playsinline poster="${p}videos/web/${f.slug}-poster.webp" width="${f.w}" height="${f.h}" aria-describedby="${f.id}-desc"><source src="${p}videos/web/${f.slug}.mp4" type="video/mp4"><a href="${p}videos/web/${f.slug}.mp4">Download the film (MP4)</a></video>`;
+  const player = (f) => html`<video controls preload="none" playsinline poster="${p}videos/web/${f.slug}-poster.webp" width="${f.w}" height="${f.h}" aria-labelledby="${f.id}-h" aria-describedby="${f.id}-desc"><source src="${p}videos/web/${f.slug}.mp4" type="video/mp4"><a href="${p}videos/web/${f.slug}.mp4">Download the film (MP4)</a></video>`;
   const thirds = ['s-third-a', 's-third-b', 's-third-c'];
   const body = html`
 <header class="intro wrap g"><div class="s-text center"><h1 class="h1">Films and motion</h1><p class="lead in">${d.intro}</p></div></header>
@@ -294,7 +294,7 @@ ${d.films.map((f) => html`<article class="block wrap g" id="${f.id}" aria-labell
 </section>
 <section id="reels" aria-labelledby="reels-h">
 <div class="chapter wrap g"><div class="head s-text"><h2 class="h1" id="reels-h">${d.reelsTitle}</h2></div></div>
-<ul class="block wrap g" role="list" data-rv>${d.reels.map((f, k) => html`<li class="${thirds[k % 3]} film stack-s" id="${f.id}">${player(f)}<h3 class="title">${f.title}</h3><p class="label">${f.label}</p><p class="meta" id="${f.id}-desc">${f.text}</p></li>`)}</ul>
+<ul class="block wrap g" role="list" data-rv>${d.reels.map((f, k) => html`<li class="${thirds[k % 3]} film stack-s" id="${f.id}">${player(f)}<h3 class="title" id="${f.id}-h">${f.title}</h3><p class="label">${f.label}</p><p class="meta" id="${f.id}-desc">${f.text}</p></li>`)}</ul>
 </section>
 <section class="chapter wrap g" aria-labelledby="mabout-h">
 <div class="s-text center"><h2 class="h1" id="mabout-h">${d.aboutTitle}</h2></div>
