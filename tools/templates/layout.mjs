@@ -1,6 +1,6 @@
-// Document shell: head metadata, header (top cover), footer (back cover), dialogs.
+// Document shell ("Field"): head metadata, the centred header, the compact bar, footer, dialogs.
 import { html, raw, attrs, when } from '../lib/html.mjs';
-import { mark, icon } from './partials.mjs';
+import { icon } from './partials.mjs';
 
 const abs = (site, rel) => site.origin + site.base + rel.replace(/^\.\//, '').replace(/^index\.html$/, '');
 
@@ -9,11 +9,15 @@ export function layout(site, page, body, ctx) {
   const url = abs(site, page.path);
   const og = abs(site, page.og || 'images/og/home.jpg');
   const v = ctx.versions;
+  const P = site.person;
   const ld = (page.jsonld || []).map((o) => raw(`<script type="application/ld+json">${JSON.stringify(o).replace(/</g, '\\u003c')}</script>`));
-  const navItem = (n) => {
+  const navItem = (n, i) => {
     const cur = page.nav === n.id ? (page.navExact ? 'page' : 'true') : null;
-    return html`<li><a href="${p}${n.href}"${attrs({ 'aria-current': cur })}>${n.label}</a></li>`;
+    return html`<li style="--i: ${i}"><a href="${p}${n.href}"${attrs({ 'aria-current': cur })}>${n.label}</a></li>`;
   };
+  const home = p || './';
+  const brand = (cur) => html`<a class="brand" href="${home}"${attrs({ 'aria-current': cur && page.nav === 'home' ? 'page' : null })}>${P.name}</a>`;
+  const menuButton = html`<button class="menu-button" type="button" commandfor="menu" command="show-modal" aria-haspopup="dialog" aria-controls="menu">menu</button>`;
   return html`<!DOCTYPE html>
 <html lang="${site.lang}" data-ga="${site.ga4}">
 <head>
@@ -30,7 +34,7 @@ ${page.preload || ''}
 <script src="${p}js/site.js?v=${v.js}" defer></script>
 <meta name="theme-color" content="${site.themeColor}">
 <meta name="color-scheme" content="light">
-<meta name="author" content="${site.person.name}">
+<meta name="author" content="${P.name}">
 ${when(page.verification, () => html`<meta name="google-site-verification" content="${site.googleSiteVerification}">`)}
 <link rel="icon" href="${p}favicon.svg" type="image/svg+xml">
 <link rel="icon" href="${p}favicon.ico" sizes="32x32">
@@ -56,53 +60,43 @@ ${ld}
 <body class="${page.bodyClass || ''}">
 <a class="skip" href="#main">Skip to content</a>
 <header class="site-header">
-<div class="site-header__inner wrap">
-<a class="brand" href="${p || './'}"${attrs({ 'aria-current': page.nav === 'home' ? 'page' : null })}>${mark()}<span class="brand__name">${site.person.name}</span></a>
-<nav class="site-nav" aria-label="Main"><ul>${site.nav.map(navItem)}</ul></nav>
-<button class="menu-button" type="button" commandfor="menu" command="show-modal" aria-haspopup="dialog" aria-controls="menu"><span class="menu-button__icon" aria-hidden="true"></span>Menu</button>
+<div class="wrap">
+${brand(true)}
+<nav class="nav" aria-label="Main"><ul role="list">${site.nav.map(navItem)}</ul></nav>
+${menuButton}
 </div>
 </header>
+<div class="bar" id="bar" inert>
+<div class="bar__in wrap">
+${brand(false)}
+<nav class="nav" aria-label="Site"><ul role="list">${site.nav.map(navItem)}</ul></nav>
+${menuButton}
+</div>
+</div>
 <main id="main" tabindex="-1">
 ${body}
 </main>
 <footer class="site-footer">
 <div class="wrap">
-<div class="site-footer__mark">
-${mark()}
-<p class="site-footer__name">${site.person.name}</p>
-<p class="site-footer__line">${site.person.line}</p>
-<ul class="site-footer__contact" role="list">
-<li><a href="mailto:${site.person.email}">${site.person.email}</a></li>
-<li><a href="${site.person.linkedin}" target="_blank" rel="noopener">LinkedIn<span class="vh"> (opens in a new tab)</span></a></li>
-</ul>
-</div>
+<p class="site-footer__mail"><a href="mailto:${P.email}">${P.email}</a></p>
+<p class="site-footer__links"><a href="${P.linkedin}" target="_blank" rel="noopener">LinkedIn<span class="vh"> (opens in a new tab)</span></a><a href="${p}files/hazem-radhouani-cv.pdf">CV (PDF)</a></p>
 <div class="site-footer__base">
-<p>&copy; 2026 ${site.person.name}</p>
-<nav aria-label="Footer"><ul>${site.footerNav.map((n) => html`<li><a href="${p}${n.href}">${n.label}</a></li>`)}</ul></nav>
-<p>Set in EB Garamond and IBM Plex Sans</p>
+<nav aria-label="Footer"><ul role="list">${site.footerNav.map((n) => html`<li><a href="${p}${n.href}">${n.label}</a></li>`)}</ul></nav>
+<p>&copy; 2026 ${P.name} | Set in EB Garamond and IBM Plex Sans</p>
 </div>
 </div>
 </footer>
 <dialog class="menu" id="menu" aria-label="Site menu">
 <div class="wrap">
-<div class="menu__bar">
-<a class="brand" href="${p || './'}">${mark()}<span class="brand__name">${site.person.name}</span></a>
-<form method="dialog"><button class="menu__close" type="submit" autofocus>Close</button></form>
-</div>
-<nav aria-label="Main"><ul class="menu__list">${site.nav.map(navItem)}</ul></nav>
-<p class="menu__contact"><a href="mailto:${site.person.email}">${site.person.email}</a><a href="${site.person.linkedin}" target="_blank" rel="noopener">LinkedIn<span class="vh"> (opens in a new tab)</span></a></p>
+<div class="menu__top">${brand(false)}<form method="dialog"><button class="menu__close" type="submit" autofocus>close</button></form></div>
+<nav aria-label="Main"><ul class="menu__list" role="list">${site.nav.map(navItem)}</ul></nav>
+<p class="menu__contact"><a href="mailto:${P.email}">${P.email}</a><a href="${P.linkedin}" target="_blank" rel="noopener">LinkedIn<span class="vh"> (opens in a new tab)</span></a></p>
 </div>
 </dialog>
 ${when(ctx.viewer, () => html`<dialog class="viewer" id="viewer" aria-labelledby="viewer-title">
-<div class="viewer__bar">
-<p class="viewer__title" id="viewer-title"></p>
-<div class="viewer__actions">
-<button class="viewer__btn" type="button" data-viewer-toggle aria-pressed="false"><span>Actual size</span></button>
-<form method="dialog"><button class="viewer__btn" type="submit" autofocus>Close${icon('x', p)}</button></form>
-</div>
-</div>
-<div class="viewer__stage" tabindex="0" role="group" aria-label="Image, scroll or drag to pan">
-</div>
+<div class="viewer__top"><span class="viewer__count" aria-hidden="true"></span><p class="viewer__title" id="viewer-title"></p><form method="dialog"><button class="viewer__btn" type="submit" autofocus>close${icon('x', p)}</button></form></div>
+<div class="viewer__stage" tabindex="0" role="group" aria-roledescription="image viewer" aria-label="Full-size image. Arrow keys: previous and next; double click or the actual size button: zoom"></div>
+<div class="viewer__bottom"><button class="viewer__btn" type="button" data-viewer-toggle aria-pressed="false"><span>actual size</span></button><div class="viewer__nav"><button class="viewer__btn" type="button" data-viewer-prev aria-label="Previous image">${icon('arrow-left', p)}</button><button class="viewer__btn" type="button" data-viewer-next aria-label="Next image">${icon('arrow-right', p)}</button></div></div>
 </dialog>`)}
 </body>
 </html>

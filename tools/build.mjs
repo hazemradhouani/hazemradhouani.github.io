@@ -80,7 +80,7 @@ ${out.filter((p) => !p.noindex).map((p) => `  <url><loc>${abs(p.path === 'index.
 </urlset>
 `);
 write('site.webmanifest', JSON.stringify({ name: site.siteName, short_name: 'H. Radhouani', start_url: site.base, scope: site.base, display: 'browser',
-  background_color: '#15110E', theme_color: site.themeColor, icons: [
+  background_color: '#FFFFFF', theme_color: site.themeColor, icons: [
     { src: 'images/brand/icon-192.png', sizes: '192x192', type: 'image/png' },
     { src: 'images/brand/icon-512.png', sizes: '512x512', type: 'image/png' },
     { src: 'images/brand/icon-maskable-512.png', sizes: '512x512', type: 'image/png', purpose: 'maskable' }] }, null, 2) + '\n');
