@@ -1,0 +1,40 @@
+{
+  "$comment": "Settings for tools/cutout.mjs (D29, D30, D40). Targets = every image of a kind:drawing figure + extra - exclude. Per-image overrides: paper [r,g,b], floor, knee, margin, band, halo (px), alpha ('halo' | 'graded').",
+  "defaults": {
+    "floor": 0.06,
+    "knee": 0.14,
+    "margin": 0.01,
+    "band": 0.02,
+    "halo": 10,
+    "alpha": "halo"
+  },
+  "extra": [
+    "images/al-arg/al-arg-site-plan-proposal.png",
+    "images/al-arg/al-arg-ground-floor-proposed.png"
+  ],
+  "exclude": {
+    "images/cinephile/cinephile-section-facade.jpg": "mixed: a teal sky band and a rendered facade; keying would make the sky translucent",
+    "images/corallum/corallum-site.jpg": "a massing model photographed on a tinted full-bleed ground; no paper to key"
+  },
+  "images": {
+    "images/al-arg/al-arg-site-plan-proposal.png": {
+      "paper": [
+        246,
+        240,
+        233
+      ],
+      "floor": 0.1,
+      "knee": 0.18
+    },
+    "images/al-arg/al-arg-ground-floor-proposed.png": {
+      "paper": [
+        246,
+        240,
+        233
+      ]
+    }
+  },
+  "fullBleed": {
+    "images/al-arg/al-arg-site-plan-proposal.png": "a map whose tree hatching fills its own frame: no paper inside it; the halo mask is the frame (graded alpha would weigh 143 KB at 480 px)"
+  }
+}

@@ -12,6 +12,8 @@ Every fact on the site comes from one of these sources (precedence in `05-brief.
 
 Translations from French are literal and marked "(translated from French)". Line-break hyphens and obvious typos in the PDFs are normalised and marked.
 
+**Image derivatives (Field, 2026-10-13).** `images/cut/**` are transparent cutouts of the drawing masters made by `tools/cutout.mjs` (D29, D30); they add no content. `images/books/thesis-book-closed.png` and `thesis-book-open.png` are the thesis mockups printed in `pdf2025:p46` and `pdf2025:p47`, extracted with their own soft masks (`pdfimages -png` + `alphamerge`), unchanged apart from the merge.
+
 ## Conflicts and how they were resolved
 
 | ID | Conflict | Resolution |

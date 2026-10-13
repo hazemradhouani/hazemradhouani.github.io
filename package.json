@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "build": "node tools/build.mjs",
+    "cutout": "node tools/cutout.mjs",
     "media": "node tools/media.mjs",
     "serve": "node tools/serve.mjs . 8090",
     "qa": "node tools/qa.mjs",
