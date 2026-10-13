@@ -32,33 +32,33 @@ console.log('icons done');
 const site = rd('content/site.json');
 const projects = fs.readdirSync(path.join(REPO, 'content/projects')).map((f) => rd('content/projects/' + f));
 const home = rd('content/pages/home.json');
+// Field cards (D35): a white field, the image contained at its natural ratio (never cropped), credits kept
 const cards = [
-  { name: 'home', title: site.person.name, line: site.person.line, img: home.cover.image, pos: '50% 45%' },
-  { name: 'work', title: 'Work', line: `${projects.length} projects in Paris, Morocco and Tunisia, 2022 to 2026`, img: 'images/la-villette/la-villette-street-render.jpg' },
-  { name: 'research', title: 'Research', line: 'Between the Poetics of Place and the Value of Heritage', img: 'images/al-arg/al-arg-render-courtyard.jpg' },
+  { name: 'home', title: site.person.name, line: site.person.line, img: home.flagship.hero.image },
+  { name: 'work', title: 'Work', line: `${projects.length} projects in Paris, Morocco and Tunisia, 2022 to 2026`, img: 'images/la-villette/la-villette-street-render.jpg', credit: 'Render: Studio BELEM' },
+  { name: 'research', title: 'Research', line: 'Between the Poetics of Place and the Value of Heritage', img: 'images/books/thesis-book-closed.png' },
   { name: 'about', title: 'About', line: site.person.credential, img: 'images/portrait.jpg' },
   { name: 'motion', title: 'Films and motion', line: 'Architectural films and motion graphic reels', img: 'images/zenata/zenata-platform-render.jpg' },
   ...projects.filter((p) => p.hero).map((p) => ({ name: 'project-' + p.slug, title: p.title, line: `${p.descriptor} | ${p.place} | ${p.year}`, img: p.hero.src, credit: p.hero.credit }))
 ];
-const MARK = '<svg viewBox="0 0 64 64" fill="none" stroke="#EDE7DC" stroke-width="1.4" width="44" height="44"><path d="M10 60V27a22 22 0 0 1 44 0v33"/><path d="M32 5v16"/><path d="M0 60h64"/></svg>';
 for (const c of cards) {
   const p = await b.newPage({ viewport: { width: 1200, height: 630 }, deviceScaleFactor: 1 });
   await p.goto(BASE + '404.html');
   await p.setContent(`<!doctype html><html><head><base href="${BASE}"><style>
 @font-face{font-family:G;src:url(fonts/eb-garamond-latin-wght-normal.woff2) format("woff2");font-weight:400 800}
 @font-face{font-family:P;src:url(fonts/ibm-plex-sans-latin-wght-normal.woff2) format("woff2");font-weight:100 700}
-body{margin:0;width:1200px;height:630px;background:#15110E;color:#EDE7DC;display:grid;grid-template-columns:640px 560px;overflow:hidden}
-.t{padding:56px 56px 52px;display:flex;flex-direction:column;justify-content:space-between}
-h1{font:500 ${c.title.length > 18 ? 52 : 64}px/1.04 G,serif;letter-spacing:.06em;text-transform:uppercase;margin:0 0 22px}
-p{font:400 25px/1.4 P,sans-serif;color:#B3ABA0;margin:0;max-width:30ch}
-.who{font:500 15px P,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#B3ABA0}
-.r{height:630px;background:#221C18;position:relative}.r img{width:100%;height:100%;object-fit:cover;object-position:${c.pos || '50% 50%'};display:block}
-.cr{position:absolute;right:14px;bottom:10px;font:400 14px P,sans-serif;color:#fff;text-shadow:0 0 6px #000}
-.rule{width:40px;height:2px;background:#C9805F;margin-bottom:26px}
-</style></head><body><div class="t"><div>${MARK}</div><div><div class="rule"></div><h1>${c.title}</h1><p>${c.line}</p></div><div class="who">Hazem Radhouani | Architect</div></div>
+body{margin:0;width:1200px;height:630px;background:#fff;color:#111;display:grid;grid-template-columns:560px 640px;overflow:hidden}
+.t{padding:60px 40px 56px 64px;display:flex;flex-direction:column;justify-content:space-between}
+.who{font:600 15px P,sans-serif;letter-spacing:.22em;text-transform:uppercase}
+h1{font:600 ${c.title.length > 18 ? 40 : 52}px/1.12 P,sans-serif;letter-spacing:.08em;text-transform:uppercase;margin:0 0 20px}
+p{font:400 30px/1.35 G,serif;color:#111;margin:0;max-width:24ch}
+.r{height:630px;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:48px 56px 40px 24px;box-sizing:border-box}
+.r img{max-width:100%;max-height:505px;width:auto;height:auto;object-fit:contain;display:block}
+.cr{margin-top:10px;font:400 17px G,serif;color:#5E5E5E;align-self:flex-end}
+</style></head><body><div class="t"><div class="who">Hazem Radhouani</div><div><h1>${c.title}</h1><p>${c.line}</p></div><div class="who" style="color:#5E5E5E;font-size:13px">Architect</div></div>
 <div class="r"><img src="${c.img}">${c.credit ? `<span class="cr">${c.credit}</span>` : ''}</div></body></html>`);
   await p.evaluate(async () => { await document.fonts.ready; await Promise.all([...document.images].map((i) => i.decode().catch(() => {}))); });
-  const ok = await p.evaluate(() => document.fonts.check('500 20px G') && [...document.images].every((i) => i.naturalWidth > 0));
+  const ok = await p.evaluate(() => document.fonts.check('600 20px P') && document.fonts.check('400 20px G') && [...document.images].every((i) => i.naturalWidth > 0));
   if (!ok) throw new Error('font or image not loaded for ' + c.name);
   await p.screenshot({ path: path.join(REPO, 'images/og', c.name + '.jpg'), type: 'jpeg', quality: 86 });
   await p.close();

@@ -242,7 +242,7 @@
   /* figures: images at their natural ratio, never cropped, never above native pixels (--nw) */
   .nw { display: block; width: 100%; max-width: var(--nw, 100%); margin-inline: auto; }
   .nw img, .nw picture { width: 100%; height: auto; }
-  .cap { margin: var(--s3) auto 0; max-width: 40rem; text-align: center; font-size: var(--fs-cap); line-height: 1.55; color: var(--ink-2); }
+  .cap { margin-top: var(--s3); text-align: center; font-size: var(--fs-cap); line-height: 1.55; color: var(--ink-2); }
   .cap__t { color: var(--ink); }
   .zoom-link { display: block; cursor: zoom-in; text-decoration: none; }
   .zoom-link:focus-visible { outline-offset: 6px; }
@@ -277,7 +277,7 @@
 
   /* viewer: opens from the clicked image and returns into it (same path, D38) */
   .viewer { position: fixed; inset: 0; width: 100%; height: 100%; background: transparent; color: var(--ink); overflow: hidden; }
-  .viewer::backdrop { background: rgb(255 255 255 / 0.97); }
+  .viewer::backdrop { background: var(--bg); }  /* opaque: transparent drawings must not show the page through */
   .viewer__stage { position: absolute; inset: var(--bar-h) 0 4.5rem; overflow: hidden; overscroll-behavior: contain; touch-action: none; }
   .viewer.is-actual .viewer__stage { overflow: auto; touch-action: pan-x pan-y; cursor: grab; }
   .viewer__stage.is-dragging { cursor: grabbing; }

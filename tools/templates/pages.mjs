@@ -2,7 +2,7 @@
 // Every block sits on the one grid (.wrap.g) through a centred span class; images are placed by partials.mjs.
 import { html, attrs, when } from '../lib/html.mjs';
 import { dims, shown, preloadFor } from '../lib/images.mjs';
-import { icon, image, row, cells, figure, hero, heroPartner, creditLine, sizesFor, spanFor, projectHref, vtTitle, vtHero } from './partials.mjs';
+import { icon, image, row, cells, figure, hero, heroPartner, creditLine, heroCaption, sizesFor, spanFor, projectHref, vtTitle, vtHero } from './partials.mjs';
 
 const q = (s) => `“${s}”`;
 const more = (href, label, p, { dir = 'right', ext = false } = {}) => dir === 'left'
@@ -154,16 +154,17 @@ export function project(site, x, projects, ctx) {
   const next = projects[(i + 1) % projects.length];
   const h = hero(x, ctx, { priority: true, zoom: true });
   const figs = x.figures.filter((f) => f !== h.partner);
-  const credit = creditLine(x);
+  const cap = heroCaption(x);
   const film = x.film ? ctx.films.find((f) => f.slug === x.film) : null;
   const nh = hero(next, ctx, { max: 'narrow' });
   const filmSpan = film ? spanFor(film.w, film.h, { max: 'wide' }) : null;
   const body = html`
 <article class="case">
 <header class="case-head">
-<div class="lead-fig wrap g"><div class="s-${h.span}">${h.html}</div>${when(credit, () => html`<p class="cap s-text">${credit}</p>`)}</div>
+<div class="lead-fig wrap g"><div class="s-${h.span}">${h.html}</div>${when(cap, () => html`<p class="cap s-narrow">${cap}</p>`)}</div>
 <div class="case-head__text wrap g"><div class="s-text center">
-<h1 class="h1" style="view-transition-name: ${vtTitle(x)}">${x.title}</h1>
+<p class="label">${x.run}</p>
+<h1 class="h1 in" style="view-transition-name: ${vtTitle(x)}">${x.title}</h1>
 <p class="lead in">${x.descriptor}</p>
 ${spec(x.spec)}
 <p class="meta case-head__tag">${x.tag}</p>

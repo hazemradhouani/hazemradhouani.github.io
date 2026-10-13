@@ -73,7 +73,7 @@ export function cells(items, { prefix, zoom = true, after = null, cls = '' }) {
 }
 
 /* ---------------------------------------------------------- figures of a case study */
-const capOf = (f) => (f.title || f.caption || f.credit) ? html`<figcaption class="cap s-text">${when(f.title, () => html`<span class="cap__t">${f.title}.</span> `)}${inline(f.caption || '')}${when(f.credit, () => html` <span class="credit">${f.credit}.</span>`)}</figcaption>` : '';
+const capOf = (f) => (f.title || f.caption || f.credit) ? html`<figcaption class="cap s-narrow">${when(f.title, () => html`<span class="cap__t">${f.title}.</span> `)}${inline(f.caption || '')}${when(f.credit, () => html` <span class="credit">${f.credit}.</span>`)}</figcaption>` : '';
 
 export function figure(f, n, ctx) {
   const p = ctx.prefix;
@@ -121,3 +121,9 @@ export function hero(x, ctx, { priority = false, max = 'full', zoom = false, vt 
 
 // render credits of what the hero shows, once each
 export const creditLine = (x) => [...new Set([x.hero.credit, heroPartner(x)?.credit].filter(Boolean))].join(' | ');
+// the full caption under a case-study hero: its caption, the partner's, then the credits
+export const heroCaption = (x) => {
+  const parts = [x.hero.caption, heroPartner(x)?.caption].filter(Boolean);
+  const credit = creditLine(x);
+  return parts.length || credit ? html`${inline(parts.join(' '))}${when(credit, () => html`${parts.length ? ' ' : ''}<span class="credit">${credit}</span>`)}` : '';
+};

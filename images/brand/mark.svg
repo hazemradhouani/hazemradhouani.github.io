@@ -1,7 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="butt" role="img" aria-label="Arch mark">
-  <!-- Construction: baseline 64 wide; arch 44 wide (r 22) and 55 high on it; plumb line 16 long from the apex.
-       Proportions measured from the 2026 printed portfolio's back cover. -->
-  <path d="M10 60V27a22 22 0 0 1 44 0v33" vector-effect="non-scaling-stroke"/>
-  <path d="M32 5v16" vector-effect="non-scaling-stroke"/>
-  <path d="M0 60h64" vector-effect="non-scaling-stroke"/>
-</svg>
