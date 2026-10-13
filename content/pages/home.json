@@ -27,19 +27,19 @@
       {
         "label": "Territorial",
         "caption": "Site map | Al-Arg within the Jérid. Reading of the oasis territory as a system | water, road, inhabited fabric.",
-        "image": "images/opt/al-arg/scales-territorial.jpg",
+        "image": "images/al-arg/al-arg-territory-map-2026.jpg",
         "alt": "Territory map of the Jérid oasis around Al-Arg, roads, water and inhabited fabric"
       },
       {
         "label": "Urban",
         "caption": "Site plan | rehabilitation proposal.",
-        "image": "images/opt/al-arg/scales-urban.jpg",
+        "image": "images/al-arg/al-arg-site-plan-proposal.png",
         "alt": "Site plan of the Al-Arg rehabilitation proposal"
       },
       {
         "label": "Architectural",
         "caption": "Ground floor plan | proposed",
-        "image": "images/opt/al-arg/scales-architectural.jpg",
+        "image": "images/al-arg/al-arg-ground-floor-proposed.png",
         "alt": "Proposed ground floor plan of the rehabilitated building"
       }
     ],
@@ -96,8 +96,8 @@
     "titleAr": "بين شاعرية المكان و قيمة الأثر",
     "meta": "Architecture thesis | ENAU, University of Carthage | Highest Honours, unanimous jury, June 2024",
     "award": "Sakura Science Program, Japan 2025 | Most Appreciated Research",
-    "cover": "images/books/thesis-cover.png",
-    "coverAlt": "Cover of the thesis Between the Poetics of Place and the Value of Heritage",
+    "cover": "images/books/thesis-book-closed.png",
+    "coverAlt": "The printed thesis Between the Poetics of Place and the Value of Heritage, closed, its cover showing an earthen wall",
     "sources": {
       "title": "site:books + pdf2025:p3",
       "titleAr": "pdf2025:p46",
