@@ -2,10 +2,11 @@
 // Every image is placed at build time on the largest centred span that neither enlarges it nor makes it
 // taller than MAX_H at the 1280px canvas, so its edges fall on grid lines and nothing is cropped (D32).
 import { html, raw, inline, when } from '../lib/html.mjs';
-import fs from 'node:fs';
-import { picture, dims, largest, shown } from '../lib/images.mjs';
-// drawings excluded from cutouts on purpose (tools/cutout.json); any other drawing must have its cutout
-const EXCLUDED = new Set(Object.keys(JSON.parse(fs.readFileSync(new URL('../cutout.json', import.meta.url), 'utf8')).exclude || {}));
+import { fileURLToPath } from 'node:url';
+import { picture, dims, largest, shown, darkOf } from '../lib/images.mjs';
+import { loadCutoutConfig } from '../lib/cutout-config.mjs';
+// drawings excluded from cutouts on purpose (tools/cutout.json, tools/cutout.d); any other drawing must have its cutout
+const EXCLUDED = new Set(Object.keys(loadCutoutConfig(fileURLToPath(new URL('../..', import.meta.url))).exclude));
 const cutOrFail = (src) => { const rel = shown(src, true); if (rel === src && !EXCLUDED.has(src)) throw new Error(`No cutout for drawing ${src}: run npm run cutout`); return rel; };
 
 export const icon = (name, p) => raw(`<svg class="icon" width="16" height="16" aria-hidden="true" focusable="false"><use href="${p}images/icons.svg#${name}"></use></svg>`);
@@ -46,10 +47,12 @@ export function planRow(items, { max = 'full', maxH = MAX_H } = {}) {
 export function image(rel, { alt, sz, prefix = '', priority = false, zoom = false, title = '', vt = null }) {
   const { w, h } = dims(rel);
   const style = `--nw: ${w}px${vt ? `; view-transition-name: ${vt}` : ''}`;
-  const cls = `nw${rel.startsWith('images/cut/') ? ' nw--drawing' : ''}`;
+  // a cutout carries its dark-scheme treatment (D50): inverted linework, or the inspection field
+  const dark = darkOf(rel);
+  const cls = `nw${dark ? ` nw--drawing nw--${dark}` : ''}`;
   if (!zoom) return picture(rel, { alt, sizes: sz, prefix, priority, cls, style });
   const big = largest(rel, prefix);
-  return html`<a class="zoom-link ${cls}" style="${style}" href="${prefix}${rel}" data-viewer data-title="${title}" data-alt="${alt}" data-w="${w}" data-h="${h}" data-webp="${big.webp}" data-avif="${big.avif}"><span class="vh">Open full size: ${title || alt}</span>${picture(rel, { alt, sizes: sz, prefix, priority })}</a>`;
+  return html`<a class="zoom-link ${cls}" style="${style}" href="${prefix}${rel}" data-viewer data-title="${title}" data-alt="${alt}" data-w="${w}" data-h="${h}" data-webp="${big.webp}" data-avif="${big.avif}"${dark ? html` data-dark="${dark}"` : ''}><span class="vh">Open full size: ${title || alt}</span>${picture(rel, { alt, sizes: sz, prefix, priority })}</a>`;
 }
 
 // a row of images sharing one height; `stack`: one per line on phones (drawings, or more than two).

@@ -9,6 +9,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { inspectCutoutRgba } from './lib/cutout-alpha.mjs';
+import { loadCutoutConfig } from './lib/cutout-config.mjs';
 const here = path.dirname(fileURLToPath(import.meta.url));
 const REPO = path.join(here, '..');
 const ARGS = process.argv.slice(2);
@@ -179,6 +180,19 @@ for (const url of urls) {
         if (el.closest('video, svg')) continue;
         const c = getComputedStyle(el).backgroundColor; if (!ok.has(c)) out.palette.push(`${el.tagName.toLowerCase()}.${[...el.classList].join('.')} ${c}`);
       }
+      // dark treatments (D50): inverted linework is filtered only in the dark scheme; the inspection
+      // field shows only in the dark scheme; light pages show every drawing as authored
+      for (const el of document.querySelectorAll('main .nw--drawing')) {
+        const img = el.querySelector('img'); if (!img) continue;
+        const f = getComputedStyle(img).filter; const bg = getComputedStyle(el).backgroundColor;
+        const kind = ['invert-accent', 'invert', 'field', 'object'].find((k) => el.classList.contains(`nw--${k}`)) || 'none';
+        const name = (img.getAttribute('src') || '').split('/').pop();
+        if (theme === 'light' && f !== 'none') out.theme.push(`${name} filtered in light: ${f}`);
+        if (theme === 'dark' && kind.startsWith('invert') && !/invert(0.965)/u.test(f)) out.theme.push(`${name} ${kind} not inverted in dark: ${f}`);
+        if (theme === 'dark' && kind === 'invert-accent' && !/hue-rotate(180deg)/u.test(f)) out.theme.push(`${name} invert-accent without hue-rotate: ${f}`);
+        if (theme === 'dark' && kind === 'field' && bg !== 'rgb(247, 245, 239)') out.theme.push(`${name} field drawing without its inspection field: ${bg}`);
+        if (theme === 'dark' && kind !== 'field' && bg !== 'rgba(0, 0, 0, 0)') out.theme.push(`${name} ${kind} drawing has a background: ${bg}`);
+      }
       if (de.getAttribute('data-theme') !== theme) out.theme.push(`resolved ${de.getAttribute('data-theme') || 'none'}, expected ${theme}`);
       if (getComputedStyle(de).colorScheme !== theme) out.theme.push(`color-scheme ${getComputedStyle(de).colorScheme}, expected ${theme}`);
       const controls = [...document.querySelectorAll('[data-theme-toggle]')];
@@ -197,7 +211,7 @@ for (const url of urls) {
     row.grid.push(...r.grid.map((s) => `${theme}/${w}: ${s}`)); row.palette.push(...r.palette.map((s) => `${theme}/${w}: ${s}`)); row.theme.push(...r.theme.map((s) => `${theme}/${w}: ${s}`));
     // alpha: every cutout keeps a transparent corner (decoded in the page, at 1440 only)
     // (drawings declared full-bleed in tools/cutout.json, with a reason, have no paper inside their frame)
-    const fullBleed = Object.keys(JSON.parse(fs.readFileSync(path.join(REPO, 'tools/cutout.json'), 'utf8')).fullBleed || {})
+    const fullBleed = Object.keys(loadCutoutConfig(REPO).fullBleed)
       .map((s) => s.split('/').pop().replace(/\.\w+$/, ''));
     if (w === 1440) {
       const cutout = await page.evaluate(async ({ fullBleed, inspectorSource }) => {

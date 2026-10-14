@@ -276,7 +276,11 @@
 
   /* figures: images at their natural ratio, never cropped, never above native pixels (--nw) */
   .nw { display: block; width: 100%; max-width: var(--nw, 100%); margin-inline: auto; }
-  .nw--drawing { background: var(--drawing-bg); }
+  /* a drawing's dark treatment (D50): colour-coded or shaded drawings sit on the inspection field;
+     greyscale linework is inverted, so in dark mode its background is truly gone (exact for grey) */
+  .nw--drawing.nw--field { background: var(--drawing-bg); }
+  html[data-theme="dark"] .nw--invert img { filter: invert(.965); }
+  html[data-theme="dark"] .nw--invert-accent img { filter: invert(.965) hue-rotate(180deg); }
   .nw img, .nw picture { width: 100%; height: auto; }
   .cap { margin-top: var(--s3); text-align: center; font-size: var(--fs-cap); line-height: 1.55; color: var(--ink-2); }
   .cap__t { color: var(--ink); }
@@ -319,6 +323,8 @@
   .viewer::backdrop { background: var(--bg); }  /* opaque: transparent drawings must not show the page through */
   .viewer__stage { position: absolute; inset: var(--bar-h) 0 4.5rem; overflow: hidden; overscroll-behavior: contain; touch-action: pan-y pinch-zoom; }
   .viewer__stage.is-inspection { background: var(--drawing-bg); }
+  html[data-theme="dark"] .viewer__stage.is-invert img { filter: invert(.965); }
+  html[data-theme="dark"] .viewer__stage.is-invert-accent img { filter: invert(.965) hue-rotate(180deg); }
   .viewer.is-actual .viewer__stage { overflow: auto; touch-action: pan-x pan-y; cursor: grab; }
   .viewer__stage.is-dragging { cursor: grabbing; }
   .viewer__img { position: absolute; left: 0; top: 0; max-width: none; transform-origin: 0 0; }
@@ -491,6 +497,7 @@
     @page { size: A4; margin: 16mm 16mm 18mm; }
     :root { --bg: #FFFFFF; --ink: #111111; --ink-2: #5E5E5E; --line: #E6E6E6; --ui: #8A8A8A; --error: #A61B1B; --bar-bg: #FFFFFF; --drawing-bg: #FFFFFF; --gap-group: 6mm; --gap-chapter: 8mm; --cols: 12; --gutter: 4mm; color-scheme: light; }
     body { font-size: 10.5pt; line-height: 1.45; }
+    .nw--drawing img { filter: none !important; }  /* print shows every drawing as authored, black on white */
     .wrap { width: 100%; }
     .print-only { display: block; }
     .print-name { font-family: var(--sans); font-weight: 600; font-size: 18pt; letter-spacing: var(--tr-display); text-transform: uppercase; }

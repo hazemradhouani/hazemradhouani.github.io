@@ -53,3 +53,16 @@ test('browser QA exercises both schemes, fallback resolution and theme interacti
   assert.match(qa, /runThemeFallback/u);
   assert.match(qa, /reducedMotion:\s*'reduce'/u);
 });
+
+test('drawings get their dark treatment in the page and in the viewer: inverted linework or the inspection field (D50)', () => {
+  const css = read('css/site.css');
+  const js = read('js/site.js');
+  const partials = read('tools/templates/partials.mjs');
+  assert.match(css, /html\[data-theme="dark"\] \.nw--invert img[^{]*\{[^}]*filter:\s*invert\(\.965\)/u);
+  assert.match(css, /html\[data-theme="dark"\] \.nw--invert-accent img[^{]*\{[^}]*filter:\s*invert\(\.965\) hue-rotate\(180deg\)/u);
+  assert.match(css, /\.nw--drawing\.nw--field\s*\{[^}]*background:\s*var\(--drawing-bg\)/u);
+  assert.match(css, /\.viewer__stage\.is-invert img/u);
+  assert.match(js, /data-dark/u);
+  assert.match(partials, /darkOf\(/u);
+  assert.match(css, /@media print[\s\S]*filter:\s*none/u, 'print shows every drawing as authored, black on white');
+});

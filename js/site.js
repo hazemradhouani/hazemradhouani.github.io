@@ -151,7 +151,13 @@
     var info = function (k) {
       var a = links[k];
       return { a: a, w: +a.getAttribute('data-w'), h: +a.getAttribute('data-h'), full: a.getAttribute('data-webp') || a.getAttribute('href'),
-        title: a.getAttribute('data-title') || '', alt: a.getAttribute('data-alt') || '', drawing: a.classList.contains('nw--drawing') };
+        title: a.getAttribute('data-title') || '', alt: a.getAttribute('data-alt') || '', dark: a.getAttribute('data-dark') || '' };
+    };
+    // the figure's dark treatment (D50): the inspection field, or inverted linework
+    var treat = function (it) {
+      stage.classList.toggle('is-inspection', it.dark === 'field');
+      stage.classList.toggle('is-invert', it.dark === 'invert');
+      stage.classList.toggle('is-invert-accent', it.dark === 'invert-accent');
     };
     var fit = function (it) {
       var r = stage.getBoundingClientRect();
@@ -215,7 +221,7 @@
       var old = img, prev = cur; cur = k; resetToggle();
       if (old) { old.style.position = ''; old.style.transform = tf(fit(info(prev))); }   // leaving actual size: fade out from its fitted place
       stage.scrollLeft = 0; stage.scrollTop = 0;
-      var it = info(k); stage.classList.toggle('is-inspection', it.drawing); img = makeImg(it); img.style.transform = tf(fit(it)); stage.appendChild(img); label();
+      var it = info(k); treat(it); img = makeImg(it); img.style.transform = tf(fit(it)); stage.appendChild(img); label();
       if (reduce.matches || !img.animate) { if (old) old.remove(); return; }
       img.animate([{ opacity: 0, translate: (dir * 24) + 'px 0' }, { opacity: 1, translate: '0 0' }], { duration: 280, easing: css('--ease-out') });
       if (old) {
@@ -228,7 +234,7 @@
       stage.textContent = '';
       viewer.showModal();
       var it = info(k);
-      stage.classList.toggle('is-inspection', it.drawing);
+      treat(it);
       img = makeImg(it); stage.appendChild(img); label();
       busy = true; viewer.classList.add('is-moving');
       animate(img, sourceRect(it), fit(it)).then(function () { busy = false; viewer.classList.remove('is-moving'); });
@@ -255,7 +261,7 @@
     vClose.addEventListener('click', function (e) { e.preventDefault(); closeViewer(); });
     viewer.addEventListener('cancel', function (e) { e.preventDefault(); closeViewer(); });
     viewer.addEventListener('close', function () {
-      stage.textContent = ''; stage.classList.remove('is-inspection'); img = null; cur = -1; busy = false;
+      stage.textContent = ''; treat({ dark: '' }); img = null; cur = -1; busy = false;
       if (returnTo) { var r = returnTo.getBoundingClientRect(); returnTo.focus({ preventScroll: r.bottom > 0 && r.top < window.innerHeight }); returnTo = null; }
     });
     vPrev.addEventListener('click', function () { show(cur - 1, -1); });

@@ -3,7 +3,7 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import test from 'node:test';
-import { setRoot, variants } from '../lib/images.mjs';
+import { darkOf, setRoot, variants } from '../lib/images.mjs';
 
 const tmpDirs = [];
 
@@ -23,4 +23,18 @@ test('responsive source sets ignore zero-byte derivatives left by an interrupted
 
   setRoot(root);
   assert.deepEqual(variants('images/demo/scene.jpg'), [480]);
+});
+
+test('a cutout reports the dark treatment chosen in its sidecar, and the inspection field when none is set (D50)', () => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'image-dark-'));
+  tmpDirs.push(root);
+  const dir = path.join(root, 'images', 'cut', 'demo');
+  fs.mkdirSync(dir, { recursive: true });
+  fs.writeFileSync(path.join(dir, 'plan.json'), JSON.stringify({ dark: 'invert' }));
+  fs.writeFileSync(path.join(dir, 'sheet.json'), JSON.stringify({ dark: null }));
+  setRoot(root);
+  assert.equal(darkOf('images/cut/demo/plan.png'), 'invert');
+  assert.equal(darkOf('images/cut/demo/sheet.png'), 'field');
+  assert.equal(darkOf('images/cut/demo/unknown.png'), 'field');
+  assert.equal(darkOf('images/demo/render.jpg'), null);
 });
