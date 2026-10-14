@@ -10,17 +10,17 @@
       "height": 2481,
       "projectMapping": {
         "slug": "hay-mohammadi",
-        "status": "provisional"
+        "status": "confirmed"
       },
-      "mappingEvidence": "Brief 10 maps the Station Hay Mohammadi source folder to the existing Hay Mohammadi case study; the individual source still needs a visual and caption comparison.",
-      "visualType": "drawing-or-sheet",
-      "textDisposition": "review-required",
+      "mappingEvidence": "Footer 'HAY MOHAMMADI STATION' and the same aerial camera as the existing figure 'Render, Aerial View' (pdf2025:p43): white roof beside the tracks, platform shelters, car park to the right",
+      "visualType": "portfolio page: full-bleed dusk aerial render with a text panel and a footer printed over it",
+      "textDisposition": "furniture (cropped out): footer page number '46' and title 'HAY MOHAMMADI STATION'; fact panel printed on the render (cropped out, not erasable): 'LOCATION: Casablanca, Hay Mohammadi neighborhood' (agrees with the spec), 'AREA: 600 m²' (agrees with answer:2026-10-12), 'TYPE: Train Station – Social integration hub' (not adopted: the site's 'RER Station' takes precedence), 'YEAR: February 2025' (agrees with the year 2025); prose (not published, the site narrative takes precedence): 'ABOUT / Vibrant mosaics shimmer across perforated walls, casting kaleidoscopic light onto communal plazas. As trains arrive and depart, the station becomes a living tapestry of neighborhood voices and shared aspirations.'; third-party quotation (not published): '“We all should know that diversity makes for a rich tapestry, and we must understand that all the threads of the tapestry are equal in value no matter what their color.” — Maya Angelou'; intrinsic (stays): the station-name lettering on the roof fascia, illegible at this angle",
       "duplicateOf": null,
-      "disposition": "withheld",
+      "disposition": "approved",
       "authorizationEvidence": "owner-direct:2026-10-13",
-      "creditEvidence": "not established",
-      "roleEvidence": "not established",
-      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+      "creditEvidence": "No credit printed on the source or on pdf2025:p43-44; the page publishes it as work at Yassir Khalil Studio (site, office field) with no third-party render credit",
+      "roleEvidence": "The case study states the office (Yassir Khalil Studio, site) and no personal role (role list empty); nothing on this page claims one",
+      "reason": "The only aerial view: roof form, tracks, platforms and car park. Published as a full-width crop (y 0-1595) above the printed text panel; the panel overlaps the entrance stairs, so no rectangle keeps the whole building without text. The lower walls lost to the crop are shown whole on page 0002"
     },
     {
       "source": "Images HQ/Station Hay Mohammadi/2025 - Hazem radhouani - Portfolio - HQ [46-50]_page-0002.jpg",
@@ -29,17 +29,17 @@
       "height": 2481,
       "projectMapping": {
         "slug": "hay-mohammadi",
-        "status": "provisional"
+        "status": "confirmed"
       },
-      "mappingEvidence": "Brief 10 maps the Station Hay Mohammadi source folder to the existing Hay Mohammadi case study; the individual source still needs a visual and caption comparison.",
-      "visualType": "drawing-or-sheet",
-      "textDisposition": "review-required",
+      "mappingEvidence": "Signage 'STATION HAY MOHAMMADI' on the façade; the two renders are the 'entrance' and 'street' items of the existing figure 'Street views' (pdf2025:p44), same cameras",
+      "visualType": "portfolio page: two renders stacked, separated by a white gutter (y 1229-1251), with a page tab over the lower render",
+      "textDisposition": "furniture (cropped out): page tab '47' (x 3120-3508, y 2328-2399); intrinsic (stays): façade signage 'STATION HAY MOHAMMADI' and Arabic 'محطة حي المحمدي' ('Hay Mohammadi Station')",
       "duplicateOf": null,
-      "disposition": "withheld",
+      "disposition": "approved",
       "authorizationEvidence": "owner-direct:2026-10-13",
-      "creditEvidence": "not established",
-      "roleEvidence": "not established",
-      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+      "creditEvidence": "No credit printed on the source or on pdf2025:p43-44; the page publishes it as work at Yassir Khalil Studio (site, office field) with no third-party render credit",
+      "roleEvidence": "The case study states the office (Yassir Khalil Studio, site) and no personal role (role list empty); nothing on this page claims one",
+      "reason": "Split into two renders: the front (hero) and the platform side (closing figure), both at full resolution"
     }
   ]
 }
