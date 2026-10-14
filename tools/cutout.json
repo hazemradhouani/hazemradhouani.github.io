@@ -1,12 +1,12 @@
 {
-  "$comment": "Settings for tools/cutout.mjs (D29, D30, D40). Targets = every image of a kind:drawing figure + extra - exclude. Per-image overrides: paper [r,g,b], floor, knee, margin, band, halo (px), alpha ('halo' | 'graded').",
+  "$comment": "Settings for tools/cutout.mjs (D29, D30, D40, D46). Targets = every image of a kind:drawing figure + extra - exclude. Per-image overrides: paper [r,g,b], floor, knee, margin, band, halo (px), alpha ('halo' legacy light-only | 'graded' required for dark-compatible drawings).",
   "defaults": {
     "floor": 0.06,
     "knee": 0.14,
     "margin": 0.01,
     "band": 0.02,
     "halo": 10,
-    "alpha": "halo"
+    "alpha": "graded"
   },
   "extra": [
     "images/al-arg/al-arg-site-plan-proposal.png",
@@ -35,6 +35,6 @@
     }
   },
   "fullBleed": {
-    "images/al-arg/al-arg-site-plan-proposal.png": "a map whose tree hatching fills its own frame: no paper inside it; the halo mask is the frame (graded alpha would weigh 143 KB at 480 px)"
+    "images/al-arg/al-arg-site-plan-proposal.png": "a map whose tree hatching fills its own frame: no paper inside it; graded alpha preserves the authored linework without adding a paper rectangle"
   }
 }

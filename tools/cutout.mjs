@@ -5,12 +5,13 @@
 // trim to the ink plus a margin. Writes images/cut/<dir>/<stem>.png; masters are never touched.
 // Zero npm dependencies: ffmpeg decodes and encodes, Node does the pixel maths.
 // Usage: node tools/cutout.mjs [--force] [--sheet] [path-prefix ...]
-//   --sheet  also writes review contact sheets (on white and on magenta) to tools/.cache/cutouts/
+//   --sheet  also writes review contact sheets (on white, Field dark and magenta) to tools/.cache/cutouts/
 import fs from 'node:fs';
 import path from 'node:path';
 import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { setRoot, dims, cutFor } from './lib/images.mjs';
+import { reviewFilter } from './lib/cutout-review.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 setRoot(ROOT);
@@ -20,7 +21,7 @@ const SHEET = args.includes('--sheet');
 const only = args.filter((a) => !a.startsWith('--'));
 const read = (rel) => JSON.parse(fs.readFileSync(path.join(ROOT, rel), 'utf8'));
 const conf = read('tools/cutout.json');
-const DEF = { floor: 0.06, knee: 0.14, margin: 0.01, band: 0.02, halo: 10, alpha: 'halo', ...conf.defaults };
+const DEF = { floor: 0.06, knee: 0.14, margin: 0.01, band: 0.02, halo: 10, alpha: 'graded', ...conf.defaults };
 
 // targets: every image of a drawing figure, plus the extras, minus the exclusions
 const targets = new Set();
@@ -58,9 +59,9 @@ function cut(rel, o) {
   }
   if (Math.min(...P) < 200) throw new Error(`${rel}: border median ${P} is not paper; set "paper" in tools/cutout.json or exclude it`);
   // 2-4. white-balance, white-to-alpha, unblend, noise floor; track the ink and its bbox.
-  // "graded" keeps the exact alpha (for use on any ground). The default "halo" keeps each pixel's
-  // colour as composited on white and makes it opaque within `halo` px of ink, transparent beyond:
-  // on the white field it is pixel-identical to graded alpha, and the mask compresses 2-5x better (D40).
+  // "graded" keeps the exact alpha (for use on any ground). "halo" is a legacy, light-field-only
+  // exception: it keeps each pixel's colour as composited on white and makes it opaque within
+  // `halo` px of ink. It must never be declared dark-compatible.
   const graded = o.alpha === 'graded';
   const ink = new Uint8Array(W * H);
   let x0 = W, y0 = H, x1 = -1, y1 = -1;
@@ -115,14 +116,14 @@ for (const rel of list) {
 }
 console.log(`${made} cutout(s) written, ${done.length} current`);
 
-// review sheets: each cutout over white (what visitors see) and over magenta (where the alpha is)
+// Review each cutout over white, Field charcoal and magenta. The same derivative is composited in
+// all three panels, so a white fringe or lost fine line cannot be hidden by a light field.
 if (SHEET) {
   const dir = path.join(ROOT, 'tools/.cache/cutouts'); fs.mkdirSync(dir, { recursive: true });
   for (const rel of done) {
     const src = path.join(ROOT, cutFor(rel));
     const name = cutFor(rel).replace(/^images\/cut\//, '').replace(/[\/.]/g, '_');
-    execFileSync('ffmpeg', ['-v', 'error', '-y', '-i', src, '-filter_complex',
-      '[0:v]scale=640:-2,split=4[a][b][c][d];[b]drawbox=c=white:t=fill[w];[c]drawbox=c=0xff00ff:t=fill[m];[w][a]overlay[ow];[m][d]overlay[om];[ow][om]hstack',
+    execFileSync('ffmpeg', ['-v', 'error', '-y', '-i', src, '-filter_complex', reviewFilter(),
       '-frames:v', '1', path.join(dir, name + '.jpg')]);
   }
   console.log(`review sheets in ${path.relative(ROOT, dir)}`);
