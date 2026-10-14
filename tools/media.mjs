@@ -11,7 +11,8 @@ import { setRoot, dims, optStem, variants, hasAlpha } from './lib/images.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 setRoot(ROOT);
-const WIDTHS = [480, 800, 1200, 1600, 2000];
+// 2560 serves a full-width figure at 2x; masters are already capped (D51), so the native width stays reasonable
+const WIDTHS = [480, 800, 1200, 1600, 2000, 2560];
 const SKIP = /^images\/(opt|og|brand|images)\//;
 const FORCE = process.argv.includes('--force');
 const only = process.argv.slice(2).filter((a) => !a.startsWith('--'));

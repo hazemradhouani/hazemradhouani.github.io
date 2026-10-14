@@ -1,0 +1,30 @@
+{
+  "version": 1,
+  "sourceRoot": "Images HQ",
+  "assets": [
+    {
+      "source": "Images HQ/BOLIVAR/NB_StudioBelem_SimonBolivar_E-01_AvSimonBolivar-Reprise2_S2_20240522.jpg",
+      "output": "images/bolivar/bolivar-street-render-hq.jpg",
+      "sha256": "e43b8687e86088f5e9c5330aa7a779b25b9168e3f97d0289d98c448bfd5a2504",
+      "crop": null,
+      "treatment": "source-preserving exact copy of the reviewed full scene",
+      "darkTreatment": "preserve-colour-scene",
+      "credit": "Render: Studio BELEM",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "captionEvidence": "Exact visual match to the existing Bolívar street-view caption and alt text (content/projects/bolivar.json; pdf2026:p18).",
+      "reviewStatus": "approved"
+    },
+    {
+      "source": "Images HQ/BOLIVAR/NB_StudioBelem_SimonBolivar_E-02_AvSimonBolivar-Reprise2V-Sun1_20240522-mod.jpg",
+      "output": "images/bolivar/bolivar-courtyard-render-hq.jpg",
+      "sha256": "32f29b1836754eb4322b2ba0212a2b9a2d9e8cfbf33ec15f51d964e2abdb9710",
+      "crop": null,
+      "treatment": "source-preserving exact copy of the reviewed full scene",
+      "darkTreatment": "preserve-colour-scene",
+      "credit": "Render: Studio BELEM",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "captionEvidence": "Exact visual match to the existing Bolívar courtyard hero caption and alt text (content/projects/bolivar.json; pdf2026:p17).",
+      "reviewStatus": "approved"
+    }
+  ]
+}

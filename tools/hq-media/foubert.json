@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "sourceRoot": "Images HQ",
+  "assets": [
+    {
+      "source": "Images HQ/FOUBERT/20240105_BLM_FOU_Perspective rue.jpg",
+      "output": "images/foubert/foubert-brick-render-hq.jpg",
+      "sha256": "e791cc80297c204cef301a4e2137a76a214ffd6227c6ed0ff7825d3a0ddd9b8b",
+      "crop": null,
+      "treatment": "source-preserving exact copy of the reviewed full scene",
+      "darkTreatment": "preserve-colour-scene",
+      "credit": "Render: Studio BELEM",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "captionEvidence": "Exact visual match to the existing Foubert hero caption and alt text (content/projects/foubert.json; pdf2026:p13).",
+      "reviewStatus": "approved"
+    }
+  ]
+}

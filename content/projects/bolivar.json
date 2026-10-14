@@ -72,7 +72,7 @@
     }
   ],
   "hero": {
-    "src": "images/bolivar/bolivar-courtyard-render.jpg",
+    "src": "images/bolivar/bolivar-courtyard-render-hq.jpg",
     "alt": "Courtyard render of the Bolivar hotel and student residence with planted terraces",
     "credit": "Render: Studio BELEM",
     "source": "pdf2026:p17"
@@ -99,7 +99,7 @@
       "source": "pdf2026:p18"
     },
     {
-      "src": "images/bolivar/bolivar-street-render.jpg",
+      "src": "images/bolivar/bolivar-street-render-hq.jpg",
       "title": "Street view",
       "caption": "",
       "alt": "Street render of the Bolivar building on avenue Simon Bolivar",
