@@ -18,8 +18,9 @@ export function layout(site, page, body, ctx) {
   const home = p || './';
   const brand = (cur) => html`<a class="brand" href="${home}"${attrs({ 'aria-current': cur && page.nav === 'home' ? 'page' : null })}>${P.name}</a>`;
   const menuButton = html`<button class="menu-button" type="button" commandfor="menu" command="show-modal" aria-haspopup="dialog" aria-controls="menu">menu</button>`;
+  const themeButton = (scope) => html`<button class="theme-button" type="button" data-theme-toggle data-theme-scope="${scope}" aria-pressed="false" aria-label="Switch to dark theme"><span class="theme-button__glyph" aria-hidden="true">◐</span><span class="theme-button__label" data-theme-label aria-hidden="true">theme: light</span></button>`;
   return html`<!DOCTYPE html>
-<html lang="${site.lang}" data-ga="${site.ga4}">
+<html lang="${site.lang}" data-ga="${site.ga4}" data-theme="light">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -30,10 +31,11 @@ ${when(page.noindex, () => html`<meta name="robots" content="noindex, follow">`)
 <link rel="preload" href="${p}fonts/eb-garamond-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="${p}fonts/ibm-plex-sans-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 ${page.preload || ''}
+<meta id="theme-color" name="theme-color" content="${site.themeColor}">
+<meta name="color-scheme" content="light dark">
+<script data-theme-bootstrap>(function(){var t;try{t=localStorage.getItem('hazem-theme');}catch(e){}if(t!=='light'&&t!=='dark'){try{t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}catch(e){t='light';}}var d=document.documentElement;d.setAttribute('data-theme',t);d.style.colorScheme=t;var m=document.getElementById('theme-color');if(m)m.content=t==='dark'?'#121311':'#FFFFFF';}());</script>
 <link rel="stylesheet" href="${p}css/site.css?v=${v.css}">
 <script src="${p}js/site.js?v=${v.js}" defer></script>
-<meta name="theme-color" content="${site.themeColor}">
-<meta name="color-scheme" content="light">
 <meta name="author" content="${P.name}">
 ${when(page.verification, () => html`<meta name="google-site-verification" content="${site.googleSiteVerification}">`)}
 <link rel="icon" href="${p}favicon.svg" type="image/svg+xml">
@@ -63,14 +65,14 @@ ${ld}
 <div class="wrap">
 ${brand(true)}
 <nav class="nav" aria-label="Main"><ul role="list">${site.nav.map(navItem)}</ul></nav>
-${menuButton}
+<div class="site-header__tools">${themeButton('header')}${menuButton}</div>
 </div>
 </header>
 <div class="bar" id="bar" inert>
 <div class="bar__in wrap">
 ${brand(false)}
 <nav class="nav" aria-label="Site"><ul role="list">${site.nav.map(navItem)}</ul></nav>
-${menuButton}
+<div class="bar__tools">${themeButton('bar')}${menuButton}</div>
 </div>
 </div>
 <main id="main" tabindex="-1">
@@ -88,7 +90,7 @@ ${body}
 </footer>
 <dialog class="menu" id="menu" aria-label="Site menu">
 <div class="wrap">
-<div class="menu__top">${brand(false)}<form method="dialog"><button class="menu__close" type="submit" autofocus>close</button></form></div>
+<div class="menu__top">${brand(false)}<div class="menu__controls">${themeButton('menu')}<form method="dialog"><button class="menu__close" type="submit" autofocus>close</button></form></div></div>
 <nav aria-label="Main"><ul class="menu__list" role="list">${site.nav.map(navItem)}</ul></nav>
 <p class="menu__contact"><a href="mailto:${P.email}">${P.email}</a><a href="${P.linkedin}" target="_blank" rel="noopener">LinkedIn<span class="vh"> (opens in a new tab)</span></a></p>
 </div>

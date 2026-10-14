@@ -55,12 +55,18 @@ function scan(rel) {
   if (!fs.existsSync(dir)) return { ws: [], avif: false };
   const base = path.posix.basename(stem);
   const pre = `${base}-`;
+  // An interrupted ffmpeg process can leave an empty output path behind. A file name alone is not
+  // a valid responsive source: omit it so the media builder regenerates that width next time.
+  const usable = (file) => fs.statSync(path.join(dir, file)).size > 0;
   const ws = fs.readdirSync(dir)
-    .filter((f) => f.startsWith(pre) && f.endsWith('.webp'))
+    .filter((f) => f.startsWith(pre) && f.endsWith('.webp') && usable(f))
     .map((f) => f.slice(pre.length, -'.webp'.length))
     .filter((s) => s.length > 0 && [...s].every((c) => c >= '0' && c <= '9'))
     .map(Number).sort((a, b) => a - b);
-  return { ws, avif: ws.length > 0 && ws.every((w) => fs.existsSync(path.join(dir, `${base}-${w}.avif`))) };
+  return { ws, avif: ws.length > 0 && ws.every((w) => {
+    const file = `${base}-${w}.avif`;
+    return fs.existsSync(path.join(dir, file)) && usable(file);
+  }) };
 }
 export const variants = (rel) => scan(rel).ws;
 

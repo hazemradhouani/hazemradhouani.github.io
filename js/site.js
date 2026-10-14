@@ -10,6 +10,43 @@
   var css = function (name) { return getComputedStyle(root).getPropertyValue(name).trim(); };
   var slice = function (list) { return Array.prototype.slice.call(list); };
 
+  /* ------------------------------------------------------------ theme (preference, state)
+     The inline bootstrap sets data-theme before CSS is parsed. This controller only synchronises
+     the three visible controls, persists an explicit choice when storage is available, and keeps
+     the browser chrome colour in step. A failed storage read/write is deliberately non-fatal. */
+  var themeControls = slice(document.querySelectorAll('[data-theme-toggle]'));
+  var themeMeta = document.getElementById('theme-color');
+  var themeMedia = window.matchMedia('(prefers-color-scheme: dark)');
+  var explicitTheme = null;
+  try {
+    var savedTheme = window.localStorage.getItem('hazem-theme');
+    if (savedTheme === 'light' || savedTheme === 'dark') explicitTheme = savedTheme;
+  } catch (e) {}
+  var currentTheme = function () { return root.getAttribute('data-theme') === 'dark' ? 'dark' : 'light'; };
+  var applyTheme = function (theme, persist) {
+    var dark = theme === 'dark';
+    root.setAttribute('data-theme', dark ? 'dark' : 'light');
+    root.style.colorScheme = dark ? 'dark' : 'light';
+    if (themeMeta) themeMeta.setAttribute('content', dark ? '#121311' : '#FFFFFF');
+    themeControls.forEach(function (button) {
+      button.setAttribute('aria-pressed', String(dark));
+      button.setAttribute('aria-label', dark ? 'Switch to light theme' : 'Switch to dark theme');
+      var label = button.querySelector('[data-theme-label]');
+      if (label) label.textContent = 'theme: ' + (dark ? 'dark' : 'light');
+    });
+    if (persist) {
+      explicitTheme = dark ? 'dark' : 'light';
+      try { window.localStorage.setItem('hazem-theme', explicitTheme); } catch (e) {}
+    }
+  };
+  applyTheme(currentTheme(), false);
+  themeControls.forEach(function (button) {
+    button.addEventListener('click', function () { applyTheme(currentTheme() === 'dark' ? 'light' : 'dark', true); });
+  });
+  var followSystemTheme = function (event) { if (!explicitTheme) applyTheme(event.matches ? 'dark' : 'light', false); };
+  if (themeMedia.addEventListener) themeMedia.addEventListener('change', followSystemTheme);
+  else if (themeMedia.addListener) themeMedia.addListener(followSystemTheme);
+
   /* ------------------------------------------------------------ menu (phones; state)
      Chromium opens the dialog natively through commandfor/command; other browsers get the same call
      here. Esc and the close button (form method="dialog") are native. Focus returns to the opener. */
@@ -114,7 +151,7 @@
     var info = function (k) {
       var a = links[k];
       return { a: a, w: +a.getAttribute('data-w'), h: +a.getAttribute('data-h'), full: a.getAttribute('data-webp') || a.getAttribute('href'),
-        title: a.getAttribute('data-title') || '', alt: a.getAttribute('data-alt') || '' };
+        title: a.getAttribute('data-title') || '', alt: a.getAttribute('data-alt') || '', drawing: a.classList.contains('nw--drawing') };
     };
     var fit = function (it) {
       var r = stage.getBoundingClientRect();
@@ -178,7 +215,7 @@
       var old = img, prev = cur; cur = k; resetToggle();
       if (old) { old.style.position = ''; old.style.transform = tf(fit(info(prev))); }   // leaving actual size: fade out from its fitted place
       stage.scrollLeft = 0; stage.scrollTop = 0;
-      var it = info(k); img = makeImg(it); img.style.transform = tf(fit(it)); stage.appendChild(img); label();
+      var it = info(k); stage.classList.toggle('is-inspection', it.drawing); img = makeImg(it); img.style.transform = tf(fit(it)); stage.appendChild(img); label();
       if (reduce.matches || !img.animate) { if (old) old.remove(); return; }
       img.animate([{ opacity: 0, translate: (dir * 24) + 'px 0' }, { opacity: 1, translate: '0 0' }], { duration: 280, easing: css('--ease-out') });
       if (old) {
@@ -191,6 +228,7 @@
       stage.textContent = '';
       viewer.showModal();
       var it = info(k);
+      stage.classList.toggle('is-inspection', it.drawing);
       img = makeImg(it); stage.appendChild(img); label();
       busy = true; viewer.classList.add('is-moving');
       animate(img, sourceRect(it), fit(it)).then(function () { busy = false; viewer.classList.remove('is-moving'); });
@@ -217,7 +255,7 @@
     vClose.addEventListener('click', function (e) { e.preventDefault(); closeViewer(); });
     viewer.addEventListener('cancel', function (e) { e.preventDefault(); closeViewer(); });
     viewer.addEventListener('close', function () {
-      stage.textContent = ''; img = null; cur = -1; busy = false;
+      stage.textContent = ''; stage.classList.remove('is-inspection'); img = null; cur = -1; busy = false;
       if (returnTo) { var r = returnTo.getBoundingClientRect(); returnTo.focus({ preventScroll: r.bottom > 0 && r.top < window.innerHeight }); returnTo = null; }
     });
     vPrev.addEventListener('click', function () { show(cur - 1, -1); });

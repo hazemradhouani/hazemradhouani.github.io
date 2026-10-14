@@ -46,9 +46,10 @@ export function planRow(items, { max = 'full', maxH = MAX_H } = {}) {
 export function image(rel, { alt, sz, prefix = '', priority = false, zoom = false, title = '', vt = null }) {
   const { w, h } = dims(rel);
   const style = `--nw: ${w}px${vt ? `; view-transition-name: ${vt}` : ''}`;
-  if (!zoom) return picture(rel, { alt, sizes: sz, prefix, priority, cls: 'nw', style });
+  const cls = `nw${rel.startsWith('images/cut/') ? ' nw--drawing' : ''}`;
+  if (!zoom) return picture(rel, { alt, sizes: sz, prefix, priority, cls, style });
   const big = largest(rel, prefix);
-  return html`<a class="zoom-link nw" style="${style}" href="${prefix}${rel}" data-viewer data-title="${title}" data-alt="${alt}" data-w="${w}" data-h="${h}" data-webp="${big.webp}" data-avif="${big.avif}"><span class="vh">Open full size: ${title || alt}</span>${picture(rel, { alt, sizes: sz, prefix, priority })}</a>`;
+  return html`<a class="zoom-link ${cls}" style="${style}" href="${prefix}${rel}" data-viewer data-title="${title}" data-alt="${alt}" data-w="${w}" data-h="${h}" data-webp="${big.webp}" data-avif="${big.avif}"><span class="vh">Open full size: ${title || alt}</span>${picture(rel, { alt, sizes: sz, prefix, priority })}</a>`;
 }
 
 // a row of images sharing one height; `stack`: one per line on phones (drawings, or more than two).

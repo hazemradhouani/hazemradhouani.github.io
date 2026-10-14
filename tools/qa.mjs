@@ -1,16 +1,20 @@
 // Run: npm run qa  (needs the local server: npm run serve)
 // QA harness: every page at six widths. Overflow, broken images, console errors, tiny text,
 // small targets, and axe-core (WCAG 2.0/2.1/2.2 A+AA) at 375 and 1440. Field gates (D39): no image
-// cropped or enlarged, every block edge on a grid line, cutout corners transparent, no background
-// colour outside the tokens, and every content string present in its page.
+// cropped or enlarged, every block edge on a grid line, cutout corners/edges/detail verified, no
+// background colour outside the tokens, and every content string present in its page.
 // Usage: node qa.mjs [base] [--shots] [--only=<path part>]
 import { chromium } from 'playwright-core';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { inspectCutoutRgba } from './lib/cutout-alpha.mjs';
 const here = path.dirname(fileURLToPath(import.meta.url));
 const REPO = path.join(here, '..');
-const BASE = process.argv.slice(2).find((a) => !a.startsWith('--')) || 'http://127.0.0.1:8090/portfolio/';
+const ARGS = process.argv.slice(2);
+const BASE = ARGS.find((a) => a.startsWith('--base='))?.slice('--base='.length)
+  || ARGS.find((a) => !a.startsWith('--'))
+  || 'http://127.0.0.1:8090/portfolio/';
 fs.mkdirSync(path.join(here, '.cache'), { recursive: true });
 const SHOTS = process.argv.includes('--shots');
 const ONLY = process.argv.find((a) => a.startsWith('--only='))?.slice(7);
@@ -19,7 +23,7 @@ let gateFails = 0;
 /* ---- content coverage: every content string (not paths, ids or sources) appears in its built page */
 {
   const rd = (p) => JSON.parse(fs.readFileSync(path.join(REPO, p), 'utf8'));
-  const SKIP = new Set(['source', 'sources', 'og', '$comment', 'id', 'slug', 'group', 'filters', 'order', 'kind', 'size', 'fit', 'lang', 'film',
+  const SKIP = new Set(['source', 'sources', 'og', '$comment', 'id', 'slug', 'group', 'filters', 'order', 'kind', 'size', 'fit', 'lang', 'film', 'knowsAbout',
     'project', 'coverSource', 'abstractSource', 'date', 'action', 'href', 'case']);
   const strings = (v, key = '', out = []) => {
     if (SKIP.has(key) || /Source$/.test(key)) return out;
@@ -48,21 +52,94 @@ let urls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1].replace
 urls.push(BASE + '404.html', BASE + 'does-not-exist/x.html');
 if (ONLY) urls = urls.filter((u) => u.includes(ONLY));
 const WIDTHS = [320, 375, 768, 1024, 1440, 1920];
+const THEMES = ['light', 'dark'];
+const cutoutInspectorSource = inspectCutoutRgba.toString();
 const browser = await chromium.launch({ executablePath: process.env.CHROME_PATH || "C:/Program Files/Google/Chrome/Application/chrome.exe", headless: true });
+
+// These interaction checks run once per QA execution rather than once per page. The page loop below
+// already proves both resolved schemes at every URL and width; this proves the state-changing path.
+async function runThemeInteractions() {
+  const failures = [];
+  const ctx = await browser.newContext({ viewport: { width: 1024, height: 900 }, colorScheme: 'light', reducedMotion: 'reduce' });
+  const page = await ctx.newPage();
+  const verify = async (expected, where) => {
+    const state = await page.evaluate(() => ({
+      theme: document.documentElement.getAttribute('data-theme'),
+      saved: (() => { try { return localStorage.getItem('hazem-theme'); } catch (e) { return 'storage-error'; } })(),
+      chrome: document.getElementById('theme-color')?.getAttribute('content'),
+      controls: [...document.querySelectorAll('[data-theme-toggle]')].map((b) => ({ pressed: b.getAttribute('aria-pressed'), label: b.getAttribute('aria-label'), text: b.querySelector('[data-theme-label]')?.textContent?.trim() }))
+    }));
+    if (state.theme !== expected) failures.push(`${where}: theme ${state.theme}, expected ${expected}`);
+    if (state.saved !== expected) failures.push(`${where}: stored ${state.saved}, expected ${expected}`);
+    if (state.chrome !== (expected === 'dark' ? '#121311' : '#FFFFFF')) failures.push(`${where}: theme-color ${state.chrome}`);
+    for (const control of state.controls) {
+      if (control.pressed !== String(expected === 'dark')) failures.push(`${where}: unsynchronised aria-pressed`);
+      if (control.label !== (expected === 'dark' ? 'Switch to light theme' : 'Switch to dark theme')) failures.push(`${where}: incorrect control action`);
+      if (control.text !== `theme: ${expected}`) failures.push(`${where}: incorrect visible control label`);
+    }
+  };
+  try {
+    await page.goto(BASE + 'index.html', { waitUntil: 'load' });
+    await page.locator('[data-theme-scope="header"]').focus();
+    await page.locator('[data-theme-scope="header"]').press('Enter');
+    await verify('dark', 'header keyboard toggle');
+    await page.reload({ waitUntil: 'load' });
+    await verify('dark', 'persistence through reload');
+    await page.goto(BASE + 'about.html', { waitUntil: 'load' });
+    await verify('dark', 'persistence through navigation');
+  } catch (e) { failures.push(`header/persistence interaction: ${e.message}`); }
+  await ctx.close();
+
+  const mobile = await browser.newContext({ viewport: { width: 375, height: 812 }, colorScheme: 'dark', reducedMotion: 'reduce' });
+  const mobilePage = await mobile.newPage();
+  try {
+    await mobilePage.goto(BASE + 'index.html', { waitUntil: 'load' });
+    await mobilePage.locator('.menu-button').first().click();
+    await mobilePage.locator('#menu[open] [data-theme-scope="menu"]').focus();
+    await mobilePage.locator('#menu[open] [data-theme-scope="menu"]').press('Enter');
+    const state = await mobilePage.evaluate(() => ({ theme: document.documentElement.getAttribute('data-theme'), all: [...document.querySelectorAll('[data-theme-toggle]')].every((b) => b.getAttribute('aria-pressed') === 'false') }));
+    if (state.theme !== 'light' || !state.all) failures.push('mobile menu keyboard toggle did not synchronise light preference');
+  } catch (e) { failures.push(`mobile menu interaction: ${e.message}`); }
+  await mobile.close();
+  return failures;
+}
+
+async function runThemeFallback() {
+  const failures = [];
+  const ctx = await browser.newContext({ viewport: { width: 375, height: 812 }, colorScheme: 'dark', reducedMotion: 'reduce' });
+  await ctx.addInitScript(() => {
+    try { Storage.prototype.getItem = function () { throw new Error('storage blocked for QA'); }; } catch (e) {}
+  });
+  const page = await ctx.newPage();
+  try {
+    await page.goto(BASE + 'index.html', { waitUntil: 'load' });
+    const state = await page.evaluate(() => ({ theme: document.documentElement.getAttribute('data-theme'), chrome: document.getElementById('theme-color')?.getAttribute('content') }));
+    if (state.theme !== 'dark' || state.chrome !== '#121311') failures.push(`storage fallback resolved ${state.theme}/${state.chrome}, expected dark/#121311`);
+  } catch (e) { failures.push(`storage fallback: ${e.message}`); }
+  await ctx.close();
+  return failures;
+}
+
+const themeWorkflowFailures = [...await runThemeInteractions(), ...await runThemeFallback()];
+gateFails += themeWorkflowFailures.length;
+if (themeWorkflowFailures.length) console.log(`FAIL theme interaction/fallback: ${themeWorkflowFailures.join(' | ')}`);
+else console.log('ok   theme interaction/fallback: keyboard, persistence, navigation, menu and storage fallback');
 const report = [];
 for (const url of urls) {
   const name = url.replace(BASE, '') || 'index';
-  const row = { page: name, overflow: [], brokenImgs: [], console: [], small: [], targets: [], axe: {}, crop: [], upscale: [], grid: [], palette: [], alpha: [] };
+  const row = { page: name, overflow: [], brokenImgs: [], console: [], small: [], targets: [], axe: {}, crop: [], upscale: [], grid: [], palette: [], alpha: [], fringe: [], theme: [] };
   for (const w of WIDTHS) {
-    const ctx = await browser.newContext({ viewport: { width: w, height: w < 768 ? 812 : 900 }, deviceScaleFactor: 1 });
+    for (const theme of THEMES) {
+    const ctx = await browser.newContext({ viewport: { width: w, height: w < 768 ? 812 : 900 }, deviceScaleFactor: 1, colorScheme: theme, reducedMotion: 'reduce' });
+    await ctx.addInitScript((chosenTheme) => { try { localStorage.setItem('hazem-theme', chosenTheme); } catch (e) {} }, theme);
     const page = await ctx.newPage();
-    page.on('console', (m) => { if (m.type() === 'error' && !(url.includes('does-not-exist') && m.text().includes('status of 404'))) row.console.push(`${w}: ${m.text().slice(0, 140)}`); });
-    page.on('pageerror', (e) => row.console.push(`${w}: ${e.message.slice(0, 140)}`));
+    page.on('console', (m) => { if (m.type() === 'error' && !(url.includes('does-not-exist') && m.text().includes('status of 404'))) row.console.push(`${theme}/${w}: ${m.text().slice(0, 140)}`); });
+    page.on('pageerror', (e) => row.console.push(`${theme}/${w}: ${e.message.slice(0, 140)}`));
     await page.goto(url, { waitUntil: 'load' });
     await page.evaluate(async () => { for (let y = 0; y < document.body.scrollHeight; y += 700) { window.scrollTo(0, y); await new Promise((r) => setTimeout(r, 40)); } window.scrollTo(0, 0); });
     await page.waitForTimeout(400);
-    const r = await page.evaluate(() => {
-      const de = document.documentElement; const out = { ow: de.scrollWidth - de.clientWidth, offenders: [], broken: [], small: [], targets: [] };
+    const r = await page.evaluate((theme) => {
+      const de = document.documentElement; const out = { ow: de.scrollWidth - de.clientWidth, offenders: [], broken: [], small: [], targets: [], theme: [] };
       if (out.ow > 0) for (const el of document.querySelectorAll('body *')) { const b = el.getBoundingClientRect(); if (b.right > de.clientWidth + 1 && b.width > 0) { out.offenders.push(`${el.tagName.toLowerCase()}.${[...el.classList].join('.')}`); if (out.offenders.length > 4) break; } }
       for (const img of document.images) if (img.complete && img.naturalWidth === 0) out.broken.push(img.getAttribute('src'));
       const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
@@ -93,22 +170,40 @@ for (const url of urls) {
           if (!on(kb.left) || !on(kb.right)) out.grid.push(`${k.tagName.toLowerCase()}.${[...k.classList].join('.')} ${Math.round(kb.left)}-${Math.round(kb.right)}`);
         }
       }
-      // palette: no background colour outside the tokens (white field, ink, the translucent bar)
-      const ok = new Set(['rgba(0, 0, 0, 0)', 'rgb(255, 255, 255)', 'rgb(17, 17, 17)', 'rgba(255, 255, 255, 0.86)']);
+      // palette: no background colour outside the active Field tokens. Rendered scenes are skipped;
+      // they carry their authored colour and do not define interface surfaces.
+      const ok = theme === 'dark'
+        ? new Set(['rgba(0, 0, 0, 0)', 'rgb(18, 19, 17)', 'rgb(247, 245, 239)', 'rgb(69, 70, 63)', 'rgba(18, 19, 17, 0.88)'])
+        : new Set(['rgba(0, 0, 0, 0)', 'rgb(255, 255, 255)', 'rgb(17, 17, 17)', 'rgba(255, 255, 255, 0.86)']);
       if (innerWidth === 375 || innerWidth === 1440) for (const el of [document.documentElement, document.body, ...document.querySelectorAll('body *')]) {
         if (el.closest('video, svg')) continue;
         const c = getComputedStyle(el).backgroundColor; if (!ok.has(c)) out.palette.push(`${el.tagName.toLowerCase()}.${[...el.classList].join('.')} ${c}`);
       }
+      if (de.getAttribute('data-theme') !== theme) out.theme.push(`resolved ${de.getAttribute('data-theme') || 'none'}, expected ${theme}`);
+      if (getComputedStyle(de).colorScheme !== theme) out.theme.push(`color-scheme ${getComputedStyle(de).colorScheme}, expected ${theme}`);
+      const controls = [...document.querySelectorAll('[data-theme-toggle]')];
+      if (controls.length !== 3) out.theme.push(`theme controls ${controls.length}, expected 3`);
+      else for (const control of controls) {
+        const expectedPressed = String(theme === 'dark');
+        const expectedAction = theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme';
+        const label = control.querySelector('[data-theme-label]')?.textContent?.trim();
+        if (control.getAttribute('aria-pressed') !== expectedPressed) out.theme.push(`${control.dataset.themeScope} aria-pressed ${control.getAttribute('aria-pressed')}`);
+        if (control.getAttribute('aria-label') !== expectedAction) out.theme.push(`${control.dataset.themeScope} aria-label ${control.getAttribute('aria-label')}`);
+        if (label !== `theme: ${theme}`) out.theme.push(`${control.dataset.themeScope} label ${label}`);
+      }
       return out;
-    });
-    row.crop.push(...r.crop.map((s) => `${w}: ${s}`)); row.upscale.push(...r.upscale.map((s) => `${w}: ${s}`));
-    row.grid.push(...r.grid.map((s) => `${w}: ${s}`)); row.palette.push(...r.palette.map((s) => `${w}: ${s}`));
+    }, theme);
+    row.crop.push(...r.crop.map((s) => `${theme}/${w}: ${s}`)); row.upscale.push(...r.upscale.map((s) => `${theme}/${w}: ${s}`));
+    row.grid.push(...r.grid.map((s) => `${theme}/${w}: ${s}`)); row.palette.push(...r.palette.map((s) => `${theme}/${w}: ${s}`)); row.theme.push(...r.theme.map((s) => `${theme}/${w}: ${s}`));
     // alpha: every cutout keeps a transparent corner (decoded in the page, at 1440 only)
     // (drawings declared full-bleed in tools/cutout.json, with a reason, have no paper inside their frame)
     const fullBleed = Object.keys(JSON.parse(fs.readFileSync(path.join(REPO, 'tools/cutout.json'), 'utf8')).fullBleed || {})
       .map((s) => s.split('/').pop().replace(/\.\w+$/, ''));
-    if (w === 1440) row.alpha.push(...await page.evaluate(async (fullBleed) => {
-      const bad = [];
+    if (w === 1440) {
+      const cutout = await page.evaluate(async ({ fullBleed, inspectorSource }) => {
+        // The function is serialised from the tested local helper rather than duplicated here.
+        const inspectCutoutRgba = Function(`return (${inspectorSource});`)();
+        const bad = []; const fringe = [];
       for (const img of document.querySelectorAll('main img[src*="images/cut/"], main img[src*="thesis-book"]')) {
         if (fullBleed.some((s) => img.getAttribute('src').includes(s))) continue;
         img.loading = 'eager';
@@ -118,32 +213,42 @@ for (const url of urls) {
         const x = c.getContext('2d'); x.drawImage(img, 0, 0);
         const a = [[0, 0], [c.width - 1, 0], [0, c.height - 1], [c.width - 1, c.height - 1]].map(([i, j]) => x.getImageData(i, j, 1, 1).data[3]);
         if (Math.min(...a) > 0) bad.push(`${img.currentSrc.split('/').pop()} corners alpha ${a.join(',')}`);
+        if (!img.getAttribute('src').includes('images/cut/')) continue;
+        const check = inspectCutoutRgba(x.getImageData(0, 0, c.width, c.height).data, c.width, c.height);
+        if (check.opaqueWhiteEdge > 3) fringe.push(`${img.currentSrc.split('/').pop()} opaque white edge samples ${check.opaqueWhiteEdge}`);
+        if (!check.hasDetail) fringe.push(`${img.currentSrc.split('/').pop()} no partial-alpha detail`);
       }
-      return bad;
-    }, fullBleed));
-    if (r.ow > 0) row.overflow.push(`${w}px +${r.ow}: ${r.offenders.join(', ')}`);
-    row.brokenImgs.push(...r.broken.map((s) => `${w}: ${s}`));
-    row.small.push(...r.small.slice(0, 3).map((s) => `${w}: ${s}`));
-    row.targets.push(...r.targets.slice(0, 3).map((s) => `${w}: ${s}`));
+        return { bad, fringe };
+      }, { fullBleed, inspectorSource: cutoutInspectorSource });
+      row.alpha.push(...cutout.bad.map((s) => `${theme}/${w}: ${s}`));
+      row.fringe.push(...cutout.fringe.map((s) => `${theme}/${w}: ${s}`));
+    }
+    if (r.ow > 0) row.overflow.push(`${theme}/${w}px +${r.ow}: ${r.offenders.join(', ')}`);
+    row.brokenImgs.push(...r.broken.map((s) => `${theme}/${w}: ${s}`));
+    row.small.push(...r.small.slice(0, 3).map((s) => `${theme}/${w}: ${s}`));
+    row.targets.push(...r.targets.slice(0, 3).map((s) => `${theme}/${w}: ${s}`));
     if (w === 375 || w === 1440) {
       await page.addScriptTag({ content: axeSrc });
       const res = await page.evaluate(async () => (await window.axe.run(document, { runOnly: ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa'] })).violations.map((v) => `${v.id} (${v.impact}) x${v.nodes.length}: ${v.nodes[0].target.join(' ')}`));
-      row.axe[w] = res;
+      row.axe[`${theme}-${w}`] = res;
     }
     if (SHOTS && (w === 375 || w === 1440)) { await page.evaluate(() => { document.querySelectorAll("img[loading=lazy]").forEach((i) => { i.loading = "eager"; }); document.querySelectorAll(".rv").forEach((e) => e.classList.add("is-in")); }); await page.waitForLoadState("networkidle"); await page.waitForTimeout(900); }
-    if (SHOTS && (w === 375 || w === 1440)) await page.screenshot({ path: path.join(here, '.cache', `${name.replace(/[\/.]/g, '_')}-${w}.jpg`), type: 'jpeg', quality: 60, fullPage: true });
+    if (SHOTS && (w === 375 || w === 1440)) await page.screenshot({ path: path.join(here, '.cache', `${name.replace(/[\/.]/g, '_')}-${theme}-${w}.jpg`), type: 'jpeg', quality: 60, fullPage: true });
     await ctx.close();
+    }
   }
-  for (const k of ['brokenImgs', 'small', 'targets', 'console', 'crop', 'upscale', 'grid', 'palette', 'alpha']) row[k] = [...new Set(row[k])];
+  for (const k of ['brokenImgs', 'small', 'targets', 'console', 'crop', 'upscale', 'grid', 'palette', 'alpha', 'fringe', 'theme']) row[k] = [...new Set(row[k])];
   report.push(row);
-  const gates = row.crop.length + row.upscale.length + row.grid.length + row.palette.length + row.alpha.length;
+  const gates = row.crop.length + row.upscale.length + row.grid.length + row.palette.length + row.alpha.length + row.fringe.length + row.theme.length;
   gateFails += gates;
-  const bad = gates + row.overflow.length + row.brokenImgs.length + row.console.length + (row.axe[375]?.length || 0) + (row.axe[1440]?.length || 0);
+  const axeBad = Object.values(row.axe).reduce((n, items) => n + items.length, 0);
+  const bad = gates + row.overflow.length + row.brokenImgs.length + row.console.length + axeBad;
   const list = (k, n = 4) => (row[k].length ? ` | ${k} (${row[k].length}) ${row[k].slice(0, n).join(' ; ')}` : '');
-  console.log(`${bad ? 'FAIL' : 'ok  '} ${name}${row.overflow.length ? ' | overflow ' + row.overflow.join(' ; ') : ''}${list('brokenImgs')}${list('console', 2)}${row.axe[375]?.length ? ' | axe375 ' + row.axe[375].join(' ; ') : ''}${row.axe[1440]?.length ? ' | axe1440 ' + row.axe[1440].join(' ; ') : ''}${list('crop')}${list('upscale')}${list('grid')}${list('palette')}${list('alpha')}${list('small', 3)}${list('targets', 3)}`);
+  const axeList = Object.entries(row.axe).filter(([, items]) => items.length).map(([key, items]) => ` | axe${key} ${items.join(' ; ')}`).join('');
+  console.log(`${bad ? 'FAIL' : 'ok  '} ${name}${row.overflow.length ? ' | overflow ' + row.overflow.join(' ; ') : ''}${list('brokenImgs')}${list('console', 2)}${axeList}${list('crop')}${list('upscale')}${list('grid')}${list('palette')}${list('alpha')}${list('fringe')}${list('theme')}${list('small', 3)}${list('targets', 3)}`);
 }
 fs.writeFileSync(path.join(here, '.cache', 'qa-report.json'), JSON.stringify(report, null, 2));
 await browser.close();
-console.log(gateFails ? `Field gates: ${gateFails} failure(s)` : 'Field gates: all pass (crop, upscale, grid, palette, alpha, content coverage)');
-const failed = report.some((r) => r.overflow.length || r.brokenImgs.length || r.console.length || r.axe[375]?.length || r.axe[1440]?.length);
+console.log(gateFails ? `Field gates: ${gateFails} failure(s)` : 'Field gates: all pass (crop, upscale, grid, palette, alpha/fringe/detail, content coverage)');
+const failed = themeWorkflowFailures.length || report.some((r) => r.overflow.length || r.brokenImgs.length || r.console.length || Object.values(r.axe).some((items) => items.length));
 if (gateFails || failed) process.exitCode = 1;
