@@ -114,11 +114,12 @@ test('the importer copies an approved no-crop master byte-for-byte without chang
   assert.deepEqual(fs.readFileSync(path.join(root, ...source.split('/'))), bytes);
 });
 
-test('masters are capped by kind: renders at 2560 px, drawings at 4096 px and 6 MP, never enlarged (D51)', () => {
+test('masters are capped at 2560 px, drawings also at 6 MP, never enlarged (D51, D55)', () => {
   assert.deepEqual(targetSize(5760, 3240, 'jpg'), { width: 2560, height: 1440, scaled: true });
   assert.deepEqual(targetSize(4060, 5413, 'jpg'), { width: 1920, height: 2560, scaled: true });
-  assert.deepEqual(targetSize(9038, 1342, 'png'), { width: 4096, height: 608, scaled: true });
-  assert.deepEqual(targetSize(14044, 9934, 'png'), { width: 2912, height: 2060, scaled: true });
+  assert.deepEqual(targetSize(9038, 1342, 'png'), { width: 2560, height: 380, scaled: true });
+  assert.deepEqual(targetSize(14044, 9934, 'png'), { width: 2560, height: 1811, scaled: true });
+  assert.deepEqual(targetSize(3000, 3000, 'png'), { width: 2449, height: 2449, scaled: true });
   assert.deepEqual(targetSize(800, 600, 'jpg'), { width: 800, height: 600, scaled: false });
   assert.deepEqual(targetSize(3000, 1000, 'jpg', 1200), { width: 1200, height: 400, scaled: true });
 });
@@ -151,4 +152,18 @@ test('the importer refuses to overwrite an output whose bytes differ from the de
     () => importMedia({ root, audit, manifest: media }),
     /refusing to overwrite/u,
   );
+});
+
+test('a crop of a 4:2:0 JPEG keeps its exact odd size (cropped in RGB, not on chroma pairs)', () => {
+  const root = tempDir();
+  const source = 'Images HQ/Demo/sheet.jpg';
+  const sourceFile = path.join(root, ...source.split('/'));
+  fs.mkdirSync(path.dirname(sourceFile), { recursive: true });
+  execFileSync('ffmpeg', ['-v', 'error', '-f', 'lavfi', '-i', 'testsrc2=size=900x600', '-pix_fmt', 'yuvj420p', '-frames:v', '1', sourceFile]);
+  const digest = sha(fs.readFileSync(sourceFile));
+  const audit = approvedAudit(source, digest);
+  Object.assign(audit.assets[0], { width: 900, height: 600 });
+  importMedia({ root, audit, manifest: manifest(source, digest, { output: 'images/demo/odd.png', crop: { x: 11, y: 7, width: 301, height: 205 } }) });
+  const out = execFileSync('ffprobe', ['-v', 'error', '-select_streams', 'v:0', '-show_entries', 'stream=width,height', '-of', 'csv=p=0', path.join(root, 'images', 'demo', 'odd.png')]).toString().trim();
+  assert.equal(out, '301,205');
 });

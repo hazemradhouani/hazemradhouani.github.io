@@ -7,7 +7,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
-import { setRoot, dims, optStem, variants, hasAlpha } from './lib/images.mjs';
+import { setRoot, dims, optStem, variants, hasAlpha, cutFor } from './lib/images.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 setRoot(ROOT);
@@ -19,7 +19,9 @@ const only = process.argv.slice(2).filter((a) => !a.startsWith('--'));
 
 const walk = (dir) => fs.readdirSync(path.join(ROOT, dir), { withFileTypes: true }).flatMap((e) =>
   e.isDirectory() ? walk(`${dir}/${e.name}`) : [`${dir}/${e.name}`]);
-const sources = walk('images').filter((f) => /\.(jpe?g|png)$/i.test(f) && !SKIP.test(f) && (!only.length || only.some((o) => f.startsWith(o))));
+// a drawing master that has a cutout is never served (pages show the cutout), so it gets no derivatives
+const sources = walk('images').filter((f) => /\.(jpe?g|png)$/i.test(f) && !SKIP.test(f) && (!only.length || only.some((o) => f.startsWith(o)))
+  && (f.startsWith('images/cut/') || !fs.existsSync(path.join(ROOT, cutFor(f)))));
 
 let made = 0;
 for (const rel of sources) {
@@ -43,9 +45,15 @@ for (const rel of sources) {
   if (!todo.length) continue;
   fs.mkdirSync(path.dirname(stem), { recursive: true });
   for (const x of todo) {
-    const scale = x === w ? null : `scale=${x}:-2:flags=lanczos`;
-    if (!alpha) execFileSync('ffmpeg', ['-v', 'error', '-y', '-i', path.join(ROOT, rel), '-vf', scale ? `${scale},format=yuv420p` : 'format=yuv420p', '-c:v', 'libaom-av1', '-still-picture', '1', '-crf', '30', '-cpu-used', '4', `${stem}-${x}.avif`]);
-    execFileSync('ffmpeg', ['-v', 'error', '-y', '-i', path.join(ROOT, rel), '-vf', scale || 'null', '-c:v', 'libwebp', '-quality', alpha ? '80' : '78', `${stem}-${x}.webp`]);
+    // WebP takes any size, so its height is exact (-1): an even-only height (-2) stretched thin drawings
+    // by up to 1.2%. AVIF stays 4:2:0, which needs an even height; it serves only opaque images.
+    // Alpha is scaled premultiplied: straight-alpha lanczos bled the clear pixels' colour into the
+    // antialiased edge (measured: edge ink 84.8 instead of 0, a pale rim on every smaller cutout).
+    const webpScale = x === w ? 'null' : alpha
+      ? `format=gbrap,premultiply=inplace=1,scale=${x}:-1:flags=lanczos,unpremultiply=inplace=1`
+      : `scale=${x}:-1:flags=lanczos`;
+    if (!alpha) execFileSync('ffmpeg', ['-v', 'error', '-y', '-i', path.join(ROOT, rel), '-vf', x === w ? 'format=yuv420p' : `scale=${x}:-2:flags=lanczos,format=yuv420p`, '-c:v', 'libaom-av1', '-still-picture', '1', '-crf', '30', '-cpu-used', '4', `${stem}-${x}.avif`]);
+    execFileSync('ffmpeg', ['-v', 'error', '-y', '-i', path.join(ROOT, rel), '-vf', webpScale, '-c:v', 'libwebp', '-quality', alpha ? '80' : '78', `${stem}-${x}.webp`]);
     made++;
   }
   console.log(`${rel} (${w}px${alpha ? ', alpha: WebP only' : ''}): ${todo.join(', ')}`);

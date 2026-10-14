@@ -25,7 +25,8 @@ let gateFails = 0;
 {
   const rd = (p) => JSON.parse(fs.readFileSync(path.join(REPO, p), 'utf8'));
   const SKIP = new Set(['source', 'sources', 'og', '$comment', 'id', 'slug', 'group', 'filters', 'order', 'kind', 'size', 'fit', 'lang', 'film', 'knowsAbout',
-    'project', 'coverSource', 'abstractSource', 'date', 'action', 'href', 'case']);
+    'project', 'coverSource', 'abstractSource', 'date', 'action', 'href', 'case',
+    'at', 'align', 'swatch']);  // label anchors, alignment and legend colours are not visible copy
   const strings = (v, key = '', out = []) => {
     if (SKIP.has(key) || /Source$/.test(key)) return out;
     if (typeof v === 'string') { if (v.length > 2 && !/^(images|videos|files|projects)\/|\.(jpe?g|png|webp|mp4)$/i.test(v)) out.push(v); }
@@ -158,7 +159,7 @@ for (const url of urls) {
         if (getComputedStyle(img).objectFit === 'cover') out.crop.push(`${src} object-fit: cover`);
         if (b.width > w + 1) out.upscale.push(`${src} ${Math.round(b.width)}px > ${w}px`);
         // the file actually served (a derivative) must have the master's ratio, or the browser stretches it
-        if (img.complete && img.naturalWidth && Math.abs(img.naturalWidth / img.naturalHeight - w / h) / (w / h) > 0.02) out.crop.push(`${img.currentSrc.split('/').pop()} served ratio ${img.naturalWidth}x${img.naturalHeight} vs ${w}x${h}`);
+        if (img.complete && img.naturalWidth && Math.abs(img.naturalWidth / img.naturalHeight - w / h) / (w / h) > Math.max(0.02, 1.01 / Math.min(img.naturalWidth, img.naturalHeight))) out.crop.push(`${img.currentSrc.split('/').pop()} served ratio ${img.naturalWidth}x${img.naturalHeight} vs ${w}x${h}`);
       }
       // grid: every block placed on a .g sits between column lines (1px tolerance)
       for (const g of document.querySelectorAll('.g')) {
@@ -188,8 +189,8 @@ for (const url of urls) {
         const kind = ['invert-accent', 'invert', 'field', 'object'].find((k) => el.classList.contains(`nw--${k}`)) || 'none';
         const name = (img.getAttribute('src') || '').split('/').pop();
         if (theme === 'light' && f !== 'none') out.theme.push(`${name} filtered in light: ${f}`);
-        if (theme === 'dark' && kind.startsWith('invert') && !/invert(0.965)/u.test(f)) out.theme.push(`${name} ${kind} not inverted in dark: ${f}`);
-        if (theme === 'dark' && kind === 'invert-accent' && !/hue-rotate(180deg)/u.test(f)) out.theme.push(`${name} invert-accent without hue-rotate: ${f}`);
+        if (theme === 'dark' && kind.startsWith('invert') && !/invert\(0\.965\)/u.test(f)) out.theme.push(`${name} ${kind} not inverted in dark: ${f}`);
+        if (theme === 'dark' && kind === 'invert-accent' && !/hue-rotate\(180deg\)/u.test(f)) out.theme.push(`${name} invert-accent without hue-rotate: ${f}`);
         if (theme === 'dark' && kind === 'field' && bg !== 'rgb(247, 245, 239)') out.theme.push(`${name} field drawing without its inspection field: ${bg}`);
         if (theme === 'dark' && kind !== 'field' && bg !== 'rgba(0, 0, 0, 0)') out.theme.push(`${name} ${kind} drawing has a background: ${bg}`);
       }
@@ -250,7 +251,7 @@ for (const url of urls) {
           const ww = Math.min(c.width - x0, Math.ceil(lb.width * k)), hh = Math.min(c.height - y0, Math.ceil(lb.height * k));
           if (ww < 1 || hh < 1) continue;
           const d = x.getImageData(x0, y0, ww, hh).data; let inked = 0; for (let i = 3; i < d.length; i += 4) if (d[i] > 76) inked++;
-          if (inked / (ww * hh) > 0.02) fringe.push(`label "${it.textContent.trim()}" sits on the drawing (${(100 * inked / (ww * hh)).toFixed(1)}% ink beneath)`);
+          if (inked / (ww * hh) > 0.005) fringe.push(`label "${it.textContent.trim()}" sits on the drawing (${(100 * inked / (ww * hh)).toFixed(1)}% ink beneath)`);
         }
       }
         return { bad, fringe };

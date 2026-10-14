@@ -296,22 +296,28 @@
     min-width: 1.375rem; height: 1.375rem; display: grid; place-items: center; padding-inline: 0.25rem;
     background: var(--lab-ink); color: var(--lab-paper); font-family: var(--sans); font-weight: 600; font-size: var(--fs-label);
     line-height: 1; font-variant-numeric: tabular-nums; }
+  /* annotation is the drawing's secondary voice: Plex Sans in sentence case, as printed on the sheets,
+     narrower than the tracked capitals of titles so a label keeps to the space its original had */
   .lab__list { list-style: none; padding: 0; margin: var(--s3) 0 0; display: grid; gap: var(--s1); justify-items: start;
-    font-family: var(--sans); font-weight: 600; font-size: var(--fs-label); letter-spacing: var(--tr-caps); text-transform: uppercase; color: var(--ink); }
+    font-family: var(--sans); font-weight: 600; font-size: var(--fs-label); letter-spacing: 0.01em; line-height: 1.25; color: var(--ink); }
   .lab__item { display: flex; gap: var(--s2); align-items: baseline; }
   .lab__n { min-width: 1.5em; color: var(--ink-2); font-variant-numeric: tabular-nums; }
+  .lab__t br { display: none; }   /* a printed line break is kept only where the label stands in place */
   @container (min-width: 36rem) {
     .lab__pins { display: none; }
     .lab__list { position: absolute; inset: 0; margin: 0; display: block; pointer-events: none; color: var(--lab-ink);
       font-size: clamp(0.8125rem, 1.15cqi, 1rem); }
     .lab__item { position: absolute; left: var(--x); top: calc(var(--y) + var(--h) / 2); translate: 0 -50%; white-space: nowrap; }
-    .lab__item--end { left: auto; right: calc(100% - var(--x) - var(--w)); }
+    .lab__item--end { left: auto; right: calc(100% - var(--x) - var(--w)); text-align: end; }
     .lab__n { display: none; }
+    .lab__t br { display: initial; }
   }
   /* a legend printed on the sheet, re-set with the drawing's own colours */
   .legend { list-style: none; padding: 0; margin-top: var(--s3); display: flex; flex-wrap: wrap; justify-content: center;
     gap: var(--s2) var(--s5); font-size: var(--fs-cap); line-height: 1.4; color: var(--ink-2); }
   .legend li { display: inline-flex; align-items: center; gap: var(--s2); }
+  /* phones: one left-aligned column, centred as a block (the box itself stays on the grid lines) */
+  @media (max-width: 47.99rem) { .legend { display: grid; justify-content: center; justify-items: start; } }
   .legend__sw { width: 0.875rem; height: 0.875rem; flex: none; outline: 1px solid var(--line); outline-offset: 0; }
   .zoom-link { display: block; cursor: zoom-in; text-decoration: none; }
   .zoom-link:focus-visible { outline-offset: 6px; }

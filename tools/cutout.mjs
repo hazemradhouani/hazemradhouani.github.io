@@ -39,6 +39,8 @@ for (const f of fs.readdirSync(path.join(ROOT, 'content/projects'))) {
   }
 }
 for (const s of conf.extra || []) targets.add(s);
+// an image given settings in a cutout file is a target too (a recipe may precede its use in content)
+for (const s of Object.keys(conf.images || {})) if (fs.existsSync(path.join(ROOT, s))) targets.add(s);
 for (const s of Object.keys(conf.exclude || {})) targets.delete(s);
 // an excluded drawing must not keep an old cutout (the build would still use it)
 for (const s of Object.keys(conf.exclude || {})) {
@@ -92,6 +94,8 @@ function cut(rel, o) {
   let x0 = W, y0 = H, x1 = -1, y1 = -1;
   for (let p = 0; p < W * H; p++) if (px[p * 4 + 3] > 5) { const x = p % W, y = (p - x) / W; if (x < x0) x0 = x; if (x > x1) x1 = x; if (y < y0) y0 = y; if (y > y1) y1 = y; }
   if (x1 < 0) throw new Error(`${rel}: nothing left after keying`);
+  // a removed label keeps its place: the trim includes its box, so the HTML label has the room it had
+  for (const e of erased) { x0 = Math.min(x0, e.bbox.x); y0 = Math.min(y0, e.bbox.y); x1 = Math.max(x1, e.bbox.x + e.bbox.w - 1); y1 = Math.max(y1, e.bbox.y + e.bbox.h - 1); }
   const m = Math.round(Math.max(W, H) * o.margin);
   x0 = Math.max(0, x0 - m); y0 = Math.max(0, y0 - m); x1 = Math.min(W - 1, x1 + m); y1 = Math.min(H - 1, y1 + m);
   const cw = x1 - x0 + 1, chh = y1 - y0 + 1; const out = Buffer.alloc(cw * chh * 4);
@@ -123,6 +127,11 @@ const done = [];
 const failed = [];
 for (const rel of list) {
   const o = { ...DEF, ...(conf.images || {})[rel], fullBleed: rel in (conf.fullBleed || {}) };
+  // an HQ drawing master is a local intermediate (D55): without it, keep the committed cutout
+  if (!fs.existsSync(path.join(ROOT, rel))) {
+    if (fs.existsSync(path.join(ROOT, cutFor(rel))) && fs.existsSync(path.join(ROOT, sidecarFor(rel)))) { done.push({ rel, sidecar: JSON.parse(fs.readFileSync(path.join(ROOT, sidecarFor(rel)), 'utf8')) }); continue; }
+    failed.push(`${rel}: neither the master nor a committed cutout exists (run node tools/import-hq-media.mjs --write)`); continue;
+  }
   if (o.alpha === 'halo') throw new Error(`${rel}: the "halo" alpha mode is retired (D46, D50); remove it`);
   const dest = path.join(ROOT, cutFor(rel)); const side = path.join(ROOT, sidecarFor(rel));
   const prev = fs.existsSync(side) ? JSON.parse(fs.readFileSync(side, 'utf8')) : null;

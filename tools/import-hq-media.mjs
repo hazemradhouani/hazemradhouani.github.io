@@ -60,9 +60,11 @@ export function validateImportPlan({ root = ROOT, audit, manifest }) {
   return errors;
 }
 
-// Master caps (D51): a render (JPEG) at most 2560 px on its long edge covers a full-width hero at 2x;
-// a drawing (PNG) keeps up to 4096 px and 6 MP so its linework stays legible in the viewer.
-const CAPS = { jpg: { edge: 2560, pixels: Infinity }, png: { edge: 4096, pixels: 6e6 } };
+// Master caps (D51, D55): 2560 px on the long edge covers a full-width figure at 2x and is the most the
+// site ever serves (the viewer uses the largest derivative); a drawing (PNG) is also held to 6 MP.
+const CAPS = { jpg: { edge: 2560, pixels: Infinity }, png: { edge: 2560, pixels: 6e6 } };
+// bump when the rendering of a recipe changes, so cached outputs are rebuilt
+const RECIPE_VERSION = 2;
 const kindOf = (file) => (/\.png$/iu.test(file) ? 'png' : 'jpg');
 
 /** The size a master is written at: the source (or crop) scaled down to its cap, never enlarged. */
@@ -84,7 +86,8 @@ function makeDerivative({ source, output, crop, size }) {
   const sameKind = kindOf(source) === kindOf(output);
   if (!crop && !size.scaled && sameKind) return fs.readFileSync(source);
   const filters = [];
-  if (crop) filters.push(`crop=${crop.width}:${crop.height}:${crop.x}:${crop.y}`);
+  // full-resolution RGB first: a 4:2:0 JPEG is otherwise cropped on even pixels only
+  if (crop) filters.push('format=rgb24', `crop=${crop.width}:${crop.height}:${crop.x}:${crop.y}`);
   if (size.scaled) filters.push(`scale=${size.width}:${size.height}:flags=area`);
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'hq-import-'));
   const rendered = path.join(dir, path.basename(output));
@@ -123,7 +126,7 @@ export function importMedia({ root = ROOT, audit, manifest, check = false, repla
     const { source, output } = planEntry(media, auditBySource, root, index);
     const from = media.crop || auditBySource.get(media.source);
     const size = targetSize(from.width, from.height, kindOf(output), media.maxEdge);
-    const recipe = sha(JSON.stringify([media.sha256, media.crop, size, ENCODE[kindOf(output)], kindOf(media.source)]));
+    const recipe = sha(JSON.stringify([RECIPE_VERSION, media.sha256, media.crop, size, ENCODE[kindOf(output)], kindOf(media.source)]));
     const exists = fs.existsSync(output);
     if (exists && cache[media.output]?.recipe === recipe && cache[media.output].output === sha(fs.readFileSync(output))) { current++; continue; }
     const bytes = makeDerivative({ source, output, crop: media.crop, size });

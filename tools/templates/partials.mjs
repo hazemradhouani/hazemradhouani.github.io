@@ -78,7 +78,9 @@ export function row(items, { prefix, max = 'full', zoom = false, after = () => '
 // a series in equal cells, each image contained at or under its native width, standing on one line;
 // with `after`, each cell has a second row (caption, text) aligned across cells (subgrid, .cells--2)
 export function cells(items, { prefix, zoom = true, after = null, cls = '', scale = false }) {
-  const k = items.length; const n = k <= 4 ? k : k % 3 === 0 ? 3 : 4; const n8 = Math.min(n, after ? 3 : 2);
+  // long strips (elevations, sections: wider than 2.4:1) stack one per line at full width, still at one scale
+  const strips = items.every((it) => { const d = dims(it.rel); return d.w / d.h > 2.4; });
+  const k = items.length; const n = strips ? 1 : k <= 4 ? k : k % 3 === 0 ? 3 : 4; const n8 = Math.min(n, after ? 3 : 2);
   const maxW = Math.max(...items.map((it) => dims(it.rel).w));
   const out = items.map((it, i) => {
     const f = scale ? dims(it.rel).w / maxW : 1;   // one scale across a series: each drawing as wide as its pixels say
@@ -104,7 +106,7 @@ function labelsFor(rel, labels) {
 function labelled(pic, rel, labels) {
   const { w } = dims(rel);
   const pos = (l) => `--x: ${l.x}%; --y: ${l.y}%; --w: ${l.w}%; --h: ${l.h}%`;
-  return html`<div class="lab lab--${darkOf(rel)}" style="--nw: ${w}px">${pic}<div class="lab__pins" aria-hidden="true">${labels.map((l, i) => html`<span class="lab__pin" style="${pos(l)}">${i + 1}</span>`)}</div><ol class="lab__list" aria-label="Labels on the drawing">${labels.map((l, i) => html`<li class="lab__item${l.align === 'end' ? ' lab__item--end' : ''}" style="${pos(l)}"><span class="lab__n" aria-hidden="true">${i + 1}</span>${l.text}</li>`)}</ol></div>`;
+  return html`<div class="lab lab--${darkOf(rel)}" style="--nw: ${w}px">${pic}<div class="lab__pins" aria-hidden="true">${labels.map((l, i) => html`<span class="lab__pin" style="${pos(l)}">${i + 1}</span>`)}</div><ol class="lab__list" aria-label="Labels on the drawing">${labels.map((l, i) => html`<li class="lab__item${l.align === 'end' ? ' lab__item--end' : ''}" style="${pos(l)}"><span class="lab__n" aria-hidden="true">${i + 1}</span><span class="lab__t">${l.text.split('\n').map((t, j) => html`${j ? html` <br>` : ''}${t}`)}</span></li>`)}</ol></div>`;
 }
 // a legend printed on the sheet, re-set as a list with the drawing's own colours
 const legendOf = (f) => (f.legend?.length ? html`<ul class="legend s-narrow" aria-label="Legend">${f.legend.map((it) => html`<li><span class="legend__sw" style="background: ${it.swatch}" aria-hidden="true"></span>${it.text}</li>`)}</ul>` : '');
@@ -117,13 +119,14 @@ export function figure(f, n, ctx) {
   const drawing = f.kind === 'drawing';
   if (f.items) {
     const items = f.items.map((it, k) => ({ rel: drawing ? cutOrFail(it.src) : it.src, alt: it.alt, drawing, title: `${f.title} (${k + 1} of ${f.items.length})` }));
-    if (drawing) return html`<figure class="fig block wrap g" id="fig-${n}">${cells(items, { prefix: p, scale: true })}${capOf(f)}</figure>`;
+    if (drawing) return html`<figure class="fig block wrap g" id="fig-${n}">${cells(items, { prefix: p, scale: true })}${legendOf(f)}${capOf(f)}</figure>`;
     const r = row(items, { prefix: p, zoom: true });
     return html`<figure class="fig block wrap g" id="fig-${n}" data-rv><div class="s-${r.span}">${r.html}</div>${capOf(f)}</figure>`;
   }
   const rel = drawing ? cutOrFail(f.src) : f.src;
   const { w, h } = dims(rel);
-  const span = spanFor(w, h);
+  // a tall drawing may allow a little more height (at most 820px) where its legibility needs a wider span
+  const span = spanFor(w, h, f.maxH ? { maxH: Math.min(820, f.maxH) } : {});
   const pic = image(rel, { alt: f.alt, sz: sizesFor(span), prefix: p, zoom: true, title: f.title });
   const labels = drawing ? labelsFor(rel, f.labels) : [];
   return html`<figure class="fig block wrap g" id="fig-${n}" data-rv><div class="s-${span}">${labels.length ? labelled(pic, rel, labels) : pic}</div>${legendOf(f)}${capOf(f)}</figure>`;
