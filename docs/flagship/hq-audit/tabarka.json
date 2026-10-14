@@ -1,0 +1,140 @@
+{
+  "version": 1,
+  "sourceRoot": "Images HQ",
+  "folder": "Tabarka",
+  "assets": [
+    {
+      "source": "Images HQ/Tabarka/.trashed-1762728296-Image_1.png",
+      "sha256": "222c0568eaff912734cc90ac1c83e5331293f51996db809d1256268835378892",
+      "width": 5806,
+      "height": 2609,
+      "projectMapping": {
+        "slug": "corallum",
+        "status": "provisional"
+      },
+      "mappingEvidence": "Brief 10 maps the Tabarka source folder to the existing Corallum case study; the individual source still needs a visual and caption comparison.",
+      "visualType": "unreviewed",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+    },
+    {
+      "source": "Images HQ/Tabarka/.trashed-1762728296-Image_2.png",
+      "sha256": "537c121913a7cb9cbfac11fdc49186b45cf3e1213a70eceb51f62acd0243661d",
+      "width": 7680,
+      "height": 4874,
+      "projectMapping": {
+        "slug": "corallum",
+        "status": "provisional"
+      },
+      "mappingEvidence": "Brief 10 maps the Tabarka source folder to the existing Corallum case study; the individual source still needs a visual and caption comparison.",
+      "visualType": "unreviewed",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+    },
+    {
+      "source": "Images HQ/Tabarka/.trashed-1762728296-Image_4.png",
+      "sha256": "554e81101a507087c30131cb298e239bf7214eef69e38641406b504b1e051257",
+      "width": 7680,
+      "height": 4874,
+      "projectMapping": {
+        "slug": "corallum",
+        "status": "provisional"
+      },
+      "mappingEvidence": "Brief 10 maps the Tabarka source folder to the existing Corallum case study; the individual source still needs a visual and caption comparison.",
+      "visualType": "unreviewed",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+    },
+    {
+      "source": "Images HQ/Tabarka/.trashed-1762728296-Image_6.png",
+      "sha256": "39856e9d9d82e14334f7d537c60f99d6710bae531270be2bbb678540f389c783",
+      "width": 7680,
+      "height": 4874,
+      "projectMapping": {
+        "slug": "corallum",
+        "status": "provisional"
+      },
+      "mappingEvidence": "Brief 10 maps the Tabarka source folder to the existing Corallum case study; the individual source still needs a visual and caption comparison.",
+      "visualType": "unreviewed",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+    },
+    {
+      "source": "Images HQ/Tabarka/2025 - Hazem radhouani - Portfolio - HQ [21-25]_page-0003.jpg",
+      "sha256": "e15fb0d5b0543d1e2650c50f1afe82bc22698167f66dffd711c8096c6068644c",
+      "width": 3508,
+      "height": 2481,
+      "projectMapping": {
+        "slug": "corallum",
+        "status": "provisional"
+      },
+      "mappingEvidence": "Brief 10 maps the Tabarka source folder to the existing Corallum case study; the individual source still needs a visual and caption comparison.",
+      "visualType": "drawing-or-sheet",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+    },
+    {
+      "source": "Images HQ/Tabarka/2025 - Hazem radhouani - Portfolio - HQ [21-25]_page-0004.jpg",
+      "sha256": "868eabd332e91cc2c0863827f2686197af4b92190c3a921b82162c93e7ca7f58",
+      "width": 3508,
+      "height": 2481,
+      "projectMapping": {
+        "slug": "corallum",
+        "status": "provisional"
+      },
+      "mappingEvidence": "Brief 10 maps the Tabarka source folder to the existing Corallum case study; the individual source still needs a visual and caption comparison.",
+      "visualType": "drawing-or-sheet",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+    },
+    {
+      "source": "Images HQ/Tabarka/2025 - Hazem radhouani - Portfolio - HQ [21-25]_page-0005.jpg",
+      "sha256": "9a131ee16612ad5d3432ebc81e138370f1a9f6c1b2e6ed6125645385413ef89c",
+      "width": 3508,
+      "height": 2481,
+      "projectMapping": {
+        "slug": "corallum",
+        "status": "provisional"
+      },
+      "mappingEvidence": "Brief 10 maps the Tabarka source folder to the existing Corallum case study; the individual source still needs a visual and caption comparison.",
+      "visualType": "drawing-or-sheet",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+    }
+  ]
+}

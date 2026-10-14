@@ -1,0 +1,64 @@
+{
+  "version": 1,
+  "sourceRoot": "Images HQ",
+  "folder": "Memoire",
+  "assets": [
+    {
+      "source": "Images HQ/Memoire/001.png",
+      "sha256": "f2e3f5a47c5f8942ddfa1716e6f918167f91d73a0a0c67eff3f3665248f88f28",
+      "width": 4500,
+      "height": 3000,
+      "projectMapping": {
+        "slug": null,
+        "status": "unresolved"
+      },
+      "mappingEvidence": "Brief 10 keeps Memoire unpublished pending a verified title, author and relationship to the portfolio owner.",
+      "visualType": "unreviewed",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "unresolved",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld because the supplied material does not establish a publishable project relationship or personal role."
+    },
+    {
+      "source": "Images HQ/Memoire/002.png",
+      "sha256": "5cbf8a511daf70e4918187d66dc8a6fdb4b4ad08b8173f97d66cfc5238fd2c32",
+      "width": 4500,
+      "height": 3000,
+      "projectMapping": {
+        "slug": null,
+        "status": "unresolved"
+      },
+      "mappingEvidence": "Brief 10 keeps Memoire unpublished pending a verified title, author and relationship to the portfolio owner.",
+      "visualType": "unreviewed",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "unresolved",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld because the supplied material does not establish a publishable project relationship or personal role."
+    },
+    {
+      "source": "Images HQ/Memoire/003.png",
+      "sha256": "dde0b4ae38f7a2f157d264eac23dac6051ad8a60a2d8d650fceff8fed68f3cd7",
+      "width": 4500,
+      "height": 3000,
+      "projectMapping": {
+        "slug": null,
+        "status": "unresolved"
+      },
+      "mappingEvidence": "Brief 10 keeps Memoire unpublished pending a verified title, author and relationship to the portfolio owner.",
+      "visualType": "unreviewed",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "unresolved",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld because the supplied material does not establish a publishable project relationship or personal role."
+    }
+  ]
+}

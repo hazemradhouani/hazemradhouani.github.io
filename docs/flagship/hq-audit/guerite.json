@@ -1,0 +1,83 @@
+{
+  "version": 1,
+  "sourceRoot": "Images HQ",
+  "folder": "Guerite",
+  "assets": [
+    {
+      "source": "Images HQ/Guerite/2025 - Hazem radhouani - Portfolio - HQ [26-30]_page-0001.jpg",
+      "sha256": "3a6182a675fabf6d9f01d10aa7093fac8ccf9887d19474859bcc4d4c09b4b9dc",
+      "width": 3508,
+      "height": 2481,
+      "projectMapping": {
+        "slug": "sentry",
+        "status": "provisional"
+      },
+      "mappingEvidence": "Brief 10 maps the Guerite source folder to the existing Sentry case study; the individual source still needs a visual and caption comparison.",
+      "visualType": "drawing-or-sheet",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+    },
+    {
+      "source": "Images HQ/Guerite/2025 - Hazem radhouani - Portfolio - HQ [26-30]_page-0002.jpg",
+      "sha256": "9bb1b6d0e5375d048d832b75577e375d366574f4a428cd8cc124fba7f34f1f94",
+      "width": 3508,
+      "height": 2481,
+      "projectMapping": {
+        "slug": "sentry",
+        "status": "provisional"
+      },
+      "mappingEvidence": "Brief 10 maps the Guerite source folder to the existing Sentry case study; the individual source still needs a visual and caption comparison.",
+      "visualType": "drawing-or-sheet",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+    },
+    {
+      "source": "Images HQ/Guerite/2025 - Hazem radhouani - Portfolio - HQ [26-30]_page-0003.jpg",
+      "sha256": "47acacf7de97b8655984dd953f50f081d416f2db92f11bcd941f808965ed4a60",
+      "width": 3508,
+      "height": 2481,
+      "projectMapping": {
+        "slug": "sentry",
+        "status": "provisional"
+      },
+      "mappingEvidence": "Brief 10 maps the Guerite source folder to the existing Sentry case study; the individual source still needs a visual and caption comparison.",
+      "visualType": "drawing-or-sheet",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+    },
+    {
+      "source": "Images HQ/Guerite/2025 - Hazem radhouani - Portfolio - HQ [26-30]_page-0004.jpg",
+      "sha256": "91da5fd57b082c8cd822a7271965e1566dbff987bec1ad76f5c771ac8a51b8bc",
+      "width": 3508,
+      "height": 2481,
+      "projectMapping": {
+        "slug": "sentry",
+        "status": "provisional"
+      },
+      "mappingEvidence": "Brief 10 maps the Guerite source folder to the existing Sentry case study; the individual source still needs a visual and caption comparison.",
+      "visualType": "drawing-or-sheet",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+    }
+  ]
+}

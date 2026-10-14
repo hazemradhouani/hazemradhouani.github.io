@@ -1,0 +1,178 @@
+{
+  "version": 1,
+  "sourceRoot": "Images HQ",
+  "folder": "Zenata",
+  "assets": [
+    {
+      "source": "Images HQ/Zenata/2025 - Hazem radhouani - Portfolio - HQ [11-15]_page-0001.jpg",
+      "sha256": "fb7cba5c6c6ac011ab479f4a820f41a21c69e12b54c82d0068eb1aa3bad7b47d",
+      "width": 3508,
+      "height": 2481,
+      "projectMapping": {
+        "slug": "zenata",
+        "status": "provisional"
+      },
+      "mappingEvidence": "Brief 10 maps the Zenata source folder to the existing Zenata case study; the individual source still needs a visual and caption comparison.",
+      "visualType": "drawing-or-sheet",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+    },
+    {
+      "source": "Images HQ/Zenata/2025 - Hazem radhouani - Portfolio - HQ [6-10]_page-0003.jpg",
+      "sha256": "c9d240724823bcbb746805d6dd534f53ee744cdc26b155e2d69a10621362374d",
+      "width": 3508,
+      "height": 2481,
+      "projectMapping": {
+        "slug": "zenata",
+        "status": "provisional"
+      },
+      "mappingEvidence": "Brief 10 maps the Zenata source folder to the existing Zenata case study; the individual source still needs a visual and caption comparison.",
+      "visualType": "drawing-or-sheet",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+    },
+    {
+      "source": "Images HQ/Zenata/2025 - Hazem radhouani - Portfolio - HQ [6-10]_page-0004.jpg",
+      "sha256": "e9fb9eb5d794716541630142ad8ee80490ebdf0ee06326a7ce44e921c4f9f5ec",
+      "width": 3508,
+      "height": 2481,
+      "projectMapping": {
+        "slug": "zenata",
+        "status": "provisional"
+      },
+      "mappingEvidence": "Brief 10 maps the Zenata source folder to the existing Zenata case study; the individual source still needs a visual and caption comparison.",
+      "visualType": "drawing-or-sheet",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+    },
+    {
+      "source": "Images HQ/Zenata/2025 - Hazem radhouani - Portfolio - HQ [6-10]_page-0005.jpg",
+      "sha256": "796b74143e1f2f997d66b5876791e57b9f9340050562d2d044ad93b54a1a0242",
+      "width": 3508,
+      "height": 2481,
+      "projectMapping": {
+        "slug": "zenata",
+        "status": "provisional"
+      },
+      "mappingEvidence": "Brief 10 maps the Zenata source folder to the existing Zenata case study; the individual source still needs a visual and caption comparison.",
+      "visualType": "drawing-or-sheet",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+    },
+    {
+      "source": "Images HQ/Zenata/Scene 13.png",
+      "sha256": "d92c45372662ef650c4ed7c22163307ef1f392728e744f1fc77fa75f5e8a7c33",
+      "width": 3840,
+      "height": 2436,
+      "projectMapping": {
+        "slug": "zenata",
+        "status": "provisional"
+      },
+      "mappingEvidence": "Brief 10 maps the Zenata source folder to the existing Zenata case study; the individual source still needs a visual and caption comparison.",
+      "visualType": "render",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+    },
+    {
+      "source": "Images HQ/Zenata/Scene 35.png",
+      "sha256": "bc65c0c3d5dc6c929de73b173347a3be8f566debd0abadb8443294000b4b981f",
+      "width": 3840,
+      "height": 2436,
+      "projectMapping": {
+        "slug": "zenata",
+        "status": "provisional"
+      },
+      "mappingEvidence": "Brief 10 maps the Zenata source folder to the existing Zenata case study; the individual source still needs a visual and caption comparison.",
+      "visualType": "render",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+    },
+    {
+      "source": "Images HQ/Zenata/Scene 51.png",
+      "sha256": "428ddcb5cdf26ade52fd19ad6b1e289258439dfdd97cff573b522e317d65cf1d",
+      "width": 2560,
+      "height": 1662,
+      "projectMapping": {
+        "slug": "zenata",
+        "status": "provisional"
+      },
+      "mappingEvidence": "Brief 10 maps the Zenata source folder to the existing Zenata case study; the individual source still needs a visual and caption comparison.",
+      "visualType": "render",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+    },
+    {
+      "source": "Images HQ/Zenata/Scene 64.png",
+      "sha256": "c3e7bf00527af25a6f0d42b02f63ebd926e2fc98da568ee45e94b32aa3b4dd1d",
+      "width": 2560,
+      "height": 1662,
+      "projectMapping": {
+        "slug": "zenata",
+        "status": "provisional"
+      },
+      "mappingEvidence": "Brief 10 maps the Zenata source folder to the existing Zenata case study; the individual source still needs a visual and caption comparison.",
+      "visualType": "render",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+    },
+    {
+      "source": "Images HQ/Zenata/يصي.png",
+      "sha256": "95e54502eb8f357ff7a42b1cb17935ae1ca68d04221d4b3cebca53cad0f267c6",
+      "width": 3840,
+      "height": 2436,
+      "projectMapping": {
+        "slug": "zenata",
+        "status": "provisional"
+      },
+      "mappingEvidence": "Brief 10 maps the Zenata source folder to the existing Zenata case study; the individual source still needs a visual and caption comparison.",
+      "visualType": "unreviewed",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+    }
+  ]
+}

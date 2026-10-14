@@ -1,0 +1,102 @@
+{
+  "version": 1,
+  "sourceRoot": "Images HQ",
+  "folder": "Nouvelle Medina",
+  "assets": [
+    {
+      "source": "Images HQ/Nouvelle Medina/A0 MEDINA F [1]_page-0001.jpg",
+      "sha256": "49f2fafcf4ae688a9b771e3d6412697a9b41c4353872453ba11f8144697c9ab5",
+      "width": 14044,
+      "height": 9934,
+      "projectMapping": {
+        "slug": "nouvelle-medina",
+        "status": "provisional"
+      },
+      "mappingEvidence": "Brief 10 maps the Nouvelle Medina source folder to the existing Nouvelle Medina case study; the individual source still needs a visual and caption comparison.",
+      "visualType": "drawing-or-sheet",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+    },
+    {
+      "source": "Images HQ/Nouvelle Medina/A0 MEDINA F [2]_page-0001.jpg",
+      "sha256": "463be941902056c8fda8f4025d5db664f293dd2396bf2630f4c584aebc997806",
+      "width": 14044,
+      "height": 9934,
+      "projectMapping": {
+        "slug": "nouvelle-medina",
+        "status": "provisional"
+      },
+      "mappingEvidence": "Brief 10 maps the Nouvelle Medina source folder to the existing Nouvelle Medina case study; the individual source still needs a visual and caption comparison.",
+      "visualType": "drawing-or-sheet",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+    },
+    {
+      "source": "Images HQ/Nouvelle Medina/Scene 11_6.png",
+      "sha256": "01e5e51133cae4630af208eb18f35f612aa8dd922a27e49cf53a55f64e824eb1",
+      "width": 2560,
+      "height": 1662,
+      "projectMapping": {
+        "slug": "nouvelle-medina",
+        "status": "provisional"
+      },
+      "mappingEvidence": "Brief 10 maps the Nouvelle Medina source folder to the existing Nouvelle Medina case study; the individual source still needs a visual and caption comparison.",
+      "visualType": "render",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+    },
+    {
+      "source": "Images HQ/Nouvelle Medina/Scene 39_2.png",
+      "sha256": "7729394989051324e85f538de0b3e735c8782bb99ff6d539c33e871a9889b86b",
+      "width": 2560,
+      "height": 1586,
+      "projectMapping": {
+        "slug": "nouvelle-medina",
+        "status": "provisional"
+      },
+      "mappingEvidence": "Brief 10 maps the Nouvelle Medina source folder to the existing Nouvelle Medina case study; the individual source still needs a visual and caption comparison.",
+      "visualType": "render",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+    },
+    {
+      "source": "Images HQ/Nouvelle Medina/Scene 6_5.png",
+      "sha256": "f1a922a5ffc33b177faf3be4184cc3f6e84c9c7adf94e77e8ba60cd8c2b3021c",
+      "width": 2560,
+      "height": 1559,
+      "projectMapping": {
+        "slug": "nouvelle-medina",
+        "status": "provisional"
+      },
+      "mappingEvidence": "Brief 10 maps the Nouvelle Medina source folder to the existing Nouvelle Medina case study; the individual source still needs a visual and caption comparison.",
+      "visualType": "render",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "version": 1,
+  "sourceRoot": "Images HQ",
+  "folder": "Station Hay Mohammadi",
+  "assets": [
+    {
+      "source": "Images HQ/Station Hay Mohammadi/2025 - Hazem radhouani - Portfolio - HQ [46-50]_page-0001.jpg",
+      "sha256": "432fe63e86b8d7122b10fa42eba4a5813125687f09840ce1bd57f6dd75aef4f6",
+      "width": 3508,
+      "height": 2481,
+      "projectMapping": {
+        "slug": "hay-mohammadi",
+        "status": "provisional"
+      },
+      "mappingEvidence": "Brief 10 maps the Station Hay Mohammadi source folder to the existing Hay Mohammadi case study; the individual source still needs a visual and caption comparison.",
+      "visualType": "drawing-or-sheet",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+    },
+    {
+      "source": "Images HQ/Station Hay Mohammadi/2025 - Hazem radhouani - Portfolio - HQ [46-50]_page-0002.jpg",
+      "sha256": "bb9fa56d3b2ce1656725542c2d3bbca67a72aa81b3f3d061168b48aedca9b3d9",
+      "width": 3508,
+      "height": 2481,
+      "projectMapping": {
+        "slug": "hay-mohammadi",
+        "status": "provisional"
+      },
+      "mappingEvidence": "Brief 10 maps the Station Hay Mohammadi source folder to the existing Hay Mohammadi case study; the individual source still needs a visual and caption comparison.",
+      "visualType": "drawing-or-sheet",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+    }
+  ]
+}

@@ -1,0 +1,349 @@
+{
+  "version": 1,
+  "sourceRoot": "Images HQ",
+  "folder": "Cinema",
+  "assets": [
+    {
+      "source": "Images HQ/Cinema/.trashed-1762728296-Image(10).png",
+      "sha256": "41beef20af7d4eb893e367d2f7bf782cdcb99513a0f44567532fdf7c4ed8bd2a",
+      "width": 3840,
+      "height": 2437,
+      "projectMapping": {
+        "slug": "cinephile",
+        "status": "provisional"
+      },
+      "mappingEvidence": "Brief 10 maps the Cinema source folder to the existing Cinephile case study; the individual source still needs a visual and caption comparison.",
+      "visualType": "unreviewed",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+    },
+    {
+      "source": "Images HQ/Cinema/.trashed-1762728296-Image(11).jpg",
+      "sha256": "43109fac49f50011da4565ffddfa193ae93b067c5517ccc06294c14c62b705ba",
+      "width": 3840,
+      "height": 2437,
+      "projectMapping": {
+        "slug": "cinephile",
+        "status": "provisional"
+      },
+      "mappingEvidence": "Brief 10 maps the Cinema source folder to the existing Cinephile case study; the individual source still needs a visual and caption comparison.",
+      "visualType": "unreviewed",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+    },
+    {
+      "source": "Images HQ/Cinema/.trashed-1762728296-Image(11).png",
+      "sha256": "af74aff520df0466a533dd84aceb48e3089cce226a2c5440ca960b9c9dcf359a",
+      "width": 3840,
+      "height": 2437,
+      "projectMapping": {
+        "slug": "cinephile",
+        "status": "provisional"
+      },
+      "mappingEvidence": "Brief 10 maps the Cinema source folder to the existing Cinephile case study; the individual source still needs a visual and caption comparison.",
+      "visualType": "unreviewed",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+    },
+    {
+      "source": "Images HQ/Cinema/.trashed-1762728296-Image(2).png",
+      "sha256": "b1386a87f4e6db7f72114f93d9463e5c3791ca05c0709a5f9b652b122dce9628",
+      "width": 3840,
+      "height": 2437,
+      "projectMapping": {
+        "slug": "cinephile",
+        "status": "provisional"
+      },
+      "mappingEvidence": "Brief 10 maps the Cinema source folder to the existing Cinephile case study; the individual source still needs a visual and caption comparison.",
+      "visualType": "unreviewed",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+    },
+    {
+      "source": "Images HQ/Cinema/.trashed-1762728296-Image(4).png",
+      "sha256": "8fe5e2a63b9e7ac6218cba4948afae0318feee521a5522c5e9bc506545cfac50",
+      "width": 3840,
+      "height": 3840,
+      "projectMapping": {
+        "slug": "cinephile",
+        "status": "provisional"
+      },
+      "mappingEvidence": "Brief 10 maps the Cinema source folder to the existing Cinephile case study; the individual source still needs a visual and caption comparison.",
+      "visualType": "unreviewed",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+    },
+    {
+      "source": "Images HQ/Cinema/.trashed-1762728296-Image(6).png",
+      "sha256": "f3512c1b13df02da1e5ddba1a230f6512339254ed6b074c3146b3abbd0339a57",
+      "width": 3840,
+      "height": 2437,
+      "projectMapping": {
+        "slug": "cinephile",
+        "status": "provisional"
+      },
+      "mappingEvidence": "Brief 10 maps the Cinema source folder to the existing Cinephile case study; the individual source still needs a visual and caption comparison.",
+      "visualType": "unreviewed",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+    },
+    {
+      "source": "Images HQ/Cinema/.trashed-1762728296-Image(7).png",
+      "sha256": "510bfa12c7da32b6262c53113d3dde3f53097f8f50cb749ea42afbd58bce04a9",
+      "width": 3840,
+      "height": 2437,
+      "projectMapping": {
+        "slug": "cinephile",
+        "status": "provisional"
+      },
+      "mappingEvidence": "Brief 10 maps the Cinema source folder to the existing Cinephile case study; the individual source still needs a visual and caption comparison.",
+      "visualType": "unreviewed",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+    },
+    {
+      "source": "Images HQ/Cinema/.trashed-1762728296-Image(9).png",
+      "sha256": "5648fc83c1a701b0868e3c5db85f2048c0e7fb98d7b01a01e3413f0c66a05a7b",
+      "width": 3840,
+      "height": 2437,
+      "projectMapping": {
+        "slug": "cinephile",
+        "status": "provisional"
+      },
+      "mappingEvidence": "Brief 10 maps the Cinema source folder to the existing Cinephile case study; the individual source still needs a visual and caption comparison.",
+      "visualType": "unreviewed",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+    },
+    {
+      "source": "Images HQ/Cinema/.trashed-1762728296-Scene 2.png",
+      "sha256": "c900a3735b825fcae0d13cea3f6832ed050d5f8aa3fd6d7170838ea3aa247d93",
+      "width": 7680,
+      "height": 4320,
+      "projectMapping": {
+        "slug": "cinephile",
+        "status": "provisional"
+      },
+      "mappingEvidence": "Brief 10 maps the Cinema source folder to the existing Cinephile case study; the individual source still needs a visual and caption comparison.",
+      "visualType": "render",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+    },
+    {
+      "source": "Images HQ/Cinema/.trashed-1762728296-Scene 6.png",
+      "sha256": "d6e4c418c35fec4bedcc6d85cc787e74a01daf7b5efde091d5653a7ba099a0b1",
+      "width": 3840,
+      "height": 2437,
+      "projectMapping": {
+        "slug": "cinephile",
+        "status": "provisional"
+      },
+      "mappingEvidence": "Brief 10 maps the Cinema source folder to the existing Cinephile case study; the individual source still needs a visual and caption comparison.",
+      "visualType": "render",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+    },
+    {
+      "source": "Images HQ/Cinema/.trashed-1762728296-dz.png",
+      "sha256": "5ac2c076d837e7962308df4c6474da48273e21440e8591f04770ca8739c03b84",
+      "width": 7680,
+      "height": 7680,
+      "projectMapping": {
+        "slug": "cinephile",
+        "status": "provisional"
+      },
+      "mappingEvidence": "Brief 10 maps the Cinema source folder to the existing Cinephile case study; the individual source still needs a visual and caption comparison.",
+      "visualType": "unreviewed",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+    },
+    {
+      "source": "Images HQ/Cinema/2025 - Hazem radhouani - Portfolio - HQ [11-15]_page-0002.jpg",
+      "sha256": "9a66522b5eb38fbc8c7e7182210d1d05f73221b04afe197bb2ec96dcc9c906e8",
+      "width": 3508,
+      "height": 2481,
+      "projectMapping": {
+        "slug": "cinephile",
+        "status": "provisional"
+      },
+      "mappingEvidence": "Brief 10 maps the Cinema source folder to the existing Cinephile case study; the individual source still needs a visual and caption comparison.",
+      "visualType": "drawing-or-sheet",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+    },
+    {
+      "source": "Images HQ/Cinema/2025 - Hazem radhouani - Portfolio - HQ [16-20]_page-0001.jpg",
+      "sha256": "93f557ead89f738ebf6d7e0e832cd58b637669c061a527c2ced8e475119baa8e",
+      "width": 1720,
+      "height": 2481,
+      "projectMapping": {
+        "slug": "cinephile",
+        "status": "provisional"
+      },
+      "mappingEvidence": "Brief 10 maps the Cinema source folder to the existing Cinephile case study; the individual source still needs a visual and caption comparison.",
+      "visualType": "drawing-or-sheet",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+    },
+    {
+      "source": "Images HQ/Cinema/Buildings height.png",
+      "sha256": "dce72386a8dfb3afcdd6614391fd9ff753c1f737dc99064fd38a37f110a6769d",
+      "width": 739,
+      "height": 554,
+      "projectMapping": {
+        "slug": "cinephile",
+        "status": "provisional"
+      },
+      "mappingEvidence": "Brief 10 maps the Cinema source folder to the existing Cinephile case study; the individual source still needs a visual and caption comparison.",
+      "visualType": "drawing-or-sheet",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+    },
+    {
+      "source": "Images HQ/Cinema/Level 01.jpg",
+      "sha256": "24b65b8bb9526d23fae54995bdc8ab5bf45184428ac5c6f345b1f91100293f51",
+      "width": 1874,
+      "height": 1682,
+      "projectMapping": {
+        "slug": "cinephile",
+        "status": "provisional"
+      },
+      "mappingEvidence": "Brief 10 maps the Cinema source folder to the existing Cinephile case study; the individual source still needs a visual and caption comparison.",
+      "visualType": "drawing-or-sheet",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+    },
+    {
+      "source": "Images HQ/Cinema/Site study.png",
+      "sha256": "2ac377fb70f93d2e5325195f859765ca750f9c9db48c2ec8fdd5dda68a1abb5b",
+      "width": 1541,
+      "height": 943,
+      "projectMapping": {
+        "slug": "cinephile",
+        "status": "provisional"
+      },
+      "mappingEvidence": "Brief 10 maps the Cinema source folder to the existing Cinephile case study; the individual source still needs a visual and caption comparison.",
+      "visualType": "drawing-or-sheet",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+    },
+    {
+      "source": "Images HQ/Cinema/Sketching the idea.jpg",
+      "sha256": "9c4e4c03d36c94e8fe2e747fb1687715658bf184a3782b7d084c748c207a0c9e",
+      "width": 1599,
+      "height": 1032,
+      "projectMapping": {
+        "slug": "cinephile",
+        "status": "provisional"
+      },
+      "mappingEvidence": "Brief 10 maps the Cinema source folder to the existing Cinephile case study; the individual source still needs a visual and caption comparison.",
+      "visualType": "drawing-or-sheet",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+    },
+    {
+      "source": "Images HQ/Cinema/Tree cover.png",
+      "sha256": "5004052a66da15cea532882c95ab0d2b2a3905619385406f15e27b37995968cf",
+      "width": 679,
+      "height": 509,
+      "projectMapping": {
+        "slug": "cinephile",
+        "status": "provisional"
+      },
+      "mappingEvidence": "Brief 10 maps the Cinema source folder to the existing Cinephile case study; the individual source still needs a visual and caption comparison.",
+      "visualType": "drawing-or-sheet",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+    }
+  ]
+}

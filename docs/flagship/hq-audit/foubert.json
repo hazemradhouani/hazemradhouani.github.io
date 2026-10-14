@@ -1,0 +1,501 @@
+{
+  "version": 1,
+  "sourceRoot": "Images HQ",
+  "folder": "FOUBERT",
+  "assets": [
+    {
+      "source": "Images HQ/FOUBERT/20240105_BLM_FOU_Perspective rue.jpg",
+      "sha256": "e791cc80297c204cef301a4e2137a76a214ffd6227c6ed0ff7825d3a0ddd9b8b",
+      "width": 6943,
+      "height": 6306,
+      "projectMapping": {
+        "slug": "foubert",
+        "status": "confirmed"
+      },
+      "mappingEvidence": "Exact visual comparison confirms this source is the existing Foubert hero (images/foubert/foubert-brick-render.jpg); the case-study source is pdf2026:p13.",
+      "visualType": "render",
+      "textDisposition": "no-text",
+      "duplicateOf": null,
+      "disposition": "approved",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "The existing Foubert hero identifies this matching render as Render: Studio BELEM (content/projects/foubert.json; source pdf2026:p13).",
+      "roleEvidence": "The existing Foubert record documents Hazem's facade-design and architectural-detailing role (content/projects/foubert.json; source pdf2026:p13).",
+      "reason": "Approved after exact visual comparison to the existing credited hero; it is a full scene with no crop and adds no new project claim."
+    },
+    {
+      "source": "Images HQ/FOUBERT/20240610_BLM_FOU_Perspective arrière.jpg",
+      "sha256": "549b4060d5d1d5b46362d091e08b33b1bd9b58c73316e363cbfd5b3b52332274",
+      "width": 3200,
+      "height": 3200,
+      "projectMapping": {
+        "slug": "foubert",
+        "status": "provisional"
+      },
+      "mappingEvidence": "Brief 10 maps the FOUBERT source folder to the existing Foubert case study; the individual source still needs a visual and caption comparison.",
+      "visualType": "render",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+    },
+    {
+      "source": "Images HQ/FOUBERT/20260129_BLM_FOU_PRO_Plan de niveaux_merge [1-20] [1-15]_page-0001.jpg",
+      "sha256": "34c69d3d7abe0c62ca938ed4cbc6ae50adb18e5d9297eb714159c4570e5d0f72",
+      "width": 9933,
+      "height": 7017,
+      "projectMapping": {
+        "slug": "foubert",
+        "status": "provisional"
+      },
+      "mappingEvidence": "Brief 10 maps the FOUBERT source folder to the existing Foubert case study; the individual source still needs a visual and caption comparison.",
+      "visualType": "drawing-or-sheet",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+    },
+    {
+      "source": "Images HQ/FOUBERT/20260129_BLM_FOU_PRO_Plan de niveaux_merge [1-20] [1-15]_page-0002.jpg",
+      "sha256": "38fb654f99187f18ff3dd18c17b32933b71d653a030a2b705c713e00ff51bf63",
+      "width": 9933,
+      "height": 7017,
+      "projectMapping": {
+        "slug": "foubert",
+        "status": "provisional"
+      },
+      "mappingEvidence": "Brief 10 maps the FOUBERT source folder to the existing Foubert case study; the individual source still needs a visual and caption comparison.",
+      "visualType": "drawing-or-sheet",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+    },
+    {
+      "source": "Images HQ/FOUBERT/20260129_BLM_FOU_PRO_Plan de niveaux_merge [1-20] [1-15]_page-0003.jpg",
+      "sha256": "41388fedb56194228eac8f867a62d607dec2092e6355c7f799eee73dc6137b45",
+      "width": 9933,
+      "height": 7017,
+      "projectMapping": {
+        "slug": "foubert",
+        "status": "provisional"
+      },
+      "mappingEvidence": "Brief 10 maps the FOUBERT source folder to the existing Foubert case study; the individual source still needs a visual and caption comparison.",
+      "visualType": "drawing-or-sheet",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+    },
+    {
+      "source": "Images HQ/FOUBERT/20260129_BLM_FOU_PRO_Plan de niveaux_merge [1-20] [1-15]_page-0004.jpg",
+      "sha256": "b62658ea7140991ab921c703d61264f7022a49fe2bd83bebf2384071238aad19",
+      "width": 9933,
+      "height": 7017,
+      "projectMapping": {
+        "slug": "foubert",
+        "status": "provisional"
+      },
+      "mappingEvidence": "Brief 10 maps the FOUBERT source folder to the existing Foubert case study; the individual source still needs a visual and caption comparison.",
+      "visualType": "drawing-or-sheet",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+    },
+    {
+      "source": "Images HQ/FOUBERT/20260129_BLM_FOU_PRO_Plan de niveaux_merge [1-20] [1-15]_page-0005.jpg",
+      "sha256": "815fc37311513de351028016c7c3a51cee5589f5c766d5d2d8f01df87dee3910",
+      "width": 9933,
+      "height": 7017,
+      "projectMapping": {
+        "slug": "foubert",
+        "status": "provisional"
+      },
+      "mappingEvidence": "Brief 10 maps the FOUBERT source folder to the existing Foubert case study; the individual source still needs a visual and caption comparison.",
+      "visualType": "drawing-or-sheet",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+    },
+    {
+      "source": "Images HQ/FOUBERT/20260129_BLM_FOU_PRO_Plan de niveaux_merge [1-20] [1-15]_page-0006.jpg",
+      "sha256": "59a7f7659d49cddab7995c713d67750be52e9c55d3b83bdb7f1e77156291211b",
+      "width": 9933,
+      "height": 7017,
+      "projectMapping": {
+        "slug": "foubert",
+        "status": "provisional"
+      },
+      "mappingEvidence": "Brief 10 maps the FOUBERT source folder to the existing Foubert case study; the individual source still needs a visual and caption comparison.",
+      "visualType": "drawing-or-sheet",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+    },
+    {
+      "source": "Images HQ/FOUBERT/20260129_BLM_FOU_PRO_Plan de niveaux_merge [1-20] [1-15]_page-0007.jpg",
+      "sha256": "9946c2173f7b95905d75f6ec32a5983dd0581f2e4f3d04da430a7ba777649367",
+      "width": 9933,
+      "height": 7017,
+      "projectMapping": {
+        "slug": "foubert",
+        "status": "provisional"
+      },
+      "mappingEvidence": "Brief 10 maps the FOUBERT source folder to the existing Foubert case study; the individual source still needs a visual and caption comparison.",
+      "visualType": "drawing-or-sheet",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+    },
+    {
+      "source": "Images HQ/FOUBERT/20260129_BLM_FOU_PRO_Plan de niveaux_merge [1-20] [1-15]_page-0008.jpg",
+      "sha256": "3255bf4c3c598883ac8235514d1e1858b0ce2b3c6fc8a9ed99ffd81265a5c82d",
+      "width": 9933,
+      "height": 7017,
+      "projectMapping": {
+        "slug": "foubert",
+        "status": "provisional"
+      },
+      "mappingEvidence": "Brief 10 maps the FOUBERT source folder to the existing Foubert case study; the individual source still needs a visual and caption comparison.",
+      "visualType": "drawing-or-sheet",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+    },
+    {
+      "source": "Images HQ/FOUBERT/20260129_BLM_FOU_PRO_Plan de niveaux_merge [1-20] [1-15]_page-0009.jpg",
+      "sha256": "273b6a712504956dff4e348283ce05ae5a3e3b22ebf07c37ad3df12ae4ad4b8e",
+      "width": 9933,
+      "height": 7017,
+      "projectMapping": {
+        "slug": "foubert",
+        "status": "provisional"
+      },
+      "mappingEvidence": "Brief 10 maps the FOUBERT source folder to the existing Foubert case study; the individual source still needs a visual and caption comparison.",
+      "visualType": "drawing-or-sheet",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+    },
+    {
+      "source": "Images HQ/FOUBERT/20260129_BLM_FOU_PRO_Plan de niveaux_merge [1-20] [1-15]_page-0010.jpg",
+      "sha256": "017911b57507f07d5478530fca75a49170ac93c325fb254318823b22d664ec3e",
+      "width": 9933,
+      "height": 7017,
+      "projectMapping": {
+        "slug": "foubert",
+        "status": "provisional"
+      },
+      "mappingEvidence": "Brief 10 maps the FOUBERT source folder to the existing Foubert case study; the individual source still needs a visual and caption comparison.",
+      "visualType": "drawing-or-sheet",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+    },
+    {
+      "source": "Images HQ/FOUBERT/20260129_BLM_FOU_PRO_Plan de niveaux_merge [1-20] [1-15]_page-0011.jpg",
+      "sha256": "7b44207fb5912e0d2214b0075910161e1d5124e0c04d3cf1916e56c2ef83a6af",
+      "width": 9933,
+      "height": 7017,
+      "projectMapping": {
+        "slug": "foubert",
+        "status": "provisional"
+      },
+      "mappingEvidence": "Brief 10 maps the FOUBERT source folder to the existing Foubert case study; the individual source still needs a visual and caption comparison.",
+      "visualType": "drawing-or-sheet",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+    },
+    {
+      "source": "Images HQ/FOUBERT/20260129_BLM_FOU_PRO_Plan de niveaux_merge [1-20] [1-15]_page-0012.jpg",
+      "sha256": "3bf1254ad3012c0e4b5685198d9a88576fd962683eca97d280a52e1fc10acef7",
+      "width": 9933,
+      "height": 7017,
+      "projectMapping": {
+        "slug": "foubert",
+        "status": "provisional"
+      },
+      "mappingEvidence": "Brief 10 maps the FOUBERT source folder to the existing Foubert case study; the individual source still needs a visual and caption comparison.",
+      "visualType": "drawing-or-sheet",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+    },
+    {
+      "source": "Images HQ/FOUBERT/20260129_BLM_FOU_PRO_Plan de niveaux_merge [1-20] [1-15]_page-0013.jpg",
+      "sha256": "e7e2bd80a685fdf208efc3061ae6afda3a963bb0c82e614c4ca31d079f2c5481",
+      "width": 4961,
+      "height": 3508,
+      "projectMapping": {
+        "slug": "foubert",
+        "status": "provisional"
+      },
+      "mappingEvidence": "Brief 10 maps the FOUBERT source folder to the existing Foubert case study; the individual source still needs a visual and caption comparison.",
+      "visualType": "drawing-or-sheet",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+    },
+    {
+      "source": "Images HQ/FOUBERT/20260129_BLM_FOU_PRO_Plan de niveaux_merge [1-20] [1-15]_page-0014.jpg",
+      "sha256": "79461ece7833a0f799337bfb7e517d5e9037adaed0521cd3ba1389bd03eacff5",
+      "width": 4961,
+      "height": 3508,
+      "projectMapping": {
+        "slug": "foubert",
+        "status": "provisional"
+      },
+      "mappingEvidence": "Brief 10 maps the FOUBERT source folder to the existing Foubert case study; the individual source still needs a visual and caption comparison.",
+      "visualType": "drawing-or-sheet",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+    },
+    {
+      "source": "Images HQ/FOUBERT/20260129_BLM_FOU_PRO_Plan de niveaux_merge [1-20] [1-15]_page-0015.jpg",
+      "sha256": "7452f58be6f3a73e991cf43743754e45895c59fff0bc3db6407785bb89e9f617",
+      "width": 4961,
+      "height": 3508,
+      "projectMapping": {
+        "slug": "foubert",
+        "status": "provisional"
+      },
+      "mappingEvidence": "Brief 10 maps the FOUBERT source folder to the existing Foubert case study; the individual source still needs a visual and caption comparison.",
+      "visualType": "drawing-or-sheet",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+    },
+    {
+      "source": "Images HQ/FOUBERT/20260129_BLM_FOU_PRO_Plan de niveaux_merge [1-20] [16-20]_page-0001.jpg",
+      "sha256": "4b01dfbb61df42e74f4e1ebb675a5ac0892150544c55e7c6dd42f7ad848aa4ea",
+      "width": 4961,
+      "height": 3508,
+      "projectMapping": {
+        "slug": "foubert",
+        "status": "provisional"
+      },
+      "mappingEvidence": "Brief 10 maps the FOUBERT source folder to the existing Foubert case study; the individual source still needs a visual and caption comparison.",
+      "visualType": "drawing-or-sheet",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+    },
+    {
+      "source": "Images HQ/FOUBERT/20260129_BLM_FOU_PRO_Plan de niveaux_merge [1-20] [16-20]_page-0002.jpg",
+      "sha256": "e73c0192dfc444974f492d4d54b030eacc2056d9f37a9f513b744606a3607629",
+      "width": 4961,
+      "height": 3508,
+      "projectMapping": {
+        "slug": "foubert",
+        "status": "provisional"
+      },
+      "mappingEvidence": "Brief 10 maps the FOUBERT source folder to the existing Foubert case study; the individual source still needs a visual and caption comparison.",
+      "visualType": "drawing-or-sheet",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+    },
+    {
+      "source": "Images HQ/FOUBERT/20260129_BLM_FOU_PRO_Plan de niveaux_merge [1-20] [16-20]_page-0003.jpg",
+      "sha256": "698a3e64cc3f54c0201542c591b6df868b6e00f333548eaed7da773f80355bc9",
+      "width": 9933,
+      "height": 7017,
+      "projectMapping": {
+        "slug": "foubert",
+        "status": "provisional"
+      },
+      "mappingEvidence": "Brief 10 maps the FOUBERT source folder to the existing Foubert case study; the individual source still needs a visual and caption comparison.",
+      "visualType": "drawing-or-sheet",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+    },
+    {
+      "source": "Images HQ/FOUBERT/20260129_BLM_FOU_PRO_Plan de niveaux_merge [1-20] [16-20]_page-0004.jpg",
+      "sha256": "fb5e35be0551a05e73c7f9d378f90d12c36564529e5560bf16374f4364d792eb",
+      "width": 9933,
+      "height": 7017,
+      "projectMapping": {
+        "slug": "foubert",
+        "status": "provisional"
+      },
+      "mappingEvidence": "Brief 10 maps the FOUBERT source folder to the existing Foubert case study; the individual source still needs a visual and caption comparison.",
+      "visualType": "drawing-or-sheet",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+    },
+    {
+      "source": "Images HQ/FOUBERT/20260129_BLM_FOU_PRO_Plan de niveaux_merge [1-20] [16-20]_page-0005.jpg",
+      "sha256": "a7e552375f367b84339de724d4680fb00a557c0a0f9d09dcf39cbc06b95e545c",
+      "width": 9933,
+      "height": 7017,
+      "projectMapping": {
+        "slug": "foubert",
+        "status": "provisional"
+      },
+      "mappingEvidence": "Brief 10 maps the FOUBERT source folder to the existing Foubert case study; the individual source still needs a visual and caption comparison.",
+      "visualType": "drawing-or-sheet",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+    },
+    {
+      "source": "Images HQ/FOUBERT/20260129_BLM_FOU_PRO_Plan de niveaux_merge [21-25]_page-0001.jpg",
+      "sha256": "704a145f751bbd1a85ad7afd7f161a0248e837641606016a4f69b8b817ac24e0",
+      "width": 9933,
+      "height": 7017,
+      "projectMapping": {
+        "slug": "foubert",
+        "status": "provisional"
+      },
+      "mappingEvidence": "Brief 10 maps the FOUBERT source folder to the existing Foubert case study; the individual source still needs a visual and caption comparison.",
+      "visualType": "drawing-or-sheet",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+    },
+    {
+      "source": "Images HQ/FOUBERT/20260129_BLM_FOU_PRO_Plan de niveaux_merge [21-25]_page-0002.jpg",
+      "sha256": "b4fa1a421e5f3833f16b8e7418c2c8c15363aea19328b4547faad9d627267df4",
+      "width": 9933,
+      "height": 7017,
+      "projectMapping": {
+        "slug": "foubert",
+        "status": "provisional"
+      },
+      "mappingEvidence": "Brief 10 maps the FOUBERT source folder to the existing Foubert case study; the individual source still needs a visual and caption comparison.",
+      "visualType": "drawing-or-sheet",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+    },
+    {
+      "source": "Images HQ/FOUBERT/20260129_BLM_FOU_PRO_Plan de niveaux_merge [21-25]_page-0004.jpg",
+      "sha256": "ad636930cc789490147c1be0f574f4f379b567a7cdcb6791ae2ceea58e8332df",
+      "width": 4961,
+      "height": 3508,
+      "projectMapping": {
+        "slug": "foubert",
+        "status": "provisional"
+      },
+      "mappingEvidence": "Brief 10 maps the FOUBERT source folder to the existing Foubert case study; the individual source still needs a visual and caption comparison.",
+      "visualType": "drawing-or-sheet",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+    },
+    {
+      "source": "Images HQ/FOUBERT/20260129_BLM_FOU_PRO_Plan de niveaux_merge [21-25]_page-0005.jpg",
+      "sha256": "df0e1afbb05acf606f0ad4ed5485986a1a709ff7723601b825fd69371e70f5a9",
+      "width": 4961,
+      "height": 3508,
+      "projectMapping": {
+        "slug": "foubert",
+        "status": "provisional"
+      },
+      "mappingEvidence": "Brief 10 maps the FOUBERT source folder to the existing Foubert case study; the individual source still needs a visual and caption comparison.",
+      "visualType": "drawing-or-sheet",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+    }
+  ]
+}

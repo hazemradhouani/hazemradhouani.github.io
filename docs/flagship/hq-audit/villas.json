@@ -1,0 +1,121 @@
+{
+  "version": 1,
+  "sourceRoot": "Images HQ",
+  "folder": "VILLAS",
+  "assets": [
+    {
+      "source": "Images HQ/VILLAS/2025 - Hazem radhouani - Portfolio - HQ [31-35]_page-0001.jpg",
+      "sha256": "7f599edc323b9f6ce6c625584fae1a8d16915413edb48bc58a6d6cbe35199dc0",
+      "width": 3508,
+      "height": 2481,
+      "projectMapping": {
+        "slug": "papillon",
+        "status": "provisional"
+      },
+      "mappingEvidence": "Brief 10 maps the VILLAS source folder to the existing Villa Papillon case study; the individual source still needs a visual and caption comparison.",
+      "visualType": "drawing-or-sheet",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+    },
+    {
+      "source": "Images HQ/VILLAS/2_page-0001.jpg",
+      "sha256": "3ebb68c361ce4e8296f6e44e99a1632d2395bd617247a541583a1b2fbbf0d5b4",
+      "width": 4962,
+      "height": 3509,
+      "projectMapping": {
+        "slug": "papillon",
+        "status": "provisional"
+      },
+      "mappingEvidence": "Brief 10 maps the VILLAS source folder to the existing Villa Papillon case study; the individual source still needs a visual and caption comparison.",
+      "visualType": "drawing-or-sheet",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+    },
+    {
+      "source": "Images HQ/VILLAS/Image_19(1).png",
+      "sha256": "e84263344eda2cbecda9f64beed744a8db11e4b62bf8ed33fd94c6039ad77c04",
+      "width": 3840,
+      "height": 2160,
+      "projectMapping": {
+        "slug": "papillon",
+        "status": "provisional"
+      },
+      "mappingEvidence": "Brief 10 maps the VILLAS source folder to the existing Villa Papillon case study; the individual source still needs a visual and caption comparison.",
+      "visualType": "unreviewed",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+    },
+    {
+      "source": "Images HQ/VILLAS/Image_20(1).png",
+      "sha256": "4841e81e7f355f452a2200e55debc6539e457b737bf08b39e21776158a88bbad",
+      "width": 3840,
+      "height": 2160,
+      "projectMapping": {
+        "slug": "papillon",
+        "status": "provisional"
+      },
+      "mappingEvidence": "Brief 10 maps the VILLAS source folder to the existing Villa Papillon case study; the individual source still needs a visual and caption comparison.",
+      "visualType": "unreviewed",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+    },
+    {
+      "source": "Images HQ/VILLAS/Image_21(1).png",
+      "sha256": "89a69cafbbc56a1f361e784ce905034842ffce3cdad2fb1340f1121b2b48d998",
+      "width": 3840,
+      "height": 2160,
+      "projectMapping": {
+        "slug": "papillon",
+        "status": "provisional"
+      },
+      "mappingEvidence": "Brief 10 maps the VILLAS source folder to the existing Villa Papillon case study; the individual source still needs a visual and caption comparison.",
+      "visualType": "unreviewed",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+    },
+    {
+      "source": "Images HQ/VILLAS/Image_28.png",
+      "sha256": "56921cbe0cbf8b3a9d906d0ddb4ee9f08d9c5bf32358adfbbe60881a4c0c41a0",
+      "width": 3840,
+      "height": 2160,
+      "projectMapping": {
+        "slug": "papillon",
+        "status": "provisional"
+      },
+      "mappingEvidence": "Brief 10 maps the VILLAS source folder to the existing Villa Papillon case study; the individual source still needs a visual and caption comparison.",
+      "visualType": "unreviewed",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+    }
+  ]
+}

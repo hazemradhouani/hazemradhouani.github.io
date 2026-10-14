@@ -1,0 +1,197 @@
+{
+  "version": 1,
+  "sourceRoot": "Images HQ",
+  "folder": "BELHOMME",
+  "assets": [
+    {
+      "source": "Images HQ/BELHOMME/ANX1_merge [1-30]_page-0026.jpg",
+      "sha256": "5c333fbe0264ef8b432720efaf58ef2253c7d436c960ae733765f2cbf47eefb3",
+      "width": 4961,
+      "height": 3508,
+      "projectMapping": {
+        "slug": "belhomme",
+        "status": "provisional"
+      },
+      "mappingEvidence": "Brief 10 maps the BELHOMME source folder to the existing Belhomme case study; the individual source still needs a visual and caption comparison.",
+      "visualType": "drawing-or-sheet",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+    },
+    {
+      "source": "Images HQ/BELHOMME/ANX1_merge [1-30]_page-0029.jpg",
+      "sha256": "db44c23531367efa3122556e416a2a4e1e095db5691ee5b5aaa35c61f7d58445",
+      "width": 4961,
+      "height": 3508,
+      "projectMapping": {
+        "slug": "belhomme",
+        "status": "provisional"
+      },
+      "mappingEvidence": "Brief 10 maps the BELHOMME source folder to the existing Belhomme case study; the individual source still needs a visual and caption comparison.",
+      "visualType": "drawing-or-sheet",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+    },
+    {
+      "source": "Images HQ/BELHOMME/ANX1_merge [1-30]_page-0030.jpg",
+      "sha256": "83af8ee170ee37eb3653211f1e204f0058aeff26a8d2d5b5015dd67884411cb7",
+      "width": 4961,
+      "height": 3508,
+      "projectMapping": {
+        "slug": "belhomme",
+        "status": "provisional"
+      },
+      "mappingEvidence": "Brief 10 maps the BELHOMME source folder to the existing Belhomme case study; the individual source still needs a visual and caption comparison.",
+      "visualType": "drawing-or-sheet",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+    },
+    {
+      "source": "Images HQ/BELHOMME/ANX1_merge [31-60]_page-0001.jpg",
+      "sha256": "1b745d25330ec5206b45b8a3f503d5323412188ec5345cd34eae1c455eccbf8f",
+      "width": 4961,
+      "height": 3508,
+      "projectMapping": {
+        "slug": "belhomme",
+        "status": "provisional"
+      },
+      "mappingEvidence": "Brief 10 maps the BELHOMME source folder to the existing Belhomme case study; the individual source still needs a visual and caption comparison.",
+      "visualType": "drawing-or-sheet",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+    },
+    {
+      "source": "Images HQ/BELHOMME/ANX1_merge [31-60]_page-0002.jpg",
+      "sha256": "654e498b0dc7cfec98cdd42ab4624745a227c26eef96c413323c259f570327a3",
+      "width": 4961,
+      "height": 3508,
+      "projectMapping": {
+        "slug": "belhomme",
+        "status": "provisional"
+      },
+      "mappingEvidence": "Brief 10 maps the BELHOMME source folder to the existing Belhomme case study; the individual source still needs a visual and caption comparison.",
+      "visualType": "drawing-or-sheet",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+    },
+    {
+      "source": "Images HQ/BELHOMME/ANX1_merge [31-60]_page-0004.jpg",
+      "sha256": "7468aa2e31e240568155c73a65aa1055b24bc91d866dae40e5b589415724da5a",
+      "width": 4961,
+      "height": 3508,
+      "projectMapping": {
+        "slug": "belhomme",
+        "status": "provisional"
+      },
+      "mappingEvidence": "Brief 10 maps the BELHOMME source folder to the existing Belhomme case study; the individual source still needs a visual and caption comparison.",
+      "visualType": "drawing-or-sheet",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+    },
+    {
+      "source": "Images HQ/BELHOMME/ANX1_merge [31-60]_page-0005.jpg",
+      "sha256": "0beea6ef4038e5091414ba82907ae94a7d66a65df204e539d2ec339fe41688d8",
+      "width": 4961,
+      "height": 3508,
+      "projectMapping": {
+        "slug": "belhomme",
+        "status": "provisional"
+      },
+      "mappingEvidence": "Brief 10 maps the BELHOMME source folder to the existing Belhomme case study; the individual source still needs a visual and caption comparison.",
+      "visualType": "drawing-or-sheet",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+    },
+    {
+      "source": "Images HQ/BELHOMME/ANX1_merge [31-60]_page-0017.jpg",
+      "sha256": "a4bcda21cb9af099fcd09068ef2ecc49feea639d6b6ad60682fa98a75ec1c7de",
+      "width": 4961,
+      "height": 3508,
+      "projectMapping": {
+        "slug": "belhomme",
+        "status": "provisional"
+      },
+      "mappingEvidence": "Brief 10 maps the BELHOMME source folder to the existing Belhomme case study; the individual source still needs a visual and caption comparison.",
+      "visualType": "drawing-or-sheet",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+    },
+    {
+      "source": "Images HQ/BELHOMME/ANX1_merge [31-60]_page-0018.jpg",
+      "sha256": "6b754afebfc7475ea42ce6e620559b5916c1eb0b33cbc8370e36010c90e6b57b",
+      "width": 4961,
+      "height": 3508,
+      "projectMapping": {
+        "slug": "belhomme",
+        "status": "provisional"
+      },
+      "mappingEvidence": "Brief 10 maps the BELHOMME source folder to the existing Belhomme case study; the individual source still needs a visual and caption comparison.",
+      "visualType": "drawing-or-sheet",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+    },
+    {
+      "source": "Images HQ/BELHOMME/ANX1_merge [31-60]_page-0019.jpg",
+      "sha256": "334f406fc353a24a4a256e9ddc729039e33a377493b4d273f0531fa3f27e75e8",
+      "width": 4961,
+      "height": 3508,
+      "projectMapping": {
+        "slug": "belhomme",
+        "status": "provisional"
+      },
+      "mappingEvidence": "Brief 10 maps the BELHOMME source folder to the existing Belhomme case study; the individual source still needs a visual and caption comparison.",
+      "visualType": "drawing-or-sheet",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+    }
+  ]
+}

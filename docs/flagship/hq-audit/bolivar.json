@@ -1,0 +1,387 @@
+{
+  "version": 1,
+  "sourceRoot": "Images HQ",
+  "folder": "BOLIVAR",
+  "assets": [
+    {
+      "source": "Images HQ/BOLIVAR/ANX1-PC - PLANS PROJET_pages-to-jpg-0005.jpg",
+      "sha256": "46bad3c8746e142717c35735cf1baf84490bb186966fd808ab0ab6555d4eeeac",
+      "width": 4962,
+      "height": 3509,
+      "projectMapping": {
+        "slug": "bolivar",
+        "status": "provisional"
+      },
+      "mappingEvidence": "Brief 10 maps the BOLIVAR source folder to the existing Bolívar case study; the individual source still needs a visual and caption comparison.",
+      "visualType": "drawing-or-sheet",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+    },
+    {
+      "source": "Images HQ/BOLIVAR/ANX1-PC - PLANS PROJET_pages-to-jpg-0008.jpg",
+      "sha256": "65ce9845494e6e1adb01b56d91172243ef024bddae3888193252346386d786c3",
+      "width": 4962,
+      "height": 3509,
+      "projectMapping": {
+        "slug": "bolivar",
+        "status": "provisional"
+      },
+      "mappingEvidence": "Brief 10 maps the BOLIVAR source folder to the existing Bolívar case study; the individual source still needs a visual and caption comparison.",
+      "visualType": "drawing-or-sheet",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+    },
+    {
+      "source": "Images HQ/BOLIVAR/NB_StudioBelem_SimonBolivar_E-01_AvSimonBolivar-Reprise2_S2_20240522.jpg",
+      "sha256": "e43b8687e86088f5e9c5330aa7a779b25b9168e3f97d0289d98c448bfd5a2504",
+      "width": 4060,
+      "height": 5413,
+      "projectMapping": {
+        "slug": "bolivar",
+        "status": "confirmed"
+      },
+      "mappingEvidence": "Exact visual comparison confirms this source is the existing Bolívar street render (images/bolivar/bolivar-street-render.jpg); the case-study source is pdf2026:p18.",
+      "visualType": "render",
+      "textDisposition": "no-text",
+      "duplicateOf": null,
+      "disposition": "approved",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "The existing Bolívar figure identifies this matching render as Render: Studio BELEM (content/projects/bolivar.json; source pdf2026:p18).",
+      "roleEvidence": "The existing Bolívar record documents Hazem's 3D modelling and graphic-production role for the permit submission (content/projects/bolivar.json; source pdf2026:p17).",
+      "reason": "Approved after exact visual comparison to the existing credited street-render figure; it is a full scene with no crop and adds no new project claim."
+    },
+    {
+      "source": "Images HQ/BOLIVAR/NB_StudioBelem_SimonBolivar_E-02_AvSimonBolivar-Reprise2V-Sun1_20240522-mod.jpg",
+      "sha256": "32f29b1836754eb4322b2ba0212a2b9a2d9e8cfbf33ec15f51d964e2abdb9710",
+      "width": 3380,
+      "height": 4500,
+      "projectMapping": {
+        "slug": "bolivar",
+        "status": "confirmed"
+      },
+      "mappingEvidence": "Exact visual comparison confirms this source is the existing Bolívar courtyard hero (images/bolivar/bolivar-courtyard-render.jpg); the case-study source is pdf2026:p17.",
+      "visualType": "render",
+      "textDisposition": "no-text",
+      "duplicateOf": null,
+      "disposition": "approved",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "The existing Bolívar hero identifies this matching render as Render: Studio BELEM (content/projects/bolivar.json; source pdf2026:p17).",
+      "roleEvidence": "The existing Bolívar record documents Hazem's 3D modelling and graphic-production role for the permit submission (content/projects/bolivar.json; source pdf2026:p17).",
+      "reason": "Approved after exact visual comparison to the existing credited courtyard hero; it is a full scene with no crop and adds no new project claim."
+    },
+    {
+      "source": "Images HQ/BOLIVAR/PC3 - 1 - COUPES DU TERRAIN AVEC IMPLANTATION DU PROJET-A_page-0002.jpg",
+      "sha256": "28a119d1b6a8fd3a8c906dfdbbf3578ecd5fa20460c32b6aa21f53e1dc771969",
+      "width": 4963,
+      "height": 3509,
+      "projectMapping": {
+        "slug": "bolivar",
+        "status": "provisional"
+      },
+      "mappingEvidence": "Brief 10 maps the BOLIVAR source folder to the existing Bolívar case study; the individual source still needs a visual and caption comparison.",
+      "visualType": "drawing-or-sheet",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+    },
+    {
+      "source": "Images HQ/BOLIVAR/PC3 - 1 - COUPES DU TERRAIN AVEC IMPLANTATION DU PROJET-A_page-0004.jpg",
+      "sha256": "a376fbf37c398f4c689f931a0995e168d92013141401fc7ca32a3b2bb0ec7451",
+      "width": 4963,
+      "height": 3509,
+      "projectMapping": {
+        "slug": "bolivar",
+        "status": "provisional"
+      },
+      "mappingEvidence": "Brief 10 maps the BOLIVAR source folder to the existing Bolívar case study; the individual source still needs a visual and caption comparison.",
+      "visualType": "drawing-or-sheet",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+    },
+    {
+      "source": "Images HQ/BOLIVAR/PC3 - 1 - COUPES DU TERRAIN AVEC IMPLANTATION DU PROJET-A_page-0005.jpg",
+      "sha256": "4ed955a3666a17d53a0a2b54a8ae70f661465d611ae49ba4956147eafeb3aef6",
+      "width": 4963,
+      "height": 3509,
+      "projectMapping": {
+        "slug": "bolivar",
+        "status": "provisional"
+      },
+      "mappingEvidence": "Brief 10 maps the BOLIVAR source folder to the existing Bolívar case study; the individual source still needs a visual and caption comparison.",
+      "visualType": "drawing-or-sheet",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+    },
+    {
+      "source": "Images HQ/BOLIVAR/PC3 - 1 - COUPES DU TERRAIN AVEC IMPLANTATION DU PROJET-A_page-0006.jpg",
+      "sha256": "8961c594c123a96b1ab5d5e20bea2b8ab17d4d2d0566f3a7105aa5051b56d226",
+      "width": 4963,
+      "height": 3509,
+      "projectMapping": {
+        "slug": "bolivar",
+        "status": "provisional"
+      },
+      "mappingEvidence": "Brief 10 maps the BOLIVAR source folder to the existing Bolívar case study; the individual source still needs a visual and caption comparison.",
+      "visualType": "drawing-or-sheet",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+    },
+    {
+      "source": "Images HQ/BOLIVAR/PC3 - 1 - COUPES DU TERRAIN AVEC IMPLANTATION DU PROJET-A_page-0008.jpg",
+      "sha256": "e028f6b03a2636542ee9179f6cbb1d4a73b58fca56693d8b8e8f3cb6392e5a43",
+      "width": 4963,
+      "height": 3509,
+      "projectMapping": {
+        "slug": "bolivar",
+        "status": "provisional"
+      },
+      "mappingEvidence": "Brief 10 maps the BOLIVAR source folder to the existing Bolívar case study; the individual source still needs a visual and caption comparison.",
+      "visualType": "drawing-or-sheet",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+    },
+    {
+      "source": "Images HQ/BOLIVAR/PC4 - Notice decrivant le terrain et présentant le projet-B_page-0011.jpg",
+      "sha256": "f68fe1bc5d01c1d467079cd3b7c5a1d58f65e80f17fd041b729fbc5a7737876d",
+      "width": 2481,
+      "height": 3508,
+      "projectMapping": {
+        "slug": "bolivar",
+        "status": "provisional"
+      },
+      "mappingEvidence": "Brief 10 maps the BOLIVAR source folder to the existing Bolívar case study; the individual source still needs a visual and caption comparison.",
+      "visualType": "drawing-or-sheet",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+    },
+    {
+      "source": "Images HQ/BOLIVAR/PC5-UN PLAN DES FACADES ET DES TOITURES PROJET-A_page-0002.jpg",
+      "sha256": "bef53fb3747891244d94e769538e2a1e98331f20fbdbe10b068f3c8aacdf2dd4",
+      "width": 4963,
+      "height": 3509,
+      "projectMapping": {
+        "slug": "bolivar",
+        "status": "provisional"
+      },
+      "mappingEvidence": "Brief 10 maps the BOLIVAR source folder to the existing Bolívar case study; the individual source still needs a visual and caption comparison.",
+      "visualType": "drawing-or-sheet",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+    },
+    {
+      "source": "Images HQ/BOLIVAR/PC5-UN PLAN DES FACADES ET DES TOITURES PROJET-A_page-0003.jpg",
+      "sha256": "23d7d614ebb9dd69158ccc4243ec81b2bb9d75e676663a635c8111747522011b",
+      "width": 4963,
+      "height": 3509,
+      "projectMapping": {
+        "slug": "bolivar",
+        "status": "provisional"
+      },
+      "mappingEvidence": "Brief 10 maps the BOLIVAR source folder to the existing Bolívar case study; the individual source still needs a visual and caption comparison.",
+      "visualType": "drawing-or-sheet",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+    },
+    {
+      "source": "Images HQ/BOLIVAR/PC5-UN PLAN DES FACADES ET DES TOITURES PROJET-A_page-0004.jpg",
+      "sha256": "8b3239cd9bbea512b3f3814851a35fc6a943f37e2a724ab29b79a21b0ab595ec",
+      "width": 4963,
+      "height": 3509,
+      "projectMapping": {
+        "slug": "bolivar",
+        "status": "provisional"
+      },
+      "mappingEvidence": "Brief 10 maps the BOLIVAR source folder to the existing Bolívar case study; the individual source still needs a visual and caption comparison.",
+      "visualType": "drawing-or-sheet",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+    },
+    {
+      "source": "Images HQ/BOLIVAR/PC5-UN PLAN DES FACADES ET DES TOITURES PROJET-A_page-0005.jpg",
+      "sha256": "fd63fedbbbf79185cee171dc9f032a0b7982a33f313d4ffe383b8084d9c9aa29",
+      "width": 4963,
+      "height": 3509,
+      "projectMapping": {
+        "slug": "bolivar",
+        "status": "provisional"
+      },
+      "mappingEvidence": "Brief 10 maps the BOLIVAR source folder to the existing Bolívar case study; the individual source still needs a visual and caption comparison.",
+      "visualType": "drawing-or-sheet",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+    },
+    {
+      "source": "Images HQ/BOLIVAR/PC5-UN PLAN DES FACADES ET DES TOITURES PROJET-A_page-0006.jpg",
+      "sha256": "6b91d59bc3dfdda9c34c915f30cd465aef98ce4dd5afacb4618e374803d10cf2",
+      "width": 4963,
+      "height": 3509,
+      "projectMapping": {
+        "slug": "bolivar",
+        "status": "provisional"
+      },
+      "mappingEvidence": "Brief 10 maps the BOLIVAR source folder to the existing Bolívar case study; the individual source still needs a visual and caption comparison.",
+      "visualType": "drawing-or-sheet",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+    },
+    {
+      "source": "Images HQ/BOLIVAR/PC5-UN PLAN DES FACADES ET DES TOITURES PROJET-A_page-0007.jpg",
+      "sha256": "e2625040c3164a7f21e70ad81cb86fac2999aed1d870d404e821c3f17e0fcf6b",
+      "width": 4963,
+      "height": 3509,
+      "projectMapping": {
+        "slug": "bolivar",
+        "status": "provisional"
+      },
+      "mappingEvidence": "Brief 10 maps the BOLIVAR source folder to the existing Bolívar case study; the individual source still needs a visual and caption comparison.",
+      "visualType": "drawing-or-sheet",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+    },
+    {
+      "source": "Images HQ/BOLIVAR/PC5-UN PLAN DES FACADES ET DES TOITURES PROJET-A_page-0008.jpg",
+      "sha256": "01deedeb1618d00e024f7e3fc1a4c8f68551f5b8126243352ccd9653820da468",
+      "width": 4963,
+      "height": 3509,
+      "projectMapping": {
+        "slug": "bolivar",
+        "status": "provisional"
+      },
+      "mappingEvidence": "Brief 10 maps the BOLIVAR source folder to the existing Bolívar case study; the individual source still needs a visual and caption comparison.",
+      "visualType": "drawing-or-sheet",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+    },
+    {
+      "source": "Images HQ/BOLIVAR/PC5-UN PLAN DES FACADES ET DES TOITURES PROJET-A_page-0010.jpg",
+      "sha256": "ff30fc512e5aaf0c8cfdaac7688ffc4483d76dcdce38394636a68cbbe2d3d82b",
+      "width": 4963,
+      "height": 3509,
+      "projectMapping": {
+        "slug": "bolivar",
+        "status": "provisional"
+      },
+      "mappingEvidence": "Brief 10 maps the BOLIVAR source folder to the existing Bolívar case study; the individual source still needs a visual and caption comparison.",
+      "visualType": "drawing-or-sheet",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+    },
+    {
+      "source": "Images HQ/BOLIVAR/PC6 - Insertion du projet dans l'environnement-A_page-0004.jpg",
+      "sha256": "80e806fbe79bee98e2dfabb32b5f2b92d2cb30e4c560971857b71ec1cbb90da9",
+      "width": 4963,
+      "height": 3509,
+      "projectMapping": {
+        "slug": "bolivar",
+        "status": "provisional"
+      },
+      "mappingEvidence": "Brief 10 maps the BOLIVAR source folder to the existing Bolívar case study; the individual source still needs a visual and caption comparison.",
+      "visualType": "drawing-or-sheet",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+    },
+    {
+      "source": "Images HQ/BOLIVAR/PC6 - Insertion du projet dans l'environnement-A_page-0005.jpg",
+      "sha256": "b4f10fa15ed1ea34785a505f45350e8699883d409f4eb504ec68ac2feb5a118d",
+      "width": 4963,
+      "height": 3509,
+      "projectMapping": {
+        "slug": "bolivar",
+        "status": "provisional"
+      },
+      "mappingEvidence": "Brief 10 maps the BOLIVAR source folder to the existing Bolívar case study; the individual source still needs a visual and caption comparison.",
+      "visualType": "drawing-or-sheet",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+    }
+  ]
+}

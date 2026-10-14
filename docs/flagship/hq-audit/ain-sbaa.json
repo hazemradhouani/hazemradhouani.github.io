@@ -1,0 +1,159 @@
+{
+  "version": 1,
+  "sourceRoot": "Images HQ",
+  "folder": "Ain Sbaa",
+  "assets": [
+    {
+      "source": "Images HQ/Ain Sbaa/COUPE AA.jpg",
+      "sha256": "accc30a6c989bc4fa4e16a3b4079e1625964b72a56836778af6d33eeb52cfbf4",
+      "width": 9038,
+      "height": 1342,
+      "projectMapping": {
+        "slug": "ain-sebaa",
+        "status": "provisional"
+      },
+      "mappingEvidence": "Brief 10 maps the source folder to the existing Aïn Sebaâ case study; the individual source still needs a visual and caption comparison.",
+      "visualType": "drawing-or-sheet",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+    },
+    {
+      "source": "Images HQ/Ain Sbaa/Coupe and facade.jpg",
+      "sha256": "c472e62676a05dc092813572693a82d271c4772cc61225d60d596a583b50c51f",
+      "width": 4180,
+      "height": 3198,
+      "projectMapping": {
+        "slug": "ain-sebaa",
+        "status": "provisional"
+      },
+      "mappingEvidence": "Brief 10 maps the source folder to the existing Aïn Sebaâ case study; the individual source still needs a visual and caption comparison.",
+      "visualType": "drawing-or-sheet",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+    },
+    {
+      "source": "Images HQ/Ain Sbaa/Flux.jpg",
+      "sha256": "6224b5dc7ca7c3d9dac92b11128eba035cde77657a9be2a4cbd8edbce40b81e1",
+      "width": 3311,
+      "height": 2335,
+      "projectMapping": {
+        "slug": "ain-sebaa",
+        "status": "provisional"
+      },
+      "mappingEvidence": "Brief 10 maps the source folder to the existing Aïn Sebaâ case study; the individual source still needs a visual and caption comparison.",
+      "visualType": "drawing-or-sheet",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+    },
+    {
+      "source": "Images HQ/Ain Sbaa/PLAN RDC.jpg",
+      "sha256": "c88edd2555ef3e87e5221cd169302fcb5ef32d2a1aaa04248bd004dc36c8c2c5",
+      "width": 3678,
+      "height": 3688,
+      "projectMapping": {
+        "slug": "ain-sebaa",
+        "status": "provisional"
+      },
+      "mappingEvidence": "Brief 10 maps the source folder to the existing Aïn Sebaâ case study; the individual source still needs a visual and caption comparison.",
+      "visualType": "drawing-or-sheet",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+    },
+    {
+      "source": "Images HQ/Ain Sbaa/Scene 69.png",
+      "sha256": "6a41209c227bd4f8801e1f1186455765325d7ea3d61eaa40b829b5f9435b8b9b",
+      "width": 3840,
+      "height": 2493,
+      "projectMapping": {
+        "slug": "ain-sebaa",
+        "status": "provisional"
+      },
+      "mappingEvidence": "Brief 10 maps the source folder to the existing Aïn Sebaâ case study; the individual source still needs a visual and caption comparison.",
+      "visualType": "render",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+    },
+    {
+      "source": "Images HQ/Ain Sbaa/Scene 72_1.png",
+      "sha256": "fe3756a23fd210f600aaa7f67c199b8cafa574be4b7df34536d63a2facc580da",
+      "width": 3840,
+      "height": 2493,
+      "projectMapping": {
+        "slug": "ain-sebaa",
+        "status": "provisional"
+      },
+      "mappingEvidence": "Brief 10 maps the source folder to the existing Aïn Sebaâ case study; the individual source still needs a visual and caption comparison.",
+      "visualType": "render",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+    },
+    {
+      "source": "Images HQ/Ain Sbaa/Structure.jpg",
+      "sha256": "36ff242723eb7fa132c642b269e69323cac48d33780edf5bcc77262465c9e7f5",
+      "width": 3921,
+      "height": 4367,
+      "projectMapping": {
+        "slug": "ain-sebaa",
+        "status": "provisional"
+      },
+      "mappingEvidence": "Brief 10 maps the source folder to the existing Aïn Sebaâ case study; the individual source still needs a visual and caption comparison.",
+      "visualType": "drawing-or-sheet",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+    },
+    {
+      "source": "Images HQ/Ain Sbaa/plan masse.jpg",
+      "sha256": "fc334595eb479a2e15d4051057e11f7690683df983c37e5866d8bcd88f57fff2",
+      "width": 3334,
+      "height": 2404,
+      "projectMapping": {
+        "slug": "ain-sebaa",
+        "status": "provisional"
+      },
+      "mappingEvidence": "Brief 10 maps the source folder to the existing Aïn Sebaâ case study; the individual source still needs a visual and caption comparison.",
+      "visualType": "drawing-or-sheet",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+    }
+  ]
+}

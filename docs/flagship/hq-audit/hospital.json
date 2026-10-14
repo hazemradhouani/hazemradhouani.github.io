@@ -1,0 +1,121 @@
+{
+  "version": 1,
+  "sourceRoot": "Images HQ",
+  "folder": "Hospital",
+  "assets": [
+    {
+      "source": "Images HQ/Hospital/A0 Plie [1]_page-0001.jpg",
+      "sha256": "fe8470a7e911dbbe10dce63c602a49c7a7d9d06de93a6dd6ae6f12a9e48013c3",
+      "width": 14044,
+      "height": 9934,
+      "projectMapping": {
+        "slug": "tamansourt",
+        "status": "provisional"
+      },
+      "mappingEvidence": "Brief 10 maps the Hospital source folder to the existing Tamansourt case study; the individual source still needs a visual and caption comparison.",
+      "visualType": "drawing-or-sheet",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+    },
+    {
+      "source": "Images HQ/Hospital/Scene 12_1.png",
+      "sha256": "79ec0c929ec047f529e45ae30037b9539425280679bffc251a6714161a512e8c",
+      "width": 5760,
+      "height": 3240,
+      "projectMapping": {
+        "slug": "tamansourt",
+        "status": "provisional"
+      },
+      "mappingEvidence": "Brief 10 maps the Hospital source folder to the existing Tamansourt case study; the individual source still needs a visual and caption comparison.",
+      "visualType": "render",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+    },
+    {
+      "source": "Images HQ/Hospital/Scene 14_1.png",
+      "sha256": "63bb03635d43f6b4118d457c1374c3840a284e0fc09cb183e526794f7e763f73",
+      "width": 5760,
+      "height": 3240,
+      "projectMapping": {
+        "slug": "tamansourt",
+        "status": "provisional"
+      },
+      "mappingEvidence": "Brief 10 maps the Hospital source folder to the existing Tamansourt case study; the individual source still needs a visual and caption comparison.",
+      "visualType": "render",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+    },
+    {
+      "source": "Images HQ/Hospital/Scene 24_1.png",
+      "sha256": "ae5f41817374457cc1b2d0f0c6f2496642dd0e3a48f261ae875dbeca88ec3aa8",
+      "width": 5760,
+      "height": 3240,
+      "projectMapping": {
+        "slug": "tamansourt",
+        "status": "provisional"
+      },
+      "mappingEvidence": "Brief 10 maps the Hospital source folder to the existing Tamansourt case study; the individual source still needs a visual and caption comparison.",
+      "visualType": "render",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+    },
+    {
+      "source": "Images HQ/Hospital/Scene 32.png",
+      "sha256": "37db783dbdd893827b8852a56d2022ac719567aeea2a27f54a2660632b0bcfef",
+      "width": 5760,
+      "height": 3836,
+      "projectMapping": {
+        "slug": "tamansourt",
+        "status": "provisional"
+      },
+      "mappingEvidence": "Brief 10 maps the Hospital source folder to the existing Tamansourt case study; the individual source still needs a visual and caption comparison.",
+      "visualType": "render",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+    },
+    {
+      "source": "Images HQ/Hospital/Scene 9_1.png",
+      "sha256": "24aeb6dc157dad3ecfb23ccce27b9c9d33b6f24924e4920f2b901a3f827cb08a",
+      "width": 5760,
+      "height": 3240,
+      "projectMapping": {
+        "slug": "tamansourt",
+        "status": "provisional"
+      },
+      "mappingEvidence": "Brief 10 maps the Hospital source folder to the existing Tamansourt case study; the individual source still needs a visual and caption comparison.",
+      "visualType": "render",
+      "textDisposition": "review-required",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "not established",
+      "roleEvidence": "not established",
+      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+    }
+  ]
+}

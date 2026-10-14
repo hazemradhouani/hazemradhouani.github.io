@@ -5,3 +5,7 @@
 # Tooling scratch output
 /tools/.cache/
 node_modules/
+# Owner-supplied source libraries: immutable local inputs, never published (D48)
+/Images HQ/
+/Skills/
+/docs/Skills/
