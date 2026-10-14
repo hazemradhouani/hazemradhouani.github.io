@@ -2,11 +2,14 @@
 // Every image is placed at build time on the largest centred span that neither enlarges it nor makes it
 // taller than MAX_H at the 1280px canvas, so its edges fall on grid lines and nothing is cropped (D32).
 import { html, raw, inline, when } from '../lib/html.mjs';
+import fs from 'node:fs';
+import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { picture, dims, largest, shown, darkOf } from '../lib/images.mjs';
 import { loadCutoutConfig } from '../lib/cutout-config.mjs';
 // drawings excluded from cutouts on purpose (tools/cutout.json, tools/cutout.d); any other drawing must have its cutout
-const EXCLUDED = new Set(Object.keys(loadCutoutConfig(fileURLToPath(new URL('../..', import.meta.url))).exclude));
+const ROOT_DIR = fileURLToPath(new URL('../..', import.meta.url));
+const EXCLUDED = new Set(Object.keys(loadCutoutConfig(ROOT_DIR).exclude));
 const cutOrFail = (src) => { const rel = shown(src, true); if (rel === src && !EXCLUDED.has(src)) throw new Error(`No cutout for drawing ${src}: run npm run cutout`); return rel; };
 
 export const icon = (name, p) => raw(`<svg class="icon" width="16" height="16" aria-hidden="true" focusable="false"><use href="${p}images/icons.svg#${name}"></use></svg>`);
@@ -85,6 +88,27 @@ export function cells(items, { prefix, zoom = true, after = null, cls = '', scal
   return html`<div class="s-full cells${after ? ' cells--2' : ''}${scale ? ' cells--scale' : ''}${cls ? ' ' + cls : ''}" style="--n: ${n}; --n8: ${n8}; --n4: 1" data-rv>${out}</div>`;
 }
 
+/* ---------------------------------------------------------- labels re-set from a drawing (D49) */
+// A label removed from the pixels returns as real text at the place it was printed: the cutout's
+// sidecar gives the removed text's box as % of the cutout. Wide figures show the words in place;
+// narrow ones show numbered pins on the drawing and the words in a list below (container query).
+function labelsFor(rel, labels) {
+  if (!labels?.length) return [];
+  const side = JSON.parse(fs.readFileSync(path.join(ROOT_DIR, rel.replace(/\.png$/u, '.json')), 'utf8'));
+  return labels.map((l) => {
+    const box = side.labels?.find((b) => b.id === l.at);
+    if (!box) throw new Error(`${rel}: label "${l.text}" points at erase "${l.at}", which the cutout does not have`);
+    return { ...box, text: l.text, align: l.align === 'end' ? 'end' : 'start' };
+  });
+}
+function labelled(pic, rel, labels) {
+  const { w } = dims(rel);
+  const pos = (l) => `--x: ${l.x}%; --y: ${l.y}%; --w: ${l.w}%; --h: ${l.h}%`;
+  return html`<div class="lab lab--${darkOf(rel)}" style="--nw: ${w}px">${pic}<div class="lab__pins" aria-hidden="true">${labels.map((l, i) => html`<span class="lab__pin" style="${pos(l)}">${i + 1}</span>`)}</div><ol class="lab__list" aria-label="Labels on the drawing">${labels.map((l, i) => html`<li class="lab__item${l.align === 'end' ? ' lab__item--end' : ''}" style="${pos(l)}"><span class="lab__n" aria-hidden="true">${i + 1}</span>${l.text}</li>`)}</ol></div>`;
+}
+// a legend printed on the sheet, re-set as a list with the drawing's own colours
+const legendOf = (f) => (f.legend?.length ? html`<ul class="legend s-narrow" aria-label="Legend">${f.legend.map((it) => html`<li><span class="legend__sw" style="background: ${it.swatch}" aria-hidden="true"></span>${it.text}</li>`)}</ul>` : '');
+
 /* ---------------------------------------------------------- figures of a case study */
 const capOf = (f) => (f.title || f.caption || f.credit) ? html`<figcaption class="cap s-narrow">${when(f.title, () => html`<span class="cap__t">${f.title}.</span> `)}${inline(f.caption || '')}${when(f.credit, () => html` <span class="credit">${f.credit}.</span>`)}</figcaption>` : '';
 
@@ -100,7 +124,9 @@ export function figure(f, n, ctx) {
   const rel = drawing ? cutOrFail(f.src) : f.src;
   const { w, h } = dims(rel);
   const span = spanFor(w, h);
-  return html`<figure class="fig block wrap g" id="fig-${n}" data-rv><div class="s-${span}">${image(rel, { alt: f.alt, sz: sizesFor(span), prefix: p, zoom: true, title: f.title })}</div>${capOf(f)}</figure>`;
+  const pic = image(rel, { alt: f.alt, sz: sizesFor(span), prefix: p, zoom: true, title: f.title });
+  const labels = drawing ? labelsFor(rel, f.labels) : [];
+  return html`<figure class="fig block wrap g" id="fig-${n}" data-rv><div class="s-${span}">${labels.length ? labelled(pic, rel, labels) : pic}</div>${legendOf(f)}${capOf(f)}</figure>`;
 }
 
 /* ---------------------------------------------------------- heroes */

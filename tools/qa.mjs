@@ -128,7 +128,7 @@ else console.log('ok   theme interaction/fallback: keyboard, persistence, naviga
 const report = [];
 for (const url of urls) {
   const name = url.replace(BASE, '') || 'index';
-  const row = { page: name, overflow: [], brokenImgs: [], console: [], small: [], targets: [], axe: {}, crop: [], upscale: [], grid: [], palette: [], alpha: [], fringe: [], theme: [] };
+  const row = { page: name, overflow: [], brokenImgs: [], console: [], small: [], targets: [], axe: {}, crop: [], upscale: [], grid: [], palette: [], alpha: [], fringe: [], theme: [], labels: [] };
   for (const w of WIDTHS) {
     for (const theme of THEMES) {
     const ctx = await browser.newContext({ viewport: { width: w, height: w < 768 ? 812 : 900 }, deviceScaleFactor: 1, colorScheme: theme, reducedMotion: 'reduce' });
@@ -177,7 +177,7 @@ for (const url of urls) {
         ? new Set(['rgba(0, 0, 0, 0)', 'rgb(18, 19, 17)', 'rgb(247, 245, 239)', 'rgb(69, 70, 63)', 'rgba(18, 19, 17, 0.88)'])
         : new Set(['rgba(0, 0, 0, 0)', 'rgb(255, 255, 255)', 'rgb(17, 17, 17)', 'rgba(255, 255, 255, 0.86)']);
       if (innerWidth === 375 || innerWidth === 1440) for (const el of [document.documentElement, document.body, ...document.querySelectorAll('body *')]) {
-        if (el.closest('video, svg')) continue;
+        if (el.closest('video, svg, .legend__sw, .lab__pin')) continue;
         const c = getComputedStyle(el).backgroundColor; if (!ok.has(c)) out.palette.push(`${el.tagName.toLowerCase()}.${[...el.classList].join('.')} ${c}`);
       }
       // dark treatments (D50): inverted linework is filtered only in the dark scheme; the inspection
@@ -192,6 +192,17 @@ for (const url of urls) {
         if (theme === 'dark' && kind === 'invert-accent' && !/hue-rotate(180deg)/u.test(f)) out.theme.push(`${name} invert-accent without hue-rotate: ${f}`);
         if (theme === 'dark' && kind === 'field' && bg !== 'rgb(247, 245, 239)') out.theme.push(`${name} field drawing without its inspection field: ${bg}`);
         if (theme === 'dark' && kind !== 'field' && bg !== 'rgba(0, 0, 0, 0)') out.theme.push(`${name} ${kind} drawing has a background: ${bg}`);
+      }
+      // labels re-set from a drawing (D49): in place, they stay inside the drawing and never overlap
+      out.labels = [];
+      for (const lab of document.querySelectorAll('.lab')) {
+        const box = lab.getBoundingClientRect(); const items = [...lab.querySelectorAll('.lab__item')];
+        if (getComputedStyle(items[0] || lab).position !== 'absolute') continue;   // narrow: pins and a list
+        const rs = items.map((it) => it.getBoundingClientRect());
+        rs.forEach((r, i) => {
+          if (r.left < box.left - 1 || r.right > box.right + 1 || r.top < box.top - 1 || r.bottom > box.bottom + 1) out.labels.push(`"${items[i].textContent.trim()}" outside its drawing`);
+          for (let j = i + 1; j < rs.length; j++) { const q = rs[j]; if (r.left < q.right && q.left < r.right && r.top < q.bottom && q.top < r.bottom) out.labels.push(`"${items[i].textContent.trim()}" overlaps "${items[j].textContent.trim()}"`); }
+        });
       }
       if (de.getAttribute('data-theme') !== theme) out.theme.push(`resolved ${de.getAttribute('data-theme') || 'none'}, expected ${theme}`);
       if (getComputedStyle(de).colorScheme !== theme) out.theme.push(`color-scheme ${getComputedStyle(de).colorScheme}, expected ${theme}`);
@@ -208,7 +219,7 @@ for (const url of urls) {
       return out;
     }, theme);
     row.crop.push(...r.crop.map((s) => `${theme}/${w}: ${s}`)); row.upscale.push(...r.upscale.map((s) => `${theme}/${w}: ${s}`));
-    row.grid.push(...r.grid.map((s) => `${theme}/${w}: ${s}`)); row.palette.push(...r.palette.map((s) => `${theme}/${w}: ${s}`)); row.theme.push(...r.theme.map((s) => `${theme}/${w}: ${s}`));
+    row.grid.push(...r.grid.map((s) => `${theme}/${w}: ${s}`)); row.labels.push(...r.labels.map((s) => `${theme}/${w}: ${s}`)); row.palette.push(...r.palette.map((s) => `${theme}/${w}: ${s}`)); row.theme.push(...r.theme.map((s) => `${theme}/${w}: ${s}`));
     // alpha: every cutout keeps a transparent corner (decoded in the page, at 1440 only)
     // (drawings declared full-bleed in tools/cutout.json, with a reason, have no paper inside their frame)
     const fullBleed = Object.keys(loadCutoutConfig(REPO).fullBleed)
@@ -231,6 +242,16 @@ for (const url of urls) {
         const check = inspectCutoutRgba(x.getImageData(0, 0, c.width, c.height).data, c.width, c.height);
         if (check.opaqueWhiteEdge > 3) fringe.push(`${img.currentSrc.split('/').pop()} opaque white edge samples ${check.opaqueWhiteEdge}`);
         if (!check.hasDetail) fringe.push(`${img.currentSrc.split('/').pop()} no partial-alpha detail`);
+        const lab = img.closest('.lab');
+        if (lab) for (const it of lab.querySelectorAll('.lab__item')) {
+          if (getComputedStyle(it).position !== 'absolute') continue;
+          const ib = img.getBoundingClientRect(); const lb = it.getBoundingClientRect(); const k = c.width / ib.width;
+          const x0 = Math.max(0, Math.floor((lb.left - ib.left) * k)), y0 = Math.max(0, Math.floor((lb.top - ib.top) * k));
+          const ww = Math.min(c.width - x0, Math.ceil(lb.width * k)), hh = Math.min(c.height - y0, Math.ceil(lb.height * k));
+          if (ww < 1 || hh < 1) continue;
+          const d = x.getImageData(x0, y0, ww, hh).data; let inked = 0; for (let i = 3; i < d.length; i += 4) if (d[i] > 76) inked++;
+          if (inked / (ww * hh) > 0.02) fringe.push(`label "${it.textContent.trim()}" sits on the drawing (${(100 * inked / (ww * hh)).toFixed(1)}% ink beneath)`);
+        }
       }
         return { bad, fringe };
       }, { fullBleed, inspectorSource: cutoutInspectorSource });
@@ -251,18 +272,18 @@ for (const url of urls) {
     await ctx.close();
     }
   }
-  for (const k of ['brokenImgs', 'small', 'targets', 'console', 'crop', 'upscale', 'grid', 'palette', 'alpha', 'fringe', 'theme']) row[k] = [...new Set(row[k])];
+  for (const k of ['brokenImgs', 'small', 'targets', 'console', 'crop', 'upscale', 'grid', 'palette', 'alpha', 'fringe', 'theme', 'labels']) row[k] = [...new Set(row[k])];
   report.push(row);
-  const gates = row.crop.length + row.upscale.length + row.grid.length + row.palette.length + row.alpha.length + row.fringe.length + row.theme.length;
+  const gates = row.crop.length + row.upscale.length + row.grid.length + row.palette.length + row.alpha.length + row.fringe.length + row.theme.length + row.labels.length;
   gateFails += gates;
   const axeBad = Object.values(row.axe).reduce((n, items) => n + items.length, 0);
   const bad = gates + row.overflow.length + row.brokenImgs.length + row.console.length + axeBad;
   const list = (k, n = 4) => (row[k].length ? ` | ${k} (${row[k].length}) ${row[k].slice(0, n).join(' ; ')}` : '');
   const axeList = Object.entries(row.axe).filter(([, items]) => items.length).map(([key, items]) => ` | axe${key} ${items.join(' ; ')}`).join('');
-  console.log(`${bad ? 'FAIL' : 'ok  '} ${name}${row.overflow.length ? ' | overflow ' + row.overflow.join(' ; ') : ''}${list('brokenImgs')}${list('console', 2)}${axeList}${list('crop')}${list('upscale')}${list('grid')}${list('palette')}${list('alpha')}${list('fringe')}${list('theme')}${list('small', 3)}${list('targets', 3)}`);
+  console.log(`${bad ? 'FAIL' : 'ok  '} ${name}${row.overflow.length ? ' | overflow ' + row.overflow.join(' ; ') : ''}${list('brokenImgs')}${list('console', 2)}${axeList}${list('crop')}${list('upscale')}${list('grid')}${list('palette')}${list('alpha')}${list('fringe')}${list('theme')}${list('labels')}${list('small', 3)}${list('targets', 3)}`);
 }
 fs.writeFileSync(path.join(here, '.cache', 'qa-report.json'), JSON.stringify(report, null, 2));
 await browser.close();
-console.log(gateFails ? `Field gates: ${gateFails} failure(s)` : 'Field gates: all pass (crop, upscale, grid, palette, alpha/fringe/detail, content coverage)');
+console.log(gateFails ? `Field gates: ${gateFails} failure(s)` : 'Field gates: all pass (crop, upscale, grid, palette, alpha/fringe/detail, dark treatments, labels, content coverage)');
 const failed = themeWorkflowFailures.length || report.some((r) => r.overflow.length || r.brokenImgs.length || r.console.length || Object.values(r.axe).some((items) => items.length));
 if (gateFails || failed) process.exitCode = 1;
