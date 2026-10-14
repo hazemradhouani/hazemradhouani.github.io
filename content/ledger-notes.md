@@ -8,11 +8,14 @@ Every fact on the site comes from one of these sources (precedence in `05-brief.
 | `pdf2026:pN` | `2026 - Porfolio.pdf`, physical page N (text read visually; outlined) |
 | `site` | The site text as published before this rebuild (last edited 2026-06) |
 | `pdf2025:pN` | `2025 - Porfolio.pdf`, physical page N |
-| `claude-md` | The identity stated by the owner in `CLAUDE.md` |
+| `claude-md` | The identity instruction in `CLAUDE.md`; its former heritage/earthen-specialist wording is superseded for identity claims by `owner:2026-10-13` |
+| `owner:2026-10-13` | The owner's current direct instruction: broad project-work identity and permission to derive/publish suitable assets from the supplied HQ library; it does not establish a project-specific personal role, author or credit |
 
 Translations from French are literal and marked "(translated from French)". Line-break hyphens and obvious typos in the PDFs are normalised and marked.
 
-**Image derivatives (Field, 2026-10-13).** `images/cut/**` are transparent cutouts of the drawing masters made by `tools/cutout.mjs` (D29, D30); they add no content. `images/books/thesis-book-closed.png` and `thesis-book-open.png` are the thesis mockups printed in `pdf2025:p46` and `pdf2025:p47`, extracted with their own soft masks (`pdfimages -png` + `alphamerge`), unchanged apart from the merge.
+**Image derivatives (Field, 2026-10-13).** `images/cut/**` are transparent cutouts of the drawing masters made by `tools/cutout.mjs` (D29, D30, D46). Dark-compatible drawings use reviewed graded alpha; the derivative adds no content and never changes a master. `images/books/thesis-book-closed.png` and `thesis-book-open.png` are the thesis mockups printed in `pdf2025:p46` and `pdf2025:p47`, extracted with their own soft masks (`pdfimages -png` + `alphamerge`), unchanged apart from the merge.
+
+**HQ source library (2026-10-13).** `Images HQ/` is a user-provided, untracked and immutable 193-file source library. `docs/flagship/hq-asset-audit.json` inventories it without publishing it; `tools/hq-media.json` records only approved production derivatives. At this stage that production manifest is deliberately empty. A future derivative needs its source hash, exact crop (if any), treatment, theme treatment, credit, authorization, caption evidence and review status. The owner's access permission is recorded as `owner-direct:2026-10-13`; it is not evidence of a project-specific role, authorship or credit.
 
 ## Conflicts and how they were resolved
 
@@ -36,6 +39,7 @@ Translations from French are literal and marked "(translated from French)". Line
 | C16 | Nouvelle Medina and Aïn Sebaâ: no office named in the 2025 PDF | Owner confirmed: Yassir Khalil Studio (2026-10-12) |
 | C17 | The 2026 cover photograph (earthen alley) has no caption or place | Published without a place name |
 | C18 | Where the owner is based: films page "between Paris, Casablanca, and Tunis" vs About "Paris, Casablanca, and Tokyo" (both site text); the 2026 PDF says "Tunis / Paris" | Both kept verbatim on their pages; flagged |
+| C19 | The former identity says “Architect specialising in heritage documentation and earthen architecture”; the owner's 2026-10-13 instruction asks for documented work across Tunisia, France and Morocco and research in Japan | The new person line uses `owner:2026-10-13`. Heritage, earthen architecture, survey, rehabilitation, BIM/Revit, visualisation and infrastructure remain individual supported evidence; Japan is described as research, not a practice base (D45) |
 
 ## [CONTENT NEEDED]
 
@@ -46,5 +50,6 @@ Translations from French are literal and marked "(translated from French)". Line
 5. Analytics consent for EU visitors (GA4 is idle-loaded and off under Do Not Track / Global Privacy Control; not legal advice).
 6. Where you are based (C18).
 7. Links and material for your website and app, when ready.
+8. Project-specific personal-role, credit and caption evidence for any HQ source selected beyond the existing portfolio records; no such source is selected in `tools/hq-media.json` yet.
 
-Resolved by the owner on 2026-10-12: surfaces, Sakura wording, Zenata ranking, supervisors, Studio BELEM dates, Nouvelle Medina and Aïn Sebaâ office, publication permission for office drawings (the owner produced them).
+Resolved by the owner on 2026-10-12: surfaces, Sakura wording, Zenata ranking, supervisors, Studio BELEM dates, Nouvelle Medina and Aïn Sebaâ office, publication permission for office drawings (the owner produced them). Resolved by the owner on 2026-10-13: the broad identity wording and authority to derive/publish a suitable supplied HQ asset, subject to the project-specific evidence rules above.

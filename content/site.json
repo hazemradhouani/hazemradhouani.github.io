@@ -10,12 +10,21 @@
   "person": {
     "name": "Hazem Radhouani",
     "jobTitle": "Architect",
-    "line": "Architect specialising in heritage documentation and earthen architecture.",
-    "strengths": "Survey and documentation, BIM delivery in Revit, and visualisation in Unreal Engine and D5 Render.",
+    "line": "Architect with project work in Tunisia, France and Morocco, and research experience in Japan.",
+    "knowsAbout": [
+      "Architectural survey",
+      "Building rehabilitation",
+      "BIM",
+      "Revit",
+      "Architectural visualisation",
+      "Unreal Engine",
+      "D5 Render",
+      "Rail infrastructure"
+    ],
     "credential": "National Architecture Diploma, Highest Honours | ENAU 2026",
     "email": "hazemradhouani@gmail.com",
     "linkedin": "https://www.linkedin.com/in/hazem-radhouani-b36616319/",
-    "sources": { "line": "claude-md", "strengths": "claude-md", "credential": "site:about + answer:F01", "email": "site", "linkedin": "site + pdf2025:p48" }
+    "sources": { "line": "owner:2026-10-13", "knowsAbout": "owner:2026-10-13 + site", "credential": "site:about + answer:F01", "email": "site", "linkedin": "site + pdf2025:p48" }
   },
   "nav": [
     { "id": "work", "label": "Work", "href": "architecture.html" },

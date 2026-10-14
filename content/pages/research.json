@@ -48,7 +48,7 @@
   "report": {
     "label": "Professional | Report | 2026",
     "title": "Internship Report",
-    "subtitle": "Professional practice across Paris, Casablanca, and Tokyo",
+    "subtitle": "Professional practice in Paris and Casablanca; research in Japan",
     "cover": "images/books/report-cover.png",
     "coverAlt": "Cover of the internship report, Hazem Radhouani, Paris, Casablanca, Tokyo, 2026",
     "spec": [
@@ -70,8 +70,8 @@
     ],
     "text": [
       {
-        "text": "Internship report documenting professional architectural practice across three cities between 2024 and 2026. The report covers project work at Studio BELEM in Paris (residential rehabilitation, mixed-use, and heritage projects within the ABF regulatory framework) and at Yassir Khalil Studio in Casablanca, across infrastructure, residential, and healthcare programmes.",
-        "source": "site (dashes replaced by parentheses)"
+        "text": "Internship report documenting professional architectural practice in Paris and Casablanca between 2024 and 2026. The report covers project work at Studio BELEM in Paris (residential rehabilitation, mixed-use, and heritage projects within the ABF regulatory framework) and at Yassir Khalil Studio in Casablanca, across infrastructure, residential, and healthcare programmes.",
+        "source": "site (dashes replaced by parentheses) + owner:2026-10-13"
       },
       {
         "text": "A chapter is dedicated to research conducted within the Sakura Science Program in Japan, 2025, for which the Most Appreciated Research distinction was received. The report is submitted in partial fulfilment of the requirements for the National Architecture Diploma at ENAU, Université de Carthage.",
