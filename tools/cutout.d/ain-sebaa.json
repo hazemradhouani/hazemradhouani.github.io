@@ -1,0 +1,109 @@
+{
+  "$comment": "Aïn Sebaâ cutouts (tools/cutout.mjs; D46, D49, D50). Clean vector exports keep pale fills: low floor/knee. clip = sides where the drawing is clipped by its own frame.",
+  "images": {
+    "images/ain-sebaa/ain-sebaa-plan-main.png": {
+      "paper": [
+        255,
+        255,
+        255
+      ],
+      "floor": 0.015,
+      "knee": 0.03,
+      "clip": [
+        "left",
+        "top",
+        "right",
+        "bottom"
+      ],
+      "dark": "field"
+    },
+    "images/ain-sebaa/ain-sebaa-facade-main.png": {
+      "floor": 0.02,
+      "knee": 0.05,
+      "clip": [
+        "left",
+        "right"
+      ],
+      "dark": "invert"
+    },
+    "images/ain-sebaa/ain-sebaa-facade-rear.png": {
+      "floor": 0.02,
+      "knee": 0.05,
+      "clip": [
+        "left",
+        "right"
+      ],
+      "dark": "invert"
+    },
+    "images/ain-sebaa/ain-sebaa-section-aa.png": {
+      "floor": 0.02,
+      "knee": 0.05,
+      "clip": [
+        "left",
+        "right"
+      ],
+      "dark": "invert-accent"
+    },
+    "images/ain-sebaa/ain-sebaa-structure.png": {
+      "floor": 0.02,
+      "knee": 0.05,
+      "erase": [
+        {
+          "id": "envelope",
+          "x": 1728,
+          "y": 218,
+          "w": 312,
+          "h": 129
+        },
+        {
+          "id": "roof-structure",
+          "x": 253,
+          "y": 921,
+          "w": 317,
+          "h": 243
+        },
+        {
+          "id": "columns",
+          "x": 1674,
+          "y": 1332,
+          "w": 480,
+          "h": 109
+        },
+        {
+          "id": "title",
+          "x": 1595,
+          "y": 2263,
+          "w": 555,
+          "h": 114
+        }
+      ],
+      "dark": "field"
+    },
+    "images/ain-sebaa/ain-sebaa-flows-main.png": {
+      "paper": [
+        255,
+        255,
+        255
+      ],
+      "floor": 0.01,
+      "knee": 0.02,
+      "clip": [
+        "left"
+      ],
+      "dark": "field"
+    },
+    "images/ain-sebaa/ain-sebaa-flows-secondary.png": {
+      "paper": [
+        255,
+        255,
+        255
+      ],
+      "floor": 0.01,
+      "knee": 0.02,
+      "clip": [
+        "right"
+      ],
+      "dark": "field"
+    }
+  }
+}

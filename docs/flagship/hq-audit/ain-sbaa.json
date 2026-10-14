@@ -10,17 +10,17 @@
       "height": 1342,
       "projectMapping": {
         "slug": "ain-sebaa",
-        "status": "provisional"
+        "status": "confirmed"
       },
-      "mappingEvidence": "Brief 10 maps the source folder to the existing Aïn Sebaâ case study; the individual source still needs a visual and caption comparison.",
-      "visualType": "drawing-or-sheet",
-      "textDisposition": "review-required",
+      "mappingEvidence": "The section A-A of pdf2025:p42",
+      "visualType": "drawing (section)",
+      "textDisposition": "title → caption: 'COUPE AA' (cropped out); intrinsic (stays): levels +7.50 +0.00 -0.10 -0.90 -4.10",
       "duplicateOf": null,
-      "disposition": "withheld",
+      "disposition": "approved",
       "authorizationEvidence": "owner-direct:2026-10-13",
-      "creditEvidence": "not established",
-      "roleEvidence": "not established",
-      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+      "creditEvidence": "Owner's own work (D09); no third-party credit printed on the source or on pdf2025:p39-42",
+      "roleEvidence": "The existing case study publishes this as owner-supplied work at Yassir Khalil Studio (answer:2026-10-12, D09); no personal-role statement is made (role list empty)",
+      "reason": "Section A-A at full resolution"
     },
     {
       "source": "Images HQ/Ain Sbaa/Coupe and facade.jpg",
@@ -29,17 +29,17 @@
       "height": 3198,
       "projectMapping": {
         "slug": "ain-sebaa",
-        "status": "provisional"
+        "status": "confirmed"
       },
-      "mappingEvidence": "Brief 10 maps the source folder to the existing Aïn Sebaâ case study; the individual source still needs a visual and caption comparison.",
-      "visualType": "drawing-or-sheet",
-      "textDisposition": "review-required",
+      "mappingEvidence": "Upper drawing identical to 'Elevation East' on pdf2025:p41",
+      "visualType": "drawing sheet (two section-elevations)",
+      "textDisposition": "titles → captions: 'COUPE FACADE PRINCIPALE', 'COUPE FACADE ARRIERE' (cropped out); intrinsic (stays): levels +8.85 +0.00 -0.10 -0.50 -4.10, 'GARE AIN SEBAA' and Arabic sign on the facade",
       "duplicateOf": null,
-      "disposition": "withheld",
+      "disposition": "approved",
       "authorizationEvidence": "owner-direct:2026-10-13",
-      "creditEvidence": "not established",
-      "roleEvidence": "not established",
-      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+      "creditEvidence": "Owner's own work (D09); no third-party credit printed on the source or on pdf2025:p39-42",
+      "roleEvidence": "The existing case study publishes this as owner-supplied work at Yassir Khalil Studio (answer:2026-10-12, D09); no personal-role statement is made (role list empty)",
+      "reason": "Split into the main and rear section-elevations"
     },
     {
       "source": "Images HQ/Ain Sbaa/Flux.jpg",
@@ -48,17 +48,17 @@
       "height": 2335,
       "projectMapping": {
         "slug": "ain-sebaa",
-        "status": "provisional"
+        "status": "confirmed"
       },
-      "mappingEvidence": "Brief 10 maps the source folder to the existing Aïn Sebaâ case study; the individual source still needs a visual and caption comparison.",
-      "visualType": "drawing-or-sheet",
-      "textDisposition": "review-required",
+      "mappingEvidence": "The flow studies of pdf2025:p40 and p42",
+      "visualType": "diagram sheet (two rendered flow axonometrics, legend, title)",
+      "textDisposition": "title → caption: 'ETUDE DES FLUX'; legend → HTML legend: 'FLUX PIETONS : INTERMODALITÉ - GARE', 'FLUX DES VOYAGEURS - GARE', 'FLUX DES VOYAGEURS - ACCES AUX QUAIS', 'FLUX DES VOYAGEURS - SORTIE DES QUAIS/ GARE', 'CONNEXION VERTICALE GARE/QUAIS' (cropped out); intrinsic (stay): Entrée Gare, Sortie Gare, Entrée Quais, Sortie Quais, Accès Quais, PARVIS, PARKING, DÉPOSE MINUTE",
       "duplicateOf": null,
-      "disposition": "withheld",
+      "disposition": "approved",
       "authorizationEvidence": "owner-direct:2026-10-13",
-      "creditEvidence": "not established",
-      "roleEvidence": "not established",
-      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+      "creditEvidence": "Owner's own work (D09); no third-party credit printed on the source or on pdf2025:p39-42",
+      "roleEvidence": "The existing case study publishes this as owner-supplied work at Yassir Khalil Studio (answer:2026-10-12, D09); no personal-role statement is made (role list empty)",
+      "reason": "Split into the main and secondary building flow studies"
     },
     {
       "source": "Images HQ/Ain Sbaa/PLAN RDC.jpg",
@@ -67,17 +67,17 @@
       "height": 3688,
       "projectMapping": {
         "slug": "ain-sebaa",
-        "status": "provisional"
+        "status": "confirmed"
       },
-      "mappingEvidence": "Brief 10 maps the source folder to the existing Aïn Sebaâ case study; the individual source still needs a visual and caption comparison.",
-      "visualType": "drawing-or-sheet",
-      "textDisposition": "review-required",
+      "mappingEvidence": "Identical to 'PLAN RDC +0.00 BV PRINCIPALE' on pdf2025:p41",
+      "visualType": "drawing (coloured plan)",
+      "textDisposition": "intrinsic (stays): room names and areas (Local Technique 33 m², Salle de Prière 18 m², Sanitaires (F) 23 m², Sanitaires (H) 23 m², Local Gardiennage & Nettoyage 10 m², Office 10 m², Poste Police 14 m², Local FM 25 m², Hall Contrôlé 162 m², Hall non contrôlé 345 m², Commerce 72 m², Commerce 71 m², Vente 45 m², Back Office 28 m² x2, ASC), levels +0.00 +0.10 -0.50, dimensions; no title on the sheet",
       "duplicateOf": null,
-      "disposition": "withheld",
+      "disposition": "approved",
       "authorizationEvidence": "owner-direct:2026-10-13",
-      "creditEvidence": "not established",
-      "roleEvidence": "not established",
-      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+      "creditEvidence": "Owner's own work (D09); no third-party credit printed on the source or on pdf2025:p39-42",
+      "roleEvidence": "The existing case study publishes this as owner-supplied work at Yassir Khalil Studio (answer:2026-10-12, D09); no personal-role statement is made (role list empty)",
+      "reason": "Ground floor plan of the main building"
     },
     {
       "source": "Images HQ/Ain Sbaa/Scene 69.png",
@@ -86,17 +86,17 @@
       "height": 2493,
       "projectMapping": {
         "slug": "ain-sebaa",
-        "status": "provisional"
+        "status": "confirmed"
       },
-      "mappingEvidence": "Brief 10 maps the source folder to the existing Aïn Sebaâ case study; the individual source still needs a visual and caption comparison.",
+      "mappingEvidence": "Station lettering 'GARE AIN SEBAA' visible in the scene; same envelope and X-columns as the case study",
       "visualType": "render",
-      "textDisposition": "review-required",
+      "textDisposition": "intrinsic: 'GARE AIN SEBAA' and Arabic lettering seen mirrored through the glass (part of the scene)",
       "duplicateOf": null,
-      "disposition": "withheld",
+      "disposition": "approved",
       "authorizationEvidence": "owner-direct:2026-10-13",
-      "creditEvidence": "not established",
-      "roleEvidence": "not established",
-      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+      "creditEvidence": "Owner's own work (D09); no third-party credit printed on the source or on pdf2025:p39-42",
+      "roleEvidence": "The existing case study publishes this as owner-supplied work at Yassir Khalil Studio (answer:2026-10-12, D09); no personal-role statement is made (role list empty)",
+      "reason": "New view of the station from across the tracks"
     },
     {
       "source": "Images HQ/Ain Sbaa/Scene 72_1.png",
@@ -105,17 +105,17 @@
       "height": 2493,
       "projectMapping": {
         "slug": "ain-sebaa",
-        "status": "provisional"
+        "status": "confirmed"
       },
-      "mappingEvidence": "Brief 10 maps the source folder to the existing Aïn Sebaâ case study; the individual source still needs a visual and caption comparison.",
+      "mappingEvidence": "Same camera, X-shaped columns and patterned screen as the existing hero (pdf2025:p39)",
       "visualType": "render",
-      "textDisposition": "review-required",
+      "textDisposition": "none on the image",
       "duplicateOf": null,
-      "disposition": "withheld",
+      "disposition": "approved",
       "authorizationEvidence": "owner-direct:2026-10-13",
-      "creditEvidence": "not established",
-      "roleEvidence": "not established",
-      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+      "creditEvidence": "Owner's own work (D09); no third-party credit printed on the source or on pdf2025:p39-42",
+      "roleEvidence": "The existing case study publishes this as owner-supplied work at Yassir Khalil Studio (answer:2026-10-12, D09); no personal-role statement is made (role list empty)",
+      "reason": "Hero: the full-resolution file of the existing hero view (pdf2025:p39)"
     },
     {
       "source": "Images HQ/Ain Sbaa/Structure.jpg",
@@ -124,17 +124,17 @@
       "height": 4367,
       "projectMapping": {
         "slug": "ain-sebaa",
-        "status": "provisional"
+        "status": "confirmed"
       },
-      "mappingEvidence": "Brief 10 maps the source folder to the existing Aïn Sebaâ case study; the individual source still needs a visual and caption comparison.",
-      "visualType": "drawing-or-sheet",
-      "textDisposition": "review-required",
+      "mappingEvidence": "The exploded structure of pdf2025:p40",
+      "visualType": "drawing (shaded exploded axonometric)",
+      "textDisposition": "title → caption: 'PARTI STRUCTUREL' (removed from blank paper, D49); callouts → HTML labels: 'Enveloppe' (Envelope), 'Charpente Metallique' (Steel roof structure), 'Poteaux Inclinés' (Inclined columns)",
       "duplicateOf": null,
-      "disposition": "withheld",
+      "disposition": "approved",
       "authorizationEvidence": "owner-direct:2026-10-13",
-      "creditEvidence": "not established",
-      "roleEvidence": "not established",
-      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+      "creditEvidence": "Owner's own work (D09); no third-party credit printed on the source or on pdf2025:p39-42",
+      "roleEvidence": "The existing case study publishes this as owner-supplied work at Yassir Khalil Studio (answer:2026-10-12, D09); no personal-role statement is made (role list empty)",
+      "reason": "Exploded structural concept at full resolution"
     },
     {
       "source": "Images HQ/Ain Sbaa/plan masse.jpg",
@@ -143,17 +143,17 @@
       "height": 2404,
       "projectMapping": {
         "slug": "ain-sebaa",
-        "status": "provisional"
+        "status": "confirmed"
       },
-      "mappingEvidence": "Brief 10 maps the source folder to the existing Aïn Sebaâ case study; the individual source still needs a visual and caption comparison.",
-      "visualType": "drawing-or-sheet",
-      "textDisposition": "review-required",
+      "mappingEvidence": "Two station buildings on either side of the tracks with a footbridge, as the narrative describes (pdf2025:p40, p42)",
+      "visualType": "rendered site plan",
+      "textDisposition": "title on rendered pixels: 'PLAN MASSE 1-1000' and north sign stay (D49: renders are never edited) and are restated in the caption",
       "duplicateOf": null,
-      "disposition": "withheld",
+      "disposition": "approved",
       "authorizationEvidence": "owner-direct:2026-10-13",
-      "creditEvidence": "not established",
-      "roleEvidence": "not established",
-      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+      "creditEvidence": "Owner's own work (D09); no third-party credit printed on the source or on pdf2025:p39-42",
+      "roleEvidence": "The existing case study publishes this as owner-supplied work at Yassir Khalil Studio (answer:2026-10-12, D09); no personal-role statement is made (role list empty)",
+      "reason": "Site plan: the two buildings and the footbridge across the tracks"
     }
   ]
 }

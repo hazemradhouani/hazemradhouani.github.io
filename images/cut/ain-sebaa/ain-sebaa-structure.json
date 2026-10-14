@@ -1,0 +1,76 @@
+{
+ "src": "images/ain-sebaa/ain-sebaa-structure.png",
+ "hash": "540e11a6375cba7b",
+ "mode": "ink",
+ "from": [
+  2299,
+  2560
+ ],
+ "to": [
+  1923,
+  2385
+ ],
+ "offset": [
+  239,
+  55
+ ],
+ "paper": [
+  255,
+  255,
+  255
+ ],
+ "clip": [],
+ "ink": {
+  "ink": 209907,
+  "chromaticFraction": 0.0101,
+  "midtoneFraction": 0.4934,
+  "suggest": "accent"
+ },
+ "dark": "field",
+ "specks": 1714,
+ "tile": [
+  640,
+  1800,
+  640,
+  400
+ ],
+ "background": null,
+ "labels": [
+  {
+   "id": "envelope",
+   "removed": 9,
+   "kept": 0,
+   "x": 78.627,
+   "y": 7.589,
+   "w": 14.353,
+   "h": 4.151
+  },
+  {
+   "id": "roof-structure",
+   "removed": 20,
+   "kept": 0,
+   "x": 1.352,
+   "y": 36.813,
+   "w": 14.925,
+   "h": 9.057
+  },
+  {
+   "id": "columns",
+   "removed": 18,
+   "kept": 0,
+   "x": 75.351,
+   "y": 54.046,
+   "w": 23.297,
+   "h": 3.396
+  },
+  {
+   "id": "title",
+   "removed": 25,
+   "kept": 1,
+   "x": 70.515,
+   "y": 92.662,
+   "w": 27.977,
+   "h": 3.941
+  }
+ ]
+}

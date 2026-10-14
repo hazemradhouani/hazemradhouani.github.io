@@ -1,0 +1,42 @@
+{
+ "src": "images/ain-sebaa/ain-sebaa-plan-main.png",
+ "hash": "98395bdddbde52f1",
+ "mode": "ink",
+ "from": [
+  2446,
+  2453
+ ],
+ "to": [
+  2446,
+  2453
+ ],
+ "offset": [
+  0,
+  0
+ ],
+ "paper": [
+  255,
+  255,
+  255
+ ],
+ "clip": [
+  "left",
+  "right"
+ ],
+ "ink": {
+  "ink": 586351,
+  "chromaticFraction": 0.0066,
+  "midtoneFraction": 0.1966,
+  "suggest": "accent"
+ },
+ "dark": "field",
+ "specks": 64,
+ "tile": [
+  0,
+  1200,
+  640,
+  400
+ ],
+ "background": null,
+ "labels": []
+}

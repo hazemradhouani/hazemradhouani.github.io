@@ -1,0 +1,41 @@
+{
+ "src": "images/ain-sebaa/ain-sebaa-flows-main.png",
+ "hash": "ca2110ec5cbb9042",
+ "mode": "ink",
+ "from": [
+  1940,
+  2300
+ ],
+ "to": [
+  1940,
+  2293
+ ],
+ "offset": [
+  0,
+  7
+ ],
+ "paper": [
+  255,
+  255,
+  255
+ ],
+ "clip": [
+  "left"
+ ],
+ "ink": {
+  "ink": 272749,
+  "chromaticFraction": 0.044,
+  "midtoneFraction": 0.2277,
+  "suggest": "accent"
+ },
+ "dark": "field",
+ "specks": 1887,
+ "tile": [
+  320,
+  800,
+  640,
+  400
+ ],
+ "background": null,
+ "labels": []
+}
