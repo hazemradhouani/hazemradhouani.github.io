@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-ga="G-S61QWV2ZRE">
+<html lang="en" data-ga="G-S61QWV2ZRE" data-theme="light">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,10 +10,11 @@
 <link rel="preload" href="fonts/eb-garamond-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/ibm-plex-sans-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 
-<link rel="stylesheet" href="css/site.css?v=730d10944c">
-<script src="js/site.js?v=71b4387f9e" defer></script>
-<meta name="theme-color" content="#FFFFFF">
-<meta name="color-scheme" content="light">
+<meta id="theme-color" name="theme-color" content="#FFFFFF">
+<meta name="color-scheme" content="light dark">
+<script data-theme-bootstrap>(function(){var t;try{t=localStorage.getItem('hazem-theme');}catch(e){}if(t!=='light'&&t!=='dark'){try{t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}catch(e){t='light';}}var d=document.documentElement;d.setAttribute('data-theme',t);d.style.colorScheme=t;var m=document.getElementById('theme-color');if(m)m.content=t==='dark'?'#121311':'#FFFFFF';}());</script>
+<link rel="stylesheet" href="css/site.css?v=40d99621ef">
+<script src="js/site.js?v=36ff625a5f" defer></script>
 <meta name="author" content="Hazem Radhouani">
 
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
@@ -43,14 +44,14 @@
 <div class="wrap">
 <a class="brand" href="./">Hazem Radhouani</a>
 <nav class="nav" aria-label="Main"><ul role="list"><li style="--i: 0"><a href="architecture.html">Work</a></li><li style="--i: 1"><a href="books.html" aria-current="page">Research</a></li><li style="--i: 2"><a href="about.html">About</a></li><li style="--i: 3"><a href="about.html#contact">Contact</a></li></ul></nav>
-<button class="menu-button" type="button" commandfor="menu" command="show-modal" aria-haspopup="dialog" aria-controls="menu">menu</button>
+<div class="site-header__tools"><button class="theme-button" type="button" data-theme-toggle data-theme-scope="header" aria-pressed="false" aria-label="Switch to dark theme"><span class="theme-button__glyph" aria-hidden="true">◐</span><span class="theme-button__label" data-theme-label aria-hidden="true">theme: light</span></button><button class="menu-button" type="button" commandfor="menu" command="show-modal" aria-haspopup="dialog" aria-controls="menu">menu</button></div>
 </div>
 </header>
 <div class="bar" id="bar" inert>
 <div class="bar__in wrap">
 <a class="brand" href="./">Hazem Radhouani</a>
 <nav class="nav" aria-label="Site"><ul role="list"><li style="--i: 0"><a href="architecture.html">Work</a></li><li style="--i: 1"><a href="books.html" aria-current="page">Research</a></li><li style="--i: 2"><a href="about.html">About</a></li><li style="--i: 3"><a href="about.html#contact">Contact</a></li></ul></nav>
-<button class="menu-button" type="button" commandfor="menu" command="show-modal" aria-haspopup="dialog" aria-controls="menu">menu</button>
+<div class="bar__tools"><button class="theme-button" type="button" data-theme-toggle data-theme-scope="bar" aria-pressed="false" aria-label="Switch to dark theme"><span class="theme-button__glyph" aria-hidden="true">◐</span><span class="theme-button__label" data-theme-label aria-hidden="true">theme: light</span></button><button class="menu-button" type="button" commandfor="menu" command="show-modal" aria-haspopup="dialog" aria-controls="menu">menu</button></div>
 </div>
 </div>
 <main id="main" tabindex="-1">
@@ -74,12 +75,12 @@
 <div class="s-text center chapter__text">
 <p class="label">Professional | Report | 2026</p>
 <h2 class="h1 in" id="report-h">Internship Report</h2>
-<p class="lead in">Professional practice across Paris, Casablanca, and Tokyo</p>
+<p class="lead in">Professional practice in Paris and Casablanca; research in Japan</p>
 
 <dl class="spec in"><dt>Host organisations</dt><dd>Studio BELEM, Paris | Yassir Khalil Studio, Casablanca</dd><dt>Research</dt><dd>Sakura Science Program, Tokyo | Most Appreciated Research | 2025</dd><dt>Supervisor</dt><dd>Prof. Moncef Fourati | February 2026</dd></dl>
 </div>
 
-<div class="s-narrow block"><div class="prose"><p>Internship report documenting professional architectural practice across three cities between 2024 and 2026. The report covers project work at Studio BELEM in Paris (residential rehabilitation, mixed-use, and heritage projects within the ABF regulatory framework) and at Yassir Khalil Studio in Casablanca, across infrastructure, residential, and healthcare programmes.</p><p>A chapter is dedicated to research conducted within the Sakura Science Program in Japan, 2025, for which the Most Appreciated Research distinction was received. The report is submitted in partial fulfilment of the requirements for the National Architecture Diploma at ENAU, Université de Carthage.</p></div></div>
+<div class="s-narrow block"><div class="prose"><p>Internship report documenting professional architectural practice in Paris and Casablanca between 2024 and 2026. The report covers project work at Studio BELEM in Paris (residential rehabilitation, mixed-use, and heritage projects within the ABF regulatory framework) and at Yassir Khalil Studio in Casablanca, across infrastructure, residential, and healthcare programmes.</p><p>A chapter is dedicated to research conducted within the Sakura Science Program in Japan, 2025, for which the Most Appreciated Research distinction was received. The report is submitted in partial fulfilment of the requirements for the National Architecture Diploma at ENAU, Université de Carthage.</p></div></div>
 <p class="s-text center in actions"><a class="more" href="https://heyzine.com/flip-book/8d862ba791.html" target="_blank" rel="noopener"><span>Read online</span><svg class="icon" width="16" height="16" aria-hidden="true" focusable="false"><use href="images/icons.svg#arrow-up-right"></use></svg><span class="vh"> (opens in a new tab)</span></a></p>
 </article>
 <article class="chapter wrap g" aria-labelledby="sakura-h">
@@ -99,7 +100,7 @@
 </footer>
 <dialog class="menu" id="menu" aria-label="Site menu">
 <div class="wrap">
-<div class="menu__top"><a class="brand" href="./">Hazem Radhouani</a><form method="dialog"><button class="menu__close" type="submit" autofocus>close</button></form></div>
+<div class="menu__top"><a class="brand" href="./">Hazem Radhouani</a><div class="menu__controls"><button class="theme-button" type="button" data-theme-toggle data-theme-scope="menu" aria-pressed="false" aria-label="Switch to dark theme"><span class="theme-button__glyph" aria-hidden="true">◐</span><span class="theme-button__label" data-theme-label aria-hidden="true">theme: light</span></button><form method="dialog"><button class="menu__close" type="submit" autofocus>close</button></form></div></div>
 <nav aria-label="Main"><ul class="menu__list" role="list"><li style="--i: 0"><a href="architecture.html">Work</a></li><li style="--i: 1"><a href="books.html" aria-current="page">Research</a></li><li style="--i: 2"><a href="about.html">About</a></li><li style="--i: 3"><a href="about.html#contact">Contact</a></li></ul></nav>
 <p class="menu__contact"><a href="mailto:hazemradhouani@gmail.com">hazemradhouani@gmail.com</a><a href="https://www.linkedin.com/in/hazem-radhouani-b36616319/" target="_blank" rel="noopener">LinkedIn<span class="vh"> (opens in a new tab)</span></a></p>
 </div>
