@@ -186,7 +186,8 @@ ${when(film, () => html`<section class="block wrap g" aria-labelledby="film-h" d
   const jsonld = [{ '@context': 'https://schema.org', '@type': 'CreativeWork', name: x.title, description: x.summary, url,
     image: `${site.origin}${site.base}${x.hero.src}`, dateCreated: x.date,
     genre: x.descriptor.split(' | ')[0], locationCreated: { '@type': 'Place', name: x.place },
-    ...(x.office ? { creator: { '@type': 'Organization', name: x.office }, contributor: person } : { creator: person }),
+    // an office project names the owner as contributor, unless the case study makes no role claim (D53)
+    ...(x.office ? { creator: { '@type': 'Organization', name: x.office }, ...(x.noRoleClaim ? {} : { contributor: person }) } : { creator: person }),
     isPartOf: { '@type': 'WebSite', url: `${site.origin}${site.base}`, name: site.siteName } },
   { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
     { '@type': 'ListItem', position: 1, name: 'Home', item: `${site.origin}${site.base}` },
