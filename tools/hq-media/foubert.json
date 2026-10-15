@@ -13,6 +13,240 @@
       "authorizationEvidence": "owner-direct:2026-10-13",
       "captionEvidence": "Exact visual match to the existing Foubert hero caption and alt text (content/projects/foubert.json; pdf2026:p13).",
       "reviewStatus": "approved"
+    },
+    {
+      "source": "Images HQ/FOUBERT/20240610_BLM_FOU_Perspective arrière.jpg",
+      "output": "images/foubert/foubert-rear-render-hq.jpg",
+      "sha256": "549b4060d5d1d5b46362d091e08b33b1bd9b58c73316e363cbfd5b3b52332274",
+      "crop": null,
+      "treatment": "the full scene, scaled to the 2560 px cap; no crop, nothing edited",
+      "darkTreatment": "preserve-colour-scene",
+      "credit": "Render: Studio BELEM",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "captionEvidence": "File title 'Perspective arrière' (rear perspective); same camera, terrace, planted roof and neighbouring roofs as the existing 'Aerial view' figure (pdf2026:p16), in an iteration dated 2024-06-10 whose courtyard windows carry no fabric blinds",
+      "reviewStatus": "approved"
+    },
+    {
+      "source": "Images HQ/FOUBERT/20260129_BLM_FOU_PRO_Plan de niveaux_merge [21-25]_page-0004.jpg",
+      "output": "images/foubert/foubert-site-plan.png",
+      "sha256": "ad636930cc789490147c1be0f574f4f379b567a7cdcb6791ae2ceea58e8332df",
+      "crop": {
+        "x": 396,
+        "y": 115,
+        "width": 4304,
+        "height": 2889
+      },
+      "treatment": "the plan with about 40 px of paper (ink x 436-4660, y 155-2964), with 'Passage Foubert' under the frontage; the frame and the bottom cartouche stay outside the crop",
+      "darkTreatment": "invert-accent",
+      "credit": "Studio BELEM (EMETTEUR panel of the cartouche)",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "captionEvidence": "Printed title 'Plan de masse' (site plan), sheet 00-02, PRO phase, 30/01/2026; no printed scale",
+      "reviewStatus": "approved"
+    },
+    {
+      "source": "Images HQ/FOUBERT/20260129_BLM_FOU_PRO_Plan de niveaux_merge [1-20] [1-15]_page-0002.jpg",
+      "output": "images/foubert/foubert-plan-rdc.png",
+      "sha256": "38fb654f99187f18ff3dd18c17b32933b71d653a030a2b705c713e00ff51bf63",
+      "crop": {
+        "x": 121,
+        "y": 386,
+        "width": 8479,
+        "height": 6048
+      },
+      "treatment": "level RDC: the plan with its neighbouring plots, dimension chains and grid bubbles (ink x 125-8572, y 426-6394 across the three level sheets); one shared crop for the series so the three plans keep one scale and register on the grid; the sheet frame (x 117) and the cartouche column (x 8627+: client, studio, project and sheet panels, thumbnail render) stay outside the crop",
+      "darkTreatment": "invert-accent",
+      "credit": "Studio BELEM (EMETTEUR panel of the cartouche)",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "captionEvidence": "Printed title 'Plan de niveau RDC', scale 1 : 50, sheet 10-02, PRO phase, 30/01/2026",
+      "reviewStatus": "approved"
+    },
+    {
+      "source": "Images HQ/FOUBERT/20260129_BLM_FOU_PRO_Plan de niveaux_merge [1-20] [1-15]_page-0004.jpg",
+      "output": "images/foubert/foubert-plan-r2.png",
+      "sha256": "b62658ea7140991ab921c703d61264f7022a49fe2bd83bebf2384071238aad19",
+      "crop": {
+        "x": 121,
+        "y": 386,
+        "width": 8479,
+        "height": 6048
+      },
+      "treatment": "level R+2: the plan with its neighbouring plots, dimension chains and grid bubbles (ink x 125-8572, y 426-6394 across the three level sheets); one shared crop for the series so the three plans keep one scale and register on the grid; the sheet frame (x 117) and the cartouche column (x 8627+: client, studio, project and sheet panels, thumbnail render) stay outside the crop",
+      "darkTreatment": "invert-accent",
+      "credit": "Studio BELEM (EMETTEUR panel of the cartouche)",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "captionEvidence": "Printed title 'Plan de niveau R+2', scale 1 : 50, sheet 10-04, PRO phase, 30/01/2026",
+      "reviewStatus": "approved"
+    },
+    {
+      "source": "Images HQ/FOUBERT/20260129_BLM_FOU_PRO_Plan de niveaux_merge [1-20] [1-15]_page-0006.jpg",
+      "output": "images/foubert/foubert-plan-r4.png",
+      "sha256": "59a7f7659d49cddab7995c713d67750be52e9c55d3b83bdb7f1e77156291211b",
+      "crop": {
+        "x": 121,
+        "y": 386,
+        "width": 8479,
+        "height": 6048
+      },
+      "treatment": "level R+4: the plan with its neighbouring plots, dimension chains and grid bubbles (ink x 125-8572, y 426-6394 across the three level sheets); one shared crop for the series so the three plans keep one scale and register on the grid; the sheet frame (x 117) and the cartouche column (x 8627+: client, studio, project and sheet panels, thumbnail render) stay outside the crop",
+      "darkTreatment": "invert-accent",
+      "credit": "Studio BELEM (EMETTEUR panel of the cartouche)",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "captionEvidence": "Printed title 'Plan de niveau R+4', scale 1 : 50, sheet 10-06, PRO phase, 30/01/2026",
+      "reviewStatus": "approved"
+    },
+    {
+      "source": "Images HQ/FOUBERT/20260129_BLM_FOU_PRO_Plan de niveaux_merge [1-20] [1-15]_page-0009.jpg",
+      "output": "images/foubert/foubert-section-bb.png",
+      "sha256": "273b6a712504956dff4e348283ce05ae5a3e3b22ebf07c37ad3df12ae4ad4b8e",
+      "crop": {
+        "x": 699,
+        "y": 606,
+        "width": 7348,
+        "height": 5934
+      },
+      "treatment": "the section with its levels and property-line labels and about 40 px of paper (ink x 739-8007, y 648-6500); the key plan (x 245-712, y 263-543), the frame and the cartouche column stay outside the crop",
+      "darkTreatment": "invert-accent",
+      "credit": "Studio BELEM (EMETTEUR panel of the cartouche)",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "captionEvidence": "Printed title 'Coupe longitudinale BB', scale 1/50, sheet 30-02, PRO phase, 30/01/2026",
+      "reviewStatus": "approved"
+    },
+    {
+      "source": "Images HQ/FOUBERT/20260129_BLM_FOU_PRO_Plan de niveaux_merge [1-20] [1-15]_page-0010.jpg",
+      "output": "images/foubert/foubert-section-cc.png",
+      "sha256": "017911b57507f07d5478530fca75a49170ac93c325fb254318823b22d664ec3e",
+      "crop": {
+        "x": 1191,
+        "y": 521,
+        "width": 6376,
+        "height": 5813
+      },
+      "treatment": "the section with its levels and property-line labels and about 40 px of paper (ink x 1231-7527, y 561-6294); the key plan (x 267-694, y 245-615), the frame and the cartouche column stay outside the crop",
+      "darkTreatment": "invert-accent",
+      "credit": "Studio BELEM (EMETTEUR panel of the cartouche)",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "captionEvidence": "Printed title 'Coupe transversale CC', scale 1/50, sheet 30-03, PRO phase, 30/01/2026",
+      "reviewStatus": "approved"
+    },
+    {
+      "source": "Images HQ/FOUBERT/20260129_BLM_FOU_PRO_Plan de niveaux_merge [1-20] [16-20]_page-0003.jpg",
+      "output": "images/foubert/foubert-west-facade.png",
+      "sha256": "698a3e64cc3f54c0201542c591b6df868b6e00f333548eaed7da773f80355bc9",
+      "crop": {
+        "x": 343,
+        "y": 1212,
+        "width": 7972,
+        "height": 5294
+      },
+      "treatment": "the elevation with its ghosted neighbours, NGF levels and entrance labels (ink x 383-8275, y 1252-6466); the key plan (x 7059-7645, y 409-725), the frame and the cartouche column stay outside the crop; the material legend (x 7915-8518, y 424-1545) cannot be cropped away without cutting the level labels below it, so its lower items fall inside the crop on blank paper and are erased in the cutout (D49) and re-set as caption text",
+      "darkTreatment": "field",
+      "credit": "Studio BELEM (EMETTEUR panel of the cartouche)",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "captionEvidence": "Printed title 'Façade Ouest', scale 'Comme indiqué', sheet 20-01, PRO phase, 30/01/2026, numbered legend 1-9; the same drawing as the existing 'West facade' figure (pdf2026:p14): same 23.23 frontage, grid 1-8 and nine-item legend",
+      "reviewStatus": "approved"
+    },
+    {
+      "source": "Images HQ/FOUBERT/20260129_BLM_FOU_PRO_Plan de niveaux_merge [1-20] [16-20]_page-0005.jpg",
+      "output": "images/foubert/foubert-east-facade.png",
+      "sha256": "a7e552375f367b84339de724d4680fb00a557c0a0f9d09dcf39cbc06b95e545c",
+      "crop": {
+        "x": 952,
+        "y": 1188,
+        "width": 6724,
+        "height": 5400
+      },
+      "treatment": "the elevation with its NGF levels and terrace-exit labels (ink x 992-7636, y 1227-6549); the key plan (x 7268-7696, y 256-536), the material legend (x 7880-8485, y 368-1492), the frame and the cartouche column stay outside the crop",
+      "darkTreatment": "field",
+      "credit": "Studio BELEM (EMETTEUR panel of the cartouche)",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "captionEvidence": "Printed title 'Façade Est', scale 'Comme indiqué', sheet 20-03, PRO phase, 30/01/2026; the same drawing as the existing 'East facade' figure (pdf2026:p15): same 23.20 frontage, grid 8-1 and terrace exits",
+      "reviewStatus": "approved"
+    },
+    {
+      "source": "Images HQ/FOUBERT/20260129_BLM_FOU_PRO_Plan de niveaux_merge [21-25]_page-0005.jpg",
+      "output": "images/foubert/foubert-street-window-section.png",
+      "sha256": "df0e1afbb05acf606f0ad4ed5485986a1a709ff7723601b825fd69371e70f5a9",
+      "crop": {
+        "x": 451,
+        "y": 100,
+        "width": 1373,
+        "height": 2114
+      },
+      "treatment": "drawing 1 of the sheet, the wall section with its leader callouts, which stay in the drawing and are translated in the caption (ink x 491-1784, y 137-2174, about 40 px of paper); the brick elevation (x 1894+), the interior elevation, the two plan details, the frame and the cartouche stay outside the crop",
+      "darkTreatment": "invert-accent",
+      "credit": "Studio BELEM (EMETTEUR panel of the cartouche)",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "captionEvidence": "Sheet title 'Fenêtre sur rue' (street window), sheet 50-ETA-09, PRO phase, 30/01/2026; the same drawing as the section in the existing 'Street-facing window detail' (pdf2026:p14)",
+      "reviewStatus": "approved"
+    },
+    {
+      "source": "Images HQ/FOUBERT/20260129_BLM_FOU_PRO_Plan de niveaux_merge [21-25]_page-0005.jpg",
+      "output": "images/foubert/foubert-street-window-elevation.png",
+      "sha256": "df0e1afbb05acf606f0ad4ed5485986a1a709ff7723601b825fd69371e70f5a9",
+      "crop": {
+        "x": 1854,
+        "y": 100,
+        "width": 1370,
+        "height": 2114
+      },
+      "treatment": "drawing 2 of the sheet, the exterior elevation of the window in brick with its dimensions (ink x 1894-3206, y 154-2174), cropped to the section's height so the pair keeps one scale and one baseline; the section, the interior elevation (x 3238+), the plan details, the frame and the cartouche stay outside the crop",
+      "darkTreatment": "field",
+      "credit": "Studio BELEM (EMETTEUR panel of the cartouche)",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "captionEvidence": "Sheet title 'Fenêtre sur rue' (street window), sheet 50-ETA-09; the same drawing as the brick elevation in the existing 'Street-facing window detail' (pdf2026:p14)",
+      "reviewStatus": "approved"
+    },
+    {
+      "source": "Images HQ/FOUBERT/20260129_BLM_FOU_PRO_Plan de niveaux_merge [1-20] [1-15]_page-0014.jpg",
+      "output": "images/foubert/foubert-attic-terrace-detail.png",
+      "sha256": "79461ece7833a0f799337bfb7e517d5e9037adaed0521cd3ba1389bd03eacff5",
+      "crop": {
+        "x": 264,
+        "y": 100,
+        "width": 2196,
+        "height": 2355
+      },
+      "treatment": "drawing 1 of the sheet, the attic-terrace section with its leader callouts (kept, translated in the caption), NGF levels and dimensions (ink x 304-2420, y 137-2435, about 40 px of paper); the window elevation (x 2880+), the plan detail, the frame and the cartouche stay outside the crop; the top edge of the key plan (x 383-1272, y 2380-2455) cannot be cropped away without cutting the lowest callout, so that sliver of sheet furniture is erased in the cutout",
+      "darkTreatment": "invert-accent",
+      "credit": "Studio BELEM (EMETTEUR panel of the cartouche)",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "captionEvidence": "Sheet title 'Détail terrasse attique' (attic terrace detail), Ech. 1:10, sheet 50-19, PRO phase, 30/01/2026; the same drawing as the section in the existing 'Attic terrace detail' (pdf2026:p14)",
+      "reviewStatus": "approved"
+    },
+    {
+      "source": "Images HQ/FOUBERT/20260129_BLM_FOU_PRO_Plan de niveaux_merge [1-20] [1-15]_page-0015.jpg",
+      "output": "images/foubert/foubert-green-roof-detail-2.png",
+      "sha256": "7452f58be6f3a73e991cf43743754e45895c59fff0bc3db6407785bb89e9f617",
+      "crop": {
+        "x": 249,
+        "y": 384,
+        "width": 3359,
+        "height": 2728
+      },
+      "treatment": "the three-part section with its leader callouts (kept, translated in the caption) and NGF levels (ink x 289-3568, y 424-3072, about 40 px of paper); the frame and the cartouche stay outside the crop; maxEdge 2467 holds it at the scale of detail 50-21 (k 0.7344) so the pair keeps one scale",
+      "darkTreatment": "invert-accent",
+      "credit": "Studio BELEM (EMETTEUR panel of the cartouche)",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "captionEvidence": "Sheet title 'Détail terrasse végétalisée' (green terrace detail), Ech. 1:10, sheet 50-20, PRO phase, 30/01/2026; the same drawing as the existing 'Green roof terrace detail 2' (pdf2026:p15)",
+      "reviewStatus": "approved",
+      "maxEdge": 2467
+    },
+    {
+      "source": "Images HQ/FOUBERT/20260129_BLM_FOU_PRO_Plan de niveaux_merge [1-20] [16-20]_page-0001.jpg",
+      "output": "images/foubert/foubert-green-roof-detail-1.png",
+      "sha256": "4b01dfbb61df42e74f4e1ebb675a5ac0892150544c55e7c6dd42f7ad848aa4ea",
+      "crop": {
+        "x": 267,
+        "y": 105,
+        "width": 3486,
+        "height": 3030
+      },
+      "treatment": "the section with the ghosted windows behind it, its leader callouts (kept, translated in the caption), the property-line label and dimensions (ink x 307-3713, y 145-3095); the key plan and the notes ('Remarques') column (x 3765+), the frame and the cartouche stay outside the crop",
+      "darkTreatment": "invert-accent",
+      "credit": "Studio BELEM (EMETTEUR panel of the cartouche)",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "captionEvidence": "Sheet title 'Détail terrasse végétalisée' (green terrace detail), Ech. 1:10, sheet 50-21, PRO phase, 30/01/2026; the same drawing as the existing 'Green roof terrace detail 1' (pdf2026:p15)",
+      "reviewStatus": "approved"
     }
   ]
 }

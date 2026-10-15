@@ -71,75 +71,126 @@
       "source": "site"
     },
     {
-      "text": "The programme distributes six residential units across four levels with a shared courtyard at ground floor. The structural system is concrete with masonry infill, detailed in Revit for direct handover to the engineer. All PC documentation was prepared by the team at Studio BELEM with Hazem contributing from concept through to technical drawings and regulatory compliance checks.",
-      "source": "site"
+      "text": "The structural system is concrete with masonry infill, detailed in Revit for direct handover to the engineer. All PC documentation was prepared by the team at Studio BELEM with Hazem contributing from concept through to technical drawings and regulatory compliance checks.",
+      "source": "site (first sentence withheld, D60)"
     }
   ],
   "hero": {
     "src": "images/foubert/foubert-brick-render-hq.jpg",
     "alt": "Render of the Foubert residential building in aged red brick with a claustra screen",
     "credit": "Render: Studio BELEM",
-    "source": "pdf2026:p13"
+    "source": "pdf2026:p13 + hq:FOUBERT/20240105_BLM_FOU_Perspective rue.jpg"
   },
   "figures": [
     {
-      "src": "images/foubert/foubert-west-facade.jpg",
+      "src": "images/foubert/foubert-site-plan.png",
+      "title": "Site plan",
+      "caption": "PRO sheet 00-02, January 2026. The planted roof terrace at R+4 over the street block, with the accessible attic at R+3 along passage Foubert, and accessible roofs at R+1 and R+2 over the rear wings; a 23.24 m frontage.",
+      "alt": "Site plan of the plot on passage Foubert: the long street block under a pale green planted roof with a curved stair bay on the street side, rear wings with green roofs and paved terraces, a triangular garden, and the neighbouring buildings in outline with their storey counts",
+      "kind": "drawing",
+      "source": "hq:FOUBERT/20260129_BLM_FOU_PRO_Plan de niveaux_merge [21-25]_page-0004.jpg (printed title 'Plan de masse'; labels 'Toiture terrasse végétalisée à R+4', 'Attique accessible à R+3', 'Toiture accessible à R+1', 'Toiture accessible à R+2', 'Passage Foubert'; translated, D17)"
+    },
+    {
+      "title": "Level plans",
+      "caption": "PRO sheets 10-02, 10-04 and 10-06, 1:50, January 2026: ground floor, second floor and attic floor, left to right. At ground level the street workshop (A00) sits beside the two halls and three flats, with a garden behind; the second floor holds four flats (A21 to A24) and a workshop around the common stair; the attic flats (A41, A42) step back behind terraces on the street.",
+      "kind": "drawing",
+      "items": [
+        {
+          "src": "images/foubert/foubert-plan-rdc.png",
+          "alt": "Ground-floor plan: a large workshop on the street at the left, the entrance halls and the curved common stair in the middle, three flats on the right, and planted gardens with trees behind, all dimensioned in red"
+        },
+        {
+          "src": "images/foubert/foubert-plan-r2.png",
+          "alt": "Second-floor plan: three flats along the street front around the common stair and lift, and a rear wing with a workshop and a fourth flat with a balcony over the garden"
+        },
+        {
+          "src": "images/foubert/foubert-plan-r4.png",
+          "alt": "Attic-floor plan: two flats with spiral stairs behind long terraces on the street, the common stair rounded into a curved bay at the front"
+        }
+      ],
+      "source": "hq:FOUBERT/20260129_BLM_FOU_PRO_Plan de niveaux_merge [1-20] [1-15]_page-0002.jpg, page-0004.jpg, page-0006.jpg (printed titles 'Plan de niveau RDC', 'Plan de niveau R+2', 'Plan de niveau R+4', scale 1 : 50; room labels 'Atelier sur Rue', 'Hall commun', 'Jardin', 'Séjour-Cuisine', 'Terrasse'; translated, D17)"
+    },
+    {
+      "src": "images/foubert/foubert-section-bb.png",
+      "title": "Longitudinal section B-B",
+      "caption": "PRO sheet 30-02, 1/50. Along the street block, from the basement cellars, refuse and water rooms through the street workshop and the common stair to the attic flats under the planted roof; levels from 49.80 to 68.10 NGF.",
+      "alt": "Section through the five-storey street block: a basement of cellars under the ground floor, four floors of rooms above, the common stair rising in the middle, timber windows seen beyond, a planted roof on top and grey party walls at both ends",
+      "kind": "drawing",
+      "source": "hq:FOUBERT/20260129_BLM_FOU_PRO_Plan de niveaux_merge [1-20] [1-15]_page-0009.jpg (printed title 'Coupe longitudinale BB', scale 1/50; room labels 'Cave 07', 'Local OM', 'Local eau', 'Atelier sur Rue', 'Circulation commune'; levels 49.80 S1 to 68.10 TT; translated, D17)"
+    },
+    {
+      "src": "images/foubert/foubert-section-cc.png",
+      "title": "Cross-section C-C",
+      "caption": "PRO sheet 30-03, 1/50. Across the plot, from the rear wing and its planted roof to the brick front on passage Foubert, with the basement bicycle store below and the attic floor above.",
+      "alt": "Cross-section: on the left a three-storey rear wing with timber windows and a planted roof against a grey party wall, on the right the street block rising to the attic with a red brick front, and a basement beneath both",
+      "kind": "drawing",
+      "source": "hq:FOUBERT/20260129_BLM_FOU_PRO_Plan de niveaux_merge [1-20] [1-15]_page-0010.jpg (printed title 'Coupe transversale CC', scale 1/50; room labels 'Local vélos', 'Souplex', 'Séjour-Cuisine'; translated, D17)",
+      "maxH": 820
+    },
+    {
+      "src": "images/foubert/foubert-west-facade.png",
       "title": "West facade",
-      "caption": "West Facade | Passage Foubert. Eco-brick cladding Fjord Soda red aged, wood joinery, metal mesh guardrails RAL 9007, red metal frames RAL 3014. Scale 1:100.",
-      "alt": "West facade drawing of the Foubert building on passage Foubert",
+      "caption": "PRO sheet 20-01, January 2026. The street front on passage Foubert, 23.23 m between the property lines. Materials, by the numbers on the drawing: 1 solid-brick claustra screen, «fjord soda» type, aged red; 2 eco-brick bond, 6 cm thick, «fjord soda» type, aged red; 3 clear glazing; 4 metal-mesh guardrail with a powder-coated metal rail, RAL 9007; 5 varnished natural-timber joinery; 6 powder-coated metal frames and metalwork, RAL 3014; 7 powder-coated metal door, RAL 3014; 8 floated lime-render facade, RAL 9010 or equivalent; 9 metal screen panels, RAL 3014.",
+      "alt": "Street elevation in aged red brick: four storeys of tall timber French windows with mesh guardrails over a ground floor of perforated brick claustra panels, a red metal workshop door and the entrances, a planted roof edge on top and the neighbouring facades ghosted on either side",
       "kind": "drawing",
-      "source": "pdf2026:p14 + site",
-      "size": "wide"
+      "source": "pdf2026:p14 + site + hq:FOUBERT/20260129_BLM_FOU_PRO_Plan de niveaux_merge [1-20] [16-20]_page-0003.jpg (printed title 'Façade Ouest'; numbered legend 1-9; translated, D17)"
     },
     {
-      "title": "Details",
-      "caption": "Attic terrace detail. Street-facing window detail.",
-      "kind": "drawing",
-      "items": [
-        {
-          "src": "images/foubert/foubert-attic-terrace-detail.jpg",
-          "alt": "Attic terrace construction detail"
-        },
-        {
-          "src": "images/foubert/foubert-street-window-detail.jpg",
-          "alt": "Street-facing window construction detail"
-        }
-      ],
-      "source": "pdf2026:p14"
-    },
-    {
-      "src": "images/foubert/foubert-east-facade.jpg",
+      "src": "images/foubert/foubert-east-facade.png",
       "title": "East facade",
-      "caption": "East Facade | Passage Foubert. Terrace accesses at upper levels, apartment entries at grade. Same material language from garden side.",
-      "alt": "East facade drawing of the Foubert building",
+      "caption": "PRO sheet 20-03. The garden front, 23.20 m between the property lines: timber windows in lime render, balconies with mesh guardrails and terrace exits at ground level; material numbers as listed for the west facade.",
+      "alt": "Rear elevation in white render: rows of timber windows with red metal panels between them, two balconies with mesh guardrails on the left, a grey neighbouring building standing in front of the middle bays, and a planted roof edge on top",
       "kind": "drawing",
-      "source": "pdf2026:p15 + site",
-      "size": "wide"
+      "source": "pdf2026:p15 + site + hq:FOUBERT/20260129_BLM_FOU_PRO_Plan de niveaux_merge [1-20] [16-20]_page-0005.jpg (printed title 'Façade Est'; 'Sortie Terrasse'; translated, D17)"
     },
     {
-      "title": "Green roof",
-      "caption": "Green roof terrace detail 1. Green roof terrace detail 2.",
+      "title": "Street window",
+      "caption": "PRO sheet 50-ETA-09, January 2026: wall section and exterior elevation of a window on the street front. Callouts on the section, top to bottom: BB slab build-up, 29 cm; insulation; air gap over 30 mm; Eco-brik Olm; support bracket; reinforcement; hanger; 4 cm rock-wool insulation; adjustable external louvre blind; blind guide rails; Eco-brik Olm; lacquered metal sheet; powder-coated metal guardrail with 3 cm metal mesh; metal sill flashing; timber window.",
       "kind": "drawing",
       "items": [
         {
-          "src": "images/foubert/foubert-green-roof-detail-1.jpg",
-          "alt": "Green roof terrace construction detail 1"
+          "src": "images/foubert/foubert-street-window-section.png",
+          "alt": "Wall section through the window: concrete slab and insulation, an air gap and a skin of red brick hung on brackets, the louvre blind box over the timber window and the mesh guardrail, with French callouts on the left"
         },
         {
-          "src": "images/foubert/foubert-green-roof-detail-2.jpg",
-          "alt": "Green roof terrace construction detail 2"
+          "src": "images/foubert/foubert-street-window-elevation.png",
+          "alt": "Exterior elevation of a French window in red brick with a soldier-course lintel, a timber frame and a mesh guardrail across its lower part, dimensioned in red"
         }
       ],
-      "source": "pdf2026:p15"
+      "source": "pdf2026:p14 + hq:FOUBERT/20260129_BLM_FOU_PRO_Plan de niveaux_merge [21-25]_page-0005.jpg (sheet title 'Fenêtre sur rue'; callouts kept on the drawing, translated, D17)"
     },
     {
-      "src": "images/foubert/foubert-aerial-render.jpg",
-      "title": "Aerial view",
-      "caption": "Aerial view of the completed project.",
-      "alt": "Aerial render of the completed Foubert building",
+      "src": "images/foubert/foubert-attic-terrace-detail.png",
+      "title": "Attic terrace detail",
+      "caption": "PRO sheet 50-19, 1:10. Callouts on the left: guardrail fixing; metal coping; concrete; insulation; air gap; brick finish. On the right: slabs on pedestals; grating; BB slab build-up, 36 cm; concrete beam; BB slab build-up, 21 cm; vapour barrier; insulation; waterproofing. Levels 65.18 to 66.26 NGF.",
+      "alt": "Section of the attic terrace at 1:10: the brick-faced parapet with its coping and guardrail on the left, paving slabs on pedestals over insulation and the concrete slab, and the attic wall with its window rising on the right",
+      "kind": "drawing",
+      "source": "pdf2026:p14 + hq:FOUBERT/20260129_BLM_FOU_PRO_Plan de niveaux_merge [1-20] [1-15]_page-0014.jpg (sheet title 'Détail terrasse attique', Ech. 1:10; callouts kept on the drawing, translated, D17)"
+    },
+    {
+      "title": "Green roof terrace",
+      "caption": "PRO sheets 50-21 and 50-20, 1:10, left to right. On 50-21: L-shaped concrete kerb; guardrail; insulation; metal coping; roof (timber frame); and below, insulation; concrete; vapour barrier; KNAUF Thane insulation; flexible PVC with 40% plasticiser; topsoil. On 50-20: lacquered metal sheet; metal coping; guardrail fixing; guardrail; insulation; concrete; render; L-shaped concrete kerb; topsoil; slabs on pedestals; grating; metal U-profile; BB slab build-up, 29 cm; concrete beam; plywood panels; KNAUF Thane insulation; flexible PVC with 40% plasticiser.",
+      "kind": "drawing",
+      "items": [
+        {
+          "src": "images/foubert/foubert-green-roof-detail-1.png",
+          "alt": "Section of a planted roof terrace at 1:10: a 30 cm bed of topsoil between paved strips on pedestals, guardrails at both edges, insulation and the concrete slab below, windows drawn faintly behind"
+        },
+        {
+          "src": "images/foubert/foubert-green-roof-detail-2.png",
+          "alt": "Three-part section of the green terrace at 1:10: the parapet with a planted strip, the planting bed behind a concrete kerb, and paving on pedestals at the door threshold, each with a mesh guardrail"
+        }
+      ],
+      "source": "pdf2026:p15 + hq:FOUBERT/20260129_BLM_FOU_PRO_Plan de niveaux_merge [1-20] [16-20]_page-0001.jpg and [1-20] [1-15]_page-0015.jpg (sheet title 'Détail terrasse végétalisée', Ech. 1:10; callouts kept on the drawing, translated, D17)"
+    },
+    {
+      "src": "images/foubert/foubert-rear-render-hq.jpg",
+      "title": "Rear view",
+      "caption": "From above the rear: the courtyard terrace and the planted roof.",
+      "alt": "Render from above of the pale pink rear facade, with a paved courtyard terrace with planting and outdoor seating at its foot, a planted roof along the top, and neighbouring roofs in zinc and red tile all around",
       "kind": "render",
       "credit": "Render: Studio BELEM",
-      "source": "pdf2026:p16"
+      "source": "pdf2026:p16 + hq:FOUBERT/20240610_BLM_FOU_Perspective arrière.jpg"
     }
   ],
   "date": "2026",

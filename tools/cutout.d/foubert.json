@@ -1,0 +1,156 @@
+{
+  "$comment": "Foubert cutouts (tools/cutout.mjs; D46, D49, D50). Studio BELEM PRO sheets (January 2026) exported on clean white paper: low floor/knee so the pale hatches, ghosted neighbours and pale green planted areas survive. Leader-line callouts on the details stay in the drawing (they are not free-standing text; translated in the captions). Erased: the west-facade legend items that fall inside the crop (re-set as caption text) and the sliver of key plan under the attic detail (sheet furniture). Clip: only plan R+2, whose grid axis lines run to the sheet frame by design (they start 7 px from the frame; the shared series crop starts 4 px inside it); every other crop leaves paper on all sides.",
+  "images": {
+    "images/foubert/foubert-site-plan.png": {
+      "paper": [
+        255,
+        255,
+        255
+      ],
+      "floor": 0.015,
+      "knee": 0.03,
+      "dark": "invert-accent"
+    },
+    "images/foubert/foubert-plan-rdc.png": {
+      "paper": [
+        255,
+        255,
+        255
+      ],
+      "floor": 0.015,
+      "knee": 0.03,
+      "dark": "invert-accent"
+    },
+    "images/foubert/foubert-plan-r2.png": {
+      "paper": [
+        255,
+        255,
+        255
+      ],
+      "floor": 0.015,
+      "knee": 0.03,
+      "dark": "invert-accent",
+      "clip": [
+        "left"
+      ]
+    },
+    "images/foubert/foubert-plan-r4.png": {
+      "paper": [
+        255,
+        255,
+        255
+      ],
+      "floor": 0.015,
+      "knee": 0.03,
+      "dark": "invert-accent"
+    },
+    "images/foubert/foubert-section-bb.png": {
+      "paper": [
+        255,
+        255,
+        255
+      ],
+      "floor": 0.015,
+      "knee": 0.03,
+      "dark": "invert-accent"
+    },
+    "images/foubert/foubert-section-cc.png": {
+      "paper": [
+        255,
+        255,
+        255
+      ],
+      "floor": 0.015,
+      "knee": 0.03,
+      "dark": "invert-accent"
+    },
+    "images/foubert/foubert-west-facade.png": {
+      "paper": [
+        255,
+        255,
+        255
+      ],
+      "floor": 0.015,
+      "knee": 0.03,
+      "erase": [
+        {
+          "id": "legend",
+          "x": 2418,
+          "y": 0,
+          "w": 142,
+          "h": 121
+        }
+      ],
+      "dark": "field"
+    },
+    "images/foubert/foubert-east-facade.png": {
+      "paper": [
+        255,
+        255,
+        255
+      ],
+      "floor": 0.015,
+      "knee": 0.03,
+      "dark": "field"
+    },
+    "images/foubert/foubert-street-window-section.png": {
+      "paper": [
+        255,
+        255,
+        255
+      ],
+      "floor": 0.015,
+      "knee": 0.03,
+      "dark": "invert-accent"
+    },
+    "images/foubert/foubert-street-window-elevation.png": {
+      "paper": [
+        255,
+        255,
+        255
+      ],
+      "floor": 0.015,
+      "knee": 0.03,
+      "dark": "field"
+    },
+    "images/foubert/foubert-attic-terrace-detail.png": {
+      "paper": [
+        255,
+        255,
+        255
+      ],
+      "floor": 0.015,
+      "knee": 0.03,
+      "erase": [
+        {
+          "id": "key-plan-edge",
+          "x": 105,
+          "y": 2266,
+          "w": 775,
+          "h": 89
+        }
+      ],
+      "dark": "invert-accent"
+    },
+    "images/foubert/foubert-green-roof-detail-1.png": {
+      "paper": [
+        255,
+        255,
+        255
+      ],
+      "floor": 0.015,
+      "knee": 0.03,
+      "dark": "invert-accent"
+    },
+    "images/foubert/foubert-green-roof-detail-2.png": {
+      "paper": [
+        255,
+        255,
+        255
+      ],
+      "floor": 0.015,
+      "knee": 0.03,
+      "dark": "invert-accent"
+    }
+  }
+}

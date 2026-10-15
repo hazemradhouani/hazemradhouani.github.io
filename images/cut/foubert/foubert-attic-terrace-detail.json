@@ -1,0 +1,49 @@
+{
+ "src": "images/foubert/foubert-attic-terrace-detail.png",
+ "hash": "863306ecdafc72fb",
+ "mode": "ink",
+ "from": [
+  2196,
+  2355
+ ],
+ "to": [
+  2164,
+  2342
+ ],
+ "offset": [
+  16,
+  13
+ ],
+ "paper": [
+  255,
+  255,
+  255
+ ],
+ "clip": [],
+ "ink": {
+  "ink": 102099,
+  "chromaticFraction": 0.0549,
+  "midtoneFraction": 0.4622,
+  "suggest": "accent"
+ },
+ "dark": "invert-accent",
+ "specks": 35,
+ "tile": [
+  1280,
+  1400,
+  640,
+  400
+ ],
+ "background": null,
+ "labels": [
+  {
+   "id": "key-plan-edge",
+   "removed": 55,
+   "kept": 0,
+   "x": 4.76,
+   "y": 96.755,
+   "w": 34.381,
+   "h": 3.245
+  }
+ ]
+}

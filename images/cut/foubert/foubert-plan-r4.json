@@ -1,0 +1,39 @@
+{
+ "src": "images/foubert/foubert-plan-r4.png",
+ "hash": "2d1f32e0a0a4df7b",
+ "mode": "ink",
+ "from": [
+  2560,
+  1826
+ ],
+ "to": [
+  2560,
+  1826
+ ],
+ "offset": [
+  0,
+  0
+ ],
+ "paper": [
+  255,
+  255,
+  255
+ ],
+ "clip": [],
+ "ink": {
+  "ink": 75076,
+  "chromaticFraction": 0.1797,
+  "midtoneFraction": 0.5375,
+  "suggest": "colour"
+ },
+ "dark": "invert-accent",
+ "specks": 26,
+ "tile": [
+  960,
+  1200,
+  640,
+  400
+ ],
+ "background": null,
+ "labels": []
+}

@@ -1,0 +1,39 @@
+{
+ "src": "images/foubert/foubert-green-roof-detail-2.png",
+ "hash": "e3d644e8e6d224af",
+ "mode": "ink",
+ "from": [
+  2467,
+  2004
+ ],
+ "to": [
+  2459,
+  1996
+ ],
+ "offset": [
+  4,
+  4
+ ],
+ "paper": [
+  255,
+  255,
+  255
+ ],
+ "clip": [],
+ "ink": {
+  "ink": 125774,
+  "chromaticFraction": 0.0295,
+  "midtoneFraction": 0.4237,
+  "suggest": "accent"
+ },
+ "dark": "invert-accent",
+ "specks": 69,
+ "tile": [
+  1600,
+  1200,
+  640,
+  400
+ ],
+ "background": null,
+ "labels": []
+}
