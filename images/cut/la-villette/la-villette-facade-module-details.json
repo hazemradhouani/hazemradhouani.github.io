@@ -1,0 +1,94 @@
+{
+ "src": "images/la-villette/la-villette-facade-module-details.png",
+ "hash": "010f59cf31072eb9",
+ "mode": "ink",
+ "from": [
+  2560,
+  2267
+ ],
+ "to": [
+  2560,
+  2267
+ ],
+ "offset": [
+  0,
+  0
+ ],
+ "paper": [
+  255,
+  255,
+  255
+ ],
+ "clip": [],
+ "ink": {
+  "ink": 343901,
+  "chromaticFraction": 0.1713,
+  "midtoneFraction": 0.4379,
+  "suggest": "colour"
+ },
+ "dark": "field",
+ "specks": 794,
+ "tile": [
+  320,
+  1000,
+  640,
+  400
+ ],
+ "background": null,
+ "labels": [
+  {
+   "id": "band-top",
+   "removed": 13,
+   "kept": 0,
+   "x": 63.281,
+   "y": 10.19,
+   "w": 8.438,
+   "h": 1.103
+  },
+  {
+   "id": "drip",
+   "removed": 9,
+   "kept": 0,
+   "x": 94.375,
+   "y": 13.807,
+   "w": 4.961,
+   "h": 0.838
+  },
+  {
+   "id": "solar",
+   "removed": 14,
+   "kept": 0,
+   "x": 63.906,
+   "y": 16.145,
+   "w": 7.852,
+   "h": 0.882
+  },
+  {
+   "id": "joinery",
+   "removed": 20,
+   "kept": 0,
+   "x": 60.781,
+   "y": 24.085,
+   "w": 10.977,
+   "h": 0.882
+  },
+  {
+   "id": "form-lined",
+   "removed": 13,
+   "kept": 0,
+   "x": 63.242,
+   "y": 56.242,
+   "w": 6.289,
+   "h": 0.926
+  },
+  {
+   "id": "band-bottom",
+   "removed": 13,
+   "kept": 0,
+   "x": 63.281,
+   "y": 67.843,
+   "w": 8.438,
+   "h": 1.103
+  }
+ ]
+}

@@ -63,36 +63,263 @@
   "tag": "Studio BELEM / Phase PRO/EXE / PLU | ABF | ERP | PPRI",
   "narrative": [],
   "hero": {
-    "src": "images/la-villette/la-villette-street-render.jpg",
-    "alt": "Street render of the La Villette rehabilitation on avenue Jean Jaurès, with a shopfront on the ground floor",
+    "src": "images/la-villette/la-villette-street-render-hq.jpg",
+    "alt": "Street render of the building on avenue Jean Jaurès: a white rendered façade over a pale green shopfront, between a taller white building with a red restaurant front and a lower neighbour, a white car at the kerb",
     "credit": "Render: Studio BELEM",
-    "source": "pdf2026:p3"
+    "source": "pdf2026:p3 + hq:La villette/NB_StudioBeleem_JJaures_LaVillette_CAM-03_AvenueJeanJaures_Rep-3_PC_20260224.jpg"
   },
   "figures": [
     {
-      "src": "images/la-villette/la-villette-gate-detail.jpg",
-      "title": "Access gate and entry door",
-      "caption": "Access Gate 5UP + Main Entry Door 1UP | North Elevation Building A.",
-      "alt": "Construction detail of the access gate and entry door: elevation, section, plan and north elevation of building A",
+      "src": "images/la-villette/la-villette-garden-render.jpg",
+      "title": "Garden path",
+      "caption": "The framed concrete façade along the planted path.",
+      "alt": "Render of a planted path beside a long building whose concrete frame repeats storey after storey, with timber-framed windows set deep in each bay, young trees and flowering plants along the path",
+      "kind": "render",
+      "credit": "Render: Studio BELEM",
+      "source": "hq:La villette/NB_StudioBeleem_JJaures_LaVillette_CAM-01_Rep-Julliet _20240716.jpg (no printed title)"
+    },
+    {
+      "src": "images/la-villette/la-villette-aerial-render-hq.jpg",
+      "title": "Aerial view",
+      "caption": "Reading of the three buildings A, B and C.",
+      "alt": "Hazy high view: a low block of grey pitched roofs in front, two framed concrete blocks with planted roofs behind it, and older Paris buildings beyond",
+      "kind": "render",
+      "credit": "Render: Studio BELEM",
+      "source": "pdf2026:p8 + hq:La villette/NB_StudioBeleem_JJaures_LaVillette_CAM-02_AvenueJeanJaures_Rep-Julliet_20240720_modifié.jpg"
+    },
+    {
+      "src": "images/la-villette/la-villette-site-plan.jpg",
+      "title": "Site plan",
+      "caption": "Site plan | Buildings A, B, and C.",
+      "alt": "Site plan of buildings A, B and C around the patio",
       "kind": "drawing",
-      "source": "pdf2026:p4",
+      "source": "pdf2026:p7 (no HQ source)",
       "size": "wide"
     },
     {
-      "title": "Facade module",
-      "caption": "Facade module Building C | constructive axonometric. Module details | sections and elevations.",
+      "src": "images/la-villette/la-villette-plan-level-2-room-types.png",
+      "title": "Level 2, building C: room types",
+      "caption": "Key plan of the room types on level 2; level 3, on the same sheet, repeats the layout. Standard, bunkie and flex rooms sit side by side between the two stair cores.",
+      "alt": "Colour plan of a long building with two short wings: pale salmon rooms in the wings, teal and pale yellow rooms between two stair cores in the middle, grid bubbles c1 to c21 along the bottom and z1 to z6 on the right",
       "kind": "drawing",
-      "items": [
+      "legend": [
         {
-          "src": "images/la-villette/la-villette-facade-module-axonometric.jpg",
-          "alt": "Constructive axonometric of the facade module of building C"
+          "swatch": "#FFE0CE",
+          "text": "Standard room"
         },
         {
-          "src": "images/la-villette/la-villette-module-details.jpg",
-          "alt": "Sections and elevations of the facade module details"
+          "swatch": "#93CFCF",
+          "text": "Bunkie room"
+        },
+        {
+          "swatch": "#FFFFCD",
+          "text": "Flex room"
         }
       ],
-      "source": "pdf2026:p5"
+      "source": "hq:La villette/1050-6001-B_LAV_BLM_CHB_CAR_REP_DCE_merge_page-0006.jpg (printed titles 'Plan de repérage des Chambres Types, Niveau 2 -3 _ Bâtiments C' and 'Plan de repérage_ Niveau 2'; legend 'Chambre Standard', 'Chambre Bunkie', 'Chambre Flex', 'Chambre PMR' (no room in this colour on level 2, not re-set); translated, D17)"
+    },
+    {
+      "src": "images/la-villette/la-villette-south-elevation-c.png",
+      "title": "South elevation, building C",
+      "caption": "1:100, PRO phase. The framed concrete façade from level N0 to N7, taller on the left with a set-back rooftop storey and lower on the right; grid z1 to z6 at 2.75 m.",
+      "alt": "Line elevation of a framed façade: a regular concrete grid with a window over a solid spandrel in every bay, a taller part on the left with a set-back rooftop storey, a lower wing on the right, red property lines and level marks at the side",
+      "kind": "drawing",
+      "source": "hq:La villette/1050-4701-G_LAV_BLM_MET_CAR_REP_A_DCE_merge_page-0008.jpg (printed title 'Elevation Sud_Bâtiment C'; cartouche 'Façades', 'Bâtiment C', '1/100', phase 'PRO'; levels 'N0-C' to 'N7-C', bays '2.75'; translated, D17)"
+    },
+    {
+      "src": "images/la-villette/la-villette-facade-module-axo.png",
+      "title": "Façade module, constructive axonometric",
+      "caption": "From the façade prototype booklet: one module of building C's façade, cut open to show its build-up. The spandrel is in textured concrete; the columns and façade bands are in sandblasted concrete.",
+      "alt": "Axonometric cut through one façade module: a deep concrete frame with rounded column edges around a timber-framed window, a grey spandrel panel below it, and the wall build-up of concrete and insulation cut at the top and bottom",
+      "kind": "drawing",
+      "maxH": 760,
+      "labels": [
+        {
+          "at": "concrete",
+          "text": "Concrete",
+          "align": "end"
+        },
+        {
+          "at": "drip",
+          "text": "Drip",
+          "align": "end"
+        },
+        {
+          "at": "insulation",
+          "text": "Insulation",
+          "align": "end"
+        },
+        {
+          "at": "sun",
+          "text": "Solar protection"
+        },
+        {
+          "at": "glazing",
+          "text": "Glazing"
+        },
+        {
+          "at": "timber-frame",
+          "text": "Timber frame"
+        },
+        {
+          "at": "spandrel",
+          "text": "Spandrel"
+        },
+        {
+          "at": "column",
+          "text": "Column"
+        },
+        {
+          "at": "joint",
+          "text": "Recessed joint"
+        },
+        {
+          "at": "band",
+          "text": "Façade band"
+        }
+      ],
+      "source": "hq:La villette/1050-6001-B_LAV_BLM_CHB_CAR_REP_DCE_merge_page-0010.jpg (printed titles 'Carnet Prototype de façade', 'Module de façade'; callouts 'Béton', 'Goutte d'eau', 'Isolation', 'Protection solaire', 'Vitrage', 'Cadre bois', 'Allège fin. Béton matricé', 'Poteau fin. Béton sablé', 'Joint creux', 'Bandeau de façade fin. Béton sablé'; translated, D17, D49); pdf2026:p5"
+    },
+    {
+      "src": "images/la-villette/la-villette-facade-module-details.png",
+      "title": "Façade module details",
+      "caption": "1:20. Elevation, vertical section and plan of one module: a 185 cm opening between 75 cm columns, the window over an 87 cm spandrel.",
+      "alt": "Detail sheet of the module: on the left an elevation of a timber-framed window over a grey textured spandrel between two columns, with red dimensions; on the right a vertical section through the window, the spandrel and the projecting façade bands; below, a plan of the opening between the two rounded columns",
+      "kind": "drawing",
+      "maxH": 760,
+      "labels": [
+        {
+          "at": "band-top",
+          "text": "Façade band"
+        },
+        {
+          "at": "solar",
+          "text": "Solar\nprotection"
+        },
+        {
+          "at": "joinery",
+          "text": "External\njoinery"
+        },
+        {
+          "at": "form-lined",
+          "text": "Textured\nconcrete"
+        },
+        {
+          "at": "band-bottom",
+          "text": "Façade band"
+        },
+        {
+          "at": "drip",
+          "text": "Drip"
+        }
+      ],
+      "source": "hq:La villette/1050-6001-B_LAV_BLM_CHB_CAR_REP_DCE_merge_page-0011.jpg (printed titles 'Carnet Prototype de façade', 'Détails', scale '1/20'; callouts 'Bandeau de façade', 'Protection solaire', 'Menuiserierie [sic] extérieure', 'Béton matricé', 'Goutte d'eau'; dimensions 75, 185, 87, 181; translated, D17, D49); pdf2026:p5"
+    },
+    {
+      "src": "images/la-villette/la-villette-access-gate.png",
+      "title": "Access gate, north elevation",
+      "caption": "1:20. Elevation (left) and section (right) of the gate: an entrance door of one unit of passage (1UP) and an access gate of five (5UP) in one steel frame.",
+      "alt": "Construction elevation of a two-leaf gate of vertical pale salmon slats in a dark steel frame under a stippled wall band, leader lines running across the middle to labels and on to a narrow section through the gate on the right, with red dimensions",
+      "kind": "drawing",
+      "labels": [
+        {
+          "at": "door-closer",
+          "text": "Closer"
+        },
+        {
+          "at": "frame",
+          "text": "Powder-coated metal frame, RAL 7016"
+        },
+        {
+          "at": "batten",
+          "text": "Lacquered timber batten, 70 × 35 mm"
+        },
+        {
+          "at": "structure",
+          "text": "Gate structure, RAL 7016"
+        },
+        {
+          "at": "tie-rod",
+          "text": "Tie rod"
+        },
+        {
+          "at": "hinge",
+          "text": "Double-action spring hinge /\nbutt hinge / pintle"
+        },
+        {
+          "at": "handle",
+          "text": "Handle",
+          "align": "end"
+        },
+        {
+          "at": "slats",
+          "text": "Powder-coated metal slats, RAL 9016"
+        },
+        {
+          "at": "stop",
+          "text": "Controlled door stop\nwith manual release"
+        },
+        {
+          "at": "pivot",
+          "text": "Controlled floor pivot with\nreleasable electromagnetic stop"
+        }
+      ],
+      "source": "hq:La villette/1050-4701-G_LAV_BLM_MET_CAR_REP_A_DCE_merge_page-0002.jpg (printed title 'Portail, trappe d'accès colonnes sèches– elevation nord', scale '1/20'; view titles 'ELEVATION', 'COUPE'; callouts 'Ferme porte', 'Cadre métallique thermolaqué RAL 7016', 'Tasseau bois laqué 70x35mm', 'Structure portail RAL 7016', 'Tirant metallic', 'Charniere à ressort double action / Paumelle / Gond', 'Poignée', 'Lames métalliques thermolaqués RAL 9016', 'Arret de porte asservie avec déverrouillage manuel', 'Pivot de sol asservis à arrêt électromagnétique déverrouillable'; intrinsic 'Porte d'entrée 1UP', 'Portail d'accès 5UP'; translated, D17, D49); pdf2026:p4"
+    },
+    {
+      "src": "images/la-villette/la-villette-window-guardrail.png",
+      "title": "Window guardrail, section A2",
+      "caption": "1:15. Section A2 through a window bay, beside an axonometric of the bays on the north front. Guardrail heights: 68.00 cm for type A1, 82.50 cm for type A2.",
+      "alt": "Section through a rubble-stone wall and two floors with a tall window, a slim guardrail and a human figure for scale; beside it an axonometric of stacked window bays with guardrails and dark reveals",
+      "kind": "drawing",
+      "maxH": 790,
+      "labels": [
+        {
+          "at": "finish",
+          "text": "Finish"
+        },
+        {
+          "at": "screed",
+          "text": "Screed"
+        },
+        {
+          "at": "insulation",
+          "text": "Insulation"
+        },
+        {
+          "at": "ipe",
+          "text": "IPE steel beam"
+        },
+        {
+          "at": "sprayed",
+          "text": "Sprayed coating"
+        },
+        {
+          "at": "plenum",
+          "text": "Plenum"
+        },
+        {
+          "at": "plasterboard",
+          "text": "2 × BA13 plasterboard"
+        },
+        {
+          "at": "blackout",
+          "text": "Blackout blind"
+        },
+        {
+          "at": "window",
+          "text": "Tilt-turn window"
+        },
+        {
+          "at": "guardrail",
+          "text": "Guardrail"
+        },
+        {
+          "at": "sill",
+          "text": "Timber sill"
+        }
+      ],
+      "source": "hq:La villette/1050-4701-G_LAV_BLM_MET_CAR_REP_A_DCE_merge_page-0004.jpg (printed title 'Garde corps de fenêtre - elevation nord', scale '1/15'; legend 'A1 h = 68.00 cm', 'A2 h = 82.50 cm'; callouts 'Finition', 'Chappe', 'Isolation', 'IPE', 'Flocage', 'Plénum', '2 BA13', 'Blackout', 'Fenêtre oscillo battant', 'Garde corps', 'Tablette en bois'; translated, D17, D49); pdf2026:p6"
     },
     {
       "src": "images/la-villette/la-villette-courtyard-render.jpg",
@@ -101,34 +328,7 @@
       "alt": "Render of the courtyard between the buildings",
       "kind": "render",
       "credit": "Render: Studio BELEM",
-      "source": "pdf2026:p5"
-    },
-    {
-      "src": "images/la-villette/la-villette-window-balustrade.jpg",
-      "title": "Window balustrade",
-      "caption": "Window balustrade | section A2 and axonometric.",
-      "alt": "Section A2, axonometric, elevation and plans of the window balustrade",
-      "kind": "drawing",
-      "source": "pdf2026:p6",
-      "size": "wide"
-    },
-    {
-      "src": "images/la-villette/la-villette-site-plan.jpg",
-      "title": "Site plan",
-      "caption": "Site plan | Buildings A, B, and C.",
-      "alt": "Site plan of buildings A, B and C around the patio",
-      "kind": "drawing",
-      "source": "pdf2026:p7",
-      "size": "wide"
-    },
-    {
-      "src": "images/la-villette/la-villette-aerial-render.jpg",
-      "title": "Aerial view",
-      "caption": "Aerial view | reading of the three buildings A, B and C.",
-      "alt": "Aerial render of the three buildings A, B and C",
-      "kind": "render",
-      "credit": "Render: Studio BELEM",
-      "source": "pdf2026:p8"
+      "source": "pdf2026:p5 (no HQ source)"
     }
   ],
   "date": "2026",

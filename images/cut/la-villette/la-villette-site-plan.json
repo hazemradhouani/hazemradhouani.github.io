@@ -1,0 +1,39 @@
+{
+ "src": "images/la-villette/la-villette-site-plan.jpg",
+ "hash": "6c23496f53fde966",
+ "mode": "ink",
+ "from": [
+  1648,
+  968
+ ],
+ "to": [
+  1627,
+  952
+ ],
+ "offset": [
+  9,
+  8
+ ],
+ "paper": [
+  246,
+  240,
+  233
+ ],
+ "clip": [],
+ "ink": {
+  "ink": 108626,
+  "chromaticFraction": 0.1926,
+  "midtoneFraction": 0.7532,
+  "suggest": "colour"
+ },
+ "dark": null,
+ "specks": 7742,
+ "tile": [
+  960,
+  200,
+  640,
+  400
+ ],
+ "background": null,
+ "labels": []
+}
