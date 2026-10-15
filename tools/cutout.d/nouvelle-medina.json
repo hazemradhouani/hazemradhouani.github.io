@@ -1,0 +1,191 @@
+{
+  "$comment": "Nouvelle Medina cutouts (tools/cutout.mjs; D46, D49, D50). Board 2/2 drawings keep their pale background buildings and fills: low floor/knee; their dark treatment is invert-accent so the beige trees keep their hue (a series shares one treatment). clip = sides where the crop shortens ground hatch that the sheet already clips at its frame, to leave out a title printed over or against it (see the recipes). Flows: floor 0.015 so the legend separates from the faint shading; the light-blue legend swatch still touches a road line and stays (D49).",
+  "images": {
+    "images/nouvelle-medina/nouvelle-medina-plan-platform.png": {
+      "paper": [
+        255,
+        255,
+        255
+      ],
+      "floor": 0.015,
+      "knee": 0.03,
+      "dark": "field"
+    },
+    "images/nouvelle-medina/nouvelle-medina-plan-ground.png": {
+      "paper": [
+        255,
+        255,
+        255
+      ],
+      "floor": 0.015,
+      "knee": 0.03,
+      "dark": "field"
+    },
+    "images/nouvelle-medina/nouvelle-medina-plan-roof.png": {
+      "paper": [
+        255,
+        255,
+        255
+      ],
+      "floor": 0.015,
+      "knee": 0.03,
+      "dark": "field"
+    },
+    "images/nouvelle-medina/nouvelle-medina-facade-main.png": {
+      "floor": 0.015,
+      "knee": 0.03,
+      "clip": [
+        "bottom"
+      ],
+      "dark": "invert-accent"
+    },
+    "images/nouvelle-medina/nouvelle-medina-facade-rear.png": {
+      "floor": 0.015,
+      "knee": 0.03,
+      "clip": [
+        "bottom"
+      ],
+      "dark": "invert-accent"
+    },
+    "images/nouvelle-medina/nouvelle-medina-section-aa.png": {
+      "floor": 0.015,
+      "knee": 0.03,
+      "clip": [
+        "left"
+      ],
+      "dark": "invert-accent"
+    },
+    "images/nouvelle-medina/nouvelle-medina-section-bb.png": {
+      "floor": 0.015,
+      "knee": 0.03,
+      "clip": [
+        "left"
+      ],
+      "dark": "invert-accent"
+    },
+    "images/nouvelle-medina/nouvelle-medina-section-elevation-1.png": {
+      "floor": 0.015,
+      "knee": 0.03,
+      "clip": [
+        "bottom"
+      ],
+      "dark": "invert-accent"
+    },
+    "images/nouvelle-medina/nouvelle-medina-section-elevation-2.png": {
+      "floor": 0.015,
+      "knee": 0.03,
+      "clip": [
+        "left"
+      ],
+      "dark": "invert-accent"
+    },
+    "images/nouvelle-medina/nouvelle-medina-structure-exploded.png": {
+      "floor": 0.02,
+      "knee": 0.05,
+      "erase": [
+        {
+          "id": "roof-envelope",
+          "x": 52,
+          "y": 14,
+          "w": 640,
+          "h": 164
+        },
+        {
+          "id": "roof-frame",
+          "x": 18,
+          "y": 415,
+          "w": 646,
+          "h": 85
+        },
+        {
+          "id": "columns",
+          "x": 15,
+          "y": 640,
+          "w": 652,
+          "h": 237
+        },
+        {
+          "id": "facade-envelope",
+          "x": 18,
+          "y": 988,
+          "w": 642,
+          "h": 154
+        },
+        {
+          "id": "glazing",
+          "x": 30,
+          "y": 1375,
+          "w": 275,
+          "h": 83
+        }
+      ],
+      "dark": "invert"
+    },
+    "images/nouvelle-medina/nouvelle-medina-origami-concept.png": {
+      "floor": 0.02,
+      "knee": 0.05,
+      "erase": [
+        {
+          "id": "folding",
+          "x": 1155,
+          "y": 18,
+          "w": 185,
+          "h": 102
+        },
+        {
+          "id": "flat-sheet",
+          "x": 255,
+          "y": 343,
+          "w": 430,
+          "h": 217
+        },
+        {
+          "id": "refining",
+          "x": 2025,
+          "y": 715,
+          "w": 237,
+          "h": 210
+        },
+        {
+          "id": "refining-2",
+          "x": 2025,
+          "y": 925,
+          "w": 175,
+          "h": 120
+        },
+        {
+          "id": "angles",
+          "x": 62,
+          "y": 1398,
+          "w": 610,
+          "h": 117
+        }
+      ],
+      "dark": "invert-accent"
+    },
+    "images/nouvelle-medina/nouvelle-medina-flows.png": {
+      "paper": [
+        255,
+        255,
+        255
+      ],
+      "floor": 0.015,
+      "knee": 0.03,
+      "erase": [
+        {
+          "id": "legend",
+          "x": 1852,
+          "y": 1176,
+          "w": 590,
+          "h": 222
+        }
+      ],
+      "dark": "field"
+    },
+    "images/nouvelle-medina/nouvelle-medina-corner-perspective.png": {
+      "floor": 0.01,
+      "knee": 0.02,
+      "dark": "field"
+    }
+  }
+}

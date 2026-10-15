@@ -1,0 +1,391 @@
+{
+  "version": 1,
+  "sourceRoot": "Images HQ",
+  "assets": [
+    {
+      "source": "Images HQ/Nouvelle Medina/Scene 39_2.png",
+      "output": "images/nouvelle-medina/nouvelle-medina-night-section-hq.jpg",
+      "sha256": "7729394989051324e85f538de0b3e735c8782bb99ff6d539c33e871a9889b86b",
+      "crop": null,
+      "treatment": "full scene, re-encoded as JPEG (no scaling: 2560 px wide)",
+      "darkTreatment": "preserve-colour-scene",
+      "credit": "Owner's own work (D09): no third-party credit is printed on the source or on pdf2025:p35-38",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "reviewStatus": "approved",
+      "captionEvidence": "Same camera, moon, palms and train as the existing hero (pdf2025:p35)"
+    },
+    {
+      "source": "Images HQ/Nouvelle Medina/A0 MEDINA F [1]_page-0001.jpg",
+      "output": "images/nouvelle-medina/nouvelle-medina-site-plan.jpg",
+      "sha256": "49f2fafcf4ae688a9b771e3d6412697a9b41c4353872453ba11f8144697c9ab5",
+      "crop": {
+        "x": 3436,
+        "y": 7755,
+        "width": 3666,
+        "height": 2094
+      },
+      "treatment": "board 1/2, bottom row: the rendered site plan only, inset 6 px inside its frame; its printed title, scale and north sign sit on rendered pixels and stay (renders are never edited)",
+      "darkTreatment": "preserve-colour-scene",
+      "credit": "Owner's own work (D09): no third-party credit is printed on the source or on pdf2025:p35-38",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "reviewStatus": "approved",
+      "captionEvidence": "Printed title 'Plan de masse 1-1000' on the render"
+    },
+    {
+      "source": "Images HQ/Nouvelle Medina/A0 MEDINA F [1]_page-0001.jpg",
+      "output": "images/nouvelle-medina/nouvelle-medina-aerial.jpg",
+      "sha256": "49f2fafcf4ae688a9b771e3d6412697a9b41c4353872453ba11f8144697c9ab5",
+      "crop": {
+        "x": 7190,
+        "y": 7743,
+        "width": 3646,
+        "height": 2106
+      },
+      "treatment": "board 1/2, bottom row: the aerial render only, inset 6 px inside its frame",
+      "darkTreatment": "preserve-colour-scene",
+      "credit": "Owner's own work (D09): no third-party credit is printed on the source or on pdf2025:p35-38",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "reviewStatus": "approved",
+      "captionEvidence": "Visual: the station roof, the platforms and the car park seen from above; the same building as the plans of board 2/2"
+    },
+    {
+      "source": "Images HQ/Nouvelle Medina/A0 MEDINA F [2]_page-0001.jpg",
+      "output": "images/nouvelle-medina/nouvelle-medina-plan-platform.png",
+      "sha256": "463be941902056c8fda8f4025d5db664f293dd2396bf2630f4c584aebc997806",
+      "crop": {
+        "x": 126,
+        "y": 5835,
+        "width": 2614,
+        "height": 3705
+      },
+      "maxEdge": 1783,
+      "treatment": "board 2/2 (one scale for the sheet: master factor 2560/5320 through maxEdge); plan only; its printed title 'Plan Niveau Quais -06.50m' and the north sign below it (y 9607-9782) left outside the crop",
+      "darkTreatment": "field",
+      "credit": "Owner's own work (D09): no third-party credit is printed on the source or on pdf2025:p35-38",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "reviewStatus": "approved",
+      "captionEvidence": "Printed title 'Plan Niveau Quais -06.50m'; 'Level -06.50' on pdf2025:p37"
+    },
+    {
+      "source": "Images HQ/Nouvelle Medina/A0 MEDINA F [2]_page-0001.jpg",
+      "output": "images/nouvelle-medina/nouvelle-medina-plan-ground.png",
+      "sha256": "463be941902056c8fda8f4025d5db664f293dd2396bf2630f4c584aebc997806",
+      "crop": {
+        "x": 3085,
+        "y": 5835,
+        "width": 5320,
+        "height": 3705
+      },
+      "maxEdge": 2560,
+      "treatment": "board 2/2 (one scale for the sheet: master factor 2560/5320 through maxEdge); plan only; its printed title 'Plan Niveau RDC+ 0.15m' and the north sign below it left outside the crop",
+      "darkTreatment": "field",
+      "credit": "Owner's own work (D09): no third-party credit is printed on the source or on pdf2025:p35-38",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "reviewStatus": "approved",
+      "captionEvidence": "Printed title 'Plan Niveau RDC+ 0.15m'; 'Level +00.15' on pdf2025:p37"
+    },
+    {
+      "source": "Images HQ/Nouvelle Medina/A0 MEDINA F [2]_page-0001.jpg",
+      "output": "images/nouvelle-medina/nouvelle-medina-plan-roof.png",
+      "sha256": "463be941902056c8fda8f4025d5db664f293dd2396bf2630f4c584aebc997806",
+      "crop": {
+        "x": 8662,
+        "y": 5835,
+        "width": 5262,
+        "height": 3705
+      },
+      "maxEdge": 2532,
+      "treatment": "board 2/2 (one scale for the sheet: master factor 2560/5320 through maxEdge); plan only; its printed title 'Plan Niveau Toiture +08.50m' and the north sign below it left outside the crop",
+      "darkTreatment": "field",
+      "credit": "Owner's own work (D09): no third-party credit is printed on the source or on pdf2025:p35-38",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "reviewStatus": "approved",
+      "captionEvidence": "Printed title 'Plan Niveau Toiture +08.50m'; 'Level +08.50' on pdf2025:p37"
+    },
+    {
+      "source": "Images HQ/Nouvelle Medina/A0 MEDINA F [2]_page-0001.jpg",
+      "output": "images/nouvelle-medina/nouvelle-medina-facade-main.png",
+      "sha256": "463be941902056c8fda8f4025d5db664f293dd2396bf2630f4c584aebc997806",
+      "crop": {
+        "x": 3092,
+        "y": 1440,
+        "width": 5312,
+        "height": 1222
+      },
+      "maxEdge": 2556,
+      "treatment": "board 2/2 (one scale for the sheet: master factor 2560/5320 through maxEdge); drawing only; the crop ends 5 px above its printed title 'Façade Principale' (y 2667) and so trims the bottom of the ground hatch, which the sheet already clips at its frame",
+      "darkTreatment": "invert-accent",
+      "credit": "Owner's own work (D09): no third-party credit is printed on the source or on pdf2025:p35-38",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "reviewStatus": "approved",
+      "captionEvidence": "Printed title 'Façade Principale'; the elevation of pdf2025:p38"
+    },
+    {
+      "source": "Images HQ/Nouvelle Medina/A0 MEDINA F [2]_page-0001.jpg",
+      "output": "images/nouvelle-medina/nouvelle-medina-section-aa.png",
+      "sha256": "463be941902056c8fda8f4025d5db664f293dd2396bf2630f4c584aebc997806",
+      "crop": {
+        "x": 3700,
+        "y": 3154,
+        "width": 4704,
+        "height": 806
+      },
+      "maxEdge": 2264,
+      "treatment": "board 2/2 (one scale for the sheet: master factor 2560/5320 through maxEdge); drawing only; its printed title 'Coupe AA′' is printed over the ground hatch at the left end (x 3122-3645), so the crop starts at x 3700 and shortens the run-off ground (hatch, ground line, two trees) instead of erasing",
+      "darkTreatment": "invert-accent",
+      "credit": "Owner's own work (D09): no third-party credit is printed on the source or on pdf2025:p35-38",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "reviewStatus": "approved",
+      "captionEvidence": "Printed title 'Coupe AA′'"
+    },
+    {
+      "source": "Images HQ/Nouvelle Medina/A0 MEDINA F [2]_page-0001.jpg",
+      "output": "images/nouvelle-medina/nouvelle-medina-facade-rear.png",
+      "sha256": "463be941902056c8fda8f4025d5db664f293dd2396bf2630f4c584aebc997806",
+      "crop": {
+        "x": 3092,
+        "y": 4066,
+        "width": 5312,
+        "height": 1393
+      },
+      "maxEdge": 2556,
+      "treatment": "board 2/2 (one scale for the sheet: master factor 2560/5320 through maxEdge); drawing only; its printed title 'Façade Arrière' is printed over the band of ground hatch below the black track slab and touches the slab, so the crop ends on the slab's last row (y 5458) and leaves that hatch band out",
+      "darkTreatment": "invert-accent",
+      "credit": "Owner's own work (D09): no third-party credit is printed on the source or on pdf2025:p35-38",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "reviewStatus": "approved",
+      "captionEvidence": "Printed title 'Façade Arrière'; the long elevation of pdf2025:p37"
+    },
+    {
+      "source": "Images HQ/Nouvelle Medina/A0 MEDINA F [2]_page-0001.jpg",
+      "output": "images/nouvelle-medina/nouvelle-medina-section-elevation-1.png",
+      "sha256": "463be941902056c8fda8f4025d5db664f293dd2396bf2630f4c584aebc997806",
+      "crop": {
+        "x": 8889,
+        "y": 1439,
+        "width": 5034,
+        "height": 1199
+      },
+      "maxEdge": 2422,
+      "treatment": "board 2/2 (one scale for the sheet: master factor 2560/5320 through maxEdge); drawing only; its printed title 'Façade Coupe' starts 2 px above the end of the ground hatch, so the crop ends at y 2638 and trims the last row of hatch ticks",
+      "darkTreatment": "invert-accent",
+      "credit": "Owner's own work (D09): no third-party credit is printed on the source or on pdf2025:p35-38",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "reviewStatus": "approved",
+      "captionEvidence": "Printed title 'Façade Coupe' (upper)"
+    },
+    {
+      "source": "Images HQ/Nouvelle Medina/A0 MEDINA F [2]_page-0001.jpg",
+      "output": "images/nouvelle-medina/nouvelle-medina-section-bb.png",
+      "sha256": "463be941902056c8fda8f4025d5db664f293dd2396bf2630f4c584aebc997806",
+      "crop": {
+        "x": 9610,
+        "y": 2929,
+        "width": 4313,
+        "height": 1239
+      },
+      "maxEdge": 2075,
+      "treatment": "board 2/2 (one scale for the sheet: master factor 2560/5320 through maxEdge); drawing only; its printed title 'Coupe BB′' is printed over the ground hatch at the left end (x 8936-9554), so the crop starts at x 9610 and shortens the run-off ground",
+      "darkTreatment": "invert-accent",
+      "credit": "Owner's own work (D09): no third-party credit is printed on the source or on pdf2025:p35-38",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "reviewStatus": "approved",
+      "captionEvidence": "Printed title 'Coupe BB′'; 'Coupe BB′' on pdf2025:p38"
+    },
+    {
+      "source": "Images HQ/Nouvelle Medina/A0 MEDINA F [2]_page-0001.jpg",
+      "output": "images/nouvelle-medina/nouvelle-medina-section-elevation-2.png",
+      "sha256": "463be941902056c8fda8f4025d5db664f293dd2396bf2630f4c584aebc997806",
+      "crop": {
+        "x": 9810,
+        "y": 4315,
+        "width": 4113,
+        "height": 1253
+      },
+      "maxEdge": 1979,
+      "treatment": "board 2/2 (one scale for the sheet: master factor 2560/5320 through maxEdge); drawing only; its printed title 'Façade Coupe' is printed over the ground hatch at the left end (x 8920-9760), so the crop starts at x 9810 and shortens the run-off ground",
+      "darkTreatment": "invert-accent",
+      "credit": "Owner's own work (D09): no third-party credit is printed on the source or on pdf2025:p35-38",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "reviewStatus": "approved",
+      "captionEvidence": "Printed title 'Façade Coupe' (lower)"
+    },
+    {
+      "source": "Images HQ/Nouvelle Medina/A0 MEDINA F [1]_page-0001.jpg",
+      "output": "images/nouvelle-medina/nouvelle-medina-structure-exploded.png",
+      "sha256": "49f2fafcf4ae688a9b771e3d6412697a9b41c4353872453ba11f8144697c9ab5",
+      "crop": {
+        "x": 4625,
+        "y": 1030,
+        "width": 4065,
+        "height": 2965
+      },
+      "treatment": "board 1/2, middle column: the exploded axonometric with its five printed callouts; the callouts on blank paper are re-set in HTML (D49), their leader lines stay",
+      "darkTreatment": "invert",
+      "credit": "Owner's own work (D09): no third-party credit is printed on the source or on pdf2025:p35-38",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "reviewStatus": "approved",
+      "captionEvidence": "Printed callouts 'Enveloppe du Batiment (Toiture) en HPL Blanc', 'Charpente métallique de la toiture', 'Système Poutres Al / Poteaux HEA ancrés dans des massifs en Béton', 'Enveloppe du Batiment (Façade) en HPL Blanc', 'Façade vitrée'; the exploded structure of pdf2025:p36"
+    },
+    {
+      "source": "Images HQ/Nouvelle Medina/A0 MEDINA F [1]_page-0001.jpg",
+      "output": "images/nouvelle-medina/nouvelle-medina-origami-concept.png",
+      "sha256": "49f2fafcf4ae688a9b771e3d6412697a9b41c4353872453ba11f8144697c9ab5",
+      "crop": {
+        "x": 4695,
+        "y": 5734,
+        "width": 2799,
+        "height": 1675
+      },
+      "treatment": "board 1/2, middle column: the folding diagram; its five printed captions on blank paper are re-set in HTML (D49)",
+      "darkTreatment": "invert-accent",
+      "credit": "Owner's own work (D09): no third-party credit is printed on the source or on pdf2025:p35-38",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "reviewStatus": "approved",
+      "captionEvidence": "Printed captions 'Feuille plane / Point de départ', 'Pliage', 'Toiture du projet', 'Affinage des lignes', 'Ajustement des angles'; the origami concept of the narrative (pdf2025:p36)"
+    },
+    {
+      "source": "Images HQ/Nouvelle Medina/A0 MEDINA F [1]_page-0001.jpg",
+      "output": "images/nouvelle-medina/nouvelle-medina-flows.png",
+      "sha256": "49f2fafcf4ae688a9b771e3d6412697a9b41c4353872453ba11f8144697c9ab5",
+      "crop": {
+        "x": 7589,
+        "y": 5385,
+        "width": 3274,
+        "height": 2335
+      },
+      "treatment": "board 1/2: the passenger-flow axonometric; its printed legend on blank paper is re-set in HTML (D49); the room and place names printed on the model stay",
+      "darkTreatment": "field",
+      "credit": "Owner's own work (D09): no third-party credit is printed on the source or on pdf2025:p35-38",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "reviewStatus": "approved",
+      "captionEvidence": "Printed legend 'FLUX PIETONS : INTERMODALITÉ - GARE' and four more lines; the passenger-flow axonometric of pdf2025:p38"
+    },
+    {
+      "source": "Images HQ/Nouvelle Medina/A0 MEDINA F [1]_page-0001.jpg",
+      "output": "images/nouvelle-medina/nouvelle-medina-corner-perspective.png",
+      "sha256": "49f2fafcf4ae688a9b771e3d6412697a9b41c4353872453ba11f8144697c9ab5",
+      "crop": {
+        "x": 4900,
+        "y": 4200,
+        "width": 3485,
+        "height": 1085
+      },
+      "treatment": "board 1/2, middle column: the white-model perspective of the station corner; the station name on the canopy is signage and stays",
+      "darkTreatment": "field",
+      "credit": "Owner's own work (D09): no third-party credit is printed on the source or on pdf2025:p35-38",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "reviewStatus": "approved",
+      "captionEvidence": "Visual: the same canopy, glazed front and canted glass corner as the street render; no printed title"
+    },
+    {
+      "source": "Images HQ/Nouvelle Medina/A0 MEDINA F [1]_page-0001.jpg",
+      "output": "images/nouvelle-medina/nouvelle-medina-street-view.jpg",
+      "sha256": "49f2fafcf4ae688a9b771e3d6412697a9b41c4353872453ba11f8144697c9ab5",
+      "crop": {
+        "x": 92,
+        "y": 1060,
+        "width": 4415,
+        "height": 1543
+      },
+      "treatment": "board 1/2, left column, first render; the board paper around it left out (its white sky meets the paper, so the top is set 18 px above the first scene pixel)",
+      "darkTreatment": "preserve-colour-scene",
+      "credit": "Owner's own work (D09): no third-party credit is printed on the source or on pdf2025:p35-38",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "reviewStatus": "approved",
+      "captionEvidence": "Same view as the existing street render (pdf2025:p38): canopy with the station name, glazed front, palms"
+    },
+    {
+      "source": "Images HQ/Nouvelle Medina/A0 MEDINA F [1]_page-0001.jpg",
+      "output": "images/nouvelle-medina/nouvelle-medina-platform-section.jpg",
+      "sha256": "49f2fafcf4ae688a9b771e3d6412697a9b41c4353872453ba11f8144697c9ab5",
+      "crop": {
+        "x": 8832,
+        "y": 372,
+        "width": 5105,
+        "height": 2292
+      },
+      "treatment": "board 1/2, right column, first render; ends at the bottom of the dark ground of the section (y 2664) because its fog fades into the axonometric printed below it",
+      "darkTreatment": "preserve-colour-scene",
+      "credit": "Owner's own work (D09): no third-party credit is printed on the source or on pdf2025:p35-38",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "reviewStatus": "approved",
+      "captionEvidence": "Same view as the existing platform render (pdf2025:p38): the station beside the cut through the tracks and the footbridge"
+    },
+    {
+      "source": "Images HQ/Nouvelle Medina/Scene 11_6.png",
+      "output": "images/nouvelle-medina/nouvelle-medina-platform-view.jpg",
+      "sha256": "01e5e51133cae4630af208eb18f35f612aa8dd922a27e49cf53a55f64e824eb1",
+      "crop": null,
+      "treatment": "full scene, re-encoded as JPEG (no scaling: 2560 px wide); board 1/2 prints a crop of the same render",
+      "darkTreatment": "preserve-colour-scene",
+      "credit": "Owner's own work (D09): no third-party credit is printed on the source or on pdf2025:p35-38",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "reviewStatus": "approved",
+      "captionEvidence": "Visual: the station from the platform, canopies and the stair to the footbridge; the same render is printed on board 1/2"
+    },
+    {
+      "source": "Images HQ/Nouvelle Medina/Scene 6_5.png",
+      "output": "images/nouvelle-medina/nouvelle-medina-section-stairs.jpg",
+      "sha256": "f1a922a5ffc33b177faf3be4184cc3f6e84c9c7adf94e77e8ba60cd8c2b3021c",
+      "crop": null,
+      "treatment": "full scene, re-encoded as JPEG (no scaling: 2560 px wide); board 1/2 prints a crop of it with the word 'ASCENSEUR' added on the lift shaft, which this file does not have",
+      "darkTreatment": "preserve-colour-scene",
+      "credit": "Owner's own work (D09): no third-party credit is printed on the source or on pdf2025:p35-38",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "reviewStatus": "approved",
+      "captionEvidence": "Visual: section-render of the stairs and lift from the station down to the platforms; the same render is printed on board 1/2"
+    },
+    {
+      "source": "Images HQ/Nouvelle Medina/A0 MEDINA F [1]_page-0001.jpg",
+      "output": "images/nouvelle-medina/nouvelle-medina-dusk-section.jpg",
+      "sha256": "49f2fafcf4ae688a9b771e3d6412697a9b41c4353872453ba11f8144697c9ab5",
+      "crop": {
+        "x": 100,
+        "y": 4530,
+        "width": 4405,
+        "height": 1452
+      },
+      "treatment": "board 1/2, left column, third render, inset 6 px inside its frame; board 2/2 prints the same render with a feathered border",
+      "darkTreatment": "preserve-colour-scene",
+      "credit": "Owner's own work (D09): no third-party credit is printed on the source or on pdf2025:p35-38",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "reviewStatus": "approved",
+      "captionEvidence": "Visual: section-perspective through the tracks, platforms and station"
+    },
+    {
+      "source": "Images HQ/Nouvelle Medina/A0 MEDINA F [1]_page-0001.jpg",
+      "output": "images/nouvelle-medina/nouvelle-medina-concourse.jpg",
+      "sha256": "49f2fafcf4ae688a9b771e3d6412697a9b41c4353872453ba11f8144697c9ab5",
+      "crop": {
+        "x": 100,
+        "y": 6072,
+        "width": 2197,
+        "height": 1568
+      },
+      "treatment": "board 1/2, left column, interior render, inset 6 px inside its frame; the text block beside it ('Concept Novateur du projet') left out",
+      "darkTreatment": "preserve-colour-scene",
+      "credit": "Owner's own work (D09): no third-party credit is printed on the source or on pdf2025:p35-38",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "reviewStatus": "approved",
+      "captionEvidence": "Visual: the concourse with ticket gates, a patterned brick wall and screens"
+    },
+    {
+      "source": "Images HQ/Nouvelle Medina/A0 MEDINA F [2]_page-0001.jpg",
+      "output": "images/nouvelle-medina/nouvelle-medina-hall-section.jpg",
+      "sha256": "463be941902056c8fda8f4025d5db664f293dd2396bf2630f4c584aebc997806",
+      "crop": {
+        "x": 133,
+        "y": 3337,
+        "width": 2570,
+        "height": 2180
+      },
+      "treatment": "board 2/2, left column, second render, inset 6 px inside its frame",
+      "darkTreatment": "preserve-colour-scene",
+      "credit": "Owner's own work (D09): no third-party credit is printed on the source or on pdf2025:p35-38",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "reviewStatus": "approved",
+      "captionEvidence": "Visual: section-render of the hall with ticket machines above and the stair down to the platform below"
+    }
+  ]
+}

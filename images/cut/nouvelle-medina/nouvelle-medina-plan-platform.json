@@ -1,0 +1,39 @@
+{
+ "src": "images/nouvelle-medina/nouvelle-medina-plan-platform.png",
+ "hash": "572a3e4baf9ed153",
+ "mode": "ink",
+ "from": [
+  1258,
+  1783
+ ],
+ "to": [
+  1258,
+  1783
+ ],
+ "offset": [
+  0,
+  0
+ ],
+ "paper": [
+  255,
+  255,
+  255
+ ],
+ "clip": [],
+ "ink": {
+  "ink": 133466,
+  "chromaticFraction": 0,
+  "midtoneFraction": 0.3977,
+  "suggest": "mono"
+ },
+ "dark": "field",
+ "specks": 9,
+ "tile": [
+  320,
+  600,
+  640,
+  400
+ ],
+ "background": null,
+ "labels": []
+}

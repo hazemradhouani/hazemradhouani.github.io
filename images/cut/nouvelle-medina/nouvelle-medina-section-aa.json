@@ -1,0 +1,41 @@
+{
+ "src": "images/nouvelle-medina/nouvelle-medina-section-aa.png",
+ "hash": "09b370856b7699e7",
+ "mode": "ink",
+ "from": [
+  2264,
+  388
+ ],
+ "to": [
+  2264,
+  388
+ ],
+ "offset": [
+  0,
+  0
+ ],
+ "paper": [
+  254,
+  254,
+  254
+ ],
+ "clip": [
+  "left"
+ ],
+ "ink": {
+  "ink": 53966,
+  "chromaticFraction": 0.0054,
+  "midtoneFraction": 0.4303,
+  "suggest": "accent"
+ },
+ "dark": "invert-accent",
+ "specks": 6,
+ "tile": [
+  640,
+  0,
+  640,
+  388
+ ],
+ "background": null,
+ "labels": []
+}

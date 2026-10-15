@@ -1,0 +1,39 @@
+{
+ "src": "images/nouvelle-medina/nouvelle-medina-corner-perspective.png",
+ "hash": "f2db8cd91b2dad99",
+ "mode": "ink",
+ "from": [
+  2560,
+  797
+ ],
+ "to": [
+  2560,
+  797
+ ],
+ "offset": [
+  0,
+  0
+ ],
+ "paper": [
+  255,
+  255,
+  255
+ ],
+ "clip": [],
+ "ink": {
+  "ink": 252002,
+  "chromaticFraction": 0.0439,
+  "midtoneFraction": 0.677,
+  "suggest": "accent"
+ },
+ "dark": "field",
+ "specks": 1213,
+ "tile": [
+  640,
+  200,
+  640,
+  400
+ ],
+ "background": null,
+ "labels": []
+}

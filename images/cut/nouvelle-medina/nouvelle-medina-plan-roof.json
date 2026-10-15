@@ -1,0 +1,39 @@
+{
+ "src": "images/nouvelle-medina/nouvelle-medina-plan-roof.png",
+ "hash": "5e01de0f018499d4",
+ "mode": "ink",
+ "from": [
+  2532,
+  1783
+ ],
+ "to": [
+  2532,
+  1783
+ ],
+ "offset": [
+  0,
+  0
+ ],
+ "paper": [
+  255,
+  255,
+  255
+ ],
+ "clip": [],
+ "ink": {
+  "ink": 256690,
+  "chromaticFraction": 0,
+  "midtoneFraction": 0.3126,
+  "suggest": "mono"
+ },
+ "dark": "field",
+ "specks": 738,
+ "tile": [
+  0,
+  1000,
+  640,
+  400
+ ],
+ "background": null,
+ "labels": []
+}
