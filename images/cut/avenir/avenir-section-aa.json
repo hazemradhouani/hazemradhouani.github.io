@@ -1,0 +1,39 @@
+{
+ "src": "images/avenir/avenir-section-aa.png",
+ "hash": "f07b34f23b510a50",
+ "mode": "ink",
+ "from": [
+  2560,
+  1244
+ ],
+ "to": [
+  2560,
+  1244
+ ],
+ "offset": [
+  0,
+  0
+ ],
+ "paper": [
+  255,
+  255,
+  255
+ ],
+ "clip": [],
+ "ink": {
+  "ink": 161202,
+  "chromaticFraction": 0.0867,
+  "midtoneFraction": 0.7171,
+  "suggest": "colour"
+ },
+ "dark": "field",
+ "specks": 297,
+ "tile": [
+  1600,
+  400,
+  640,
+  400
+ ],
+ "background": null,
+ "labels": []
+}

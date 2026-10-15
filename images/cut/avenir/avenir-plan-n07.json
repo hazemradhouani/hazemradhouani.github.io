@@ -1,0 +1,39 @@
+{
+ "src": "images/avenir/avenir-plan-n07.png",
+ "hash": "349b83062e8aee8a",
+ "mode": "ink",
+ "from": [
+  2560,
+  809
+ ],
+ "to": [
+  2492,
+  779
+ ],
+ "offset": [
+  25,
+  30
+ ],
+ "paper": [
+  255,
+  255,
+  255
+ ],
+ "clip": [],
+ "ink": {
+  "ink": 76130,
+  "chromaticFraction": 0.0898,
+  "midtoneFraction": 0.5381,
+  "suggest": "colour"
+ },
+ "dark": "invert-accent",
+ "specks": 1211,
+ "tile": [
+  0,
+  200,
+  640,
+  400
+ ],
+ "background": null,
+ "labels": []
+}

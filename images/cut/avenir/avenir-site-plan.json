@@ -1,0 +1,43 @@
+{
+ "src": "images/avenir/avenir-site-plan.png",
+ "hash": "cade06efbf43f097",
+ "mode": "ink",
+ "from": [
+  2560,
+  1513
+ ],
+ "to": [
+  2560,
+  1513
+ ],
+ "offset": [
+  0,
+  0
+ ],
+ "paper": [
+  255,
+  255,
+  255
+ ],
+ "clip": [
+  "left",
+  "top",
+  "bottom"
+ ],
+ "ink": {
+  "ink": 137619,
+  "chromaticFraction": 0.0337,
+  "midtoneFraction": 0.251,
+  "suggest": "accent"
+ },
+ "dark": "invert-accent",
+ "specks": 1177,
+ "tile": [
+  320,
+  800,
+  640,
+  400
+ ],
+ "background": null,
+ "labels": []
+}

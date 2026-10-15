@@ -1,0 +1,42 @@
+{
+ "src": "images/avenir/avenir-south-elevation.png",
+ "hash": "0133df6727e7671d",
+ "mode": "ink",
+ "from": [
+  2560,
+  1999
+ ],
+ "to": [
+  2560,
+  1990
+ ],
+ "offset": [
+  0,
+  8
+ ],
+ "paper": [
+  255,
+  255,
+  255
+ ],
+ "clip": [
+  "left",
+  "right"
+ ],
+ "ink": {
+  "ink": 358568,
+  "chromaticFraction": 0.0389,
+  "midtoneFraction": 0.6114,
+  "suggest": "accent"
+ },
+ "dark": "field",
+ "specks": 1279,
+ "tile": [
+  960,
+  1000,
+  640,
+  400
+ ],
+ "background": null,
+ "labels": []
+}
