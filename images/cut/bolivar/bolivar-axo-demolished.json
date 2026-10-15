@@ -1,0 +1,42 @@
+{
+ "src": "images/bolivar/bolivar-axo-demolished.png",
+ "hash": "9280feee0cafa26a",
+ "mode": "ink",
+ "from": [
+  1724,
+  696
+ ],
+ "to": [
+  1724,
+  696
+ ],
+ "offset": [
+  0,
+  0
+ ],
+ "paper": [
+  249,
+  249,
+  249
+ ],
+ "clip": [
+  "top",
+  "right"
+ ],
+ "ink": {
+  "ink": 61820,
+  "chromaticFraction": 0.7109,
+  "midtoneFraction": 0.7493,
+  "suggest": "colour"
+ },
+ "dark": "field",
+ "specks": 378,
+ "tile": [
+  320,
+  200,
+  640,
+  400
+ ],
+ "background": null,
+ "labels": []
+}

@@ -1,0 +1,71 @@
+{
+ "src": "images/bolivar/bolivar-long-section-aa.png",
+ "hash": "98a5ffb7993d808e",
+ "mode": "ink",
+ "from": [
+  2560,
+  1414
+ ],
+ "to": [
+  2560,
+  1414
+ ],
+ "offset": [
+  0,
+  0
+ ],
+ "paper": [
+  255,
+  255,
+  255
+ ],
+ "clip": [
+  "left",
+  "right",
+  "bottom"
+ ],
+ "ink": {
+  "ink": 137784,
+  "chromaticFraction": 0.1528,
+  "midtoneFraction": 0.5584,
+  "suggest": "colour"
+ },
+ "dark": "invert-accent",
+ "specks": 3041,
+ "tile": [
+  320,
+  600,
+  640,
+  400
+ ],
+ "background": null,
+ "labels": [
+  {
+   "id": "key-plan",
+   "removed": 21,
+   "kept": 0,
+   "x": 82.734,
+   "y": 0,
+   "w": 15.742,
+   "h": 4.385
+  },
+  {
+   "id": "key-plan-title",
+   "removed": 4,
+   "kept": 0,
+   "x": 93.32,
+   "y": 11.669,
+   "w": 4.688,
+   "h": 0.778
+  },
+  {
+   "id": "avenue",
+   "removed": 5,
+   "kept": 0,
+   "x": 0.859,
+   "y": 49.364,
+   "w": 4.258,
+   "h": 0.566
+  }
+ ]
+}

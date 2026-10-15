@@ -1,0 +1,44 @@
+{
+ "src": "images/bolivar/bolivar-roof-plan.png",
+ "hash": "f87dd2c3d58f4dde",
+ "mode": "ink",
+ "from": [
+  2560,
+  1087
+ ],
+ "to": [
+  2560,
+  1087
+ ],
+ "offset": [
+  0,
+  0
+ ],
+ "paper": [
+  255,
+  255,
+  255
+ ],
+ "clip": [
+  "left",
+  "top",
+  "right",
+  "bottom"
+ ],
+ "ink": {
+  "ink": 377752,
+  "chromaticFraction": 0.7641,
+  "midtoneFraction": 0.9078,
+  "suggest": "colour"
+ },
+ "dark": "field",
+ "specks": 135,
+ "tile": [
+  960,
+  400,
+  640,
+  400
+ ],
+ "background": null,
+ "labels": []
+}

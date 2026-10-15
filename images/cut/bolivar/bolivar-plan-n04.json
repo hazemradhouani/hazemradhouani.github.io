@@ -1,0 +1,44 @@
+{
+ "src": "images/bolivar/bolivar-plan-n04.png",
+ "hash": "9c15f94c66fdac3d",
+ "mode": "ink",
+ "from": [
+  2560,
+  1161
+ ],
+ "to": [
+  2560,
+  1161
+ ],
+ "offset": [
+  0,
+  0
+ ],
+ "paper": [
+  255,
+  255,
+  255
+ ],
+ "clip": [
+  "left",
+  "top",
+  "right",
+  "bottom"
+ ],
+ "ink": {
+  "ink": 311924,
+  "chromaticFraction": 0.416,
+  "midtoneFraction": 0.632,
+  "suggest": "colour"
+ },
+ "dark": "field",
+ "specks": 184,
+ "tile": [
+  1280,
+  200,
+  640,
+  400
+ ],
+ "background": null,
+ "labels": []
+}

@@ -1,0 +1,41 @@
+{
+ "src": "images/bolivar/bolivar-axo-raised-lowered.png",
+ "hash": "5f4219ef30768292",
+ "mode": "ink",
+ "from": [
+  1724,
+  848
+ ],
+ "to": [
+  1724,
+  848
+ ],
+ "offset": [
+  0,
+  0
+ ],
+ "paper": [
+  249,
+  249,
+  249
+ ],
+ "clip": [
+  "top"
+ ],
+ "ink": {
+  "ink": 78660,
+  "chromaticFraction": 0.5424,
+  "midtoneFraction": 0.6386,
+  "suggest": "colour"
+ },
+ "dark": "field",
+ "specks": 481,
+ "tile": [
+  640,
+  0,
+  640,
+  400
+ ],
+ "background": null,
+ "labels": []
+}

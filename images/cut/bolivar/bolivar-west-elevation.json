@@ -1,0 +1,43 @@
+{
+ "src": "images/bolivar/bolivar-west-elevation.png",
+ "hash": "f0e7366520192e0e",
+ "mode": "ink",
+ "from": [
+  2560,
+  1986
+ ],
+ "to": [
+  2560,
+  1986
+ ],
+ "offset": [
+  0,
+  0
+ ],
+ "paper": [
+  255,
+  255,
+  255
+ ],
+ "clip": [
+  "left",
+  "right",
+  "bottom"
+ ],
+ "ink": {
+  "ink": 751766,
+  "chromaticFraction": 0.0296,
+  "midtoneFraction": 0.2171,
+  "suggest": "accent"
+ },
+ "dark": "invert-accent",
+ "specks": 239,
+ "tile": [
+  640,
+  600,
+  640,
+  400
+ ],
+ "background": null,
+ "labels": []
+}
