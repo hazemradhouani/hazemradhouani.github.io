@@ -1,0 +1,39 @@
+{
+ "src": "images/belhomme/belhomme-section-cc.png",
+ "hash": "dabc9f8fc750cbb5",
+ "mode": "ink",
+ "from": [
+  2526,
+  2375
+ ],
+ "to": [
+  2502,
+  2350
+ ],
+ "offset": [
+  12,
+  11
+ ],
+ "paper": [
+  255,
+  255,
+  255
+ ],
+ "clip": [],
+ "ink": {
+  "ink": 410916,
+  "chromaticFraction": 0.0327,
+  "midtoneFraction": 0.2182,
+  "suggest": "accent"
+ },
+ "dark": "invert-accent",
+ "specks": 197,
+ "tile": [
+  320,
+  1800,
+  640,
+  400
+ ],
+ "background": null,
+ "labels": []
+}

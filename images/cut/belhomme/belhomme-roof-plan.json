@@ -1,0 +1,39 @@
+{
+ "src": "images/belhomme/belhomme-roof-plan.png",
+ "hash": "143b16f3b80011eb",
+ "mode": "ink",
+ "from": [
+  2420,
+  1878
+ ],
+ "to": [
+  2389,
+  1847
+ ],
+ "offset": [
+  15,
+  16
+ ],
+ "paper": [
+  255,
+  255,
+  255
+ ],
+ "clip": [],
+ "ink": {
+  "ink": 625008,
+  "chromaticFraction": 0.0163,
+  "midtoneFraction": 0.0836,
+  "suggest": "accent"
+ },
+ "dark": "invert-accent",
+ "specks": 94,
+ "tile": [
+  320,
+  200,
+  640,
+  400
+ ],
+ "background": null,
+ "labels": []
+}

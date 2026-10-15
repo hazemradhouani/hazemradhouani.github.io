@@ -1,0 +1,39 @@
+{
+ "src": "images/belhomme/belhomme-awning-section.png",
+ "hash": "0820246d7284c2f0",
+ "mode": "ink",
+ "from": [
+  1152,
+  1498
+ ],
+ "to": [
+  1122,
+  1487
+ ],
+ "offset": [
+  15,
+  0
+ ],
+ "paper": [
+  255,
+  255,
+  255
+ ],
+ "clip": [],
+ "ink": {
+  "ink": 56907,
+  "chromaticFraction": 0.0599,
+  "midtoneFraction": 0.4191,
+  "suggest": "accent"
+ },
+ "dark": "invert-accent",
+ "specks": 42,
+ "tile": [
+  320,
+  1000,
+  640,
+  400
+ ],
+ "background": null,
+ "labels": []
+}

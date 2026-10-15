@@ -1,0 +1,39 @@
+{
+ "src": "images/belhomme/belhomme-facade-rue-belhomme.png",
+ "hash": "c9ef9bbd661b5002",
+ "mode": "ink",
+ "from": [
+  2560,
+  1926
+ ],
+ "to": [
+  2555,
+  1919
+ ],
+ "offset": [
+  2,
+  3
+ ],
+ "paper": [
+  255,
+  255,
+  255
+ ],
+ "clip": [],
+ "ink": {
+  "ink": 169931,
+  "chromaticFraction": 0.0284,
+  "midtoneFraction": 0.4826,
+  "suggest": "accent"
+ },
+ "dark": "invert-accent",
+ "specks": 40,
+ "tile": [
+  960,
+  1400,
+  640,
+  400
+ ],
+ "background": null,
+ "labels": []
+}

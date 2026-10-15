@@ -1,0 +1,39 @@
+{
+ "src": "images/belhomme/belhomme-existing-facades-survey.jpg",
+ "hash": "ffbf819470b96048",
+ "mode": "ink",
+ "from": [
+  1634,
+  446
+ ],
+ "to": [
+  1618,
+  445
+ ],
+ "offset": [
+  8,
+  1
+ ],
+ "paper": [
+  245,
+  241,
+  232
+ ],
+ "clip": [],
+ "ink": {
+  "ink": 19493,
+  "chromaticFraction": 0,
+  "midtoneFraction": 0.3672,
+  "suggest": "mono"
+ },
+ "dark": null,
+ "specks": 517,
+ "tile": [
+  0,
+  0,
+  640,
+  400
+ ],
+ "background": null,
+ "labels": []
+}
