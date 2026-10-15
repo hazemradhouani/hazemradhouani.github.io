@@ -74,8 +74,8 @@
       "context": "La Villette, Paris 19th | Studio BELEM",
       "tools": "Revit | ArchiCAD | Rhino | Grasshopper",
       "project": "la-villette",
-      "image": "images/la-villette/la-villette-gate-detail.jpg",
-      "alt": "Construction detail of the access gate and entry door, north elevation of building A",
+      "image": "images/la-villette/la-villette-access-gate-annotated.png",
+      "alt": "Construction elevation and section of the access gate and entry door, north elevation of building A, with its French callouts on leader lines",
       "kind": "drawing",
       "source": "pdf2026:p3, pdf2026:p28 (tools)"
     },

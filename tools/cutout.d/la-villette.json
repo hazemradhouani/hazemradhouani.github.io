@@ -69,6 +69,13 @@
       ],
       "dark": "field"
     },
+    "images/la-villette/la-villette-access-gate-annotated.png": {
+      "paper": [255, 255, 255],
+      "floor": 0.015,
+      "knee": 0.03,
+      "clip": ["top", "bottom"],
+      "dark": "field"
+    },
     "images/la-villette/la-villette-window-guardrail.png": {
       "paper": [255, 255, 255],
       "floor": 0.015,

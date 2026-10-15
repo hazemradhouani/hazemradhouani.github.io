@@ -99,6 +99,18 @@
       "reviewStatus": "approved"
     },
     {
+      "source": "Images HQ/La villette/1050-4701-G_LAV_BLM_MET_CAR_REP_A_DCE_merge_page-0002.jpg",
+      "output": "images/la-villette/la-villette-access-gate-annotated.png",
+      "sha256": "3834517f8b02939033a8a2091cf5c3060a5201840e35a1eb3a524833193b30bd",
+      "crop": { "x": 250, "y": 92, "width": 4545, "height": 2243 },
+      "treatment": "the same crop as la-villette-access-gate.png with the printed callouts and view titles kept in the pixels: it stands on the home page's capabilities card, which sets no HTML labels, and a callout tied to its leader line stays with the drawing (D60)",
+      "darkTreatment": "field",
+      "credit": "Studio BELEM: issuer (EMETTEUR) 'Belem' in the sheet's cartouche; the client panel is furniture and not published",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "captionEvidence": "Sheet title 'Portail, trappe d'accès colonnes sèches– elevation nord'; replaces the gate detail (pdf2026:p4) on the home page, whose card text is pdf2026:p3",
+      "reviewStatus": "approved"
+    },
+    {
       "source": "Images HQ/La villette/1050-4701-G_LAV_BLM_MET_CAR_REP_A_DCE_merge_page-0004.jpg",
       "output": "images/la-villette/la-villette-window-guardrail.png",
       "sha256": "3aa7ab4472e0e80f16e8705f96397f28dd79e8aa2635f063702c27a402e1dd32",
