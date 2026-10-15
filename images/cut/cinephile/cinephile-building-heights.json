@@ -1,0 +1,39 @@
+{
+ "src": "images/cinephile/cinephile-building-heights.png",
+ "hash": "bc9dcf362af0af0b",
+ "mode": "ink",
+ "from": [
+  478,
+  490
+ ],
+ "to": [
+  426,
+  457
+ ],
+ "offset": [
+  19,
+  21
+ ],
+ "paper": [
+  255,
+  255,
+  255
+ ],
+ "clip": [],
+ "ink": {
+  "ink": 32741,
+  "chromaticFraction": 0.9596,
+  "midtoneFraction": 0.4842,
+  "suggest": "colour"
+ },
+ "dark": "field",
+ "specks": 47,
+ "tile": [
+  0,
+  0,
+  426,
+  400
+ ],
+ "background": null,
+ "labels": []
+}

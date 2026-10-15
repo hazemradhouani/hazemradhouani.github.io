@@ -1,0 +1,39 @@
+{
+ "src": "images/cinephile/cinephile-detail-under-stairs.png",
+ "hash": "48aa937dcf1cc983",
+ "mode": "ink",
+ "from": [
+  478,
+  404
+ ],
+ "to": [
+  440,
+  374
+ ],
+ "offset": [
+  15,
+  13
+ ],
+ "paper": [
+  255,
+  255,
+  255
+ ],
+ "clip": [],
+ "ink": {
+  "ink": 9467,
+  "chromaticFraction": 0,
+  "midtoneFraction": 0.473,
+  "suggest": "mono"
+ },
+ "dark": "invert",
+ "specks": 1015,
+ "tile": [
+  0,
+  0,
+  440,
+  374
+ ],
+ "background": null,
+ "labels": []
+}

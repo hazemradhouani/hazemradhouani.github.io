@@ -55,51 +55,176 @@
     }
   ],
   "hero": {
-    "src": "images/cinephile/cinephile-site-aerial.jpg",
-    "alt": "Aerial massing render of the Cinephile site in Tunis, the cinema highlighted in pink within the city fabric",
+    "src": "images/cinephile/cinephile-foyer.jpg",
+    "alt": "Render of the foyer: a red floor dappled with circles of sunlight, dark balconies and red volumes cantilevered overhead, shafts of light falling from high windows, the hall number 2 above a door and a few people standing and walking",
     "credit": null,
-    "source": "pdf2025:p11"
+    "source": "site + pdf2025:p14 + hq:Cinema/.trashed-1762728296-Scene 2.png"
   },
   "figures": [
     {
-      "src": "images/cinephile/cinephile-renders.jpg",
-      "title": "Renders, Interior Spaces",
-      "caption": "Left: public lobby and interior street, warm concrete volumes, oblique incisions, deep cast shadows. Centre: main auditorium, patterned timber acoustic ceiling, classical seating rake, stage framing. Bottom left: site plan, building footprint within the Tunis urban block. Right: exploded axonometric showing structural floor system and programme layering across all levels.",
-      "alt": "Cinephile renders, public lobby, main auditorium, site plan and exploded axonometry",
+      "src": "images/cinephile/cinephile-aerial.jpg",
+      "title": "Aerial view",
+      "caption": "The building's roofs, in pink, on a triangular block between the city grid and the wooded Belvédère park.",
+      "alt": "Top-down render of the site: pink and brown roofs on a triangular block, the white massing of the surrounding city blocks with long shadows, grey streets, and a wooded park with autumn-coloured trees across the road",
       "kind": "render",
-      "source": "site"
+      "source": "pdf2025:p11 + pdf2025:p12 (location 'overlooking Belvédère Park') + hq:Cinema/.trashed-1762728296-Image(4).png (no printed title)"
     },
     {
-      "src": "images/cinephile/cinephile-site-study.jpg",
-      "title": "Site Study",
-      "caption": "Urban site study. Site at the corner of the medina and the colonial grid. Belvedere park to the south. Place de l'Afrique bus station to the north-east. Palestine metro station to the north-west. Pedestrian desire lines (dotted red) and vehicular routes mapped. Existing programme highlighted in orange.",
-      "alt": "3D urban site study, corner between medina and colonial grid, Belvedere park, pedestrian routes and transit connections",
+      "src": "images/cinephile/cinephile-site-study.png",
+      "title": "Site study",
+      "caption": "Routes to Mohamed V Road, downtown, the Passage, Olympic City N., Mahrajen N. and the R21 highway; Palestine metro station and the Place de l'Afrique bus station. Pedestrian routes (dotted red) run along Avenue Taeib M'hiri and around the Belvédère park.",
+      "alt": "Axonometric of the city blocks around the site: white massing, the green Belvédère park in front, a few buildings picked out in orange near Place de l'Afrique, red arrows for the routes out of the area and dotted red lines for walking routes",
       "kind": "drawing",
-      "source": "site"
+      "source": "site + hq:Cinema/Site study.png (printed title 'Site Study', erased and re-set, D49; callouts 'TO MOHAMED V ROAD', 'PALESTINE METRO STATION', 'PLACE DE L'AFRIQUE BUS STATION', 'TO DOWNTOWN', 'TO PASSAGE', 'TO OLYMPIC CITY N.', 'TO MAHRAJEN N.', 'TO R21 HIGHWAY', 'AV. TAEIB M'HIRI', 'BELVEDERE' stay on the drawing); pdf2025:p12"
     },
     {
-      "src": "images/cinephile/cinephile-sketches.jpg",
-      "title": "Design Sketches",
-      "caption": "Concept sketches. Early exploration of section logic and vertical programme organisation. Circulation strategy through the building as an interior public street. Structural grid and screen volumes developed in pencil and ink.",
-      "alt": "Hand sketches exploring section logic, circulation strategy and structural grid",
-      "kind": "render",
-      "source": "site"
+      "src": "images/cinephile/cinephile-tree-cover.png",
+      "title": "Tree cover",
+      "caption": "Trees by species over the park and the blocks beside it.",
+      "alt": "Map of the park and the blocks beside it with trees drawn as dots coloured by species, dense in the park and lining the streets",
+      "kind": "drawing",
+      "legend": [
+        { "swatch": "#29794B", "text": "Eucalyptus" },
+        { "swatch": "#C4DA66", "text": "Palm tree" },
+        { "swatch": "#4AA646", "text": "Pine" },
+        { "swatch": "#D51C8F", "text": "Olive tree" },
+        { "swatch": "#235562", "text": "Sempervivum" }
+      ],
+      "source": "hq:Cinema/Tree cover.png (printed title 'Tree cover'; legend 'Eucalyptus', 'Palm tree', 'Pine', 'Olive tree', 'Sempervivum', re-set); pdf2025:p12"
+    },
+    {
+      "src": "images/cinephile/cinephile-building-heights.png",
+      "title": "Building heights",
+      "caption": "Heights of the buildings in the three zones numbered on the map.",
+      "alt": "Map of three zones: a large pale zone 1 with two low buildings, and zones 2 and 3 densely built, coloured from yellow for one or two storeys to magenta for seven and more",
+      "kind": "drawing",
+      "legend": [
+        { "swatch": "#F9D544", "text": "1 to 2 stories" },
+        { "swatch": "#5FA49C", "text": "3 to 4 stories" },
+        { "swatch": "#245886", "text": "5 to 6 stories" },
+        { "swatch": "#BF1D75", "text": "7+ stories" }
+      ],
+      "source": "hq:Cinema/Buildings height.png (printed title 'Buildings Height'; legend '1 to 2 Stories', '3 to 4 Stories', '5 to 6 Stories', '7+ Stories', re-set); pdf2025:p12"
+    },
+    {
+      "src": "images/cinephile/cinephile-sketch.png",
+      "title": "Sketching the ideas",
+      "caption": "Early exploration of the section, in pencil and ink; the handwritten 'Esp. cons' marks a refreshment area.",
+      "alt": "Hand sketch in pencil and ink of a building section: heavy floor lines, a box on the left, a V-shaped volume on the right, small figures and loose construction lines",
+      "kind": "drawing",
+      "source": "site + hq:Cinema/Sketching the idea.jpg (title 'Sketching The Ideas' printed on pdf2025:p12; handwriting 'Esp. cons', for 'espace de consommation', translated, D17)"
+    },
+    {
+      "src": "images/cinephile/cinephile-plan-000.png",
+      "title": "Level +0.00",
+      "caption": "The entrance level (+12.00 NGT): the 900 m² atrium, 17.65 m high under the slab, between two ticket offices and two counters, with refreshment areas on both sides and the management offices and infirmary along the top.",
+      "alt": "Plan with its structural grid and dimensions: a large central atrium outlined in dashed lines, two flights of stairs, two small ticket booths, café tables on both sides, offices and stair cores along the top and trees around the building",
+      "kind": "drawing",
+      "source": "hq:Cinema/Level 01.jpg (title 'LEVEL +0.00 = ±12.00 NGT' printed on pdf2025:p13; room labels 'ATIRUM Surf = 900 m² H.S.D = 17.65 m', 'Billetterie', 'Comptoir', 'Espace de consommation', 'Direction', 'Infirmerie'; translated, D17)"
     },
     {
       "src": "images/cinephile/cinephile-plan-n01.jpg",
-      "title": "Ground Floor Plan, N01",
-      "caption": "Ground floor N01. Four cinema screens distributed symmetrically around the central covered lobby. Ticketing and public foyer at centre. Film library and archive to the north. Technical core and sanitary block at service edges. Screen entrances stepped along the east–west public axis. Scale 1:200.",
-      "alt": "Ground floor plan N01, four cinema screens, public lobby, film library, technical core",
+      "title": "Level +5.00",
+      "caption": "Four cinema halls with raked seating, two large outer halls and two smaller inner ones, around the void over the atrium (+17.00 NGT).",
+      "alt": "Plan of the upper level: four rectangular halls with rows of seats along the bottom, a grey void in the centre between them, stair cores and offices along the top",
       "kind": "drawing",
-      "source": "site"
+      "source": "site + pdf2025:p14 (printed title 'LEVEL 5.00 = ±17.00 NGT'; the site's title 'Ground Floor Plan, N01' and its caption are withheld: they contradict the printed level and the level +0.00 plan, D07)"
     },
     {
-      "src": "images/cinephile/cinephile-section-facade.jpg",
-      "title": "Section and Facade",
-      "caption": "Left: transversal section. Acoustic ceiling geometry in the main auditorium, programme floor distribution, facade layering and four construction detail zones. Right: facade elevation. Diamond-pattern aluminium cladding, vertical circulation tower, double-skin glass envelope.",
-      "alt": "Transversal section and facade elevation, acoustic ceiling geometry, diamond-pattern aluminium cladding, double-skin glass envelope",
+      "src": "images/cinephile/cinephile-section.jpg",
+      "title": "Section",
+      "caption": "The upper hall with its balcony and lining over the foyers, a lower hall beneath, and details 1 to 4 referenced at the façade.",
+      "alt": "Section on a pale teal sky: a large hall at the top with a balcony and diamond-patterned lining, foyer floors below, a smaller hall with stepped seating beneath, and four dashed circles marking details at the right-hand façade",
       "kind": "drawing",
-      "source": "site"
+      "source": "site + hq:Cinema/2025 - Hazem radhouani - Portfolio - HQ [16-20]_page-0001.jpg (callouts 'DETAIL 1' to 'DETAIL 4' stay on the drawing); pdf2025:p15"
+    },
+    {
+      "src": "images/cinephile/cinephile-section-perspective.jpg",
+      "title": "Sectional perspective",
+      "caption": "The building cut open lengthwise: the hall and its balcony above the foyer levels.",
+      "alt": "Pale pink render of the building cut lengthwise: a hall with a balcony and a wave of folded panels under its roof on the left, floors and ramps of the foyer beneath it, and a block of rooms on four levels on the right",
+      "kind": "render",
+      "source": "hq:Cinema/.trashed-1762728296-Image(7).png (no printed title)"
+    },
+    {
+      "src": "images/cinephile/cinephile-east-facade.jpg",
+      "title": "Eastern façade",
+      "caption": "Diamond-pattern panels on the volumes either side of the vertical circulation tower.",
+      "alt": "Elevation on a pale teal sky: volumes clad in white diamond-shaped panels with deep shadows, set either side of a narrow glazed tower with stairs",
+      "kind": "drawing",
+      "source": "site + hq:Cinema/2025 - Hazem radhouani - Portfolio - HQ [16-20]_page-0001.jpg (printed title 'Eastern Facade'); pdf2025:p15"
+    },
+    {
+      "src": "images/cinephile/cinephile-facade-render.jpg",
+      "title": "Façade",
+      "caption": "Three volumes clad in diamond-pattern panels over a glazed base, reflected in water.",
+      "alt": "Dusk render of a symmetrical façade: a tall central volume and two lower side volumes clad in pink diamond-patterned panels, a glazed entrance between them, small trees and a mirror-like reflection in the water in front",
+      "kind": "render",
+      "source": "hq:Cinema/.trashed-1762728296-Image(6).png (no printed title)"
+    },
+    {
+      "title": "Façade details",
+      "caption": "Left to right: upper façade detail, façade attachment detail, corner insulation detail and under-stairs openings detail.",
+      "kind": "drawing",
+      "source": "hq:Cinema/2025 - Hazem radhouani - Portfolio - HQ [16-20]_page-0001.jpg (printed titles 'Upper facade Detail', 'Facade attatchment detail', 'Corner insulation detail', 'Under stairs oppnings detail', re-set with their spelling corrected); pdf2025:p15",
+      "items": [
+        {
+          "src": "images/cinephile/cinephile-detail-upper-facade.png",
+          "alt": "Detail of the top of a wall: a thick dark structural wall turning at the roof, a light inner lining and folded façade panels fixed outside it"
+        },
+        {
+          "src": "images/cinephile/cinephile-detail-facade-attachment.png",
+          "alt": "Detail of a wall corner with layered insulation and a folded façade panel held off the wall by a bracket"
+        },
+        {
+          "src": "images/cinephile/cinephile-detail-corner-insulation.png",
+          "alt": "Detail of a thick dark wall turning into a sloping underside, with a light inner lining and folded panels around the outside"
+        },
+        {
+          "src": "images/cinephile/cinephile-detail-under-stairs.png",
+          "alt": "Axonometric detail of a stepped dark slab under a stair, with an opening below and folded panels behind"
+        }
+      ]
+    },
+    {
+      "src": "images/cinephile/cinephile-exploded-axonometric.jpg",
+      "title": "Exploded axonometric",
+      "caption": "The programme layered across all levels.",
+      "alt": "Render of the building's floors pulled apart vertically and joined by translucent shafts: the entrance level at the base and levels with rows of cinema seating above, on a pale mauve ground",
+      "kind": "render",
+      "source": "site + pdf2025:p13 + hq:Cinema/.trashed-1762728296-dz.png (no printed title)"
+    },
+    {
+      "src": "images/cinephile/cinephile-cutaway-axonometric.jpg",
+      "title": "Cutaway axonometric",
+      "caption": "The upper hall cut open: raked seating, the balcony and the folded lining at the stage end, above tables and ramps at ground level.",
+      "alt": "Monochrome axonometric render of the building with the roof of its upper hall cut away, showing rows of seats, a balcony and a curved panelled wall at the stage end, with ramps, stairs and round tables beneath the overhanging hall",
+      "kind": "render",
+      "source": "hq:Cinema/.trashed-1762728296-Image(11).png (no printed title)"
+    },
+    {
+      "src": "images/cinephile/cinephile-foyer-above.jpg",
+      "title": "Foyer",
+      "caption": "The passage through the foyer, seen from an upper level.",
+      "alt": "Render looking down into the red foyer from an upper level: a glazed passage between two red volumes, bands of sunlight on the ceiling, the hall number 2 on a wall and a few people walking below",
+      "kind": "render",
+      "source": "hq:Cinema/.trashed-1762728296-Image(2).png (no printed title)"
+    },
+    {
+      "title": "Auditorium",
+      "caption": "Folded timber panels line the walls and ceiling; red curtains frame the stage.",
+      "kind": "render",
+      "source": "site + pdf2025:p14 + hq:Cinema/.trashed-1762728296-Image(10).png and .trashed-1762728296-Image(9).png (no printed titles)",
+      "items": [
+        {
+          "src": "images/cinephile/cinephile-auditorium-stage.jpg",
+          "alt": "Render of the hall from the seats: rows of timber chairs facing a stage framed by dark red curtains, with a back wall and ceiling of folded timber panels radiating from the centre"
+        },
+        {
+          "src": "images/cinephile/cinephile-auditorium-side.jpg",
+          "alt": "Render of the hall from the side: walls of folded timber panels, the dark stage opening with a red curtain, the underside of the balcony and rows of seats"
+        }
+      ]
     }
   ],
   "date": "2022",

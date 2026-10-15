@@ -13,7 +13,6 @@
     "images/al-arg/al-arg-ground-floor-proposed.png"
   ],
   "exclude": {
-    "images/cinephile/cinephile-section-facade.jpg": "mixed: a teal sky band and a rendered facade; keying would make the sky translucent",
     "images/corallum/corallum-site.jpg": "a massing model photographed on a tinted full-bleed ground; no paper to key"
   },
   "images": {

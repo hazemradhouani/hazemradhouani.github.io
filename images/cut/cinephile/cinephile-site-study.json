@@ -1,0 +1,49 @@
+{
+ "src": "images/cinephile/cinephile-site-study.png",
+ "hash": "f9a25ee9b758e79c",
+ "mode": "ink",
+ "from": [
+  1540,
+  943
+ ],
+ "to": [
+  1532,
+  937
+ ],
+ "offset": [
+  0,
+  6
+ ],
+ "paper": [
+  255,
+  255,
+  255
+ ],
+ "clip": [],
+ "ink": {
+  "ink": 117094,
+  "chromaticFraction": 0.4863,
+  "midtoneFraction": 0.8096,
+  "suggest": "colour"
+ },
+ "dark": "field",
+ "specks": 892,
+ "tile": [
+  640,
+  400,
+  640,
+  400
+ ],
+ "background": null,
+ "labels": [
+  {
+   "id": "title",
+   "removed": 9,
+   "kept": 0,
+   "x": 88.708,
+   "y": 95.091,
+   "w": 10.313,
+   "h": 4.055
+  }
+ ]
+}

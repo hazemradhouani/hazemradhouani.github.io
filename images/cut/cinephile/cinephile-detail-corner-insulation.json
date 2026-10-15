@@ -1,0 +1,39 @@
+{
+ "src": "images/cinephile/cinephile-detail-corner-insulation.png",
+ "hash": "e4ee112c940862fd",
+ "mode": "ink",
+ "from": [
+  458,
+  493
+ ],
+ "to": [
+  423,
+  458
+ ],
+ "offset": [
+  13,
+  17
+ ],
+ "paper": [
+  255,
+  255,
+  255
+ ],
+ "clip": [],
+ "ink": {
+  "ink": 20067,
+  "chromaticFraction": 0,
+  "midtoneFraction": 0.4539,
+  "suggest": "mono"
+ },
+ "dark": "invert",
+ "specks": 950,
+ "tile": [
+  0,
+  0,
+  423,
+  400
+ ],
+ "background": null,
+ "labels": []
+}

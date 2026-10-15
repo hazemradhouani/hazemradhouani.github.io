@@ -1,0 +1,39 @@
+{
+ "src": "images/cinephile/cinephile-tree-cover.png",
+ "hash": "06f0db0eda128534",
+ "mode": "ink",
+ "from": [
+  464,
+  455
+ ],
+ "to": [
+  409,
+  440
+ ],
+ "offset": [
+  24,
+  11
+ ],
+ "paper": [
+  255,
+  255,
+  255
+ ],
+ "clip": [],
+ "ink": {
+  "ink": 30797,
+  "chromaticFraction": 0.6788,
+  "midtoneFraction": 0.6531,
+  "suggest": "colour"
+ },
+ "dark": "field",
+ "specks": 28,
+ "tile": [
+  0,
+  0,
+  409,
+  400
+ ],
+ "background": null,
+ "labels": []
+}
