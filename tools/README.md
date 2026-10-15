@@ -5,9 +5,10 @@ The site is plain static HTML on GitHub Pages, built on the light/dark "Field" s
 | Command | What it does | Needs |
 |---|---|---|
 | `node tools/build.mjs` (`npm run build`) | Writes every page, `sitemap.xml`, `site.webmanifest`, `robots.txt` from `content/*.json`. Places every image at build time on the largest grid span that neither enlarges nor crops it | Node 20+ only |
-| `node tools/cutout.mjs [--force] [--sheet] [images/folder]` (`npm run cutout`) | Transparent cutouts of every drawing (`"kind": "drawing"` figures, plus `extra` in `tools/cutout.json`) into `images/cut/`: the sheet's own paper becomes reviewed graded alpha, trimmed to the ink. `--sheet` writes white, charcoal and magenta review panels to `tools/.cache/cutouts/`; opaque white fringe or lost partial-alpha detail is a defect | ffmpeg |
-| `node tools/hq-audit.mjs --check` / `--write` | Validates / refreshes the complete immutable `Images HQ/` inventory and checks the production manifest. The audit includes dot-prefixed recoverable sources. It never changes a source image; `--write` only updates `docs/flagship/hq-asset-audit.json` | Node; local `Images HQ/` source library |
-| `node tools/media.mjs [--force] [images/folder]` | AVIF + WebP widths (480 to 2000 px and the native width, never larger) for any new image; images with alpha (cutouts) get WebP only. `--force` replaces stale widths | ffmpeg |
+| `node tools/cutout.mjs [--force] [--sheet] images/<slug>/<file>.png …` (`npm run cutout`) | Transparent cutouts of drawings and isolated objects into `images/cut/`, each with a sidecar `.json` (label boxes, ink class, trim, clip). Settings: `tools/cutout.json` plus one `tools/cutout.d/<slug>.json` per case study (mode `ink`/`object`, paper, floor/knee, `clip`, `erase` rectangles, `dark` treatment). Annotations on blank paper are removed component by component (D49); an undeclared edge touch fails the run. `--sheet` writes `tools/.cache/cutouts/<name>.jpg` (white, charcoal, magenta, the dark rendering) and `<name>-detail.jpg` (densest region at 1:1). **Always pass paths**: a bare run regenerates every project | ffmpeg |
+| `node tools/hq-audit.mjs --check` / `--write` | Validates the complete immutable `Images HQ/` inventory: one audit file per folder in `docs/flagship/hq-audit/` (D52), every source with a disposition, every recipe tied to an approved record. It never changes a source image | Node; local `Images HQ/` |
+| `node tools/import-hq-media.mjs --check` / `--write [--replace] [--only=images/<slug>/]` | Builds the published masters from the recipes in `tools/hq-media/<slug>.json`: an exact copy or a rectangular source-pixel crop, downscaled to the 2 560 px cap (D55) and encoded explicitly. `--check` proves every master matches its recipe | ffmpeg; local `Images HQ/` |
+| `node tools/media.mjs [--force] [path-prefix …]` | AVIF + WebP widths (480, 800, 1200, 1600, 2000, 2560 and the native width, never larger) for any new image; images with alpha (cutouts) get WebP only, scaled with premultiplied alpha. A drawing master that has a cutout gets no derivatives. `--force` replaces stale widths | ffmpeg |
 | `node tools/ledger.mjs` | Regenerates `docs/flagship/content-ledger.md` (every fact with its source) | Node |
 | `npm run serve` | Local server at http://127.0.0.1:8090/portfolio/ (same base path as GitHub Pages) | Node |
 | `npm run og` | Share cards `images/og/*.jpg` and icons, rendered with the real fonts on Field's light default, images never cropped | `npm install`, Chrome |
@@ -19,7 +20,14 @@ Set `CHROME_PATH` if Chrome is not in its default Windows location.
 
 ## HQ source workflow
 
-`Images HQ/` is an owner-supplied source library, not a publishable asset directory. Do not rename, delete, retouch, link to, or add production URLs that point into it. Start with `node tools/hq-audit.mjs --check`; only select an image after its audit record has project, role, credit and caption evidence. Add an approved derivative beneath a stable `images/<slug>/` path, record its source hash and exact source-pixel crop (or `null`) in `tools/hq-media.json`, then run `node tools/media.mjs` to create responsive formats. Owner-provided access is not a substitute for a project-specific credit or role.
+`Images HQ/` is an owner-supplied source library (gitignored), not a publishable asset directory. Do not rename, delete, retouch, link to, or add production URLs that point into it. The full procedure is `docs/flagship/13-dissection-protocol.md`; in short, per case study:
+
+1. Audit every source of the folder in `docs/flagship/hq-audit/<folder>.json`: transcription of every word with its disposition, project mapping, credit and role evidence (`node tools/hq-audit.mjs --check`).
+2. Write one recipe per published view in `tools/hq-media/<slug>.json` and run `node tools/import-hq-media.mjs --write --only=images/<slug>/`. Drawing PNG masters are gitignored; their cutouts are committed.
+3. Cut out the drawings (`tools/cutout.d/<slug>.json`, `node tools/cutout.mjs --sheet <paths>`) and look at every review sheet.
+4. `node tools/media.mjs --force images/<slug> images/cut/<slug>`, then the content (`labels`, `legend`, `maxH`), `npm run build` and `node tools/qa.mjs --only=projects/project-<slug>.html --shots`.
+
+Owner-provided access is not a substitute for a project-specific credit or role.
 
 ## Add a project
 
@@ -29,8 +37,8 @@ Set `CHROME_PATH` if Chrome is not in its default Windows location.
    - `hero`: any ratio. A portrait hero is paired with the project's first render so the pair fills the grid; nothing is cropped;
    - `figures`: drawings (`"kind": "drawing"`, shown as transparent cutouts) or renders; a figure with `items` shows a series (drawings in equal cells, renders in one justified row);
    - every fact gets a `source` (see the ledger keys). Write nothing you cannot source.
-3. Run `npm run cutout -- --sheet images/<slug>` and inspect the white, charcoal and magenta panels in `tools/.cache/cutouts/`. Use graded alpha for any dark-compatible drawing. If a drawing has no paper to key (a photograph or a full-bleed coloured ground), add it to `exclude` in `tools/cutout.json`; if its border is not paper, give it a `paper` colour; if it fills its own frame, list it in `fullBleed` with the reason rather than faking transparency.
-4. Run `node tools/media.mjs images/<slug> images/cut/<slug>`, then `npm run build`, `npm run og` and `npm run qa`.
+3. Run `npm run cutout -- --sheet images/<slug>` and inspect the four panels and the 1:1 detail sheet in `tools/.cache/cutouts/`. Settings go in `tools/cutout.d/<slug>.json`. If a drawing has no paper to key (a photograph or a full-bleed coloured ground), add it to that file's `exclude` with the reason; if its border is not paper, give it a `paper` colour; if it fills its own frame, list it in `fullBleed` with the reason rather than faking transparency. Choose its dark treatment (`invert`, `invert-accent`, `field` or `object`, D50).
+4. Run `node tools/media.mjs images/<slug> images/cut/<slug>`, then `npm run build`, `npm run og`, `npm run qa` and `node tools/ledger.mjs`.
 
 ## Add the website or the app (Digital)
 

@@ -149,7 +149,7 @@ node tools/media.mjs --force images/<slug> images/cut/<slug>
   ```
   ffmpeg -i src -vf crop=5:3:X:Y,scale=1:1 -f rawvideo -pix_fmt rgb24 - | od -An -tu1
   ```
-- **A tall labelled drawing** may set `"maxH": 780` (at most 820).
+- **A tall drawing**, labelled or not, may set `"maxH": 780` (at most 820) when it reads too small under the default height limit.
 - **A series** (`items`) must be at one scale. Long strips stack automatically.
 
 ## 8. Verify
