@@ -1,0 +1,51 @@
+{
+ "src": "images/zenata/zenata-site-access.png",
+ "hash": "88b634ead8507b0e",
+ "mode": "ink",
+ "from": [
+  1065,
+  1048
+ ],
+ "to": [
+  1047,
+  1039
+ ],
+ "offset": [
+  9,
+  9
+ ],
+ "paper": [
+  255,
+  255,
+  255
+ ],
+ "clip": [
+  "bottom"
+ ],
+ "ink": {
+  "ink": 80867,
+  "chromaticFraction": 0.11,
+  "midtoneFraction": 0.1814,
+  "suggest": "colour"
+ },
+ "dark": "field",
+ "specks": 4310,
+ "tile": [
+  0,
+  200,
+  640,
+  400
+ ],
+ "background": null,
+ "labels": [
+  {
+   "id": "legend",
+   "removed": 190,
+   "kept": 0,
+   "x": 16.523,
+   "y": 76.997,
+   "w": 14.518,
+   "h": 15.399
+  }
+ ]
+}

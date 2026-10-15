@@ -318,7 +318,9 @@
   .legend li { display: inline-flex; align-items: center; gap: var(--s2); }
   /* phones: one left-aligned column, centred as a block (the box itself stays on the grid lines) */
   @media (max-width: 47.99rem) { .legend { display: grid; justify-content: center; justify-items: start; } }
-  .legend__sw { width: 0.875rem; height: 0.875rem; flex: none; outline: 1px solid var(--line); outline-offset: 0; }
+  /* the swatch keeps the drawing's colour; its outline (--ui, 3:1+ in both schemes) makes a dark swatch visible on charcoal
+     and a pale one on white (WCAG 1.4.11) */
+  .legend__sw { width: 0.875rem; height: 0.875rem; flex: none; outline: 1px solid var(--ui); outline-offset: 0; }
   .zoom-link { display: block; cursor: zoom-in; text-decoration: none; }
   .zoom-link:focus-visible { outline-offset: 6px; }
 

@@ -1,0 +1,129 @@
+{
+  "$comment": "Zenata cutouts (tools/cutout.mjs; D46, D49, D50). Vector plans and elevations with thin light lines and pale fills: low floor/knee. Rendered axonometrics: 0.01/0.02.",
+  "images": {
+    "images/zenata/zenata-site-access.png": {
+      "paper": [
+        255,
+        255,
+        255
+      ],
+      "floor": 0.01,
+      "knee": 0.02,
+      "clip": [
+        "bottom"
+      ],
+      "erase": [
+        {
+          "id": "legend",
+          "x": 168,
+          "y": 798,
+          "w": 177,
+          "h": 174
+        }
+      ],
+      "dark": "field"
+    },
+    "images/zenata/zenata-plan-000.png": {
+      "paper": [
+        255,
+        255,
+        255
+      ],
+      "floor": 0.015,
+      "knee": 0.03,
+      "dark": "invert"
+    },
+    "images/zenata/zenata-plan-420.png": {
+      "paper": [
+        255,
+        255,
+        255
+      ],
+      "floor": 0.015,
+      "knee": 0.03,
+      "dark": "invert"
+    },
+    "images/zenata/zenata-plan-775.png": {
+      "paper": [
+        255,
+        255,
+        255
+      ],
+      "floor": 0.015,
+      "knee": 0.03,
+      "dark": "invert"
+    },
+    "images/zenata/zenata-programme-000.png": {
+      "paper": [
+        255,
+        255,
+        255
+      ],
+      "floor": 0.01,
+      "knee": 0.02,
+      "dark": "field"
+    },
+    "images/zenata/zenata-programme-420.png": {
+      "paper": [
+        255,
+        255,
+        255
+      ],
+      "floor": 0.01,
+      "knee": 0.02,
+      "dark": "field"
+    },
+    "images/zenata/zenata-programme-775.png": {
+      "paper": [
+        255,
+        255,
+        255
+      ],
+      "floor": 0.01,
+      "knee": 0.02,
+      "dark": "field"
+    },
+    "images/zenata/zenata-long-elevation.png": {
+      "paper": [
+        255,
+        255,
+        255
+      ],
+      "floor": 0.015,
+      "knee": 0.03,
+      "dark": "invert-accent"
+    },
+    "images/zenata/zenata-end-elevation.png": {
+      "paper": [
+        255,
+        255,
+        255
+      ],
+      "floor": 0.015,
+      "knee": 0.03,
+      "clip": [
+        "left"
+      ],
+      "dark": "invert-accent"
+    },
+    "images/zenata/zenata-profile-diagrams.png": {
+      "paper": [
+        255,
+        255,
+        255
+      ],
+      "floor": 0.02,
+      "knee": 0.05,
+      "erase": [
+        {
+          "id": "stray",
+          "x": 354,
+          "y": 780,
+          "w": 29,
+          "h": 38
+        }
+      ],
+      "dark": "invert-accent"
+    }
+  }
+}

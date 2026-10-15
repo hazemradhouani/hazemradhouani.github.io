@@ -1,0 +1,270 @@
+{
+  "version": 1,
+  "sourceRoot": "Images HQ",
+  "assets": [
+    {
+      "source": "Images HQ/Zenata/Scene 51.png",
+      "output": "images/zenata/zenata-platform-render.jpg",
+      "sha256": "428ddcb5cdf26ade52fd19ad6b1e289258439dfdd97cff573b522e317d65cf1d",
+      "crop": null,
+      "treatment": "full scene, exact pixels (2560 px, at the cap)",
+      "darkTreatment": "preserve-colour-scene",
+      "credit": "Owner-supplied office work (Yassir Khalil Studio, site); no third-party credit is printed on the source",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "reviewStatus": "approved",
+      "captionEvidence": "Same camera as the existing hero (pdf2025:p7): the station over the tracks seen from the platform"
+    },
+    {
+      "source": "Images HQ/Zenata/Scene 13.png",
+      "output": "images/zenata/zenata-aerial-model.jpg",
+      "sha256": "d92c45372662ef650c4ed7c22163307ef1f392728e744f1fc77fa75f5e8a7c33",
+      "crop": null,
+      "treatment": "full scene, area downscale to the render cap",
+      "darkTreatment": "preserve-colour-scene",
+      "credit": "Owner-supplied office work (Yassir Khalil Studio, site); no third-party credit is printed on the source",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "reviewStatus": "approved",
+      "captionEvidence": "Visual: monochrome aerial view of the station across the tracks between two car parks"
+    },
+    {
+      "source": "Images HQ/Zenata/2025 - Hazem radhouani - Portfolio - HQ [6-10]_page-0004.jpg",
+      "output": "images/zenata/zenata-site-access.png",
+      "sha256": "e9fb9eb5d794716541630142ad8ee80490ebdf0ee06326a7ce44e921c4f9f5ec",
+      "crop": {
+        "x": 2330,
+        "y": 1270,
+        "width": 1065,
+        "height": 1048
+      },
+      "treatment": "crop of the site axonometric with blank paper around its frame; the legend inside it is erased and re-set in HTML (D49); page tab left outside",
+      "darkTreatment": "field",
+      "credit": "Owner-supplied office work (Yassir Khalil Studio, site); no third-party credit is printed on the source",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "reviewStatus": "approved",
+      "captionEvidence": "Printed legend 'Accès Piétons', 'Espaces Parking', 'Avitaillement', 'Accès Véhicules' (pdf2025:p8)"
+    },
+    {
+      "source": "Images HQ/Zenata/2025 - Hazem radhouani - Portfolio - HQ [6-10]_page-0005.jpg",
+      "output": "images/zenata/zenata-plan-000.png",
+      "sha256": "796b74143e1f2f997d66b5876791e57b9f9340050562d2d044ad93b54a1a0242",
+      "crop": {
+        "x": 150,
+        "y": 302,
+        "width": 1070,
+        "height": 1711
+      },
+      "treatment": "crop of the left plan; its printed title (y 2069-2098) left outside",
+      "darkTreatment": "invert",
+      "credit": "Owner-supplied office work (Yassir Khalil Studio, site); no third-party credit is printed on the source",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "reviewStatus": "approved",
+      "captionEvidence": "Printed title 'LEVEL +00.00'; the existing Plans figure (pdf2025:p9)"
+    },
+    {
+      "source": "Images HQ/Zenata/2025 - Hazem radhouani - Portfolio - HQ [6-10]_page-0005.jpg",
+      "output": "images/zenata/zenata-plan-420.png",
+      "sha256": "796b74143e1f2f997d66b5876791e57b9f9340050562d2d044ad93b54a1a0242",
+      "crop": {
+        "x": 1358,
+        "y": 310,
+        "width": 879,
+        "height": 1694
+      },
+      "treatment": "crop of the middle plan; its printed title left outside",
+      "darkTreatment": "invert",
+      "credit": "Owner-supplied office work (Yassir Khalil Studio, site); no third-party credit is printed on the source",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "reviewStatus": "approved",
+      "captionEvidence": "Printed title 'LEVEL +04.20'; the existing Plans figure (pdf2025:p9)"
+    },
+    {
+      "source": "Images HQ/Zenata/2025 - Hazem radhouani - Portfolio - HQ [6-10]_page-0005.jpg",
+      "output": "images/zenata/zenata-plan-775.png",
+      "sha256": "796b74143e1f2f997d66b5876791e57b9f9340050562d2d044ad93b54a1a0242",
+      "crop": {
+        "x": 2357,
+        "y": 289,
+        "width": 1001,
+        "height": 1752
+      },
+      "treatment": "crop of the right plan; its printed title left outside",
+      "darkTreatment": "invert",
+      "credit": "Owner-supplied office work (Yassir Khalil Studio, site); no third-party credit is printed on the source",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "reviewStatus": "approved",
+      "captionEvidence": "Printed title 'LEVEL +07.75'; the existing Plans figure (pdf2025:p9)"
+    },
+    {
+      "source": "Images HQ/Zenata/2025 - Hazem radhouani - Portfolio - HQ [11-15]_page-0001.jpg",
+      "output": "images/zenata/zenata-programme-000.png",
+      "sha256": "fb7cba5c6c6ac011ab479f4a820f41a21c69e12b54c82d0068eb1aa3bad7b47d",
+      "crop": {
+        "x": 1640,
+        "y": 90,
+        "width": 1222,
+        "height": 722
+      },
+      "treatment": "crop of the top axonometric; its legend (x 2926+) left outside and re-set in HTML",
+      "darkTreatment": "field",
+      "credit": "Owner-supplied office work (Yassir Khalil Studio, site); no third-party credit is printed on the source",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "reviewStatus": "approved",
+      "captionEvidence": "Legend of the top axonometric; rooms match plan LEVEL +00.00 (pdf2025:p9, p10)"
+    },
+    {
+      "source": "Images HQ/Zenata/2025 - Hazem radhouani - Portfolio - HQ [11-15]_page-0001.jpg",
+      "output": "images/zenata/zenata-programme-420.png",
+      "sha256": "fb7cba5c6c6ac011ab479f4a820f41a21c69e12b54c82d0068eb1aa3bad7b47d",
+      "crop": {
+        "x": 1640,
+        "y": 830,
+        "width": 1222,
+        "height": 742
+      },
+      "treatment": "crop of the middle axonometric; its legend left outside and re-set in HTML",
+      "darkTreatment": "field",
+      "credit": "Owner-supplied office work (Yassir Khalil Studio, site); no third-party credit is printed on the source",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "reviewStatus": "approved",
+      "captionEvidence": "Legend of the middle axonometric; rooms match plan LEVEL +04.20 (pdf2025:p9, p10)"
+    },
+    {
+      "source": "Images HQ/Zenata/2025 - Hazem radhouani - Portfolio - HQ [11-15]_page-0001.jpg",
+      "output": "images/zenata/zenata-programme-775.png",
+      "sha256": "fb7cba5c6c6ac011ab479f4a820f41a21c69e12b54c82d0068eb1aa3bad7b47d",
+      "crop": {
+        "x": 1640,
+        "y": 1612,
+        "width": 1222,
+        "height": 736
+      },
+      "treatment": "crop of the bottom axonometric; its legend and the page tab left outside",
+      "darkTreatment": "field",
+      "credit": "Owner-supplied office work (Yassir Khalil Studio, site); no third-party credit is printed on the source",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "reviewStatus": "approved",
+      "captionEvidence": "Legend of the bottom axonometric; rooms match plan LEVEL +07.75 (pdf2025:p9, p10)"
+    },
+    {
+      "source": "Images HQ/Zenata/2025 - Hazem radhouani - Portfolio - HQ [6-10]_page-0004.jpg",
+      "output": "images/zenata/zenata-long-elevation.png",
+      "sha256": "e9fb9eb5d794716541630142ad8ee80490ebdf0ee06326a7ce44e921c4f9f5ec",
+      "crop": {
+        "x": 91,
+        "y": 103,
+        "width": 3322,
+        "height": 898
+      },
+      "treatment": "crop of the long elevation with its level marks; downscaled to the 2560 px cap",
+      "darkTreatment": "invert-accent",
+      "credit": "Owner-supplied office work (Yassir Khalil Studio, site); no third-party credit is printed on the source",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "reviewStatus": "approved",
+      "captionEvidence": "The existing long elevation (pdf2025:p8), levels +0.15 +7.30 +16.00 +27.00"
+    },
+    {
+      "source": "Images HQ/Zenata/2025 - Hazem radhouani - Portfolio - HQ [6-10]_page-0004.jpg",
+      "output": "images/zenata/zenata-end-elevation.png",
+      "sha256": "e9fb9eb5d794716541630142ad8ee80490ebdf0ee06326a7ce44e921c4f9f5ec",
+      "crop": {
+        "x": 313,
+        "y": 1885,
+        "width": 1127,
+        "height": 471
+      },
+      "treatment": "crop of the end elevation; its left shrub is cut by its own frame",
+      "darkTreatment": "invert-accent",
+      "credit": "Owner-supplied office work (Yassir Khalil Studio, site); no third-party credit is printed on the source",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "reviewStatus": "approved",
+      "captionEvidence": "Visual: the end façade with 'GARE DE ZENATA' and Arabic sign, mast and cables (pdf2025:p8)"
+    },
+    {
+      "source": "Images HQ/Zenata/2025 - Hazem radhouani - Portfolio - HQ [6-10]_page-0004.jpg",
+      "output": "images/zenata/zenata-profile-diagrams.png",
+      "sha256": "e9fb9eb5d794716541630142ad8ee80490ebdf0ee06326a7ce44e921c4f9f5ec",
+      "crop": {
+        "x": 1436,
+        "y": 1259,
+        "width": 697,
+        "height": 1042
+      },
+      "treatment": "crop of the five profile diagrams; a stray glyph erased (D49)",
+      "darkTreatment": "invert-accent",
+      "credit": "Owner-supplied office work (Yassir Khalil Studio, site); no third-party credit is printed on the source",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "reviewStatus": "approved",
+      "captionEvidence": "Visual: five profile diagrams of the station, one element in red in four of them (pdf2025:p8)"
+    },
+    {
+      "source": "Images HQ/Zenata/2025 - Hazem radhouani - Portfolio - HQ [11-15]_page-0001.jpg",
+      "output": "images/zenata/zenata-side-dusk.jpg",
+      "sha256": "fb7cba5c6c6ac011ab479f4a820f41a21c69e12b54c82d0068eb1aa3bad7b47d",
+      "crop": {
+        "x": 0,
+        "y": 832,
+        "width": 1392,
+        "height": 816
+      },
+      "treatment": "crop of the middle render of the left column, inside its edges (rows 827-1653, columns 0-1395)",
+      "darkTreatment": "preserve-colour-scene",
+      "credit": "Owner-supplied office work (Yassir Khalil Studio, site); no third-party credit is printed on the source",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "reviewStatus": "approved",
+      "captionEvidence": "Visual: the station side at dusk with the mast, cables and signage (pdf2025:p10)"
+    },
+    {
+      "source": "Images HQ/Zenata/2025 - Hazem radhouani - Portfolio - HQ [11-15]_page-0001.jpg",
+      "output": "images/zenata/zenata-underside-night.jpg",
+      "sha256": "fb7cba5c6c6ac011ab479f4a820f41a21c69e12b54c82d0068eb1aa3bad7b47d",
+      "crop": {
+        "x": 0,
+        "y": 1656,
+        "width": 1392,
+        "height": 825
+      },
+      "treatment": "crop of the bottom render of the left column, inside its edges",
+      "darkTreatment": "preserve-colour-scene",
+      "credit": "Owner-supplied office work (Yassir Khalil Studio, site); no third-party credit is printed on the source",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "reviewStatus": "approved",
+      "captionEvidence": "Visual: the cantilevered roof and stairs lit at night (pdf2025:p10)"
+    },
+    {
+      "source": "Images HQ/Zenata/Scene 64.png",
+      "output": "images/zenata/zenata-waiting-hall.jpg",
+      "sha256": "c3e7bf00527af25a6f0d42b02f63ebd926e2fc98da568ee45e94b32aa3b4dd1d",
+      "crop": null,
+      "treatment": "full scene, exact pixels",
+      "darkTreatment": "preserve-colour-scene",
+      "credit": "Owner-supplied office work (Yassir Khalil Studio, site); no third-party credit is printed on the source",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "reviewStatus": "approved",
+      "captionEvidence": "Same camera as the existing concourse render (pdf2025:p10), which is a crop of it"
+    },
+    {
+      "source": "Images HQ/Zenata/Scene 35.png",
+      "output": "images/zenata/zenata-entrance-night.jpg",
+      "sha256": "bc65c0c3d5dc6c929de73b173347a3be8f566debd0abadb8443294000b4b981f",
+      "crop": null,
+      "treatment": "full scene, area downscale to the render cap",
+      "darkTreatment": "preserve-colour-scene",
+      "credit": "Owner-supplied office work (Yassir Khalil Studio, site); no third-party credit is printed on the source",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "reviewStatus": "approved",
+      "captionEvidence": "Visual: the glazed entrance hall with escalators at night, cars in front"
+    },
+    {
+      "source": "Images HQ/Zenata/يصي.png",
+      "output": "images/zenata/zenata-dusk-corner.jpg",
+      "sha256": "95e54502eb8f357ff7a42b1cb17935ae1ca68d04221d4b3cebca53cad0f267c6",
+      "crop": null,
+      "treatment": "full scene, area downscale to the render cap; named descriptively (the source name is an accidental keyboard string)",
+      "darkTreatment": "preserve-colour-scene",
+      "credit": "Owner-supplied office work (Yassir Khalil Studio, site); no third-party credit is printed on the source",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "reviewStatus": "approved",
+      "captionEvidence": "Visual: the lit station at dusk with 'GARE DE ZENATA' signage"
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+ "src": "images/zenata/zenata-end-elevation.png",
+ "hash": "03030f5190c9b9dd",
+ "mode": "ink",
+ "from": [
+  1127,
+  471
+ ],
+ "to": [
+  1095,
+  434
+ ],
+ "offset": [
+  18,
+  19
+ ],
+ "paper": [
+  255,
+  255,
+  255
+ ],
+ "clip": [],
+ "ink": {
+  "ink": 17460,
+  "chromaticFraction": 0.0675,
+  "midtoneFraction": 0.7256,
+  "suggest": "colour"
+ },
+ "dark": "invert-accent",
+ "specks": 2,
+ "tile": [
+  0,
+  0,
+  640,
+  400
+ ],
+ "background": null,
+ "labels": []
+}

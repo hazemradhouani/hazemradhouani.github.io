@@ -1,0 +1,39 @@
+{
+ "src": "images/zenata/zenata-programme-000.png",
+ "hash": "c8e62507a7ccb34d",
+ "mode": "ink",
+ "from": [
+  1222,
+  722
+ ],
+ "to": [
+  1189,
+  691
+ ],
+ "offset": [
+  17,
+  16
+ ],
+ "paper": [
+  255,
+  255,
+  255
+ ],
+ "clip": [],
+ "ink": {
+  "ink": 40322,
+  "chromaticFraction": 0.2115,
+  "midtoneFraction": 0.3474,
+  "suggest": "colour"
+ },
+ "dark": "field",
+ "specks": 4822,
+ "tile": [
+  320,
+  200,
+  640,
+  400
+ ],
+ "background": null,
+ "labels": []
+}

@@ -1,0 +1,49 @@
+{
+ "src": "images/zenata/zenata-profile-diagrams.png",
+ "hash": "a13bb79d1fe6a7f9",
+ "mode": "ink",
+ "from": [
+  697,
+  1042
+ ],
+ "to": [
+  665,
+  1003
+ ],
+ "offset": [
+  13,
+  20
+ ],
+ "paper": [
+  255,
+  255,
+  255
+ ],
+ "clip": [],
+ "ink": {
+  "ink": 13651,
+  "chromaticFraction": 0.1315,
+  "midtoneFraction": 0.59,
+  "suggest": "colour"
+ },
+ "dark": "invert-accent",
+ "specks": 55,
+ "tile": [
+  0,
+  200,
+  640,
+  400
+ ],
+ "background": null,
+ "labels": [
+  {
+   "id": "stray",
+   "removed": 1,
+   "kept": 0,
+   "x": 52.782,
+   "y": 76.869,
+   "w": 1.203,
+   "h": 1.496
+  }
+ ]
+}
