@@ -1,0 +1,39 @@
+{
+ "src": "images/sentry/sentry-3d-view.png",
+ "hash": "22a1f652007e4e3b",
+ "mode": "ink",
+ "from": [
+  1679,
+  725
+ ],
+ "to": [
+  1653,
+  699
+ ],
+ "offset": [
+  13,
+  13
+ ],
+ "paper": [
+  255,
+  255,
+  255
+ ],
+ "clip": [],
+ "ink": {
+  "ink": 156895,
+  "chromaticFraction": 0,
+  "midtoneFraction": 0.5307,
+  "suggest": "mono"
+ },
+ "dark": "field",
+ "specks": 530,
+ "tile": [
+  320,
+  200,
+  640,
+  400
+ ],
+ "background": null,
+ "labels": []
+}

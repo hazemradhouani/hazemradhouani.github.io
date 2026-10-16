@@ -1,0 +1,278 @@
+{
+  "version": 1,
+  "sourceRoot": "Images HQ",
+  "assets": [
+    {
+      "source": "Images HQ/Guerite/2025 - Hazem radhouani - Portfolio - HQ [26-30]_page-0001.jpg",
+      "output": "images/sentry/sentry-roof-aerial.jpg",
+      "sha256": "3a6182a675fabf6d9f01d10aa7093fac8ccf9887d19474859bcc4d4c09b4b9dc",
+      "crop": {
+        "x": 0,
+        "y": 0,
+        "width": 3508,
+        "height": 2321
+      },
+      "treatment": "the full-page render from its top edge to y 2320, just above the page tab '26' and the chapter name 'SENTRY' printed over its lower-left corner (x 0-590, y 2324-2397); the 160 px of render below the tab line (ground and planter edges, down to the page edge) are left outside (D58: text printed over a render is never erased; the pavilion stays whole, its lowest corner at y 2131); area downscale to the render cap",
+      "darkTreatment": "preserve-colour-scene",
+      "credit": "Yassir Khalil Studio (the office named on the case study, site); no credit is printed on the page",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "captionEvidence": "Same camera as the existing 'Render, Aerial View' sentry-render.jpg (site), at 1.7x its width; no printed title",
+      "reviewStatus": "approved"
+    },
+    {
+      "source": "Images HQ/Guerite/2025 - Hazem radhouani - Portfolio - HQ [26-30]_page-0004.jpg",
+      "output": "images/sentry/sentry-aerial-road.jpg",
+      "sha256": "91da5fd57b082c8cd822a7271965e1566dbff987bec1ad76f5c771ac8a51b8bc",
+      "crop": {
+        "x": 0,
+        "y": 827,
+        "width": 1396,
+        "height": 827
+      },
+      "treatment": "the middle render of the left column, whole (x 0-1395, y 827-1653); the renders above and below are left outside; never upscaled",
+      "darkTreatment": "preserve-colour-scene",
+      "credit": "Yassir Khalil Studio (the office named on the case study, site); no credit is printed on the page",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "captionEvidence": "New material on pdf2025:p29, no printed title",
+      "reviewStatus": "approved"
+    },
+    {
+      "source": "Images HQ/Guerite/2025 - Hazem radhouani - Portfolio - HQ [26-30]_page-0004.jpg",
+      "output": "images/sentry/sentry-plan-roof.png",
+      "sha256": "91da5fd57b082c8cd822a7271965e1566dbff987bec1ad76f5c771ac8a51b8bc",
+      "crop": {
+        "x": 1849,
+        "y": 93,
+        "width": 1219,
+        "height": 1107
+      },
+      "treatment": "the roof plan with its dimensions (818, 609, 731, 227), its grey cast shadow and the section marks A and B (ink x 1879-3037, y 123-1169), with 30 px of paper; one sheet and one scale with the floor plan below",
+      "darkTreatment": "invert-accent",
+      "credit": "Yassir Khalil Studio (the office named on the case study, site); no credit is printed on the page",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "captionEvidence": "pdf2025:p29, no printed title; the roof outline and the 731 dimension match the floor plan below; section marks 'A' and 'B'",
+      "reviewStatus": "approved"
+    },
+    {
+      "source": "Images HQ/Guerite/2025 - Hazem radhouani - Portfolio - HQ [26-30]_page-0004.jpg",
+      "output": "images/sentry/sentry-plan-floor.png",
+      "sha256": "91da5fd57b082c8cd822a7271965e1566dbff987bec1ad76f5c771ac8a51b8bc",
+      "crop": {
+        "x": 1905,
+        "y": 1268,
+        "width": 1165,
+        "height": 1083
+      },
+      "treatment": "the floor plan with its dimensions, room mark 'PL' and the section marks A and B (ink x 1935-3039, y 1298-2320); the page tab '29' (from x 3118) is left outside; never upscaled",
+      "darkTreatment": "invert-accent",
+      "credit": "Yassir Khalil Studio (the office named on the case study, site); no credit is printed on the page",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "captionEvidence": "pdf2025:p29, no printed title; the guard room with its desk, chair and door, dimensions and section marks 'A' and 'B'",
+      "reviewStatus": "approved"
+    },
+    {
+      "source": "Images HQ/Guerite/2025 - Hazem radhouani - Portfolio - HQ [26-30]_page-0002.jpg",
+      "output": "images/sentry/sentry-elevation-window.png",
+      "sha256": "9bb1b6d0e5375d048d832b75577e375d366574f4a428cd8cc124fba7f34f1f94",
+      "crop": {
+        "x": 2118,
+        "y": 90,
+        "width": 1312,
+        "height": 711
+      },
+      "treatment": "the first elevation of the right column with its dimensions (313, 66, 120, 80, 266, 313) and section mark A (ink x 2158-3389, y 120-761); one sheet and one scale with the elevation and section A-A below",
+      "darkTreatment": "invert-accent",
+      "credit": "Yassir Khalil Studio (the office named on the case study, site); no credit is printed on the page",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "captionEvidence": "pdf2025:p27, no printed title; the glazed bay and sliding window match the plan and the 3D view of the same sheet",
+      "reviewStatus": "approved"
+    },
+    {
+      "source": "Images HQ/Guerite/2025 - Hazem radhouani - Portfolio - HQ [26-30]_page-0002.jpg",
+      "output": "images/sentry/sentry-elevation-roof.png",
+      "sha256": "9bb1b6d0e5375d048d832b75577e375d366574f4a428cd8cc124fba7f34f1f94",
+      "crop": {
+        "x": 2118,
+        "y": 842,
+        "width": 1312,
+        "height": 704
+      },
+      "treatment": "the second elevation with its dimension 130 and section mark A (ink x 2158-3389, y 872-1516)",
+      "darkTreatment": "invert-accent",
+      "credit": "Yassir Khalil Studio (the office named on the case study, site); no credit is printed on the page",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "captionEvidence": "pdf2025:p27, no printed title",
+      "reviewStatus": "approved"
+    },
+    {
+      "source": "Images HQ/Guerite/2025 - Hazem radhouani - Portfolio - HQ [26-30]_page-0002.jpg",
+      "output": "images/sentry/sentry-section-aa.png",
+      "sha256": "9bb1b6d0e5375d048d832b75577e375d366574f4a428cd8cc124fba7f34f1f94",
+      "crop": {
+        "x": 2118,
+        "y": 1573,
+        "width": 1312,
+        "height": 750
+      },
+      "treatment": "the cut drawing with its section mark A (ink x 2158-3389, y 1603-2323); its ground hatch is clipped at y 2323 on the sheet itself; the crop ends at y 2322, above the antialiased top edge of the page tab '27' (x 3118 onwards, from y 2323)",
+      "darkTreatment": "invert",
+      "credit": "Yassir Khalil Studio (the office named on the case study, site); no credit is printed on the page",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "captionEvidence": "The section through line A of the plans (pdf2025:p27); the existing site figure 'Section B-B' is the other section (pdf2025:p28)",
+      "reviewStatus": "approved"
+    },
+    {
+      "source": "Images HQ/Guerite/2025 - Hazem radhouani - Portfolio - HQ [26-30]_page-0002.jpg",
+      "output": "images/sentry/sentry-3d-view.png",
+      "sha256": "9bb1b6d0e5375d048d832b75577e375d366574f4a428cd8cc124fba7f34f1f94",
+      "crop": {
+        "x": 104,
+        "y": 98,
+        "width": 1679,
+        "height": 725
+      },
+      "treatment": "the shaded 3D view with its three French callouts on leader lines (kept, D60; ink x 134-1752, y 128-792); its Revit view title '1 visuel 1:1' below (y 848-901) and the page rule (y 1052) are left outside",
+      "darkTreatment": "field",
+      "credit": "Yassir Khalil Studio (the office named on the case study, site); no credit is printed on the page",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "captionEvidence": "pdf2025:p27, view title 'visuel' (view) and callouts 'Menuiserie aluminium', 'Fenêtre coulissante ouvrant d'angle', 'Tôle métallique perforée galvanisée'",
+      "reviewStatus": "approved"
+    },
+    {
+      "source": "Images HQ/Guerite/2025 - Hazem radhouani - Portfolio - HQ [26-30]_page-0003.jpg",
+      "output": "images/sentry/sentry-elevation-cladding.png",
+      "sha256": "47acacf7de97b8655984dd953f50f081d416f2db92f11bcd941f808965ed4a60",
+      "crop": {
+        "x": 1690,
+        "y": 90,
+        "width": 1492,
+        "height": 744
+      },
+      "treatment": "the first elevation of the right column with its callout 'Plaque en fer galvanisé perforée' on two leader lines (kept, D60) and section mark B (ink x 1730-3141, y 120-803); one sheet and one scale with the elevation and section B-B below",
+      "darkTreatment": "invert",
+      "credit": "Yassir Khalil Studio (the office named on the case study, site); no credit is printed on the page",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "captionEvidence": "pdf2025:p28, no printed title; callout 'Plaque en fer galvanisé perforée'",
+      "reviewStatus": "approved"
+    },
+    {
+      "source": "Images HQ/Guerite/2025 - Hazem radhouani - Portfolio - HQ [26-30]_page-0003.jpg",
+      "output": "images/sentry/sentry-elevation-side.png",
+      "sha256": "47acacf7de97b8655984dd953f50f081d416f2db92f11bcd941f808965ed4a60",
+      "crop": {
+        "x": 1688,
+        "y": 880,
+        "width": 1515,
+        "height": 725
+      },
+      "treatment": "the second elevation with its callouts 'Menuiserie Aluminium', 'Fenêtre coulissante', 'Plaque en fer galvanisé perforée' on leader lines (kept, D60), dimensions 313, 5.00°, 266, 23, 120, 80, 130 and section mark B (ink x 1728-3162, y 910-1597); the crop ends 7 px under its ground hatch, 24 px above the next section mark",
+      "darkTreatment": "invert-accent",
+      "credit": "Yassir Khalil Studio (the office named on the case study, site); no credit is printed on the page",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "captionEvidence": "pdf2025:p28, no printed title; callouts 'Menuiserie Aluminium', 'Fenêtre coulissante', 'Plaque en fer galvanisé perforée'",
+      "reviewStatus": "approved"
+    },
+    {
+      "source": "Images HQ/Guerite/2025 - Hazem radhouani - Portfolio - HQ [26-30]_page-0003.jpg",
+      "output": "images/sentry/sentry-section-bb.png",
+      "sha256": "47acacf7de97b8655984dd953f50f081d416f2db92f11bcd941f808965ed4a60",
+      "crop": {
+        "x": 1646,
+        "y": 1612,
+        "width": 1580,
+        "height": 712
+      },
+      "treatment": "the cut drawing with its dimensions (290, 14, 109) and section mark B (ink x 1686-3185, y 1628-2323); its ground hatch is clipped at y 2323 on the sheet itself, so the crop ends there; never upscaled",
+      "darkTreatment": "invert-accent",
+      "credit": "Yassir Khalil Studio (the office named on the case study, site); no credit is printed on the page",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "captionEvidence": "The same section as the existing figure 'Section B-B' sentry-section.jpg (site), which it replaces at 2.2x its width; section mark 'B'",
+      "reviewStatus": "approved"
+    },
+    {
+      "source": "Images HQ/Guerite/2025 - Hazem radhouani - Portfolio - HQ [26-30]_page-0004.jpg",
+      "output": "images/sentry/sentry-window-counter.jpg",
+      "sha256": "91da5fd57b082c8cd822a7271965e1566dbff987bec1ad76f5c771ac8a51b8bc",
+      "crop": {
+        "x": 0,
+        "y": 0,
+        "width": 1396,
+        "height": 827
+      },
+      "treatment": "the top render of the left column, whole (x 0-1395, y 0-826, full bleed to the page edges); never upscaled",
+      "darkTreatment": "preserve-colour-scene",
+      "credit": "Yassir Khalil Studio (the office named on the case study, site); no credit is printed on the page",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "captionEvidence": "New material on pdf2025:p29, no printed title",
+      "reviewStatus": "approved"
+    },
+    {
+      "source": "Images HQ/Guerite/2025 - Hazem radhouani - Portfolio - HQ [26-30]_page-0003.jpg",
+      "output": "images/sentry/sentry-window-seated.jpg",
+      "sha256": "47acacf7de97b8655984dd953f50f081d416f2db92f11bcd941f808965ed4a60",
+      "crop": {
+        "x": 0,
+        "y": 827,
+        "width": 1396,
+        "height": 827
+      },
+      "treatment": "the middle render of the left column, whole (x 0-1395, y 827-1653); never upscaled",
+      "darkTreatment": "preserve-colour-scene",
+      "credit": "Yassir Khalil Studio (the office named on the case study, site); no credit is printed on the page",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "captionEvidence": "New material on pdf2025:p28, no printed title",
+      "reviewStatus": "approved"
+    },
+    {
+      "source": "Images HQ/Guerite/2025 - Hazem radhouani - Portfolio - HQ [26-30]_page-0003.jpg",
+      "output": "images/sentry/sentry-entrance.jpg",
+      "sha256": "47acacf7de97b8655984dd953f50f081d416f2db92f11bcd941f808965ed4a60",
+      "crop": {
+        "x": 0,
+        "y": 1654,
+        "width": 1396,
+        "height": 667
+      },
+      "treatment": "the bottom render of the left column from its top edge (y 1654) to y 2320, just above the page tab '28' printed over its lower-left corner (x 0-389, y 2324-2397); the 160 px of render below the tab line (planter fronts and ground) are left outside (D58); never upscaled",
+      "darkTreatment": "preserve-colour-scene",
+      "credit": "Yassir Khalil Studio (the office named on the case study, site); no credit is printed on the page",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "captionEvidence": "New material on pdf2025:p28, no printed title",
+      "reviewStatus": "approved"
+    },
+    {
+      "source": "Images HQ/Guerite/2025 - Hazem radhouani - Portfolio - HQ [26-30]_page-0003.jpg",
+      "output": "images/sentry/sentry-evening.jpg",
+      "sha256": "47acacf7de97b8655984dd953f50f081d416f2db92f11bcd941f808965ed4a60",
+      "crop": {
+        "x": 0,
+        "y": 0,
+        "width": 1396,
+        "height": 827
+      },
+      "treatment": "the top render of the left column, whole (x 0-1395, y 0-826, full bleed); never upscaled",
+      "darkTreatment": "preserve-colour-scene",
+      "credit": "Yassir Khalil Studio (the office named on the case study, site); no credit is printed on the page",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "captionEvidence": "Same camera as the existing hero thumb.jpg (site), which it replaces at 1.5x its width; no printed title",
+      "reviewStatus": "approved"
+    },
+    {
+      "source": "Images HQ/Guerite/2025 - Hazem radhouani - Portfolio - HQ [26-30]_page-0004.jpg",
+      "output": "images/sentry/sentry-dusk.jpg",
+      "sha256": "91da5fd57b082c8cd822a7271965e1566dbff987bec1ad76f5c771ac8a51b8bc",
+      "crop": {
+        "x": 0,
+        "y": 1654,
+        "width": 1396,
+        "height": 827
+      },
+      "treatment": "the bottom render of the left column, whole (x 0-1395, y 1654-2480, to the page edge); never upscaled",
+      "darkTreatment": "preserve-colour-scene",
+      "credit": "Yassir Khalil Studio (the office named on the case study, site); no credit is printed on the page",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "captionEvidence": "New material on pdf2025:p29, no printed title",
+      "reviewStatus": "approved"
+    }
+  ]
+}

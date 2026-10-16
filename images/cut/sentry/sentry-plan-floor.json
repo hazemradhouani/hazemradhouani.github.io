@@ -1,0 +1,39 @@
+{
+ "src": "images/sentry/sentry-plan-floor.png",
+ "hash": "54c1bbe6dbf64bfc",
+ "mode": "ink",
+ "from": [
+  1165,
+  1083
+ ],
+ "to": [
+  1129,
+  1047
+ ],
+ "offset": [
+  18,
+  18
+ ],
+ "paper": [
+  255,
+  255,
+  255
+ ],
+ "clip": [],
+ "ink": {
+  "ink": 24839,
+  "chromaticFraction": 0.1128,
+  "midtoneFraction": 0.6835,
+  "suggest": "colour"
+ },
+ "dark": "invert-accent",
+ "specks": 112,
+ "tile": [
+  0,
+  400,
+  640,
+  400
+ ],
+ "background": null,
+ "labels": []
+}

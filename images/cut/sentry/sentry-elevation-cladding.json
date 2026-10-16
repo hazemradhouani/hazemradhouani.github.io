@@ -1,0 +1,39 @@
+{
+ "src": "images/sentry/sentry-elevation-cladding.png",
+ "hash": "78eb3a398fa4949f",
+ "mode": "ink",
+ "from": [
+  1492,
+  744
+ ],
+ "to": [
+  1442,
+  714
+ ],
+ "offset": [
+  25,
+  15
+ ],
+ "paper": [
+  255,
+  255,
+  255
+ ],
+ "clip": [],
+ "ink": {
+  "ink": 81715,
+  "chromaticFraction": 0,
+  "midtoneFraction": 0.4804,
+  "suggest": "mono"
+ },
+ "dark": "invert",
+ "specks": 348,
+ "tile": [
+  640,
+  200,
+  640,
+  400
+ ],
+ "background": null,
+ "labels": []
+}

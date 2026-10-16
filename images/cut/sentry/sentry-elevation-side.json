@@ -1,0 +1,39 @@
+{
+ "src": "images/sentry/sentry-elevation-side.png",
+ "hash": "7d1b0b9a0c37ac00",
+ "mode": "ink",
+ "from": [
+  1515,
+  725
+ ],
+ "to": [
+  1465,
+  710
+ ],
+ "offset": [
+  25,
+  15
+ ],
+ "paper": [
+  255,
+  255,
+  255
+ ],
+ "clip": [],
+ "ink": {
+  "ink": 80323,
+  "chromaticFraction": 0.0297,
+  "midtoneFraction": 0.386,
+  "suggest": "accent"
+ },
+ "dark": "invert-accent",
+ "specks": 462,
+ "tile": [
+  320,
+  200,
+  640,
+  400
+ ],
+ "background": null,
+ "labels": []
+}

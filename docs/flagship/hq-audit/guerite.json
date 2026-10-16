@@ -10,17 +10,17 @@
       "height": 2481,
       "projectMapping": {
         "slug": "sentry",
-        "status": "provisional"
+        "status": "confirmed"
       },
-      "mappingEvidence": "Brief 10 maps the Guerite source folder to the existing Sentry case study; the individual source still needs a visual and caption comparison.",
-      "visualType": "drawing-or-sheet",
-      "textDisposition": "review-required",
+      "mappingEvidence": "Portfolio page with the footer '26 SENTRY' (pdf2025:p26); its render is the same camera as the existing figure 'Render, Aerial View' sentry-render.jpg (site)",
+      "visualType": "portfolio page: one full-bleed render, the pavilion from above with its perforated folded roof, a figure at the glazed end, raised planted beds and a car beyond",
+      "textDisposition": "furniture (dropped): page tab '26' and chapter name 'SENTRY', printed over the render's lower-left corner; no other text",
       "duplicateOf": null,
-      "disposition": "withheld",
+      "disposition": "approved",
       "authorizationEvidence": "owner-direct:2026-10-13",
-      "creditEvidence": "not established",
-      "roleEvidence": "not established",
-      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+      "creditEvidence": "No credit printed on the page; office Yassir Khalil Studio (site); no personal-role statement",
+      "roleEvidence": "The case study makes no personal-role statement (role: []); the image adds none",
+      "reason": "The strongest and largest render; cropped above the page tab (D58) and published as the hero images/sentry/sentry-roof-aerial.jpg, replacing both thumb.jpg as hero and sentry-render.jpg (the same view at 1.7x its width)"
     },
     {
       "source": "Images HQ/Guerite/2025 - Hazem radhouani - Portfolio - HQ [26-30]_page-0002.jpg",
@@ -29,17 +29,17 @@
       "height": 2481,
       "projectMapping": {
         "slug": "sentry",
-        "status": "provisional"
+        "status": "confirmed"
       },
-      "mappingEvidence": "Brief 10 maps the Guerite source folder to the existing Sentry case study; the individual source still needs a visual and caption comparison.",
-      "visualType": "drawing-or-sheet",
-      "textDisposition": "review-required",
+      "mappingEvidence": "pdf2025:p27 of the Sentry chapter: the name 'Sentry' in the printed text and 'Casablanca Finance City' (site); the drawings show the pavilion of the renders (perforated cladding, sloping roof, glazed guard's window)",
+      "visualType": "portfolio page: a shaded 3D view with callouts and its view title (upper left), the fact panel and 'ABOUT' text (lower left), two elevations and section A-A with dimensions and section marks (right), the page tab '27'",
+      "textDisposition": "callouts (intrinsic, kept on their leader lines, D60; English in the caption): 'Menuiserie aluminium' (aluminium joinery), 'Fenêtre coulissante ouvrant d'angle' (sliding corner-opening window), 'Tôle métallique perforée galvanisée' (perforated galvanised metal sheet). Intrinsic (stays): dimensions 313, 66, 120, 80, 266, 313 (first elevation) and 130 (second elevation), section marks 'A', the window opening arrow. Furniture (dropped): view title '1 visuel 1:1' (Revit view tag; 'visuel' = view), page rule, page tab '27'. Fact panel, prose/fact: 'LOCATION: Casablanca Finance City, adjacent to CFG Bank' (the location is already published; 'adjacent to CFG Bank' WITHHELD: a neighbouring institution likely tied to the client, client names are not published), 'AREA: 10 m²' (WITHHELD, ledger C02: the site gives 38 m² and the plan's own dimensions contradict 10 m²; no surface figure is published), 'TYPE: Guard Pavilion – Human-scale security kiosk' (consistent with the published type 'Guard Pavilion'), 'YEAR: December 2024' (consistent with 2024). 'ABOUT: A sculpted sentinel of perforated steel, Sentry stands at the crossroads of civic rigor and poetic restraint. Its latticed walls filter sunlight into shifting filigree, transforming a humble kiosk into a beacon of watchful elegance.' Not published: 'perforated steel' agrees with the site's 'perforated steel'; the rest is no fact the drawings show. Quotation 'Simplicity is the ultimate sophistication.' — Leonardo da Vinci: another author's words, not published",
       "duplicateOf": null,
-      "disposition": "withheld",
+      "disposition": "approved",
       "authorizationEvidence": "owner-direct:2026-10-13",
-      "creditEvidence": "not established",
-      "roleEvidence": "not established",
-      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+      "creditEvidence": "No credit printed on the page; office Yassir Khalil Studio (site); no personal-role statement",
+      "roleEvidence": "The case study makes no personal-role statement (role: []); the page adds none",
+      "reason": "Split into four new outputs: the 3D view, the two elevations and section A-A (one sheet, one scale). The fact panel and prose are left outside every crop"
     },
     {
       "source": "Images HQ/Guerite/2025 - Hazem radhouani - Portfolio - HQ [26-30]_page-0003.jpg",
@@ -48,17 +48,17 @@
       "height": 2481,
       "projectMapping": {
         "slug": "sentry",
-        "status": "provisional"
+        "status": "confirmed"
       },
-      "mappingEvidence": "Brief 10 maps the Guerite source folder to the existing Sentry case study; the individual source still needs a visual and caption comparison.",
-      "visualType": "drawing-or-sheet",
-      "textDisposition": "review-required",
+      "mappingEvidence": "pdf2025:p28 of the Sentry chapter: its top render is the existing hero thumb.jpg and its bottom drawing the existing figure 'Section B-B' sentry-section.jpg (site)",
+      "visualType": "portfolio page: three renders stacked on the left (the pavilion in elevation in evening light; from above, a guard seated inside and a visitor at the window; a low view with a visitor at the open end, the page tab '28' over its lower-left corner), two elevations and section B-B with callouts, dimensions and section marks (right)",
+      "textDisposition": "callouts (intrinsic, kept on their leader lines, D60; English in the caption): 'Plaque en fer galvanisé perforée' (perforated galvanised iron plate; on both elevations), 'Menuiserie Aluminium' (aluminium joinery), 'Fenêtre coulissante' (sliding window). Intrinsic (stays): dimensions 313, 5.00°, 266, 23, 120, 80, 130 (second elevation), 290, 14, 109 (section), section marks 'B'. Furniture (dropped): page tab '28' (over the bottom render)",
       "duplicateOf": null,
-      "disposition": "withheld",
+      "disposition": "approved",
       "authorizationEvidence": "owner-direct:2026-10-13",
-      "creditEvidence": "not established",
-      "roleEvidence": "not established",
-      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+      "creditEvidence": "No credit printed on the page; office Yassir Khalil Studio (site); no personal-role statement",
+      "roleEvidence": "The case study makes no personal-role statement (role: []); the page adds none",
+      "reason": "Split into six outputs: the evening render (replacing thumb.jpg at 1.5x), the seated-guard render, the low view (cropped above the page tab, D58), two elevations (new) and section B-B (replacing sentry-section.jpg at 2.2x)"
     },
     {
       "source": "Images HQ/Guerite/2025 - Hazem radhouani - Portfolio - HQ [26-30]_page-0004.jpg",
@@ -67,17 +67,17 @@
       "height": 2481,
       "projectMapping": {
         "slug": "sentry",
-        "status": "provisional"
+        "status": "confirmed"
       },
-      "mappingEvidence": "Brief 10 maps the Guerite source folder to the existing Sentry case study; the individual source still needs a visual and caption comparison.",
-      "visualType": "drawing-or-sheet",
-      "textDisposition": "review-required",
+      "mappingEvidence": "pdf2025:p29 of the Sentry chapter: the same pavilion, planted beds and cars as the renders of pp.26 and 28; the plans carry the section marks A and B of the elevations and sections",
+      "visualType": "portfolio page: three renders stacked on the left (the long side with a guard at the counter and a visitor; from above, beside the road with cars; at dusk with a blurred figure in the foreground), the roof plan and the floor plan with dimensions and section marks (right), the page tab '29' in the margin",
+      "textDisposition": "intrinsic (stays): roof plan dimensions 818, 609, 731, 227; floor plan dimensions 101, 174, 220, 220, 275, 90, 90, 172, 98, 61, 87, 91, 117, 338, 208 and room mark 'PL'; section marks 'A' and 'B'. Furniture (dropped): page tab '29'. No titles",
       "duplicateOf": null,
-      "disposition": "withheld",
+      "disposition": "approved",
       "authorizationEvidence": "owner-direct:2026-10-13",
-      "creditEvidence": "not established",
-      "roleEvidence": "not established",
-      "reason": "Withheld pending individual visual review, visible credit review, role evidence and a confirmed existing-case-study caption match."
+      "creditEvidence": "No credit printed on the page; office Yassir Khalil Studio (site); no personal-role statement",
+      "roleEvidence": "The case study makes no personal-role statement (role: []); the page adds none",
+      "reason": "Split into five new outputs: three renders and the two plans (one sheet, one scale). No surface figure is derived from the plan dimensions (ledger C02)"
     }
   ]
 }
