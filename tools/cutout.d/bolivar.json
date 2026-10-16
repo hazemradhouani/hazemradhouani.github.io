@@ -1,0 +1,69 @@
+{
+  "$comment": "Bolivar cutouts (tools/cutout.mjs; D46, D49, D50). Permit sheets at 300 dpi, clean vector exports. Plans and roof plan: colour-coded fills, low floor/knee, the neighbours' hatch and parcel lines run off every side. Volume diagrams: cropped inside their grey panel (paper 249), white context lighter than paper clears.",
+  "images": {
+    "images/bolivar/bolivar-plan-n01.png": {
+      "paper": [255, 255, 255],
+      "floor": 0.015,
+      "knee": 0.03,
+      "clip": ["left", "top", "right", "bottom"],
+      "dark": "invert-accent"
+    },
+    "images/bolivar/bolivar-plan-n04.png": {
+      "paper": [255, 255, 255],
+      "floor": 0.015,
+      "knee": 0.03,
+      "clip": ["left", "top", "right", "bottom"],
+      "dark": "invert-accent"
+    },
+    "images/bolivar/bolivar-roof-plan.png": {
+      "paper": [255, 255, 255],
+      "floor": 0.015,
+      "knee": 0.03,
+      "clip": ["left", "top", "right", "bottom"],
+      "dark": "invert-accent"
+    },
+    "images/bolivar/bolivar-long-section-aa.png": {
+      "paper": [255, 255, 255],
+      "floor": 0.02,
+      "knee": 0.05,
+      "clip": ["left", "right", "bottom"],
+      "erase": [
+        { "id": "key-plan", "x": 2105, "y": 0, "w": 430, "h": 75 },
+        { "id": "key-plan-title", "x": 2376, "y": 153, "w": 145, "h": 36 },
+        { "id": "avenue", "x": 10, "y": 686, "w": 134, "h": 32 }
+      ],
+      "dark": "invert-accent"
+    },
+    "images/bolivar/bolivar-west-elevation.png": {
+      "paper": [255, 255, 255],
+      "floor": 0.015,
+      "knee": 0.03,
+      "clip": ["left", "right", "bottom"],
+      "dark": "invert-accent"
+    },
+    "images/bolivar/bolivar-axo-demolished.png": {
+      "paper": [249, 249, 249],
+      "floor": 0.02,
+      "knee": 0.05,
+      "clip": ["left", "top", "right", "bottom"],
+      "dark": "invert-accent"
+    },
+    "images/bolivar/bolivar-axo-retained.png": {
+      "paper": [249, 249, 249],
+      "floor": 0.02,
+      "knee": 0.05,
+      "clip": ["left", "top", "right", "bottom"],
+      "dark": "invert-accent"
+    },
+    "images/bolivar/bolivar-vegetation-section.jpg": {
+      "dark": "invert-accent"
+    },
+    "images/bolivar/bolivar-axo-raised-lowered.png": {
+      "paper": [249, 249, 249],
+      "floor": 0.02,
+      "knee": 0.05,
+      "clip": ["left", "top", "right", "bottom"],
+      "dark": "invert-accent"
+    }
+  }
+}

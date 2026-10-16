@@ -1,0 +1,50 @@
+{
+ "src": "images/corallum/corallum-facade-overlapping.png",
+ "hash": "8bf953467daa6e78",
+ "mode": "ink",
+ "from": [
+  693,
+  1217
+ ],
+ "to": [
+  637,
+  1163
+ ],
+ "offset": [
+  28,
+  28
+ ],
+ "paper": [
+  255,
+  255,
+  255
+ ],
+ "clip": [],
+ "ink": {
+  "ink": 21145,
+  "chromaticFraction": 0.1546,
+  "midtoneFraction": 0.9189,
+  "suggest": "colour"
+ },
+ "dark": "invert-accent",
+ "keep": null,
+ "specks": 295,
+ "tile": [
+  0,
+  0,
+  637,
+  400
+ ],
+ "background": null,
+ "labels": [
+  {
+   "id": "text",
+   "removed": 53,
+   "kept": 0,
+   "x": 21.193,
+   "y": 52.193,
+   "w": 62.009,
+   "h": 12.124
+  }
+ ]
+}

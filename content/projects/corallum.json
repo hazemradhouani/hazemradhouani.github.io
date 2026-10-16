@@ -46,51 +46,172 @@
       "source": "site"
     },
     {
-      "text": "The project is organised around the relationship between water and land, with the building positioned at the edge of the sea on a rocky promontory. The research facilities are embedded into the topography, partially submerged to control temperature and light, while the public exhibition spaces rise above the rock to offer views of the sea. The structural system is reinforced concrete cast against rock formwork, with openings calibrated to frame specific views and filter the intense coastal light.",
-      "source": "site"
-    },
-    {
       "text": "The project was developed through physical model-making and hand drawing alongside digital production, exploring the tectonic possibilities of a building built in and with the materials of its site.",
       "source": "site"
     }
   ],
   "hero": {
-    "src": "images/corallum/thumb.jpg",
-    "alt": "Render of the Corallum coral research and exhibition centre",
-    "credit": null
+    "src": "images/corallum/corallum-corner.jpg",
+    "alt": "Render of the building from a corner at ground level: a box wrapped in tall, twisting white fins that part into a tear-shaped opening over a glazed entrance, grasses along its base and a sandy forecourt under a cloudy sky",
+    "credit": null,
+    "source": "site + pdf2025:p23 + hq:Tabarka/.trashed-1762728296-Image_4.png"
   },
   "figures": [
     {
-      "src": "images/corallum/corallum-renders.jpg",
-      "title": "Renders",
-      "caption": "Top: interior, fluid spatial sequence within the exhibition shell, white concrete curves, diffused natural light from above, inhabited surface with figures. Bottom: exterior, folded and vertically striated facade rising from a shallow reflecting pool at its base, northern Tunisian coastal site.",
-      "alt": "Corallum renders, fluid interior public space and exterior coastal facade with water reflection",
+      "src": "images/corallum/corallum-site-plan.jpg",
+      "title": "Site plan",
+      "caption": "The building, with its oval roof opening, on a planted plot between the seafront road and the beach; the port and a wooded peninsula beyond.",
+      "alt": "Top-down render of a coastal town: white building blocks and wooded hills, a sandy beach and esplanade, a small square building with an oval perforated roof on a planted plot by the beach, a port basin and a wooded peninsula in dark green water",
       "kind": "render",
-      "source": "site"
+      "source": "hq:Tabarka/.trashed-1762728296-Image_1.png (no printed title)"
     },
     {
-      "src": "images/corallum/corallum-site.jpg",
+      "src": "images/corallum/corallum-site-model.jpg",
       "title": "Site",
-      "caption": "Site axonometric. Urban coastal context. Building site highlighted at the seafront edge, at the boundary between the built fabric and the sea. Coastal topography, road network, and existing built grain legible. Research and exhibition programme positioned to maximise sea access and public visibility from the town.",
-      "alt": "Corallum urban coastal site axonometric, building position at the seafront edge of a Tunisian coastal town",
-      "kind": "drawing",
-      "source": "site"
+      "caption": "Massing model of the town, the site marked in pink on the seafront.",
+      "alt": "Massing render of a coastal town in pale pink-grey: white blocks along the shore, smaller houses and trees on the hills behind, a pink ellipse marking a plot on the seafront and a harbour basin at the right",
+      "kind": "render",
+      "source": "site + hq:Tabarka/2025 - Hazem radhouani - Portfolio - HQ [21-25]_page-0005.jpg (no printed title); pdf2025:p25"
     },
     {
-      "src": "images/corallum/corallum-volume-research.jpg",
-      "title": "Formal Research, Volume",
-      "caption": "Volume research. Six phases of formal generation. Phase 01: verticality, spiral section, rotational energy. Phase 02: transformation, radial expansion from a point. Helical form, double curvature torsional surface. 2D expansion, lateral spread from a central axis. Phase 03: guided, constrained growth within a field. Phase 04: pseudo-sinusoidal, wave rhythm, undulating surface. Restrict movement, contained vertical extrusion. Change the rhythm, layered sinusoidal displacement.",
-      "alt": "Corallum volume research, six phases of formal generation",
-      "kind": "drawing",
-      "source": "site"
+      "src": "images/corallum/corallum-massing-aerial.jpg",
+      "title": "Aerial view",
+      "caption": "The building, in pink, among the white massing of its neighbours, the oval opening in its roof.",
+      "alt": "Aerial render of white building blocks on a white ground with the project in pink at the lower right: a box with fluted walls and an oval perforated opening in its roof; a curved white form and a haze at the lower left",
+      "kind": "render",
+      "source": "hq:Tabarka/2025 - Hazem radhouani - Portfolio - HQ [21-25]_page-0005.jpg (lower left, no printed title); pdf2025:p25"
     },
     {
-      "src": "images/corallum/corallum-facade-research.jpg",
-      "title": "Formal Research, Facade",
-      "caption": "Facade orientations. Three proposals each tested in plan, section and axonometric. Option 1: sliding parallel to the east, perpendicular to the south, lateral displacement, raking light. Option 2: overlapping parallel to the north, perpendicular to the east, layered screens, filtered diffuse light. Option 3: pulling perpendicular to the west, deep reveals, controlled west exposure. Each option modulates interior light quality and coastal view framing differently.",
-      "alt": "Corallum facade research, three orientations: sliding, overlapping and pulling",
+      "src": "images/corallum/corallum-plan-level-01.jpg",
+      "title": "Level 01",
+      "caption": "Plan of level 01, at 15.00 m: the floor, shaded pink, with an oval at its centre and curved openings around it, inside the rectangular footprint on its plot.",
+      "alt": "Rendered plan: a rectangular building in pink with an oval at its centre and curved shapes around it, inside a white plot outline, between grey roads and white neighbouring buildings, one of them a large black U-shaped block",
       "kind": "drawing",
-      "source": "site"
+      "source": "hq:Tabarka/2025 - Hazem radhouani - Portfolio - HQ [21-25]_page-0004.jpg (printed title 'PLAN NIVEAU 01 | 15.00 m' and '1/500', footer 'Level 01 = 15.00' and 'Scale: 1 / 500', cropped out; translated, D17); pdf2025:p24"
+    },
+    {
+      "title": "Western façade and section A-A",
+      "caption": "Top: the western façade, the building beside its taller neighbours. Bottom: section A-A, cut through the building.",
+      "kind": "drawing",
+      "source": "hq:Tabarka/2025 - Hazem radhouani - Portfolio - HQ [21-25]_page-0005.jpg (printed titles 'Western Facade', 'Section A-A' and 'COUPE A-A 1/500', cropped out; translated, D17); pdf2025:p25",
+      "items": [
+        {
+          "src": "images/corallum/corallum-west-facade.jpg",
+          "alt": "Long elevation on a grey screened panel: the fluted box of the building on the left, a low rise in the ground, and a row of taller white and black blocks on the right"
+        },
+        {
+          "src": "images/corallum/corallum-section-aa.jpg",
+          "alt": "Long section on a grey panel: the building cut through in black, showing curved floors and branching supports inside, among white and black neighbouring blocks"
+        }
+      ]
+    },
+    {
+      "title": "Formal research, volume",
+      "caption": "In the sheet's order: phase 01, verticality; phase 02, transformation; helical form; 2D expansion; phase 03, guided; phase 04, pseudo-sinusoidal; restrict movement; change the rhythm.",
+      "kind": "drawing",
+      "source": "site + hq:Tabarka/2025 - Hazem radhouani - Portfolio - HQ [21-25]_page-0003.jpg (printed titles 'Phase 01 Verticality', 'Phase 02 Transformation', 'Helical Form', '2D Expansion', 'Phase 03 Guided', 'Phase 04 Pseudo-sinusoidal', 'Restrict movement', 'Change the rhythm', cropped out and re-set in the caption); pdf2025:p23",
+      "items": [
+        {
+          "src": "images/corallum/corallum-volume-phase-01.png",
+          "alt": "Shaded disc seen from above, divided by radial lines, with a dark wedge where the surface lifts from the centre"
+        },
+        {
+          "src": "images/corallum/corallum-volume-phase-02.png",
+          "alt": "Shaded elliptical disc with a wedge lifting from its centre, crossed by orange dashed curves"
+        },
+        {
+          "src": "images/corallum/corallum-volume-helical.png",
+          "alt": "Grey surface winding in a helix, with an orange arrow following its turn"
+        },
+        {
+          "src": "images/corallum/corallum-volume-expansion.png",
+          "alt": "Two flat curved surfaces spreading sideways from a vertical edge, with orange arrows pointing left and right"
+        },
+        {
+          "src": "images/corallum/corallum-volume-phase-03.png",
+          "alt": "Shaded elliptical disc with an orange centre outlined by a dashed line"
+        },
+        {
+          "src": "images/corallum/corallum-volume-phase-04.png",
+          "alt": "Gridded wavy surface with an oval opening cut through it"
+        },
+        {
+          "src": "images/corallum/corallum-volume-restrict.png",
+          "alt": "Spiral surface winding around an orange cylinder"
+        },
+        {
+          "src": "images/corallum/corallum-volume-rhythm.png",
+          "alt": "Three stacked wavy strips with an orange line weaving through them to an arrow"
+        }
+      ]
+    },
+    {
+      "title": "Formal research, façade",
+      "caption": "1, sliding: parallel to the east, perpendicular to the south. 2, overlapping: parallel to the north, perpendicular to the east. 3, pulling: perpendicular to the west. Each panel is drawn in axonometric above two cuts through its profile, with orange arrows.",
+      "kind": "drawing",
+      "source": "site + hq:Tabarka/2025 - Hazem radhouani - Portfolio - HQ [21-25]_page-0004.jpg (printed text '1 Sliding Parallel to the East Perpendicular to the South', '2 Overlapping Parallel to the North Perpendicular to the East', '3 Pulling Perpendicular to the West', erased and re-set in the caption, D49); pdf2025:p24",
+      "items": [
+        {
+          "src": "images/corallum/corallum-facade-sliding.png",
+          "alt": "Axonometric of a tall panel whose orange profile bows inward, numbered 1, above two cuts through its dipping profile, with vertical and diagonal orange arrows"
+        },
+        {
+          "src": "images/corallum/corallum-facade-overlapping.png",
+          "alt": "Axonometric of a tall panel with a deeper inward curve, numbered 2, above two cuts through its profile, with vertical and diagonal orange arrows"
+        },
+        {
+          "src": "images/corallum/corallum-facade-pulling.png",
+          "alt": "Axonometric of a tall panel with an almost straight orange profile, numbered 3, above two cuts through its sloping profile, with vertical and shallow diagonal orange arrows"
+        }
+      ]
+    },
+    {
+      "src": "images/corallum/corallum-section-perspective.jpg",
+      "title": "Sectional perspective",
+      "caption": "The building cut open: curving floors and dark funnel-shaped volumes, walkways with glass balustrades and a latticed roof over the void.",
+      "alt": "Render of the building cut open on several levels: white floors curving up into dark funnel-shaped volumes, walkways with glass balustrades and inked figures, a latticed roof at the top and the fin screen behind",
+      "kind": "render",
+      "source": "hq:Tabarka/2025 - Hazem radhouani - Portfolio - HQ [21-25]_page-0004.jpg (lower left, no printed title; cropped above the page tab printed over it, D58); pdf2025:p24"
+    },
+    {
+      "title": "Interior",
+      "caption": "A ramp curving under the oval opening; looking up through the oval void, past the galleries, to the perforated roof.",
+      "kind": "render",
+      "source": "site + hq:Tabarka/2025 - Hazem radhouani - Portfolio - HQ [21-25]_page-0005.jpg (upper left) and hq:Tabarka/2025 - Hazem radhouani - Portfolio - HQ [21-25]_page-0004.jpg (lower middle), no printed titles; pdf2025:p24-25",
+      "items": [
+        {
+          "src": "images/corallum/corallum-interior-ramp.jpg",
+          "alt": "Render of a white interior of curving surfaces: a ramp with a glass balustrade sweeping through it, inked figures walking and standing, and the edge of an oval opening with a cellular pattern at the top"
+        },
+        {
+          "src": "images/corallum/corallum-oval-void.jpg",
+          "alt": "Render looking up through an oval void lined with white galleries, small figures standing at their edges, to a roof screen of irregular cells with glass beyond"
+        }
+      ]
+    },
+    {
+      "src": "images/corallum/corallum-collage.jpg",
+      "title": "Corner view",
+      "caption": "Line render of the corner and its tear-shaped entrance, collaged with a pink sun, birds and inked figures.",
+      "alt": "Line render of the building's corner, its fluted fin screen parting over a tall pointed opening, set against a large pink circle with birds in the sky and inked figures standing and walking in the foreground",
+      "kind": "render",
+      "source": "site + hq:Tabarka/2025 - Hazem radhouani - Portfolio - HQ [21-25]_page-0003.jpg (no printed title); pdf2025:p23"
+    },
+    {
+      "title": "Across the water",
+      "caption": "The building and its reflection, in daylight and in low evening light.",
+      "kind": "render",
+      "source": "site + hq:Tabarka/.trashed-1762728296-Image_2.png and .trashed-1762728296-Image_6.png (no printed titles)",
+      "items": [
+        {
+          "src": "images/corallum/corallum-water-day.jpg",
+          "alt": "Render of the building across rippling water in daylight: the box of twisting white fins over a glazed base, a bed of grasses, tan neighbouring blocks and trees behind, and its reflection broken by ripples"
+        },
+        {
+          "src": "images/corallum/corallum-water-evening.jpg",
+          "alt": "The same view in warm low light under heavy clouds: the fins lit gold and deeply shadowed, reflected in the water"
+        }
+      ]
     }
   ],
   "date": "2023",

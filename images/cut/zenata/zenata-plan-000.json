@@ -1,0 +1,40 @@
+{
+ "src": "images/zenata/zenata-plan-000.png",
+ "hash": "6bd60eb16be8ff75",
+ "mode": "ink",
+ "from": [
+  1070,
+  1711
+ ],
+ "to": [
+  1045,
+  1686
+ ],
+ "offset": [
+  13,
+  13
+ ],
+ "paper": [
+  255,
+  255,
+  255
+ ],
+ "clip": [],
+ "ink": {
+  "ink": 209469,
+  "chromaticFraction": 0,
+  "midtoneFraction": 0.1544,
+  "suggest": "mono"
+ },
+ "dark": "invert",
+ "keep": null,
+ "specks": 0,
+ "tile": [
+  320,
+  800,
+  640,
+  400
+ ],
+ "background": null,
+ "labels": []
+}

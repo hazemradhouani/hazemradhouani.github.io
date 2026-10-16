@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-ga="G-S61QWV2ZRE">
+<html lang="en" data-ga="G-S61QWV2ZRE" data-theme="light">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,10 +10,11 @@
 <link rel="preload" href="/portfolio/fonts/eb-garamond-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/portfolio/fonts/ibm-plex-sans-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 
-<link rel="stylesheet" href="/portfolio/css/site.css?v=730d10944c">
-<script src="/portfolio/js/site.js?v=71b4387f9e" defer></script>
-<meta name="theme-color" content="#FFFFFF">
-<meta name="color-scheme" content="light">
+<meta id="theme-color" name="theme-color" content="#FFFFFF">
+<meta name="color-scheme" content="light dark">
+<script data-theme-bootstrap>(function(){var t;try{t=localStorage.getItem('hazem-theme');}catch(e){}if(t!=='light'&&t!=='dark'){try{t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}catch(e){t='light';}}var d=document.documentElement;d.setAttribute('data-theme',t);d.style.colorScheme=t;var m=document.getElementById('theme-color');if(m)m.content=t==='dark'?'#121311':'#FFFFFF';}());</script>
+<link rel="stylesheet" href="/portfolio/css/site.css?v=c0efe93e80">
+<script src="/portfolio/js/site.js?v=4419c121b9" defer></script>
 <meta name="author" content="Hazem Radhouani">
 
 <link rel="icon" href="/portfolio/favicon.svg" type="image/svg+xml">
@@ -43,14 +44,14 @@
 <div class="wrap">
 <a class="brand" href="/portfolio/">Hazem Radhouani</a>
 <nav class="nav" aria-label="Main"><ul role="list"><li style="--i: 0"><a href="/portfolio/architecture.html">Work</a></li><li style="--i: 1"><a href="/portfolio/books.html">Research</a></li><li style="--i: 2"><a href="/portfolio/about.html">About</a></li><li style="--i: 3"><a href="/portfolio/about.html#contact">Contact</a></li></ul></nav>
-<button class="menu-button" type="button" commandfor="menu" command="show-modal" aria-haspopup="dialog" aria-controls="menu">menu</button>
+<div class="site-header__tools"><button class="theme-button" type="button" data-theme-toggle data-theme-scope="header"><span class="theme-button__glyph" aria-hidden="true">◐</span><span class="theme-button__label" data-theme-label>theme: light</span><span class="vh" data-theme-action>, switch to dark</span></button><button class="menu-button" type="button" commandfor="menu" command="show-modal" aria-haspopup="dialog" aria-controls="menu">menu</button></div>
 </div>
 </header>
 <div class="bar" id="bar" inert>
 <div class="bar__in wrap">
 <a class="brand" href="/portfolio/">Hazem Radhouani</a>
 <nav class="nav" aria-label="Site"><ul role="list"><li style="--i: 0"><a href="/portfolio/architecture.html">Work</a></li><li style="--i: 1"><a href="/portfolio/books.html">Research</a></li><li style="--i: 2"><a href="/portfolio/about.html">About</a></li><li style="--i: 3"><a href="/portfolio/about.html#contact">Contact</a></li></ul></nav>
-<button class="menu-button" type="button" commandfor="menu" command="show-modal" aria-haspopup="dialog" aria-controls="menu">menu</button>
+<div class="bar__tools"><button class="theme-button" type="button" data-theme-toggle data-theme-scope="bar"><span class="theme-button__glyph" aria-hidden="true">◐</span><span class="theme-button__label" data-theme-label>theme: light</span><span class="vh" data-theme-action>, switch to dark</span></button><button class="menu-button" type="button" commandfor="menu" command="show-modal" aria-haspopup="dialog" aria-controls="menu">menu</button></div>
 </div>
 </div>
 <main id="main" tabindex="-1">
@@ -68,7 +69,7 @@
 </footer>
 <dialog class="menu" id="menu" aria-label="Site menu">
 <div class="wrap">
-<div class="menu__top"><a class="brand" href="/portfolio/">Hazem Radhouani</a><form method="dialog"><button class="menu__close" type="submit" autofocus>close</button></form></div>
+<div class="menu__top"><a class="brand" href="/portfolio/">Hazem Radhouani</a><div class="menu__controls"><button class="theme-button" type="button" data-theme-toggle data-theme-scope="menu"><span class="theme-button__glyph" aria-hidden="true">◐</span><span class="theme-button__label" data-theme-label>theme: light</span><span class="vh" data-theme-action>, switch to dark</span></button><form method="dialog"><button class="menu__close" type="submit" autofocus>close</button></form></div></div>
 <nav aria-label="Main"><ul class="menu__list" role="list"><li style="--i: 0"><a href="/portfolio/architecture.html">Work</a></li><li style="--i: 1"><a href="/portfolio/books.html">Research</a></li><li style="--i: 2"><a href="/portfolio/about.html">About</a></li><li style="--i: 3"><a href="/portfolio/about.html#contact">Contact</a></li></ul></nav>
 <p class="menu__contact"><a href="mailto:hazemradhouani@gmail.com">hazemradhouani@gmail.com</a><a href="https://www.linkedin.com/in/hazem-radhouani-b36616319/" target="_blank" rel="noopener">LinkedIn<span class="vh"> (opens in a new tab)</span></a></p>
 </div>

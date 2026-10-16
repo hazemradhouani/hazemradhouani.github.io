@@ -1,0 +1,36 @@
+{
+  "$comment": "Corallum cutouts (tools/cutout.mjs; D46, D49, D50). Both series come from the 2025 portfolio sheets (pdf2025:p23, p24), cropped at 1:1, never upscaled. The eight volume diagrams and the three facade studies are shaded with pale grey fills (about 228/255) and orange lines, so they use the low floor/knee of rendered diagram panels, inverted with their hues held in the dark scheme (D69). The facade studies keep their numerals 1-3 (referred to in the caption); the printed text between each axonometric and its light diagram is erased from blank paper and re-set in the caption (D49). The level 01 plan, the western elevation and section A-A sit on rendered or screened grounds with no paper: they are plates (D69), kept whole, and inverted in the dark scheme, where their grey ground falls to the page's charcoal and the white massing reads as dark volumes against it.",
+  "fullBleed": {
+    "images/corallum/corallum-plan-level-01.jpg": "a rendered plan on a shaded ground with soft shadows: the ground is the drawing; keying would make it translucent",
+    "images/corallum/corallum-west-facade.jpg": "an elevation of white massing on a grey screened sky: the sky is what makes the white volumes legible",
+    "images/corallum/corallum-section-aa.jpg": "a section of white massing on a grey screened sky: the sky is what makes the white volumes legible"
+  },
+  "images": {
+    "images/corallum/corallum-plan-level-01.jpg": { "mode": "plate", "dark": "invert-accent" },
+    "images/corallum/corallum-west-facade.jpg": { "mode": "plate", "dark": "invert-accent" },
+    "images/corallum/corallum-section-aa.jpg": { "mode": "plate", "dark": "invert-accent" },
+    "images/corallum/corallum-volume-phase-01.png": { "paper": [255, 255, 255], "floor": 0.01, "knee": 0.02, "dark": "invert-accent" },
+    "images/corallum/corallum-volume-phase-02.png": { "paper": [255, 255, 255], "floor": 0.01, "knee": 0.02, "dark": "invert-accent" },
+    "images/corallum/corallum-volume-helical.png": { "paper": [255, 255, 255], "floor": 0.01, "knee": 0.02, "dark": "invert-accent" },
+    "images/corallum/corallum-volume-expansion.png": { "paper": [255, 255, 255], "floor": 0.01, "knee": 0.02, "dark": "invert-accent" },
+    "images/corallum/corallum-volume-phase-03.png": { "paper": [255, 255, 255], "floor": 0.01, "knee": 0.02, "dark": "invert-accent" },
+    "images/corallum/corallum-volume-phase-04.png": { "paper": [255, 255, 255], "floor": 0.01, "knee": 0.02, "dark": "invert-accent" },
+    "images/corallum/corallum-volume-restrict.png": { "paper": [255, 255, 255], "floor": 0.01, "knee": 0.02, "dark": "invert-accent" },
+    "images/corallum/corallum-volume-rhythm.png": { "paper": [255, 255, 255], "floor": 0.01, "knee": 0.02, "dark": "invert-accent" },
+    "images/corallum/corallum-facade-sliding.png": {
+      "paper": [255, 255, 255], "floor": 0.01, "knee": 0.02,
+      "erase": [{ "id": "text", "x": 28, "y": 621, "w": 443, "h": 165 }],
+      "dark": "invert-accent"
+    },
+    "images/corallum/corallum-facade-overlapping.png": {
+      "paper": [255, 255, 255], "floor": 0.01, "knee": 0.02,
+      "erase": [{ "id": "text", "x": 151, "y": 623, "w": 419, "h": 165 }],
+      "dark": "invert-accent"
+    },
+    "images/corallum/corallum-facade-pulling.png": {
+      "paper": [255, 255, 255], "floor": 0.01, "knee": 0.02,
+      "erase": [{ "id": "text", "x": 284, "y": 645, "w": 435, "h": 115 }],
+      "dark": "invert-accent"
+    }
+  }
+}

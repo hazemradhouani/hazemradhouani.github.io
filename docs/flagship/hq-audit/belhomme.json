@@ -1,0 +1,197 @@
+{
+  "version": 1,
+  "sourceRoot": "Images HQ",
+  "folder": "BELHOMME",
+  "assets": [
+    {
+      "source": "Images HQ/BELHOMME/ANX1_merge [1-30]_page-0026.jpg",
+      "sha256": "5c333fbe0264ef8b432720efaf58ef2253c7d436c960ae733765f2cbf47eefb3",
+      "width": 4961,
+      "height": 3508,
+      "projectMapping": {
+        "slug": "belhomme",
+        "status": "confirmed"
+      },
+      "mappingEvidence": "Cartouche PROJET panel \"BELHOMME 1 à 3 rue Belhomme - 75018 Paris\", EMETTEUR \"STUDIO BELEM\", Affaire 0022; the case study's location is 1-3 rue Belhomme, Paris 18th (pdf2026:p9)",
+      "visualType": "drawing sheet (section, 1/150)",
+      "textDisposition": "title → caption: 'PC3 COUPE TRANSVERSALE CC'' (Cross-section C-C'), scale '1/150' (printed), date 05/02/2026; furniture: key plan with cut line C C' and north sign; furniture (dropped): cartouche panels MAÎTRE D'OUVRAGE (client name and address, not published), EMETTEUR STUDIO BELEM 2 rue Vicq d'Azir - 75010 Paris, PROJET BELHOMME 1 à 3 rue Belhomme - 75018 Paris, Affaire 0022, Sys. coord. Projection RGF93-CC49, Nivellement: NGF, series/code/page boxes; intrinsic (stays): levels N05-F +77.69 NGF, N04_F +75.10, N03_F +72.36, N02_F +69.61, N01_F +66.68, N00_F_3 Rue Belhomme +63.32, SS01_F02 +60.46 NGF; spot levels 81.97, 67.08, 68.02, 67.14, 63.32, 63.29 NGF; dimensions 16.93, 4.28, 2.59, 2.74, 2.75, 2.93, 3.36, 2.86, 2.54, 0.88, 1.00, 0.91, 0.61; 'Limite Parcellaire' x2; rooms Séjour+Cuisine, Circulation commune, Commerce 2, Locaux vélos, Local OM, LT EAU; street label 'Rue Belhomme'",
+      "duplicateOf": null,
+      "disposition": "approved",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "Office credit only: EMETTEUR STUDIO BELEM printed in the cartouche; the page states the office (Studio BELEM) and no draughtsman",
+      "roleEvidence": "The page restates only the existing role text (pdf2026:p9: production of the permit drawings from the existing and proposed models); this record adds no personal-role claim",
+      "reason": "New: the only cross-section of the proposal in the library, through the Rue Belhomme wing from basement to roof"
+    },
+    {
+      "source": "Images HQ/BELHOMME/ANX1_merge [1-30]_page-0029.jpg",
+      "sha256": "db44c23531367efa3122556e416a2a4e1e095db5691ee5b5aaa35c61f7d58445",
+      "width": 4961,
+      "height": 3508,
+      "projectMapping": {
+        "slug": "belhomme",
+        "status": "confirmed"
+      },
+      "mappingEvidence": "Cartouche PROJET panel \"BELHOMME 1 à 3 rue Belhomme - 75018 Paris\", EMETTEUR \"STUDIO BELEM\", Affaire 0022; the case study's location is 1-3 rue Belhomme, Paris 18th (pdf2026:p9)",
+      "visualType": "drawing sheet (roof plan, 1/150)",
+      "textDisposition": "title → caption: 'PC5 PLAN DE TOITURE PROJET' (Proposed roof plan), scale '1/150' (printed); legend → caption: 'LEGENDE', '1 Toiture en zinc gris foncé' (dark grey zinc roofing; numbered circle, no swatch); furniture (dropped): cartouche panels MAÎTRE D'OUVRAGE (client name and address, not published), EMETTEUR STUDIO BELEM 2 rue Vicq d'Azir - 75010 Paris, PROJET BELHOMME 1 à 3 rue Belhomme - 75018 Paris, Affaire 0022, Sys. coord. Projection RGF93-CC49, Nivellement: NGF, series/code/page boxes; intrinsic (stays): north sign inside the plan, callouts 1, Jardin, Cour, R+1, R+2, R+3, R+4, R+7, 'R+4 Section BR n°17', 'R+5+C Section BR n°18', 'R+6 Section BR n°21', 'R+8 Section BR n°19', 'Terrasse végétalisée', 'verrière', levels 67.09, 67.06, 78.93, 72.39, 69.58, 78.91, 81.97, 80.49, 77.69, 63.16, 63.11, 63.25, 63.29 NGF, slopes 25 %, 33 %, 56 %, dimensions 7.00, 3.08, 3.95, 3.71, 3.11, 3.59, 3.28, 1.67, 3.45, 1.52, 15.67, 7.75, 9.94, 11.03",
+      "duplicateOf": null,
+      "disposition": "approved",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "Office credit only: EMETTEUR STUDIO BELEM printed in the cartouche; the page states the office (Studio BELEM) and no draughtsman",
+      "roleEvidence": "The page restates only the existing role text (pdf2026:p9: production of the permit drawings from the existing and proposed models); this record adds no personal-role claim",
+      "reason": "New: the proposed roof plan, the only plan of the whole block at full resolution"
+    },
+    {
+      "source": "Images HQ/BELHOMME/ANX1_merge [1-30]_page-0030.jpg",
+      "sha256": "83af8ee170ee37eb3653211f1e204f0058aeff26a8d2d5b5015dd67884411cb7",
+      "width": 4961,
+      "height": 3508,
+      "projectMapping": {
+        "slug": "belhomme",
+        "status": "confirmed"
+      },
+      "mappingEvidence": "Cartouche PROJET panel \"BELHOMME 1 à 3 rue Belhomme - 75018 Paris\", EMETTEUR \"STUDIO BELEM\", Affaire 0022; the case study's location is 1-3 rue Belhomme, Paris 18th (pdf2026:p9)",
+      "visualType": "drawing sheet (street elevation, 1/150)",
+      "textDisposition": "title → caption: 'PC5 FACADE RUE BELHOMME' (Rue Belhomme elevation), scale '1/150' (printed); legend (13 numbered items, no colour swatches) → caption text: '1 Façades existantes en enduit ( RAL 9010 ou équivalent )' (existing facades in render), '2 Façades neuves en enduit naturel à la chaux taloché blanc ( RAL 9010 ou équivalent)' (new facades in white floated natural lime render), '3 Toitures en zinc' (zinc roofs), '4 Socle en béton sablé avec granulats exposés gris clair' (light grey sandblasted concrete base with exposed aggregate), '5 Menuiseries en bois naturel verni' (varnished natural timber windows and doors), '6 Stores en tissu, couleur blanc cassé ( RAL 9002 ou équivalent)' (off-white fabric awnings), '7 Bandeaux et menuiseries en aluminium gris clair' (light grey aluminium bands and frames), '8 Héberge voisine' (neighbouring building), '9 Garde-corps en maille inox et lisse en métal anodisé gris clair' (stainless-steel mesh guardrails with light grey anodised rail), '10 Menuiseries aluminium gris clair' (light grey aluminium frames), '11 Bandeau métalique gris clair, intégrant les gilles des commerces' (light grey metal band housing the shop grilles; 'gilles' read as 'grilles'), '12 Verrière, menuiseries aluminium gris clair' (glass roof, light grey aluminium frames), '13 Courniche ( RAL 9010 ou équivalent )' (cornice); furniture: key plan with 'Rue Belhomme' and north sign; furniture (dropped): cartouche panels MAÎTRE D'OUVRAGE (client name and address, not published), EMETTEUR STUDIO BELEM 2 rue Vicq d'Azir - 75010 Paris, PROJET BELHOMME 1 à 3 rue Belhomme - 75018 Paris, Affaire 0022, Sys. coord. Projection RGF93-CC49, Nivellement: NGF, series/code/page boxes; intrinsic (stays): material numbers on the drawing, levels N05-F +77.69 to SS01_F02 +60.46 NGF (with N00_F_1 Rue Belhomme +63.29), spot levels 82.02, 78.91, 63.16, 63.25, 63.29 NGF, dimensions 20.62, 4.32, 2.59, 2.74, 2.75, 2.93, 'Limite Parcellaire' x2, 'ancien jour de souffrance bouché' (former light opening, blocked), 'Bd Rochechouart', 'ENTREE COMMERCE' x4, 'ENTREE LOGEMENT'",
+      "duplicateOf": null,
+      "disposition": "approved",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "Office credit only: EMETTEUR STUDIO BELEM printed in the cartouche; the page states the office (Studio BELEM) and no draughtsman",
+      "roleEvidence": "The page restates only the existing role text (pdf2026:p9: production of the permit drawings from the existing and proposed models); this record adds no personal-role claim",
+      "reason": "Replaces the low-resolution PDF crop of the same drawing (filed as the boulevard Rochechouart PLU elevation; the printed title is the Rue Belhomme facade)"
+    },
+    {
+      "source": "Images HQ/BELHOMME/ANX1_merge [31-60]_page-0001.jpg",
+      "sha256": "1b745d25330ec5206b45b8a3f503d5323412188ec5345cd34eae1c455eccbf8f",
+      "width": 4961,
+      "height": 3508,
+      "projectMapping": {
+        "slug": "belhomme",
+        "status": "confirmed"
+      },
+      "mappingEvidence": "Cartouche PROJET panel \"BELHOMME 1 à 3 rue Belhomme - 75018 Paris\", EMETTEUR \"STUDIO BELEM\", Affaire 0022; the case study's location is 1-3 rue Belhomme, Paris 18th (pdf2026:p9)",
+      "visualType": "drawing sheet (street elevation, 1/150)",
+      "textDisposition": "title → caption: 'PC5 FACADE BD ROCHECHOUART' (Boulevard Rochechouart elevation), scale '1/150' (printed); legend (13 numbered items, no colour swatches) → caption text: '1 Façades existantes en enduit ( RAL 9010 ou équivalent )' (existing facades in render), '2 Façades neuves en enduit naturel à la chaux taloché blanc ( RAL 9010 ou équivalent)' (new facades in white floated natural lime render), '3 Toitures en zinc' (zinc roofs), '4 Socle en béton sablé avec granulats exposés gris clair' (light grey sandblasted concrete base with exposed aggregate), '5 Menuiseries en bois naturel verni' (varnished natural timber windows and doors), '6 Stores en tissu, couleur blanc cassé ( RAL 9002 ou équivalent)' (off-white fabric awnings), '7 Bandeaux et menuiseries en aluminium gris clair' (light grey aluminium bands and frames), '8 Héberge voisine' (neighbouring building), '9 Garde-corps en maille inox et lisse en métal anodisé gris clair' (stainless-steel mesh guardrails with light grey anodised rail), '10 Menuiseries aluminium gris clair' (light grey aluminium frames), '11 Bandeau métalique gris clair, intégrant les gilles des commerces' (light grey metal band housing the shop grilles; 'gilles' read as 'grilles'), '12 Verrière, menuiseries aluminium gris clair' (glass roof, light grey aluminium frames), '13 Courniche ( RAL 9010 ou équivalent )' (cornice) (the right ends of seven legend lines fall inside the crop on blank paper and are erased, D49); furniture: key plan with 'Boulevard Rochechouart' and north sign; furniture (dropped): cartouche panels MAÎTRE D'OUVRAGE (client name and address, not published), EMETTEUR STUDIO BELEM 2 rue Vicq d'Azir - 75010 Paris, PROJET BELHOMME 1 à 3 rue Belhomme - 75018 Paris, Affaire 0022, Sys. coord. Projection RGF93-CC49, Nivellement: NGF, series/code/page boxes; intrinsic (stays): material numbers, 'R+8', levels N05-F +77.69 to SS01_F02 +60.46 NGF, spot levels 82.02, 78.91 NGF, dimensions 7.67, 3.18, 0.97, 'Limite parcellaire' x2, 'ancien jour de souffrance bouché', 'ENTREE COMMERCE' x4, 'ENTREE LOGEMENT'",
+      "duplicateOf": null,
+      "disposition": "approved",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "Office credit only: EMETTEUR STUDIO BELEM printed in the cartouche; the page states the office (Studio BELEM) and no draughtsman",
+      "roleEvidence": "The page restates only the existing role text (pdf2026:p9: production of the permit drawings from the existing and proposed models); this record adds no personal-role claim",
+      "reason": "New: the corner elevation on boulevard de Rochechouart"
+    },
+    {
+      "source": "Images HQ/BELHOMME/ANX1_merge [31-60]_page-0002.jpg",
+      "sha256": "654e498b0dc7cfec98cdd42ab4624745a227c26eef96c413323c259f570327a3",
+      "width": 4961,
+      "height": 3508,
+      "projectMapping": {
+        "slug": "belhomme",
+        "status": "confirmed"
+      },
+      "mappingEvidence": "Cartouche PROJET panel \"BELHOMME 1 à 3 rue Belhomme - 75018 Paris\", EMETTEUR \"STUDIO BELEM\", Affaire 0022; the case study's location is 1-3 rue Belhomme, Paris 18th (pdf2026:p9)",
+      "visualType": "drawing sheet (rear elevation, 1/150)",
+      "textDisposition": "title → caption: 'PC5 FACADE ARRIERE' (Rear elevation), scale '1/150' (printed); legend (13 numbered items, no colour swatches) → caption text: '1 Façades existantes en enduit ( RAL 9010 ou équivalent )' (existing facades in render), '2 Façades neuves en enduit naturel à la chaux taloché blanc ( RAL 9010 ou équivalent)' (new facades in white floated natural lime render), '3 Toitures en zinc' (zinc roofs), '4 Socle en béton sablé avec granulats exposés gris clair' (light grey sandblasted concrete base with exposed aggregate), '5 Menuiseries en bois naturel verni' (varnished natural timber windows and doors), '6 Stores en tissu, couleur blanc cassé ( RAL 9002 ou équivalent)' (off-white fabric awnings), '7 Bandeaux et menuiseries en aluminium gris clair' (light grey aluminium bands and frames), '8 Héberge voisine' (neighbouring building), '9 Garde-corps en maille inox et lisse en métal anodisé gris clair' (stainless-steel mesh guardrails with light grey anodised rail), '10 Menuiseries aluminium gris clair' (light grey aluminium frames), '11 Bandeau métalique gris clair, intégrant les gilles des commerces' (light grey metal band housing the shop grilles; 'gilles' read as 'grilles'), '12 Verrière, menuiseries aluminium gris clair' (glass roof, light grey aluminium frames), '13 Courniche ( RAL 9010 ou équivalent )' (cornice); furniture: key plan with 'Façade arrière' and north sign; furniture (dropped): cartouche panels MAÎTRE D'OUVRAGE (client name and address, not published), EMETTEUR STUDIO BELEM 2 rue Vicq d'Azir - 75010 Paris, PROJET BELHOMME 1 à 3 rue Belhomme - 75018 Paris, Affaire 0022, Sys. coord. Projection RGF93-CC49, Nivellement: NGF, series/code/page boxes; intrinsic (stays): material numbers 1, 3, 5, 9, levels N05-F +77.69 to SS01_F02 +60.46 NGF, dimension 11.30, 'Limite parcellaire' x2, 'Heberge voisine' x2",
+      "duplicateOf": null,
+      "disposition": "approved",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "Office credit only: EMETTEUR STUDIO BELEM printed in the cartouche; the page states the office (Studio BELEM) and no draughtsman",
+      "roleEvidence": "The page restates only the existing role text (pdf2026:p9: production of the permit drawings from the existing and proposed models); this record adds no personal-role claim",
+      "reason": "New: the rear courtyard elevation, the drawing of the facade seen in the courtyard render"
+    },
+    {
+      "source": "Images HQ/BELHOMME/ANX1_merge [31-60]_page-0004.jpg",
+      "sha256": "7468aa2e31e240568155c73a65aa1055b24bc91d866dae40e5b589415724da5a",
+      "width": 4961,
+      "height": 3508,
+      "projectMapping": {
+        "slug": "belhomme",
+        "status": "confirmed"
+      },
+      "mappingEvidence": "Cartouche PROJET panel \"BELHOMME 1 à 3 rue Belhomme - 75018 Paris\", EMETTEUR \"STUDIO BELEM\", Affaire 0022; the case study's location is 1-3 rue Belhomme, Paris 18th (pdf2026:p9)",
+      "visualType": "render set in a permit sheet",
+      "textDisposition": "title → caption: 'PC6 INSERTION DU PROJET DANS L'ENVIRONNEMENT - PROJETE RUE BELHOMME / BD ROCHECHOUART' (Insertion of the project in its setting, proposed: rue Belhomme / boulevard Rochechouart), scale 'ND', date 15/01/2026; furniture: key plan; furniture (dropped): cartouche panels MAÎTRE D'OUVRAGE (client name and address, not published), EMETTEUR STUDIO BELEM 2 rue Vicq d'Azir - 75010 Paris, PROJET BELHOMME 1 à 3 rue Belhomme - 75018 Paris, Affaire 0022, Sys. coord. Projection RGF93-CC49, Nivellement: NGF, series/code/page boxes; intrinsic (on rendered pixels, stays): shop sign 'MARIAGE' and street-name plate",
+      "duplicateOf": null,
+      "disposition": "approved",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "Office credit only, 'Render: Studio BELEM' as on the existing hero (pdf2026:p9); EMETTEUR STUDIO BELEM printed in the cartouche; no renderer or personal credit is claimed",
+      "roleEvidence": "The page restates only the existing role text (pdf2026:p9: production of the permit drawings from the existing and proposed models); this record adds no personal-role claim",
+      "reason": "Hero: full-resolution file of the existing corner render (same camera, bicycles and corner)"
+    },
+    {
+      "source": "Images HQ/BELHOMME/ANX1_merge [31-60]_page-0005.jpg",
+      "sha256": "0beea6ef4038e5091414ba82907ae94a7d66a65df204e539d2ec339fe41688d8",
+      "width": 4961,
+      "height": 3508,
+      "projectMapping": {
+        "slug": "belhomme",
+        "status": "confirmed"
+      },
+      "mappingEvidence": "Cartouche PROJET panel \"BELHOMME 1 à 3 rue Belhomme - 75018 Paris\", EMETTEUR \"STUDIO BELEM\", Affaire 0022; the case study's location is 1-3 rue Belhomme, Paris 18th (pdf2026:p9)",
+      "visualType": "render set in a permit sheet",
+      "textDisposition": "title → caption: 'PC6 INSERTION DU PROJET DANS L'ENVIRONNEMENT - PROJETE -COURS ARRIERE' (Insertion of the project in its setting, proposed: rear courtyard), scale 'ND', date 15/01/2026; furniture: key plan; furniture (dropped): cartouche panels MAÎTRE D'OUVRAGE (client name and address, not published), EMETTEUR STUDIO BELEM 2 rue Vicq d'Azir - 75010 Paris, PROJET BELHOMME 1 à 3 rue Belhomme - 75018 Paris, Affaire 0022, Sys. coord. Projection RGF93-CC49, Nivellement: NGF, series/code/page boxes; no text on the rendered pixels",
+      "duplicateOf": null,
+      "disposition": "approved",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "Office credit only, 'Render: Studio BELEM' as on the existing hero (pdf2026:p9); EMETTEUR STUDIO BELEM printed in the cartouche; no renderer or personal credit is claimed",
+      "roleEvidence": "The page restates only the existing role text (pdf2026:p9: production of the permit drawings from the existing and proposed models); this record adds no personal-role claim",
+      "reason": "Replaces the existing courtyard render with its full-resolution file (same camera and trees)"
+    },
+    {
+      "source": "Images HQ/BELHOMME/ANX1_merge [31-60]_page-0017.jpg",
+      "sha256": "a4bcda21cb9af099fcd09068ef2ecc49feea639d6b6ad60682fa98a75ec1c7de",
+      "width": 4961,
+      "height": 3508,
+      "projectMapping": {
+        "slug": "belhomme",
+        "status": "confirmed"
+      },
+      "mappingEvidence": "Cartouche PROJET panel \"BELHOMME 1 à 3 rue Belhomme - 75018 Paris\", EMETTEUR \"STUDIO BELEM\", Affaire 0022; the case study's location is 1-3 rue Belhomme, Paris 18th (pdf2026:p9)",
+      "visualType": "drawing sheet (awning approval: section 1:50, elevation and level 01 plan 1:150)",
+      "textDisposition": "sheet title: 'PC10 ACCORD DU GESTIONNAIRE' (Public-domain manager's agreement); drawing titles: '1 ZOOM - Coupe 1 : 50' → caption (Zoom section, 1:50), '2 ZOOM - Elévation bd Rochechouart 1 : 150' and '3 Niv 01 1 : 150' (not used); prose → caption facts: 'Pour accord du gestionnaire du domaine public pour engager la procédure d 'autorisation d'occupation temporaire du domaine public.' (for the public-domain manager's agreement, to open the temporary-occupation procedure), 'La projection du store en débord est de 1 m de profondeur, elle se trouve sur la façade du Boulevard de Rochechouart.' (the awning projects 1 m, on the boulevard de Rochechouart facade), 'La surface de projection au sol du débord de façade est égale à 5.3 m²' (projected ground area 5.3 m²); note '* NB : Tous les stores sont à la charge des futurs preneurs' (all awnings are the future tenants' responsibility; cropped out, not restated); legend 'Projections des stores en débord de facade' (red fill, not present in drawing 1), 'Limite de propriété' (red dashed line → caption); furniture (dropped): cartouche panels MAÎTRE D'OUVRAGE (client name and address, not published), EMETTEUR STUDIO BELEM 2 rue Vicq d'Azir - 75010 Paris, PROJET BELHOMME 1 à 3 rue Belhomme - 75018 Paris, Affaire 0022, Sys. coord. Projection RGF93-CC49, Nivellement: NGF, series/code/page boxes; intrinsic in drawing 1 (stays): 0.91, 2.80, 2.67, 63.16 NGF, 63.29 NGF; in drawings 2-3 (not used): 4.66, 2.84, 0.91, 67.06 NGF, 'N00_F_1 Rue Belhomme +63.29 NGF', 'ENTREE COMMERCE', 'Débord autorisé 1.00 m', 'Zoom 1'",
+      "duplicateOf": null,
+      "disposition": "approved",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "Office credit only: EMETTEUR STUDIO BELEM printed in the cartouche; the page states the office (Studio BELEM) and no draughtsman",
+      "roleEvidence": "The page restates only the existing role text (pdf2026:p9: production of the permit drawings from the existing and proposed models); this record adds no personal-role claim",
+      "reason": "Drawing 1 used: the only detail-scale drawing in the folder (awning over the public pavement); drawing 2 repeats the boulevard Rochechouart elevation and drawing 3 is a location plan for the awning"
+    },
+    {
+      "source": "Images HQ/BELHOMME/ANX1_merge [31-60]_page-0018.jpg",
+      "sha256": "6b754afebfc7475ea42ce6e620559b5916c1eb0b33cbc8370e36010c90e6b57b",
+      "width": 4961,
+      "height": 3508,
+      "projectMapping": {
+        "slug": "belhomme",
+        "status": "confirmed"
+      },
+      "mappingEvidence": "Cartouche PROJET panel \"BELHOMME 1 à 3 rue Belhomme - 75018 Paris\", EMETTEUR \"STUDIO BELEM\", Affaire 0022; the case study's location is 1-3 rue Belhomme, Paris 18th (pdf2026:p9)",
+      "visualType": "drawing sheet (roof-overhang approval: section, elevation, roof plan, 1:150)",
+      "textDisposition": "sheet title 'PC10 ACCORD DU GESTIONNAIRE'; drawing titles '2 AA' TOITURE 1 : 150', '3 5003 - Rue Belhomme TOITURE 1 : 150', '1 Niveau TT - 1/150 DETAILS TOITURE 1 : 150'; legend 'Projections de toiture en débord de facade', 'Limite de propriété'; furniture (dropped): cartouche panels MAÎTRE D'OUVRAGE (client name and address, not published), EMETTEUR STUDIO BELEM 2 rue Vicq d'Azir - 75010 Paris, PROJET BELHOMME 1 à 3 rue Belhomme - 75018 Paris, Affaire 0022, Sys. coord. Projection RGF93-CC49, Nivellement: NGF, series/code/page boxes; intrinsic: Limite Parcellaire, 7.70, 0.24, 0.17, 14.17, 14.34, 0.09, 0.14, 0.32, levels and NGF spots (81.97, 78.91, 78.93, 74.85, 67.06), rooms Séjour+Cuisine, Chambre, SDE, Commerce 1, Réserve commerce 1, Jardin, Cour, R+1 to R+8, Section BR n°17/18/19, Terrasse végétalisée, verrière, ENTREE COMMERCE, ENTREE LOGEMENT, Rue Belhomme (read on a 1600 px preview; not published)",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "Office credit only: EMETTEUR STUDIO BELEM printed in the cartouche; the page states the office (Studio BELEM) and no draughtsman",
+      "roleEvidence": "The page restates only the existing role text (pdf2026:p9: production of the permit drawings from the existing and proposed models); this record adds no personal-role claim",
+      "reason": "Withheld, low added value: drawn to locate the roof overhang for the public-domain manager; its roof plan and Rue Belhomme elevation repeat PC5 sheets at the same scale, and its section repeats the levels of section CC'"
+    },
+    {
+      "source": "Images HQ/BELHOMME/ANX1_merge [31-60]_page-0019.jpg",
+      "sha256": "334f406fc353a24a4a256e9ddc729039e33a377493b4d273f0531fa3f27e75e8",
+      "width": 4961,
+      "height": 3508,
+      "projectMapping": {
+        "slug": "belhomme",
+        "status": "confirmed"
+      },
+      "mappingEvidence": "Cartouche PROJET panel \"BELHOMME 1 à 3 rue Belhomme - 75018 Paris\", EMETTEUR \"STUDIO BELEM\", Affaire 0022; the case study's location is 1-3 rue Belhomme, Paris 18th (pdf2026:p9)",
+      "visualType": "drawing sheet (cornice approval: elevation 1:150, detail 1:20, level 03 plan 1:150)",
+      "textDisposition": "sheet title 'PC10 ACCORD DU GESTIONNAIRE'; drawing titles '3 5003 - Rue Belhomme Courniche 1 : 150', '2 AA' Courniche 1 : 20', '1 Niveau 03 - 1/150 DETAIL COURNICHE 1 : 150'; legend 'Projections deCourniche en débord de facade', 'Limite de propriété'; furniture (dropped): cartouche panels MAÎTRE D'OUVRAGE (client name and address, not published), EMETTEUR STUDIO BELEM 2 rue Vicq d'Azir - 75010 Paris, PROJET BELHOMME 1 à 3 rue Belhomme - 75018 Paris, Affaire 0022, Sys. coord. Projection RGF93-CC49, Nivellement: NGF, series/code/page boxes; intrinsic: Limite Parcellaire, 78.91 NGF, 0.03, 0.15, 0.11, 0.14, ENTREE COMMERCE x2, ENTREE LOGEMENT, units A31/ T2, A32/ T1, A33/ T3 (read on a 1600 px preview; not published)",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "Office credit only: EMETTEUR STUDIO BELEM printed in the cartouche; the page states the office (Studio BELEM) and no draughtsman",
+      "roleEvidence": "The page restates only the existing role text (pdf2026:p9: production of the permit drawings from the existing and proposed models); this record adds no personal-role claim",
+      "reason": "Withheld, low value: its elevation repeats the PC5 Rue Belhomme facade, the 1:20 detail shows only a 0.03 m cornice projection on a wall line, and the level 03 plan is a greyed underlay"
+    }
+  ]
+}

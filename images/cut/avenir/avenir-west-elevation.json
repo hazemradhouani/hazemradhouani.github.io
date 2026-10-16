@@ -1,0 +1,58 @@
+{
+ "src": "images/avenir/avenir-west-elevation.png",
+ "hash": "70f460e3bc53a4bb",
+ "mode": "ink",
+ "from": [
+  2560,
+  1311
+ ],
+ "to": [
+  2560,
+  1311
+ ],
+ "offset": [
+  0,
+  0
+ ],
+ "paper": [
+  255,
+  255,
+  255
+ ],
+ "clip": [
+  "bottom"
+ ],
+ "ink": {
+  "ink": 338166,
+  "chromaticFraction": 0.0949,
+  "midtoneFraction": 0.6779,
+  "suggest": "colour"
+ },
+ "dark": "keep",
+ "keep": {
+  "file": "images/cut/avenir/avenir-west-elevation--keep.png",
+  "share": 0.3415,
+  "radius": 4,
+  "t": 0.06,
+  "fill": true
+ },
+ "specks": 128,
+ "tile": [
+  1600,
+  400,
+  640,
+  400
+ ],
+ "background": null,
+ "labels": [
+  {
+   "id": "key-plan-edge",
+   "removed": 36,
+   "kept": 0,
+   "x": 2.969,
+   "y": 0,
+   "w": 12.383,
+   "h": 3.356
+  }
+ ]
+}

@@ -1,0 +1,65 @@
+{
+  "$comment": "Rue de l'Avenir cutouts (tools/cutout.mjs; D46, D49, D50). Studio BELEM permit sheets (December 2025) exported on clean white paper: low floor/knee so the pale hatches, dotted planting and ghosted context survive. Every legend lies outside its crop (the west elevation keeps the top 11 px of its M1 legend bubble, drawn over the ground hatch, which D49 forbids erasing). Erased: only the bottom sliver of the west elevation's key plan (sheet furniture on blank paper, cut by the crop, which must start above the property lines). Clip: the site plan and the raised ground floor, whose context is drawn to the sheet frame; the basement, whose ground hatch fills the frame; the west elevation, whose ground hatch is cut above the legend; the south elevation, whose neighbours and ground run to the frame on both sides.",
+  "images": {
+    "images/avenir/avenir-site-plan.png": {
+      "paper": [255, 255, 255],
+      "floor": 0.015,
+      "knee": 0.03,
+      "clip": ["left", "top", "right", "bottom"],
+      "dark": "invert-accent"
+    },
+    "images/avenir/avenir-plan-ground.png": {
+      "paper": [255, 255, 255],
+      "floor": 0.015,
+      "knee": 0.03,
+      "clip": ["left", "top", "right", "bottom"],
+      "dark": "invert-accent"
+    },
+    "images/avenir/avenir-plan-basement.png": {
+      "paper": [255, 255, 255],
+      "floor": 0.015,
+      "knee": 0.03,
+      "clip": ["left", "top", "right", "bottom"],
+      "dark": "invert-accent"
+    },
+    "images/avenir/avenir-plan-n01.png": {
+      "paper": [255, 255, 255],
+      "floor": 0.015,
+      "knee": 0.03,
+      "dark": "invert-accent"
+    },
+    "images/avenir/avenir-plan-n07.png": {
+      "paper": [255, 255, 255],
+      "floor": 0.015,
+      "knee": 0.03,
+      "dark": "invert-accent"
+    },
+    "images/avenir/avenir-section-aa.png": {
+      "paper": [255, 255, 255],
+      "floor": 0.015,
+      "knee": 0.03,
+      "dark": "keep", "keepFill": false
+    },
+    "images/avenir/avenir-section-ee.png": {
+      "paper": [255, 255, 255],
+      "floor": 0.015,
+      "knee": 0.03,
+      "dark": "keep", "keepFill": false
+    },
+    "images/avenir/avenir-west-elevation.png": {
+      "paper": [255, 255, 255],
+      "floor": 0.015,
+      "knee": 0.03,
+      "clip": ["bottom"],
+      "erase": [{ "id": "key-plan-edge", "x": 66, "y": 0, "w": 340, "h": 55 }],
+      "dark": "keep"
+    },
+    "images/avenir/avenir-south-elevation.png": {
+      "paper": [255, 255, 255],
+      "floor": 0.015,
+      "knee": 0.03,
+      "clip": ["left", "right"],
+      "dark": "keep"
+    }
+  }
+}

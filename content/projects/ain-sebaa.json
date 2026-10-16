@@ -55,38 +55,19 @@
     }
   ],
   "hero": {
-    "src": "images/ain-sebaa/ain-sebaa-render-screen.jpg",
-    "alt": "Render of Aïn Sebaâ Station with X-shaped columns and a patterned screen",
+    "src": "images/ain-sebaa/ain-sebaa-render-screen-hq.jpg",
+    "alt": "Render of the corner of Aïn Sebaâ Station: a white folded roof on inclined white columns, glazing, and a patterned screen of triangular tiles",
     "credit": null,
-    "source": "pdf2025:p39"
+    "source": "pdf2025:p39 + hq:Ain Sbaa/Scene 72_1.png"
   },
   "figures": [
     {
-      "src": "images/ain-sebaa/ain-sebaa-concept-sheet.jpg",
-      "title": "Main and secondary buildings",
-      "caption": "Main building and secondary building. Flow study. Exploded structure.",
-      "alt": "Renders of the main and secondary station buildings, flow study plan and exploded structure",
-      "kind": "drawing",
-      "source": "pdf2025:p40 (labels translated from French)",
-      "size": "narrow"
-    },
-    {
-      "src": "images/ain-sebaa/ain-sebaa-plans-elevations.jpg",
-      "title": "Plans, elevation and section",
-      "caption": "Ground floor plans, main and secondary station buildings. Elevation East. Section West.",
-      "alt": "Ground floor plans of the two station buildings, east elevation and west section",
-      "kind": "drawing",
-      "source": "pdf2025:p41 (translated from French)",
-      "size": "full"
-    },
-    {
-      "src": "images/ain-sebaa/ain-sebaa-section-flows.jpg",
-      "title": "Section and flows",
-      "caption": "Section A-A. Passenger flow axonometric.",
-      "alt": "Section A-A and passenger flow axonometric of the station",
-      "kind": "drawing",
-      "source": "pdf2025:p42",
-      "size": "narrow"
+      "src": "images/ain-sebaa/ain-sebaa-site-plan.jpg",
+      "title": "Site plan",
+      "caption": "1:1000. The two station buildings on either side of the tracks, linked by the footbridge.",
+      "alt": "Rendered site plan seen from above: one station building and its car park on one side of the tracks, the second building and its car park on the other, and the footbridge crossing the tracks at one end",
+      "kind": "render",
+      "source": "hq:Ain Sbaa/plan masse.jpg (printed title 'PLAN MASSE 1-1000'); footbridge: pdf2025:p42"
     },
     {
       "src": "images/ain-sebaa/ain-sebaa-panorama.jpg",
@@ -96,6 +77,108 @@
       "kind": "render",
       "source": "pdf2025:p41",
       "size": "full"
+    },
+    {
+      "src": "images/ain-sebaa/ain-sebaa-plan-main.png",
+      "title": "Ground floor, main building",
+      "caption": "Level +0.00: the controlled hall (162 m²) and the open hall (345 m²) between service rooms and shops.",
+      "alt": "Coloured ground floor plan of the main station building below the platforms: two central halls, service rooms, prayer room and toilets on one side, shops and back offices on the other, with room areas",
+      "kind": "drawing",
+      "source": "hq:Ain Sbaa/PLAN RDC.jpg (room labels: Hall Contrôlé 162 m², Hall non contrôlé 345 m²; translated); pdf2025:p41"
+    },
+    {
+      "src": "images/ain-sebaa/ain-sebaa-section-aa.png",
+      "title": "Section A-A",
+      "caption": "Through the main building and the platforms, from level −4.10 to +7.50.",
+      "alt": "Long section through the station: the roof at +7.50, the halls at +0.00 and the lower level at −4.10, with the platform canopies and the second building to the right",
+      "kind": "drawing",
+      "source": "hq:Ain Sbaa/COUPE AA.jpg (printed title 'COUPE AA', levels); pdf2025:p42"
+    },
+    {
+      "title": "Main and rear façades",
+      "caption": "Section-elevations from +0.00 to +8.85; at the rear, stairs lead down to the lower level at −4.10.",
+      "kind": "drawing",
+      "source": "hq:Ain Sbaa/Coupe and facade.jpg (printed titles 'COUPE FACADE PRINCIPALE', 'COUPE FACADE ARRIERE', levels; translated); pdf2025:p41",
+      "items": [
+        {
+          "src": "images/ain-sebaa/ain-sebaa-facade-main.png",
+          "alt": "Section-elevation of the main façade: a sloping roof rising to +8.85 over inclined columns and a gridded screen bearing the station name"
+        },
+        {
+          "src": "images/ain-sebaa/ain-sebaa-facade-rear.png",
+          "alt": "Section-elevation of the rear façade with the ground cut below: stairs on both sides lead down from +0.00 to a lower level at −4.10"
+        }
+      ]
+    },
+    {
+      "src": "images/ain-sebaa/ain-sebaa-structure.png",
+      "title": "Structural concept",
+      "caption": "Exploded axonometric: the envelope, the steel roof structure and the inclined columns over the ground floor.",
+      "alt": "Exploded axonometric of the station: the roof envelope at the top, the steel roof structure below it, the inclined columns, and the ground floor rooms at the base, linked by red projection lines",
+      "kind": "drawing",
+      "source": "hq:Ain Sbaa/Structure.jpg (printed title 'PARTI STRUCTUREL' and labels 'Enveloppe', 'Charpente Metallique', 'Poteaux Inclinés'; translated, D17, D49); pdf2025:p40",
+      "labels": [
+        {
+          "at": "envelope",
+          "text": "Envelope"
+        },
+        {
+          "at": "roof-structure",
+          "text": "Steel roof\nstructure",
+          "align": "end"
+        },
+        {
+          "at": "columns",
+          "text": "Inclined columns"
+        }
+      ],
+      "maxH": 780
+    },
+    {
+      "title": "Flow study",
+      "caption": "Passenger routes through the main building and the secondary building.",
+      "kind": "drawing",
+      "source": "hq:Ain Sbaa/Flux.jpg (printed title 'ETUDE DES FLUX' and legend; translated, D17); pdf2025:p40, p42",
+      "items": [
+        {
+          "src": "images/ain-sebaa/ain-sebaa-flows-main.png",
+          "alt": "Axonometric flow diagram of the main building beside the tracks: dashed coloured routes for entering and leaving the station and reaching the platforms, with the car park and forecourt labelled"
+        },
+        {
+          "src": "images/ain-sebaa/ain-sebaa-flows-secondary.png",
+          "alt": "Axonometric flow diagram of the secondary building: dashed coloured routes from the forecourt and drop-off to the platform access"
+        }
+      ],
+      "legend": [
+        {
+          "swatch": "#CCCCCC",
+          "text": "Pedestrian flows: intermodal links to the station"
+        },
+        {
+          "swatch": "#2A3F92",
+          "text": "Passenger flows: station"
+        },
+        {
+          "swatch": "#F7B61A",
+          "text": "Passenger flows: to the platforms"
+        },
+        {
+          "swatch": "#AB5C6F",
+          "text": "Passenger flows: leaving the platforms and the station"
+        },
+        {
+          "swatch": "#BFE8FA",
+          "text": "Vertical connection, station to platforms"
+        }
+      ]
+    },
+    {
+      "src": "images/ain-sebaa/ain-sebaa-platform-view.jpg",
+      "title": "Across the tracks",
+      "caption": "The station from the opposite platform.",
+      "alt": "Render of the station seen from the opposite platform: the white roof on inclined columns, a glazed hall with a patterned screen, palm trees and glass towers behind, and a dark band below the tracks",
+      "kind": "render",
+      "source": "hq:Ain Sbaa/Scene 69.png"
     }
   ],
   "date": "2025",

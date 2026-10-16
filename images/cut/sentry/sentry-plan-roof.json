@@ -1,0 +1,40 @@
+{
+ "src": "images/sentry/sentry-plan-roof.png",
+ "hash": "dba2139dbf0e70ca",
+ "mode": "ink",
+ "from": [
+  1219,
+  1107
+ ],
+ "to": [
+  1183,
+  1071
+ ],
+ "offset": [
+  18,
+  18
+ ],
+ "paper": [
+  255,
+  255,
+  255
+ ],
+ "clip": [],
+ "ink": {
+  "ink": 74496,
+  "chromaticFraction": 0.0225,
+  "midtoneFraction": 0.6138,
+  "suggest": "accent"
+ },
+ "dark": "invert-accent",
+ "keep": null,
+ "specks": 181,
+ "tile": [
+  320,
+  400,
+  640,
+  400
+ ],
+ "background": null,
+ "labels": []
+}

@@ -1,0 +1,50 @@
+{
+ "src": "images/corallum/corallum-facade-pulling.png",
+ "hash": "aa16bb00c97a840b",
+ "mode": "ink",
+ "from": [
+  747,
+  1233
+ ],
+ "to": [
+  691,
+  1179
+ ],
+ "offset": [
+  28,
+  28
+ ],
+ "paper": [
+  255,
+  255,
+  255
+ ],
+ "clip": [],
+ "ink": {
+  "ink": 23096,
+  "chromaticFraction": 0.1127,
+  "midtoneFraction": 0.9232,
+  "suggest": "colour"
+ },
+ "dark": "invert-accent",
+ "keep": null,
+ "specks": 264,
+ "tile": [
+  0,
+  0,
+  640,
+  400
+ ],
+ "background": null,
+ "labels": [
+  {
+   "id": "text",
+   "removed": 31,
+   "kept": 0,
+   "x": 38.784,
+   "y": 53.35,
+   "w": 59.479,
+   "h": 7.718
+  }
+ ]
+}

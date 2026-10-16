@@ -1,0 +1,57 @@
+{
+  "version": 1,
+  "sourceRoot": "Images HQ",
+  "assets": [
+    {
+      "source": "Images HQ/Station Hay Mohammadi/2025 - Hazem radhouani - Portfolio - HQ [46-50]_page-0002.jpg",
+      "output": "images/hay-mohammadi/hay-mohammadi-front.jpg",
+      "sha256": "bb9fa56d3b2ce1656725542c2d3bbca67a72aa81b3f3d061168b48aedca9b3d9",
+      "crop": {
+        "x": 0,
+        "y": 0,
+        "width": 3508,
+        "height": 1229
+      },
+      "treatment": "upper render of the two-render page, cut at the white gutter (y 1229-1251); the bilingual station signage is intrinsic to the scene and stays",
+      "darkTreatment": "preserve-colour-scene",
+      "credit": "No credit is printed on the source or on pdf2025:p43-44; the case study is published as work at Yassir Khalil Studio (site), supplied by the owner",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "reviewStatus": "approved",
+      "captionEvidence": "Same view as the existing hero (images/hay-mohammadi/thumb.jpg) and the 'entrance' item of pdf2025:p44: the front with the signage 'STATION HAY MOHAMMADI' and its Arabic counterpart"
+    },
+    {
+      "source": "Images HQ/Station Hay Mohammadi/2025 - Hazem radhouani - Portfolio - HQ [46-50]_page-0001.jpg",
+      "output": "images/hay-mohammadi/hay-mohammadi-aerial.jpg",
+      "sha256": "432fe63e86b8d7122b10fa42eba4a5813125687f09840ce1bd57f6dd75aef4f6",
+      "crop": {
+        "x": 0,
+        "y": 0,
+        "width": 3508,
+        "height": 1595
+      },
+      "treatment": "full-width band above the text panel printed on the render (x 2353-3390, y 1602-2315) and the page footer (x 0-1058, y 2324-2398); text on rendered pixels cannot be erased, so the crop gives up the lower walls, the entrance stairs and the foreground palms, which the front and platform renders show whole; the roof, tracks, platforms and car park stay",
+      "darkTreatment": "preserve-colour-scene",
+      "credit": "No credit is printed on the source or on pdf2025:p43-44; the case study is published as work at Yassir Khalil Studio (site), supplied by the owner",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "reviewStatus": "approved",
+      "captionEvidence": "Same camera as the existing figure 'Render, Aerial View' (images/hay-mohammadi/hay-mohammadi-render.jpg, pdf2025:p43): the white roof beside the tracks with the car park to the right"
+    },
+    {
+      "source": "Images HQ/Station Hay Mohammadi/2025 - Hazem radhouani - Portfolio - HQ [46-50]_page-0002.jpg",
+      "output": "images/hay-mohammadi/hay-mohammadi-platform-view.jpg",
+      "sha256": "bb9fa56d3b2ce1656725542c2d3bbca67a72aa81b3f3d061168b48aedca9b3d9",
+      "crop": {
+        "x": 0,
+        "y": 1252,
+        "width": 3508,
+        "height": 1066
+      },
+      "treatment": "lower render of the two-render page, from below the white gutter to just above the page tab '47' (x 3120-3508, y 2328-2399), which is printed over the render; the strip of near platform below the tab is left out",
+      "darkTreatment": "preserve-colour-scene",
+      "credit": "No credit is printed on the source or on pdf2025:p43-44; the case study is published as work at Yassir Khalil Studio (site), supplied by the owner",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "reviewStatus": "approved",
+      "captionEvidence": "Same view as the 'street' item of pdf2025:p44 (images/hay-mohammadi/hay-mohammadi-render-street.jpg): the station seen from the platform across the tracks"
+    }
+  ]
+}

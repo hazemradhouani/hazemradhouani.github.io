@@ -1,0 +1,40 @@
+{
+ "src": "images/foubert/foubert-plan-rdc.png",
+ "hash": "6a66c9a6494098e9",
+ "mode": "ink",
+ "from": [
+  2560,
+  1826
+ ],
+ "to": [
+  2560,
+  1826
+ ],
+ "offset": [
+  0,
+  0
+ ],
+ "paper": [
+  255,
+  255,
+  255
+ ],
+ "clip": [],
+ "ink": {
+  "ink": 227203,
+  "chromaticFraction": 0.046,
+  "midtoneFraction": 0.2574,
+  "suggest": "accent"
+ },
+ "dark": "invert-accent",
+ "keep": null,
+ "specks": 34,
+ "tile": [
+  960,
+  1200,
+  640,
+  400
+ ],
+ "background": null,
+ "labels": []
+}

@@ -1,0 +1,66 @@
+{
+  "version": 1,
+  "sourceRoot": "Images HQ",
+  "assets": [
+    {
+      "source": "Images HQ/VILLAS/Image_28.png",
+      "output": "images/papillon/papillon-pool.jpg",
+      "sha256": "56921cbe0cbf8b3a9d906d0ddb4ee9f08d9c5bf32358adfbbe60881a4c0c41a0",
+      "crop": null,
+      "treatment": "the full scene, untouched; area downscale from 3 840 px to the render cap",
+      "darkTreatment": "preserve-colour-scene",
+      "credit": "Owner-supplied office work (Yassir Khalil Studio, site); no third-party credit is printed on the source",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "captionEvidence": "Same camera as the existing hero images/papillon/thumb.jpg and the unreferenced papillon-render-garden.jpg: the white and terracotta volumes, the two hanging chairs under the terracotta overhang, the pool and the palms; this file is the full 16:9 frame at 3 840 px",
+      "reviewStatus": "approved"
+    },
+    {
+      "source": "Images HQ/VILLAS/2_page-0001.jpg",
+      "output": "images/papillon/papillon-site-plan.png",
+      "sha256": "3ebb68c361ce4e8296f6e44e99a1632d2395bd617247a541583a1b2fbbf0d5b4",
+      "crop": { "x": 757, "y": 716, "width": 3479, "height": 2070 },
+      "treatment": "the whole site plan (ink x 797-4195, y 756-2745) with 40 px of paper, its intrinsic dimensions (105.48, 95.08, 18.96, 32.55, 18.25, 16.48, 18.90) and the pool label 'PISCINE'; the north arrow (x 240-584, y 544-920, outside the drawing; north is up, given in the caption), the wind rose and its title 'Rose des vents' (x 208-600, y 2472-2984), the title 'Plan Situation | Ech 1/200' (y 2912-2984) and the sheet's frame line (x 4944) are left outside; area reduction to 2 560 px (factor 0.736)",
+      "darkTreatment": "field",
+      "credit": "Owner-supplied office work (Yassir Khalil Studio, site); no credit, cartouche or studio name is printed on the sheet",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "captionEvidence": "Printed title 'Plan Situation | Ech 1/200' (site plan, scale 1:200, translated from French) and north arrow 'N'; the same site plan, at 2.2 times the resolution, as the 'Site Plan' of the Villa Papillon page (pdf2025:p29: 'LOCATION: Marrakech, Palmeraie')",
+      "reviewStatus": "approved"
+    },
+    {
+      "source": "Images HQ/VILLAS/Image_21(1).png",
+      "output": "images/papillon/papillon-terracotta-wall.jpg",
+      "sha256": "89a69cafbbc56a1f361e784ce905034842ffce3cdad2fb1340f1121b2b48d998",
+      "crop": null,
+      "treatment": "the full scene, untouched; area downscale from 3 840 px to the render cap",
+      "darkTreatment": "preserve-colour-scene",
+      "credit": "Owner-supplied office work (Yassir Khalil Studio, site); no third-party credit is printed on the source",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "captionEvidence": "Same camera as the existing papillon-render-terracotta.jpg (956 px) and the upper large render of pdf2025:p31: the terracotta wall with the palm's shadow below the white volume",
+      "reviewStatus": "approved"
+    },
+    {
+      "source": "Images HQ/VILLAS/Image_20(1).png",
+      "output": "images/papillon/papillon-facade-angle.jpg",
+      "sha256": "4841e81e7f355f452a2200e55debc6539e457b737bf08b39e21776158a88bbad",
+      "crop": null,
+      "treatment": "the full scene, untouched; area downscale from 3 840 px to the render cap",
+      "darkTreatment": "preserve-colour-scene",
+      "credit": "Owner-supplied office work (Yassir Khalil Studio, site); no third-party credit is printed on the source",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "captionEvidence": "Same camera as the existing papillon-render-entrance.jpg (956 px) and the lower large render of pdf2025:p31: the inclined white volume, the terracotta frame, the glazing and the cactus",
+      "reviewStatus": "approved"
+    },
+    {
+      "source": "Images HQ/VILLAS/Image_19(1).png",
+      "output": "images/papillon/papillon-facade-front.jpg",
+      "sha256": "e84263344eda2cbecda9f64beed744a8db11e4b62bf8ed33fd94c6039ad77c04",
+      "crop": null,
+      "treatment": "the full scene, untouched; area downscale from 3 840 px to the render cap",
+      "darkTreatment": "preserve-colour-scene",
+      "credit": "Owner-supplied office work (Yassir Khalil Studio, site); no third-party credit is printed on the source",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "captionEvidence": "Same camera as the second small render in the right-hand column of pdf2025:p31; the same white frame, terracotta frame, glazing and door as Image_20(1)",
+      "reviewStatus": "approved"
+    }
+  ]
+}

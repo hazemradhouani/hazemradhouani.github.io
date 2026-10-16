@@ -1,0 +1,46 @@
+{
+ "src": "images/al-arg/al-arg-territory-map-hq.png",
+ "hash": "8ab4e675c65a8a1c",
+ "mode": "ink",
+ "from": [
+  1535,
+  1309
+ ],
+ "to": [
+  1504,
+  1114
+ ],
+ "offset": [
+  2,
+  103
+ ],
+ "paper": [
+  255,
+  255,
+  255
+ ],
+ "clip": [],
+ "ink": {
+  "ink": 265840,
+  "chromaticFraction": 0.6889,
+  "midtoneFraction": 0.9689,
+  "suggest": "colour"
+ },
+ "dark": "keep",
+ "keep": {
+  "file": "images/cut/al-arg/al-arg-territory-map-hq--keep.png",
+  "share": 0.6191,
+  "radius": 4,
+  "t": 0.06,
+  "fill": true
+ },
+ "specks": 0,
+ "tile": [
+  320,
+  200,
+  640,
+  400
+ ],
+ "background": null,
+ "labels": []
+}

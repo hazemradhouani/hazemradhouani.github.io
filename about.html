@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-ga="G-S61QWV2ZRE">
+<html lang="en" data-ga="G-S61QWV2ZRE" data-theme="light">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,10 +10,11 @@
 <link rel="preload" href="fonts/eb-garamond-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/ibm-plex-sans-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" as="image" type="image/avif" imagesrcset="images/opt/portrait-480.avif 480w, images/opt/portrait-720.avif 720w" imagesizes="(min-width: 90rem) 406px, (min-width: 64rem) 30vw, (min-width: 48rem) 45vw, 90vw" fetchpriority="high">
-<link rel="stylesheet" href="css/site.css?v=730d10944c">
-<script src="js/site.js?v=71b4387f9e" defer></script>
-<meta name="theme-color" content="#FFFFFF">
-<meta name="color-scheme" content="light">
+<meta id="theme-color" name="theme-color" content="#FFFFFF">
+<meta name="color-scheme" content="light dark">
+<script data-theme-bootstrap>(function(){var t;try{t=localStorage.getItem('hazem-theme');}catch(e){}if(t!=='light'&&t!=='dark'){try{t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}catch(e){t='light';}}var d=document.documentElement;d.setAttribute('data-theme',t);d.style.colorScheme=t;var m=document.getElementById('theme-color');if(m)m.content=t==='dark'?'#121311':'#FFFFFF';}());</script>
+<link rel="stylesheet" href="css/site.css?v=c0efe93e80">
+<script src="js/site.js?v=4419c121b9" defer></script>
 <meta name="author" content="Hazem Radhouani">
 
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
@@ -35,7 +36,7 @@
 <meta name="twitter:description" content="Hazem Radhouani, architect (National Architecture Diploma, Highest Honours, ENAU 2026). Experience at Studio BELEM, Paris, and Yassir Khalil Studio, Casablanca; Sakura Science Program research in Japan.">
 <meta name="twitter:image" content="https://hazemradhouani.github.io/portfolio/images/og/about.jpg">
 <meta name="twitter:image:alt" content="About | Hazem Radhouani, architect">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"ProfilePage","url":"https://hazemradhouani.github.io/portfolio/about.html","mainEntity":{"@id":"https://hazemradhouani.github.io/portfolio/#person"}}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","@id":"https://hazemradhouani.github.io/portfolio/#person","name":"Hazem Radhouani","jobTitle":"Architect","description":"Architect specialising in heritage documentation and earthen architecture.","url":"https://hazemradhouani.github.io/portfolio/","email":"mailto:hazemradhouani@gmail.com","image":"https://hazemradhouani.github.io/portfolio/images/portrait.jpg","sameAs":["https://www.linkedin.com/in/hazem-radhouani-b36616319/"],"alumniOf":{"@type":"CollegeOrUniversity","name":"École Nationale d’Architecture et d’Urbanisme de Tunis (ENAU), Université de Carthage"},"knowsAbout":["Heritage documentation","Architectural survey","Earthen architecture","Vernacular architecture","Heritage rehabilitation","BIM","Revit","Unreal Engine","D5 Render"],"knowsLanguage":["ar","fr","en"],"award":["Highest Honours, National Architecture Diploma, ENAU, 2026","Highest Honours, Final Year Architectural Thesis, ENAU, 2024","Most Appreciated Research, Sakura Science Program, 2025"]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"ProfilePage","url":"https://hazemradhouani.github.io/portfolio/about.html","mainEntity":{"@id":"https://hazemradhouani.github.io/portfolio/#person"}}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","@id":"https://hazemradhouani.github.io/portfolio/#person","name":"Hazem Radhouani","jobTitle":"Architect","description":"Architect with project work in Tunisia, France and Morocco, and research experience in Japan.","url":"https://hazemradhouani.github.io/portfolio/","email":"mailto:hazemradhouani@gmail.com","image":"https://hazemradhouani.github.io/portfolio/images/portrait.jpg","sameAs":["https://www.linkedin.com/in/hazem-radhouani-b36616319/"],"alumniOf":{"@type":"CollegeOrUniversity","name":"École Nationale d’Architecture et d’Urbanisme de Tunis (ENAU), Université de Carthage"},"knowsAbout":["Architectural survey","Building rehabilitation","BIM","Revit","Architectural visualisation","Unreal Engine","D5 Render","Rail infrastructure"],"knowsLanguage":["ar","fr","en"],"award":["Highest Honours, National Architecture Diploma, ENAU, 2026","Highest Honours, Final Year Architectural Thesis, ENAU, 2024","Most Appreciated Research, Sakura Science Program, 2025"]}</script>
 </head>
 <body class="page-about">
 <a class="skip" href="#main">Skip to content</a>
@@ -43,14 +44,14 @@
 <div class="wrap">
 <a class="brand" href="./">Hazem Radhouani</a>
 <nav class="nav" aria-label="Main"><ul role="list"><li style="--i: 0"><a href="architecture.html">Work</a></li><li style="--i: 1"><a href="books.html">Research</a></li><li style="--i: 2"><a href="about.html" aria-current="page">About</a></li><li style="--i: 3"><a href="about.html#contact">Contact</a></li></ul></nav>
-<button class="menu-button" type="button" commandfor="menu" command="show-modal" aria-haspopup="dialog" aria-controls="menu">menu</button>
+<div class="site-header__tools"><button class="theme-button" type="button" data-theme-toggle data-theme-scope="header"><span class="theme-button__glyph" aria-hidden="true">◐</span><span class="theme-button__label" data-theme-label>theme: light</span><span class="vh" data-theme-action>, switch to dark</span></button><button class="menu-button" type="button" commandfor="menu" command="show-modal" aria-haspopup="dialog" aria-controls="menu">menu</button></div>
 </div>
 </header>
 <div class="bar" id="bar" inert>
 <div class="bar__in wrap">
 <a class="brand" href="./">Hazem Radhouani</a>
 <nav class="nav" aria-label="Site"><ul role="list"><li style="--i: 0"><a href="architecture.html">Work</a></li><li style="--i: 1"><a href="books.html">Research</a></li><li style="--i: 2"><a href="about.html" aria-current="page">About</a></li><li style="--i: 3"><a href="about.html#contact">Contact</a></li></ul></nav>
-<button class="menu-button" type="button" commandfor="menu" command="show-modal" aria-haspopup="dialog" aria-controls="menu">menu</button>
+<div class="bar__tools"><button class="theme-button" type="button" data-theme-toggle data-theme-scope="bar"><span class="theme-button__glyph" aria-hidden="true">◐</span><span class="theme-button__label" data-theme-label>theme: light</span><span class="vh" data-theme-action>, switch to dark</span></button><button class="menu-button" type="button" commandfor="menu" command="show-modal" aria-haspopup="dialog" aria-controls="menu">menu</button></div>
 </div>
 </div>
 <main id="main" tabindex="-1">
@@ -58,11 +59,11 @@
 <header class="intro about-head wrap g">
 <div class="s-text center">
 <p class="print-only print-name">Hazem Radhouani | Architect</p>
-<p class="print-only">Architect specialising in heritage documentation and earthen architecture. hazemradhouani@gmail.com | linkedin.com/in/hazem-radhouani-b36616319/ | hazemradhouani.github.io/portfolio/</p>
+<p class="print-only">Architect with project work in Tunisia, France and Morocco, and research experience in Japan. hazemradhouani@gmail.com | linkedin.com/in/hazem-radhouani-b36616319/ | hazemradhouani.github.io/portfolio/</p>
 <h1 class="h1">About</h1>
 </div>
 <div class="s-four block about-portrait"><picture class="nw" style="--nw: 720px"><source type="image/avif" srcset="images/opt/portrait-480.avif 480w, images/opt/portrait-720.avif 720w" sizes="(min-width: 90rem) 406px, (min-width: 64rem) 30vw, (min-width: 48rem) 45vw, 90vw"><source type="image/webp" srcset="images/opt/portrait-480.webp 480w, images/opt/portrait-720.webp 720w" sizes="(min-width: 90rem) 406px, (min-width: 64rem) 30vw, (min-width: 48rem) 45vw, 90vw"><img src="images/portrait.jpg" alt="Portrait of Hazem Radhouani" width="720" height="900" loading="eager" fetchpriority="high"></picture></div>
-<div class="s-narrow block"><div class="prose"><p>Architect graduated with Highest Honours (ENAU, 2026), drawn to the architecture of the existing: the inhabited, the deteriorated, the overlooked. My practice spans Paris, Casablanca, and Tokyo, cities where I have read how buildings hold memory, resist erasure, and remain rooted in place. I am determined to make heritage rehabilitation a speciality, and the breadth of my work reflects that commitment at every scale, from regional rail infrastructure in Morocco to residential rehabilitation in Paris and comparative heritage research in Japan.</p></div></div>
+<div class="s-narrow block"><div class="prose"><p>Architect graduated with Highest Honours (ENAU, 2026), drawn to the architecture of the existing: the inhabited, the deteriorated, the overlooked. My project work spans Tunisia, France and Morocco, from regional rail infrastructure to residential rehabilitation and academic design work. In 2025, research experience in Japan extended a comparative study of historic-district rehabilitation and adaptive reuse.</p></div></div>
 <p class="s-text center in no-print"><a class="more" href="files/hazem-radhouani-cv.pdf"><span>Download CV (PDF)</span><svg class="icon" width="16" height="16" aria-hidden="true" focusable="false"><use href="images/icons.svg#arrow-right"></use></svg></a></p>
 </header>
 <div class="wrap g block">
@@ -102,7 +103,7 @@
 </footer>
 <dialog class="menu" id="menu" aria-label="Site menu">
 <div class="wrap">
-<div class="menu__top"><a class="brand" href="./">Hazem Radhouani</a><form method="dialog"><button class="menu__close" type="submit" autofocus>close</button></form></div>
+<div class="menu__top"><a class="brand" href="./">Hazem Radhouani</a><div class="menu__controls"><button class="theme-button" type="button" data-theme-toggle data-theme-scope="menu"><span class="theme-button__glyph" aria-hidden="true">◐</span><span class="theme-button__label" data-theme-label>theme: light</span><span class="vh" data-theme-action>, switch to dark</span></button><form method="dialog"><button class="menu__close" type="submit" autofocus>close</button></form></div></div>
 <nav aria-label="Main"><ul class="menu__list" role="list"><li style="--i: 0"><a href="architecture.html">Work</a></li><li style="--i: 1"><a href="books.html">Research</a></li><li style="--i: 2"><a href="about.html" aria-current="page">About</a></li><li style="--i: 3"><a href="about.html#contact">Contact</a></li></ul></nav>
 <p class="menu__contact"><a href="mailto:hazemradhouani@gmail.com">hazemradhouani@gmail.com</a><a href="https://www.linkedin.com/in/hazem-radhouani-b36616319/" target="_blank" rel="noopener">LinkedIn<span class="vh"> (opens in a new tab)</span></a></p>
 </div>

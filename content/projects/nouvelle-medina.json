@@ -11,7 +11,7 @@
   "summary": "Urban train station in Casablanca whose folded, origami-like roof structures the building and modulates daylight.",
   "place": "Casablanca",
   "year": "2025",
-  "descriptor": "Infrastructure | urban train station",
+  "descriptor": "Infrastructure | urban train station, competition",
   "spec": [
     {
       "label": "Location",
@@ -39,7 +39,7 @@
       "source": "pdf2025:p36"
     }
   ],
-  "tag": "La nouvelle gare Nouvelle Medina / Plans, facades and sections / Scale 1:200",
+  "tag": "Competition entry / Concours n°S053.6/PLGV / Phase II",
   "narrative": [
     {
       "text": "The architectural concept rests on a contemporary interpretation of origami, where the roof becomes a structuring element, both functional and expressive. Composed of dynamic folds, it generates a volume in tension that seems to unfold towards the public space, expressing the notion of movement inherent to travel.",
@@ -48,57 +48,254 @@
     {
       "text": "This play of facets allows a subtle modulation of natural light through the interior spaces, while optimising rainwater runoff and solar protection. The glazed facade, in dialogue with this sculptural roof, ensures transparency and lightness, reinforcing the porosity between the city and the platforms. This architectural composition, both fluid and assertive, gives the station a strong identity, where structure and aesthetics merge in a dynamic balance.",
       "source": "pdf2025:p36 (translated from French)"
+    },
+    {
+      "text": "Accessibility is reinforced by underground passages leading directly to the platforms, thereby avoiding conflicts of circulation. In addition, a public footbridge, conceived as an urban bridge, provides a safe pedestrian link between the two sides of the district, contributing to better urban porosity.",
+      "source": "hq:Nouvelle Medina/A0 MEDINA F [1]_page-0001.jpg (board 1/2, 'Orientations d'aménagement proposées du Concept Global', second paragraph; translated from French, D17)"
     }
   ],
   "hero": {
-    "src": "images/nouvelle-medina/nouvelle-medina-night-section.jpg",
-    "alt": "Night section-render of Nouvelle Medina Station through the platforms",
+    "src": "images/nouvelle-medina/nouvelle-medina-night-section-hq.jpg",
+    "alt": "Night section-render of Nouvelle Medina Station: the lit glazed hall under its thin roof above the railway cutting, stairs and a lift descending to the platform, a train at the right, palms and a crescent moon",
     "credit": null,
-    "source": "pdf2025:p35"
+    "source": "pdf2025:p35 + hq:Nouvelle Medina/Scene 39_2.png"
   },
   "figures": [
     {
-      "src": "images/nouvelle-medina/nouvelle-medina-structure-sheet.jpg",
-      "title": "Massing and structure",
-      "caption": "Massing axonometric. Exploded structure: building envelope (roof) in white HPL; steel roof framing; beam system; HEA columns anchored in concrete footings; building envelope (facade) in white HPL; glazed facade.",
-      "alt": "White massing axonometric of the station and exploded axonometric of its structure",
-      "kind": "drawing",
-      "source": "pdf2025:p36 (labels translated from French)",
-      "size": "full"
-    },
-    {
-      "src": "images/nouvelle-medina/nouvelle-medina-plans-elevation.jpg",
-      "title": "Plans and long elevation",
-      "caption": "Platform level plan -06.50 m. Ground floor plan +0.15 m. Roof plan +08.50 m. Long elevation.",
-      "alt": "Plans of the station at platform, ground and roof levels, and its long elevation",
-      "kind": "drawing",
-      "source": "pdf2025:p37 (translated from French)",
-      "size": "full"
-    },
-    {
-      "src": "images/nouvelle-medina/nouvelle-medina-sections-flows.jpg",
-      "title": "Sections and passenger flows",
-      "caption": "Section BB'. Elevation. Passenger flows: station, intermodal pedestrian flows, access to the platforms, exit from the platforms, vertical connection between station and platforms.",
-      "alt": "Section BB, elevation and passenger flow axonometric of the station",
-      "kind": "drawing",
-      "source": "pdf2025:p38 (translated from French)",
-      "size": "narrow"
-    },
-    {
-      "title": "Views",
-      "caption": "Platform and street views.",
+      "src": "images/nouvelle-medina/nouvelle-medina-site-plan.jpg",
+      "title": "Site plan",
+      "caption": "1:1000. The station roof, marked +8.50, beside the railway cutting at −6.50, with car parks on either side.",
+      "alt": "Rendered site plan seen from above: the white station roof between two car parks with parked cars, a road along the top, and the railway cutting with a train along the bottom, crossed by a walkway",
       "kind": "render",
+      "source": "hq:Nouvelle Medina/A0 MEDINA F [1]_page-0001.jpg (rendered site plan; printed title 'Plan de masse 1-1000', 'Parking', levels +8.50 and -6.50; translated)"
+    },
+    {
+      "src": "images/nouvelle-medina/nouvelle-medina-aerial.jpg",
+      "title": "Aerial view",
+      "caption": "From above the car park; the railway cutting runs behind the station.",
+      "alt": "Aerial render of the white station building with its folded roof and glazed entrance, a planted island and the car park in front, and the railway cutting with a platform canopy and a lift tower behind",
+      "kind": "render",
+      "source": "hq:Nouvelle Medina/A0 MEDINA F [1]_page-0001.jpg (aerial render)"
+    },
+    {
+      "title": "Plans",
+      "caption": "1:200 on the sheet. The platform level at −6.50, the ground floor at +0.15 and the roof at +8.50.",
+      "kind": "drawing",
+      "source": "hq:Nouvelle Medina/A0 MEDINA F [2]_page-0001.jpg (printed titles 'Plan Niveau Quais -06.50m', 'Plan Niveau RDC+ 0.15m', 'Plan Niveau Toiture +08.50m', 'Echelle 1/200'; translated, D17); pdf2025:p37",
       "items": [
         {
-          "src": "images/nouvelle-medina/nouvelle-medina-platform-render.jpg",
-          "alt": "Render of the station above the platforms"
+          "src": "images/nouvelle-medina/nouvelle-medina-plan-platform.png",
+          "alt": "Plan at platform level: two platforms along the tracks, each with a lift, and the stair and lift core set into the earth on the station side"
         },
         {
-          "src": "images/nouvelle-medina/nouvelle-medina-street-render.jpg",
-          "alt": "Street render of the station frontage"
+          "src": "images/nouvelle-medina/nouvelle-medina-plan-ground.png",
+          "alt": "Ground floor plan: the station hall between two rows of rooms, the forecourt and car parks above it, and a walkway crossing the tracks to the far platform, with dimensions and room areas"
+        },
+        {
+          "src": "images/nouvelle-medina/nouvelle-medina-plan-roof.png",
+          "alt": "Roof plan: the folded roof drawn as one white quadrilateral over the station, the forecourt and car parks around it, and the walkway over the tracks"
+        }
+      ]
+    },
+    {
+      "title": "Main and rear façades",
+      "caption": "1:200 on the sheet. The canopy rises to +9.50; at the rear, two flights of stairs descend from the hall at +0.15 to the platforms at −6.50.",
+      "kind": "drawing",
+      "source": "hq:Nouvelle Medina/A0 MEDINA F [2]_page-0001.jpg (printed titles 'Façade Principale', 'Façade Arrière', levels +09.50 +07.00 +06.00 +00.15 -06.50; translated, D17); pdf2025:p37-38",
+      "items": [
+        {
+          "src": "images/nouvelle-medina/nouvelle-medina-facade-main.png",
+          "alt": "Main façade: the glazed station front under a canopy rising to one raised end that carries the station name, planters on either side and the footbridge stair at the right, tall buildings in pale outline behind"
+        },
+        {
+          "src": "images/nouvelle-medina/nouvelle-medina-facade-rear.png",
+          "alt": "Rear façade above the railway cutting: the glazed hall under its folded roof, two flights of stairs meeting at a central lift shaft and descending to the platform, and a platform canopy on each side"
+        }
+      ]
+    },
+    {
+      "title": "Sections AA′ and BB′",
+      "caption": "1:200 on the sheet. AA′ cuts through the hall at +0.15 under the roof at +8.00; BB′ cuts across the railway cutting and the hall, with a stair down into the cutting.",
+      "kind": "drawing",
+      "source": "hq:Nouvelle Medina/A0 MEDINA F [2]_page-0001.jpg (printed titles 'Coupe AA′', 'Coupe BB′', levels +09.50 +08.00 +03.00 +00.15 -00.60); pdf2025:p38",
+      "items": [
+        {
+          "src": "images/nouvelle-medina/nouvelle-medina-section-aa.png",
+          "alt": "Section AA′ through the station hall: ticket gates and counters under the folded roof, the ground hatched below, planters and the footbridge stair to the right"
+        },
+        {
+          "src": "images/nouvelle-medina/nouvelle-medina-section-bb.png",
+          "alt": "Section BB′: the railway cutting with stepped platforms and canopies at the left, a slab at +0.15 bridging over it, and the station hall with a stair going down at the right"
+        }
+      ]
+    },
+    {
+      "title": "Section-elevations",
+      "caption": "1:200 on the sheet. The station in elevation with the railway cutting in section, the platforms at −6.50.",
+      "kind": "drawing",
+      "source": "hq:Nouvelle Medina/A0 MEDINA F [2]_page-0001.jpg (printed titles 'Façade Coupe' ×2, translated as 'section-elevation'; levels +09.50 +07.00 +03.00 +00.15 -00.60 -06.50)",
+      "items": [
+        {
+          "src": "images/nouvelle-medina/nouvelle-medina-section-elevation-1.png",
+          "alt": "Section-elevation: the railway cutting in section at the left with platform canopies at −6.50, the footbridge above it at +3.00, and the closed end of the station under its roof at the right"
+        },
+        {
+          "src": "images/nouvelle-medina/nouvelle-medina-section-elevation-2.png",
+          "alt": "Section-elevation: the glazed side of the station under its rising roof at the left, and the railway cutting in section at the right with a lift tower and the platforms at −6.50"
+        }
+      ]
+    },
+    {
+      "src": "images/nouvelle-medina/nouvelle-medina-origami-concept.png",
+      "title": "Folding concept",
+      "caption": "From a flat sheet to the roof: folding, refining the lines and adjusting the angles. The final shape is marked ‘Toiture du projet’, the project’s roof.",
+      "alt": "Concept diagram in steps linked by dotted arrows: a flat rectangle, the sheet folded so that it crosses itself, the same fold with its edges straightened by red dashed lines, a profile with adjusted angles, and the final roof shape shaded on one side",
+      "kind": "drawing",
+      "source": "hq:Nouvelle Medina/A0 MEDINA F [1]_page-0001.jpg (printed captions 'Feuille plane / Point de départ', 'Pliage', 'Affinage des lignes', 'Ajustement des angles', translated, D17, D49; 'Toiture du projet' is printed over the roof's fold line, so it stays on the drawing and is translated in the caption)",
+      "labels": [
+        {
+          "at": "flat-sheet",
+          "text": "Flat sheet\nStarting point"
+        },
+        {
+          "at": "folding",
+          "text": "Folding"
+        },
+        {
+          "at": "refining",
+          "text": "Refining\nthe lines"
+        },
+        {
+          "at": "angles",
+          "text": "Adjusting the angles"
+        }
+      ]
+    },
+    {
+      "src": "images/nouvelle-medina/nouvelle-medina-structure-exploded.png",
+      "title": "Structure",
+      "caption": "Exploded axonometric: the roof envelope and the façade envelope in white HPL, the steel roof frame, the beams and HEA columns anchored in concrete footings, and the glazed façade.",
+      "alt": "Exploded axonometric of the station in five layers: the folded roof panel at the top, the steel space frame of the roof, the grid of beams on columns standing in footings, a solid façade panel, and the glazed façade with its doors at the base",
+      "kind": "drawing",
+      "source": "hq:Nouvelle Medina/A0 MEDINA F [1]_page-0001.jpg (printed callouts 'Enveloppe du Batiment (Toiture) en HPL Blanc', 'Charpente métallique de la toiture', 'Système Poutres Al / Poteaux HEA ancrés dans des massifs en Béton', 'Enveloppe du Batiment (Façade) en HPL Blanc', 'Façade vitrée'; translated, D17, D49; 'Al' not expanded); pdf2025:p36",
+      "labels": [
+        {
+          "at": "roof-envelope",
+          "text": "Roof envelope\nin white HPL"
+        },
+        {
+          "at": "roof-frame",
+          "text": "Steel roof frame"
+        },
+        {
+          "at": "columns",
+          "text": "Beams / HEA columns\nanchored in concrete\nfootings"
+        },
+        {
+          "at": "facade-envelope",
+          "text": "Façade envelope\nin white HPL"
+        },
+        {
+          "at": "glazing",
+          "text": "Glazed façade"
         }
       ],
-      "source": "pdf2025:p38"
+      "maxH": 780
+    },
+    {
+      "src": "images/nouvelle-medina/nouvelle-medina-flows.png",
+      "title": "Passenger flows",
+      "caption": "Routes into the hall, over the footbridge to the platforms and back out, and the pedestrian links from the forecourt, the bus stop, the drop-off and the car parks.",
+      "alt": "Axonometric of the station over the tracks with dashed coloured routes: from the forecourt into the hall, across the hall to the footbridge and down to the platforms, and back up and out; shops, toilets, a prayer room and service rooms are labelled in French on the model",
+      "kind": "drawing",
+      "source": "hq:Nouvelle Medina/A0 MEDINA F [1]_page-0001.jpg (printed legend 'FLUX PIETONS : INTERMODALITÉ - GARE', 'FLUX DES VOYAGEURS - GARE', 'FLUX DES VOYAGEURS - ACCES AUX QUAIS', 'FLUX DES VOYAGEURS - SORTIE DES QUAIS/ GARE', 'CONNEXION VERTICALE GARE/QUAIS'; translated, D17, D49; the light-blue swatch touches a road line and stays on the drawing); pdf2025:p38",
+      "legend": [
+        {
+          "swatch": "#D4D4D4",
+          "text": "Pedestrian flows: intermodal links to the station"
+        },
+        {
+          "swatch": "#293D93",
+          "text": "Passenger flows: station"
+        },
+        {
+          "swatch": "#F0B723",
+          "text": "Passenger flows: to the platforms"
+        },
+        {
+          "swatch": "#A85C6D",
+          "text": "Passenger flows: leaving the platforms and the station"
+        },
+        {
+          "swatch": "#BFE7FA",
+          "text": "Vertical connection, station to platforms"
+        }
+      ]
+    },
+    {
+      "src": "images/nouvelle-medina/nouvelle-medina-corner-perspective.png",
+      "title": "Corner perspective",
+      "caption": "White-model view of the glazed front and the canted glass corner under the canopy.",
+      "alt": "White-model perspective of the station: the long canopy carrying the station name in Arabic and French over the glazed front with sliding doors, and the glazed corner leaning outward at the right",
+      "kind": "drawing",
+      "source": "hq:Nouvelle Medina/A0 MEDINA F [1]_page-0001.jpg (white-model perspective, no printed title)"
+    },
+    {
+      "src": "images/nouvelle-medina/nouvelle-medina-street-view.jpg",
+      "title": "Street front",
+      "caption": "The canopy carries the station's name in Arabic and French, 'Gare Nouvelle Médina'.",
+      "alt": "Render of the station from the street: a white canopy rising to a point at the right over a glazed front and a patterned brick wall, the station name at its raised left end, cars and palms",
+      "kind": "render",
+      "source": "pdf2025:p38 + hq:Nouvelle Medina/A0 MEDINA F [1]_page-0001.jpg (signage 'GARE NOUVELLE MÉDINA' on the render)",
+      "size": "full"
+    },
+    {
+      "title": "Along the platforms",
+      "caption": "The station stands at the edge of the railway cutting; a stair and a lift tower lead up to the footbridge.",
+      "kind": "render",
+      "source": "pdf2025:p38 + hq:Nouvelle Medina/A0 MEDINA F [1]_page-0001.jpg; hq:Nouvelle Medina/Scene 11_6.png",
+      "items": [
+        {
+          "src": "images/nouvelle-medina/nouvelle-medina-platform-section.jpg",
+          "alt": "Render cut through the ground: the station with a patterned screen wall at the left, and at the right the railway cutting with a train, platforms with canopies and the footbridge stair, glass towers behind"
+        },
+        {
+          "src": "images/nouvelle-medina/nouvelle-medina-platform-view.jpg",
+          "alt": "Render from the platform: people waiting under a canopy against the concrete cutting wall, the glazed station above it, and a stair rising to the footbridge at the right"
+        }
+      ]
+    },
+    {
+      "title": "Sections through the cutting",
+      "caption": "Stairs and a lift lead from the hall down to the platforms.",
+      "kind": "render",
+      "source": "hq:Nouvelle Medina/Scene 6_5.png; hq:Nouvelle Medina/A0 MEDINA F [1]_page-0001.jpg",
+      "items": [
+        {
+          "src": "images/nouvelle-medina/nouvelle-medina-section-stairs.jpg",
+          "alt": "Section-render by day: two long stairs and a central lift shaft descend from the glazed station to the platforms, a train at the right, palms and a blue sky"
+        },
+        {
+          "src": "images/nouvelle-medina/nouvelle-medina-dusk-section.jpg",
+          "alt": "Section-perspective at dusk across the railway cutting: tracks and platforms at the left, a stair down from the station hall, and the hall with its patterned wall and roof at the right"
+        }
+      ]
+    },
+    {
+      "title": "Hall",
+      "caption": "Ticket gates and ticket machines in the hall, and the stair down to the platform.",
+      "kind": "render",
+      "source": "hq:Nouvelle Medina/A0 MEDINA F [1]_page-0001.jpg; hq:Nouvelle Medina/A0 MEDINA F [2]_page-0001.jpg",
+      "items": [
+        {
+          "src": "images/nouvelle-medina/nouvelle-medina-concourse.jpg",
+          "alt": "Interior render of the hall: a traveller with a suitcase at the ticket gates, a patterned brick wall with two screens, and glazing to the city"
+        },
+        {
+          "src": "images/nouvelle-medina/nouvelle-medina-hall-section.jpg",
+          "alt": "Section-render: people at ticket machines in the hall above, and below it a stair descending to the platform where a train waits"
+        }
+      ]
     }
   ],
   "date": "2025",

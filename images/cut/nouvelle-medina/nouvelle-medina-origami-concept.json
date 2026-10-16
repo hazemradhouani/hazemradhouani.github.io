@@ -1,0 +1,86 @@
+{
+ "src": "images/nouvelle-medina/nouvelle-medina-origami-concept.png",
+ "hash": "8213ee157c3abf8c",
+ "mode": "ink",
+ "from": [
+  2560,
+  1532
+ ],
+ "to": [
+  2559,
+  1531
+ ],
+ "offset": [
+  1,
+  1
+ ],
+ "paper": [
+  255,
+  255,
+  255
+ ],
+ "clip": [],
+ "ink": {
+  "ink": 35735,
+  "chromaticFraction": 0.0746,
+  "midtoneFraction": 0.5139,
+  "suggest": "colour"
+ },
+ "dark": "invert-accent",
+ "keep": null,
+ "specks": 28,
+ "tile": [
+  1280,
+  800,
+  640,
+  400
+ ],
+ "background": null,
+ "labels": [
+  {
+   "id": "folding",
+   "removed": 7,
+   "kept": 0,
+   "x": 45.877,
+   "y": 1.698,
+   "w": 5.862,
+   "h": 6.074
+  },
+  {
+   "id": "flat-sheet",
+   "removed": 28,
+   "kept": 0,
+   "x": 10.668,
+   "y": 22.992,
+   "w": 15.436,
+   "h": 13.194
+  },
+  {
+   "id": "refining",
+   "removed": 11,
+   "kept": 0,
+   "x": 79.523,
+   "y": 47.093,
+   "w": 8.284,
+   "h": 12.149
+  },
+  {
+   "id": "refining-2",
+   "removed": 7,
+   "kept": 0,
+   "x": 79.64,
+   "y": 61.528,
+   "w": 5.705,
+   "h": 6.074
+  },
+  {
+   "id": "angles",
+   "removed": 20,
+   "kept": 0,
+   "x": 2.931,
+   "y": 92.227,
+   "w": 22.821,
+   "h": 6.074
+  }
+ ]
+}

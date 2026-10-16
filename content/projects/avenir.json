@@ -1,0 +1,166 @@
+{
+  "slug": "avenir",
+  "order": 5.5,
+  "group": "paris",
+  "filters": [
+    "professional",
+    "new-build",
+    "residential"
+  ],
+  "title": "Rue de l'Avenir",
+  "run": "Studio BELEM | Villeneuve-la-Garenne",
+  "summary": "Housing over a corner shop and a semi-buried car park in Villeneuve-la-Garenne: Studio BELEM building-permit drawings, December 2025.",
+  "place": "Villeneuve-la-Garenne",
+  "year": "2025",
+  "descriptor": "New construction | residential and commercial",
+  "office": "Studio BELEM",
+  "quote": null,
+  "role": [],
+  "spec": [
+    {
+      "label": "Project type",
+      "value": "Residential and commercial / New construction",
+      "source": "hq:Villneuve la garenne/PC40-2_DOCUMENTS DESCRIPTIFS SECURITE INCENDIE ERP_merge [21-40]_page-0011.jpg ('Construction d'un bâtiment de logemebt', sic) + [1-20]_page-0009.jpg ('Local commercial 95,76 m²')"
+    },
+    {
+      "label": "Phase",
+      "value": "Building permit (PC)",
+      "source": "hq:Villneuve la garenne/PC40-2_DOCUMENTS DESCRIPTIFS SECURITE INCENDIE ERP_merge [1-20]_page-0001.jpg ('PERMIS DE CONSTRUIRE', 'Phase PC')"
+    },
+    {
+      "label": "Year",
+      "value": "2025 / Professional",
+      "source": "hq:Villneuve la garenne/PC40-2_DOCUMENTS DESCRIPTIFS SECURITE INCENDIE ERP_merge [1-20]_page-0001.jpg ('DATE DE L'INDICE 19/12/2025')"
+    },
+    {
+      "label": "Location",
+      "value": "2 rue de l'Avenir, Villeneuve-la-Garenne",
+      "source": "hq:Villneuve la garenne/PC40-2_DOCUMENTS DESCRIPTIFS SECURITE INCENDIE ERP_merge [1-20]_page-0001.jpg ('2 rue de l'avenir, 92000, Villeneuve-la-Garenne'; postcode left out)"
+    },
+    {
+      "label": "Office",
+      "value": "Studio BELEM",
+      "source": "hq:Villneuve la garenne/PC40-2_DOCUMENTS DESCRIPTIFS SECURITE INCENDIE ERP_merge [1-20]_page-0001.jpg ('Architecte : Studio Belem')"
+    },
+    {
+      "label": "Blocks",
+      "value": "R+7 and R+5",
+      "source": "hq:Villneuve la garenne/PC40-2_DOCUMENTS DESCRIPTIFS SECURITE INCENDIE ERP_merge [1-20]_page-0003.jpg ('R+7', 'R+5')"
+    },
+    {
+      "label": "Car park",
+      "value": "36 spaces, basement",
+      "source": "hq:Villneuve la garenne/PC40-2_DOCUMENTS DESCRIPTIFS SECURITE INCENDIE ERP_merge [1-20]_page-0008.jpg ('Plan SS1', spaces numbered 01 to 36)"
+    }
+  ],
+  "tag": "Studio BELEM / Building permit, December 2025 / Housing, shop and car park",
+  "narrative": [
+    {
+      "text": "The flood-risk prevention plan (PPRI) requires the whole building to be raised to 29.5 NGF, about 1.6 m above natural ground. The permit notice turns this into a plinth of bonded, perforated brick on which the two blocks sit: two offset low walls holding a continuous planter, so that the street is partly planted at passers-by's height. On the plinth, the active uses of the raised ground floor are arranged within a covered passage, wide open to the street, that links the two blocks; a semi-buried car park lies beneath, about 2.0 m below natural ground. A shop, at natural ground level, occupies the south end of block A, at the corner of avenue de Verdun and rue de l'Avenir.",
+      "source": "hq:Villneuve la garenne/PC40-2_DOCUMENTS DESCRIPTIFS SECURITE INCENDIE ERP_merge [121-140]_page-0001.jpg (architectural notice PC 4, page 8: 'La contrainte réglementaire liée au PPRI impose une surélévation générale du bâtiment jusqu'à la cote 29,5 NGF […] Un commerce, implanté au niveau du sol naturel, occupe la partie Sud du plot A, à l'angle de l'avenue de Verdun et de la rue de l'Avenir.'; translated, D17)"
+    },
+    {
+      "text": "The materials notice names bio-sourced materials (timber windows, French windows and curtain walls; timber decking or slabs on pedestals for the terraces), a geo-sourced substrate for the planted roofs, and reused solid brick.",
+      "source": "hq:Villneuve la garenne/PC40-2_DOCUMENTS DESCRIPTIFS SECURITE INCENDIE ERP_merge [141-160] [11-20]_page-0005.jpg (materials notice PC 10-1, page 5, '3/ PROVENANCES DES MATÉRIAUX': 'Matériaux biosourcés', 'Matériaux géosourcés', 'Matériaux issus du réemploi : Brique pleine.'; translated, D17)"
+    }
+  ],
+  "hero": {
+    "src": "images/avenir/avenir-avenue-de-verdun-render.jpg",
+    "alt": "Render of the eight-storey corner building in pale brick, its curved balconies full of plants, seen across avenue de Verdun on a sunny day, a shop with white awnings and café tables at its foot, the lower block behind on the left and a white neighbouring building on the right",
+    "caption": "The building from avenue de Verdun.",
+    "credit": "Render: Studio BELEM",
+    "source": "hq:Villneuve la garenne/PC40-2_DOCUMENTS DESCRIPTIFS SECURITE INCENDIE ERP_merge [141-160] [11-20]_page-0005.jpg (printed caption 'FIGURE 2. VUE DU BÂTIMENT DEPUIS L'AVENUE DE VERDUN.'; translated, D17)"
+  },
+  "figures": [
+    {
+      "src": "images/avenir/avenir-site-plan.png",
+      "title": "Site plan",
+      "caption": "Fire-safety site plan, PC40 sheet, 1/500, December 2025. The corner block (R+7) on avenue de Verdun and the lower block (R+5) along rue de l'Avenir, joined by an R+1 link. Following the sheet's legend, green arrows mark the accesses and red ones the emergency exits; the red dot and line give the fire hydrant on avenue de Verdun and its 60.41 m distance to the shop entrance.",
+      "alt": "Site plan: two pale blocks on a narrow plot along rue de l'Avenir, the square corner block and the long lower block, a curved link between them, avenue de Verdun on the left, houses and trees around, and red and green access marks",
+      "kind": "drawing",
+      "source": "hq:Villneuve la garenne/PC40-2_DOCUMENTS DESCRIPTIFS SECURITE INCENDIE ERP_merge [1-20]_page-0003.jpg (printed title 'PC40 - Dossier destiné à la vérification de la conformité aux règles de sécurité incendie', 'Plan masse securité', scale 1/500; legend 'Distance borne - établissement', 'Borne incendie', 'Sortie de secours', 'Accès à l'établissement'; labels 'Accès Logement', 'Accès Parking', 'Accès Commerce', '60,41 m'; translated, D17)"
+    },
+    {
+      "src": "images/avenir/avenir-plan-ground.png",
+      "title": "Raised ground floor",
+      "caption": "Plan N0H, 1/200, December 2025. On avenue de Verdun (left), the shop (95.76 m²) with its entrance and emergency exit, then the service rooms, the hall of block A and flat A01. The residents' entrance opens from rue de l'Avenir (top) onto the covered passage between the blocks; block B holds four flats (B01 to B04), its hall and stores for 20 and 60 bicycles, with the parking and bicycle accesses at the right.",
+      "alt": "Ground-floor plan in black, red and blue: a long shop along the left edge, a stair core and service rooms, a paved passage with an arc, the lower block with four flats around a central stair, bicycle racks, and a curved ramp at the right end; the street with parked cars along the top",
+      "kind": "drawing",
+      "source": "hq:Villneuve la garenne/PC40-2_DOCUMENTS DESCRIPTIFS SECURITE INCENDIE ERP_merge [1-20]_page-0009.jpg (printed title 'ANX0 - PLAN PROJET', 'Plan N0H', scale 1/200; labels 'Local commercial 95,76 m²', 'Sortie de secours commerce', 'Accès piéton aux logements', 'Accès Logement A', 'Accès Logement B', '20 Vélos', '60 Vélos', 'Accès parking', 'Accès vélo', 'A01', 'B01'-'B04'; translated, D17)"
+    },
+    {
+      "title": "Basement, first floor and top floor",
+      "caption": "Plans SS1, N01 and N07, 1/200, December 2025, top to bottom. The car park under both blocks, with 36 numbered spaces (two for disabled drivers), the pedestrian exits and the curved ramp; level 1, with flats in both blocks around their stair cores; level 7, the top floor of the corner block (flats A71 and A72), beside the roof of the lower block.",
+      "kind": "drawing",
+      "items": [
+        {
+          "src": "images/avenir/avenir-plan-basement.png",
+          "alt": "Basement plan in a hatched ground: numbered parking bays along both sides of a central aisle, a stair and lift at the left with a shop store below, and a curved ramp at the right"
+        },
+        {
+          "src": "images/avenir/avenir-plan-n01.png",
+          "alt": "First-floor plan: the square corner block with four flats around a central stair at the left, an arched opening over the passage, and the long block with six flats around its stair at the right"
+        },
+        {
+          "src": "images/avenir/avenir-plan-n07.png",
+          "alt": "Seventh-floor plan: two flats in the corner block at the left and, at the right, the roof of the long block with its roof outlets"
+        }
+      ],
+      "source": "hq:Villneuve la garenne/PC40-2_DOCUMENTS DESCRIPTIFS SECURITE INCENDIE ERP_merge [1-20]_page-0008.jpg, page-0010.jpg, page-0016.jpg (printed titles 'Plan SS1', 'PLAN N01', 'Plan N07', 'ANX0 - PLAN PROJET', scale 1/200; labels 'Sortie piéton principal', 'Issue de secours piéton secondaire', 'Rampe d'accès automobile', spaces '01'-'36', 'A71', 'A72'; translated, D17)"
+    },
+    {
+      "src": "images/avenir/avenir-section-aa.png",
+      "title": "Longitudinal section A-A",
+      "caption": "PC3 sheet, 1/200, December 2025. From avenue de Verdun (left): the corner block, eight levels over its shop; the low link between the blocks under a planted roof; the lower block, six levels; and the car-park ramp, all over a shared basement. Levels from +25.95 NGF in the basement to +52.95 NGF at the top of the corner block.",
+      "alt": "Long section: on the left an eight-storey block with stairs and flats over a glazed shop, a low planted link in the middle, a six-storey block on the right with a curved stair, a basement car park running beneath both, and NGF levels in blue",
+      "kind": "drawing",
+      "source": "hq:Villneuve la garenne/PC40-2_DOCUMENTS DESCRIPTIFS SECURITE INCENDIE ERP_merge [101-120]_page-0009.jpg (printed title 'PC3 - PLANS DE COUPE DU TERRAIN AVEC IMPLANTATION DU PROJET', 'Coupe longitudinale AA', scale 1/200; labels 'Avenue de Verdun', 'Local commercial', 'SS1 +25,95 NGF', 'NTa +52,95 NGF'; translated, D17)"
+    },
+    {
+      "src": "images/avenir/avenir-section-ee.png",
+      "title": "Cross-section E-E",
+      "caption": "PC3 sheet, 1/200, December 2025. Through the corner block, rue de l'Avenir on the right: natural ground at +27.98 NGF, the raised ground floor at +29.50 NGF above the basement at +25.95 NGF, and the neighbouring ground at +29.82 NGF on the left.",
+      "alt": "Cross-section of the corner block: eight floors of flats with balconies in beige brick seen beyond, a planted terrace at the first floor, the ground floor raised above the street, the basement below, and NGF levels in blue on the right",
+      "kind": "drawing",
+      "source": "hq:Villneuve la garenne/PC40-2_DOCUMENTS DESCRIPTIFS SECURITE INCENDIE ERP_merge [101-120]_page-0013.jpg (printed title 'PC3 - PLANS DE COUPE DU TERRAIN AVEC IMPLANTATION DU PROJET', 'Coupe transversale EE', scale 1/200; labels 'NIV SOL NATUREL +27.98 NGF', 'N0Haut +29,50 NGF', 'SS1 +25,95 NGF', 'N VOISIN +29.82 NGF'; translated, D17)"
+    },
+    {
+      "src": "images/avenir/avenir-west-elevation.png",
+      "title": "West elevation, rue de l'Avenir",
+      "caption": "PC5 sheet, 1/200, December 2025. The rue de l'Avenir front, 67.52 m between the property lines: the lower block (left) on columns above the planted plinth, the corner block (right). At street level, the bicycle and parking accesses and a pedestrian emergency exit at the left, the residents' entrance between the blocks. Materials, by the codes on the drawing: M1 timber joinery; M2 low-carbon concrete tinted in the mass, light beige; M3 glass bricks; M4 solid brick; M5 powder-coated metalwork, 'mocha' brown; M6 planter; M7 light beige facing tiles.",
+      "alt": "Coloured street elevation of two beige brick blocks with dark balcony railings and planted roofs: a six-storey block on the left raised on columns over a planted plinth, a glazed entrance between the blocks, and an eight-storey block on the right; red property lines and blue NGF levels",
+      "kind": "drawing",
+      "source": "hq:Villneuve la garenne/PC40-2_DOCUMENTS DESCRIPTIFS SECURITE INCENDIE ERP_merge [121-140]_page-0014.jpg (printed title 'PC5 - PLANS DE FACADES ET TOITURES', 'Élévation ouest', scale 1/200; dimension '67,52'; labels 'Accès vélo', 'Accès parking', 'Sortie de secours piétons', 'Accès piéton aux logements'; legend 'M1 Menuiseries en bois', 'M2 Béton bas carbone teinté dans la masse, teinte beige claire', 'M3 Briques de verre', 'M4 Brique pleine', 'M5 Serrurerie en métal thermolaqué, brune \" mocha \"', 'M6 Jardinière', 'M7 Plaquette de parement beige clair'; translated, D17)"
+    },
+    {
+      "src": "images/avenir/avenir-south-elevation.png",
+      "title": "South elevation, avenue de Verdun",
+      "caption": "PC5 sheet, 1/200, December 2025. The corner block's front on avenue de Verdun, 19.22 m between the property lines, with the glazed shop at street level, its access and its emergency exit; natural ground at +27.98 NGF. Material codes as listed for the west elevation.",
+      "alt": "Elevation of the eight-storey corner block: seven floors of beige brick with tall windows and dark railings, terraces stepping back at the upper left, a fully glazed shop on the ground floor, neighbouring buildings in outline on both sides",
+      "kind": "drawing",
+      "source": "hq:Villneuve la garenne/PC40-2_DOCUMENTS DESCRIPTIFS SECURITE INCENDIE ERP_merge [121-140]_page-0015.jpg (printed title 'PC5 - PLANS DE FACADES ET TOITURES', 'Élévation sud', scale 1/200; dimension '19,22'; labels 'Sortie de secours commerce', 'Accès commerce', 'NIV SOL NATUREL +27,98 NGF'; translated, D17)"
+    },
+    {
+      "src": "images/avenir/avenir-planters-render.jpg",
+      "title": "Planters on avenue de Verdun",
+      "caption": "",
+      "alt": "Render at street level: passers-by beside a red-brick low wall topped by a continuous planter, slender columns and a tall timber-framed glazed entrance behind, a kiosk with a blue shutter on the left",
+      "kind": "render",
+      "credit": "Render: Studio BELEM",
+      "source": "hq:Villneuve la garenne/PC40-2_DOCUMENTS DESCRIPTIFS SECURITE INCENDIE ERP_merge [121-140]_page-0001.jpg (printed caption 'FIGURE 6. VUE DES JARDINIÈRES DEPUIS L'AVENUE DE VERDUN.'; translated, D17)"
+    },
+    {
+      "src": "images/avenir/avenir-shop-render.jpg",
+      "title": "The shop on avenue de Verdun",
+      "caption": "",
+      "alt": "Render of the shop front: white awnings marked Epicerie, Vins and Thé over a timber-framed glazed front, customers at the window and café tables under parasols on the pavement, brick upper floors above",
+      "kind": "render",
+      "credit": "Render: Studio BELEM",
+      "source": "hq:Villneuve la garenne/PC40-2_DOCUMENTS DESCRIPTIFS SECURITE INCENDIE ERP_merge [121-140]_page-0001.jpg (printed caption 'FIGURE 7. VUE DU COMMERCE DEPUIS L'AVENUE DE VERDUN.'; translated, D17)"
+    }
+  ],
+  "date": "2025",
+  "honour": null,
+  "film": null,
+  "noRoleClaim": true
+}

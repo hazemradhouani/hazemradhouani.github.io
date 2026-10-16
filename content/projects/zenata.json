@@ -54,64 +54,278 @@
   "honour": "Competition: 2nd Place | Casablanca Metropolitan Rail",
   "hero": {
     "src": "images/zenata/zenata-platform-render.jpg",
-    "alt": "Render of Zenata Station from the platform, its cantilevered hall above the tracks",
+    "alt": "Render of Zenata Station from the platform: a white two-level hall bridging the tracks under a sloping roof held by cables from a leaning mast, the station name in French and Arabic on its side, and a train at the platform",
     "credit": null,
-    "source": "pdf2025:p7"
+    "source": "pdf2025:p7 + hq:Zenata/Scene 51.png"
   },
   "figures": [
     {
-      "src": "images/zenata/zenata-elevation.jpg",
-      "title": "Long elevation",
-      "caption": "Long elevation. Levels +0.15, +7.30, +16.00 and +27.00.",
-      "alt": "Long elevation of Zenata Station with its stayed roof",
-      "kind": "drawing",
-      "source": "pdf2025:p8",
-      "size": "full"
-    },
-    {
-      "src": "images/zenata/zenata-plans.jpg",
-      "title": "Plans",
-      "caption": "Level +00.00. Level +04.20. Level +07.75.",
-      "alt": "Plans of Zenata Station at levels +00.00, +04.20 and +07.75",
-      "kind": "drawing",
-      "source": "pdf2025:p9",
-      "size": "full"
-    },
-    {
-      "title": "Interiors",
-      "caption": "Hall, concourse and the station at dusk.",
+      "src": "images/zenata/zenata-aerial-model.jpg",
+      "title": "Aerial view",
+      "caption": "The station spans the tracks between two car parks.",
+      "alt": "Monochrome aerial render of the station over the railway: a long roof with a grid of panels and a leaning mast, car parks with planted strips on both sides of the tracks, a train approaching, low buildings and open land around",
       "kind": "render",
+      "source": "hq:Zenata/Scene 13.png"
+    },
+    {
+      "src": "images/zenata/zenata-site-access.png",
+      "title": "Accesses",
+      "caption": "A pedestrian entrance on each side of the tracks, car parks on both sides and the vehicle access.",
+      "alt": "Axonometric of the station across the tracks: black arrows at a pedestrian entrance on each side, pink car parks marked P on both sides, a pale yellow area beside the tracks, a red arrow at the car park entrance and dashed routes",
+      "kind": "drawing",
+      "source": "hq:Zenata/2025 - Hazem radhouani - Portfolio - HQ [6-10]_page-0004.jpg (legend 'Accès Piétons', 'Espaces Parking', 'Avitaillement', 'Accès Véhicules'; translated, D17, D49); pdf2025:p8",
+      "legend": [
+        {
+          "swatch": "#241E1E",
+          "text": "Pedestrian access"
+        },
+        {
+          "swatch": "#FDE8EF",
+          "text": "Parking"
+        },
+        {
+          "swatch": "#FEFAD7",
+          "text": "Provisioning"
+        },
+        {
+          "swatch": "#DA2129",
+          "text": "Vehicle access"
+        }
+      ]
+    },
+    {
+      "title": "Plans",
+      "caption": "Levels +00.00, +04.20 and +07.75, left to right. At +00.00 the platforms run between the two buildings; at +07.75 the main hall (1 026.69 m²) opens onto the boarding area (398.50 m²).",
+      "kind": "drawing",
+      "source": "hq:Zenata/2025 - Hazem radhouani - Portfolio - HQ [6-10]_page-0005.jpg (printed titles 'LEVEL +00.00', 'LEVEL +04.20', 'LEVEL +07.75'; room labels 'Quais', 'HALL 01 1026.69 m²', 'Espace d'embarquement 398.50m²'; translated, D17); pdf2025:p9",
       "items": [
         {
-          "src": "images/zenata/zenata-hall-render.jpg",
-          "alt": "Render of the station hall"
+          "src": "images/zenata/zenata-plan-000.png",
+          "alt": "Plan at level +00.00: two buildings on either side of the platforms, with technical rooms, a police room, changing rooms and halls with stairs up to +4.00"
         },
         {
-          "src": "images/zenata/zenata-concourse-render.jpg",
-          "alt": "Render of the concourse with passengers"
+          "src": "images/zenata/zenata-plan-420.png",
+          "alt": "Plan at level +04.20: two mezzanines with prayer and ablution rooms for men and women, changing rooms, offices and a shop, around voids over the halls"
         },
         {
-          "src": "images/zenata/zenata-dusk-render.jpg",
-          "alt": "Render of the station hall at dusk"
+          "src": "images/zenata/zenata-plan-775.png",
+          "alt": "Plan at level +07.75: the main hall with shops along one side, the ticket hall and sales area, offices, the boarding area, the group reception area and toilets"
         }
-      ],
-      "source": "pdf2025:p10"
+      ]
+    },
+    {
+      "src": "images/zenata/zenata-long-elevation.png",
+      "title": "Long elevation",
+      "caption": "The mast rises to +27.00 and the roof to +16.00; the concourse floor is at +7.30 above the ground at +0.15.",
+      "alt": "Long elevation of the station: a two-level glazed hall under a sloping roof, a leaning mast at the left with cables to the roof, trees in front, and dashed level lines",
+      "kind": "drawing",
+      "source": "hq:Zenata/2025 - Hazem radhouani - Portfolio - HQ [6-10]_page-0004.jpg (levels +27.00, +16.00, +7.30, +0.15); pdf2025:p8"
+    },
+    {
+      "src": "images/zenata/zenata-end-elevation.png",
+      "title": "End elevation",
+      "caption": "The end façade carries the station name in French and Arabic; its roof edge is marked 16.18.",
+      "alt": "End elevation: a gridded façade with 'GARE DE ZENATA' and the Arabic name, split by the mast with cables on both sides, and a stair descending at the right",
+      "kind": "drawing",
+      "source": "hq:Zenata/2025 - Hazem radhouani - Portfolio - HQ [6-10]_page-0004.jpg (signage 'GARE DE ZENATA', 'محطة زناتة'; level 16.18); pdf2025:p8"
+    },
+    {
+      "src": "images/zenata/zenata-programme-000.png",
+      "title": "Programme, level +00.00",
+      "caption": "Service rooms of the two buildings beside the tracks.",
+      "alt": "Axonometric of the ground level beside the tracks: technical rooms in blue in one building, maintenance, toilets, changing rooms and storage in yellow, orange and pink in the other",
+      "kind": "drawing",
+      "source": "hq:Zenata/2025 - Hazem radhouani - Portfolio - HQ [11-15]_page-0001.jpg (legend; translated, D17); level from the matching room names on plan 'LEVEL +00.00' (pdf2025:p9); pdf2025:p10",
+      "legend": [
+        {
+          "swatch": "#9D9AC5",
+          "text": "Police post"
+        },
+        {
+          "swatch": "#BDE8F9",
+          "text": "Technical rooms"
+        },
+        {
+          "swatch": "#FEF783",
+          "text": "Maintenance"
+        },
+        {
+          "swatch": "#EC987E",
+          "text": "Toilets and changing rooms, ground-floor ticket office"
+        },
+        {
+          "swatch": "#FFD0E2",
+          "text": "Onboard services, waste room"
+        },
+        {
+          "swatch": "#F8C9B9",
+          "text": "Technical rooms"
+        },
+        {
+          "swatch": "#F8D49A",
+          "text": "Miscellaneous"
+        },
+        {
+          "swatch": "#B8D9AA",
+          "text": "Gardening, storage room"
+        }
+      ]
+    },
+    {
+      "src": "images/zenata/zenata-programme-420.png",
+      "title": "Programme, level +04.20",
+      "caption": "The mezzanines: prayer rooms, changing rooms, cleaning and logistics.",
+      "alt": "Axonometric of the mezzanine level: prayer and ablution rooms in green-grey in one building, shops, changing rooms, cleaning and offices in pink, yellow and lilac in the other",
+      "kind": "drawing",
+      "source": "hq:Zenata/2025 - Hazem radhouani - Portfolio - HQ [11-15]_page-0001.jpg (legend; translated, D17); level from the matching room names on plan 'LEVEL +04.20' (pdf2025:p9); pdf2025:p10",
+      "legend": [
+        {
+          "swatch": "#9F7171",
+          "text": "Retail"
+        },
+        {
+          "swatch": "#FAD88E",
+          "text": "Cleaning"
+        },
+        {
+          "swatch": "#E7CDCE",
+          "text": "Technical room: sound system, information"
+        },
+        {
+          "swatch": "#CA999D",
+          "text": "Changing rooms, men and women"
+        },
+        {
+          "swatch": "#C7ADD2",
+          "text": "Miscellaneous"
+        },
+        {
+          "swatch": "#D4C3AF",
+          "text": "Toilets"
+        },
+        {
+          "swatch": "#ADB9C7",
+          "text": "Logistics, offices"
+        },
+        {
+          "swatch": "#87A0A4",
+          "text": "Prayer and ablution rooms, men"
+        },
+        {
+          "swatch": "#89BEB6",
+          "text": "Prayer and ablution rooms, women"
+        }
+      ]
+    },
+    {
+      "src": "images/zenata/zenata-programme-775.png",
+      "title": "Programme, level +07.75",
+      "caption": "The level over the tracks: ticket hall, sales, shops, boarding and group reception.",
+      "alt": "Axonometric of the upper level spanning the tracks: pale coloured zones for shops, the ticket hall, sales, boarding and group reception, toilets in blue at one end and back offices at the other",
+      "kind": "drawing",
+      "source": "hq:Zenata/2025 - Hazem radhouani - Portfolio - HQ [11-15]_page-0001.jpg (legend; translated, D17); level from the matching room names on plan 'LEVEL +07.75' (pdf2025:p9); pdf2025:p10",
+      "legend": [
+        {
+          "swatch": "#BD978C",
+          "text": "Back office"
+        },
+        {
+          "swatch": "#FEF0D5",
+          "text": "Shops"
+        },
+        {
+          "swatch": "#FCE1CE",
+          "text": "Ticket hall"
+        },
+        {
+          "swatch": "#FFEAF1",
+          "text": "Sales area"
+        },
+        {
+          "swatch": "#F9F2E8",
+          "text": "Boarding area"
+        },
+        {
+          "swatch": "#EBF4E3",
+          "text": "Group reception area"
+        },
+        {
+          "swatch": "#D0EDFB",
+          "text": "Toilets, men and women"
+        }
+      ]
+    },
+    {
+      "src": "images/zenata/zenata-profile-diagrams.png",
+      "title": "Profile diagrams",
+      "caption": "Five diagrams of the station's profile; in four of them one element is drawn in red: the mast and cables, the roof, the base and the inclined end wall, and a pair of arrows.",
+      "alt": "Five identical side profiles of the station with a tree at the left, stacked; red marks in turn the mast and cables, the roof outline, the base line and the right-hand wall, and two arrows inside",
+      "kind": "drawing",
+      "source": "hq:Zenata/2025 - Hazem radhouani - Portfolio - HQ [6-10]_page-0004.jpg (no printed title or text); pdf2025:p8"
     },
     {
       "src": "images/zenata/zenata-exterior-render.jpg",
       "title": "Exterior",
       "caption": "",
-      "alt": "Exterior render of Zenata Station",
+      "alt": "Daylight render of the station's end façade with 'GARE DE ZENATA' and the Arabic name, the leaning mast and its cables beside it, and planting in front",
       "kind": "render",
       "source": "pdf2025:p10"
     },
     {
-      "src": "images/zenata/zenata-programme-section.jpg",
-      "title": "Programme and Longitudinal Section",
-      "caption": "Top: programme N01, service level, colour-coded zoning of technical and support spaces: commerce, cleaning, technical rooms, lockers, prayer rooms with ablution areas (male and female), sanitary facilities. Centre: programme N02, main passenger concourse, back office, commercial units, ticketing hall, sales zone, boarding area, group welcome space. Bottom: longitudinal section, rail at grade +0.15 m. Passenger concourse at +7.30 m. Upper glazed level at +16.00 m. Canopy peak at +27.00 m. Stratified passenger flow across all levels within the single covered civic structure.",
-      "alt": "Zenata Station programme plans N01 and N02 and longitudinal section, colour-coded zoning and full section from rail level to canopy",
-      "kind": "drawing",
-      "source": "site"
+      "title": "Interiors",
+      "caption": "Ticket gates and shops; the waiting hall.",
+      "kind": "render",
+      "items": [
+        {
+          "src": "images/zenata/zenata-hall-render.jpg",
+          "alt": "Render of the hall: glass ticket gates before shop fronts, benches and a glazed balustrade over an escalator"
+        },
+        {
+          "src": "images/zenata/zenata-waiting-hall.jpg",
+          "alt": "Render of the waiting hall: rows of black seats, a glazed wall with a planted strip and a screen of vertical fins above, escalators at the right"
+        }
+      ],
+      "source": "pdf2025:p10 + hq:Zenata/Scene 64.png"
+    },
+    {
+      "title": "At dusk",
+      "caption": "The side of the station with the mast and stairs; the cantilevered roof seen from the end.",
+      "kind": "render",
+      "items": [
+        {
+          "src": "images/zenata/zenata-side-dusk.jpg",
+          "alt": "Render at dusk of the station's side: the leaning mast and cables over a long roof, the lit two-level hall, external stairs and planting along a road"
+        },
+        {
+          "src": "images/zenata/zenata-dusk-render.jpg",
+          "alt": "Render at dusk of the station's end: the deep roof overhang over a lit two-level hall with escalators and stairs"
+        }
+      ],
+      "source": "hq:Zenata/2025 - Hazem radhouani - Portfolio - HQ [11-15]_page-0001.jpg (left column, middle render); pdf2025:p10"
+    },
+    {
+      "src": "images/zenata/zenata-dusk-corner.jpg",
+      "title": "The lit station",
+      "caption": "Dusk, with the station's name in French and Arabic on the façade.",
+      "alt": "Render at dusk of the station from a field: the long sloping roof cantilevered at the right, the leaning mast and cables behind, lit glazed halls, external stairs and the sign 'GARE DE ZENATA' with its Arabic name",
+      "kind": "render",
+      "source": "hq:Zenata/يصي.png (signage 'GARE DE ZENATA', 'محطة زناتة')"
+    },
+    {
+      "title": "At night",
+      "caption": "The glazed entrance with its escalators; the stairs under the cantilevered roof.",
+      "kind": "render",
+      "items": [
+        {
+          "src": "images/zenata/zenata-entrance-night.jpg",
+          "alt": "Night render of the entrance: a glazed double-height hall with escalators and stairs, a person at the door, cars parked in front and the mast against the sky"
+        },
+        {
+          "src": "images/zenata/zenata-underside-night.jpg",
+          "alt": "Night render of the roof overhang from below: zigzag stairs against a lit wall, screens inside the upper hall and escalators to the right"
+        }
+      ],
+      "source": "hq:Zenata/Scene 35.png; hq:Zenata/2025 - Hazem radhouani - Portfolio - HQ [11-15]_page-0001.jpg (left column, bottom render); pdf2025:p10"
     }
   ],
   "film": "zenata",

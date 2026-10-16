@@ -1,0 +1,42 @@
+{
+ "src": "images/ain-sebaa/ain-sebaa-flows-secondary.png",
+ "hash": "5405aa3127a9a627",
+ "mode": "ink",
+ "from": [
+  1300,
+  1445
+ ],
+ "to": [
+  1298,
+  1368
+ ],
+ "offset": [
+  2,
+  76
+ ],
+ "paper": [
+  255,
+  255,
+  255
+ ],
+ "clip": [
+  "right"
+ ],
+ "ink": {
+  "ink": 86874,
+  "chromaticFraction": 0.0593,
+  "midtoneFraction": 0.2781,
+  "suggest": "accent"
+ },
+ "dark": "invert-accent",
+ "keep": null,
+ "specks": 771,
+ "tile": [
+  320,
+  600,
+  640,
+  400
+ ],
+ "background": null,
+ "labels": []
+}

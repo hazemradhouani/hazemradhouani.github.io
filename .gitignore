@@ -5,3 +5,11 @@
 # Tooling scratch output
 /tools/.cache/
 node_modules/
+# Owner-supplied source libraries: immutable local inputs, never published (D48)
+/Images HQ/
+/Skills/
+/docs/Skills/
+# HQ drawing masters are local build intermediates (D55): pages show their cutouts in images/cut/,
+# which are committed; the masters are re-created from Images HQ/ by tools/import-hq-media.mjs.
+# (PNG files already tracked, such as the thesis books, stay tracked.)
+/images/*/*.png

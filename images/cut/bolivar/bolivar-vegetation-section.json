@@ -1,0 +1,40 @@
+{
+ "src": "images/bolivar/bolivar-vegetation-section.jpg",
+ "hash": "bdc815992c286a58",
+ "mode": "ink",
+ "from": [
+  888,
+  554
+ ],
+ "to": [
+  842,
+  554
+ ],
+ "offset": [
+  39,
+  0
+ ],
+ "paper": [
+  246,
+  240,
+  233
+ ],
+ "clip": [],
+ "ink": {
+  "ink": 11563,
+  "chromaticFraction": 0.6459,
+  "midtoneFraction": 0.6709,
+  "suggest": "colour"
+ },
+ "dark": "invert-accent",
+ "keep": null,
+ "specks": 391,
+ "tile": [
+  0,
+  0,
+  640,
+  400
+ ],
+ "background": null,
+ "labels": []
+}

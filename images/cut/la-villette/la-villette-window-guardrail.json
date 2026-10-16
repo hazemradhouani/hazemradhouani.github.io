@@ -1,0 +1,140 @@
+{
+ "src": "images/la-villette/la-villette-window-guardrail.png",
+ "hash": "ef4a2ff4d7f5d98c",
+ "mode": "ink",
+ "from": [
+  2536,
+  2366
+ ],
+ "to": [
+  2533,
+  2357
+ ],
+ "offset": [
+  3,
+  6
+ ],
+ "paper": [
+  255,
+  255,
+  255
+ ],
+ "clip": [],
+ "ink": {
+  "ink": 131983,
+  "chromaticFraction": 0.0572,
+  "midtoneFraction": 0.5974,
+  "suggest": "accent"
+ },
+ "dark": "invert-accent",
+ "keep": null,
+ "specks": 906,
+ "tile": [
+  320,
+  200,
+  640,
+  400
+ ],
+ "background": null,
+ "labels": [
+  {
+   "id": "finish",
+   "removed": 9,
+   "kept": 0,
+   "x": 50.178,
+   "y": 3.691,
+   "w": 4.066,
+   "h": 1.061
+  },
+  {
+   "id": "screed",
+   "removed": 6,
+   "kept": 0,
+   "x": 50.138,
+   "y": 6.491,
+   "w": 4.501,
+   "h": 1.315
+  },
+  {
+   "id": "insulation",
+   "removed": 9,
+   "kept": 0,
+   "x": 50.178,
+   "y": 11.286,
+   "w": 4.698,
+   "h": 1.061
+  },
+  {
+   "id": "ipe",
+   "removed": 3,
+   "kept": 0,
+   "x": 50.178,
+   "y": 14.51,
+   "w": 1.974,
+   "h": 1.061
+  },
+  {
+   "id": "sprayed",
+   "removed": 6,
+   "kept": 0,
+   "x": 50.178,
+   "y": 21.977,
+   "w": 4.54,
+   "h": 1.315
+  },
+  {
+   "id": "plenum",
+   "removed": 7,
+   "kept": 0,
+   "x": 50.178,
+   "y": 25.456,
+   "w": 4.264,
+   "h": 1.061
+  },
+  {
+   "id": "plasterboard",
+   "removed": 4,
+   "kept": 0,
+   "x": 50.099,
+   "y": 28.978,
+   "w": 4.224,
+   "h": 1.018
+  },
+  {
+   "id": "blackout",
+   "removed": 7,
+   "kept": 0,
+   "x": 50.178,
+   "y": 32.541,
+   "w": 4.935,
+   "h": 1.061
+  },
+  {
+   "id": "window",
+   "removed": 19,
+   "kept": 0,
+   "x": 50.178,
+   "y": 36.317,
+   "w": 12.712,
+   "h": 1.103
+  },
+  {
+   "id": "guardrail",
+   "removed": 6,
+   "kept": 0,
+   "x": 50.138,
+   "y": 72.592,
+   "w": 7.067,
+   "h": 1.315
+  },
+  {
+   "id": "sill",
+   "removed": 12,
+   "kept": 0,
+   "x": 50.099,
+   "y": 82.817,
+   "w": 9.199,
+   "h": 1.061
+  }
+ ]
+}

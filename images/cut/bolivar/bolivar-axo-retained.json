@@ -1,0 +1,44 @@
+{
+ "src": "images/bolivar/bolivar-axo-retained.png",
+ "hash": "710d88b3930ad90c",
+ "mode": "ink",
+ "from": [
+  1724,
+  689
+ ],
+ "to": [
+  1724,
+  689
+ ],
+ "offset": [
+  0,
+  0
+ ],
+ "paper": [
+  249,
+  249,
+  249
+ ],
+ "clip": [
+  "top",
+  "right",
+  "bottom"
+ ],
+ "ink": {
+  "ink": 31379,
+  "chromaticFraction": 0,
+  "midtoneFraction": 0.2494,
+  "suggest": "mono"
+ },
+ "dark": "invert-accent",
+ "keep": null,
+ "specks": 399,
+ "tile": [
+  640,
+  200,
+  640,
+  400
+ ],
+ "background": null,
+ "labels": []
+}

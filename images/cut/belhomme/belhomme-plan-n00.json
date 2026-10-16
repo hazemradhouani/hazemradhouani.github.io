@@ -1,0 +1,42 @@
+{
+ "src": "images/belhomme/belhomme-plan-n00.jpg",
+ "hash": "b0715494e3b592e6",
+ "mode": "ink",
+ "from": [
+  656,
+  530
+ ],
+ "to": [
+  641,
+  513
+ ],
+ "offset": [
+  15,
+  0
+ ],
+ "paper": [
+  246,
+  240,
+  233
+ ],
+ "clip": [
+  "top"
+ ],
+ "ink": {
+  "ink": 16381,
+  "chromaticFraction": 0.1178,
+  "midtoneFraction": 0.5433,
+  "suggest": "colour"
+ },
+ "dark": "invert-accent",
+ "keep": null,
+ "specks": 801,
+ "tile": [
+  0,
+  0,
+  640,
+  400
+ ],
+ "background": null,
+ "labels": []
+}

@@ -8,7 +8,7 @@
   ],
   "title": "Villa Papillon",
   "run": "Yassir Khalil Studio | Marrakech",
-  "summary": "Contemporary courtyard villa in the Marrakech Palmeraie, developed in Revit at Yassir Khalil Studio.",
+  "summary": "Contemporary villa in the Marrakech Palmeraie, developed in Revit at Yassir Khalil Studio.",
   "place": "Marrakech, Palmeraie",
   "year": "2024",
   "descriptor": "Residential | contemporary villa",
@@ -43,20 +43,25 @@
   "tag": "Yassir Khalil Studio / Residential / Marrakech",
   "narrative": [
     {
-      "text": "A contemporary villa in Morocco for a private client, organised around a central courtyard that brings light and ventilation to the interior while maintaining privacy from the street. The plan unfolds from a compressed entry sequence into generous living spaces that open progressively toward the garden and pool on the south side, calibrating the relationship between interior, semi-exterior, and exterior according to the daily rhythms of occupation and the seasonal movement of the sun.",
-      "source": "site"
-    },
-    {
       "text": "The architectural language draws on the spatial logic of Moroccan domestic architecture while employing a contemporary material palette: reinforced concrete structure with white plaster, raw stone from the region, and timber elements. The villa was designed and produced in Revit at Yassir Khalil Studio, with Hazem responsible for the architectural development and client coordination from schematic design through to construction documentation.",
       "source": "site"
     }
   ],
   "hero": {
-    "src": "images/papillon/thumb.jpg",
-    "alt": "Render of Villa Papillon, contemporary villa, Marrakech",
-    "credit": null
+    "src": "images/papillon/papillon-pool.jpg",
+    "alt": "Render of the villa beside the pool: a white upper volume over a terracotta base, two woven hanging chairs under a terracotta overhang, glass balustrades along the upper terrace, palms, a small sculpture and low green hills beyond",
+    "credit": null,
+    "source": "site + hq:VILLAS/Image_28.png"
   },
   "figures": [
+    {
+      "src": "images/papillon/papillon-site-plan.png",
+      "title": "Site plan",
+      "caption": "1:200, north at the top. The villa near the eastern end of its plot, with the L-shaped pool along its western side and the garden and its trees to the west; two lawns at the north-east corner.",
+      "alt": "Site plan in grey linework: a long, irregular four-sided plot with scattered tree symbols, the villa's white roof with dark shaded sloping faces near its eastern end, an L-shaped blue pool along the roof's western and southern sides, three small dark rectangles along its southern edge, two yellow-green lawns at the north-east corner and dimension lines across the plot",
+      "kind": "drawing",
+      "source": "hq:VILLAS/2_page-0001.jpg (printed title 'Plan Situation | Ech 1/200' and north arrow 'N', 'O', 'E', 'S', cropped out, translated from French, D17; intrinsic 'PISCINE' (pool) and dimensions stay); pdf2025:p29 ('Site Plan')"
+    },
     {
       "src": "images/papillon/papillon-plans.jpg",
       "title": "Plans",
@@ -67,20 +72,28 @@
       "size": "wide"
     },
     {
+      "src": "images/papillon/papillon-facade-front.jpg",
+      "title": "Front façade",
+      "caption": "The inclined white frame of the upper floor over the terracotta frame of the ground floor, both glazed, with a tall door at the right.",
+      "alt": "Frontal render of the villa among palms: an inclined white frame around the glazed upper floor, a wider terracotta frame around the glazed ground floor with dark piers between the panes, a tall dark door at the right, a cactus at the left and a strip of grass along a pale paved road",
+      "kind": "render",
+      "source": "pdf2025:p31 + hq:VILLAS/Image_19(1).png (no printed title)"
+    },
+    {
       "title": "Views",
-      "caption": "Terracotta and white volumes around the garden and pool.",
+      "caption": "The terracotta wall and frame below the white upper volume.",
       "kind": "render",
       "items": [
         {
-          "src": "images/papillon/papillon-render-terracotta.jpg",
-          "alt": "Render of a white volume over a terracotta wall among palms"
+          "src": "images/papillon/papillon-terracotta-wall.jpg",
+          "alt": "Render of a long terracotta wall carrying the shadow of a palm, below the white upper volume, with a palm and a cactus at the left and a strip of grass along a sandy road"
         },
         {
-          "src": "images/papillon/papillon-render-entrance.jpg",
-          "alt": "Render of the villa with its glazed corner and terracotta volume"
+          "src": "images/papillon/papillon-facade-angle.jpg",
+          "alt": "Three-quarter render of the villa: an inclined white volume at the left, the terracotta frame around the glazed ground floor, the glazed upper floor set back under a white frame, a tall cactus, palms and planting along a pale road"
         }
       ],
-      "source": "pdf2025:p31"
+      "source": "pdf2025:p31 + hq:VILLAS/Image_21(1).png and Image_20(1).png (no printed titles)"
     }
   ],
   "date": "2024",

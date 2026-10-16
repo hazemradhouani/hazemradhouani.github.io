@@ -1,0 +1,150 @@
+{
+  "version": 1,
+  "sourceRoot": "Images HQ",
+  "assets": [
+    {
+      "source": "Images HQ/BOLIVAR/NB_StudioBelem_SimonBolivar_E-01_AvSimonBolivar-Reprise2_S2_20240522.jpg",
+      "output": "images/bolivar/bolivar-street-render-hq.jpg",
+      "sha256": "e43b8687e86088f5e9c5330aa7a779b25b9168e3f97d0289d98c448bfd5a2504",
+      "crop": null,
+      "treatment": "source-preserving exact copy of the reviewed full scene",
+      "darkTreatment": "preserve-colour-scene",
+      "credit": "Render: Studio BELEM",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "captionEvidence": "Exact visual match to the existing Bolívar street-view caption and alt text (content/projects/bolivar.json; pdf2026:p18).",
+      "reviewStatus": "approved"
+    },
+    {
+      "source": "Images HQ/BOLIVAR/NB_StudioBelem_SimonBolivar_E-02_AvSimonBolivar-Reprise2V-Sun1_20240522-mod.jpg",
+      "output": "images/bolivar/bolivar-courtyard-render-hq.jpg",
+      "sha256": "32f29b1836754eb4322b2ba0212a2b9a2d9e8cfbf33ec15f51d964e2abdb9710",
+      "crop": null,
+      "treatment": "source-preserving exact copy of the reviewed full scene",
+      "darkTreatment": "preserve-colour-scene",
+      "credit": "Render: Studio BELEM",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "captionEvidence": "Exact visual match to the existing Bolívar courtyard hero caption and alt text (content/projects/bolivar.json; pdf2026:p17).",
+      "reviewStatus": "approved"
+    },
+    {
+      "source": "Images HQ/BOLIVAR/PC6 - Insertion du projet dans l'environnement-A_page-0004.jpg",
+      "output": "images/bolivar/bolivar-aerial-existing.jpg",
+      "sha256": "80e806fbe79bee98e2dfabb32b5f2b92d2cb30e4c560971857b71ec1cbb90da9",
+      "crop": { "x": 365, "y": 259, "width": 3688, "height": 2763 },
+      "treatment": "crop to the photograph's exact edges (columns 365-4052, rows 259-3021); the sheet frame, key-plan thumbnail and cartouche are left outside; the photograph itself is untouched",
+      "darkTreatment": "preserve-colour-scene",
+      "credit": "From the Studio BELEM permit set (sheet PC6, issuer STUDIO BELEM in the cartouche); no photographer is named on the sheet",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "captionEvidence": "Printed title 'PC6 - Photographie de l'état Existant'; same camera as the insertion photomontage (PC6 page 5)",
+      "reviewStatus": "approved"
+    },
+    {
+      "source": "Images HQ/BOLIVAR/PC6 - Insertion du projet dans l'environnement-A_page-0005.jpg",
+      "output": "images/bolivar/bolivar-aerial-insertion.jpg",
+      "sha256": "b4f10fa15ed1ea34785a505f45350e8699883d409f4eb504ec68ac2feb5a118d",
+      "crop": { "x": 278, "y": 153, "width": 3915, "height": 2932 },
+      "treatment": "crop to the photomontage's exact edges (columns 278-4192, rows 153-3084); the sheet frame, key-plan thumbnail and cartouche are left outside; area downscale to the render cap",
+      "darkTreatment": "preserve-colour-scene",
+      "credit": "Render: Studio BELEM (as the existing aerial figure, pdf2026:p22; issuer STUDIO BELEM in the cartouche)",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "captionEvidence": "Printed title 'PC6 - Insertion du projet dans l'environnement'; same camera, buildings and planted roofs as the existing aerial figure (pdf2026:p22), which it replaces",
+      "reviewStatus": "approved"
+    },
+    {
+      "source": "Images HQ/BOLIVAR/ANX1-PC - PLANS PROJET_pages-to-jpg-0005.jpg",
+      "output": "images/bolivar/bolivar-plan-n01.png",
+      "sha256": "46bad3c8746e142717c35735cf1baf84490bb186966fd808ab0ab6555d4eeeac",
+      "crop": { "x": 870, "y": 1000, "width": 3430, "height": 1555 },
+      "treatment": "crop of the plan with its grid bubbles (1-8, a-d) and the neighbouring hatch; the section-cut labels above and right, the legend (re-set in HTML), the scale bar, north sign and cartouche are left outside; same crop as plan N04 so the pair shares one scale",
+      "darkTreatment": "field",
+      "credit": "Studio BELEM: issuer (EMETTEUR) in the sheet's cartouche; the client panel is furniture and not published",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "captionEvidence": "Printed title 'PC ANX - Plan de niveau N01', scale '1 : 200', programme legend",
+      "reviewStatus": "approved"
+    },
+    {
+      "source": "Images HQ/BOLIVAR/ANX1-PC - PLANS PROJET_pages-to-jpg-0008.jpg",
+      "output": "images/bolivar/bolivar-plan-n04.png",
+      "sha256": "65ce9845494e6e1adb01b56d91172243ef024bddae3888193252346386d786c3",
+      "crop": { "x": 870, "y": 1000, "width": 3430, "height": 1555 },
+      "treatment": "crop of the plan with its grid bubbles and the neighbouring hatch; section-cut labels, legend (re-set in HTML), scale bar, north sign and cartouche left outside; same crop as plan N01",
+      "darkTreatment": "field",
+      "credit": "Studio BELEM: issuer (EMETTEUR) in the sheet's cartouche; the client panel is furniture and not published",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "captionEvidence": "Printed title 'PC ANX - Plan de niveau N04', scale '1 : 200', programme legend",
+      "reviewStatus": "approved"
+    },
+    {
+      "source": "Images HQ/BOLIVAR/PC5-UN PLAN DES FACADES ET DES TOITURES PROJET-A_page-0002.jpg",
+      "output": "images/bolivar/bolivar-roof-plan.png",
+      "sha256": "bef53fb3747891244d94e769538e2a1e98331f20fbdbe10b068f3c8aacdf2dd4",
+      "crop": { "x": 1100, "y": 925, "width": 3320, "height": 1410 },
+      "treatment": "crop of the roof plan with its overall dimensions and nearby levels; the numbered key box (re-set as caption text), scale bar and cartouche left outside; the parcel lines of the neighbours run off all four sides",
+      "darkTreatment": "field",
+      "credit": "Studio BELEM: issuer (EMETTEUR) in the sheet's cartouche; the client panel is furniture and not published",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "captionEvidence": "Printed title 'PC5 - Plan de Toiture', scale '1 : 200'; the same drawing as the existing roof and vegetation plan (pdf2026:p20), which it replaces",
+      "reviewStatus": "approved"
+    },
+    {
+      "source": "Images HQ/BOLIVAR/PC3 - 1 - COUPES DU TERRAIN AVEC IMPLANTATION DU PROJET-A_page-0002.jpg",
+      "output": "images/bolivar/bolivar-long-section-aa.png",
+      "sha256": "28a119d1b6a8fd3a8c906dfdbbf3578ecd5fa20460c32b6aa21f53e1dc771969",
+      "crop": { "x": 232, "y": 455, "width": 4536, "height": 2505 },
+      "treatment": "crop inside the sheet frame from just above the property-line label to below the lowest level; the PROJET / EXISTANT CONSERVE key (re-set in HTML), the scale bar and cartouche left outside; the key-plan thumbnail's lower edge and 'PLAN DE REPERAGE' fall inside and are erased as furniture (crop first was impossible without cutting the 'limite de propriété' label); the ground runs off left, right and bottom",
+      "darkTreatment": "invert-accent",
+      "credit": "Studio BELEM: issuer (EMETTEUR) in the sheet's cartouche; the client panel is furniture and not published",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "captionEvidence": "Printed title 'PC3 - Coupe Longitudinale AA', scale '1/200'; the same drawing as the existing longitudinal section AA (pdf2026:p21), which it replaces",
+      "reviewStatus": "approved"
+    },
+    {
+      "source": "Images HQ/BOLIVAR/PC5-UN PLAN DES FACADES ET DES TOITURES PROJET-A_page-0003.jpg",
+      "output": "images/bolivar/bolivar-west-elevation.png",
+      "sha256": "23d7d614ebb9dd69158ccc4243ec81b2bb9d75e676663a635c8111747522011b",
+      "crop": { "x": 881, "y": 717, "width": 3028, "height": 2349 },
+      "treatment": "crop just inside the elevation's own viewport border (x 878-3912, y 714-3069); the numbered key box (re-set as caption text), key-plan thumbnail, 'PLAN DE REPERAGE', scale bar and cartouche left outside; neighbours and ground run off left, right and bottom",
+      "darkTreatment": "invert-accent",
+      "credit": "Studio BELEM: issuer (EMETTEUR) in the sheet's cartouche; the client panel is furniture and not published",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "captionEvidence": "Printed title 'PC5 - Façade OUEST 1 (Avenue Simon Bolivar)', scale '1/150'; the same drawing as the existing west facade (pdf2026:p19), which it replaces",
+      "reviewStatus": "approved"
+    },
+    {
+      "source": "Images HQ/BOLIVAR/PC4 - Notice decrivant le terrain et présentant le projet-B_page-0011.jpg",
+      "output": "images/bolivar/bolivar-axo-demolished.png",
+      "sha256": "f68fe1bc5d01c1d467079cd3b7c5a1d58f65e80f17fd041b729fbc5a7737876d",
+      "crop": { "x": 378, "y": 389, "width": 1724, "height": 696 },
+      "treatment": "crop 3 px inside the top panel's grey ground (x 375-2105, y 386-1088); its printed caption (y 1137-1166) left outside and used as the caption; same width as the other two panels so the series shares one scale",
+      "darkTreatment": "field",
+      "credit": "Studio BELEM: header 'STUDIO BELEM' on the notice page",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "captionEvidence": "Printed caption 'FIGURE 10. AXONOMÉTRIE SCHÉMATIQUE DES VOLUMES À DEMOLIR'; the same diagram as the existing 'volumes to be demolished' (pdf2026:p18), which it replaces",
+      "reviewStatus": "approved"
+    },
+    {
+      "source": "Images HQ/BOLIVAR/PC4 - Notice decrivant le terrain et présentant le projet-B_page-0011.jpg",
+      "output": "images/bolivar/bolivar-axo-retained.png",
+      "sha256": "f68fe1bc5d01c1d467079cd3b7c5a1d58f65e80f17fd041b729fbc5a7737876d",
+      "crop": { "x": 378, "y": 1345, "width": 1724, "height": 689 },
+      "treatment": "crop 3 px inside the middle panel's grey ground (y 1342-2037); its printed caption (y 2117-2146) left outside",
+      "darkTreatment": "field",
+      "credit": "Studio BELEM: header 'STUDIO BELEM' on the notice page",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "captionEvidence": "Printed caption 'FIGURE 11. AXONOMÉTRIE SCHÉMATIQUE DES VOLUMES CONSERVÉS'; the same diagram as the existing 'retained volumes' (pdf2026:p18)",
+      "reviewStatus": "approved"
+    },
+    {
+      "source": "Images HQ/BOLIVAR/PC4 - Notice decrivant le terrain et présentant le projet-B_page-0011.jpg",
+      "output": "images/bolivar/bolivar-axo-raised-lowered.png",
+      "sha256": "f68fe1bc5d01c1d467079cd3b7c5a1d58f65e80f17fd041b729fbc5a7737876d",
+      "crop": { "x": 378, "y": 2308, "width": 1724, "height": 848 },
+      "treatment": "crop 3 px inside the bottom panel's grey ground (y 2305-3159); its printed caption (y 3237-3267) and the page footer left outside",
+      "darkTreatment": "field",
+      "credit": "Studio BELEM: header 'STUDIO BELEM' on the notice page",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "captionEvidence": "Printed caption 'FIGURE 12. AXONOMÉTRIE SCHÉMATIQUE DES VOLUMES SURÉLEVÉS ET DÉCAISSÉS'; the same diagram as the existing 'raised and lowered volumes' (pdf2026:p18)",
+      "reviewStatus": "approved"
+    }
+  ]
+}

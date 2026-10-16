@@ -1,0 +1,40 @@
+{
+ "src": "images/corallum/corallum-volume-helical.png",
+ "hash": "956db69e18f5df21",
+ "mode": "ink",
+ "from": [
+  302,
+  443
+ ],
+ "to": [
+  230,
+  385
+ ],
+ "offset": [
+  36,
+  23
+ ],
+ "paper": [
+  255,
+  255,
+  255
+ ],
+ "clip": [],
+ "ink": {
+  "ink": 6820,
+  "chromaticFraction": 0.1485,
+  "midtoneFraction": 0.9136,
+  "suggest": "colour"
+ },
+ "dark": "invert-accent",
+ "keep": null,
+ "specks": 17,
+ "tile": [
+  0,
+  0,
+  230,
+  385
+ ],
+ "background": null,
+ "labels": []
+}

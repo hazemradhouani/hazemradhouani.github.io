@@ -1,0 +1,42 @@
+{
+ "src": "images/la-villette/la-villette-south-elevation-c.png",
+ "hash": "761fc6883c83b0c1",
+ "mode": "ink",
+ "from": [
+  2412,
+  2488
+ ],
+ "to": [
+  2412,
+  2488
+ ],
+ "offset": [
+  0,
+  0
+ ],
+ "paper": [
+  255,
+  255,
+  255
+ ],
+ "clip": [
+  "bottom"
+ ],
+ "ink": {
+  "ink": 212460,
+  "chromaticFraction": 0.0475,
+  "midtoneFraction": 0.457,
+  "suggest": "accent"
+ },
+ "dark": "invert-accent",
+ "keep": null,
+ "specks": 57,
+ "tile": [
+  1600,
+  1800,
+  640,
+  400
+ ],
+ "background": null,
+ "labels": []
+}

@@ -1,0 +1,50 @@
+{
+ "src": "images/nouvelle-medina/nouvelle-medina-flows.png",
+ "hash": "9647d9450e398d6f",
+ "mode": "ink",
+ "from": [
+  2560,
+  1826
+ ],
+ "to": [
+  2560,
+  1826
+ ],
+ "offset": [
+  0,
+  0
+ ],
+ "paper": [
+  255,
+  255,
+  255
+ ],
+ "clip": [],
+ "ink": {
+  "ink": 388505,
+  "chromaticFraction": 0.2176,
+  "midtoneFraction": 0.6661,
+  "suggest": "colour"
+ },
+ "dark": "invert-accent",
+ "keep": null,
+ "specks": 3068,
+ "tile": [
+  320,
+  1200,
+  640,
+  400
+ ],
+ "background": null,
+ "labels": [
+  {
+   "id": "legend",
+   "removed": 145,
+   "kept": 2,
+   "x": 72.5,
+   "y": 64.403,
+   "w": 22.891,
+   "h": 12.158
+  }
+ ]
+}

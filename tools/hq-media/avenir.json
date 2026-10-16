@@ -1,0 +1,150 @@
+{
+  "version": 1,
+  "sourceRoot": "Images HQ",
+  "assets": [
+    {
+      "source": "Images HQ/Villneuve la garenne/PC40-2_DOCUMENTS DESCRIPTIFS SECURITE INCENDIE ERP_merge [141-160] [11-20]_page-0005.jpg",
+      "output": "images/avenir/avenir-avenue-de-verdun-render.jpg",
+      "sha256": "ba2f4ae15aa95343eb99dffc25cd7742ff41b27e721bc368f2c911c3864295cf",
+      "crop": { "x": 376, "y": 1577, "width": 1729, "height": 1540 },
+      "treatment": "the render's own rectangle, measured on its edges (x 375-2105, y 1576-3117) and taken 1 px inside them; the notice page's header, prose, the caption 'FIGURE 2.' and the footer stay outside the crop; the scene is not edited",
+      "darkTreatment": "preserve-colour-scene",
+      "credit": "Render: Studio BELEM (page header 'STUDIO BELEM' of the materials notice)",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "captionEvidence": "Printed caption 'FIGURE 2. VUE DU BÂTIMENT DEPUIS L'AVENUE DE VERDUN.' on the notice page 'PC 10-1 - BLM -VLG- DPC - NOTICE COMPLÉMENTAIRE MATÉRIAUX', page 5",
+      "reviewStatus": "approved"
+    },
+    {
+      "source": "Images HQ/Villneuve la garenne/PC40-2_DOCUMENTS DESCRIPTIFS SECURITE INCENDIE ERP_merge [1-20]_page-0003.jpg",
+      "output": "images/avenir/avenir-site-plan.png",
+      "sha256": "35a7a4e9d847c6aedf5de1dbfa96ad70ab0e9258bd4dbad8365f5cb58b42fd25",
+      "crop": { "x": 1330, "y": 360, "width": 3520, "height": 2080 },
+      "treatment": "the plot and its streets: the two blocks with their heights, levels and access marks, the hydrant on avenue de Verdun with its 60.41 m distance line, rue de l'Avenir and the facing plots; the surrounding context, drawn to the sheet frame, is cut on all four sides by design (clip); the legend (x 250-1349, y 2596-2947), the frame and the cartouche stay outside the crop",
+      "darkTreatment": "invert-accent",
+      "credit": "Studio BELEM (Emetteur panel and 'DESSINE PAR BELEM' of the cartouche)",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "captionEvidence": "Printed title 'PC40 - Dossier destiné à la vérification de la conformité aux règles de sécurité incendie', 'Plan masse securité', scale 1/500, date 19/12/2025; labels 'Rue de l'Avenir', 'Avenue de Verdun', 'R+7', 'R+5', 'R+1', 'Accès Logement', 'Accès Parking', 'Accès Commerce 2 UP', 'Sortie de secours commerce 1 UP', '60,41 m'; legend 'Distance borne - établissement', 'Borne incendie', 'Sortie de secours', 'Accès à l'établissement'",
+      "reviewStatus": "approved"
+    },
+    {
+      "source": "Images HQ/Villneuve la garenne/PC40-2_DOCUMENTS DESCRIPTIFS SECURITE INCENDIE ERP_merge [1-20]_page-0009.jpg",
+      "output": "images/avenir/avenir-plan-ground.png",
+      "sha256": "783f1804238f6d7c13d639764b9285e2d858744597c4027d5c311e9a46b0a017",
+      "crop": { "x": 236, "y": 600, "width": 4630, "height": 1920 },
+      "treatment": "the raised ground floor with rue de l'Avenir, its parked cars and the access labels above it, and the garden plots below; the neighbouring plots, drawn to the sheet frame, are cut on all four sides by design (clip); the north sign in the drawing's upper right (x 4465-4712, y 211-450), the neighbouring buildings across the street, the frame and the cartouche stay outside the crop",
+      "darkTreatment": "invert-accent",
+      "credit": "Studio BELEM (Emetteur panel and 'DESSINE PAR BELEM' of the cartouche)",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "captionEvidence": "Printed title 'ANX0 - PLAN PROJET', 'Plan N0H', scale 1/200, date 19/12/2025; labels 'Local commercial 95,76 m²', 'Commerce', 'Sortie de secours commerce', 'Accès piéton aux logements', 'Accès Logement A', 'Accès Logement B', '20 Vélos', '60 Vélos', 'Accès parking', 'Accès vélo', flats 'A01 T2 / 48,31 m²', 'B01 T2 / 53,45 m²', 'B02 T1 / 28,40 m²', 'B03 T1 / 28,40 m²', 'B04 T3 / 63,43 m²'",
+      "reviewStatus": "approved"
+    },
+    {
+      "source": "Images HQ/Villneuve la garenne/PC40-2_DOCUMENTS DESCRIPTIFS SECURITE INCENDIE ERP_merge [1-20]_page-0008.jpg",
+      "output": "images/avenir/avenir-plan-basement.png",
+      "sha256": "f093b59fe7acd9b0e31c227f9b5040dad8c5dcb7624134d71bc62f25203850ae",
+      "crop": { "x": 480, "y": 978, "width": 4240, "height": 1340 },
+      "treatment": "the basement car park with its dimension chains (dark ink x 613-4680, y 1018-2233); one shared crop for the series SS1, N01 and N07 (x 480-4719, y 978-2317), so the three plans keep one scale and register on the plot; the ground hatch that fills this sheet's frame is cut on all four sides by design (clip); the north sign, the frame and the cartouche stay outside the crop",
+      "darkTreatment": "invert-accent",
+      "credit": "Studio BELEM (Emetteur panel and 'DESSINE PAR BELEM' of the cartouche)",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "captionEvidence": "Printed title 'ANX0 - PLAN PROJET', 'Plan SS1', scale 1/200, date 19/12/2025; parking spaces numbered 01 to 36; labels 'Sortie piéton principal', 'Issue de secours piéton secondaire', 'Rampe d'accès automobile', 'Réserve/Technique commerce 40,91 m²'",
+      "reviewStatus": "approved"
+    },
+    {
+      "source": "Images HQ/Villneuve la garenne/PC40-2_DOCUMENTS DESCRIPTIFS SECURITE INCENDIE ERP_merge [1-20]_page-0010.jpg",
+      "output": "images/avenir/avenir-plan-n01.png",
+      "sha256": "3ebbecd657b47bf734521088a607f433d84dcaa8257a0da443e648f49689b975",
+      "crop": { "x": 480, "y": 978, "width": 4240, "height": 1340 },
+      "treatment": "level N01 with its dimension chains and the dashed plot line (ink x 539-4603, y 1032-2234); the series' shared crop (x 480-4719, y 978-2317); the north sign, the frame and the cartouche stay outside the crop",
+      "darkTreatment": "invert-accent",
+      "credit": "Studio BELEM (Emetteur panel and 'DESSINE PAR BELEM' of the cartouche)",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "captionEvidence": "Printed title 'ANX0 - PLAN PROJET', 'PLAN N01', scale 1/200, date 19/12/2025; flats A11-A14 and B11-B16; 'Accès entretien'",
+      "reviewStatus": "approved"
+    },
+    {
+      "source": "Images HQ/Villneuve la garenne/PC40-2_DOCUMENTS DESCRIPTIFS SECURITE INCENDIE ERP_merge [1-20]_page-0016.jpg",
+      "output": "images/avenir/avenir-plan-n07.png",
+      "sha256": "dfa30aa43fa31057c744fd83192c2830387bbb782875850f9d4eb03978acf909",
+      "crop": { "x": 480, "y": 978, "width": 4240, "height": 1340 },
+      "treatment": "level N07 with the roof of the lower block (ink x 566-4604, y 1071-2278); the series' shared crop (x 480-4719, y 978-2317); the north sign, the frame and the cartouche stay outside the crop",
+      "darkTreatment": "invert-accent",
+      "credit": "Studio BELEM (Emetteur panel and 'DESSINE PAR BELEM' of the cartouche)",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "captionEvidence": "Printed title 'ANX0 - PLAN PROJET', 'Plan N07', scale 1/200, date 19/12/2025; flats A71 and A72 (T4)",
+      "reviewStatus": "approved"
+    },
+    {
+      "source": "Images HQ/Villneuve la garenne/PC40-2_DOCUMENTS DESCRIPTIFS SECURITE INCENDIE ERP_merge [101-120]_page-0009.jpg",
+      "output": "images/avenir/avenir-section-aa.png",
+      "sha256": "2a9fec5994d7354d23457106706057af0765e62ca4e9619a785e170271bbbf97",
+      "crop": { "x": 236, "y": 572, "width": 4615, "height": 2242 },
+      "treatment": "the section with its property-line labels, level labels and ground hatch (ink x 267-4811, y 612-2774; 31-40 px of paper); the key plan with the cut line (x 325-1023, y 217-380), the frame and the cartouche stay outside the crop",
+      "darkTreatment": "field",
+      "credit": "Studio BELEM (Emetteur panel and 'DESSINE PAR BELEM' of the cartouche)",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "captionEvidence": "Printed title 'PC3 - PLANS DE COUPE DU TERRAIN AVEC IMPLANTATION DU PROJET', 'Coupe longitudinale AA', scale 1/200, date 19/12/2025; labels 'Avenue de Verdun', 'Limite de propriété', 'Local commercial', levels SS1 +25,95 NGF, N0Haut +29,50 NGF, NTa +52,95 NGF, NTb +47,55 NGF",
+      "reviewStatus": "approved"
+    },
+    {
+      "source": "Images HQ/Villneuve la garenne/PC40-2_DOCUMENTS DESCRIPTIFS SECURITE INCENDIE ERP_merge [101-120]_page-0013.jpg",
+      "output": "images/avenir/avenir-section-ee.png",
+      "sha256": "63792469b5a178e42279da8104b7200af7210cee87a1824b9aaed84131f925fe",
+      "crop": { "x": 1373, "y": 405, "width": 2285, "height": 2296 },
+      "treatment": "the cross-section with its property-line labels, level labels and ground hatch (ink x 1413-3618, y 445-2661; 40 px of paper); the key plan with the cut line (x 332-901, y 169-465), the frame and the cartouche stay outside the crop",
+      "darkTreatment": "field",
+      "credit": "Studio BELEM (Emetteur panel and 'DESSINE PAR BELEM' of the cartouche)",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "captionEvidence": "Printed title 'PC3 - PLANS DE COUPE DU TERRAIN AVEC IMPLANTATION DU PROJET', 'Coupe transversale EE', scale 1/200, date 19/12/2025; labels 'Rue de l'Avenir', 'Transfo voisin', 'N VOISIN +29.82 NGF', 'NIV SOL NATUREL +27.98 NGF', 'N0Haut +29,50 NGF', 'SS1 +25,95 NGF'",
+      "reviewStatus": "approved"
+    },
+    {
+      "source": "Images HQ/Villneuve la garenne/PC40-2_DOCUMENTS DESCRIPTIFS SECURITE INCENDIE ERP_merge [121-140]_page-0014.jpg",
+      "output": "images/avenir/avenir-west-elevation.png",
+      "sha256": "2d8e121faa6bcbb07ee67792733c501bdaf287776ace79755aa0e628bc594022",
+      "crop": { "x": 250, "y": 277, "width": 4616, "height": 2363 },
+      "treatment": "the elevation with its property lines and their labels, material codes, level labels and access labels (ink x 297-4855 from y 317, where the dashed property lines start); the top edge (y 277) leaves 40 px of paper above them and takes in the bottom 78 px of the key plan (x 388-957, y 277-354), which is erased in the cutout as sheet furniture; the bottom edge (y 2639) sits 2 px below the lowest access label ('piétons', y 2637) and cuts the ground hatch, which runs to y 2688, by design (clip); the material legend M1-M7 (x 4111-4855, y 2629-2975) stays outside the crop except the top 11 px of the M1 bubble (y 2629-2639), drawn over the hatch and so neither croppable nor erasable (D49); the frame and the cartouche stay outside the crop",
+      "darkTreatment": "field",
+      "credit": "Studio BELEM (Emetteur panel and 'DESSINE PAR BELEM' of the cartouche)",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "captionEvidence": "Printed title 'PC5 - PLANS DE FACADES ET TOITURES', 'Élévation ouest', scale 1/200, date 19/12/2025; access labels 'Accès vélo', 'Accès parking', 'Sortie de secours piétons', 'Accès piéton aux logements'; material legend 'M1 Menuiseries en bois' to 'M7 Plaquette de parement beige clair'",
+      "reviewStatus": "approved"
+    },
+    {
+      "source": "Images HQ/Villneuve la garenne/PC40-2_DOCUMENTS DESCRIPTIFS SECURITE INCENDIE ERP_merge [121-140]_page-0015.jpg",
+      "output": "images/avenir/avenir-south-elevation.png",
+      "sha256": "2b2de570fbfce43430c43a64213d29e31efc5290e0c36b93dfbbef972861fd81",
+      "crop": { "x": 1100, "y": 565, "width": 2850, "height": 2225 },
+      "treatment": "the corner block's front with its property-line labels, material codes, level labels and access labels (ink y 605-2758); the neighbouring buildings and the ground hatch on both sides, drawn to the sheet frame, are cut at x 1100 and x 3949 by design (clip); the material legend (x 4100+), which crosses the ground line, the key plan (x 272-898), the frame and the cartouche stay outside the crop",
+      "darkTreatment": "field",
+      "credit": "Studio BELEM (Emetteur panel and 'DESSINE PAR BELEM' of the cartouche)",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "captionEvidence": "Printed title 'PC5 - PLANS DE FACADES ET TOITURES', 'Élévation sud', scale 1/200, date 19/12/2025; labels 'Rue de l'Avenir', 'Sortie de secours commerce', 'Accès commerce', 'NIV SOL NATUREL +27,98 NGF', 'N0Haut +29,50 NGF', 'NTa +52,95 NGF'",
+      "reviewStatus": "approved"
+    },
+    {
+      "source": "Images HQ/Villneuve la garenne/PC40-2_DOCUMENTS DESCRIPTIFS SECURITE INCENDIE ERP_merge [121-140]_page-0001.jpg",
+      "output": "images/avenir/avenir-planters-render.jpg",
+      "sha256": "029c2ee8808924a8d01678bc5077469f1fd334febbbf822f7d7c713032627eb1",
+      "crop": { "x": 372, "y": 887, "width": 1725, "height": 1071 },
+      "treatment": "figure 6 only: the render's own rectangle, measured on its edges (x 371-2097, y 886-1958) and taken 1 px inside them; the prose above, the caption 'FIGURE 6.', figure 7 below, the page header and footer stay outside the crop; the scene is not edited",
+      "darkTreatment": "preserve-colour-scene",
+      "credit": "Render: Studio BELEM (page header 'STUDIO BELEM' of the architectural notice)",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "captionEvidence": "Printed caption 'FIGURE 6. VUE DES JARDINIÈRES DEPUIS L'AVENUE DE VERDUN.' on the notice page 'PC 4 - BLM -VLG- DPC - NOTICE ARCHITECTURALE', page 8",
+      "reviewStatus": "approved"
+    },
+    {
+      "source": "Images HQ/Villneuve la garenne/PC40-2_DOCUMENTS DESCRIPTIFS SECURITE INCENDIE ERP_merge [121-140]_page-0001.jpg",
+      "output": "images/avenir/avenir-shop-render.jpg",
+      "sha256": "029c2ee8808924a8d01678bc5077469f1fd334febbbf822f7d7c713032627eb1",
+      "crop": { "x": 375, "y": 2269, "width": 1726, "height": 845 },
+      "treatment": "figure 7 only: the render's own rectangle, measured on its edges (x 374-2101, y 2268-3114) and taken 1 px inside them; the prose, the caption 'FIGURE 7.', figure 6 above, the page header and footer stay outside the crop; the scene, including the shop names rendered on the awnings, is not edited",
+      "darkTreatment": "preserve-colour-scene",
+      "credit": "Render: Studio BELEM (page header 'STUDIO BELEM' of the architectural notice)",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "captionEvidence": "Printed caption 'FIGURE 7. VUE DU COMMERCE DEPUIS L'AVENUE DE VERDUN.' on the notice page 'PC 4 - BLM -VLG- DPC - NOTICE ARCHITECTURALE', page 8",
+      "reviewStatus": "approved"
+    }
+  ]
+}

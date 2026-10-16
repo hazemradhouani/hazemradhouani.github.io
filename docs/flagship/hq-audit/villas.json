@@ -1,0 +1,121 @@
+{
+  "version": 1,
+  "sourceRoot": "Images HQ",
+  "folder": "VILLAS",
+  "assets": [
+    {
+      "source": "Images HQ/VILLAS/2025 - Hazem radhouani - Portfolio - HQ [31-35]_page-0001.jpg",
+      "sha256": "7f599edc323b9f6ce6c625584fae1a8d16915413edb48bc58a6d6cbe35199dc0",
+      "width": 3508,
+      "height": 2481,
+      "projectMapping": {
+        "slug": "papillon",
+        "status": "confirmed"
+      },
+      "mappingEvidence": "The Villa Papillon page of the 2025 portfolio: the same layout, text and drawings as pdf2025:p29 ('LOCATION: Marrakech, Palmeraie', 'AREA: 500 m²', the butterfly quotation), here with page tab '31' (another edition's numbering); its site plan is the drawing of 2_page-0001",
+      "visualType": "portfolio sheet: three drawings (site plan with the roof, plan of level +00.00 and plan of level -04.50, each drawn on the plot) and a fact and text panel",
+      "textDisposition": "titles: 'Site Plan', 'Level +00.00', 'Level -04.50'; fact panel (prose/fact, not used: already sourced from pdf2025:p29): 'LOCATION: Marrakech, Palmeraie', 'AREA: 500 m²', 'TYPE: Private Villa – Contemporary residential oasis', 'YEAR: November 2024'; prose (not used): 'ABOUT' and 'Interlocking volumes rise like wings in flight, each pavilion framing a garden, a pool, a courtyard. Whitewashed and earthy walls and mirrored water evoke the metamorphosis of light itself, as the villa unfolds into the horizon.'; quotation (not used): '\"The butterfly counts not months but moments, and has time enough.\" — Rabindranath Tagore'; furniture: page tab '31'; intrinsic: dimensions 105.48, 95.08, 18.96, 32.55, 18.25, 16.48, 18.90 on the site plan, 'PISCINE' and room labels on the plans ('Accès garage', 'Parking', 'Cuisine', 'Locaux Technique' legible at 3x on level -04.50; the rest unreadable at this resolution)",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "Not published; owner-supplied office work (Yassir Khalil Studio, site), no credit printed",
+      "roleEvidence": "Not published; no role statement drawn from it",
+      "reason": "Superseded and low value: its site plan is the drawing of 2_page-0001 at less than half the resolution (the drawing about 1 550 px wide against 3 400 px); the two floor plans are drawn on the whole plot, so the house is 190-280 px wide and its 5-6 px room labels cannot be read (most not even on a 3x enlargement); the existing 'Plans' figure (pdf2025:p30) shows level +00.00 at a larger scale. The fact panel is the 2025 page layout, its facts already sourced from pdf2025:p29"
+    },
+    {
+      "source": "Images HQ/VILLAS/2_page-0001.jpg",
+      "sha256": "3ebb68c361ce4e8296f6e44e99a1632d2395bd617247a541583a1b2fbbf0d5b4",
+      "width": 4962,
+      "height": 3509,
+      "projectMapping": {
+        "slug": "papillon",
+        "status": "confirmed"
+      },
+      "mappingEvidence": "The same site plan, with the same dimensions (105.48, 95.08, 18.96, 32.55, 18.25, 16.48, 18.90), roof, pool and lawns, as the 'Site Plan' of the Villa Papillon page ([31-35]_page-0001, pdf2025:p29)",
+      "visualType": "drawing sheet (A3 at 300 dpi): one site plan in grey linework with a shaded roof, a blue pool, yellow-green lawns and tree symbols, a north arrow and a wind rose",
+      "textDisposition": "title → figure title and caption: 'Plan Situation | Ech 1/200' (translated: site plan, scale 1:200), cropped out; north arrow 'N', 'O', 'E', 'S' (O for Ouest, west), cropped out and given in the caption as 'north at the top'; 'Rose des vents' (wind rose) with its direction letters N, NE, E, SE, S, SW, W, NW, cropped out (a small generic diagram, about 390 px, with no data source printed); intrinsic (stays): dimensions 105.48, 95.08, 18.96, 32.55, 18.25, 16.48, 18.90, the pool label 'PISCINE' and two tiny area figures on the lawns (unreadable, about 4 px high)",
+      "duplicateOf": null,
+      "disposition": "approved",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "Owner-supplied office work (Yassir Khalil Studio, site); no credit, cartouche or studio name printed on the sheet",
+      "roleEvidence": "The published page's narrative keeps its existing site role sentence; the drawing adds no personal-role statement",
+      "reason": "New material, the only drawing of the plot: published as images/papillon/papillon-site-plan.png (crop of the drawing), cut out with the field dark treatment (colour fills)"
+    },
+    {
+      "source": "Images HQ/VILLAS/Image_19(1).png",
+      "sha256": "e84263344eda2cbecda9f64beed744a8db11e4b62bf8ed33fd94c6039ad77c04",
+      "width": 3840,
+      "height": 2160,
+      "projectMapping": {
+        "slug": "papillon",
+        "status": "confirmed"
+      },
+      "mappingEvidence": "Same camera as the second small render in the right-hand column of pdf2025:p31 (Villa Papillon chapter); the same inclined white frame, terracotta frame, glazing and door as Image_20(1), the existing entrance render",
+      "visualType": "render (frontal view: the inclined white frame of the upper floor over the terracotta frame of the ground floor, both glazed, a tall dark door at right, palms and a cactus)",
+      "textDisposition": "no text in the scene",
+      "duplicateOf": null,
+      "disposition": "approved",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "Owner-supplied office work (Yassir Khalil Studio, site); no third-party credit printed on the render",
+      "roleEvidence": "The published page's narrative keeps its existing site role sentence; the image adds none",
+      "reason": "New view on the site (shown only as a thumbnail on pdf2025:p31); published as images/papillon/papillon-facade-front.jpg"
+    },
+    {
+      "source": "Images HQ/VILLAS/Image_20(1).png",
+      "sha256": "4841e81e7f355f452a2200e55debc6539e457b737bf08b39e21776158a88bbad",
+      "width": 3840,
+      "height": 2160,
+      "projectMapping": {
+        "slug": "papillon",
+        "status": "confirmed"
+      },
+      "mappingEvidence": "Same camera as the existing papillon-render-entrance.jpg (956 px) and the lower large render of pdf2025:p31 (Villa Papillon chapter)",
+      "visualType": "render (three-quarter view: the inclined white volume, the terracotta frame around the glazed ground floor, the glazed upper floor, palms and a cactus, a paved road in front)",
+      "textDisposition": "no text in the scene",
+      "duplicateOf": null,
+      "disposition": "approved",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "Owner-supplied office work (Yassir Khalil Studio, site); no third-party credit printed on the render",
+      "roleEvidence": "The published page's narrative keeps its existing site role sentence; the image adds none",
+      "reason": "Replaces papillon-render-entrance.jpg in the 'Views' series; published as images/papillon/papillon-facade-angle.jpg"
+    },
+    {
+      "source": "Images HQ/VILLAS/Image_21(1).png",
+      "sha256": "89a69cafbbc56a1f361e784ce905034842ffce3cdad2fb1340f1121b2b48d998",
+      "width": 3840,
+      "height": 2160,
+      "projectMapping": {
+        "slug": "papillon",
+        "status": "confirmed"
+      },
+      "mappingEvidence": "Same camera as the existing papillon-render-terracotta.jpg (956 px) and the upper large render of pdf2025:p31 (Villa Papillon chapter)",
+      "visualType": "render (a long terracotta wall carrying a palm's shadow below the white upper volume, a palm and a cactus at left)",
+      "textDisposition": "no text in the scene",
+      "duplicateOf": null,
+      "disposition": "approved",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "Owner-supplied office work (Yassir Khalil Studio, site); no third-party credit printed on the render",
+      "roleEvidence": "The published page's narrative keeps its existing site role sentence; the image adds none",
+      "reason": "Replaces papillon-render-terracotta.jpg in the 'Views' series; published as images/papillon/papillon-terracotta-wall.jpg"
+    },
+    {
+      "source": "Images HQ/VILLAS/Image_28.png",
+      "sha256": "56921cbe0cbf8b3a9d906d0ddb4ee9f08d9c5bf32358adfbbe60881a4c0c41a0",
+      "width": 3840,
+      "height": 2160,
+      "projectMapping": {
+        "slug": "papillon",
+        "status": "confirmed"
+      },
+      "mappingEvidence": "Same camera as the existing hero images/papillon/thumb.jpg and the unreferenced papillon-render-garden.jpg: the two hanging chairs under the terracotta overhang, the pool and the palms",
+      "visualType": "render (the white and terracotta volumes beside the pool, two hanging chairs under a terracotta overhang, glazed balustrades, palms, a sculpture and hills beyond)",
+      "textDisposition": "no text in the scene",
+      "duplicateOf": null,
+      "disposition": "approved",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "Owner-supplied office work (Yassir Khalil Studio, site); no third-party credit printed on the render",
+      "roleEvidence": "The published page's narrative keeps its existing site role sentence; the image adds none",
+      "reason": "Replaces the hero thumb.jpg (2 000 px, a crop of this view) and the unreferenced papillon-render-garden.jpg; published as images/papillon/papillon-pool.jpg"
+    }
+  ]
+}

@@ -1,0 +1,86 @@
+{
+ "src": "images/nouvelle-medina/nouvelle-medina-structure-exploded.png",
+ "hash": "0b5a16708db41bf3",
+ "mode": "ink",
+ "from": [
+  2560,
+  1867
+ ],
+ "to": [
+  2560,
+  1867
+ ],
+ "offset": [
+  0,
+  0
+ ],
+ "paper": [
+  255,
+  255,
+  255
+ ],
+ "clip": [],
+ "ink": {
+  "ink": 101022,
+  "chromaticFraction": 0,
+  "midtoneFraction": 0.5415,
+  "suggest": "mono"
+ },
+ "dark": "invert",
+ "keep": null,
+ "specks": 1541,
+ "tile": [
+  1600,
+  400,
+  640,
+  400
+ ],
+ "background": null,
+ "labels": [
+  {
+   "id": "roof-envelope",
+   "removed": 39,
+   "kept": 1,
+   "x": 2.578,
+   "y": 1.553,
+   "w": 23.828,
+   "h": 7.231
+  },
+  {
+   "id": "roof-frame",
+   "removed": 33,
+   "kept": 0,
+   "x": 1.094,
+   "y": 22.817,
+   "w": 24.414,
+   "h": 3.642
+  },
+  {
+   "id": "columns",
+   "removed": 58,
+   "kept": 0,
+   "x": 1.055,
+   "y": 34.762,
+   "w": 24.453,
+   "h": 11.516
+  },
+  {
+   "id": "facade-envelope",
+   "removed": 39,
+   "kept": 0,
+   "x": 1.055,
+   "y": 53.455,
+   "w": 24.18,
+   "h": 7.231
+  },
+  {
+   "id": "glazing",
+   "removed": 15,
+   "kept": 0,
+   "x": 1.68,
+   "y": 74.183,
+   "w": 9.688,
+   "h": 3.696
+  }
+ ]
+}

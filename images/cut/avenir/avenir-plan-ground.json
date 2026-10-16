@@ -1,0 +1,45 @@
+{
+ "src": "images/avenir/avenir-plan-ground.png",
+ "hash": "9e23aee3ddf704cd",
+ "mode": "ink",
+ "from": [
+  2560,
+  1062
+ ],
+ "to": [
+  2560,
+  1062
+ ],
+ "offset": [
+  0,
+  0
+ ],
+ "paper": [
+  255,
+  255,
+  255
+ ],
+ "clip": [
+  "left",
+  "top",
+  "right",
+  "bottom"
+ ],
+ "ink": {
+  "ink": 127391,
+  "chromaticFraction": 0.1078,
+  "midtoneFraction": 0.5131,
+  "suggest": "colour"
+ },
+ "dark": "invert-accent",
+ "keep": null,
+ "specks": 271,
+ "tile": [
+  1280,
+  400,
+  640,
+  400
+ ],
+ "background": null,
+ "labels": []
+}

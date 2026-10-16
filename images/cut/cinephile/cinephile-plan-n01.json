@@ -1,0 +1,40 @@
+{
+ "src": "images/cinephile/cinephile-plan-n01.jpg",
+ "hash": "f448168b0835cc4f",
+ "mode": "ink",
+ "from": [
+  1003,
+  1042
+ ],
+ "to": [
+  916,
+  880
+ ],
+ "offset": [
+  30,
+  90
+ ],
+ "paper": [
+  255,
+  255,
+  255
+ ],
+ "clip": [],
+ "ink": {
+  "ink": 77730,
+  "chromaticFraction": 0,
+  "midtoneFraction": 0.3105,
+  "suggest": "mono"
+ },
+ "dark": "invert",
+ "keep": null,
+ "specks": 339,
+ "tile": [
+  0,
+  400,
+  640,
+  400
+ ],
+ "background": null,
+ "labels": []
+}

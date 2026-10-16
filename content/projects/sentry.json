@@ -46,26 +46,131 @@
     }
   ],
   "hero": {
-    "src": "images/sentry/thumb.jpg",
-    "alt": "Render of the Sentry guard pavilion, Casablanca Finance City",
-    "credit": null
+    "src": "images/sentry/sentry-roof-aerial.jpg",
+    "alt": "Render from above of the guard pavilion: a tilted roof of perforated metal folding down over perforated cladding, a figure at the glazed end, raised planted beds edged in dark metal and a white car beyond",
+    "credit": null,
+    "source": "site + pdf2025:p26 + hq:Guerite/2025 - Hazem radhouani - Portfolio - HQ [26-30]_page-0001.jpg (cropped above the page tab printed over it, D58)"
   },
   "figures": [
     {
-      "src": "images/sentry/sentry-render.jpg",
-      "title": "Render, Aerial View",
-      "caption": "Aerial render. Guard pavilion at Casablanca Finance City. Folded roof plane in perforated steel sheeting. Perforated dark metal cladding on three sides, glazed entry face. Vehicle lane and access control threshold. Casablanca. 2024.",
-      "alt": "Aerial render of Sentry gatehouse pavilion, folded perforated metal roof, dark cladding, planted estate perimeter and vehicle approach lane",
+      "src": "images/sentry/sentry-aerial-road.jpg",
+      "title": "Aerial view",
+      "caption": "The pavilion between raised planted beds, beside the road.",
+      "alt": "Render from above: the pavilion's perforated roof tilting over its cladding, between raised planted beds edged in dark metal, a white car parked beside it and another on the road beyond",
       "kind": "render",
-      "source": "site"
+      "source": "hq:Guerite/2025 - Hazem radhouani - Portfolio - HQ [26-30]_page-0004.jpg (left column, middle, no printed title); pdf2025:p29"
     },
     {
-      "src": "images/sentry/sentry-section.jpg",
-      "title": "Section B-B",
-      "caption": "Section B-B. Ceiling height 2.90 m at the entry face tapering to 1.09 m at the low eave. Sloped structural roof profile in reinforced concrete. Glazed entry door and guard desk positioned at the high end. Insulated roof construction with 14 cm build-up at ridge. Foundation and floor slab at grade.",
-      "alt": "Section B-B of Sentry gatehouse, 2.90m ceiling height at entry, 1.09m at eave, sloped structural roof profile, glazed door and guard desk position",
+      "title": "Roof and floor plans",
+      "caption": "Roof plan (left), dimensioned 731 by 609 with a sloping edge of 818, and floor plan (right): the room with the desk, chair and door, two further enclosed spaces and a small one marked 'PL'; section lines A and B.",
       "kind": "drawing",
-      "source": "site"
+      "source": "hq:Guerite/2025 - Hazem radhouani - Portfolio - HQ [26-30]_page-0004.jpg (no printed titles; dimensions, 'PL' and section marks stay on the drawings); pdf2025:p29",
+      "items": [
+        {
+          "src": "images/sentry/sentry-plan-roof.png",
+          "alt": "Roof plan: a four-sided outline with one long sloping edge, filled with a pattern of circular perforations, its cast shadow in grey, dimensions and section marks A and B"
+        },
+        {
+          "src": "images/sentry/sentry-plan-floor.png",
+          "alt": "Floor plan with dimensions: a room with a desk, a chair and a door at the centre, a smaller room above it, a large space to the right and a small room marked PL, inside a sloping outline"
+        }
+      ]
+    },
+    {
+      "title": "Elevations",
+      "caption": "Left: the glazed bay with its sliding window beside the perforated cladding, 313 high. Right: the roof's surface rising behind a perforated panel 130 high, with glazing under its edge.",
+      "kind": "drawing",
+      "source": "hq:Guerite/2025 - Hazem radhouani - Portfolio - HQ [26-30]_page-0002.jpg (no printed titles; dimensions and section marks stay on the drawings); pdf2025:p27",
+      "items": [
+        {
+          "src": "images/sentry/sentry-elevation-window.png",
+          "alt": "Elevation with dimensions: a panel of circular perforations on the left, a glazed bay with a sliding window on the right, under a flat roof edge"
+        },
+        {
+          "src": "images/sentry/sentry-elevation-roof.png",
+          "alt": "Elevation: the dark striped surface of the roof rising to the left, a low perforated panel at the bottom left and glazed panels under the sloping edge to the right"
+        }
+      ]
+    },
+    {
+      "src": "images/sentry/sentry-section-aa.png",
+      "title": "Section A-A",
+      "caption": "Cut along line A: the room with the desk and chair, a partition, and a second room, under the roof slab.",
+      "alt": "Section with hatched walls and roof: an empty room on the left, a hatched partition, and a room on the right with an office chair, a desk and a cabinet, on a hatched ground",
+      "kind": "drawing",
+      "source": "hq:Guerite/2025 - Hazem radhouani - Portfolio - HQ [26-30]_page-0002.jpg (no printed title; the cut through line A of the plans, section mark 'A' stays); pdf2025:p27"
+    },
+    {
+      "title": "Elevations under the sloping roof",
+      "caption": "Left: the perforated cladding under the roof. Right: the window, the wall leaning at 5.00°, the roof falling from 313 to 130. The callouts, in French on the drawings: 'Plaque en fer galvanisé perforée' (perforated galvanised iron plate), 'Menuiserie Aluminium' (aluminium joinery), 'Fenêtre coulissante' (sliding window).",
+      "kind": "drawing",
+      "source": "hq:Guerite/2025 - Hazem radhouani - Portfolio - HQ [26-30]_page-0003.jpg (no printed titles; callouts kept on their leader lines, D60: 'Plaque en fer galvanisé perforée', 'Menuiserie Aluminium', 'Fenêtre coulissante'; translated, D17); pdf2025:p28",
+      "items": [
+        {
+          "src": "images/sentry/sentry-elevation-cladding.png",
+          "alt": "Elevation: a wall of circular perforations under a roof sloping up to the right, with one callout and two leader lines"
+        },
+        {
+          "src": "images/sentry/sentry-elevation-side.png",
+          "alt": "Elevation with dimensions and three callouts: a leaning end wall, a glazed window bay, then perforated cladding under a roof sloping down to the right"
+        }
+      ]
+    },
+    {
+      "src": "images/sentry/sentry-section-bb.png",
+      "title": "Section B-B",
+      "caption": "Cut along line B: the roof, dimensioned 14 at its high end, falls from 290 to 109 above the desk, the chair and the door.",
+      "alt": "Section with dimensions: a roof sloping down from left to right over a desk, an office chair and a door, a hatched partition and a leaning end wall, on a hatched ground",
+      "kind": "drawing",
+      "source": "site + hq:Guerite/2025 - Hazem radhouani - Portfolio - HQ [26-30]_page-0003.jpg (no printed title; section mark 'B' and dimensions stay); pdf2025:p28"
+    },
+    {
+      "src": "images/sentry/sentry-3d-view.png",
+      "title": "3D view",
+      "caption": "The glazed corner under the overhanging roof, between perforated panels. The callouts, in French on the drawing: 'Menuiserie aluminium' (aluminium joinery), 'Fenêtre coulissante ouvrant d'angle' (sliding corner-opening window), 'Tôle métallique perforée galvanisée' (perforated galvanised metal sheet).",
+      "alt": "Shaded 3D drawing of the pavilion: walls of circular perforations, a deep glazed corner bay with a desk and chair inside, the roof sloping down to the right, three small callouts with leader lines",
+      "kind": "drawing",
+      "source": "hq:Guerite/2025 - Hazem radhouani - Portfolio - HQ [26-30]_page-0002.jpg (view title '1 visuel 1:1' cropped out; callouts kept on their leader lines, D60; translated, D17); pdf2025:p27"
+    },
+    {
+      "title": "At the window",
+      "caption": "A visitor at the counter; a figure seated inside the corner window, a visitor outside.",
+      "kind": "render",
+      "source": "hq:Guerite/2025 - Hazem radhouani - Portfolio - HQ [26-30]_page-0004.jpg (left column, top) and hq:Guerite/2025 - Hazem radhouani - Portfolio - HQ [26-30]_page-0003.jpg (left column, middle), no printed titles; pdf2025:p28-29",
+      "items": [
+        {
+          "src": "images/sentry/sentry-window-counter.jpg",
+          "alt": "Render of the pavilion's long side: perforated panels under the sloping roof, a figure behind the counter of the glazed end and a visitor standing before it, a planted bed in the foreground and a glazed tower behind"
+        },
+        {
+          "src": "images/sentry/sentry-window-seated.jpg",
+          "alt": "Render from above of the pavilion's glazed end: a figure seated inside behind the corner window, a visitor standing outside, perforated cladding and raised planted beds on a pale ground"
+        }
+      ]
+    },
+    {
+      "src": "images/sentry/sentry-entrance.jpg",
+      "title": "Low view",
+      "caption": "A figure under the roof's overhang at the open end.",
+      "alt": "Low render of the pavilion: its tilted roof and perforated cladding, a figure standing under the overhang at the left, raised planted beds in the foreground and a flat horizon beyond",
+      "kind": "render",
+      "source": "hq:Guerite/2025 - Hazem radhouani - Portfolio - HQ [26-30]_page-0003.jpg (left column, bottom, no printed title; cropped above the page tab printed over it, D58); pdf2025:p28"
+    },
+    {
+      "title": "Evening",
+      "caption": "The window lit in evening light, a tower behind; the pavilion against the sky at dusk.",
+      "kind": "render",
+      "source": "site + hq:Guerite/2025 - Hazem radhouani - Portfolio - HQ [26-30]_page-0003.jpg (left column, top) and hq:Guerite/2025 - Hazem radhouani - Portfolio - HQ [26-30]_page-0004.jpg (left column, bottom), no printed titles; pdf2025:p28-29",
+      "items": [
+        {
+          "src": "images/sentry/sentry-evening.jpg",
+          "alt": "Render of the pavilion in elevation in warm evening light: perforated panels, a lit window with a figure inside, the roof sloping down to the right and a dark tower behind"
+        },
+        {
+          "src": "images/sentry/sentry-dusk.jpg",
+          "alt": "Dusk render of the pavilion beyond a raised planted bed, a blurred figure in the foreground on the left, the sky fading from blue to pale"
+        }
+      ]
     }
   ],
   "film": "sentry",

@@ -1,0 +1,142 @@
+{
+  "version": 1,
+  "sourceRoot": "Images HQ",
+  "assets": [
+    {
+      "source": "Images HQ/BELHOMME/ANX1_merge [31-60]_page-0004.jpg",
+      "output": "images/belhomme/belhomme-corner-render-hq.jpg",
+      "sha256": "7468aa2e31e240568155c73a65aa1055b24bc91d866dae40e5b589415724da5a",
+      "crop": {
+        "x": 1542,
+        "y": 103,
+        "width": 2019,
+        "height": 3072
+      },
+      "treatment": "the render's own rectangle, measured on its edges (x 1542-3560, y 103-3174); the sheet frame, the key plan and the cartouche (client, studio, project and sheet panels) stay outside the crop; the scene is not edited",
+      "darkTreatment": "preserve-colour-scene",
+      "credit": "Render: Studio BELEM",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "captionEvidence": "Printed title 'PC6 INSERTION DU PROJET DANS L'ENVIRONNEMENT - PROJETE RUE BELHOMME / BD ROCHECHOUART'; same camera, corner and bicycles as the existing hero (content/projects/belhomme.json, pdf2026:p9)",
+      "reviewStatus": "approved"
+    },
+    {
+      "source": "Images HQ/BELHOMME/ANX1_merge [31-60]_page-0005.jpg",
+      "output": "images/belhomme/belhomme-courtyard-render-hq.jpg",
+      "sha256": "0beea6ef4038e5091414ba82907ae94a7d66a65df204e539d2ec339fe41688d8",
+      "crop": {
+        "x": 1318,
+        "y": 96,
+        "width": 2467,
+        "height": 3083
+      },
+      "treatment": "the render's own rectangle, measured on its edges (x 1318-3784, y 96-3178); the sheet frame, the key plan and the cartouche stay outside the crop; the scene is not edited",
+      "darkTreatment": "preserve-colour-scene",
+      "credit": "Render: Studio BELEM",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "captionEvidence": "Printed title 'PC6 INSERTION DU PROJET DANS L'ENVIRONNEMENT - PROJETE -COURS ARRIERE'; same camera, trees and stepped rear facade as the existing 'Courtyard' render (pdf2026:p12)",
+      "reviewStatus": "approved"
+    },
+    {
+      "source": "Images HQ/BELHOMME/ANX1_merge [1-30]_page-0029.jpg",
+      "output": "images/belhomme/belhomme-roof-plan.png",
+      "sha256": "db44c23531367efa3122556e416a2a4e1e095db5691ee5b5aaa35c61f7d58445",
+      "crop": {
+        "x": 1400,
+        "y": 737,
+        "width": 2420,
+        "height": 1878
+      },
+      "treatment": "the plan with about 40 px of paper (ink x 1439-3779, y 777-2575); the printed legend (y 247-394), the frame and the cartouche stay outside the crop; the north sign inside the plan stays",
+      "darkTreatment": "invert-accent",
+      "credit": "Studio BELEM (EMETTEUR panel of the cartouche)",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "captionEvidence": "Printed title 'PC5 PLAN DE TOITURE PROJET', scale 1/150 and legend '1 Toiture en zinc gris foncé'",
+      "reviewStatus": "approved"
+    },
+    {
+      "source": "Images HQ/BELHOMME/ANX1_merge [1-30]_page-0026.jpg",
+      "output": "images/belhomme/belhomme-section-cc.png",
+      "sha256": "5c333fbe0264ef8b432720efaf58ef2253c7d436c960ae733765f2cbf47eefb3",
+      "crop": {
+        "x": 1185,
+        "y": 446,
+        "width": 2680,
+        "height": 2520
+      },
+      "treatment": "the section with about 40 px of paper (ink x 1225-3824, y 486-2923); the key plan with the C-C' cut line and north sign (x 4310-4795), the frame and the cartouche stay outside the crop",
+      "darkTreatment": "invert-accent",
+      "credit": "Studio BELEM (EMETTEUR panel of the cartouche)",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "captionEvidence": "Printed title 'PC3 COUPE TRANSVERSALE CC'' and scale 1/150",
+      "reviewStatus": "approved"
+    },
+    {
+      "source": "Images HQ/BELHOMME/ANX1_merge [1-30]_page-0030.jpg",
+      "output": "images/belhomme/belhomme-facade-rue-belhomme.png",
+      "sha256": "83af8ee170ee37eb3653211f1e204f0058aeff26a8d2d5b5015dd67884411cb7",
+      "crop": {
+        "x": 860,
+        "y": 382,
+        "width": 3490,
+        "height": 2626
+      },
+      "treatment": "the elevation with its level labels (ink x 899-4309, y 422-2966); the material legend (x 278-892, y 144-1195), the key plan (x 4386-4809), the frame and the cartouche stay outside the crop",
+      "darkTreatment": "invert-accent",
+      "credit": "Studio BELEM (EMETTEUR panel of the cartouche)",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "captionEvidence": "Printed title 'PC5 FACADE RUE BELHOMME' and scale 1/150; the same drawing as the existing 'PLU elevation, boulevard Rochechouart' item (pdf2026:p11): same 20.62 m frontage, 82.02 NGF ridge and five entrances",
+      "reviewStatus": "approved"
+    },
+    {
+      "source": "Images HQ/BELHOMME/ANX1_merge [31-60]_page-0001.jpg",
+      "output": "images/belhomme/belhomme-facade-rochechouart.png",
+      "sha256": "1b745d25330ec5206b45b8a3f503d5323412188ec5345cd34eae1c455eccbf8f",
+      "crop": {
+        "x": 712,
+        "y": 284,
+        "width": 3145,
+        "height": 2726
+      },
+      "treatment": "the elevation with its level labels (ink x 752-3816, y 324-2968); the key plan and 'Boulevard Rochechouart' key label (x 4271-4838), the frame and the cartouche stay outside the crop; the right ends of seven material-legend lines (x 712-892, y 383-1181) fall inside the crop on blank paper and are erased in the cutout (D49)",
+      "darkTreatment": "invert-accent",
+      "credit": "Studio BELEM (EMETTEUR panel of the cartouche)",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "captionEvidence": "Printed title 'PC5 FACADE BD ROCHECHOUART' and scale 1/150",
+      "reviewStatus": "approved"
+    },
+    {
+      "source": "Images HQ/BELHOMME/ANX1_merge [31-60]_page-0002.jpg",
+      "output": "images/belhomme/belhomme-facade-rear.png",
+      "sha256": "654e498b0dc7cfec98cdd42ab4624745a227c26eef96c413323c259f570327a3",
+      "crop": {
+        "x": 1043,
+        "y": 475,
+        "width": 3036,
+        "height": 2486
+      },
+      "treatment": "the elevation with its level labels (ink x 1083-4038, y 515-2920); the material legend (x 278-892), the key plan with 'Façade arrière' (x 4138-4809), the frame and the cartouche stay outside the crop",
+      "darkTreatment": "invert-accent",
+      "credit": "Studio BELEM (EMETTEUR panel of the cartouche)",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "captionEvidence": "Printed title 'PC5 FACADE ARRIERE' and scale 1/150",
+      "reviewStatus": "approved"
+    },
+    {
+      "source": "Images HQ/BELHOMME/ANX1_merge [31-60]_page-0017.jpg",
+      "output": "images/belhomme/belhomme-awning-section.png",
+      "sha256": "a4bcda21cb9af099fcd09068ef2ecc49feea639d6b6ad60682fa98a75ec1c7de",
+      "crop": {
+        "x": 656,
+        "y": 204,
+        "width": 1152,
+        "height": 1498
+      },
+      "treatment": "drawing 1 of the sheet only (ink x 686-1777, y 218-1672); the note above it (y 175-193), its title box (y 1717+), drawings 2 and 3, the legend, the notes, the frame and the cartouche stay outside the crop",
+      "darkTreatment": "invert-accent",
+      "credit": "Studio BELEM (EMETTEUR panel of the cartouche)",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "captionEvidence": "Printed title '1 ZOOM - Coupe 1 : 50' on sheet 'PC10 ACCORD DU GESTIONNAIRE', and the sheet's notes on the awning projection over boulevard de Rochechouart",
+      "reviewStatus": "approved"
+    }
+  ]
+}

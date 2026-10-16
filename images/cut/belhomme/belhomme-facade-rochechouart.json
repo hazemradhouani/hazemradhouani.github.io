@@ -1,0 +1,50 @@
+{
+ "src": "images/belhomme/belhomme-facade-rochechouart.png",
+ "hash": "823060b0c20239b8",
+ "mode": "ink",
+ "from": [
+  2560,
+  2219
+ ],
+ "to": [
+  2554,
+  2206
+ ],
+ "offset": [
+  0,
+  6
+ ],
+ "paper": [
+  255,
+  255,
+  255
+ ],
+ "clip": [],
+ "ink": {
+  "ink": 129804,
+  "chromaticFraction": 0.03,
+  "midtoneFraction": 0.4909,
+  "suggest": "accent"
+ },
+ "dark": "invert-accent",
+ "keep": null,
+ "specks": 28,
+ "tile": [
+  960,
+  1600,
+  640,
+  400
+ ],
+ "background": null,
+ "labels": [
+  {
+   "id": "legend-ends",
+   "removed": 22,
+   "kept": 0,
+   "x": 0,
+   "y": 3.354,
+   "w": 3.406,
+   "h": 29.465
+  }
+ ]
+}

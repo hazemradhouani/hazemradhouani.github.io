@@ -1,0 +1,14 @@
+{
+  "$comment": "Sentry cutouts (tools/cutout.mjs; D46, D49, D50, D60). All drawings are Revit exports on the 2025 portfolio sheets (pdf2025:p27-29), cropped at 1:1, never upscaled. They keep every printed text: dimensions, section marks and the French material callouts hang on leader lines (D60; English in the captions), and no free-standing title is printed beside them. Pale glazing and shadow fills (about 230/255) need the low floor/knee. The two sections' ground hatch is clipped by the sheet itself at y 2323 (the page band above the tab), so their bottom edge is declared. Linework with blue dimensions uses invert-accent; the dimensionless elevation and section A-A are greyscale (invert); the shaded 3D view takes the inspection field.",
+  "images": {
+    "images/sentry/sentry-plan-roof.png": { "paper": [255, 255, 255], "floor": 0.015, "knee": 0.03, "dark": "invert-accent" },
+    "images/sentry/sentry-plan-floor.png": { "paper": [255, 255, 255], "floor": 0.015, "knee": 0.03, "dark": "invert-accent" },
+    "images/sentry/sentry-elevation-window.png": { "paper": [255, 255, 255], "floor": 0.015, "knee": 0.03, "dark": "invert-accent" },
+    "images/sentry/sentry-elevation-roof.png": { "paper": [255, 255, 255], "floor": 0.015, "knee": 0.03, "dark": "invert-accent" },
+    "images/sentry/sentry-section-aa.png": { "paper": [255, 255, 255], "floor": 0.015, "knee": 0.03, "clip": ["bottom"], "dark": "invert" },
+    "images/sentry/sentry-elevation-cladding.png": { "paper": [255, 255, 255], "floor": 0.015, "knee": 0.03, "dark": "invert" },
+    "images/sentry/sentry-elevation-side.png": { "paper": [255, 255, 255], "floor": 0.015, "knee": 0.03, "dark": "invert-accent" },
+    "images/sentry/sentry-section-bb.png": { "paper": [255, 255, 255], "floor": 0.015, "knee": 0.03, "clip": ["bottom"], "dark": "invert-accent" },
+    "images/sentry/sentry-3d-view.png": { "paper": [255, 255, 255], "floor": 0.015, "knee": 0.03, "dark": "invert-accent" }
+  }
+}

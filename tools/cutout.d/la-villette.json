@@ -1,0 +1,100 @@
+{
+  "$comment": "La Villette cutouts (tools/cutout.mjs; D46, D49, D50). DCE sheets at 300 dpi, clean vector exports: floor/knee 0.015/0.03 keep the pale fills. French callouts and view titles are erased (boxes in master pixels) and re-set as English labels; a box is drawn taller than its words where the label must stand clear of a leader line that runs on to a second view. The axonometric keeps a wide margin (0.1): its labels are longer than the French they replace and need the blank paper the crop left beside them. Clips: the gate's wall band runs to the sheet frame (top) and its two projection lines run on to the plan left outside (bottom); the elevation's grid and property lines run past the ground hatch to the viewport edge (bottom).",
+  "images": {
+    "images/la-villette/la-villette-site-plan.jpg": { "dark": "invert-accent" },
+    "images/la-villette/la-villette-plan-level-2-room-types.png": {
+      "paper": [255, 255, 255],
+      "floor": 0.015,
+      "knee": 0.03,
+      "dark": "invert-accent"
+    },
+    "images/la-villette/la-villette-south-elevation-c.png": {
+      "paper": [255, 255, 255],
+      "floor": 0.015,
+      "knee": 0.03,
+      "clip": ["bottom"],
+      "dark": "invert-accent"
+    },
+    "images/la-villette/la-villette-facade-module-axo.png": {
+      "paper": [255, 255, 255],
+      "floor": 0.015,
+      "knee": 0.03,
+      "margin": 0.1,
+      "erase": [
+        { "id": "concrete", "x": 232, "y": 852, "w": 128, "h": 56 },
+        { "id": "drip", "x": 250, "y": 1081, "w": 259, "h": 55 },
+        { "id": "insulation", "x": 233, "y": 1694, "w": 177, "h": 54 },
+        { "id": "sun", "x": 2028, "y": 779, "w": 354, "h": 54 },
+        { "id": "glazing", "x": 2028, "y": 910, "w": 157, "h": 62 },
+        { "id": "timber-frame", "x": 2028, "y": 1036, "w": 217, "h": 56 },
+        { "id": "spandrel", "x": 2028, "y": 1167, "w": 367, "h": 146 },
+        { "id": "column", "x": 2028, "y": 1388, "w": 320, "h": 124 },
+        { "id": "joint", "x": 2028, "y": 1569, "w": 232, "h": 54 },
+        { "id": "band", "x": 2028, "y": 1729, "w": 377, "h": 108 }
+      ],
+      "dark": "invert-accent"
+    },
+    "images/la-villette/la-villette-facade-module-details.png": {
+      "paper": [255, 255, 255],
+      "floor": 0.015,
+      "knee": 0.03,
+      "erase": [
+        { "id": "band-top", "x": 1606, "y": 102, "w": 242, "h": 164 },
+        { "id": "drip", "x": 2413, "y": 301, "w": 143, "h": 42 },
+        { "id": "solar", "x": 1622, "y": 354, "w": 227, "h": 150 },
+        { "id": "joinery", "x": 1544, "y": 534, "w": 305, "h": 152 },
+        { "id": "form-lined", "x": 1607, "y": 1159, "w": 185, "h": 148 },
+        { "id": "band-bottom", "x": 1607, "y": 1406, "w": 241, "h": 168 }
+      ],
+      "dark": "invert-accent"
+    },
+    "images/la-villette/la-villette-access-gate.png": {
+      "paper": [255, 255, 255],
+      "floor": 0.015,
+      "knee": 0.03,
+      "clip": ["top", "bottom"],
+      "erase": [
+        { "id": "door-closer", "x": 1432, "y": 86, "w": 148, "h": 92 },
+        { "id": "frame", "x": 1432, "y": 196, "w": 336, "h": 40 },
+        { "id": "frame-ral", "x": 1432, "y": 237, "w": 123, "h": 29 },
+        { "id": "batten", "x": 1432, "y": 308, "w": 334, "h": 42 },
+        { "id": "structure", "x": 1432, "y": 390, "w": 187, "h": 62 },
+        { "id": "tie-rod", "x": 1432, "y": 453, "w": 165, "h": 82 },
+        { "id": "hinge", "x": 1432, "y": 601, "w": 383, "h": 64 },
+        { "id": "handle", "x": 1432, "y": 711, "w": 105, "h": 84 },
+        { "id": "slats", "x": 1432, "y": 790, "w": 366, "h": 63 },
+        { "id": "stop", "x": 1432, "y": 950, "w": 316, "h": 67 },
+        { "id": "pivot", "x": 1432, "y": 1115, "w": 374, "h": 68 },
+        { "id": "elevation", "x": 504, "y": 1177, "w": 137, "h": 37 },
+        { "id": "section", "x": 2280, "y": 1183, "w": 88, "h": 39 }
+      ],
+      "dark": "invert-accent"
+    },
+    "images/la-villette/la-villette-access-gate-annotated.png": {
+      "paper": [255, 255, 255],
+      "floor": 0.015,
+      "knee": 0.03,
+      "clip": ["top", "bottom"],
+      "dark": "invert-accent"
+    },
+    "images/la-villette/la-villette-window-guardrail.png": {
+      "paper": [255, 255, 255],
+      "floor": 0.015,
+      "knee": 0.03,
+      "erase": [
+        { "id": "finish", "x": 1261, "y": 80, "w": 128, "h": 49 },
+        { "id": "screed", "x": 1261, "y": 147, "w": 138, "h": 54 },
+        { "id": "insulation", "x": 1261, "y": 260, "w": 144, "h": 47 },
+        { "id": "ipe", "x": 1261, "y": 337, "w": 75, "h": 47 },
+        { "id": "sprayed", "x": 1261, "y": 513, "w": 139, "h": 53 },
+        { "id": "plenum", "x": 1261, "y": 594, "w": 133, "h": 48 },
+        { "id": "plasterboard", "x": 1261, "y": 677, "w": 130, "h": 47 },
+        { "id": "blackout", "x": 1261, "y": 761, "w": 149, "h": 48 },
+        { "id": "window", "x": 1261, "y": 850, "w": 345, "h": 110 },
+        { "id": "guardrail", "x": 1261, "y": 1642, "w": 203, "h": 116 },
+        { "id": "sill", "x": 1261, "y": 1946, "w": 256, "h": 48 }
+      ],
+      "dark": "invert-accent"
+    }
+  }
+}

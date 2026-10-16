@@ -1,0 +1,46 @@
+{
+ "src": "images/al-arg/al-arg-open-ceilings.png",
+ "hash": "ccb6a2b5d71c6a6f",
+ "mode": "ink",
+ "from": [
+  667,
+  455
+ ],
+ "to": [
+  633,
+  429
+ ],
+ "offset": [
+  20,
+  16
+ ],
+ "paper": [
+  255,
+  255,
+  255
+ ],
+ "clip": [],
+ "ink": {
+  "ink": 32494,
+  "chromaticFraction": 0.013,
+  "midtoneFraction": 0.5047,
+  "suggest": "accent"
+ },
+ "dark": "keep",
+ "keep": {
+  "file": "images/cut/al-arg/al-arg-open-ceilings--keep.png",
+  "share": 0.4757,
+  "radius": 4,
+  "t": 0.06,
+  "fill": true
+ },
+ "specks": 105,
+ "tile": [
+  0,
+  0,
+  633,
+  400
+ ],
+ "background": null,
+ "labels": []
+}

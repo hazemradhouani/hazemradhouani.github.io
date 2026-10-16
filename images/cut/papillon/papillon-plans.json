@@ -1,0 +1,43 @@
+{
+ "src": "images/papillon/papillon-plans.jpg",
+ "hash": "e6ded039025a76bb",
+ "mode": "ink",
+ "from": [
+  1178,
+  537
+ ],
+ "to": [
+  1178,
+  537
+ ],
+ "offset": [
+  0,
+  0
+ ],
+ "paper": [
+  255,
+  253,
+  255
+ ],
+ "clip": [
+  "left",
+  "top"
+ ],
+ "ink": {
+  "ink": 38024,
+  "chromaticFraction": 0.0092,
+  "midtoneFraction": 0.5041,
+  "suggest": "accent"
+ },
+ "dark": "invert-accent",
+ "keep": null,
+ "specks": 1062,
+ "tile": [
+  0,
+  0,
+  640,
+  400
+ ],
+ "background": null,
+ "labels": []
+}

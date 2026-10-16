@@ -1,0 +1,43 @@
+{
+ "src": "images/ain-sebaa/ain-sebaa-section-aa.png",
+ "hash": "8457a76c55aae699",
+ "mode": "ink",
+ "from": [
+  2560,
+  312
+ ],
+ "to": [
+  2560,
+  300
+ ],
+ "offset": [
+  0,
+  11
+ ],
+ "paper": [
+  255,
+  255,
+  255
+ ],
+ "clip": [
+  "left",
+  "right"
+ ],
+ "ink": {
+  "ink": 56166,
+  "chromaticFraction": 0.0032,
+  "midtoneFraction": 0.3729,
+  "suggest": "accent"
+ },
+ "dark": "invert-accent",
+ "keep": null,
+ "specks": 3,
+ "tile": [
+  640,
+  0,
+  640,
+  300
+ ],
+ "background": null,
+ "labels": []
+}

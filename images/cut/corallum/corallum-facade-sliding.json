@@ -1,0 +1,50 @@
+{
+ "src": "images/corallum/corallum-facade-sliding.png",
+ "hash": "22548837a119a905",
+ "mode": "ink",
+ "from": [
+  727,
+  1236
+ ],
+ "to": [
+  671,
+  1182
+ ],
+ "offset": [
+  28,
+  28
+ ],
+ "paper": [
+  255,
+  255,
+  255
+ ],
+ "clip": [],
+ "ink": {
+  "ink": 22387,
+  "chromaticFraction": 0.1434,
+  "midtoneFraction": 0.8886,
+  "suggest": "colour"
+ },
+ "dark": "invert-accent",
+ "keep": null,
+ "specks": 286,
+ "tile": [
+  0,
+  0,
+  640,
+  400
+ ],
+ "background": null,
+ "labels": [
+  {
+   "id": "text",
+   "removed": 50,
+   "kept": 0,
+   "x": 1.788,
+   "y": 51.184,
+   "w": 62.444,
+   "h": 11.929
+  }
+ ]
+}

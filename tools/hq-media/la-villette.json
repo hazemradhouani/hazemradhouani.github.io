@@ -1,0 +1,126 @@
+{
+  "version": 1,
+  "sourceRoot": "Images HQ",
+  "assets": [
+    {
+      "source": "Images HQ/La villette/NB_StudioBeleem_JJaures_LaVillette_CAM-03_AvenueJeanJaures_Rep-3_PC_20260224.jpg",
+      "output": "images/la-villette/la-villette-street-render-hq.jpg",
+      "sha256": "af5786dec7bf4cbb9407276089be7161d571de9e901ff82ee1fd40fb52a6f183",
+      "crop": null,
+      "treatment": "the full scene, untouched; area downscale to the render cap",
+      "darkTreatment": "preserve-colour-scene",
+      "credit": "Render: Studio BELEM (file name 'NB_StudioBeleem_...'; as the existing hero, pdf2026:p3)",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "captionEvidence": "Same camera as the existing hero (pdf2026:p3): the white five-storey building on avenue Jean Jaurès with a green shopfront, the red restaurant awning on the right and a white car on the left",
+      "reviewStatus": "approved"
+    },
+    {
+      "source": "Images HQ/La villette/NB_StudioBeleem_JJaures_LaVillette_CAM-02_AvenueJeanJaures_Rep-Julliet_20240720_modifié.jpg",
+      "output": "images/la-villette/la-villette-aerial-render-hq.jpg",
+      "sha256": "d6b8dd75da28c898d33bc5f65201bef79c4af8c414ddac2b9c7ed659a97795ff",
+      "crop": null,
+      "treatment": "the full scene, untouched; area downscale to the render cap",
+      "darkTreatment": "preserve-colour-scene",
+      "credit": "Render: Studio BELEM (file name 'NB_StudioBeleem_...'; as the existing aerial figure, pdf2026:p8)",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "captionEvidence": "Same camera as the existing aerial figure (pdf2026:p8, 'reading of the three buildings A, B and C'): the low gabled block in front, the two framed blocks behind with planted roofs, the same neighbouring buildings; the HQ frame is wider",
+      "reviewStatus": "approved"
+    },
+    {
+      "source": "Images HQ/La villette/NB_StudioBeleem_JJaures_LaVillette_CAM-01_Rep-Julliet _20240716.jpg",
+      "output": "images/la-villette/la-villette-garden-render.jpg",
+      "sha256": "721742ced29c41feb598b331bfdf9673a71bdf5b938979dbebc9a3ff918b55e1",
+      "crop": null,
+      "treatment": "the full scene, untouched; area downscale to the render cap",
+      "darkTreatment": "preserve-colour-scene",
+      "credit": "Render: Studio BELEM (file name 'NB_StudioBeleem_...', the office's render series for this project)",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "captionEvidence": "New view: a planted path along a long building with a framed concrete façade; the same frame, timber-framed windows and spandrels as the façade module drawn in the Carnet prototype de façade",
+      "reviewStatus": "approved"
+    },
+    {
+      "source": "Images HQ/La villette/1050-6001-B_LAV_BLM_CHB_CAR_REP_DCE_merge_page-0006.jpg",
+      "output": "images/la-villette/la-villette-plan-level-2-room-types.png",
+      "sha256": "0da1a0637f5f76fe70afdacb4b49c730290681a83df7a9af4680f203348a9bf9",
+      "crop": { "x": 782, "y": 100, "width": 3603, "height": 1400 },
+      "treatment": "crop of the level 2 plan with its grid bubbles (c1-c21, z1-z6, F3) and the neighbouring hatch; the legend box (re-set in HTML), the printed title 'Plan de repérage_ Niveau 2' (the caption), the level 3 plan below and the cartouche are left outside",
+      "darkTreatment": "field",
+      "credit": "Studio BELEM: issuer (EMETTEUR) 'Belem' in the sheet's cartouche; the client panel is furniture and not published",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "captionEvidence": "Sheet title 'Plan de repérage des Chambres Types, Niveau 2-3 _ Bâtiments C'; drawing title 'Plan de repérage_ Niveau 2'; legend 'Chambre Standard', 'Chambre Bunkie', 'Chambre Flex', 'Chambre PMR'",
+      "reviewStatus": "approved"
+    },
+    {
+      "source": "Images HQ/La villette/1050-4701-G_LAV_BLM_MET_CAR_REP_A_DCE_merge_page-0008.jpg",
+      "output": "images/la-villette/la-villette-south-elevation-c.png",
+      "sha256": "0173f8adeefbaae000653422084ca922bfb12727000d54e224edf514295b6c64",
+      "crop": { "x": 7160, "y": 263, "width": 6245, "height": 6442 },
+      "treatment": "crop of the right-hand drawing, 'Elevation Sud_Bâtiment C', from its grid bubbles to the ground hatch and the level marks; the printed title (the caption), the left-hand 'Elevation Sud 2' drawing, the revision table and the cartouche with its render thumbnail are left outside; area downscale to the drawing cap",
+      "darkTreatment": "invert-accent",
+      "credit": "Studio BELEM: 'Belem' in the sheet's cartouche; the client panel is furniture and not published",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "captionEvidence": "Printed title 'Elevation Sud_Bâtiment C'; cartouche 'Façades Bâtiment C', '1/100', '17/11/2025', phase 'PRO'",
+      "reviewStatus": "approved"
+    },
+    {
+      "source": "Images HQ/La villette/1050-6001-B_LAV_BLM_CHB_CAR_REP_DCE_merge_page-0010.jpg",
+      "output": "images/la-villette/la-villette-facade-module-axo.png",
+      "sha256": "6696b674b2b4b21a4645e700ee8a1210bf3b207ef1777f4e267a2861395367d4",
+      "crop": { "x": 650, "y": 230, "width": 3077, "height": 2735 },
+      "treatment": "crop of the axonometric with its callouts (erased and re-set in HTML), blank paper kept left and right for the English labels; the key section of building C with its red locator (furniture) and the cartouche are left outside",
+      "darkTreatment": "field",
+      "credit": "Studio BELEM: issuer (EMETTEUR) 'Belem' in the sheet's cartouche; the client panel is furniture and not published",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "captionEvidence": "Sheet title 'Carnet Prototype de façade / Module de façade'; the same drawing and callouts as the existing façade-module axonometric (pdf2026:p5), which it replaces",
+      "reviewStatus": "approved"
+    },
+    {
+      "source": "Images HQ/La villette/1050-6001-B_LAV_BLM_CHB_CAR_REP_DCE_merge_page-0011.jpg",
+      "output": "images/la-villette/la-villette-facade-module-details.png",
+      "sha256": "9c7fd376b84ad54fc89cbee8573b4647eee8a49e1b9b0e167840d2c24f94b4e0",
+      "crop": { "x": 380, "y": 125, "width": 3342, "height": 2960 },
+      "treatment": "crop of the elevation, plan and section of the module with their dimensions and callouts (erased and re-set in HTML); the key section of building C with its red locator (furniture) and the cartouche are left outside",
+      "darkTreatment": "field",
+      "credit": "Studio BELEM: issuer (EMETTEUR) 'Belem' in the sheet's cartouche; the client panel is furniture and not published",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "captionEvidence": "Sheet title 'Carnet Prototype de façade / Détails', scale '1/20'; the same elevation, section and plan as the existing module details (pdf2026:p5), which it replaces",
+      "reviewStatus": "approved"
+    },
+    {
+      "source": "Images HQ/La villette/1050-4701-G_LAV_BLM_MET_CAR_REP_A_DCE_merge_page-0002.jpg",
+      "output": "images/la-villette/la-villette-access-gate.png",
+      "sha256": "3834517f8b02939033a8a2091cf5c3060a5201840e35a1eb3a524833193b30bd",
+      "crop": { "x": 250, "y": 92, "width": 4545, "height": 2243 },
+      "treatment": "crop of the elevation, the callouts (erased and re-set in HTML) and the section, down to their view titles (re-set); the plan below is left outside because its callout 'Deblocage portail asservi' overprints a reference circle and cannot be lifted cleanly (D49); the key plan 'BAT A', the key elevation 'ELEVATION NORD BAT A' and the cartouche are left outside; the wall band above the gate runs to the sheet frame",
+      "darkTreatment": "field",
+      "credit": "Studio BELEM: issuer (EMETTEUR) 'Belem' in the sheet's cartouche; the client panel is furniture and not published",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "captionEvidence": "Sheet title 'Portail, trappe d'accès colonnes sèches– elevation nord', scale '1/20'; the same elevation, section and callouts as the existing gate detail (pdf2026:p4), which it replaces",
+      "reviewStatus": "approved"
+    },
+    {
+      "source": "Images HQ/La villette/1050-4701-G_LAV_BLM_MET_CAR_REP_A_DCE_merge_page-0002.jpg",
+      "output": "images/la-villette/la-villette-access-gate-annotated.png",
+      "sha256": "3834517f8b02939033a8a2091cf5c3060a5201840e35a1eb3a524833193b30bd",
+      "crop": { "x": 250, "y": 92, "width": 4545, "height": 2243 },
+      "treatment": "the same crop as la-villette-access-gate.png with the printed callouts and view titles kept in the pixels: it stands on the home page's capabilities card, which sets no HTML labels, and a callout tied to its leader line stays with the drawing (D60)",
+      "darkTreatment": "field",
+      "credit": "Studio BELEM: issuer (EMETTEUR) 'Belem' in the sheet's cartouche; the client panel is furniture and not published",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "captionEvidence": "Sheet title 'Portail, trappe d'accès colonnes sèches– elevation nord'; replaces the gate detail (pdf2026:p4) on the home page, whose card text is pdf2026:p3",
+      "reviewStatus": "approved"
+    },
+    {
+      "source": "Images HQ/La villette/1050-4701-G_LAV_BLM_MET_CAR_REP_A_DCE_merge_page-0004.jpg",
+      "output": "images/la-villette/la-villette-window-guardrail.png",
+      "sha256": "3aa7ab4472e0e80f16e8705f96397f28dd79e8aa2635f063702c27a402e1dd32",
+      "crop": { "x": 268, "y": 128, "width": 3212, "height": 2997 },
+      "treatment": "crop of the section with its dimensions and callouts (erased and re-set in HTML) and the axonometric of the window bays; the key elevation, the three key plans with their 'COUPE A2/A3' markers, the A1/A2 legend (given in the caption) and the cartouche are left outside",
+      "darkTreatment": "invert-accent",
+      "credit": "Studio BELEM: issuer (EMETTEUR) 'Belem' in the sheet's cartouche; the client panel is furniture and not published",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "captionEvidence": "Sheet title 'Garde corps de fenêtre - elevation nord', scale '1/15', legend 'A1 h = 68.00 cm', 'A2 h = 82.50 cm'; the same section and axonometric as the existing window balustrade (pdf2026:p6), which it replaces",
+      "reviewStatus": "approved"
+    }
+  ]
+}

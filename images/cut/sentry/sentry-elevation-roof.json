@@ -1,0 +1,40 @@
+{
+ "src": "images/sentry/sentry-elevation-roof.png",
+ "hash": "35d7ee5d8c6d6bab",
+ "mode": "ink",
+ "from": [
+  1312,
+  704
+ ],
+ "to": [
+  1258,
+  672
+ ],
+ "offset": [
+  27,
+  17
+ ],
+ "paper": [
+  255,
+  255,
+  255
+ ],
+ "clip": [],
+ "ink": {
+  "ink": 108228,
+  "chromaticFraction": 0.0052,
+  "midtoneFraction": 0.5522,
+  "suggest": "accent"
+ },
+ "dark": "invert-accent",
+ "keep": null,
+ "specks": 187,
+ "tile": [
+  320,
+  200,
+  640,
+  400
+ ],
+ "background": null,
+ "labels": []
+}

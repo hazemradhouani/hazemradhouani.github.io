@@ -1,0 +1,40 @@
+{
+ "src": "images/belhomme/belhomme-plu-section-rue-belhomme-detailed.jpg",
+ "hash": "6ffe26fd3ce1aaaf",
+ "mode": "ink",
+ "from": [
+  560,
+  512
+ ],
+ "to": [
+  536,
+  484
+ ],
+ "offset": [
+  13,
+  14
+ ],
+ "paper": [
+  246,
+  240,
+  233
+ ],
+ "clip": [],
+ "ink": {
+  "ink": 24564,
+  "chromaticFraction": 0.0283,
+  "midtoneFraction": 0.172,
+  "suggest": "accent"
+ },
+ "dark": "invert-accent",
+ "keep": null,
+ "specks": 657,
+ "tile": [
+  0,
+  0,
+  536,
+  400
+ ],
+ "background": null,
+ "labels": []
+}

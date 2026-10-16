@@ -1,0 +1,40 @@
+{
+ "src": "images/foubert/foubert-site-plan.png",
+ "hash": "24427fd5f2ff100d",
+ "mode": "ink",
+ "from": [
+  2560,
+  1718
+ ],
+ "to": [
+  2560,
+  1718
+ ],
+ "offset": [
+  0,
+  0
+ ],
+ "paper": [
+  255,
+  255,
+  255
+ ],
+ "clip": [],
+ "ink": {
+  "ink": 405284,
+  "chromaticFraction": 0.0445,
+  "midtoneFraction": 0.8053,
+  "suggest": "accent"
+ },
+ "dark": "invert-accent",
+ "keep": null,
+ "specks": 1330,
+ "tile": [
+  640,
+  600,
+  640,
+  400
+ ],
+ "background": null,
+ "labels": []
+}

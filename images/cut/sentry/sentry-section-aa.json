@@ -1,0 +1,42 @@
+{
+ "src": "images/sentry/sentry-section-aa.png",
+ "hash": "3fc1557f6944bb76",
+ "mode": "ink",
+ "from": [
+  1312,
+  750
+ ],
+ "to": [
+  1285,
+  733
+ ],
+ "offset": [
+  27,
+  17
+ ],
+ "paper": [
+  255,
+  255,
+  255
+ ],
+ "clip": [
+  "bottom"
+ ],
+ "ink": {
+  "ink": 65996,
+  "chromaticFraction": 0.0027,
+  "midtoneFraction": 0.2584,
+  "suggest": "mono"
+ },
+ "dark": "invert",
+ "keep": null,
+ "specks": 266,
+ "tile": [
+  640,
+  200,
+  640,
+  400
+ ],
+ "background": null,
+ "labels": []
+}

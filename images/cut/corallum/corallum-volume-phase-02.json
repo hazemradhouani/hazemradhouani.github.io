@@ -1,0 +1,40 @@
+{
+ "src": "images/corallum/corallum-volume-phase-02.png",
+ "hash": "2d8eb2a8cbff9611",
+ "mode": "ink",
+ "from": [
+  582,
+  337
+ ],
+ "to": [
+  518,
+  303
+ ],
+ "offset": [
+  32,
+  0
+ ],
+ "paper": [
+  255,
+  255,
+  255
+ ],
+ "clip": [],
+ "ink": {
+  "ink": 15526,
+  "chromaticFraction": 0.0911,
+  "midtoneFraction": 0.1494,
+  "suggest": "colour"
+ },
+ "dark": "invert-accent",
+ "keep": null,
+ "specks": 32,
+ "tile": [
+  0,
+  0,
+  518,
+  303
+ ],
+ "background": null,
+ "labels": []
+}

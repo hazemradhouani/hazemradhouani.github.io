@@ -8,9 +8,21 @@
     "title": "Between the Poetics of Place and the Value of Heritage",
     "subtitle": "To Revive the Spirit of Al Erg Village, Hammat Al Jarid",
     "titleAr": "بين شاعرية المكان و قيمة الأثر",
-    "cover": "images/books/thesis-book-open.png",
-    "coverAlt": "The printed thesis Between the Poetics of Place and the Value of Heritage, open on a spread of axonometric drawings and site photographs of Al-Arg",
-    "coverSource": "pdf2025:p47 (mockup with its own soft mask)",
+    "cover": "images/cut/books/thesis-mockup-2.png",
+    "coverAlt": "The printed thesis Between the Poetics of Place and the Value of Heritage, open on a spread: an exploded axonometric of the building in three layers on a black page, facing a grid of site photographs of Al-Arg",
+    "coverSource": "hq:Memoire/002.png (book mockup, cut out as an object with a translucent shadow; the same view as pdf2025:p47; title and author checked on hq:Memoire/001.png, D54)",
+    "gallery": [
+      {
+        "src": "images/cut/books/thesis-mockup-1.png",
+        "alt": "The printed thesis laid open face down to show its whole cover: the Arabic title, subtitle and author over a photograph of a rubble-stone wall, and on the other half a block of Arabic text above a white drawing of the sun",
+        "source": "hq:Memoire/001.png (book mockup, cut out as an object; printed title, subtitle, author and supervisors match this page, D54)"
+      },
+      {
+        "src": "images/cut/books/thesis-mockup-3.png",
+        "alt": "The printed thesis open on a spread of renders of Al-Arg at dusk: palm fronds against a pink sky, earth roofs and walls in orange light, and the village's lit courtyards seen from above",
+        "source": "hq:Memoire/003.png (book mockup, cut out as an object; the renders on its pages are hq:EL erg/Render.jpg, Render 02.jpg and Render 03.jpg)"
+      }
+    ],
     "spec": [
       {
         "label": "Institution",
@@ -48,7 +60,7 @@
   "report": {
     "label": "Professional | Report | 2026",
     "title": "Internship Report",
-    "subtitle": "Professional practice across Paris, Casablanca, and Tokyo",
+    "subtitle": "Professional practice in Paris and Casablanca; research in Japan",
     "cover": "images/books/report-cover.png",
     "coverAlt": "Cover of the internship report, Hazem Radhouani, Paris, Casablanca, Tokyo, 2026",
     "spec": [
@@ -70,8 +82,8 @@
     ],
     "text": [
       {
-        "text": "Internship report documenting professional architectural practice across three cities between 2024 and 2026. The report covers project work at Studio BELEM in Paris (residential rehabilitation, mixed-use, and heritage projects within the ABF regulatory framework) and at Yassir Khalil Studio in Casablanca, across infrastructure, residential, and healthcare programmes.",
-        "source": "site (dashes replaced by parentheses)"
+        "text": "Internship report documenting professional architectural practice in Paris and Casablanca between 2024 and 2026. The report covers project work at Studio BELEM in Paris (residential rehabilitation, mixed-use, and heritage projects within the ABF regulatory framework) and at Yassir Khalil Studio in Casablanca, across infrastructure, residential, and healthcare programmes.",
+        "source": "site (dashes replaced by parentheses) + owner:2026-10-13"
       },
       {
         "text": "A chapter is dedicated to research conducted within the Sakura Science Program in Japan, 2025, for which the Most Appreciated Research distinction was received. The report is submitted in partial fulfilment of the requirements for the National Architecture Diploma at ENAU, Université de Carthage.",

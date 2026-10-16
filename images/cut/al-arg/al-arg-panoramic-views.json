@@ -1,0 +1,46 @@
+{
+ "src": "images/al-arg/al-arg-panoramic-views.png",
+ "hash": "a6af0f20e1f55976",
+ "mode": "ink",
+ "from": [
+  690,
+  505
+ ],
+ "to": [
+  649,
+  490
+ ],
+ "offset": [
+  17,
+  8
+ ],
+ "paper": [
+  255,
+  255,
+  255
+ ],
+ "clip": [],
+ "ink": {
+  "ink": 39041,
+  "chromaticFraction": 0.0238,
+  "midtoneFraction": 0.5663,
+  "suggest": "accent"
+ },
+ "dark": "keep",
+ "keep": {
+  "file": "images/cut/al-arg/al-arg-panoramic-views--keep.png",
+  "share": 0.4887,
+  "radius": 4,
+  "t": 0.06,
+  "fill": true
+ },
+ "specks": 142,
+ "tile": [
+  0,
+  0,
+  640,
+  400
+ ],
+ "background": null,
+ "labels": []
+}

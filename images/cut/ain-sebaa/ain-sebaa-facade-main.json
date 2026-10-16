@@ -1,0 +1,42 @@
+{
+ "src": "images/ain-sebaa/ain-sebaa-facade-main.png",
+ "hash": "b0d4fc083ba37018",
+ "mode": "ink",
+ "from": [
+  2560,
+  490
+ ],
+ "to": [
+  2560,
+  432
+ ],
+ "offset": [
+  0,
+  2
+ ],
+ "paper": [
+  255,
+  255,
+  255
+ ],
+ "clip": [
+  "right"
+ ],
+ "ink": {
+  "ink": 39937,
+  "chromaticFraction": 0,
+  "midtoneFraction": 0.6439,
+  "suggest": "mono"
+ },
+ "dark": "invert",
+ "keep": null,
+ "specks": 2,
+ "tile": [
+  1280,
+  0,
+  640,
+  400
+ ],
+ "background": null,
+ "labels": []
+}

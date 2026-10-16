@@ -1,0 +1,42 @@
+{
+ "src": "images/nouvelle-medina/nouvelle-medina-section-elevation-1.png",
+ "hash": "dc8812b5a27ccc22",
+ "mode": "ink",
+ "from": [
+  2422,
+  577
+ ],
+ "to": [
+  2422,
+  577
+ ],
+ "offset": [
+  0,
+  0
+ ],
+ "paper": [
+  255,
+  255,
+  255
+ ],
+ "clip": [
+  "bottom"
+ ],
+ "ink": {
+  "ink": 82331,
+  "chromaticFraction": 0.0087,
+  "midtoneFraction": 0.2724,
+  "suggest": "accent"
+ },
+ "dark": "invert-accent",
+ "keep": null,
+ "specks": 23,
+ "tile": [
+  0,
+  0,
+  640,
+  400
+ ],
+ "background": null,
+ "labels": []
+}

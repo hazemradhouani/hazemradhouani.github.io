@@ -5,14 +5,16 @@ import { dims, shown, preloadFor } from '../lib/images.mjs';
 import { icon, image, row, cells, figure, hero, heroPartner, creditLine, heroCaption, sizesFor, spanFor, projectHref, vtTitle, vtHero } from './partials.mjs';
 
 const q = (s) => `“${s}”`;
-const more = (href, label, p, { dir = 'right', ext = false } = {}) => dir === 'left'
+// `of`: what a repeated label leads to, read after the visible words (WCAG 2.4.4, 2.5.3)
+const more = (href, label, p, { dir = 'right', ext = false, of = '' } = {}) => dir === 'left'
   ? html`<a class="more" href="${href}">${icon('arrow-left', p)}<span>${label}</span></a>`
-  : html`<a class="more" href="${href}"${attrs({ target: ext ? '_blank' : null, rel: ext ? 'noopener' : null })}><span>${label}</span>${icon(ext ? 'arrow-up-right' : 'arrow-right', p)}${when(ext, () => html`<span class="vh"> (opens in a new tab)</span>`)}</a>`;
+  : html`<a class="more" href="${href}"${attrs({ target: ext ? '_blank' : null, rel: ext ? 'noopener' : null })}><span>${label}</span>${when(of, () => html`<span class="vh">: ${of}</span>`)}${icon(ext ? 'arrow-up-right' : 'arrow-right', p)}${when(ext, () => html`<span class="vh"> (opens in a new tab)</span>`)}</a>`;
 const lines = (...xs) => xs.filter(Boolean).map((x, i) => html`${i ? html`<br>` : ''}${x}`);
 const spec = (rows) => html`<dl class="spec in">${rows.map((s) => html`<dt>${s.label}</dt><dd${attrs({ lang: s.lang })}>${s.value}</dd>`)}</dl>`;
 
-// an image group that is also a link to its project: out of the tab order; the title link carries the name
-const linked = (href, markup) => html`<a class="card" href="${href}" tabindex="-1">${markup}</a>`;
+// an image group that is also a link to its project: out of the tab order and the accessibility tree,
+// since the title link beside it carries the same destination and the name
+const linked = (href, markup) => html`<a class="card" href="${href}" tabindex="-1" aria-hidden="true">${markup}</a>`;
 
 /* ------------------------------------------------------------------ home */
 export function home(site, d, projects, ctx) {
@@ -124,7 +126,7 @@ function chapter(x, ctx, first) {
 <p class="meta">${lines(x.descriptor, `${x.place} | ${x.year}`, x.office, credit ? html`<span class="credit">${credit}</span>` : '')}</p>
 </div>
 ${when(r, () => html`<div class="s-${r.span} block" data-rv>${linked(href, r.html)}</div>`)}
-<p class="s-text center chapter__more in">${more(href, 'View project', p)}</p>
+<p class="s-text center chapter__more in">${more(href, 'View project', p, { of: x.title })}</p>
 </article>` };
 }
 
@@ -132,9 +134,10 @@ export function work(site, projects, ctx) {
   const p = ctx.prefix;
   const groups = site.groups.map((g) => ({ ...g, items: projects.filter((x) => x.group === g.id) })).filter((g) => g.items.length);
   const chapters = projects.map((x, i) => chapter(x, ctx, i === 0));
+  const years = projects.map((x) => parseInt(x.year, 10)).filter(Number.isFinite);
   const body = html`
 <header class="intro wrap g">
-<div class="s-text center"><h1 class="h1">Work</h1><p class="lead in">Places already alive. ${projects.length} projects in Paris, Morocco and Tunisia, from 2022 to 2026.</p></div>
+<div class="s-text center"><h1 class="h1">Work</h1><p class="lead in">Places already alive. ${projects.length} projects in Tunisia, France and Morocco, from ${Math.min(...years)} to ${Math.max(...years)}.</p></div>
 <nav class="s-wide block index center" aria-label="Projects by place">
 ${groups.map((g) => html`<div><p class="label" id="g-${g.id}">${g.label}</p><ul role="list" aria-labelledby="g-${g.id}">${g.items.map((x) => html`<li><a href="#${x.slug}">${x.title}</a></li>`)}</ul></div>`)}
 </nav>
@@ -186,7 +189,8 @@ ${when(film, () => html`<section class="block wrap g" aria-labelledby="film-h" d
   const jsonld = [{ '@context': 'https://schema.org', '@type': 'CreativeWork', name: x.title, description: x.summary, url,
     image: `${site.origin}${site.base}${x.hero.src}`, dateCreated: x.date,
     genre: x.descriptor.split(' | ')[0], locationCreated: { '@type': 'Place', name: x.place },
-    ...(x.office ? { creator: { '@type': 'Organization', name: x.office }, contributor: person } : { creator: person }),
+    // an office project names the owner as contributor, unless the case study makes no role claim (D53)
+    ...(x.office ? { creator: { '@type': 'Organization', name: x.office }, ...(x.noRoleClaim ? {} : { contributor: person }) } : { creator: person }),
     isPartOf: { '@type': 'WebSite', url: `${site.origin}${site.base}`, name: site.siteName } },
   { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
     { '@type': 'ListItem', position: 1, name: 'Home', item: `${site.origin}${site.base}` },
@@ -198,11 +202,18 @@ ${when(film, () => html`<section class="block wrap g" aria-labelledby="film-h" d
 }
 
 /* ------------------------------------------------------------------ research */
-const book = (b, p, { id, extra = '', after = '' }) => {
+// further views of the printed book (optional): one justified row, every view whole
+const gallery = (b, p) => {
+  if (!b.gallery?.length) return '';
+  const r = row(b.gallery.map((g) => ({ rel: g.src, alt: g.alt })), { prefix: p, max: 'wide' });
+  return html`<div class="s-${r.span} block" data-rv>${r.html}</div>`;
+};
+// priority: the first book is above the fold and is the page's largest paint, so it loads eagerly at high priority
+const book = (b, p, { id, extra = '', after = '', priority = false }) => {
   const { w, h } = dims(b.cover);
   const span = spanFor(w, h, { max: 'narrow' });
   return html`<article class="chapter wrap g" aria-labelledby="${id}">
-<div class="s-${span}" data-rv>${image(b.cover, { alt: b.coverAlt, sz: sizesFor(span), prefix: p })}</div>
+<div class="s-${span}" data-rv>${image(b.cover, { alt: b.coverAlt, sz: sizesFor(span), prefix: p, priority })}</div>
 <div class="s-text center chapter__text">
 <p class="label">${b.label}</p>
 <h2 class="h1 in" id="${id}">${b.title}</h2>
@@ -211,8 +222,9 @@ ${extra}
 ${spec(b.spec)}
 </div>
 ${after}
+${gallery(b, p)}
 <div class="s-narrow block"><div class="prose">${b.text.map((t) => html`<p>${t.text}</p>`)}${when(b.honour, () => html`<p class="label honour">${b.honour}</p>`)}</div></div>
-<p class="s-text center in actions">${more(b.read, 'Read online', p, { ext: true })}${when(b.case, () => more(p + b.case, 'Al-Arg case study', p))}</p>
+<p class="s-text center in actions">${more(b.read, 'Read online', p, { ext: true, of: b.title })}${when(b.case, () => more(p + b.case, 'Al-Arg case study', p))}</p>
 </article>`;
 };
 export function research(site, d, ctx) {
@@ -220,8 +232,8 @@ export function research(site, d, ctx) {
   const t = d.thesis; const r = d.report;
   const body = html`
 <header class="intro wrap g"><div class="s-text center"><h1 class="h1">Research</h1><p class="lead in">${d.intro}</p></div></header>
-${book(t, p, { id: 'thesis-h', extra: html`<p class="book__ar in" lang="ar" dir="rtl">${t.titleAr}</p>`,
-    after: html`<blockquote class="s-narrow block"><div class="prose"><p class="abstract">${t.abstract}</p></div></blockquote>` })}
+${book(t, p, { id: 'thesis-h', priority: true, extra: html`<p class="book__ar in" lang="ar" dir="rtl">${t.titleAr}</p>`,
+    after: html`<div class="s-narrow block"><div class="prose"><p class="abstract">${t.abstract}</p></div></div>` })}
 ${book(r, p, { id: 'report-h' })}
 <article class="chapter wrap g" aria-labelledby="sakura-h">
 <div class="s-text center"><p class="label">${d.sakura.label}</p><h2 class="h1 in" id="sakura-h">${d.sakura.title}</h2><p class="lead in">${d.sakura.subtitle}</p><p class="label in honour">${d.sakura.award}</p></div>

@@ -1,0 +1,46 @@
+{
+ "src": "images/foubert/foubert-street-window-elevation.png",
+ "hash": "a19174e46b4a9996",
+ "mode": "ink",
+ "from": [
+  1370,
+  2114
+ ],
+ "to": [
+  1351,
+  2062
+ ],
+ "offset": [
+  19,
+  33
+ ],
+ "paper": [
+  255,
+  255,
+  255
+ ],
+ "clip": [],
+ "ink": {
+  "ink": 660480,
+  "chromaticFraction": 0.4961,
+  "midtoneFraction": 0.6103,
+  "suggest": "colour"
+ },
+ "dark": "keep",
+ "keep": {
+  "file": "images/cut/foubert/foubert-street-window-elevation--keep.png",
+  "share": 0.9514,
+  "radius": 4,
+  "t": 0.06,
+  "fill": true
+ },
+ "specks": 12,
+ "tile": [
+  640,
+  0,
+  640,
+  400
+ ],
+ "background": null,
+ "labels": []
+}

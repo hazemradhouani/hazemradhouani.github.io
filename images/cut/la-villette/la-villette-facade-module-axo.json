@@ -1,0 +1,131 @@
+{
+ "src": "images/la-villette/la-villette-facade-module-axo.png",
+ "hash": "93e74ddc5ae2a516",
+ "mode": "ink",
+ "from": [
+  2560,
+  2275
+ ],
+ "to": [
+  2560,
+  2275
+ ],
+ "offset": [
+  0,
+  0
+ ],
+ "paper": [
+  255,
+  255,
+  255
+ ],
+ "clip": [],
+ "ink": {
+  "ink": 139413,
+  "chromaticFraction": 0.1418,
+  "midtoneFraction": 0.7189,
+  "suggest": "colour"
+ },
+ "dark": "invert-accent",
+ "keep": null,
+ "specks": 4,
+ "tile": [
+  960,
+  1200,
+  640,
+  400
+ ],
+ "background": null,
+ "labels": [
+  {
+   "id": "concrete",
+   "removed": 6,
+   "kept": 0,
+   "x": 9.531,
+   "y": 37.978,
+   "w": 4.102,
+   "h": 1.451
+  },
+  {
+   "id": "drip",
+   "removed": 11,
+   "kept": 0,
+   "x": 10.195,
+   "y": 48.044,
+   "w": 9.219,
+   "h": 1.407
+  },
+  {
+   "id": "insulation",
+   "removed": 10,
+   "kept": 0,
+   "x": 9.57,
+   "y": 74.989,
+   "w": 6.016,
+   "h": 1.363
+  },
+  {
+   "id": "sun",
+   "removed": 19,
+   "kept": 0,
+   "x": 79.766,
+   "y": 34.769,
+   "w": 12.852,
+   "h": 1.363
+  },
+  {
+   "id": "glazing",
+   "removed": 8,
+   "kept": 0,
+   "x": 79.688,
+   "y": 40.527,
+   "w": 5.234,
+   "h": 1.714
+  },
+  {
+   "id": "timber-frame",
+   "removed": 10,
+   "kept": 0,
+   "x": 79.727,
+   "y": 46.066,
+   "w": 7.539,
+   "h": 1.451
+  },
+  {
+   "id": "spandrel",
+   "removed": 24,
+   "kept": 0,
+   "x": 79.688,
+   "y": 53.407,
+   "w": 13.438,
+   "h": 3.824
+  },
+  {
+   "id": "column",
+   "removed": 21,
+   "kept": 0,
+   "x": 79.688,
+   "y": 61.495,
+   "w": 11.602,
+   "h": 3.736
+  },
+  {
+   "id": "joint",
+   "removed": 11,
+   "kept": 0,
+   "x": 79.688,
+   "y": 69.495,
+   "w": 8.164,
+   "h": 1.363
+  },
+  {
+   "id": "band",
+   "removed": 30,
+   "kept": 0,
+   "x": 79.688,
+   "y": 76.527,
+   "w": 13.828,
+   "h": 3.736
+  }
+ ]
+}

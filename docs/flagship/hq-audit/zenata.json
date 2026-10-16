@@ -1,0 +1,178 @@
+{
+  "version": 1,
+  "sourceRoot": "Images HQ",
+  "folder": "Zenata",
+  "assets": [
+    {
+      "source": "Images HQ/Zenata/2025 - Hazem radhouani - Portfolio - HQ [11-15]_page-0001.jpg",
+      "sha256": "fb7cba5c6c6ac011ab479f4a820f41a21c69e12b54c82d0068eb1aa3bad7b47d",
+      "width": 3508,
+      "height": 2481,
+      "projectMapping": {
+        "slug": "zenata",
+        "status": "confirmed"
+      },
+      "mappingEvidence": "Portfolio page 11 of the Zenata chapter (pdf2025:p10): the waiting-hall render is Scene 64 of this folder, the two exterior renders show the cable-stayed mast and 'GARE DE ZENATA' signage, and the three programme axonometrics are the existing 'Programme' figure",
+      "visualType": "portfolio sheet: three stacked renders (left column) and three colour-coded programme axonometrics with legends (right)",
+      "textDisposition": "furniture (dropped): page tab '11'. Legends → HTML legends, cropped out (beside the drawings): top 'Poste de police', 'Locaux techniques', 'Maintenance', 'Sanitaires + Vestiaires Billeterie Rdc', 'Services Embarques - Local déchets', 'Locaux techniques', 'Divers', 'Jardinage - Local de stockage'; middle 'Commerce', 'Nettoyage', 'Local tech : sono - info', 'Vestiaires H+F', 'Divers', 'Sanitaires', 'Service Logistiques - Bureaux', 'Salle de prière + Salle d'ablution H', 'Salle de prière + Salle d'ablution F'; bottom 'Back office', 'Commerces', 'Espace Hall billeterie', 'Espace Ventes', 'Espace d'embarquement', 'Espace Accueil groupe', 'Sanitaires H+F'. No titles: each axonometric's level is established by matching its legend to the room names of the plans on page 10 (Local Police, Maintenance, Jardinage at +00.00; Salle de prière H/F, Vestiaires at +04.20; Hall billeterie, Espace d'embarquement, Espace Accueil Groupe at +07.75). Intrinsic (stays): 'GARE DE ZENATA' and Arabic 'محطة زناتة' signage on the dusk render",
+      "duplicateOf": null,
+      "disposition": "approved",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "Owner-supplied office work (Yassir Khalil Studio, site); no third-party credit printed on the sheet; publication of office drawings the owner produced confirmed 2026-10-12 (content ledger)",
+      "roleEvidence": "The published page claims only the narrative's existing role sentence (site: co-authoring the structural coordination and the organisation of passenger flows); the images add no personal-role statement",
+      "reason": "Used: the dusk side view and the night view (renders with no separate HQ file, cropped from the left column at 1392 px), and the three programme axonometrics (replace zenata-programme-section.jpg). Left out: the top render, a crop of Scene 64, which is used at full resolution instead"
+    },
+    {
+      "source": "Images HQ/Zenata/2025 - Hazem radhouani - Portfolio - HQ [6-10]_page-0003.jpg",
+      "sha256": "c9d240724823bcbb746805d6dd534f53ee744cdc26b155e2d69a10621362374d",
+      "width": 3508,
+      "height": 2481,
+      "projectMapping": {
+        "slug": "zenata",
+        "status": "confirmed"
+      },
+      "mappingEvidence": "Portfolio page 8 (pdf2025:p7), footer '8 ZENATA STATION'; the existing hero view",
+      "visualType": "portfolio sheet: one full-bleed render with a page footer",
+      "textDisposition": "furniture: footer '8' and 'ZENATA STATION'; intrinsic: 'GARE DE ZENATA' and Arabic 'محطة زناتة' signage on the station",
+      "duplicateOf": "Images HQ/Zenata/Scene 51.png",
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "Owner-supplied office work (Yassir Khalil Studio, site); no third-party credit printed on the sheet",
+      "roleEvidence": "Not published; no role statement drawn from it",
+      "reason": "Duplicate: same camera, mast, signage and figures as Scene 51; on a 1:1 tile of the signage the page shows the render enlarged about 1.46 times and cropped, with a page footer. Scene 51 is the original pixels"
+    },
+    {
+      "source": "Images HQ/Zenata/2025 - Hazem radhouani - Portfolio - HQ [6-10]_page-0004.jpg",
+      "sha256": "e9fb9eb5d794716541630142ad8ee80490ebdf0ee06326a7ce44e921c4f9f5ec",
+      "width": 3508,
+      "height": 2481,
+      "projectMapping": {
+        "slug": "zenata",
+        "status": "confirmed"
+      },
+      "mappingEvidence": "Portfolio page 9 (pdf2025:p8): the long elevation of the existing figure, and the project data already cited from pdf2025:p8 (Casablanca, Zenata eco-city; 7200 m²)",
+      "visualType": "portfolio sheet: long elevation, project data and prose, end elevation, five profile diagrams, site axonometric with legend",
+      "textDisposition": "furniture: page tab '9'. Prose/fact (not re-published): 'LOCATION: Casablanca, Zenata eco-city', 'AREA: 7200 m²', 'TYPE: Regional Train Station – Sustainable transit hub', 'YEAR: March 2025' (location and area already in the spec from this page), 'ABOUT' paragraph ('A slender bridge of light and concrete poised above Zenata's emerging green spine…') and the Lao Tzu quotation (third-party quote; the narrative keeps the site text). Intrinsic (stay): long elevation levels '+27.00', '+16.00', '+7.30', '+0.15' and 'GARE DE ZENATA' with Arabic sign; end elevation 'GARE DE ZENATA', 'محطة زناتة', '16.18', '1.00', '+0.15' and a truncated '.00' level label cut by the sheet layout; 'P' signs in the car parks. Legend → HTML legend (erased from blank paper inside the axonometric, D49): 'Accès Piétons', 'Espaces Parking', 'Avitaillement', 'Accès Véhicules'. Stray glyph 'r' between the fourth and fifth profile diagrams: erased, not re-set. No printed titles on the drawings",
+      "duplicateOf": null,
+      "disposition": "approved",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "Owner-supplied office work (Yassir Khalil Studio, site); no third-party credit printed on the sheet; publication of office drawings the owner produced confirmed 2026-10-12 (content ledger)",
+      "roleEvidence": "The published page claims only the narrative's existing role sentence (site); the drawings add no personal-role statement",
+      "reason": "Split into the long elevation (replaces zenata-elevation.jpg), the end elevation, the profile diagrams and the site axonometric with accesses (new)"
+    },
+    {
+      "source": "Images HQ/Zenata/2025 - Hazem radhouani - Portfolio - HQ [6-10]_page-0005.jpg",
+      "sha256": "796b74143e1f2f997d66b5876791e57b9f9340050562d2d044ad93b54a1a0242",
+      "width": 3508,
+      "height": 2481,
+      "projectMapping": {
+        "slug": "zenata",
+        "status": "confirmed"
+      },
+      "mappingEvidence": "Portfolio page 10 (pdf2025:p9): the same three plans as the existing 'Plans' figure",
+      "visualType": "portfolio sheet: three floor plans at one scale",
+      "textDisposition": "furniture: page tab '10'. Titles → caption (cropped out): 'LEVEL +00.00', 'LEVEL +04.20', 'LEVEL +07.75'. Intrinsic (stay): room names, areas, levels and dimensions, e.g. at +00.00 'Quais', 'Hall', 'Local Police 12.00m²', 'Compteurs et poste REDAL 44.30m²', 'Groupe Electrogène 43.77m²', 'Poste de transformation', 'Divers 135.6m²', 'Local maintenance équipement Gare 42.09m²', 'Jardinage local de stockage 10.13m²', 'Local déchets 18.00m²', 'Vitrage structurel'; at +04.20 'SALLE DE PRIERE H. 43.65m²', 'SALLE DE PRIERE F. 35.48m²', 'SALLE D'ABLUTION H. 20.00m²', 'SALLE D'ABLUTION F. 23.87m²', 'Commerce 59.16m²', 'Local Technique des équipements sono info télé 22.90m²', 'VIDE sur Hall'; at +07.75 'HALL 01 1026.69 m²', 'Espace d'embarquement 398.50m²', 'Espace Accueil Groupe 231.44m²', 'Espace Vente 124.73m²', 'Espace Hall Billeterie', 'Commerces 155.50m²', 'Commerces 150.75m²', 'SANITAIRES', 'Bureau Chef de Gare 20.50m²', 'Terrasse Accessible', level markers '+7.72' (the title reads +07.75)",
+      "duplicateOf": null,
+      "disposition": "approved",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "Owner-supplied office work (Yassir Khalil Studio, site); no third-party credit printed on the sheet; publication of office drawings the owner produced confirmed 2026-10-12 (content ledger)",
+      "roleEvidence": "The published page claims only the narrative's existing role sentence (site); the drawings add no personal-role statement",
+      "reason": "Split into three plans (one series at one scale); replaces zenata-plans.jpg"
+    },
+    {
+      "source": "Images HQ/Zenata/Scene 13.png",
+      "sha256": "d92c45372662ef650c4ed7c22163307ef1f392728e744f1fc77fa75f5e8a7c33",
+      "width": 3840,
+      "height": 2436,
+      "projectMapping": {
+        "slug": "zenata",
+        "status": "confirmed"
+      },
+      "mappingEvidence": "The station with its mast and paneled roof bridging the tracks between two car parks, as in the site axonometric of page 9",
+      "visualType": "render (monochrome aerial model view)",
+      "textDisposition": "none on the image",
+      "duplicateOf": null,
+      "disposition": "approved",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "Owner-supplied office work (Yassir Khalil Studio, site); no third-party credit printed on the source",
+      "roleEvidence": "The published page claims only the narrative's existing role sentence (site); the render adds no personal-role statement",
+      "reason": "New: aerial context view, first figure"
+    },
+    {
+      "source": "Images HQ/Zenata/Scene 35.png",
+      "sha256": "bc65c0c3d5dc6c929de73b173347a3be8f566debd0abadb8443294000b4b981f",
+      "width": 3840,
+      "height": 2436,
+      "projectMapping": {
+        "slug": "zenata",
+        "status": "confirmed"
+      },
+      "mappingEvidence": "The cable-stayed mast, glazed hall and external stairs of the station",
+      "visualType": "render (night)",
+      "textDisposition": "none on the image",
+      "duplicateOf": null,
+      "disposition": "approved",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "Owner-supplied office work (Yassir Khalil Studio, site); no third-party credit printed on the source",
+      "roleEvidence": "The published page claims only the narrative's existing role sentence (site); the render adds no personal-role statement",
+      "reason": "New: the lit entrance at night"
+    },
+    {
+      "source": "Images HQ/Zenata/Scene 51.png",
+      "sha256": "428ddcb5cdf26ade52fd19ad6b1e289258439dfdd97cff573b522e317d65cf1d",
+      "width": 2560,
+      "height": 1662,
+      "projectMapping": {
+        "slug": "zenata",
+        "status": "confirmed"
+      },
+      "mappingEvidence": "Same camera, mast, signage and figures as the existing hero (pdf2025:p7)",
+      "visualType": "render",
+      "textDisposition": "intrinsic: 'GARE DE ZENATA' (partly hidden by a catenary pole) and Arabic 'محطة زناتة' on the station",
+      "duplicateOf": null,
+      "disposition": "approved",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "Owner-supplied office work (Yassir Khalil Studio, site); no third-party credit printed on the source",
+      "roleEvidence": "The published page claims only the narrative's existing role sentence (site); the render adds no personal-role statement",
+      "reason": "Hero: the original file of the existing hero view (the 2025 portfolio's opening image for the project)"
+    },
+    {
+      "source": "Images HQ/Zenata/Scene 64.png",
+      "sha256": "c3e7bf00527af25a6f0d42b02f63ebd926e2fc98da568ee45e94b32aa3b4dd1d",
+      "width": 2560,
+      "height": 1662,
+      "projectMapping": {
+        "slug": "zenata",
+        "status": "confirmed"
+      },
+      "mappingEvidence": "Same camera, seating, figures and escalators as the existing concourse render (pdf2025:p10), which is a crop of it",
+      "visualType": "render (interior)",
+      "textDisposition": "none on the image",
+      "duplicateOf": null,
+      "disposition": "approved",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "Owner-supplied office work (Yassir Khalil Studio, site); no third-party credit printed on the source",
+      "roleEvidence": "The published page claims only the narrative's existing role sentence (site); the render adds no personal-role statement",
+      "reason": "Replaces zenata-concourse-render.jpg with the full, uncropped view"
+    },
+    {
+      "source": "Images HQ/Zenata/يصي.png",
+      "sha256": "95e54502eb8f357ff7a42b1cb17935ae1ca68d04221d4b3cebca53cad0f267c6",
+      "width": 3840,
+      "height": 2436,
+      "projectMapping": {
+        "slug": "zenata",
+        "status": "confirmed"
+      },
+      "mappingEvidence": "Station signage 'GARE DE ZENATA' and 'محطة زناتة', the mast and cables and the cantilevered roof of the case study",
+      "visualType": "render (dusk); the file name is an accidental keyboard string, so the output is named descriptively",
+      "textDisposition": "intrinsic: 'GARE DE ZENATA' and Arabic 'محطة زناتة' on the façade",
+      "duplicateOf": null,
+      "disposition": "approved",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "Owner-supplied office work (Yassir Khalil Studio, site); no third-party credit printed on the source",
+      "roleEvidence": "The published page claims only the narrative's existing role sentence (site); the render adds no personal-role statement",
+      "reason": "New: the lit station at dusk, closing view"
+    }
+  ]
+}

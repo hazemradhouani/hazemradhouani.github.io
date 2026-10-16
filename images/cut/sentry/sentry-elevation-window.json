@@ -1,0 +1,40 @@
+{
+ "src": "images/sentry/sentry-elevation-window.png",
+ "hash": "7933fea1a2526b92",
+ "mode": "ink",
+ "from": [
+  1312,
+  711
+ ],
+ "to": [
+  1258,
+  668
+ ],
+ "offset": [
+  27,
+  17
+ ],
+ "paper": [
+  255,
+  255,
+  255
+ ],
+ "clip": [],
+ "ink": {
+  "ink": 90422,
+  "chromaticFraction": 0.0278,
+  "midtoneFraction": 0.3619,
+  "suggest": "accent"
+ },
+ "dark": "invert-accent",
+ "keep": null,
+ "specks": 149,
+ "tile": [
+  320,
+  200,
+  640,
+  400
+ ],
+ "background": null,
+ "labels": []
+}

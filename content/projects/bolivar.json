@@ -67,88 +67,165 @@
       "source": "site"
     },
     {
-      "text": "The building section resolves this tension vertically, with hotel rooms occupying the lower floors at street level and student accommodation arranged around a shared interior courtyard at the upper levels. The facade system is designed to read as a coherent architectural gesture while modulating its openings and materiality to signal the change in programme. The project involves significant coordination with structural engineers and the urban planning authority.",
-      "source": "site"
+      "text": "The facade system is designed to read as a coherent architectural gesture while modulating its openings and materiality to signal the change in programme. The project involves significant coordination with structural engineers and the urban planning authority.",
+      "source": "site (first sentence withheld, D59)"
     }
   ],
   "hero": {
-    "src": "images/bolivar/bolivar-courtyard-render.jpg",
+    "src": "images/bolivar/bolivar-courtyard-render-hq.jpg",
     "alt": "Courtyard render of the Bolivar hotel and student residence with planted terraces",
     "credit": "Render: Studio BELEM",
-    "source": "pdf2026:p17"
+    "source": "pdf2026:p17 + hq:BOLIVAR/NB_StudioBelem_SimonBolivar_E-02_AvSimonBolivar-Reprise2V-Sun1_20240522-mod.jpg"
   },
   "figures": [
     {
-      "title": "Volumes",
-      "caption": "Volumes to be demolished. Retained volumes. Raised and lowered volumes.",
+      "title": "Before and after",
+      "caption": "The block from the air before the project, with a low building, a ramp and parked cars at its heart; and the same view with the project inserted, its planted roofs among the neighbouring roofs.",
+      "kind": "render",
+      "credit": "Permit sheets PC6, Studio BELEM",
+      "items": [
+        {
+          "src": "images/bolivar/bolivar-aerial-existing.jpg",
+          "alt": "Aerial photograph of a dense Paris block before the project: at its centre a low white building with a weathered flat roof, a ramp and a yard with parked cars, between large trees and apartment buildings with grey roofs"
+        },
+        {
+          "src": "images/bolivar/bolivar-aerial-insertion.jpg",
+          "alt": "The same aerial view with the project inserted: a pale building with a planted roof and a terrace, a planted cubic volume behind it and greenery filling the courtyard, among the trees and grey roofs of the block"
+        }
+      ],
+      "source": "hq:BOLIVAR/PC6 - Insertion du projet dans l'environnement-A_page-0004.jpg (printed title 'Photographie de l'état Existant') + page-0005.jpg (printed title 'Insertion du projet dans l'environnement'; translated, D17); pdf2026:p22"
+    },
+    {
+      "title": "Plans, levels N01 and N04",
+      "caption": "1:200, coloured by programme. At N01, seminar and work rooms (Hotel W), hotel service storage and hotel rooms; at N04, hotel rooms in the building on the avenue and student units in the rear building, beside a planted roof.",
       "kind": "drawing",
       "items": [
         {
-          "src": "images/bolivar/bolivar-volumes-demolished.jpg",
-          "alt": "Volume diagram: volumes to be demolished"
+          "src": "images/bolivar/bolivar-plan-n01.png",
+          "alt": "Coloured plan of level N01: on the left, pink seminar and work rooms around open voids; in the middle, a row of eight pink work rooms; on the right, beige service storage and cream hotel rooms; thick blue lines mark the retained existing walls"
         },
         {
-          "src": "images/bolivar/bolivar-volumes-retained.jpg",
-          "alt": "Volume diagram: retained volumes"
-        },
-        {
-          "src": "images/bolivar/bolivar-volumes-raised-lowered.jpg",
-          "alt": "Volume diagram: raised and lowered volumes"
+          "src": "images/bolivar/bolivar-plan-n04.png",
+          "alt": "Coloured plan of level N04: on the left, cream hotel rooms on both sides of a corridor; on the right, pale blue student units beside a large green planted roof"
         }
       ],
-      "source": "pdf2026:p18"
+      "legend": [
+        {
+          "swatch": "#C0C0C0",
+          "text": "Project"
+        },
+        {
+          "swatch": "#0000FE",
+          "text": "Retained existing"
+        },
+        {
+          "swatch": "#F8EDCD",
+          "text": "Hotel"
+        },
+        {
+          "swatch": "#FAF5E1",
+          "text": "Hotel, outdoor"
+        },
+        {
+          "swatch": "#FAE0D1",
+          "text": "Hotel W"
+        },
+        {
+          "swatch": "#CEC29C",
+          "text": "Hotel services"
+        },
+        {
+          "swatch": "#BDD6DD",
+          "text": "Student residence"
+        },
+        {
+          "swatch": "#DDF1FC",
+          "text": "Student residence, outdoor"
+        },
+        {
+          "swatch": "#E3E3E3",
+          "text": "Technical room (LT)"
+        }
+      ],
+      "source": "hq:BOLIVAR/ANX1-PC - PLANS PROJET_pages-to-jpg-0005.jpg and -0008.jpg (printed titles 'Plan de niveau N01', 'Plan de niveau N04', scale '1 : 200', legend; room labels 'Salle de seminaire', 'Salle de travail temporaire/réunion', 'Stockage BOH', 'Chambre', 'Unité étudiante'; translated, D17)"
     },
     {
-      "src": "images/bolivar/bolivar-street-render.jpg",
+      "src": "images/bolivar/bolivar-roof-plan.png",
+      "title": "Roof plan",
+      "caption": "1:200. Five non-accessible planted roofs of 32 to 130 m² on 25 to 85 cm of substrate, one area planted in open ground, and accessible terraces. Key: 1 glazed roof; 2 aluminium joinery; 3 guardrail or separator: aluminium and stainless-steel mesh, fishing net or expanded metal; 4 glazing; 5 timber decking; 6 steel structure; 7 planting; 8 grille, aluminium-tone RAL; 9 acoustic cladding and aluminium panel; 10 existing concrete structure; 11 steel grating; 12 metal rainwater downpipe.",
+      "alt": "Colour roof plan of the two buildings: speckled planted roofs in olive, dark green and pale yellow-green, white accessible terraces, grey gratings and a glazed roof between them, with numbered callouts, levels and overall dimensions",
+      "kind": "drawing",
+      "source": "hq:BOLIVAR/PC5-UN PLAN DES FACADES ET DES TOITURES PROJET-A_page-0002.jpg (printed title 'Plan de Toiture', scale '1 : 200', key 1-12, labels 'Surface végétalisée non accessible : 90m² pour 55cm de substrat' with 32, 103, 97 and 130 m² for 55, 85, 25 and 55 cm, 'Pleine terre', 'Terrasse accessible'; translated, D17); pdf2026:p20"
+    },
+    {
+      "src": "images/bolivar/bolivar-long-section-aa.png",
+      "title": "Longitudinal section AA",
+      "caption": "1:200, from avenue Simon Bolivar through the west building, levels N00 to N08, and the east building, up to level TT; 50.48 m between the property lines, over two basement levels.",
+      "alt": "Long section through both buildings: the taller west building on the avenue with its stair, a low glazed link, the east building and its lower wing, two basement levels below, and thick blue lines marking the retained existing floors and walls",
+      "kind": "drawing",
+      "legend": [
+        {
+          "swatch": "#C0C0C0",
+          "text": "Project"
+        },
+        {
+          "swatch": "#0000FE",
+          "text": "Retained existing"
+        }
+      ],
+      "labels": [
+        {
+          "at": "avenue",
+          "text": "Avenue Simon Bolivar",
+          "vertical": true
+        }
+      ],
+      "source": "hq:BOLIVAR/PC3 - 1 - COUPES DU TERRAIN AVEC IMPLANTATION DU PROJET-A_page-0002.jpg (printed title 'Coupe Longitudinale AA', scale '1/200', legend 'PROJET', 'EXISTANT CONCERVE' [sic], label 'AVENUE SIMON BOLIVAR', levels 'N00 Haut' to 'N08 Bat O', 'TT Bat E', 'SS1', 'SS2', dimension 50.48; translated, D17, D49); pdf2026:p21"
+    },
+    {
+      "src": "images/bolivar/bolivar-west-elevation.png",
+      "title": "West elevation, avenue Simon Bolivar",
+      "caption": "1:150; 20.31 m between the property lines. Along the street, left to right: hotel entrance 4, hotel entrance 3, and the hotel exit (1) with the student residence entrance (2). Key: 1 white render, RAL 9003; 2 aluminium joinery; 3 guardrail or separator: aluminium and stainless-steel mesh, fishing net or expanded metal; 4 glazing; 5 aluminium cassette; 6 steel structure; 7 planting; 8 grille, aluminium-tone RAL; 9 acoustic cladding and aluminium panel; 10 aluminium rainwater hopper; 11 glazed roof; 12 metal rainwater downpipe; 13 bush-hammered concrete, non-load-bearing; 14 existing concrete structure.",
+      "alt": "Elevation of the street front between grey neighbouring buildings: a glazed base with the entrances, floors of balconies with fine railings in three bays, a glazed top floor, numbered callouts, red property lines and dimensions",
+      "kind": "drawing",
+      "source": "hq:BOLIVAR/PC5-UN PLAN DES FACADES ET DES TOITURES PROJET-A_page-0003.jpg (printed title 'Façade OUEST 1 (Avenue Simon Bolivar)', scale '1/150', key 1-14, labels '4. Entrée Hôtel', '3. Entrée Hôtel', '1. Sortie Hôtel', '2. Entrée Résidence Etudiante'; translated, D17); pdf2026:p19"
+    },
+    {
+      "title": "Volumetric strategy",
+      "caption": "Schematic axonometrics: the volumes to be demolished (red), the volumes retained, and the volumes raised and lowered (blue).",
+      "kind": "drawing",
+      "items": [
+        {
+          "src": "images/bolivar/bolivar-axo-demolished.png",
+          "alt": "Schematic axonometric of the existing block among outlined neighbours, with the volumes to be demolished shaded red"
+        },
+        {
+          "src": "images/bolivar/bolivar-axo-retained.png",
+          "alt": "Schematic axonometric of the retained volumes: two blocks joined by a lower link, among outlined neighbours"
+        },
+        {
+          "src": "images/bolivar/bolivar-axo-raised-lowered.png",
+          "alt": "Schematic axonometric of the project with the raised and lowered volumes shaded blue: new storeys on both blocks and lowered parts along the base"
+        }
+      ],
+      "source": "hq:BOLIVAR/PC4 - Notice decrivant le terrain et présentant le projet-B_page-0011.jpg (printed captions 'FIGURE 10. AXONOMÉTRIE SCHÉMATIQUE DES VOLUMES À DEMOLIR', 'FIGURE 11. ... DES VOLUMES CONSERVÉS', 'FIGURE 12. ... DES VOLUMES SURÉLEVÉS ET DÉCAISSÉS'; translated, D17); pdf2026:p18"
+    },
+    {
+      "src": "images/bolivar/bolivar-vegetation-section.jpg",
+      "title": "Vegetation section",
+      "caption": "Stratification by climatic zone.",
+      "alt": "Vegetation section stratified by climatic zone",
+      "kind": "drawing",
+      "source": "pdf2026:p20 (no HQ source)"
+    },
+    {
+      "src": "images/bolivar/bolivar-street-render-hq.jpg",
       "title": "Street view",
       "caption": "",
       "alt": "Street render of the Bolivar building on avenue Simon Bolivar",
       "kind": "render",
       "credit": "Render: Studio BELEM",
-      "source": "pdf2026:p18"
-    },
-    {
-      "src": "images/bolivar/bolivar-west-facade.jpg",
-      "title": "West facade",
-      "caption": "West Facade | Avenue Simon Bolivar.",
-      "alt": "West facade drawing on avenue Simon Bolivar with its material legend",
-      "kind": "drawing",
-      "source": "pdf2026:p19",
-      "size": "wide"
-    },
-    {
-      "title": "Vegetation",
-      "caption": "Roof and vegetation plan. Vegetation section | stratification by climatic zone.",
-      "kind": "drawing",
-      "items": [
-        {
-          "src": "images/bolivar/bolivar-roof-vegetation-plan.jpg",
-          "alt": "Roof plan with green roofs and vegetation"
-        },
-        {
-          "src": "images/bolivar/bolivar-vegetation-section.jpg",
-          "alt": "Vegetation section stratified by climatic zone"
-        }
-      ],
-      "source": "pdf2026:p20"
-    },
-    {
-      "src": "images/bolivar/bolivar-longitudinal-section-aa.jpg",
-      "title": "Longitudinal section AA",
-      "caption": "Longitudinal section AA. Project and retained existing structure.",
-      "alt": "Longitudinal section AA through the hotel and student residence, project and retained existing structure",
-      "kind": "drawing",
-      "source": "pdf2026:p21",
-      "size": "full"
-    },
-    {
-      "src": "images/bolivar/bolivar-aerial-render-2026.jpg",
-      "title": "Aerial view",
-      "caption": "",
-      "alt": "Aerial render of the Bolivar block with green rooftop terraces",
-      "kind": "render",
-      "credit": "Render: Studio BELEM",
-      "source": "pdf2026:p22"
+      "source": "pdf2026:p18 + hq:BOLIVAR/NB_StudioBelem_SimonBolivar_E-01_AvSimonBolivar-Reprise2_S2_20240522.jpg"
     }
   ],
   "date": "2026",

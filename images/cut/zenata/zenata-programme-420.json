@@ -1,0 +1,40 @@
+{
+ "src": "images/zenata/zenata-programme-420.png",
+ "hash": "b4a110d560c65429",
+ "mode": "ink",
+ "from": [
+  1222,
+  742
+ ],
+ "to": [
+  1186,
+  713
+ ],
+ "offset": [
+  17,
+  15
+ ],
+ "paper": [
+  255,
+  255,
+  255
+ ],
+ "clip": [],
+ "ink": {
+  "ink": 43629,
+  "chromaticFraction": 0.0265,
+  "midtoneFraction": 0.2768,
+  "suggest": "accent"
+ },
+ "dark": "invert-accent",
+ "keep": null,
+ "specks": 3762,
+ "tile": [
+  320,
+  200,
+  640,
+  400
+ ],
+ "background": null,
+ "labels": []
+}

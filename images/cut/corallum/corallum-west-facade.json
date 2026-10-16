@@ -1,0 +1,41 @@
+{
+ "src": "images/corallum/corallum-west-facade.jpg",
+ "hash": "d8104123e6fe5790",
+ "mode": "plate",
+ "from": [
+  1724,
+  259
+ ],
+ "to": [
+  1724,
+  259
+ ],
+ "offset": [
+  0,
+  0
+ ],
+ "paper": null,
+ "clip": [
+  "left",
+  "top",
+  "right",
+  "bottom"
+ ],
+ "ink": {
+  "ink": 111198,
+  "chromaticFraction": 0,
+  "midtoneFraction": 0,
+  "suggest": "mono"
+ },
+ "dark": "invert-accent",
+ "keep": null,
+ "specks": 0,
+ "tile": [
+  0,
+  0,
+  640,
+  259
+ ],
+ "background": null,
+ "labels": []
+}

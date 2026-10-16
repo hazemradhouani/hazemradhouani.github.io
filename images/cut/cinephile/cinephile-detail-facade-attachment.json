@@ -1,0 +1,40 @@
+{
+ "src": "images/cinephile/cinephile-detail-facade-attachment.png",
+ "hash": "f60beecdb5a6013e",
+ "mode": "ink",
+ "from": [
+  462,
+  456
+ ],
+ "to": [
+  425,
+  423
+ ],
+ "offset": [
+  13,
+  17
+ ],
+ "paper": [
+  255,
+  255,
+  255
+ ],
+ "clip": [],
+ "ink": {
+  "ink": 18134,
+  "chromaticFraction": 0,
+  "midtoneFraction": 0.6727,
+  "suggest": "mono"
+ },
+ "dark": "invert",
+ "keep": null,
+ "specks": 313,
+ "tile": [
+  0,
+  0,
+  425,
+  400
+ ],
+ "background": null,
+ "labels": []
+}

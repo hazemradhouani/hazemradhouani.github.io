@@ -1,5 +1,5 @@
 /* Hazem Radhouani · site.css · "Field" system (docs/flagship/08-direction.md)
-   A white field; the work laid out at its true proportion on one centred grid.
+   One quiet field in light or dark; the work laid out at its true proportion on one centred grid.
    EB Garamond is the text voice, IBM Plex Sans capitals the title voice. */
 
 @layer reset, tokens, base, layout, components, pages, motion, utilities;
@@ -46,13 +46,16 @@
 /* ------------------------------------------------------------------ tokens */
 @layer tokens {
   :root {
-    /* colour: a white field, two inks (WCAG ratios on #FFF in 08-direction.md) */
+    /* colour: light Field. Dark values below preserve the same hierarchy and contrast. */
     --bg: #FFFFFF;
     --ink: #111111;            /* 18.9:1 */
     --ink-2: #5E5E5E;          /* 6.4:1: metadata, captions, hover */
     --line: #E6E6E6;           /* hairlines, never text */
     --ui: #8A8A8A;             /* form borders and link underlines: 3.5:1 non-text contrast */
     --error: #A61B1B;          /* 7.3:1: form errors only */
+    --bar-bg: rgb(255 255 255 / 0.86);
+    /* A drawing keeps its authored black linework on a deliberate inspection field in dark mode. */
+    --drawing-bg: #FFFFFF;
 
     /* type: Garamond speaks, Plex capitals name */
     --serif: "EB Garamond", "Garamond Fallback", Garamond, "Times New Roman", serif;
@@ -89,6 +92,16 @@
     --spring-dur: 660ms;
     --t-press: 120ms; --t-hover: 160ms; --t-ui: 240ms; --t-bar: 320ms; --t-arrive: 700ms;
   }
+  html[data-theme="dark"] {
+    --bg: #121311;
+    --ink: #F7F5EF;            /* 17.7:1 on the Field charcoal */
+    --ink-2: #C9C7C0;          /* 11.4:1, including captions and metadata */
+    --line: #45463F;
+    --ui: #B4B1A9;
+    --error: #FFB4AB;
+    --bar-bg: rgb(18 19 17 / 0.88);
+    --drawing-bg: #F7F5EF;
+  }
   @supports (transition-timing-function: linear(0, 1)) {
     :root { --spring: linear(0, 0.079 5%, 0.236 10%, 0.403 15%, 0.551 20%, 0.672 25%, 0.764 30%, 0.833 35%, 0.884 40%, 0.919 45%, 0.945 50%, 0.962 55%, 0.974 60%, 0.983 65%, 0.988 70%, 0.992 75%, 0.995 80%, 0.997 85%, 0.998 90%, 1); }
   }
@@ -98,7 +111,8 @@
 
 /* ------------------------------------------------------------------ base */
 @layer base {
-  html { background: var(--bg); scroll-padding-top: calc(var(--bar-h) + var(--s5)); }
+  html { background: var(--bg); color-scheme: light; scroll-padding-top: calc(var(--bar-h) + var(--s5)); }
+  html[data-theme="dark"] { color-scheme: dark; }
   body {
     background: var(--bg); color: var(--ink);
     font-family: var(--serif); font-size: var(--fs-body); line-height: 1.6; font-weight: 400;
@@ -106,6 +120,8 @@
     text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased;
     min-height: 100svh; display: flex; flex-direction: column; overflow-x: clip;
   }
+  /* Include off-screen validation controls: native dark form chrome must never introduce a third surface. */
+  input, textarea, select { background: var(--bg); color: var(--ink); }
   main { flex: 1 0 auto; outline: none; }
   html:has(dialog[open]) { overflow: hidden; }
   h1, h2, h3, h4 { font-family: var(--sans); font-weight: 600; line-height: 1.25; letter-spacing: var(--tr-caps);
@@ -194,6 +210,7 @@
 
   /* header: the wordmark centred over a lowercase nav */
   .site-header { padding-block: clamp(1.25rem, 3vw, 2.5rem) clamp(0.25rem, 1vw, 0.75rem); text-align: center; }
+  .site-header > .wrap { position: relative; }
   .brand { display: inline-flex; align-items: center; min-height: 2.75rem; color: var(--ink); text-decoration: none;
     font-family: var(--sans); font-weight: 600; font-size: clamp(0.875rem, 0.83rem + 0.2vw, 1rem); letter-spacing: 0.22em;
     text-transform: uppercase; line-height: 1; white-space: nowrap; padding-left: 0.22em; }
@@ -206,15 +223,32 @@
   .nav a:hover::after, .nav a[aria-current]::after { transform: scaleX(1); }
   .menu-button { display: inline-flex; align-items: center; min-height: 2.75rem; padding: 0 var(--s3); background: none; border: 0;
     color: var(--ink); font-size: 1.1875rem; text-transform: lowercase; }
+  .theme-button { display: inline-flex; align-items: center; min-height: 2.75rem; padding: 0 var(--s3); background: none; border: 0;
+    color: var(--ink); font-family: var(--sans); font-size: var(--fs-label); font-weight: 600; letter-spacing: 0.06em; text-transform: lowercase;
+    white-space: nowrap; }
+  .theme-button__glyph { display: none; }
+  html[data-theme="dark"] .theme-button { text-decoration: underline; text-decoration-color: var(--ui); text-decoration-thickness: 1px; text-underline-offset: 0.25em; }
+  .site-header__tools, .bar__tools, .menu__controls { display: flex; align-items: center; gap: var(--s1); }
+  .site-header__tools { position: absolute; top: 0; right: 0; }
   @media (max-width: 47.99rem) {
     .site-header .nav { display: none; }
     .site-header > .wrap { display: flex; align-items: center; justify-content: space-between; }
+    .site-header__tools { position: static; }
     .site-header .menu-button { margin-right: calc(-1 * var(--s3)); }
+  }
+  /* The name plus two text controls do not fit a 320px Field. Keep the action's accessible label,
+     while reducing only the static-header presentation to a familiar light/dark mark. */
+  @media (max-width: 23.99rem) {
+    .site-header .brand { font-size: 0.8125rem; letter-spacing: 0.16em; }
+    .site-header .theme-button { width: 2.75rem; justify-content: center; padding-inline: var(--s2); }
+    .site-header .theme-button__glyph { display: block; font-size: 1.125rem; line-height: 1; }
+    .site-header .theme-button__label { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); }  /* still the start of the name */
+    .site-header .menu-button { padding-inline: var(--s2); }
   }
   @media (min-width: 48rem) { .site-header .menu-button { display: none; } }
 
   /* compact bar (wayfinding on long pages): slides in on scroll-up, hidden and inert otherwise */
-  .bar { position: fixed; inset: 0 0 auto; z-index: 20; min-height: var(--bar-h); background: rgb(255 255 255 / 0.86);
+  .bar { position: fixed; inset: 0 0 auto; z-index: 20; min-height: var(--bar-h); background: var(--bar-bg);
     -webkit-backdrop-filter: blur(16px) saturate(1.4); backdrop-filter: blur(16px) saturate(1.4);
     box-shadow: 0 1px 0 var(--line); transform: translateY(-101%); visibility: hidden;
     transition: transform var(--t-bar) var(--ease-out), visibility 0s linear var(--t-bar); }
@@ -226,10 +260,11 @@
   @media (min-width: 48rem) { .bar .menu-button { display: none; } }
   @media (prefers-reduced-transparency: reduce) { .bar { background: var(--bg); -webkit-backdrop-filter: none; backdrop-filter: none; } }
 
-  /* menu (phones): a full white page; items rise in order (state) */
+  /* menu (phones): a full Field page; items rise in order (state) */
   .menu { position: fixed; inset: 0; width: 100%; height: 100%; background: var(--bg); color: var(--ink); }
   .menu::backdrop { background: var(--bg); }
   .menu__top { display: flex; align-items: center; justify-content: space-between; min-height: var(--bar-h); }
+  .menu__controls form { display: flex; }
   .menu__close { display: inline-flex; align-items: center; min-height: 2.75rem; padding: 0 var(--s3); margin-right: calc(-1 * var(--s3));
     background: none; border: 0; font-size: 1.1875rem; text-transform: lowercase; }
   .menu__list { padding-top: var(--s7); display: grid; gap: var(--s2); text-align: center; }
@@ -241,9 +276,71 @@
 
   /* figures: images at their natural ratio, never cropped, never above native pixels (--nw) */
   .nw { display: block; width: 100%; max-width: var(--nw, 100%); margin-inline: auto; }
+  /* a drawing's dark treatment (D50, D69): no drawing keeps a paper rectangle in dark mode.
+     Greyscale linework is inverted (exact for grey); colour drawings are inverted with their hues held;
+     drawings with rendered material, photographs or shaded models ("keep") are inverted the same way and
+     their solid regions are laid back on top, opaque and in their authored colours, from a second layer */
+  .nw--drawing.nw--field { background: var(--drawing-bg); }
+  html[data-theme="dark"] .nw--invert img { filter: invert(.965); }
+  html[data-theme="dark"] .nw--invert-accent img,
+  html[data-theme="dark"] .nw--keep > picture:not(.nw__keep) img { filter: invert(.965) hue-rotate(180deg); }
+  .nw--keep { position: relative; }
+  .nw__keep { display: none; }
+  html[data-theme="dark"] .nw--keep > .nw__keep { display: block; position: absolute; inset: 0; pointer-events: none; }
+  html[data-theme="dark"] .nw--keep > .nw__keep img { width: 100%; height: 100%; }
+  /* a legend's swatches follow their drawing's treatment, so the key matches what the reader sees */
+  html[data-theme="dark"] .fig:has(.nw--invert) .legend__sw { filter: invert(.965); }
+  html[data-theme="dark"] .fig:has(.nw--invert-accent) .legend__sw { filter: invert(.965) hue-rotate(180deg); }
   .nw img, .nw picture { width: 100%; height: auto; }
   .cap { margin-top: var(--s3); text-align: center; font-size: var(--fs-cap); line-height: 1.55; color: var(--ink-2); }
   .cap__t { color: var(--ink); }
+
+  /* labels re-set from a drawing (D49): where the figure is wide enough, the words stand where they
+     were printed, in the title voice; narrower, the drawing carries numbered square pins (radius 0)
+     and the words follow as a list, so no label shrinks below 13px or crowds the linework */
+  .lab { position: relative; container-type: inline-size; width: 100%; max-width: var(--nw, 100%); margin-inline: auto;
+    --lab-ink: var(--ink); --lab-paper: var(--bg); }
+  .lab--field { --lab-ink: #111111; --lab-paper: var(--drawing-bg); }   /* dark ink on the inspection field */
+  .lab__fig { position: relative; }   /* the pins' frame is the drawing alone, never the list below it */
+  .lab__pins { position: absolute; inset: 0; pointer-events: none; }
+  .lab--dense .lab__pins, .lab--dense .lab__n { display: none; }   /* pins that would touch on a phone: the list alone */
+  .lab__pin { position: absolute; left: calc(var(--x) + var(--w) / 2); top: calc(var(--y) + var(--h) / 2); translate: -50% -50%;
+    min-width: 1.375rem; height: 1.375rem; display: grid; place-items: center; padding-inline: 0.25rem;
+    background: var(--lab-ink); color: var(--lab-paper); font-family: var(--sans); font-weight: 600; font-size: var(--fs-label);
+    line-height: 1; font-variant-numeric: tabular-nums; }
+  /* annotation is the drawing's secondary voice: Plex Sans in sentence case, as printed on the sheets,
+     narrower than the tracked capitals of titles so a label keeps to the space its original had */
+  .lab__list { list-style: none; padding: 0; margin: var(--s3) 0 0; display: grid; gap: var(--s1); justify-items: start;
+    font-family: var(--sans); font-weight: 600; font-size: var(--fs-label); letter-spacing: 0.01em; line-height: 1.25; color: var(--ink); }
+  .lab__item { display: flex; gap: var(--s2); align-items: baseline; }
+  .lab__n { min-width: 1.5em; color: var(--ink-2); font-variant-numeric: tabular-nums; }
+  .lab__t br { display: none; }   /* a printed line break is kept only where the label stands in place */
+  @container (min-width: 36rem) {
+    .lab__pins { display: none; }
+    .lab__list { position: absolute; inset: 0; margin: 0; display: block; pointer-events: none; color: var(--lab-ink);
+      font-size: clamp(0.8125rem, 1.15cqi, 1rem); }
+    .lab__item { position: absolute; left: var(--x); top: calc(var(--y) + var(--h) / 2); translate: 0 -50%; white-space: nowrap;
+      text-shadow: 0 0 0.12em var(--lab-paper), 0 0 0.25em var(--lab-paper); }   /* a paper halo where a word meets linework */
+    .lab__item--end { left: auto; right: calc(100% - var(--x) - var(--w)); text-align: end; }
+    /* a street name along a section's end: set up the cut, centred on where it was printed (D70) */
+    .lab__item--v { left: calc(var(--x) + var(--w) / 2); right: auto; translate: -50% -50%; writing-mode: vertical-rl; rotate: 180deg; }
+    .lab__n { display: none; }
+    .lab__t br { display: initial; }
+  }
+  /* a legend printed on the sheet, re-set with the drawing's own colours */
+  .legend { list-style: none; padding: 0; margin-top: var(--s3); display: flex; flex-wrap: wrap; justify-content: center;
+    gap: var(--s2) var(--s5); font-size: var(--fs-cap); line-height: 1.4; color: var(--ink-2); }
+  .legend li { display: inline-flex; align-items: center; gap: var(--s2); }
+  /* phones: one left-aligned column, centred as a block (the box itself stays on the grid lines) */
+  @media (max-width: 47.99rem) { .legend { display: grid; justify-content: center; justify-items: start; } }
+  /* the swatch keeps the drawing's colour; its outline (--ui, 3:1+ in both schemes) makes a dark swatch visible on charcoal
+     and a pale one on white (WCAG 1.4.11) */
+  .legend__sw { width: 0.875rem; height: 0.875rem; flex: none; outline: 1px solid var(--ui); outline-offset: 0; }
+  /* forced colours keep the drawing's own swatch colours (their meaning) and outline swatches and pins */
+  @media (forced-colors: active) {
+    .legend__sw { forced-color-adjust: none; outline-color: CanvasText; }
+    .lab__pin { border: 1px solid CanvasText; }
+  }
   .zoom-link { display: block; cursor: zoom-in; text-decoration: none; }
   .zoom-link:focus-visible { outline-offset: 6px; }
 
@@ -285,11 +382,30 @@
   .viewer.is-actual .viewer__stage { overflow: auto; touch-action: pan-x pan-y; cursor: grab; }
   .viewer__stage.is-dragging { cursor: grabbing; }
   .viewer__img { position: absolute; left: 0; top: 0; max-width: none; transform-origin: 0 0; }
+  .viewer__img > img { display: block; width: 100%; height: 100%; max-width: none; }
+  /* each image carries its own dark treatment (D50): the inspection field behind it, or inverted linework */
+  .viewer__img.is-inspection { background: var(--drawing-bg); }
+  html[data-theme="dark"] .viewer__img.is-invert > img { filter: invert(.965); }
+  html[data-theme="dark"] .viewer__img.is-invert-accent > img,
+  html[data-theme="dark"] .viewer__img.is-keep > img:not(.viewer__keep) { filter: invert(.965) hue-rotate(180deg); }
+  .viewer__img > img.viewer__keep { display: none; position: absolute; inset: 0; }
+  html[data-theme="dark"] .viewer__img.is-keep > img.viewer__keep { display: block; }
+  /* the drawing's re-set labels at full size: where they stood on the page, scaled with the image (never filtered) */
+  .viewer__labs { position: absolute; inset: 0; margin: 0; padding: 0; list-style: none; pointer-events: none;
+    font-family: var(--sans); font-weight: 600; letter-spacing: 0.01em; line-height: 1.25; color: var(--ink);
+    --lab-paper: var(--bg); text-shadow: 0 0 0.12em var(--lab-paper), 0 0 0.25em var(--lab-paper); }
+  .viewer__img.is-inspection .viewer__labs { color: #111111; --lab-paper: var(--drawing-bg); }
+  .viewer__labs .lab__item { position: absolute; display: block; left: var(--x); top: calc(var(--y) + var(--h) / 2); translate: 0 -50%; white-space: nowrap; }
+  .viewer__labs .lab__item--end { left: auto; right: calc(100% - var(--x) - var(--w)); text-align: end; }
+  .viewer__labs .lab__item--v { left: calc(var(--x) + var(--w) / 2); right: auto; translate: -50% -50%; writing-mode: vertical-rl; rotate: 180deg; }
+  .viewer__labs .lab__n { display: none; }
+  .viewer__labs .lab__t br { display: initial; }
+  .viewer.is-small-labels:not(.is-actual) .viewer__labs { visibility: hidden; }
   .viewer__top, .viewer__bottom { position: absolute; left: 0; right: 0; display: flex; align-items: center; justify-content: space-between;
     gap: var(--s4); padding-inline: var(--margin); }
-  .viewer__top { top: 0; height: var(--bar-h); }
+  .viewer__top { top: 0; min-height: var(--bar-h); }
   .viewer__bottom { bottom: 0; height: 4.5rem; }
-  .viewer__title { flex: 1; min-width: 0; text-align: center; font-size: var(--fs-cap); line-height: 1.3; color: var(--ink-2); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .viewer__title { flex: 1; min-width: 0; text-align: center; font-size: var(--fs-cap); line-height: 1.3; color: var(--ink-2); overflow-wrap: anywhere; }
   .viewer__count { font-family: var(--sans); font-size: var(--fs-label); letter-spacing: var(--tr-caps); color: var(--ink-2); min-width: 4.5rem;
     font-variant-numeric: tabular-nums; }
   .viewer__btn { display: inline-flex; align-items: center; justify-content: center; gap: var(--s2); min-height: 2.75rem; min-width: 2.75rem;
@@ -452,8 +568,10 @@
   @media print {
     .site-header, .bar, .site-footer, .menu, .viewer, .skip, .no-print, .form, .about-contact, .about-portrait { display: none !important; }
     @page { size: A4; margin: 16mm 16mm 18mm; }
-    :root { --gap-group: 6mm; --gap-chapter: 8mm; --cols: 12; --gutter: 4mm; }
+    :root { --bg: #FFFFFF; --ink: #111111; --ink-2: #5E5E5E; --line: #E6E6E6; --ui: #8A8A8A; --error: #A61B1B; --bar-bg: #FFFFFF; --drawing-bg: #FFFFFF; --gap-group: 6mm; --gap-chapter: 8mm; --cols: 12; --gutter: 4mm; color-scheme: light; }
     body { font-size: 10.5pt; line-height: 1.45; }
+    .nw--drawing img, .legend__sw { filter: none !important; }  /* print shows every drawing as authored, black on white */
+    .nw__keep { display: none !important; }
     .wrap { width: 100%; }
     .print-only { display: block; }
     .print-name { font-family: var(--sans); font-weight: 600; font-size: 18pt; letter-spacing: var(--tr-display); text-transform: uppercase; }

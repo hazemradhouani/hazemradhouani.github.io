@@ -1,0 +1,501 @@
+{
+  "version": 1,
+  "sourceRoot": "Images HQ",
+  "folder": "FOUBERT",
+  "assets": [
+    {
+      "source": "Images HQ/FOUBERT/20240105_BLM_FOU_Perspective rue.jpg",
+      "sha256": "e791cc80297c204cef301a4e2137a76a214ffd6227c6ed0ff7825d3a0ddd9b8b",
+      "width": 6943,
+      "height": 6306,
+      "projectMapping": {
+        "slug": "foubert",
+        "status": "confirmed"
+      },
+      "mappingEvidence": "Exact visual comparison confirms this source is the existing Foubert hero (images/foubert/foubert-brick-render.jpg); the case-study source is pdf2026:p13.",
+      "visualType": "render",
+      "textDisposition": "no-text",
+      "duplicateOf": null,
+      "disposition": "approved",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "The existing Foubert hero identifies this matching render as Render: Studio BELEM (content/projects/foubert.json; source pdf2026:p13).",
+      "roleEvidence": "The existing Foubert record documents Hazem's facade-design and architectural-detailing role (content/projects/foubert.json; source pdf2026:p13).",
+      "reason": "Approved after exact visual comparison to the existing credited hero; it is a full scene with no crop and adds no new project claim."
+    },
+    {
+      "source": "Images HQ/FOUBERT/20240610_BLM_FOU_Perspective arrière.jpg",
+      "sha256": "549b4060d5d1d5b46362d091e08b33b1bd9b58c73316e363cbfd5b3b52332274",
+      "width": 3200,
+      "height": 3200,
+      "projectMapping": {
+        "slug": "foubert",
+        "status": "confirmed"
+      },
+      "mappingEvidence": "File code BLM_FOU; same camera and scene as the existing Foubert 'Aerial view' (pdf2026:p16)",
+      "visualType": "render (rear view from above, 3200x3200)",
+      "textDisposition": "no-text (scene only; no printed title, frame or logo)",
+      "duplicateOf": null,
+      "disposition": "approved",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "No credit on the image; credited 'Render: Studio BELEM' like the existing Foubert renders (content/projects/foubert.json, pdf2026:p13, p16); no personal-role statement",
+      "roleEvidence": "The page restates only the existing role text (pdf2026:p13); no claim that Hazem made this render",
+      "reason": "Replaces the low-resolution 'Aerial view' (images/foubert/foubert-aerial-render.jpg, pdf2026:p16): same camera, courtyard terrace with seating, planted roof and neighbouring roofs; this file is dated 2024-06-10 and its courtyard windows show timber frames without the fabric blinds of the PDF version, which the case study already flags ('Perspectives will be updated at the EXE phase', pdf2026:p13)"
+    },
+    {
+      "source": "Images HQ/FOUBERT/20260129_BLM_FOU_PRO_Plan de niveaux_merge [1-20] [1-15]_page-0001.jpg",
+      "sha256": "34c69d3d7abe0c62ca938ed4cbc6ae50adb18e5d9297eb714159c4570e5d0f72",
+      "width": 9933,
+      "height": 7017,
+      "projectMapping": {
+        "slug": "foubert",
+        "status": "confirmed"
+      },
+      "mappingEvidence": "Cartouche PROJET panel \"PASSAGE FOUBERT 1bis et 3 passage Foubert - 75013, Paris\", EMETTEUR \"STUDIO BELEM\", Affaire A0041; the case study's location is 1bis-3 passage Foubert, Paris 13th (pdf2026:p13)",
+      "visualType": "drawing sheet (basement plan, 1:50)",
+      "textDisposition": "title → caption: 'Plan de niveau SS1', scale '1 : 50', sheet 10-01; intrinsic (stays): room names and areas (Séjour-Cuisine, Chambre, SDB, SDE, WC, Entrée, Circulation commune, Balcon, Terrasse, Atelier...), unit codes with 'SHAB TOTAL' areas in red, dimensions in red, NGF spot levels, grid bubbles 1-8 and A-C, neighbour storey marks (R+0 to R+5), the plot boundary in red dash-dot; rooms Cave 01-13, Local vélos 20.22 m², Souplex 23.77 m², Studio 39.47 m², Cave en dation 33.47 m², Local OM, Local eau, SAS, Porte pleine, puits d'infiltration; furniture (dropped): right-hand cartouche column with an empty revision table (N°, Description, Date), MAÎTRE D'OUVRAGE (client name, not published), PROJET 'PASSAGE FOUBERT 1bis et 3 passage Foubert - 75013, Paris', a thumbnail of the street render, ASSISTANTS / CONSULTANTS and MAÎTRES D'OEUVRES lists (Géomètre CTB; Architecte STUDIO BELEM; BET Structure BITP; BET Fluides BITP; BET Acoustique AIDA; Économiste BITP; other roles blank), EMETTEUR 'STUDIO BELEM 9 Cr. des petites écuries - 75010 Paris', date 30/01/2026, affaire A0041, scale, code boxes (series, FOU, BLM, ARC, type, identifier, PRO) (read on an 1800 px preview; not published)",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "Office credit only: EMETTEUR STUDIO BELEM printed in the cartouche; the page states the office (Studio BELEM) and no draughtsman",
+      "roleEvidence": "The page restates only the existing role text (pdf2026:p13: facade design and architectural detailing at Studio BELEM); this record adds no personal-role claim",
+      "reason": "Withheld, lower value: basement storage (cellars, bicycle room, refuse and water rooms); the three published level plans and section BB already show the basement in cut"
+    },
+    {
+      "source": "Images HQ/FOUBERT/20260129_BLM_FOU_PRO_Plan de niveaux_merge [1-20] [1-15]_page-0002.jpg",
+      "sha256": "38fb654f99187f18ff3dd18c17b32933b71d653a030a2b705c713e00ff51bf63",
+      "width": 9933,
+      "height": 7017,
+      "projectMapping": {
+        "slug": "foubert",
+        "status": "confirmed"
+      },
+      "mappingEvidence": "Cartouche PROJET panel \"PASSAGE FOUBERT 1bis et 3 passage Foubert - 75013, Paris\", EMETTEUR \"STUDIO BELEM\", Affaire A0041; the case study's location is 1bis-3 passage Foubert, Paris 13th (pdf2026:p13)",
+      "visualType": "drawing sheet (ground-floor plan, 1:50)",
+      "textDisposition": "title → caption: 'Plan de niveau RDC', scale '1 : 50', sheet 10-02; intrinsic (stays): room names and areas (Séjour-Cuisine, Chambre, SDB, SDE, WC, Entrée, Circulation commune, Balcon, Terrasse, Atelier...), unit codes with 'SHAB TOTAL' areas in red, dimensions in red, NGF spot levels, grid bubbles 1-8 and A-C, neighbour storey marks (R+0 to R+5), the plot boundary in red dash-dot; units A00 'Atelier sur Rue' 55.20 m² and 'Atelier RDC' 48.03 m² (SHAB TOTAL 201.60 m²), A01, A02, A03, 'Hall 2', 'Hall commun', 'Local vélos', 'Local OM', 'Jardin', 'Terrasse', 'puits d'infiltration'; furniture (dropped): right-hand cartouche column with an empty revision table (N°, Description, Date), MAÎTRE D'OUVRAGE (client name, not published), PROJET 'PASSAGE FOUBERT 1bis et 3 passage Foubert - 75013, Paris', a thumbnail of the street render, ASSISTANTS / CONSULTANTS and MAÎTRES D'OEUVRES lists (Géomètre CTB; Architecte STUDIO BELEM; BET Structure BITP; BET Fluides BITP; BET Acoustique AIDA; Économiste BITP; other roles blank), EMETTEUR 'STUDIO BELEM 9 Cr. des petites écuries - 75010 Paris', date 30/01/2026, affaire A0041, scale, code boxes (series, FOU, BLM, ARC, type, identifier, PRO)",
+      "duplicateOf": null,
+      "disposition": "approved",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "Office credit only: EMETTEUR STUDIO BELEM printed in the cartouche; the page states the office (Studio BELEM) and no draughtsman",
+      "roleEvidence": "The page restates only the existing role text (pdf2026:p13: facade design and architectural detailing at Studio BELEM); this record adds no personal-role claim",
+      "reason": "New: the ground floor on the passage, with the street workshop, two halls, three flats and the gardens behind; read at 1:1 on the master (room names and dimensions legible)"
+    },
+    {
+      "source": "Images HQ/FOUBERT/20260129_BLM_FOU_PRO_Plan de niveaux_merge [1-20] [1-15]_page-0003.jpg",
+      "sha256": "41388fedb56194228eac8f867a62d607dec2092e6355c7f799eee73dc6137b45",
+      "width": 9933,
+      "height": 7017,
+      "projectMapping": {
+        "slug": "foubert",
+        "status": "confirmed"
+      },
+      "mappingEvidence": "Cartouche PROJET panel \"PASSAGE FOUBERT 1bis et 3 passage Foubert - 75013, Paris\", EMETTEUR \"STUDIO BELEM\", Affaire A0041; the case study's location is 1bis-3 passage Foubert, Paris 13th (pdf2026:p13)",
+      "visualType": "drawing sheet (first-floor plan, 1:50)",
+      "textDisposition": "title → caption: 'Plan de niveau R+1', scale '1 : 50', sheet 10-03; intrinsic (stays): room names and areas (Séjour-Cuisine, Chambre, SDB, SDE, WC, Entrée, Circulation commune, Balcon, Terrasse, Atelier...), unit codes with 'SHAB TOTAL' areas in red, dimensions in red, NGF spot levels, grid bubbles 1-8 and A-C, neighbour storey marks (R+0 to R+5), the plot boundary in red dash-dot; units A11-A14, Atelier R+1, Balcon; furniture (dropped): right-hand cartouche column with an empty revision table (N°, Description, Date), MAÎTRE D'OUVRAGE (client name, not published), PROJET 'PASSAGE FOUBERT 1bis et 3 passage Foubert - 75013, Paris', a thumbnail of the street render, ASSISTANTS / CONSULTANTS and MAÎTRES D'OEUVRES lists (Géomètre CTB; Architecte STUDIO BELEM; BET Structure BITP; BET Fluides BITP; BET Acoustique AIDA; Économiste BITP; other roles blank), EMETTEUR 'STUDIO BELEM 9 Cr. des petites écuries - 75010 Paris', date 30/01/2026, affaire A0041, scale, code boxes (series, FOU, BLM, ARC, type, identifier, PRO) (read on an 1800 px preview; not published)",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "Office credit only: EMETTEUR STUDIO BELEM printed in the cartouche; the page states the office (Studio BELEM) and no draughtsman",
+      "roleEvidence": "The page restates only the existing role text (pdf2026:p13: facade design and architectural detailing at Studio BELEM); this record adds no personal-role claim",
+      "reason": "Withheld, near-duplicate: the same four-flat layout as R+2 (published); its grid bubbles also reach the cartouche border, so it cannot be cropped with paper around it"
+    },
+    {
+      "source": "Images HQ/FOUBERT/20260129_BLM_FOU_PRO_Plan de niveaux_merge [1-20] [1-15]_page-0004.jpg",
+      "sha256": "b62658ea7140991ab921c703d61264f7022a49fe2bd83bebf2384071238aad19",
+      "width": 9933,
+      "height": 7017,
+      "projectMapping": {
+        "slug": "foubert",
+        "status": "confirmed"
+      },
+      "mappingEvidence": "Cartouche PROJET panel \"PASSAGE FOUBERT 1bis et 3 passage Foubert - 75013, Paris\", EMETTEUR \"STUDIO BELEM\", Affaire A0041; the case study's location is 1bis-3 passage Foubert, Paris 13th (pdf2026:p13)",
+      "visualType": "drawing sheet (second-floor plan, 1:50)",
+      "textDisposition": "title → caption: 'Plan de niveau R+2', scale '1 : 50', sheet 10-04; intrinsic (stays): room names and areas (Séjour-Cuisine, Chambre, SDB, SDE, WC, Entrée, Circulation commune, Balcon, Terrasse, Atelier...), unit codes with 'SHAB TOTAL' areas in red, dimensions in red, NGF spot levels, grid bubbles 1-8 and A-C, neighbour storey marks (R+0 to R+5), the plot boundary in red dash-dot; units A21-A24 with SHAB TOTAL areas, Atelier R+2, Balcon, Palier commun; furniture (dropped): right-hand cartouche column with an empty revision table (N°, Description, Date), MAÎTRE D'OUVRAGE (client name, not published), PROJET 'PASSAGE FOUBERT 1bis et 3 passage Foubert - 75013, Paris', a thumbnail of the street render, ASSISTANTS / CONSULTANTS and MAÎTRES D'OEUVRES lists (Géomètre CTB; Architecte STUDIO BELEM; BET Structure BITP; BET Fluides BITP; BET Acoustique AIDA; Économiste BITP; other roles blank), EMETTEUR 'STUDIO BELEM 9 Cr. des petites écuries - 75010 Paris', date 30/01/2026, affaire A0041, scale, code boxes (series, FOU, BLM, ARC, type, identifier, PRO)",
+      "duplicateOf": null,
+      "disposition": "approved",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "Office credit only: EMETTEUR STUDIO BELEM printed in the cartouche; the page states the office (Studio BELEM) and no draughtsman",
+      "roleEvidence": "The page restates only the existing role text (pdf2026:p13: facade design and architectural detailing at Studio BELEM); this record adds no personal-role claim",
+      "reason": "New: the typical floor of four flats around the common stair, with balconies over the garden"
+    },
+    {
+      "source": "Images HQ/FOUBERT/20260129_BLM_FOU_PRO_Plan de niveaux_merge [1-20] [1-15]_page-0005.jpg",
+      "sha256": "815fc37311513de351028016c7c3a51cee5589f5c766d5d2d8f01df87dee3910",
+      "width": 9933,
+      "height": 7017,
+      "projectMapping": {
+        "slug": "foubert",
+        "status": "confirmed"
+      },
+      "mappingEvidence": "Cartouche PROJET panel \"PASSAGE FOUBERT 1bis et 3 passage Foubert - 75013, Paris\", EMETTEUR \"STUDIO BELEM\", Affaire A0041; the case study's location is 1bis-3 passage Foubert, Paris 13th (pdf2026:p13)",
+      "visualType": "drawing sheet (third-floor plan, 1:50)",
+      "textDisposition": "title → caption: 'Plan de niveau R+3', scale '1 : 50', sheet 10-05; intrinsic (stays): room names and areas (Séjour-Cuisine, Chambre, SDB, SDE, WC, Entrée, Circulation commune, Balcon, Terrasse, Atelier...), unit codes with 'SHAB TOTAL' areas in red, dimensions in red, NGF spot levels, grid bubbles 1-8 and A-C, neighbour storey marks (R+0 to R+5), the plot boundary in red dash-dot; units A31, A32, Terrasse R+3, 'Terrasse végétalisée non-accessible', 'Terrasse accessible'; furniture (dropped): right-hand cartouche column with an empty revision table (N°, Description, Date), MAÎTRE D'OUVRAGE (client name, not published), PROJET 'PASSAGE FOUBERT 1bis et 3 passage Foubert - 75013, Paris', a thumbnail of the street render, ASSISTANTS / CONSULTANTS and MAÎTRES D'OEUVRES lists (Géomètre CTB; Architecte STUDIO BELEM; BET Structure BITP; BET Fluides BITP; BET Acoustique AIDA; Économiste BITP; other roles blank), EMETTEUR 'STUDIO BELEM 9 Cr. des petites écuries - 75010 Paris', date 30/01/2026, affaire A0041, scale, code boxes (series, FOU, BLM, ARC, type, identifier, PRO) (read on an 1800 px preview; not published)",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "Office credit only: EMETTEUR STUDIO BELEM printed in the cartouche; the page states the office (Studio BELEM) and no draughtsman",
+      "roleEvidence": "The page restates only the existing role text (pdf2026:p13: facade design and architectural detailing at Studio BELEM); this record adds no personal-role claim",
+      "reason": "Withheld, near-duplicate: the street wing repeats the R+2 layout (two flats instead of four); its rear roof terraces appear on the published site plan"
+    },
+    {
+      "source": "Images HQ/FOUBERT/20260129_BLM_FOU_PRO_Plan de niveaux_merge [1-20] [1-15]_page-0006.jpg",
+      "sha256": "59a7f7659d49cddab7995c713d67750be52e9c55d3b83bdb7f1e77156291211b",
+      "width": 9933,
+      "height": 7017,
+      "projectMapping": {
+        "slug": "foubert",
+        "status": "confirmed"
+      },
+      "mappingEvidence": "Cartouche PROJET panel \"PASSAGE FOUBERT 1bis et 3 passage Foubert - 75013, Paris\", EMETTEUR \"STUDIO BELEM\", Affaire A0041; the case study's location is 1bis-3 passage Foubert, Paris 13th (pdf2026:p13)",
+      "visualType": "drawing sheet (attic-floor plan, 1:50)",
+      "textDisposition": "title → caption: 'Plan de niveau R+4', scale '1 : 50', sheet 10-06; intrinsic (stays): room names and areas (Séjour-Cuisine, Chambre, SDB, SDE, WC, Entrée, Circulation commune, Balcon, Terrasse, Atelier...), unit codes with 'SHAB TOTAL' areas in red, dimensions in red, NGF spot levels, grid bubbles 1-8 and A-C, neighbour storey marks (R+0 to R+5), the plot boundary in red dash-dot; units A41, A42 with spiral stairs, Bureau, Dressing, Terrasse 8.34 m² and 16.06 m², the curved stair tower on the street; furniture (dropped): right-hand cartouche column with an empty revision table (N°, Description, Date), MAÎTRE D'OUVRAGE (client name, not published), PROJET 'PASSAGE FOUBERT 1bis et 3 passage Foubert - 75013, Paris', a thumbnail of the street render, ASSISTANTS / CONSULTANTS and MAÎTRES D'OEUVRES lists (Géomètre CTB; Architecte STUDIO BELEM; BET Structure BITP; BET Fluides BITP; BET Acoustique AIDA; Économiste BITP; other roles blank), EMETTEUR 'STUDIO BELEM 9 Cr. des petites écuries - 75010 Paris', date 30/01/2026, affaire A0041, scale, code boxes (series, FOU, BLM, ARC, type, identifier, PRO)",
+      "duplicateOf": null,
+      "disposition": "approved",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "Office credit only: EMETTEUR STUDIO BELEM printed in the cartouche; the page states the office (Studio BELEM) and no draughtsman",
+      "roleEvidence": "The page restates only the existing role text (pdf2026:p13: facade design and architectural detailing at Studio BELEM); this record adds no personal-role claim",
+      "reason": "New: the attic floor set back behind street terraces, with the curved stair tower"
+    },
+    {
+      "source": "Images HQ/FOUBERT/20260129_BLM_FOU_PRO_Plan de niveaux_merge [1-20] [1-15]_page-0007.jpg",
+      "sha256": "9946c2173f7b95905d75f6ec32a5983dd0581f2e4f3d04da430a7ba777649367",
+      "width": 9933,
+      "height": 7017,
+      "projectMapping": {
+        "slug": "foubert",
+        "status": "confirmed"
+      },
+      "mappingEvidence": "Cartouche PROJET panel \"PASSAGE FOUBERT 1bis et 3 passage Foubert - 75013, Paris\", EMETTEUR \"STUDIO BELEM\", Affaire A0041; the case study's location is 1bis-3 passage Foubert, Paris 13th (pdf2026:p13)",
+      "visualType": "drawing sheet (roof plan, 1:50)",
+      "textDisposition": "title → caption: 'Plan de niveau TT', scale '1 : 50', sheet 10-07; intrinsic (stays): room names and areas (Séjour-Cuisine, Chambre, SDB, SDE, WC, Entrée, Circulation commune, Balcon, Terrasse, Atelier...), unit codes with 'SHAB TOTAL' areas in red, dimensions in red, NGF spot levels, grid bubbles 1-8 and A-C, neighbour storey marks (R+0 to R+5), the plot boundary in red dash-dot; 'Toiture terrasse végétalisée à R+4', 'Terrasse toiture' 7.90 m² and 10.59 m², roof hatch, NGF 68.32; furniture (dropped): right-hand cartouche column with an empty revision table (N°, Description, Date), MAÎTRE D'OUVRAGE (client name, not published), PROJET 'PASSAGE FOUBERT 1bis et 3 passage Foubert - 75013, Paris', a thumbnail of the street render, ASSISTANTS / CONSULTANTS and MAÎTRES D'OEUVRES lists (Géomètre CTB; Architecte STUDIO BELEM; BET Structure BITP; BET Fluides BITP; BET Acoustique AIDA; Économiste BITP; other roles blank), EMETTEUR 'STUDIO BELEM 9 Cr. des petites écuries - 75010 Paris', date 30/01/2026, affaire A0041, scale, code boxes (series, FOU, BLM, ARC, type, identifier, PRO) (read on an 1800 px preview; not published)",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "Office credit only: EMETTEUR STUDIO BELEM printed in the cartouche; the page states the office (Studio BELEM) and no draughtsman",
+      "roleEvidence": "The page restates only the existing role text (pdf2026:p13: facade design and architectural detailing at Studio BELEM); this record adds no personal-role claim",
+      "reason": "Withheld, duplicate: the same roof appears on the published site plan (Plan de masse) with its surroundings and the lower roofs"
+    },
+    {
+      "source": "Images HQ/FOUBERT/20260129_BLM_FOU_PRO_Plan de niveaux_merge [1-20] [1-15]_page-0008.jpg",
+      "sha256": "3255bf4c3c598883ac8235514d1e1858b0ce2b3c6fc8a9ed99ffd81265a5c82d",
+      "width": 9933,
+      "height": 7017,
+      "projectMapping": {
+        "slug": "foubert",
+        "status": "confirmed"
+      },
+      "mappingEvidence": "Cartouche PROJET panel \"PASSAGE FOUBERT 1bis et 3 passage Foubert - 75013, Paris\", EMETTEUR \"STUDIO BELEM\", Affaire A0041; the case study's location is 1bis-3 passage Foubert, Paris 13th (pdf2026:p13)",
+      "visualType": "drawing sheet (longitudinal section-elevation, 1:50)",
+      "textDisposition": "title → caption: 'Coupe longitudinale AA', scale '1/50', sheet 30-01; intrinsic (stays): A01 Souplex, A01/A11/A21 Séjour-Cuisine, 'Sortie Terrasse A. 02', 'Sortie Terrasse de l'Atelier' x2, levels with NGF values (49.80 S1, 52.45 RDC, 56.20 R1, 59.17 R2, 62.14 R3, 65.18 R4, 68.10 TT, 68.49 'Acrotère Fac. Ouest'), heights and dimensions in red, 'Limite de Propriété' x2 with the red property lines, grid bubbles; furniture (dropped): key plan with the elevation or cut marked in blue; furniture (dropped): right-hand cartouche column with an empty revision table (N°, Description, Date), MAÎTRE D'OUVRAGE (client name, not published), PROJET 'PASSAGE FOUBERT 1bis et 3 passage Foubert - 75013, Paris', a thumbnail of the street render, ASSISTANTS / CONSULTANTS and MAÎTRES D'OEUVRES lists (Géomètre CTB; Architecte STUDIO BELEM; BET Structure BITP; BET Fluides BITP; BET Acoustique AIDA; Économiste BITP; other roles blank), EMETTEUR 'STUDIO BELEM 9 Cr. des petites écuries - 75010 Paris', date 30/01/2026, affaire A0041, scale, code boxes (series, FOU, BLM, ARC, type, identifier, PRO) (read on an 1800 px preview; not published)",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "Office credit only: EMETTEUR STUDIO BELEM printed in the cartouche; the page states the office (Studio BELEM) and no draughtsman",
+      "roleEvidence": "The page restates only the existing role text (pdf2026:p13: facade design and architectural detailing at Studio BELEM); this record adds no personal-role claim",
+      "reason": "Withheld, near-duplicate: a cut through the rear wing in front of the courtyard elevation, which repeats the published east facade (and section EE repeats it again)"
+    },
+    {
+      "source": "Images HQ/FOUBERT/20260129_BLM_FOU_PRO_Plan de niveaux_merge [1-20] [1-15]_page-0009.jpg",
+      "sha256": "273b6a712504956dff4e348283ce05ae5a3e3b22ebf07c37ad3df12ae4ad4b8e",
+      "width": 9933,
+      "height": 7017,
+      "projectMapping": {
+        "slug": "foubert",
+        "status": "confirmed"
+      },
+      "mappingEvidence": "Cartouche PROJET panel \"PASSAGE FOUBERT 1bis et 3 passage Foubert - 75013, Paris\", EMETTEUR \"STUDIO BELEM\", Affaire A0041; the case study's location is 1bis-3 passage Foubert, Paris 13th (pdf2026:p13)",
+      "visualType": "drawing sheet (longitudinal section, 1:50)",
+      "textDisposition": "title → caption: 'Coupe longitudinale BB', scale '1/50', sheet 30-02; intrinsic (stays): unit and room labels A00 Atelier sur Rue, A00 Cave en dation, A02 Studio, A03 SDB, A02 Séjour-Cuisine, A12-A42 Chambre/Séjour-Cuisine/Bureau, Hall commun, Circulation commune, SAS, Local OM, Local eau, Cave 07, Cave 10, detail call 1 50-02, levels with NGF values (49.80 S1, 52.45 RDC, 56.20 R1, 59.17 R2, 62.14 R3, 65.18 R4, 68.10 TT, 68.49 'Acrotère Fac. Ouest'), heights and dimensions in red, 'Limite de Propriété' x2 with the red property lines, grid bubbles; furniture (dropped): key plan with the elevation or cut marked in blue; furniture (dropped): right-hand cartouche column with an empty revision table (N°, Description, Date), MAÎTRE D'OUVRAGE (client name, not published), PROJET 'PASSAGE FOUBERT 1bis et 3 passage Foubert - 75013, Paris', a thumbnail of the street render, ASSISTANTS / CONSULTANTS and MAÎTRES D'OEUVRES lists (Géomètre CTB; Architecte STUDIO BELEM; BET Structure BITP; BET Fluides BITP; BET Acoustique AIDA; Économiste BITP; other roles blank), EMETTEUR 'STUDIO BELEM 9 Cr. des petites écuries - 75010 Paris', date 30/01/2026, affaire A0041, scale, code boxes (series, FOU, BLM, ARC, type, identifier, PRO)",
+      "duplicateOf": null,
+      "disposition": "approved",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "Office credit only: EMETTEUR STUDIO BELEM printed in the cartouche; the page states the office (Studio BELEM) and no draughtsman",
+      "roleEvidence": "The page restates only the existing role text (pdf2026:p13: facade design and architectural detailing at Studio BELEM); this record adds no personal-role claim",
+      "reason": "New: the cut along the whole street wing, from the basement to the planted roof, through every floor and the common stair"
+    },
+    {
+      "source": "Images HQ/FOUBERT/20260129_BLM_FOU_PRO_Plan de niveaux_merge [1-20] [1-15]_page-0010.jpg",
+      "sha256": "017911b57507f07d5478530fca75a49170ac93c325fb254318823b22d664ec3e",
+      "width": 9933,
+      "height": 7017,
+      "projectMapping": {
+        "slug": "foubert",
+        "status": "confirmed"
+      },
+      "mappingEvidence": "Cartouche PROJET panel \"PASSAGE FOUBERT 1bis et 3 passage Foubert - 75013, Paris\", EMETTEUR \"STUDIO BELEM\", Affaire A0041; the case study's location is 1bis-3 passage Foubert, Paris 13th (pdf2026:p13)",
+      "visualType": "drawing sheet (cross-section, 1:50)",
+      "textDisposition": "title → caption: 'Coupe transversale CC', scale '1/50', sheet 30-03; intrinsic (stays): A01 Chambre/Séjour-Cuisine/Souplex, A02 Local vélos, A11/A21 Chambre/Séjour-Cuisine, A13/A23/A31/A41 Séjour-Cuisine, Palier commun, Circulation commune, Hall 2, Hall commun, Local vélos, SAS, 63.54 NGF, 65.22 NGF, 68.51 NGF, levels with NGF values (49.80 S1, 52.45 RDC, 56.20 R1, 59.17 R2, 62.14 R3, 65.18 R4, 68.10 TT, 68.49 'Acrotère Fac. Ouest'), heights and dimensions in red, 'Limite de Propriété' x2 with the red property lines, grid bubbles; furniture (dropped): key plan with the elevation or cut marked in blue; furniture (dropped): right-hand cartouche column with an empty revision table (N°, Description, Date), MAÎTRE D'OUVRAGE (client name, not published), PROJET 'PASSAGE FOUBERT 1bis et 3 passage Foubert - 75013, Paris', a thumbnail of the street render, ASSISTANTS / CONSULTANTS and MAÎTRES D'OEUVRES lists (Géomètre CTB; Architecte STUDIO BELEM; BET Structure BITP; BET Fluides BITP; BET Acoustique AIDA; Économiste BITP; other roles blank), EMETTEUR 'STUDIO BELEM 9 Cr. des petites écuries - 75010 Paris', date 30/01/2026, affaire A0041, scale, code boxes (series, FOU, BLM, ARC, type, identifier, PRO)",
+      "duplicateOf": null,
+      "disposition": "approved",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "Office credit only: EMETTEUR STUDIO BELEM printed in the cartouche; the page states the office (Studio BELEM) and no draughtsman",
+      "roleEvidence": "The page restates only the existing role text (pdf2026:p13: facade design and architectural detailing at Studio BELEM); this record adds no personal-role claim",
+      "reason": "New: the cut across the plot from the garden to the passage, showing the attic set back and the basement"
+    },
+    {
+      "source": "Images HQ/FOUBERT/20260129_BLM_FOU_PRO_Plan de niveaux_merge [1-20] [1-15]_page-0011.jpg",
+      "sha256": "7b44207fb5912e0d2214b0075910161e1d5124e0c04d3cf1916e56c2ef83a6af",
+      "width": 9933,
+      "height": 7017,
+      "projectMapping": {
+        "slug": "foubert",
+        "status": "confirmed"
+      },
+      "mappingEvidence": "Cartouche PROJET panel \"PASSAGE FOUBERT 1bis et 3 passage Foubert - 75013, Paris\", EMETTEUR \"STUDIO BELEM\", Affaire A0041; the case study's location is 1bis-3 passage Foubert, Paris 13th (pdf2026:p13)",
+      "visualType": "drawing sheet (cross-section through the west wing, 1:50)",
+      "textDisposition": "title → caption: 'Coupe longitudinale DD', scale '1/50', sheet 30-04; intrinsic (stays): A00 Atelier RDC, A00 Atelier sur Rue, A00 Cave en dation, A14/A24/A32/A42 Séjour-Cuisine, Terrasse 8.56 m², levels with NGF values (49.80 S1, 52.45 RDC, 56.20 R1, 59.17 R2, 62.14 R3, 65.18 R4, 68.10 TT, 68.49 'Acrotère Fac. Ouest'), heights and dimensions in red, 'Limite de Propriété' x2 with the red property lines, grid bubbles; furniture (dropped): key plan with the elevation or cut marked in blue; furniture (dropped): right-hand cartouche column with an empty revision table (N°, Description, Date), MAÎTRE D'OUVRAGE (client name, not published), PROJET 'PASSAGE FOUBERT 1bis et 3 passage Foubert - 75013, Paris', a thumbnail of the street render, ASSISTANTS / CONSULTANTS and MAÎTRES D'OEUVRES lists (Géomètre CTB; Architecte STUDIO BELEM; BET Structure BITP; BET Fluides BITP; BET Acoustique AIDA; Économiste BITP; other roles blank), EMETTEUR 'STUDIO BELEM 9 Cr. des petites écuries - 75010 Paris', date 30/01/2026, affaire A0041, scale, code boxes (series, FOU, BLM, ARC, type, identifier, PRO) (read on an 1800 px preview; not published)",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "Office credit only: EMETTEUR STUDIO BELEM printed in the cartouche; the page states the office (Studio BELEM) and no draughtsman",
+      "roleEvidence": "The page restates only the existing role text (pdf2026:p13: facade design and architectural detailing at Studio BELEM); this record adds no personal-role claim",
+      "reason": "Withheld, lower value: repeats the levels and structure of section CC (published) one bay further west"
+    },
+    {
+      "source": "Images HQ/FOUBERT/20260129_BLM_FOU_PRO_Plan de niveaux_merge [1-20] [1-15]_page-0012.jpg",
+      "sha256": "3bf1254ad3012c0e4b5685198d9a88576fd962683eca97d280a52e1fc10acef7",
+      "width": 9933,
+      "height": 7017,
+      "projectMapping": {
+        "slug": "foubert",
+        "status": "confirmed"
+      },
+      "mappingEvidence": "Cartouche PROJET panel \"PASSAGE FOUBERT 1bis et 3 passage Foubert - 75013, Paris\", EMETTEUR \"STUDIO BELEM\", Affaire A0041; the case study's location is 1bis-3 passage Foubert, Paris 13th (pdf2026:p13)",
+      "visualType": "drawing sheet (longitudinal section-elevation, 1:50)",
+      "textDisposition": "title → caption: 'Coupe longitudinale EE', scale '1/50', sheet 30-05; intrinsic (stays): A01 Chambre/TECH/Souplex, A11 Chambre/TECH, A21 Chambre, A00 Atelier RDC, detail call 1 50-09, 'Sortie Terrasse A. 02', levels with NGF values (49.80 S1, 52.45 RDC, 56.20 R1, 59.17 R2, 62.14 R3, 65.18 R4, 68.10 TT, 68.49 'Acrotère Fac. Ouest'), heights and dimensions in red, 'Limite de Propriété' x2 with the red property lines, grid bubbles; furniture (dropped): key plan with the elevation or cut marked in blue; furniture (dropped): right-hand cartouche column with an empty revision table (N°, Description, Date), MAÎTRE D'OUVRAGE (client name, not published), PROJET 'PASSAGE FOUBERT 1bis et 3 passage Foubert - 75013, Paris', a thumbnail of the street render, ASSISTANTS / CONSULTANTS and MAÎTRES D'OEUVRES lists (Géomètre CTB; Architecte STUDIO BELEM; BET Structure BITP; BET Fluides BITP; BET Acoustique AIDA; Économiste BITP; other roles blank), EMETTEUR 'STUDIO BELEM 9 Cr. des petites écuries - 75010 Paris', date 30/01/2026, affaire A0041, scale, code boxes (series, FOU, BLM, ARC, type, identifier, PRO) (read on an 1800 px preview; not published)",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "Office credit only: EMETTEUR STUDIO BELEM printed in the cartouche; the page states the office (Studio BELEM) and no draughtsman",
+      "roleEvidence": "The page restates only the existing role text (pdf2026:p13: facade design and architectural detailing at Studio BELEM); this record adds no personal-role claim",
+      "reason": "Withheld, near-duplicate: like section AA, a cut through the rear wing in front of the courtyard elevation already shown by the published east facade"
+    },
+    {
+      "source": "Images HQ/FOUBERT/20260129_BLM_FOU_PRO_Plan de niveaux_merge [1-20] [1-15]_page-0013.jpg",
+      "sha256": "e7e2bd80a685fdf208efc3061ae6afda3a963bb0c82e614c4ca31d079f2c5481",
+      "width": 4961,
+      "height": 3508,
+      "projectMapping": {
+        "slug": "foubert",
+        "status": "confirmed"
+      },
+      "mappingEvidence": "Cartouche PROJET panel \"PASSAGE FOUBERT 1bis et 3 passage Foubert - 75013, Paris\", EMETTEUR \"STUDIO BELEM\", Affaire A0041; the case study's location is 1bis-3 passage Foubert, Paris 13th (pdf2026:p13)",
+      "visualType": "drawing sheet (smoke-vent window details: section and plan)",
+      "textDisposition": "sheet title 'Détails fenêtre de désenfumage' (smoke-vent window details), sheet 50-10, page 1/4; no callouts or dimensions on the drawings; furniture (dropped): bottom cartouche MAÎTRE D'OUVRAGE (client name and address, not published), EMETTEUR 'STUDIO BELEM 9 Cr des Petites Écuries, 75010 Paris', PROJET 'PASSAGE FOUBERT 1bis et 3 passage Foubert - 75013, Paris', TITRE, 'Affaire : A0041', 'Date : 30/01/2026', 'Nivellement: NGF 52.00', code boxes (series, FOU, BLM, ARC, PLN, PRO, indice 0, page) (read on an 1800 px preview; not published)",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "Office credit only: EMETTEUR STUDIO BELEM printed in the cartouche; the page states the office (Studio BELEM) and no draughtsman",
+      "roleEvidence": "The page restates only the existing role text (pdf2026:p13: facade design and architectural detailing at Studio BELEM); this record adds no personal-role claim",
+      "reason": "Withheld, low value: an outline section and plan of a roof hatch with no annotation"
+    },
+    {
+      "source": "Images HQ/FOUBERT/20260129_BLM_FOU_PRO_Plan de niveaux_merge [1-20] [1-15]_page-0014.jpg",
+      "sha256": "79461ece7833a0f799337bfb7e517d5e9037adaed0521cd3ba1389bd03eacff5",
+      "width": 4961,
+      "height": 3508,
+      "projectMapping": {
+        "slug": "foubert",
+        "status": "confirmed"
+      },
+      "mappingEvidence": "Cartouche PROJET panel \"PASSAGE FOUBERT 1bis et 3 passage Foubert - 75013, Paris\", EMETTEUR \"STUDIO BELEM\", Affaire A0041; the case study's location is 1bis-3 passage Foubert, Paris 13th (pdf2026:p13)",
+      "visualType": "drawing sheet (attic terrace detail, 1:10: section, window elevation, plan, key plan)",
+      "textDisposition": "title → caption: 'Détail terrasse attique', 'Ech. 1:10', sheet 50-19; callouts → labels (section only): 'Fixation garde corps', 'Couvertine métallique', 'Béton', 'Isolation', 'Vide/air', 'Finition brique', 'Dalle sur plot', 'Caillebotis', 'Complexe dalle BB 36cm', 'Poutre Béton', 'Complexe dalle BB 21cm', 'Pare vapeur', 'Isolation', 'Etanchéité'; intrinsic (stays): 'EXT', 'INT', NGF levels 65.29, 66.26, 65.25, 65.18, dimensions; not published: the window elevation and plan detail (outside the crop); furniture (dropped): key plan with 'Passage Foubert' and the cut arrow; furniture (dropped): bottom cartouche MAÎTRE D'OUVRAGE (client name and address, not published), EMETTEUR 'STUDIO BELEM 9 Cr des Petites Écuries, 75010 Paris', PROJET 'PASSAGE FOUBERT 1bis et 3 passage Foubert - 75013, Paris', TITRE, 'Affaire : A0041', 'Date : 30/01/2026', 'Nivellement: NGF 52.00', code boxes (series, FOU, BLM, ARC, PLN, PRO, indice 0, page)",
+      "duplicateOf": null,
+      "disposition": "approved",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "Office credit only: EMETTEUR STUDIO BELEM printed in the cartouche; the page states the office (Studio BELEM) and no draughtsman",
+      "roleEvidence": "The page restates only the existing role text (pdf2026:p13: facade design and architectural detailing at Studio BELEM); this record adds no personal-role claim",
+      "reason": "Replaces the low-resolution 'Attic terrace detail' (pdf2026:p14) with the section of the same sheet"
+    },
+    {
+      "source": "Images HQ/FOUBERT/20260129_BLM_FOU_PRO_Plan de niveaux_merge [1-20] [1-15]_page-0015.jpg",
+      "sha256": "7452f58be6f3a73e991cf43743754e45895c59fff0bc3db6407785bb89e9f617",
+      "width": 4961,
+      "height": 3508,
+      "projectMapping": {
+        "slug": "foubert",
+        "status": "confirmed"
+      },
+      "mappingEvidence": "Cartouche PROJET panel \"PASSAGE FOUBERT 1bis et 3 passage Foubert - 75013, Paris\", EMETTEUR \"STUDIO BELEM\", Affaire A0041; the case study's location is 1bis-3 passage Foubert, Paris 13th (pdf2026:p13)",
+      "visualType": "drawing sheet (green terrace detail, 1:10: three-part section)",
+      "textDisposition": "title → caption: 'Détail terrasse végétalisée', 'Ech. 1:10', sheet 50-20; callouts (attached to the drawing by leader lines, so not free-standing; they stay in the pixels and are published as faithful English in the caption): 'Tôle métallique laqué', 'Couvertine métallique', 'Fixation garde corps', 'Garde corps', 'Isolation', 'Béton', 'Enduit', 'Bordure béton en L', 'Terre végétale', 'Dalle sur plot', 'Caillebotis', 'Profil métallique en U', 'Complexe dalle BB 29cm' x2, 'Poutre Béton', 'Panneaux contreplaqués', 'Isolant KNAUF Thane', 'Chlorure de polyvinyle flexible avec 40 % plastifiant'; intrinsic (stays): 'EXT', 'INT', NGF levels 63.33, 62.32, 62.14, dimensions; furniture (dropped): bottom cartouche MAÎTRE D'OUVRAGE (client name and address, not published), EMETTEUR 'STUDIO BELEM 9 Cr des Petites Écuries, 75010 Paris', PROJET 'PASSAGE FOUBERT 1bis et 3 passage Foubert - 75013, Paris', TITRE, 'Affaire : A0041', 'Date : 30/01/2026', 'Nivellement: NGF 52.00', code boxes (series, FOU, BLM, ARC, PLN, PRO, indice 0, page)",
+      "duplicateOf": null,
+      "disposition": "approved",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "Office credit only: EMETTEUR STUDIO BELEM printed in the cartouche; the page states the office (Studio BELEM) and no draughtsman",
+      "roleEvidence": "The page restates only the existing role text (pdf2026:p13: facade design and architectural detailing at Studio BELEM); this record adds no personal-role claim",
+      "reason": "Replaces the low-resolution 'Green roof terrace detail 2' (pdf2026:p15), the same drawing"
+    },
+    {
+      "source": "Images HQ/FOUBERT/20260129_BLM_FOU_PRO_Plan de niveaux_merge [1-20] [16-20]_page-0001.jpg",
+      "sha256": "4b01dfbb61df42e74f4e1ebb675a5ac0892150544c55e7c6dd42f7ad848aa4ea",
+      "width": 4961,
+      "height": 3508,
+      "projectMapping": {
+        "slug": "foubert",
+        "status": "confirmed"
+      },
+      "mappingEvidence": "Cartouche PROJET panel \"PASSAGE FOUBERT 1bis et 3 passage Foubert - 75013, Paris\", EMETTEUR \"STUDIO BELEM\", Affaire A0041; the case study's location is 1bis-3 passage Foubert, Paris 13th (pdf2026:p13)",
+      "visualType": "drawing sheet (green terrace detail, 1:10: section with key plan and notes)",
+      "textDisposition": "title → caption: 'Détail terrasse végétalisée', 'Ech. 1:10', sheet 50-21; callouts (attached to the drawing by leader lines, so not free-standing; they stay in the pixels and are published as faithful English in the caption): 'Bordure béton en L', 'Garde corps', 'Isolation', 'Couvertine métallique', 'Toiture (Charpente bois)', 'Isolation', 'Béton', 'Pare Vapeur', 'Isolant KNAUF Thane', 'Chlorure de polyvinyle flexible avec 40 % plastifiant', 'Terre végétale'; intrinsic (stays): 'LIMITE DE PROPRIETE' in red, slope 14.1%, dimensions 30 and 20; furniture (dropped): key plan with 'Passage Foubert' and the cut arrow, 'Remarques' (five standard notes on the contractor's responsibility, that the drawings are not execution documents and that the existing geometry comes from the surveyor's model); furniture (dropped): bottom cartouche MAÎTRE D'OUVRAGE (client name and address, not published), EMETTEUR 'STUDIO BELEM 9 Cr des Petites Écuries, 75010 Paris', PROJET 'PASSAGE FOUBERT 1bis et 3 passage Foubert - 75013, Paris', TITRE, 'Affaire : A0041', 'Date : 30/01/2026', 'Nivellement: NGF 52.00', code boxes (series, FOU, BLM, ARC, PLN, PRO, indice 0, page)",
+      "duplicateOf": null,
+      "disposition": "approved",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "Office credit only: EMETTEUR STUDIO BELEM printed in the cartouche; the page states the office (Studio BELEM) and no draughtsman",
+      "roleEvidence": "The page restates only the existing role text (pdf2026:p13: facade design and architectural detailing at Studio BELEM); this record adds no personal-role claim",
+      "reason": "Replaces the low-resolution 'Green roof terrace detail 1' (pdf2026:p15), the same drawing"
+    },
+    {
+      "source": "Images HQ/FOUBERT/20260129_BLM_FOU_PRO_Plan de niveaux_merge [1-20] [16-20]_page-0002.jpg",
+      "sha256": "e73c0192dfc444974f492d4d54b030eacc2056d9f37a9f513b744606a3607629",
+      "width": 4961,
+      "height": 3508,
+      "projectMapping": {
+        "slug": "foubert",
+        "status": "confirmed"
+      },
+      "mappingEvidence": "Cartouche PROJET panel \"PASSAGE FOUBERT 1bis et 3 passage Foubert - 75013, Paris\", EMETTEUR \"STUDIO BELEM\", Affaire A0041; the case study's location is 1bis-3 passage Foubert, Paris 13th (pdf2026:p13)",
+      "visualType": "drawing sheet (balcony detail, 1:10: section with key plan and notes)",
+      "textDisposition": "sheet title 'Détail balcon', 'Ech. 1:10', sheet 50-22; callouts 'Menuiserierie extérieure', 'Finition brique', 'Structure garde corps en métal thermolaqué RAL 3014', 'Carrelage scellé (Dito dalle sur plot)', 'Recharge', 'Nez de dalle métallique RAL 3014', 'Béton', 'Isolation', 'Complexe dalle BB 36cm'; intrinsic: 'INT', 'EXT', dimensions; key plan, 'Remarques' notes; furniture (dropped): bottom cartouche MAÎTRE D'OUVRAGE (client name and address, not published), EMETTEUR 'STUDIO BELEM 9 Cr des Petites Écuries, 75010 Paris', PROJET 'PASSAGE FOUBERT 1bis et 3 passage Foubert - 75013, Paris', TITRE, 'Affaire : A0041', 'Date : 30/01/2026', 'Nivellement: NGF 52.00', code boxes (series, FOU, BLM, ARC, PLN, PRO, indice 0, page) (read on an 1800 px preview; not published)",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "Office credit only: EMETTEUR STUDIO BELEM printed in the cartouche; the page states the office (Studio BELEM) and no draughtsman",
+      "roleEvidence": "The page restates only the existing role text (pdf2026:p13: facade design and architectural detailing at Studio BELEM); this record adds no personal-role claim",
+      "reason": "Withheld, low added value: a single slab-edge and guardrail section; the slab build-up and guardrails already appear in the published attic and green-terrace details"
+    },
+    {
+      "source": "Images HQ/FOUBERT/20260129_BLM_FOU_PRO_Plan de niveaux_merge [1-20] [16-20]_page-0003.jpg",
+      "sha256": "698a3e64cc3f54c0201542c591b6df868b6e00f333548eaed7da773f80355bc9",
+      "width": 9933,
+      "height": 7017,
+      "projectMapping": {
+        "slug": "foubert",
+        "status": "confirmed"
+      },
+      "mappingEvidence": "Cartouche PROJET panel \"PASSAGE FOUBERT 1bis et 3 passage Foubert - 75013, Paris\", EMETTEUR \"STUDIO BELEM\", Affaire A0041; the case study's location is 1bis-3 passage Foubert, Paris 13th (pdf2026:p13)",
+      "visualType": "drawing sheet (west street elevation)",
+      "textDisposition": "title → caption: 'Façade Ouest', scale 'Comme indiqué', sheet 20-01; legend 'Légende :' 1 'Claustra de briques pleines type «fjord soda» couleur rouge vieilli' (solid-brick claustra screen, «fjord soda» type, aged red), 2 'Appareillage 2 d'éco-brique (6cm d'épaisseur) type « fjord soda », couleur rouge vieilli' (eco-brick bond 2, 6 cm thick, «fjord soda» type, aged red), 3 'Vitrage clair' (clear glazing), 4 'Garde-corps en maille métallique et lisse métallique thermolaqué, RAL9007' (metal-mesh guardrail with a powder-coated metal rail, RAL 9007), 5 'Menuiseries en bois naturel vernis' (varnished natural-timber joinery), 6 'Cadres et serrurerie en métal thermolaqué ( RAL 3014 )' (powder-coated metal frames and metalwork, RAL 3014), 7 'Porte en métal thermolaqué ( RAL 3014 )' (powder-coated metal door, RAL 3014), 8 'Façade en enduit à la chaux taloché, ( RAL 9010 ou équivalent )' (floated lime-render facade, RAL 9010 or equivalent), 9 'Panneaux métalliques séparatifs (RAL 3014)' (metal screen panels, RAL 3014) (read on a 1:1 tile) → caption text, items 7-9 erased in the cutout (the others lie outside the crop); intrinsic (stays): material numbers 1-7 on the drawing, detail calls (1 50-14, 2 50-06, 2 50-07, 4 50-01, 2 50-13), 'Limite de Propriété' x2, 23.23 and bay dimensions 2.98 3.77 3.58 3.79 2.28 3.58 2.98, window dimensions, levels (RDC 52.45 to TT 68.10), NGF spots 68.51, 68.49, 67.98, 66.13, 65.02, 52.55, 52.44, 52.39, 52.36, entrance labels 'Entrée de l'atelier 00', 'Entrée du Hall des Logements', 'Entrée de l'Appartement 03', 'Entrée de l'Appartement 02'; furniture (dropped): key plan with the elevation or cut marked in blue; furniture (dropped): right-hand cartouche column with an empty revision table (N°, Description, Date), MAÎTRE D'OUVRAGE (client name, not published), PROJET 'PASSAGE FOUBERT 1bis et 3 passage Foubert - 75013, Paris', a thumbnail of the street render, ASSISTANTS / CONSULTANTS and MAÎTRES D'OEUVRES lists (Géomètre CTB; Architecte STUDIO BELEM; BET Structure BITP; BET Fluides BITP; BET Acoustique AIDA; Économiste BITP; other roles blank), EMETTEUR 'STUDIO BELEM 9 Cr. des petites écuries - 75010 Paris', date 30/01/2026, affaire A0041, scale, code boxes (series, FOU, BLM, ARC, type, identifier, PRO)",
+      "duplicateOf": null,
+      "disposition": "approved",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "Office credit only: EMETTEUR STUDIO BELEM printed in the cartouche; the page states the office (Studio BELEM) and no draughtsman",
+      "roleEvidence": "The page restates only the existing role text (pdf2026:p13: facade design and architectural detailing at Studio BELEM); this record adds no personal-role claim",
+      "reason": "Replaces the low-resolution 'West facade' (images/foubert/foubert-west-facade.jpg, pdf2026:p14), the same drawing"
+    },
+    {
+      "source": "Images HQ/FOUBERT/20260129_BLM_FOU_PRO_Plan de niveaux_merge [1-20] [16-20]_page-0004.jpg",
+      "sha256": "fb5e35be0551a05e73c7f9d378f90d12c36564529e5560bf16374f4364d792eb",
+      "width": 9933,
+      "height": 7017,
+      "projectMapping": {
+        "slug": "foubert",
+        "status": "confirmed"
+      },
+      "mappingEvidence": "Cartouche PROJET panel \"PASSAGE FOUBERT 1bis et 3 passage Foubert - 75013, Paris\", EMETTEUR \"STUDIO BELEM\", Affaire A0041; the case study's location is 1bis-3 passage Foubert, Paris 13th (pdf2026:p13)",
+      "visualType": "drawing sheet (south courtyard elevation)",
+      "textDisposition": "sheet title 'Façade Sud', sheet 20-02; the same nine-item legend as 'Façade Ouest'; material numbers 3, 4, 5, 8, 9, 'Sortie Terrasse A. 01' x2, levels and dimensions; furniture (dropped): key plan with the elevation or cut marked in blue; furniture (dropped): right-hand cartouche column with an empty revision table (N°, Description, Date), MAÎTRE D'OUVRAGE (client name, not published), PROJET 'PASSAGE FOUBERT 1bis et 3 passage Foubert - 75013, Paris', a thumbnail of the street render, ASSISTANTS / CONSULTANTS and MAÎTRES D'OEUVRES lists (Géomètre CTB; Architecte STUDIO BELEM; BET Structure BITP; BET Fluides BITP; BET Acoustique AIDA; Économiste BITP; other roles blank), EMETTEUR 'STUDIO BELEM 9 Cr. des petites écuries - 75010 Paris', date 30/01/2026, affaire A0041, scale, code boxes (series, FOU, BLM, ARC, type, identifier, PRO) (read on an 1800 px preview; not published)",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "Office credit only: EMETTEUR STUDIO BELEM printed in the cartouche; the page states the office (Studio BELEM) and no draughtsman",
+      "roleEvidence": "The page restates only the existing role text (pdf2026:p13: facade design and architectural detailing at Studio BELEM); this record adds no personal-role claim",
+      "reason": "Withheld, low value: a narrow courtyard front between the grey party walls; its windows and guardrails repeat the published east facade"
+    },
+    {
+      "source": "Images HQ/FOUBERT/20260129_BLM_FOU_PRO_Plan de niveaux_merge [1-20] [16-20]_page-0005.jpg",
+      "sha256": "a7e552375f367b84339de724d4680fb00a557c0a0f9d09dcf39cbc06b95e545c",
+      "width": 9933,
+      "height": 7017,
+      "projectMapping": {
+        "slug": "foubert",
+        "status": "confirmed"
+      },
+      "mappingEvidence": "Cartouche PROJET panel \"PASSAGE FOUBERT 1bis et 3 passage Foubert - 75013, Paris\", EMETTEUR \"STUDIO BELEM\", Affaire A0041; the case study's location is 1bis-3 passage Foubert, Paris 13th (pdf2026:p13)",
+      "visualType": "drawing sheet (east courtyard elevation)",
+      "textDisposition": "title → caption: 'Façade Est', scale 'Comme indiqué', sheet 20-03; the same nine-item legend as 'Façade Ouest' (outside the crop; the caption refers to the west-facade list); intrinsic (stays): material numbers 3, 4, 5, 7, 8, 9 on the drawing, detail call 2 50-22, 'Limite de Propriété' x2, 23.20 and bay dimensions, window dimensions, levels RDC to TT, 'Sortie Terrasse A. 02' x2, 'Sortie Terrasse A. 03', 'Sortie Terrasse de l'Atelier' x2; furniture (dropped): key plan with the elevation or cut marked in blue; furniture (dropped): right-hand cartouche column with an empty revision table (N°, Description, Date), MAÎTRE D'OUVRAGE (client name, not published), PROJET 'PASSAGE FOUBERT 1bis et 3 passage Foubert - 75013, Paris', a thumbnail of the street render, ASSISTANTS / CONSULTANTS and MAÎTRES D'OEUVRES lists (Géomètre CTB; Architecte STUDIO BELEM; BET Structure BITP; BET Fluides BITP; BET Acoustique AIDA; Économiste BITP; other roles blank), EMETTEUR 'STUDIO BELEM 9 Cr. des petites écuries - 75010 Paris', date 30/01/2026, affaire A0041, scale, code boxes (series, FOU, BLM, ARC, type, identifier, PRO)",
+      "duplicateOf": null,
+      "disposition": "approved",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "Office credit only: EMETTEUR STUDIO BELEM printed in the cartouche; the page states the office (Studio BELEM) and no draughtsman",
+      "roleEvidence": "The page restates only the existing role text (pdf2026:p13: facade design and architectural detailing at Studio BELEM); this record adds no personal-role claim",
+      "reason": "Replaces the low-resolution 'East facade' (images/foubert/foubert-east-facade.jpg, pdf2026:p15), the same drawing"
+    },
+    {
+      "source": "Images HQ/FOUBERT/20260129_BLM_FOU_PRO_Plan de niveaux_merge [21-25]_page-0001.jpg",
+      "sha256": "704a145f751bbd1a85ad7afd7f161a0248e837641606016a4f69b8b817ac24e0",
+      "width": 9933,
+      "height": 7017,
+      "projectMapping": {
+        "slug": "foubert",
+        "status": "confirmed"
+      },
+      "mappingEvidence": "Cartouche PROJET panel \"PASSAGE FOUBERT 1bis et 3 passage Foubert - 75013, Paris\", EMETTEUR \"STUDIO BELEM\", Affaire A0041; the case study's location is 1bis-3 passage Foubert, Paris 13th (pdf2026:p13)",
+      "visualType": "drawing sheet (north courtyard elevation)",
+      "textDisposition": "sheet title 'Façade Nord', sheet 20-04; the same nine-item legend; material numbers 3, 4, 5, 8, levels including 55.17 'Toiture atelier' and 52.05 'Niveau arrière atelier', dimensions; furniture (dropped): key plan with the elevation or cut marked in blue; furniture (dropped): right-hand cartouche column with an empty revision table (N°, Description, Date), MAÎTRE D'OUVRAGE (client name, not published), PROJET 'PASSAGE FOUBERT 1bis et 3 passage Foubert - 75013, Paris', a thumbnail of the street render, ASSISTANTS / CONSULTANTS and MAÎTRES D'OEUVRES lists (Géomètre CTB; Architecte STUDIO BELEM; BET Structure BITP; BET Fluides BITP; BET Acoustique AIDA; Économiste BITP; other roles blank), EMETTEUR 'STUDIO BELEM 9 Cr. des petites écuries - 75010 Paris', date 30/01/2026, affaire A0041, scale, code boxes (series, FOU, BLM, ARC, type, identifier, PRO) (read on an 1800 px preview; not published)",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "Office credit only: EMETTEUR STUDIO BELEM printed in the cartouche; the page states the office (Studio BELEM) and no draughtsman",
+      "roleEvidence": "The page restates only the existing role text (pdf2026:p13: facade design and architectural detailing at Studio BELEM); this record adds no personal-role claim",
+      "reason": "Withheld, low value: mostly the grey party walls of the neighbours, with four windows that repeat the published elevations"
+    },
+    {
+      "source": "Images HQ/FOUBERT/20260129_BLM_FOU_PRO_Plan de niveaux_merge [21-25]_page-0002.jpg",
+      "sha256": "b4fa1a421e5f3833f16b8e7418c2c8c15363aea19328b4547faad9d627267df4",
+      "width": 9933,
+      "height": 7017,
+      "projectMapping": {
+        "slug": "foubert",
+        "status": "confirmed"
+      },
+      "mappingEvidence": "Cartouche PROJET panel \"PASSAGE FOUBERT 1bis et 3 passage Foubert - 75013, Paris\", EMETTEUR \"STUDIO BELEM\", Affaire A0041; the case study's location is 1bis-3 passage Foubert, Paris 13th (pdf2026:p13)",
+      "visualType": "drawing sheet (rear west elevation)",
+      "textDisposition": "sheet title 'Façade Ouest arrière', sheet 20-05; the same nine-item legend; material numbers 3, 4, 5, 8, levels, dimensions; furniture (dropped): key plan with the elevation or cut marked in blue; furniture (dropped): right-hand cartouche column with an empty revision table (N°, Description, Date), MAÎTRE D'OUVRAGE (client name, not published), PROJET 'PASSAGE FOUBERT 1bis et 3 passage Foubert - 75013, Paris', a thumbnail of the street render, ASSISTANTS / CONSULTANTS and MAÎTRES D'OEUVRES lists (Géomètre CTB; Architecte STUDIO BELEM; BET Structure BITP; BET Fluides BITP; BET Acoustique AIDA; Économiste BITP; other roles blank), EMETTEUR 'STUDIO BELEM 9 Cr. des petites écuries - 75010 Paris', date 30/01/2026, affaire A0041, scale, code boxes (series, FOU, BLM, ARC, type, identifier, PRO) (read on an 1800 px preview; not published)",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "Office credit only: EMETTEUR STUDIO BELEM printed in the cartouche; the page states the office (Studio BELEM) and no draughtsman",
+      "roleEvidence": "The page restates only the existing role text (pdf2026:p13: facade design and architectural detailing at Studio BELEM); this record adds no personal-role claim",
+      "reason": "Withheld, low value: one workshop window between grey party walls"
+    },
+    {
+      "source": "Images HQ/FOUBERT/20260129_BLM_FOU_PRO_Plan de niveaux_merge [21-25]_page-0004.jpg",
+      "sha256": "ad636930cc789490147c1be0f574f4f379b567a7cdcb6791ae2ceea58e8332df",
+      "width": 4961,
+      "height": 3508,
+      "projectMapping": {
+        "slug": "foubert",
+        "status": "confirmed"
+      },
+      "mappingEvidence": "Cartouche PROJET panel \"PASSAGE FOUBERT 1bis et 3 passage Foubert - 75013, Paris\", EMETTEUR \"STUDIO BELEM\", Affaire A0041; the case study's location is 1bis-3 passage Foubert, Paris 13th (pdf2026:p13)",
+      "visualType": "drawing sheet (site plan)",
+      "textDisposition": "title → caption: 'Plan de masse', sheet 00-02, no printed scale; intrinsic (stays): 'Toiture accessible à R+1', 'Toiture accessible à R+2', 'Toiture terrasse végétalisée à R+4', 'Attique accessible à R+3', 'caisson VMC', 'trappe accès maintenance toiture', 'Passage Foubert', neighbour storey marks R+0 to R+5, NGF spots 55.25, 52.45, 68.32, dimensions 23.24, 6.53, 4.25, 12.44 and others; furniture (dropped): bottom cartouche MAÎTRE D'OUVRAGE (client name and address, not published), EMETTEUR 'STUDIO BELEM 9 Cr des Petites Écuries, 75010 Paris', PROJET 'PASSAGE FOUBERT 1bis et 3 passage Foubert - 75013, Paris', TITRE, 'Affaire : A0041', 'Date : 30/01/2026', 'Nivellement: NGF 52.00', code boxes (series, FOU, BLM, ARC, PLN, PRO, indice 0, page)",
+      "duplicateOf": null,
+      "disposition": "approved",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "Office credit only: EMETTEUR STUDIO BELEM printed in the cartouche; the page states the office (Studio BELEM) and no draughtsman",
+      "roleEvidence": "The page restates only the existing role text (pdf2026:p13: facade design and architectural detailing at Studio BELEM); this record adds no personal-role claim",
+      "reason": "New: the only drawing that shows every roof of the project in its surroundings; opens the drawings"
+    },
+    {
+      "source": "Images HQ/FOUBERT/20260129_BLM_FOU_PRO_Plan de niveaux_merge [21-25]_page-0005.jpg",
+      "sha256": "df0e1afbb05acf606f0ad4ed5485986a1a709ff7723601b825fd69371e70f5a9",
+      "width": 4961,
+      "height": 3508,
+      "projectMapping": {
+        "slug": "foubert",
+        "status": "confirmed"
+      },
+      "mappingEvidence": "Cartouche PROJET panel \"PASSAGE FOUBERT 1bis et 3 passage Foubert - 75013, Paris\", EMETTEUR \"STUDIO BELEM\", Affaire A0041; the case study's location is 1bis-3 passage Foubert, Paris 13th (pdf2026:p13)",
+      "visualType": "drawing sheet (street window: section, exterior and interior elevations, two plan details)",
+      "textDisposition": "title → caption: 'Fenêtre sur rue', sheet 50-ETA-09, page 1/4, no printed scale; callouts (attached to the drawing by leader lines, so not free-standing; they stay in the pixels and are published as faithful English in the caption): 'Complexe dalle BB 29cm', 'Isolation', 'Lame d'aire > 30 mm', 'Eco-brik Olm', 'Console de supportage', 'Armature', 'Suspente', 'Isolation laine de roche 4 cm', 'Brise soleil orientable', 'Coulisses BSO', 'Eco-brik Olm', 'Tôle métallique laqué', 'Garde-corps en métal thermolaqué et maille métallique 3cm', 'Bavette métallique', 'Fenêtre menuiserie bois'; intrinsic (stays): dimensions 2.61, 2.17, 0.91, 0.84, 0.07; not published: the interior elevation and the two plan details (outside the crops); furniture (dropped): bottom cartouche MAÎTRE D'OUVRAGE (client name and address, not published), EMETTEUR 'STUDIO BELEM 9 Cr des Petites Écuries, 75010 Paris', PROJET 'PASSAGE FOUBERT 1bis et 3 passage Foubert - 75013, Paris', TITRE, 'Affaire : A0041', 'Date : 30/01/2026', 'Nivellement: NGF 52.00', code boxes (series, FOU, BLM, ARC, PLN, PRO, indice 0, page)",
+      "duplicateOf": null,
+      "disposition": "approved",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "Office credit only: EMETTEUR STUDIO BELEM printed in the cartouche; the page states the office (Studio BELEM) and no draughtsman",
+      "roleEvidence": "The page restates only the existing role text (pdf2026:p13: facade design and architectural detailing at Studio BELEM); this record adds no personal-role claim",
+      "reason": "Replaces the low-resolution 'Street-facing window detail' (pdf2026:p14) with the section and the exterior elevation of the same sheet"
+    }
+  ]
+}

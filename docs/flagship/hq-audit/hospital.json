@@ -1,0 +1,121 @@
+{
+  "version": 1,
+  "sourceRoot": "Images HQ",
+  "folder": "Hospital",
+  "assets": [
+    {
+      "source": "Images HQ/Hospital/A0 Plie [1]_page-0001.jpg",
+      "sha256": "fe8470a7e911dbbe10dce63c602a49c7a7d9d06de93a6dd6ae6f12a9e48013c3",
+      "width": 14044,
+      "height": 9934,
+      "projectMapping": {
+        "slug": "tamansourt",
+        "status": "confirmed"
+      },
+      "mappingEvidence": "The sheet's site plan shows the fan of curved wings, the parking courts between them with tree-lined planted strips, the roundabout and the housing across the road that the aerial render Scene 12_1 (pdf2025:p34, Tamansourt chapter) shows, turned half a turn. The sheet itself names no project, programme or place",
+      "visualType": "drawing: one A0 site plan (14 044 x 9 934 px, 300 dpi) in grey linework with hatched shadows, stippled planting and tree symbols; the context (roads, housing, empty plots) runs off every edge",
+      "textDisposition": "title → figure title: 'Plan Masse' (translated: site plan), cropped out below the drawing; scale → caption: 'ECH : 1/500' (translated: scale 1:500), cropped out; furniture (dropped): page number '1'. No room names, dimensions, north arrow or cartouche on the sheet (scanned at one-third scale for text: the only near-black components outside the tree symbols are these three)",
+      "duplicateOf": null,
+      "disposition": "approved",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "Owner-supplied office work (Yassir Khalil Studio, site); no credit, cartouche or studio name printed on the sheet",
+      "roleEvidence": "The case study makes no personal-role statement (role: []; site: 'developed by the team at Yassir Khalil Studio'); the drawing adds none",
+      "reason": "New material, the only drawing of the campus layout: published as images/tamansourt/tamansourt-site-plan.png (crop of the campus block, 4x reduction), cut out with an inverted dark treatment"
+    },
+    {
+      "source": "Images HQ/Hospital/Scene 12_1.png",
+      "sha256": "79ec0c929ec047f529e45ae30037b9539425280679bffc251a6714161a512e8c",
+      "width": 5760,
+      "height": 3240,
+      "projectMapping": {
+        "slug": "tamansourt",
+        "status": "confirmed"
+      },
+      "mappingEvidence": "Same camera as the existing 'Render, Campus Aerial' figure (tamansourt-render-aerial.jpg, 500 px) and the middle-left render of pdf2025:p34 (Tamansourt chapter): the same fan of wings, parking courts, housing blocks and shadows",
+      "visualType": "render (aerial: the campus on its block between curved roads, parking courts with cars, a roundabout at the top, housing blocks at lower right)",
+      "textDisposition": "no text in the scene",
+      "duplicateOf": null,
+      "disposition": "approved",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "Owner-supplied office work (Yassir Khalil Studio, site); no third-party credit printed on the render",
+      "roleEvidence": "The case study makes no personal-role statement (role: []); the image adds none",
+      "reason": "Replaces the 500 px 'Render, Campus Aerial' figure; published as images/tamansourt/tamansourt-aerial.jpg"
+    },
+    {
+      "source": "Images HQ/Hospital/Scene 14_1.png",
+      "sha256": "63bb03635d43f6b4118d457c1374c3840a284e0fc09cb183e526794f7e763f73",
+      "width": 5760,
+      "height": 3240,
+      "projectMapping": {
+        "slug": "tamansourt",
+        "status": "confirmed"
+      },
+      "mappingEvidence": "Same camera as the bottom-middle render of pdf2025:p34 (Tamansourt chapter), which crops it; same terracotta-coloured walls and deep-set windows as the other scenes of the folder",
+      "visualType": "render (frontal facade: deep-set windows with splayed reveals under a thin overhanging roof, a two-storey glazed recess at lower right, a tree and a parked car at left)",
+      "textDisposition": "no text in the scene",
+      "duplicateOf": null,
+      "disposition": "approved",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "Owner-supplied office work (Yassir Khalil Studio, site); no third-party credit printed on the render",
+      "roleEvidence": "The case study makes no personal-role statement (role: []); the image adds none",
+      "reason": "New view on the site (shown only on pdf2025:p34); published as images/tamansourt/tamansourt-facade.jpg. It is not the view of the existing 'Render, Street Facade' figure (the bottom-left render of pdf2025:p34, a curved block with a glazed entrance), which has no HQ source and stays"
+    },
+    {
+      "source": "Images HQ/Hospital/Scene 24_1.png",
+      "sha256": "ae5f41817374457cc1b2d0f0c6f2496642dd0e3a48f261ae875dbeca88ec3aa8",
+      "width": 5760,
+      "height": 3240,
+      "projectMapping": {
+        "slug": "tamansourt",
+        "status": "confirmed"
+      },
+      "mappingEvidence": "Same camera as the bottom-right render of pdf2025:p34 (Tamansourt chapter), which crops it; the stepped external stairs are those of the Scene 9_1 frontage",
+      "visualType": "render (two wings across a forecourt: stepped external stairs at the end of the left wing, a curved wing at right, two light bridges between them at upper levels in front of a glazed volume, a planted bed with a tree, parked cars)",
+      "textDisposition": "no text in the scene",
+      "duplicateOf": null,
+      "disposition": "approved",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "Owner-supplied office work (Yassir Khalil Studio, site); no third-party credit printed on the render",
+      "roleEvidence": "The case study makes no personal-role statement (role: []); the image adds none",
+      "reason": "New view on the site (shown only on pdf2025:p34); published as images/tamansourt/tamansourt-between-wings.jpg"
+    },
+    {
+      "source": "Images HQ/Hospital/Scene 32.png",
+      "sha256": "37db783dbdd893827b8852a56d2022ac719567aeea2a27f54a2660632b0bcfef",
+      "width": 5760,
+      "height": 3836,
+      "projectMapping": {
+        "slug": "tamansourt",
+        "status": "confirmed"
+      },
+      "mappingEvidence": "Same camera as the existing hero images/tamansourt/thumb.jpg, the full-page render of pdf2025:p33 (footer '33 TAMANSOURT HOSPITAL'), and of the unreferenced images/tamansourt/tamansourt-render-garden.jpg: the footpath, the faceless figure, the trees and the two parked cars",
+      "visualType": "render (eye level: a footpath along the foot of the building, a glazed wall at left, cantilevered upper floors, planted beds of grasses and trees, people and parked cars beyond, a faceless figure in the foreground)",
+      "textDisposition": "no text in the scene (the 2025 page's fact panel and Hippocrates quotation, printed over thumb.jpg, are absent from this file)",
+      "duplicateOf": null,
+      "disposition": "approved",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "Owner-supplied office work (Yassir Khalil Studio, site); no third-party credit printed on the render",
+      "roleEvidence": "The case study makes no personal-role statement (role: []); the image adds none",
+      "reason": "Replaces the hero thumb.jpg (2 000 px, with the 2025 page's text over the scene) and the unreferenced tamansourt-render-garden.jpg; published as images/tamansourt/tamansourt-path.jpg"
+    },
+    {
+      "source": "Images HQ/Hospital/Scene 9_1.png",
+      "sha256": "24aeb6dc157dad3ecfb23ccce27b9c9d33b6f24924e4920f2b901a3f827cb08a",
+      "width": 5760,
+      "height": 3240,
+      "projectMapping": {
+        "slug": "tamansourt",
+        "status": "confirmed"
+      },
+      "mappingEvidence": "Same camera as the middle-right render of pdf2025:p34 (Tamansourt chapter), which crops it to the buildings",
+      "visualType": "render (frontage across open sandy ground: low wings with curved roofs at left, a dark glazed volume, a four-storey block with balconies and stepped external stairs at right, cars on the road in front)",
+      "textDisposition": "no text in the scene (checked at half scale over the entrance zone)",
+      "duplicateOf": null,
+      "disposition": "approved",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "Owner-supplied office work (Yassir Khalil Studio, site); no third-party credit printed on the render",
+      "roleEvidence": "The case study makes no personal-role statement (role: []); the image adds none",
+      "reason": "New view on the site (shown only on pdf2025:p34); published as images/tamansourt/tamansourt-frontage.jpg"
+    }
+  ]
+}

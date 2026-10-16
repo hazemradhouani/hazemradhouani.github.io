@@ -1,0 +1,151 @@
+{
+  "version": 1,
+  "sourceRoot": "Images HQ",
+  "assets": [
+    {
+      "source": "Images HQ/Ain Sbaa/Scene 72_1.png",
+      "output": "images/ain-sebaa/ain-sebaa-render-screen-hq.jpg",
+      "sha256": "fe3756a23fd210f600aaa7f67c199b8cafa574be4b7df34536d63a2facc580da",
+      "crop": null,
+      "treatment": "full scene, area downscale to the render cap",
+      "darkTreatment": "preserve-colour-scene",
+      "credit": "Owner's own work (D09): no third-party credit is printed on the source or on pdf2025:p39-42",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "reviewStatus": "approved",
+      "captionEvidence": "Same view as the existing hero (pdf2025:p39): X-shaped columns and the patterned screen at the station corner"
+    },
+    {
+      "source": "Images HQ/Ain Sbaa/Scene 69.png",
+      "output": "images/ain-sebaa/ain-sebaa-platform-view.jpg",
+      "sha256": "6a41209c227bd4f8801e1f1186455765325d7ea3d61eaa40b829b5f9435b8b9b",
+      "crop": null,
+      "treatment": "full scene; the dark band below the tracks is part of the render and stays",
+      "darkTreatment": "preserve-colour-scene",
+      "credit": "Owner's own work (D09): no third-party credit is printed on the source or on pdf2025:p39-42",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "reviewStatus": "approved",
+      "captionEvidence": "Visual: the station seen from across the tracks, GARE AIN SEBAA lettering visible through the glass"
+    },
+    {
+      "source": "Images HQ/Ain Sbaa/plan masse.jpg",
+      "output": "images/ain-sebaa/ain-sebaa-site-plan.jpg",
+      "sha256": "fc334595eb479a2e15d4051057e11f7690683df983c37e5866d8bcd88f57fff2",
+      "crop": null,
+      "treatment": "full rendered site plan; its printed title and north sign sit on rendered pixels and stay (D49: renders are never edited)",
+      "darkTreatment": "preserve-colour-scene",
+      "credit": "Owner's own work (D09): no third-party credit is printed on the source or on pdf2025:p39-42",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "reviewStatus": "approved",
+      "captionEvidence": "Printed title 'PLAN MASSE 1-1000'; the two buildings and the footbridge match the narrative (pdf2025:p40, p42)"
+    },
+    {
+      "source": "Images HQ/Ain Sbaa/PLAN RDC.jpg",
+      "output": "images/ain-sebaa/ain-sebaa-plan-main.png",
+      "sha256": "c88edd2555ef3e87e5221cd169302fcb5ef32d2a1aaa04248bd004dc36c8c2c5",
+      "crop": null,
+      "treatment": "drawing, whole sheet (the plan fills its frame)",
+      "darkTreatment": "field",
+      "credit": "Owner's own work (D09): no third-party credit is printed on the source or on pdf2025:p39-42",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "reviewStatus": "approved",
+      "captionEvidence": "Same plan as 'PLAN RDC +0.00 BV PRINCIPALE' on pdf2025:p41"
+    },
+    {
+      "source": "Images HQ/Ain Sbaa/Coupe and facade.jpg",
+      "output": "images/ain-sebaa/ain-sebaa-facade-main.png",
+      "sha256": "c472e62676a05dc092813572693a82d271c4772cc61225d60d596a583b50c51f",
+      "crop": {
+        "x": 0,
+        "y": 190,
+        "width": 4180,
+        "height": 800
+      },
+      "treatment": "crop of the upper drawing; its printed title (y 1160-1255) left outside the crop",
+      "darkTreatment": "invert-accent",
+      "credit": "Owner's own work (D09): no third-party credit is printed on the source or on pdf2025:p39-42",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "reviewStatus": "approved",
+      "captionEvidence": "Printed title 'COUPE FACADE PRINCIPALE'; the same drawing is 'Elevation East' on pdf2025:p41"
+    },
+    {
+      "source": "Images HQ/Ain Sbaa/Coupe and facade.jpg",
+      "output": "images/ain-sebaa/ain-sebaa-facade-rear.png",
+      "sha256": "c472e62676a05dc092813572693a82d271c4772cc61225d60d596a583b50c51f",
+      "crop": {
+        "x": 0,
+        "y": 1600,
+        "width": 4180,
+        "height": 1180
+      },
+      "treatment": "crop of the lower drawing; its printed title (y 2968-3083) left outside the crop",
+      "darkTreatment": "invert-accent",
+      "credit": "Owner's own work (D09): no third-party credit is printed on the source or on pdf2025:p39-42",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "reviewStatus": "approved",
+      "captionEvidence": "Printed title 'COUPE FACADE ARRIERE'"
+    },
+    {
+      "source": "Images HQ/Ain Sbaa/COUPE AA.jpg",
+      "output": "images/ain-sebaa/ain-sebaa-section-aa.png",
+      "sha256": "accc30a6c989bc4fa4e16a3b4079e1625964b72a56836778af6d33eeb52cfbf4",
+      "crop": {
+        "x": 0,
+        "y": 0,
+        "width": 9038,
+        "height": 1100
+      },
+      "treatment": "crop above the printed title (y 1165-1255)",
+      "darkTreatment": "invert-accent",
+      "credit": "Owner's own work (D09): no third-party credit is printed on the source or on pdf2025:p39-42",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "reviewStatus": "approved",
+      "captionEvidence": "Printed title 'COUPE AA'; 'Section A-A' on pdf2025:p42"
+    },
+    {
+      "source": "Images HQ/Ain Sbaa/Structure.jpg",
+      "output": "images/ain-sebaa/ain-sebaa-structure.png",
+      "sha256": "36ff242723eb7fa132c642b269e69323cac48d33780edf5bcc77262465c9e7f5",
+      "crop": null,
+      "treatment": "drawing; four printed labels on blank paper re-set in HTML (D49)",
+      "darkTreatment": "field",
+      "credit": "Owner's own work (D09): no third-party credit is printed on the source or on pdf2025:p39-42",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "reviewStatus": "approved",
+      "captionEvidence": "Printed title 'PARTI STRUCTUREL' and labels 'Enveloppe', 'Charpente Metallique', 'Poteaux Inclinés'; the exploded structure of pdf2025:p40"
+    },
+    {
+      "source": "Images HQ/Ain Sbaa/Flux.jpg",
+      "output": "images/ain-sebaa/ain-sebaa-flows-main.png",
+      "sha256": "6224b5dc7ca7c3d9dac92b11128eba035cde77657a9be2a4cbd8edbce40b81e1",
+      "crop": {
+        "x": 0,
+        "y": 0,
+        "width": 1940,
+        "height": 2300
+      },
+      "treatment": "crop of the left diagram; the legend and title stay outside the crop and are re-set in HTML",
+      "darkTreatment": "field",
+      "credit": "Owner's own work (D09): no third-party credit is printed on the source or on pdf2025:p39-42",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "reviewStatus": "approved",
+      "captionEvidence": "Printed title 'ETUDE DES FLUX' and legend; the passenger-flow axonometric of pdf2025:p42"
+    },
+    {
+      "source": "Images HQ/Ain Sbaa/Flux.jpg",
+      "output": "images/ain-sebaa/ain-sebaa-flows-secondary.png",
+      "sha256": "6224b5dc7ca7c3d9dac92b11128eba035cde77657a9be2a4cbd8edbce40b81e1",
+      "crop": {
+        "x": 2011,
+        "y": 0,
+        "width": 1300,
+        "height": 1445
+      },
+      "treatment": "crop of the right diagram; the legend stays outside the crop and is re-set in HTML",
+      "darkTreatment": "field",
+      "credit": "Owner's own work (D09): no third-party credit is printed on the source or on pdf2025:p39-42",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "reviewStatus": "approved",
+      "captionEvidence": "Printed title 'ETUDE DES FLUX'; the secondary-building flow study of pdf2025:p40"
+    }
+  ]
+}

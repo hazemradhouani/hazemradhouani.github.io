@@ -1,0 +1,42 @@
+{
+ "src": "images/nouvelle-medina/nouvelle-medina-facade-rear.png",
+ "hash": "887091447484d627",
+ "mode": "ink",
+ "from": [
+  2556,
+  670
+ ],
+ "to": [
+  2556,
+  670
+ ],
+ "offset": [
+  0,
+  0
+ ],
+ "paper": [
+  254,
+  254,
+  254
+ ],
+ "clip": [
+  "bottom"
+ ],
+ "ink": {
+  "ink": 173863,
+  "chromaticFraction": 0.0019,
+  "midtoneFraction": 0.2561,
+  "suggest": "mono"
+ },
+ "dark": "invert-accent",
+ "keep": null,
+ "specks": 39,
+ "tile": [
+  640,
+  200,
+  640,
+  400
+ ],
+ "background": null,
+ "labels": []
+}

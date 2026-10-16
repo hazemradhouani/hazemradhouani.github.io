@@ -1,0 +1,41 @@
+{
+ "src": "images/al-arg/al-arg-site-plan-detail.jpg",
+ "hash": "f01b63bc68542d22",
+ "mode": "plate",
+ "from": [
+  1391,
+  1078
+ ],
+ "to": [
+  1391,
+  1078
+ ],
+ "offset": [
+  0,
+  0
+ ],
+ "paper": null,
+ "clip": [
+  "left",
+  "top",
+  "right",
+  "bottom"
+ ],
+ "ink": {
+  "ink": 374605,
+  "chromaticFraction": 0.0164,
+  "midtoneFraction": 0,
+  "suggest": "accent"
+ },
+ "dark": "invert-accent",
+ "keep": null,
+ "specks": 0,
+ "tile": [
+  0,
+  0,
+  640,
+  400
+ ],
+ "background": null,
+ "labels": []
+}

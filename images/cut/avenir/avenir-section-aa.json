@@ -1,0 +1,46 @@
+{
+ "src": "images/avenir/avenir-section-aa.png",
+ "hash": "680e79032eba8010",
+ "mode": "ink",
+ "from": [
+  2560,
+  1244
+ ],
+ "to": [
+  2560,
+  1244
+ ],
+ "offset": [
+  0,
+  0
+ ],
+ "paper": [
+  255,
+  255,
+  255
+ ],
+ "clip": [],
+ "ink": {
+  "ink": 161202,
+  "chromaticFraction": 0.0867,
+  "midtoneFraction": 0.7171,
+  "suggest": "colour"
+ },
+ "dark": "keep",
+ "keep": {
+  "file": "images/cut/avenir/avenir-section-aa--keep.png",
+  "share": 0.1149,
+  "radius": 4,
+  "t": 0.06,
+  "fill": false
+ },
+ "specks": 297,
+ "tile": [
+  1600,
+  400,
+  640,
+  400
+ ],
+ "background": null,
+ "labels": []
+}

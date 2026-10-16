@@ -7,7 +7,7 @@ Goal: upgrade this portfolio from a simple site to a flagship-level architecture
 Every design and content decision must serve these readers. A committee member should grasp who I am and what I do within 10 seconds of landing.
 
 ## Identity to express
-Architect specializing in heritage documentation and earthen/vernacular architecture. Strengths: survey and documentation, BIM/Revit delivery, high-end visualization (Unreal Engine, D5 Render, PBR material capture). The design language should come from this identity, not from generic developer-portfolio trends.
+Architect with project work documented in Tunisia, France and Morocco, and research experience in Japan. Strengths: architectural survey, BIM/Revit delivery, high-end visualization (Unreal Engine, D5 Render, PBR material capture), rehabilitation and infrastructure work. Heritage and earthen-architecture experience are supported project evidence, not a professional specialisation or the site's defining identity. The design language should come from this broad, documented body of work, not from generic developer-portfolio trends.
 
 ## Hard rules
 - Content truth: never invent projects, clients, awards, dates, metrics, quotes, or descriptions. Use only content already in the repo or content I provide. Mark gaps as [CONTENT NEEDED: description] and list them.

@@ -1,0 +1,539 @@
+{
+  "version": 1,
+  "sourceRoot": "Images HQ",
+  "folder": "Villneuve la garenne",
+  "assets": [
+    {
+      "source": "Images HQ/Villneuve la garenne/PC40-2_DOCUMENTS DESCRIPTIFS SECURITE INCENDIE ERP_merge [1-20]_page-0001.jpg",
+      "sha256": "3227d95fb2ffa7bb691e311fa6348ab95628e7baf1231b3e81824d44faa12ab9",
+      "width": 2482,
+      "height": 3509,
+      "projectMapping": {
+        "slug": "avenir",
+        "status": "confirmed"
+      },
+      "mappingEvidence": "The cover itself: 'Opération Rue de l'Avenir', '2 rue de l'avenir, 92000, Villeneuve-la-Garenne', 'Architecte : Studio Belem', 'PERMIS DE CONSTRUIRE', Phase 'PC'; case study avenir (D53)",
+      "visualType": "permit-file cover sheet (PC40-4) with a thumbnail render",
+      "textDisposition": "title → case-study title: 'Opération Rue de l'Avenir'; prose/fact → spec Location: '2 rue de l'avenir, 92000, Villeneuve-la-Garenne' (published as '2 rue de l'Avenir, Villeneuve-la-Garenne', postcode left out); prose/fact → spec Phase: 'PERMIS DE CONSTRUIRE', 'Phase PC', 'DATE DE L'INDICE 19/12/2025'; furniture (dropped): 'Maître d'ouvrage' and 'Représenter par' panels with the client's and its representatives' names, logos and address (not published), 'Belem 2 Rue Vicq d'Azir -75010 Paris', 'DOSSIER', 'ASSISTANT', 'MOE'; team panel (not published, the sheet is not a figure): 'AMO Paysage : Symbiose', 'AMO Environnement : ATPS', 'Architecte : Studio Belem', 'BET Structure : ECOBA', 'BET Fluides : PROGEREP', 'Bureau de contrôle : SOCOTEC', 'Economiste : PROGEREP'; 'PC40-4 Plan de situation, plans de masses et façades des constructions projetées'; cartouche PROJET 'VLG', TYPE 'PLA', ECHELLE '-', OBJET DE L'INDICE '0', LOT 'ARC', EMETTEUR 'BLM', No DOCUMENT '4040', IDENTIF. 'PC40-4'",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "The cover prints 'Architecte : Studio Belem' and the Belem logo; used only as the source of the title, address and permit stage",
+      "roleEvidence": "No personal-role statement: the case study has no role section (D53, [CONTENT NEEDED: role]); this record adds no role claim",
+      "reason": "Withheld: a cover sheet (furniture); its render is a small portrait-cropped copy (about 720 x 970 px) of the view published at full size from the materials notice (figure 2, [141-160] [11-20]_page-0005)"
+    },
+    {
+      "source": "Images HQ/Villneuve la garenne/PC40-2_DOCUMENTS DESCRIPTIFS SECURITE INCENDIE ERP_merge [1-20]_page-0002.jpg",
+      "sha256": "b29abab92906db2e0f9c72f5870945d3f2291ea7ee166fa7b7cfcf120c67d3a5",
+      "width": 4961,
+      "height": 3508,
+      "projectMapping": {
+        "slug": "avenir",
+        "status": "confirmed"
+      },
+      "mappingEvidence": "Cartouche project panel 'Villeneuve la Garenne', Emetteur 'Belem', DESSINE PAR 'BELEM', date 19/12/2025, in the same permit file whose cover titles the operation 'Opération Rue de l'Avenir, 2 rue de l'avenir, 92000, Villeneuve-la-Garenne' (Architecte : Studio Belem); case study avenir (D53)",
+      "visualType": "situation plan on an aerial photograph (PC40, 1/20000)",
+      "textDisposition": "title: 'PC40 - Dossier destiné à la vérification de la conformité aux règles de sécurité incendie', 'Plan de situation'; intrinsic: plot outlined in red, street names 'RUE DE L'AVENIR', 'AVENUE DE VERDUN' (x2); furniture (dropped): cartouche panels Maître d'ouvrage (client and its representatives' names and logos, not published), project 'Villeneuve la Garenne', T.Tech, Code ouvrage, Phase 'PC', Emetteur 'Belem', DESSINE PAR 'BELEM', RESPONSABLE, TYPE 'PLA', ECHELLE '1/20000', DATE DE L'INDICE '19/12/2025', OBJET DE L'INDICE '0', EMETTEUR 'BLM', No DOCUMENT '4041', INDICE '0', FEUILLE '1/3'; no imagery credit is printed on the photograph or the sheet (checked along its edges at 1:1)",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "The sheet is issued by Belem (cartouche), but the aerial photograph is not the studio's work and carries no credit",
+      "roleEvidence": "No personal-role statement: the case study has no role section (D53, [CONTENT NEEDED: role]); this record adds no role claim",
+      "reason": "Withheld: the base is a third-party aerial photograph with no printed credit or licence; the studio's own site plan (PC40 plan masse sécurité, [1-20]_page-0003) gives the context"
+    },
+    {
+      "source": "Images HQ/Villneuve la garenne/PC40-2_DOCUMENTS DESCRIPTIFS SECURITE INCENDIE ERP_merge [1-20]_page-0003.jpg",
+      "sha256": "35a7a4e9d847c6aedf5de1dbfa96ad70ab0e9258bd4dbad8365f5cb58b42fd25",
+      "width": 4961,
+      "height": 3508,
+      "projectMapping": {
+        "slug": "avenir",
+        "status": "confirmed"
+      },
+      "mappingEvidence": "Cartouche project panel 'Villeneuve la Garenne', Emetteur 'Belem', DESSINE PAR 'BELEM', date 19/12/2025, in the same permit file whose cover titles the operation 'Opération Rue de l'Avenir, 2 rue de l'avenir, 92000, Villeneuve-la-Garenne' (Architecte : Studio Belem); case study avenir (D53)",
+      "visualType": "drawing sheet (fire-safety site plan, 1/500)",
+      "textDisposition": "title → caption: 'PC40 - Dossier destiné à la vérification de la conformité aux règles de sécurité incendie' (Dossier for checking compliance with the fire-safety rules), 'Plan masse securité' (fire-safety site plan), scale '1/500'; legend → caption: red arrow-and-dot 'Distance borne - établissement' (hydrant-to-building distance), red dot 'Borne incendie' (fire hydrant), red triangle 'Sortie de secours' (emergency exit), green triangle 'Accès à l'établissement' (access to the establishment), cropped out; intrinsic (stays): 'Rue de l'Avenir', 'Avenue de Verdun', 'R+7' with '53,14 NGF', 'R+5' with '47,49 NGF', 'R+1' (block link and facing houses), '27,98 NGF', 'Accès Logement', 'Accès Parking', 'Sortie de secours commerce 1 UP', 'Accès Commerce 2 UP', '60,41 m'; furniture (dropped): cartouche panels Maître d'ouvrage (client and its representatives' names and logos, not published), project 'Villeneuve la Garenne', T.Tech, Code ouvrage, Phase 'PC', Emetteur 'Belem', DESSINE PAR 'BELEM', RESPONSABLE, TYPE 'FAC', ECHELLE '1/500', DATE DE L'INDICE '19/12/2025', OBJET DE L'INDICE '0', EMETTEUR 'BLM', No DOCUMENT '4042', INDICE '0', FEUILLE '2/3'",
+      "duplicateOf": null,
+      "disposition": "approved",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "Office credit only: Emetteur 'Belem' and DESSINE PAR 'BELEM' printed in the cartouche; the page states the office (Studio BELEM) and no draughtsman; the client panel is not published",
+      "roleEvidence": "No personal-role statement: the case study has no role section (D53, [CONTENT NEEDED: role]); this record adds no role claim",
+      "reason": "New: the only site plan drawn by the studio; it places the two blocks on rue de l'Avenir at the corner of avenue de Verdun with their heights and accesses"
+    },
+    {
+      "source": "Images HQ/Villneuve la garenne/PC40-2_DOCUMENTS DESCRIPTIFS SECURITE INCENDIE ERP_merge [1-20]_page-0004.jpg",
+      "sha256": "a236bcd6670f388b7c9de9a8cfe9a00fd66f0b64f9da8bf9bbc90a94f81e8699",
+      "width": 4961,
+      "height": 3508,
+      "projectMapping": {
+        "slug": "avenir",
+        "status": "confirmed"
+      },
+      "mappingEvidence": "Cartouche project panel 'Villeneuve la Garenne', Emetteur 'Belem', DESSINE PAR 'BELEM', date 19/12/2025, in the same permit file whose cover titles the operation 'Opération Rue de l'Avenir, 2 rue de l'avenir, 92000, Villeneuve-la-Garenne' (Architecte : Studio Belem); case study avenir (D53)",
+      "visualType": "drawing sheet (fire-safety elevation, 1/200)",
+      "textDisposition": "title: 'PC40 - Dossier destiné à la vérification de la conformité aux règles de sécurité incendie', 'Façade'; intrinsic: 'Limite de propriété' x2, 'Rue de l'Avenir', levels 'N0Haut +29,50 NGF' to 'NTa +52,95 NGF', access marks 'Accès SS 1 UP', 'Accès commerce 2 UP'; furniture (dropped): cartouche panels Maître d'ouvrage (client and its representatives' names and logos, not published), project 'Villeneuve la Garenne', T.Tech, Code ouvrage, Phase 'PC', Emetteur 'Belem', DESSINE PAR 'BELEM', RESPONSABLE, TYPE 'FAC', ECHELLE '1/200', DATE DE L'INDICE '19/12/2025', OBJET DE L'INDICE '0', EMETTEUR 'BLM', No DOCUMENT '4043', INDICE '0', FEUILLE '3/3' (read on a 1600 px preview; not published)",
+      "duplicateOf": "Images HQ/Villneuve la garenne/PC40-2_DOCUMENTS DESCRIPTIFS SECURITE INCENDIE ERP_merge [121-140]_page-0015.jpg",
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "Office credit only: Emetteur 'Belem' and DESSINE PAR 'BELEM' printed in the cartouche; the page states the office (Studio BELEM) and no draughtsman; the client panel is not published",
+      "roleEvidence": "No personal-role statement: the case study has no role section (D53, [CONTENT NEEDED: role]); this record adds no role claim",
+      "reason": "Withheld, duplicate: the same avenue de Verdun front as the PC5 south elevation ([121-140]_page-0015), which is published with its material codes; this copy adds only the fire-safety access marks"
+    },
+    {
+      "source": "Images HQ/Villneuve la garenne/PC40-2_DOCUMENTS DESCRIPTIFS SECURITE INCENDIE ERP_merge [1-20]_page-0008.jpg",
+      "sha256": "f093b59fe7acd9b0e31c227f9b5040dad8c5dcb7624134d71bc62f25203850ae",
+      "width": 4961,
+      "height": 3508,
+      "projectMapping": {
+        "slug": "avenir",
+        "status": "confirmed"
+      },
+      "mappingEvidence": "Cartouche project panel 'Villeneuve la Garenne', Emetteur 'Belem', DESSINE PAR 'BELEM', date 19/12/2025, in the same permit file whose cover titles the operation 'Opération Rue de l'Avenir, 2 rue de l'avenir, 92000, Villeneuve-la-Garenne' (Architecte : Studio Belem); case study avenir (D53)",
+      "visualType": "drawing sheet (basement plan SS1, 1/200)",
+      "textDisposition": "title → caption: 'ANX0 - PLAN PROJET', 'Plan SS1', scale '1/200'; intrinsic (stays): parking spaces '01' to '36', two accessible-space symbols, 'Sortie piéton principal', 'Issue de secours piéton secondaire', 'Rampe d'accès automobile', 'VB Parking' x2, 'Réserve/Technique commerce 40,91 m²', level '25,95 NGF', slope '0,7%', dimension chains; furniture (dropped): north sign; furniture (dropped): cartouche panels Maître d'ouvrage (client and its representatives' names and logos, not published), project 'Villeneuve la Garenne', T.Tech, Code ouvrage, Phase 'PC', Emetteur 'Belem', DESSINE PAR 'BELEM', RESPONSABLE, TYPE 'PLA', ECHELLE '1/200', DATE DE L'INDICE '19/12/2025', OBJET DE L'INDICE '0', EMETTEUR 'BLM', No DOCUMENT 'A-0001', INDICE '0', FEUILLE '1/9'",
+      "duplicateOf": null,
+      "disposition": "approved",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "Office credit only: Emetteur 'Belem' and DESSINE PAR 'BELEM' printed in the cartouche; the page states the office (Studio BELEM) and no draughtsman; the client panel is not published",
+      "roleEvidence": "No personal-role statement: the case study has no role section (D53, [CONTENT NEEDED: role]); this record adds no role claim",
+      "reason": "New: the basement car park under both blocks (36 numbered spaces, the ramp from rue de l'Avenir)"
+    },
+    {
+      "source": "Images HQ/Villneuve la garenne/PC40-2_DOCUMENTS DESCRIPTIFS SECURITE INCENDIE ERP_merge [1-20]_page-0009.jpg",
+      "sha256": "783f1804238f6d7c13d639764b9285e2d858744597c4027d5c311e9a46b0a017",
+      "width": 4961,
+      "height": 3508,
+      "projectMapping": {
+        "slug": "avenir",
+        "status": "confirmed"
+      },
+      "mappingEvidence": "Cartouche project panel 'Villeneuve la Garenne', Emetteur 'Belem', DESSINE PAR 'BELEM', date 19/12/2025, in the same permit file whose cover titles the operation 'Opération Rue de l'Avenir, 2 rue de l'avenir, 92000, Villeneuve-la-Garenne' (Architecte : Studio Belem); case study avenir (D53)",
+      "visualType": "drawing sheet (raised ground-floor plan N0H, 1/200)",
+      "textDisposition": "title → caption: 'ANX0 - PLAN PROJET', 'Plan N0H', scale '1/200'; intrinsic (stays): 'Rue de l'Avenir', 'Local commercial 95,76 m²', 'Commerce', 'Sortie de secours commerce', 'Local RCU 31,27 m²', 'LT 13,01 m²', 'LT 6,00 m²', 'Local TGBT 4,06 m²', 'Local OM 14,07 m²', 'Sas 14,19 m²', 'Local poussette 8,15 m²', 'Accès piéton aux logements', 'Accès Logement A', 'Accès Logement B', '20 Vélos', '60 Vélos', 'Local encombrant 12,01 m²', 'Local OM 15,02 m²', 'Sas 6,49 m²', 'Circulation commune 16,63 m²', 'Local poussette 4,87 m²', 'Accès entretien', 'Accès parking', 'Accès vélo', 'Transfo RDC', flats 'A01 T2 / 48,31 m²', 'B01 T2 / 53,45 m²', 'B02 T1 / 28,40 m²', 'B03 T1 / 28,40 m²', 'B04 T3 / 63,43 m²' with room names and areas (Séjour+Cuisine, Chambre, Couloir, SDB, WC), levels '28,00 NGF', '27,98 NGF', '29,50 NGF', ramp '9,4%', dimension chains; furniture (dropped): north sign; furniture (dropped): cartouche panels Maître d'ouvrage (client and its representatives' names and logos, not published), project 'Villeneuve la Garenne', T.Tech, Code ouvrage, Phase 'PC', Emetteur 'Belem', DESSINE PAR 'BELEM', RESPONSABLE, TYPE 'PLA', ECHELLE '1/200', DATE DE L'INDICE '19/12/2025', OBJET DE L'INDICE '0', EMETTEUR 'BLM', No DOCUMENT 'A-0002', INDICE '0', FEUILLE '2/9'",
+      "duplicateOf": null,
+      "disposition": "approved",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "Office credit only: Emetteur 'Belem' and DESSINE PAR 'BELEM' printed in the cartouche; the page states the office (Studio BELEM) and no draughtsman; the client panel is not published",
+      "roleEvidence": "No personal-role statement: the case study has no role section (D53, [CONTENT NEEDED: role]); this record adds no role claim",
+      "reason": "New: the raised ground floor, the level at which the shop, the residential halls, the bicycle stores and the car-park ramp meet the street"
+    },
+    {
+      "source": "Images HQ/Villneuve la garenne/PC40-2_DOCUMENTS DESCRIPTIFS SECURITE INCENDIE ERP_merge [1-20]_page-0010.jpg",
+      "sha256": "3ebbecd657b47bf734521088a607f433d84dcaa8257a0da443e648f49689b975",
+      "width": 4961,
+      "height": 3508,
+      "projectMapping": {
+        "slug": "avenir",
+        "status": "confirmed"
+      },
+      "mappingEvidence": "Cartouche project panel 'Villeneuve la Garenne', Emetteur 'Belem', DESSINE PAR 'BELEM', date 19/12/2025, in the same permit file whose cover titles the operation 'Opération Rue de l'Avenir, 2 rue de l'avenir, 92000, Villeneuve-la-Garenne' (Architecte : Studio Belem); case study avenir (D53)",
+      "visualType": "drawing sheet (level plan N01, 1/200)",
+      "textDisposition": "title → caption: 'ANX0 - PLAN PROJET', 'PLAN N01', scale '1/200'; intrinsic (stays): flats 'A11'-'A14' and 'B11'-'B16' with types and areas, room names and areas (Séjour+Cuisine, Chambre, Couloir, SDB, SDE, WC, Circulation commune), 'Accès entretien', dimension chains, dashed plot line; furniture (dropped): north sign; furniture (dropped): cartouche panels Maître d'ouvrage (client and its representatives' names and logos, not published), project 'Villeneuve la Garenne', T.Tech, Code ouvrage, Phase 'PC', Emetteur 'Belem', DESSINE PAR 'BELEM', RESPONSABLE, TYPE 'PLA', ECHELLE '1/200', DATE DE L'INDICE '19/12/2025', OBJET DE L'INDICE '0', EMETTEUR 'BLM', No DOCUMENT 'A-0003', INDICE '0', FEUILLE '3/9'",
+      "duplicateOf": null,
+      "disposition": "approved",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "Office credit only: Emetteur 'Belem' and DESSINE PAR 'BELEM' printed in the cartouche; the page states the office (Studio BELEM) and no draughtsman; the client panel is not published",
+      "roleEvidence": "No personal-role statement: the case study has no role section (D53, [CONTENT NEEDED: role]); this record adds no role claim",
+      "reason": "New: the first residential level of both blocks, the typical layout of the lower floors"
+    },
+    {
+      "source": "Images HQ/Villneuve la garenne/PC40-2_DOCUMENTS DESCRIPTIFS SECURITE INCENDIE ERP_merge [1-20]_page-0011.jpg",
+      "sha256": "2c6fd39fdd34a118b0626b0e8a1a348040a40e3ad0c29b90dba793f68ae4ffea",
+      "width": 4961,
+      "height": 3508,
+      "projectMapping": {
+        "slug": "avenir",
+        "status": "confirmed"
+      },
+      "mappingEvidence": "Cartouche project panel 'Villeneuve la Garenne', Emetteur 'Belem', DESSINE PAR 'BELEM', date 19/12/2025, in the same permit file whose cover titles the operation 'Opération Rue de l'Avenir, 2 rue de l'avenir, 92000, Villeneuve-la-Garenne' (Architecte : Studio Belem); case study avenir (D53)",
+      "visualType": "drawing sheet (level plan N02, 1/200)",
+      "textDisposition": "title: 'ANX0 - PLAN PROJET', 'Plan N02'; intrinsic: flats 'A21'-'A24', 'B21'-'B24' with room names and areas; furniture (dropped): cartouche panels Maître d'ouvrage (client and its representatives' names and logos, not published), project 'Villeneuve la Garenne', T.Tech, Code ouvrage, Phase 'PC', Emetteur 'Belem', DESSINE PAR 'BELEM', RESPONSABLE, TYPE 'PLA', ECHELLE '1/200', DATE DE L'INDICE '19/12/2025', OBJET DE L'INDICE '0', EMETTEUR 'BLM', No DOCUMENT 'A-0004', INDICE '0', FEUILLE '4/9' (read on a 1600 px preview; not published)",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "Office credit only: Emetteur 'Belem' and DESSINE PAR 'BELEM' printed in the cartouche; the page states the office (Studio BELEM) and no draughtsman; the client panel is not published",
+      "roleEvidence": "No personal-role statement: the case study has no role section (D53, [CONTENT NEEDED: role]); this record adds no role claim",
+      "reason": "Withheld, low added value: block A repeats N01 room for room; block B differs only in its flat mix; the stacking is shown by sections AA and EE"
+    },
+    {
+      "source": "Images HQ/Villneuve la garenne/PC40-2_DOCUMENTS DESCRIPTIFS SECURITE INCENDIE ERP_merge [1-20]_page-0012.jpg",
+      "sha256": "8b36f674a2c7572000529b22a83025f8d2b9d52db41b02a515a8168de9f9f271",
+      "width": 4961,
+      "height": 3508,
+      "projectMapping": {
+        "slug": "avenir",
+        "status": "confirmed"
+      },
+      "mappingEvidence": "Cartouche project panel 'Villeneuve la Garenne', Emetteur 'Belem', DESSINE PAR 'BELEM', date 19/12/2025, in the same permit file whose cover titles the operation 'Opération Rue de l'Avenir, 2 rue de l'avenir, 92000, Villeneuve-la-Garenne' (Architecte : Studio Belem); case study avenir (D53)",
+      "visualType": "drawing sheet (level plan N03, 1/200)",
+      "textDisposition": "title: 'ANX0 - PLAN PROJET', 'Plan N03'; intrinsic: flats 'A31'-'A34', 'B31'-'B34' with room names and areas; furniture (dropped): cartouche panels Maître d'ouvrage (client and its representatives' names and logos, not published), project 'Villeneuve la Garenne', T.Tech, Code ouvrage, Phase 'PC', Emetteur 'Belem', DESSINE PAR 'BELEM', RESPONSABLE, TYPE 'PLA', ECHELLE '1/200', DATE DE L'INDICE '19/12/2025', OBJET DE L'INDICE '0', EMETTEUR 'BLM', No DOCUMENT 'A-0005', INDICE '0', FEUILLE '5/9' (read on a 1600 px preview; not published)",
+      "duplicateOf": "Images HQ/Villneuve la garenne/PC40-2_DOCUMENTS DESCRIPTIFS SECURITE INCENDIE ERP_merge [1-20]_page-0011.jpg",
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "Office credit only: Emetteur 'Belem' and DESSINE PAR 'BELEM' printed in the cartouche; the page states the office (Studio BELEM) and no draughtsman; the client panel is not published",
+      "roleEvidence": "No personal-role statement: the case study has no role section (D53, [CONTENT NEEDED: role]); this record adds no role claim",
+      "reason": "Withheld, duplicate: the same layout as N02"
+    },
+    {
+      "source": "Images HQ/Villneuve la garenne/PC40-2_DOCUMENTS DESCRIPTIFS SECURITE INCENDIE ERP_merge [1-20]_page-0013.jpg",
+      "sha256": "385bbb298c8d4caae23f360a5a0a87a7316835d141757a0a2cad28dbb5041d8d",
+      "width": 4961,
+      "height": 3508,
+      "projectMapping": {
+        "slug": "avenir",
+        "status": "confirmed"
+      },
+      "mappingEvidence": "Cartouche project panel 'Villeneuve la Garenne', Emetteur 'Belem', DESSINE PAR 'BELEM', date 19/12/2025, in the same permit file whose cover titles the operation 'Opération Rue de l'Avenir, 2 rue de l'avenir, 92000, Villeneuve-la-Garenne' (Architecte : Studio Belem); case study avenir (D53)",
+      "visualType": "drawing sheet (level plan N04, 1/200)",
+      "textDisposition": "title: 'ANX0 - PLAN PROJET', 'Plan N04'; intrinsic: flats 'A41'-'A44', 'B41' (T4) and 'B42' (T5) with room names and areas, terraces; furniture (dropped): cartouche panels Maître d'ouvrage (client and its representatives' names and logos, not published), project 'Villeneuve la Garenne', T.Tech, Code ouvrage, Phase 'PC', Emetteur 'Belem', DESSINE PAR 'BELEM', RESPONSABLE, TYPE 'PLA', ECHELLE '1/200', DATE DE L'INDICE '19/12/2025', OBJET DE L'INDICE '0', EMETTEUR 'BLM', No DOCUMENT 'A-0006', INDICE '0', FEUILLE '6/9' (read on a 1600 px preview; not published)",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "Office credit only: Emetteur 'Belem' and DESSINE PAR 'BELEM' printed in the cartouche; the page states the office (Studio BELEM) and no draughtsman; the client panel is not published",
+      "roleEvidence": "No personal-role statement: the case study has no role section (D53, [CONTENT NEEDED: role]); this record adds no role claim",
+      "reason": "Withheld, low added value: the set-back upper floor of block B, whose terraces are shown in section AA and the west elevation"
+    },
+    {
+      "source": "Images HQ/Villneuve la garenne/PC40-2_DOCUMENTS DESCRIPTIFS SECURITE INCENDIE ERP_merge [1-20]_page-0014.jpg",
+      "sha256": "6a663e3ba8b423beb211458b6834f632993d662b5216ea80359a4ce48fc6df24",
+      "width": 4961,
+      "height": 3508,
+      "projectMapping": {
+        "slug": "avenir",
+        "status": "confirmed"
+      },
+      "mappingEvidence": "Cartouche project panel 'Villeneuve la Garenne', Emetteur 'Belem', DESSINE PAR 'BELEM', date 19/12/2025, in the same permit file whose cover titles the operation 'Opération Rue de l'Avenir, 2 rue de l'avenir, 92000, Villeneuve-la-Garenne' (Architecte : Studio Belem); case study avenir (D53)",
+      "visualType": "drawing sheet (level plan N05, 1/200)",
+      "textDisposition": "title: 'ANX0 - PLAN PROJET', 'Plan N05'; intrinsic: flats 'A51'-'A54', 'B51', 'B52' with room names and areas; furniture (dropped): cartouche panels Maître d'ouvrage (client and its representatives' names and logos, not published), project 'Villeneuve la Garenne', T.Tech, Code ouvrage, Phase 'PC', Emetteur 'Belem', DESSINE PAR 'BELEM', RESPONSABLE, TYPE 'PLA', ECHELLE '1/200', DATE DE L'INDICE '19/12/2025', OBJET DE L'INDICE '0', EMETTEUR 'BLM', No DOCUMENT 'A-0007', INDICE '0', FEUILLE '7/9' (read on a 1600 px preview; not published)",
+      "duplicateOf": "Images HQ/Villneuve la garenne/PC40-2_DOCUMENTS DESCRIPTIFS SECURITE INCENDIE ERP_merge [1-20]_page-0013.jpg",
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "Office credit only: Emetteur 'Belem' and DESSINE PAR 'BELEM' printed in the cartouche; the page states the office (Studio BELEM) and no draughtsman; the client panel is not published",
+      "roleEvidence": "No personal-role statement: the case study has no role section (D53, [CONTENT NEEDED: role]); this record adds no role claim",
+      "reason": "Withheld, duplicate: the same layout as N04"
+    },
+    {
+      "source": "Images HQ/Villneuve la garenne/PC40-2_DOCUMENTS DESCRIPTIFS SECURITE INCENDIE ERP_merge [1-20]_page-0015.jpg",
+      "sha256": "2119415b84d85f13ef04737fd46390ef5825172899a58ed28191897389c095a0",
+      "width": 4966,
+      "height": 3508,
+      "projectMapping": {
+        "slug": "avenir",
+        "status": "confirmed"
+      },
+      "mappingEvidence": "Cartouche project panel 'Villeneuve la Garenne', Emetteur 'Belem', DESSINE PAR 'BELEM', date 19/12/2025, in the same permit file whose cover titles the operation 'Opération Rue de l'Avenir, 2 rue de l'avenir, 92000, Villeneuve-la-Garenne' (Architecte : Studio Belem); case study avenir (D53)",
+      "visualType": "drawing sheet (level plan N06, 1/200, provisional)",
+      "textDisposition": "title: 'ANX0 - PLAN PROJET', 'Plan N06'; stamps 'DOCUMENT PROVISOIRE' and 'WIP 19/12/2025 16:13:50'; intrinsic: flats 'A61', 'A62' (T4) with room names and areas, roof of block B; furniture: cartouche with a different client representative's logo (not published), FEUILLE '8/9', No DOCUMENT 'A-0008' (read on a 1600 px preview; not published)",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "Office credit only: Emetteur 'Belem' and DESSINE PAR 'BELEM' printed in the cartouche; the page states the office (Studio BELEM) and no draughtsman; the client panel is not published",
+      "roleEvidence": "No personal-role statement: the case study has no role section (D53, [CONTENT NEEDED: role]); this record adds no role claim",
+      "reason": "Withheld: stamped 'DOCUMENT PROVISOIRE' and 'WIP'; N07 shows the same top-floor layout on a final sheet"
+    },
+    {
+      "source": "Images HQ/Villneuve la garenne/PC40-2_DOCUMENTS DESCRIPTIFS SECURITE INCENDIE ERP_merge [1-20]_page-0016.jpg",
+      "sha256": "dfa30aa43fa31057c744fd83192c2830387bbb782875850f9d4eb03978acf909",
+      "width": 4961,
+      "height": 3508,
+      "projectMapping": {
+        "slug": "avenir",
+        "status": "confirmed"
+      },
+      "mappingEvidence": "Cartouche project panel 'Villeneuve la Garenne', Emetteur 'Belem', DESSINE PAR 'BELEM', date 19/12/2025, in the same permit file whose cover titles the operation 'Opération Rue de l'Avenir, 2 rue de l'avenir, 92000, Villeneuve-la-Garenne' (Architecte : Studio Belem); case study avenir (D53)",
+      "visualType": "drawing sheet (level plan N07, 1/200)",
+      "textDisposition": "title → caption: 'ANX0 - PLAN PROJET', 'Plan N07', scale '1/200'; intrinsic (stays): flats 'A71', 'A72' (T4) with room names and areas (Séjour+Cuisine, Chambre, Couloir, SDB, SDE, WC, Circulation commune), the roof of block B with its planted areas and roof outlets, dimension chains, dashed plot line; furniture (dropped): north sign; furniture (dropped): cartouche panels Maître d'ouvrage (client and its representatives' names and logos, not published), project 'Villeneuve la Garenne', T.Tech, Code ouvrage, Phase 'PC', Emetteur 'Belem', DESSINE PAR 'BELEM', RESPONSABLE, TYPE 'PLA', ECHELLE '1/200', DATE DE L'INDICE '19/12/2025', OBJET DE L'INDICE '0', EMETTEUR 'BLM', No DOCUMENT 'A-0009', INDICE '0', FEUILLE '9/9'",
+      "duplicateOf": null,
+      "disposition": "approved",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "Office credit only: Emetteur 'Belem' and DESSINE PAR 'BELEM' printed in the cartouche; the page states the office (Studio BELEM) and no draughtsman; the client panel is not published",
+      "roleEvidence": "No personal-role statement: the case study has no role section (D53, [CONTENT NEEDED: role]); this record adds no role claim",
+      "reason": "New: the top floor of the corner block beside the planted roof of the lower block"
+    },
+    {
+      "source": "Images HQ/Villneuve la garenne/PC40-2_DOCUMENTS DESCRIPTIFS SECURITE INCENDIE ERP_merge [101-120]_page-0009.jpg",
+      "sha256": "2a9fec5994d7354d23457106706057af0765e62ca4e9619a785e170271bbbf97",
+      "width": 4961,
+      "height": 3508,
+      "projectMapping": {
+        "slug": "avenir",
+        "status": "confirmed"
+      },
+      "mappingEvidence": "Cartouche project panel 'Villeneuve la Garenne', Emetteur 'Belem', DESSINE PAR 'BELEM', date 19/12/2025, in the same permit file whose cover titles the operation 'Opération Rue de l'Avenir, 2 rue de l'avenir, 92000, Villeneuve-la-Garenne' (Architecte : Studio Belem); case study avenir (D53)",
+      "visualType": "drawing sheet (longitudinal section AA, 1/200)",
+      "textDisposition": "title → caption: 'PC3 - PLANS DE COUPE DU TERRAIN AVEC IMPLANTATION DU PROJET' (Site sections with the project in place), 'Coupe longitudinale AA', scale '1/200'; intrinsic (stays): 'Avenue de Verdun', 'Limite de propriété' x2, unit labels 'A11'-'A72', 'B04'-'B51', 'LT', 'Local commercial', levels 'SS1 +25,95 NGF', '25,90 NGF', '27.98', '28,00 NGF', 'N0Haut +29,50 NGF', 'N1a +32,95' to 'NTa +52,95 NGF', 'N1b +32,95' to 'NTb +47,55 NGF', dimension '67,52' and storey heights; furniture (dropped): key plan with the cut line; furniture (dropped): cartouche panels Maître d'ouvrage (client and its representatives' names and logos, not published), project 'Villeneuve la Garenne', T.Tech, Code ouvrage, Phase 'PC', Emetteur 'Belem', DESSINE PAR 'BELEM', RESPONSABLE, TYPE 'COU', ECHELLE '1/200', DATE DE L'INDICE '19/12/2025', OBJET DE L'INDICE '0', EMETTEUR 'BLM', No DOCUMENT '0301', INDICE '0', FEUILLE '1/5'",
+      "duplicateOf": null,
+      "disposition": "approved",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "Office credit only: Emetteur 'Belem' and DESSINE PAR 'BELEM' printed in the cartouche; the page states the office (Studio BELEM) and no draughtsman; the client panel is not published",
+      "roleEvidence": "No personal-role statement: the case study has no role section (D53, [CONTENT NEEDED: role]); this record adds no role claim",
+      "reason": "New: the only section through both blocks, the courtyard between them and the shared basement"
+    },
+    {
+      "source": "Images HQ/Villneuve la garenne/PC40-2_DOCUMENTS DESCRIPTIFS SECURITE INCENDIE ERP_merge [101-120]_page-0010.jpg",
+      "sha256": "b14fa44eea38d66bf094c7970e70e597a2722fb9b8930d5d446f52892b80cf67",
+      "width": 4961,
+      "height": 3508,
+      "projectMapping": {
+        "slug": "avenir",
+        "status": "confirmed"
+      },
+      "mappingEvidence": "Cartouche project panel 'Villeneuve la Garenne', Emetteur 'Belem', DESSINE PAR 'BELEM', date 19/12/2025, in the same permit file whose cover titles the operation 'Opération Rue de l'Avenir, 2 rue de l'avenir, 92000, Villeneuve-la-Garenne' (Architecte : Studio Belem); case study avenir (D53)",
+      "visualType": "drawing sheet (longitudinal section BB, 1/200)",
+      "textDisposition": "title: 'PC3 - PLANS DE COUPE DU TERRAIN AVEC IMPLANTATION DU PROJET', 'Coupe longitudinale BB'; intrinsic: 'Avenue de Verdun', 'Limite de propriété' x2, 'Commerce', unit labels, levels as section AA, '27,98 NGF', '28,00 NGF'; furniture (dropped): cartouche panels Maître d'ouvrage (client and its representatives' names and logos, not published), project 'Villeneuve la Garenne', T.Tech, Code ouvrage, Phase 'PC', Emetteur 'Belem', DESSINE PAR 'BELEM', RESPONSABLE, TYPE 'COU', ECHELLE '1/200', DATE DE L'INDICE '19/12/2025', OBJET DE L'INDICE '0', EMETTEUR 'BLM', No DOCUMENT '0302', INDICE '0', FEUILLE '2/5' (read on a 1600 px preview; not published)",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "Office credit only: Emetteur 'Belem' and DESSINE PAR 'BELEM' printed in the cartouche; the page states the office (Studio BELEM) and no draughtsman; the client panel is not published",
+      "roleEvidence": "No personal-role statement: the case study has no role section (D53, [CONTENT NEEDED: role]); this record adds no role claim",
+      "reason": "Withheld, low added value: a second cut along the same blocks; section AA shows the same levels, both blocks and the basement"
+    },
+    {
+      "source": "Images HQ/Villneuve la garenne/PC40-2_DOCUMENTS DESCRIPTIFS SECURITE INCENDIE ERP_merge [101-120]_page-0011.jpg",
+      "sha256": "0a8fa355305454f192a2693a824f3618a92d6551af64cbaae3977dd3878768d7",
+      "width": 4961,
+      "height": 3508,
+      "projectMapping": {
+        "slug": "avenir",
+        "status": "confirmed"
+      },
+      "mappingEvidence": "Cartouche project panel 'Villeneuve la Garenne', Emetteur 'Belem', DESSINE PAR 'BELEM', date 19/12/2025, in the same permit file whose cover titles the operation 'Opération Rue de l'Avenir, 2 rue de l'avenir, 92000, Villeneuve-la-Garenne' (Architecte : Studio Belem); case study avenir (D53)",
+      "visualType": "drawing sheet (section CC, 1/200)",
+      "textDisposition": "title: 'PC3 - PLANS DE COUPE DU TERRAIN AVEC IMPLANTATION DU PROJET', 'Coupe longitudinale CC'; intrinsic: 'Rue de l'Avenir', 'Limite de propriété' x2, units 'B03'-'B52', levels 'SS1 +25,95' to 'NTb +47,55 NGF', 'NIVEAU TROTTOIR +27,98 NGF'; furniture (dropped): cartouche panels Maître d'ouvrage (client and its representatives' names and logos, not published), project 'Villeneuve la Garenne', T.Tech, Code ouvrage, Phase 'PC', Emetteur 'Belem', DESSINE PAR 'BELEM', RESPONSABLE, TYPE 'COU', ECHELLE '1/200', DATE DE L'INDICE '19/12/2025', OBJET DE L'INDICE '0', EMETTEUR 'BLM', No DOCUMENT '0303', INDICE '0', FEUILLE '3/5' (read on a 1600 px preview; not published)",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "Office credit only: Emetteur 'Belem' and DESSINE PAR 'BELEM' printed in the cartouche; the page states the office (Studio BELEM) and no draughtsman; the client panel is not published",
+      "roleEvidence": "No personal-role statement: the case study has no role section (D53, [CONTENT NEEDED: role]); this record adds no role claim",
+      "reason": "Withheld, low added value: a cross-cut through block B; section EE shows the same plinth, ground and basement relation through block A, and section AA block B's levels"
+    },
+    {
+      "source": "Images HQ/Villneuve la garenne/PC40-2_DOCUMENTS DESCRIPTIFS SECURITE INCENDIE ERP_merge [101-120]_page-0012.jpg",
+      "sha256": "8922500c7bf884f6e4c4676809c724269a144b46403dcc51e4d2525a1b65b9f9",
+      "width": 4961,
+      "height": 3508,
+      "projectMapping": {
+        "slug": "avenir",
+        "status": "confirmed"
+      },
+      "mappingEvidence": "Cartouche project panel 'Villeneuve la Garenne', Emetteur 'Belem', DESSINE PAR 'BELEM', date 19/12/2025, in the same permit file whose cover titles the operation 'Opération Rue de l'Avenir, 2 rue de l'avenir, 92000, Villeneuve-la-Garenne' (Architecte : Studio Belem); case study avenir (D53)",
+      "visualType": "drawing sheet (cross-section DD, 1/200)",
+      "textDisposition": "title: 'PC3 - PLANS DE COUPE DU TERRAIN AVEC IMPLANTATION DU PROJET', 'Coupe transversale DD'; intrinsic: 'Rue de l'Avenir', 'Limite de propriété' x2, 'Transfo voisin', units 'A01'-'A71', 'SAS', 'LT OM', 'Local TGBT', 'Local Fibre', 'Réserve technique / commerce', levels 'SS1 +25,95' to 'NTa +52,95 NGF'; furniture (dropped): cartouche panels Maître d'ouvrage (client and its representatives' names and logos, not published), project 'Villeneuve la Garenne', T.Tech, Code ouvrage, Phase 'PC', Emetteur 'Belem', DESSINE PAR 'BELEM', RESPONSABLE, TYPE 'COU', ECHELLE '1/200', DATE DE L'INDICE '19/12/2025', OBJET DE L'INDICE '0', EMETTEUR 'BLM', No DOCUMENT '0304', INDICE '0', FEUILLE '4/5' (read on a 1600 px preview; not published)",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "Office credit only: Emetteur 'Belem' and DESSINE PAR 'BELEM' printed in the cartouche; the page states the office (Studio BELEM) and no draughtsman; the client panel is not published",
+      "roleEvidence": "No personal-role statement: the case study has no role section (D53, [CONTENT NEEDED: role]); this record adds no role claim",
+      "reason": "Withheld, low added value: the same block and levels as section EE, which also shows the natural ground, the raised plinth and the stair to the covered passage"
+    },
+    {
+      "source": "Images HQ/Villneuve la garenne/PC40-2_DOCUMENTS DESCRIPTIFS SECURITE INCENDIE ERP_merge [101-120]_page-0013.jpg",
+      "sha256": "63792469b5a178e42279da8104b7200af7210cee87a1824b9aaed84131f925fe",
+      "width": 4961,
+      "height": 3508,
+      "projectMapping": {
+        "slug": "avenir",
+        "status": "confirmed"
+      },
+      "mappingEvidence": "Cartouche project panel 'Villeneuve la Garenne', Emetteur 'Belem', DESSINE PAR 'BELEM', date 19/12/2025, in the same permit file whose cover titles the operation 'Opération Rue de l'Avenir, 2 rue de l'avenir, 92000, Villeneuve-la-Garenne' (Architecte : Studio Belem); case study avenir (D53)",
+      "visualType": "drawing sheet (cross-section EE, 1/200)",
+      "textDisposition": "title → caption: 'PC3 - PLANS DE COUPE DU TERRAIN AVEC IMPLANTATION DU PROJET', 'Coupe transversale EE', scale '1/200'; intrinsic (stays): 'Rue de l'Avenir', 'Limite de propriété' x2, 'Transfo voisin', 'N VOISIN +29.82 NGF', 'NIV SOL NATUREL +27.98 NGF', 'N0Haut +29,50 NGF', 'SS1 +25,95 NGF', levels 'N1a +32,95' to 'NTa +52,95 NGF', dimensions; furniture (dropped): key plan with the cut line; furniture (dropped): cartouche panels Maître d'ouvrage (client and its representatives' names and logos, not published), project 'Villeneuve la Garenne', T.Tech, Code ouvrage, Phase 'PC', Emetteur 'Belem', DESSINE PAR 'BELEM', RESPONSABLE, TYPE 'COU', ECHELLE '1/200', DATE DE L'INDICE '19/12/2025', OBJET DE L'INDICE '0', EMETTEUR 'BLM', No DOCUMENT '0305', INDICE '0', FEUILLE '5/5'",
+      "duplicateOf": null,
+      "disposition": "approved",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "Office credit only: Emetteur 'Belem' and DESSINE PAR 'BELEM' printed in the cartouche; the page states the office (Studio BELEM) and no draughtsman; the client panel is not published",
+      "roleEvidence": "No personal-role statement: the case study has no role section (D53, [CONTENT NEEDED: role]); this record adds no role claim",
+      "reason": "New: the cross-section that shows the plinth raised above natural ground (+27.98 to +29.50 NGF) over the basement, the planters and the spiral stair"
+    },
+    {
+      "source": "Images HQ/Villneuve la garenne/PC40-2_DOCUMENTS DESCRIPTIFS SECURITE INCENDIE ERP_merge [121-140]_page-0001.jpg",
+      "sha256": "029c2ee8808924a8d01678bc5077469f1fd334febbbf822f7d7c713032627eb1",
+      "width": 2481,
+      "height": 3508,
+      "projectMapping": {
+        "slug": "avenir",
+        "status": "confirmed"
+      },
+      "mappingEvidence": "Page header 'STUDIO BELEM' / 'RUE DE L'AVENIR' and footer code 'BLM -VLG- DPC' (the VLG project code of the permit sheets); case study avenir (D53)",
+      "visualType": "notice page with two renders (architectural notice, page 8)",
+      "textDisposition": "prose/fact → narrative (translated, D17): 'La contrainte réglementaire liée au PPRI impose une surélévation générale du bâtiment jusqu'à la cote 29,5 NGF, soit environ 1,6 m au-dessus du terrain naturel. Cette obligation est transformée en atout architectural grâce à la création d'un socle en brique appareillée et ajourée, permettant d'asseoir les deux plots. Ce socle, composé de deux murets décalés, accueille une jardinière continue : la rue se trouve ainsi partiellement végétalisée, à hauteur des passants. Sur ce socle s'organisent les usages actifs du rez-de-chaussée haut, au sein d'un préau largement ouvert sur l'espace public et reliant les deux plots. Un parking, semi-enterré, se situe sous le socle à environ 2.0 mètres sous le terrain naturel.' and 'Un commerce, implanté au niveau du sol naturel, occupe la partie Sud du plot A, à l'angle de l'avenue de Verdun et de la rue de l'Avenir.'; title → caption: 'FIGURE 6. VUE DES JARDINIÈRES DEPUIS L'AVENUE DE VERDUN.', 'FIGURE 7. VUE DU COMMERCE DEPUIS L'AVENUE DE VERDUN.'; intrinsic (rendered, stays): awning names 'EPICERIE', 'VINS', 'THE'; furniture (dropped): header 'STUDIO BELEM', 'RUE DE L'AVENIR', footer 'PC 4 - BLM -VLG- DPC - NOTICE ARCHITECTURALE', page number '8'",
+      "duplicateOf": null,
+      "disposition": "approved",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "Office credit only: the page header 'STUDIO BELEM'; the page credits the render to Studio BELEM and names no individual",
+      "roleEvidence": "No personal-role statement: the case study has no role section (D53, [CONTENT NEEDED: role]); this record adds no role claim",
+      "reason": "New: two renders at street level (figures 6 and 7), split into two outputs; the page's prose is the source of the narrative"
+    },
+    {
+      "source": "Images HQ/Villneuve la garenne/PC40-2_DOCUMENTS DESCRIPTIFS SECURITE INCENDIE ERP_merge [121-140]_page-0013.jpg",
+      "sha256": "65182e17fbd1ffbd178f462b6eb2fe07ee2aed6ba8930232ac115ed052b1c96b",
+      "width": 4961,
+      "height": 3508,
+      "projectMapping": {
+        "slug": "avenir",
+        "status": "confirmed"
+      },
+      "mappingEvidence": "Cartouche project panel 'Villeneuve la Garenne', Emetteur 'Belem', DESSINE PAR 'BELEM', date 19/12/2025, in the same permit file whose cover titles the operation 'Opération Rue de l'Avenir, 2 rue de l'avenir, 92000, Villeneuve-la-Garenne' (Architecte : Studio Belem); case study avenir (D53)",
+      "visualType": "drawing sheet (east elevation, 1/200)",
+      "textDisposition": "title: 'PC5 - PLANS DE FACADES ET TOITURES', 'Élévation est'; intrinsic: 'Avenue de Verdun', 'Limite de propriété' x2, 'Accès vélo', codes M1-M7, levels; legend M1-M7 as on the west elevation; furniture (dropped): cartouche panels Maître d'ouvrage (client and its representatives' names and logos, not published), project 'Villeneuve la Garenne', T.Tech, Code ouvrage, Phase 'PC', Emetteur 'Belem', DESSINE PAR 'BELEM', RESPONSABLE, TYPE 'FAC', ECHELLE '1/200', DATE DE L'INDICE '19/12/2025', OBJET DE L'INDICE '0', EMETTEUR 'BLM', No DOCUMENT '0501', INDICE '0', FEUILLE '1/7' (read on a 1600 px preview; not published)",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "Office credit only: Emetteur 'Belem' and DESSINE PAR 'BELEM' printed in the cartouche; the page states the office (Studio BELEM) and no draughtsman; the client panel is not published",
+      "roleEvidence": "No personal-role statement: the case study has no role section (D53, [CONTENT NEEDED: role]); this record adds no role claim",
+      "reason": "Withheld, low added value: the garden side of the same two blocks, with the same materials and levels as the west elevation, which is published as the street front"
+    },
+    {
+      "source": "Images HQ/Villneuve la garenne/PC40-2_DOCUMENTS DESCRIPTIFS SECURITE INCENDIE ERP_merge [121-140]_page-0014.jpg",
+      "sha256": "2d8e121faa6bcbb07ee67792733c501bdaf287776ace79755aa0e628bc594022",
+      "width": 4961,
+      "height": 3508,
+      "projectMapping": {
+        "slug": "avenir",
+        "status": "confirmed"
+      },
+      "mappingEvidence": "Cartouche project panel 'Villeneuve la Garenne', Emetteur 'Belem', DESSINE PAR 'BELEM', date 19/12/2025, in the same permit file whose cover titles the operation 'Opération Rue de l'Avenir, 2 rue de l'avenir, 92000, Villeneuve-la-Garenne' (Architecte : Studio Belem); case study avenir (D53)",
+      "visualType": "drawing sheet (west elevation, 1/200)",
+      "textDisposition": "title → caption: 'PC5 - PLANS DE FACADES ET TOITURES' (Elevation and roof plans), 'Élévation ouest', scale '1/200'; legend → caption (cropped out but for the top 11 px of the M1 bubble): 'M1 Menuiseries en bois', 'M2 Béton bas carbone teinté dans la masse, teinte beige claire', 'M3 Briques de verre', 'M4 Brique pleine', 'M5 Serrurerie en métal thermolaqué, brune \" mocha \"', 'M6 Jardinière', 'M7 Plaquette de parement beige clair'; intrinsic (stays): 'Limite de propriété' x2, codes 'M1'-'M7' on leader lines, access labels 'Accès vélo', 'Accès parking', 'Sortie de secours piétons', 'Accès piéton aux logements', levels 'NIV SOL NATUREL +27,98 NGF', 'SS1 +25,95 NGF', 'N0Haut +29,50 NGF', 'N1a/N1b +32,95' to 'NTa +52,95 NGF' and 'NTb +47,55 NGF', dimensions '67,52', storey heights; furniture (dropped): key plan; furniture (dropped): cartouche panels Maître d'ouvrage (client and its representatives' names and logos, not published), project 'Villeneuve la Garenne', T.Tech, Code ouvrage, Phase 'PC', Emetteur 'Belem', DESSINE PAR 'BELEM', RESPONSABLE, TYPE 'FAC', ECHELLE '1/200', DATE DE L'INDICE '19/12/2025', OBJET DE L'INDICE '0', EMETTEUR 'BLM', No DOCUMENT '0502', INDICE '0', FEUILLE '2/7'",
+      "duplicateOf": null,
+      "disposition": "approved",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "Office credit only: Emetteur 'Belem' and DESSINE PAR 'BELEM' printed in the cartouche; the page states the office (Studio BELEM) and no draughtsman; the client panel is not published",
+      "roleEvidence": "No personal-role statement: the case study has no role section (D53, [CONTENT NEEDED: role]); this record adds no role claim",
+      "reason": "New: the rue de l'Avenir front of both blocks, with the plinth, the planters, the accesses and the material codes"
+    },
+    {
+      "source": "Images HQ/Villneuve la garenne/PC40-2_DOCUMENTS DESCRIPTIFS SECURITE INCENDIE ERP_merge [121-140]_page-0015.jpg",
+      "sha256": "2b2de570fbfce43430c43a64213d29e31efc5290e0c36b93dfbbef972861fd81",
+      "width": 4961,
+      "height": 3508,
+      "projectMapping": {
+        "slug": "avenir",
+        "status": "confirmed"
+      },
+      "mappingEvidence": "Cartouche project panel 'Villeneuve la Garenne', Emetteur 'Belem', DESSINE PAR 'BELEM', date 19/12/2025, in the same permit file whose cover titles the operation 'Opération Rue de l'Avenir, 2 rue de l'avenir, 92000, Villeneuve-la-Garenne' (Architecte : Studio Belem); case study avenir (D53)",
+      "visualType": "drawing sheet (south elevation, 1/200)",
+      "textDisposition": "title → caption: 'PC5 - PLANS DE FACADES ET TOITURES', 'Élévation sud', scale '1/200'; legend (cropped out): M1-M7 as on the west elevation; intrinsic (stays): 'Rue de l'Avenir', 'Limite de propriété' x2, codes 'M1', 'M2', 'M5', 'M6', 'M7' on leader lines, 'Sortie de secours commerce', 'Accès commerce', levels 'NIV SOL NATUREL +27,98 NGF', 'N0Haut +29,50 NGF' to 'NTa +52,95 NGF', dimensions; furniture (dropped): key plan; furniture (dropped): cartouche panels Maître d'ouvrage (client and its representatives' names and logos, not published), project 'Villeneuve la Garenne', T.Tech, Code ouvrage, Phase 'PC', Emetteur 'Belem', DESSINE PAR 'BELEM', RESPONSABLE, TYPE 'FAC', ECHELLE '1/200', DATE DE L'INDICE '19/12/2025', OBJET DE L'INDICE '0', EMETTEUR 'BLM', No DOCUMENT '0503', INDICE '0', FEUILLE '3/7'",
+      "duplicateOf": null,
+      "disposition": "approved",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "Office credit only: Emetteur 'Belem' and DESSINE PAR 'BELEM' printed in the cartouche; the page states the office (Studio BELEM) and no draughtsman; the client panel is not published",
+      "roleEvidence": "No personal-role statement: the case study has no role section (D53, [CONTENT NEEDED: role]); this record adds no role claim",
+      "reason": "New: the avenue de Verdun front of the corner block with the glazed shop, the view of the hero render"
+    },
+    {
+      "source": "Images HQ/Villneuve la garenne/PC40-2_DOCUMENTS DESCRIPTIFS SECURITE INCENDIE ERP_merge [121-140]_page-0016.jpg",
+      "sha256": "c1e5c14b17e46dccc56c2d02871b8e598c2eaa4520c4beb163b58064cb7fb494",
+      "width": 4961,
+      "height": 3508,
+      "projectMapping": {
+        "slug": "avenir",
+        "status": "confirmed"
+      },
+      "mappingEvidence": "Cartouche project panel 'Villeneuve la Garenne', Emetteur 'Belem', DESSINE PAR 'BELEM', date 19/12/2025, in the same permit file whose cover titles the operation 'Opération Rue de l'Avenir, 2 rue de l'avenir, 92000, Villeneuve-la-Garenne' (Architecte : Studio Belem); case study avenir (D53)",
+      "visualType": "drawing sheet (north elevation, 1/200)",
+      "textDisposition": "title: 'PC5 - PLANS DE FACADES ET TOITURES', 'Élévation nord'; intrinsic: 'Rue de l'Avenir', 'Limite de propriété' x2, 'NIVEAU VOISIN +29,82 NGF', codes, levels; legend M1-M7; furniture (dropped): cartouche panels Maître d'ouvrage (client and its representatives' names and logos, not published), project 'Villeneuve la Garenne', T.Tech, Code ouvrage, Phase 'PC', Emetteur 'Belem', DESSINE PAR 'BELEM', RESPONSABLE, TYPE 'FAC', ECHELLE '1/200', DATE DE L'INDICE '19/12/2025', OBJET DE L'INDICE '0', EMETTEUR 'BLM', No DOCUMENT '0504', INDICE '0', FEUILLE '4/7' (read on a 1600 px preview; not published)",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "Office credit only: Emetteur 'Belem' and DESSINE PAR 'BELEM' printed in the cartouche; the page states the office (Studio BELEM) and no draughtsman; the client panel is not published",
+      "roleEvidence": "No personal-role statement: the case study has no role section (D53, [CONTENT NEEDED: role]); this record adds no role claim",
+      "reason": "Withheld, low added value: the rear gable, block B in front of block A; its levels and materials repeat the published elevations and sections"
+    },
+    {
+      "source": "Images HQ/Villneuve la garenne/PC40-2_DOCUMENTS DESCRIPTIFS SECURITE INCENDIE ERP_merge [121-140]_page-0017.jpg",
+      "sha256": "9809a11db4931eda9749aee8b39d47cc7625db13b4d7a20e39963a8184dedfb2",
+      "width": 4961,
+      "height": 3508,
+      "projectMapping": {
+        "slug": "avenir",
+        "status": "confirmed"
+      },
+      "mappingEvidence": "Cartouche project panel 'Villeneuve la Garenne', Emetteur 'Belem', DESSINE PAR 'BELEM', date 19/12/2025, in the same permit file whose cover titles the operation 'Opération Rue de l'Avenir, 2 rue de l'avenir, 92000, Villeneuve-la-Garenne' (Architecte : Studio Belem); case study avenir (D53)",
+      "visualType": "drawing sheet (courtyard elevation AA, 1/200)",
+      "textDisposition": "title: 'PC5 - PLANS DE FACADES ET TOITURES', 'Élévation intérieur AA'; intrinsic: 'Limite de propriété' x2, 'NIVEAU VOISIN +29,82 NGF', 'NIV TROTTOIR +27,98 NGF', levels; legend M1-M7; furniture (dropped): cartouche panels Maître d'ouvrage (client and its representatives' names and logos, not published), project 'Villeneuve la Garenne', T.Tech, Code ouvrage, Phase 'PC', Emetteur 'Belem', DESSINE PAR 'BELEM', RESPONSABLE, TYPE 'FAC', ECHELLE '1/200', DATE DE L'INDICE '19/12/2025', OBJET DE L'INDICE '0', EMETTEUR 'BLM', No DOCUMENT '0505', INDICE '0', FEUILLE '5/7' (read on a 1600 px preview; not published)",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "Office credit only: Emetteur 'Belem' and DESSINE PAR 'BELEM' printed in the cartouche; the page states the office (Studio BELEM) and no draughtsman; the client panel is not published",
+      "roleEvidence": "No personal-role statement: the case study has no role section (D53, [CONTENT NEEDED: role]); this record adds no role claim",
+      "reason": "Withheld, low added value: the courtyard face of block A; its openings and levels repeat the south elevation and section EE"
+    },
+    {
+      "source": "Images HQ/Villneuve la garenne/PC40-2_DOCUMENTS DESCRIPTIFS SECURITE INCENDIE ERP_merge [121-140]_page-0018.jpg",
+      "sha256": "255fa253bb504534857f5f3104cce0ecf4136904f7eb702166da155a08e65be2",
+      "width": 4961,
+      "height": 3508,
+      "projectMapping": {
+        "slug": "avenir",
+        "status": "confirmed"
+      },
+      "mappingEvidence": "Cartouche project panel 'Villeneuve la Garenne', Emetteur 'Belem', DESSINE PAR 'BELEM', date 19/12/2025, in the same permit file whose cover titles the operation 'Opération Rue de l'Avenir, 2 rue de l'avenir, 92000, Villeneuve-la-Garenne' (Architecte : Studio Belem); case study avenir (D53)",
+      "visualType": "drawing sheet (courtyard elevation BB, 1/200)",
+      "textDisposition": "title: 'PC5 - PLANS DE FACADES ET TOITURES', 'Élévation intérieur BB'; intrinsic: 'Limite de propriété' x2, 'NIVEAU TROTTOIR +27,98 NGF', levels; legend M1-M7; furniture (dropped): cartouche panels Maître d'ouvrage (client and its representatives' names and logos, not published), project 'Villeneuve la Garenne', T.Tech, Code ouvrage, Phase 'PC', Emetteur 'Belem', DESSINE PAR 'BELEM', RESPONSABLE, TYPE 'FAC', ECHELLE '1/200', DATE DE L'INDICE '19/12/2025', OBJET DE L'INDICE '0', EMETTEUR 'BLM', No DOCUMENT '0506', INDICE '0', FEUILLE '6/7' (read on a 1600 px preview; not published)",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "Office credit only: Emetteur 'Belem' and DESSINE PAR 'BELEM' printed in the cartouche; the page states the office (Studio BELEM) and no draughtsman; the client panel is not published",
+      "roleEvidence": "No personal-role statement: the case study has no role section (D53, [CONTENT NEEDED: role]); this record adds no role claim",
+      "reason": "Withheld, low added value: the courtyard face of block B; its levels repeat section AA"
+    },
+    {
+      "source": "Images HQ/Villneuve la garenne/PC40-2_DOCUMENTS DESCRIPTIFS SECURITE INCENDIE ERP_merge [141-160] [11-20]_page-0005.jpg",
+      "sha256": "ba2f4ae15aa95343eb99dffc25cd7742ff41b27e721bc368f2c911c3864295cf",
+      "width": 2481,
+      "height": 3508,
+      "projectMapping": {
+        "slug": "avenir",
+        "status": "confirmed"
+      },
+      "mappingEvidence": "Page header 'STUDIO BELEM' / 'RUE DE L'AVENIR' and footer code 'BLM -VLG- DPC' (the VLG project code of the permit sheets); case study avenir (D53)",
+      "visualType": "notice page with a render (materials notice, page 5)",
+      "textDisposition": "prose/fact → narrative (translated, D17): '3/ PROVENANCES DES MATÉRIAUX': 'La qualité et la pérennité du projet que nous proposons seront garanties par la qualité et la durabilité des matériaux utilisés. Les matériaux sont choisis pour les vertus suivantes :' 'Matériaux biosourcés : Menuiseries en bois (fenêtres, portes-fenêtres et murs-rideaux). Platelage en bois sur lambourde ou dalles sur plots (terrasses).' 'Matériaux géosourcés : Substrat pour les toitures végétalisées.' 'Matériaux issus du réemploi : Brique pleine.'; heading (dropped): '4/ REPÉRAGE DES MATÉRIAUX'; title → hero caption: 'FIGURE 2. VUE DU BÂTIMENT DEPUIS L'AVENUE DE VERDUN.'; intrinsic (rendered, stays): awning names; furniture (dropped): header 'STUDIO BELEM', 'RUE DE L'AVENIR', footer 'PC 10-1 - BLM -VLG- DPC - NOTICE COMPLÉMENTAIRE MATÉRIAUX', page number '5'",
+      "duplicateOf": null,
+      "disposition": "approved",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "Office credit only: the page header 'STUDIO BELEM'; the page credits the render to Studio BELEM and names no individual",
+      "roleEvidence": "No personal-role statement: the case study has no role section (D53, [CONTENT NEEDED: role]); this record adds no role claim",
+      "reason": "New: the only full view of the building, from avenue de Verdun (hero)"
+    },
+    {
+      "source": "Images HQ/Villneuve la garenne/PC40-2_DOCUMENTS DESCRIPTIFS SECURITE INCENDIE ERP_merge [141-160] [11-20]_page-0006.jpg",
+      "sha256": "abeadf46bdeecc361722a3778aa31fb1a66cccff241199578a12c2408a951d79",
+      "width": 2481,
+      "height": 3508,
+      "projectMapping": {
+        "slug": "avenir",
+        "status": "confirmed"
+      },
+      "mappingEvidence": "Page header 'STUDIO BELEM' / 'RUE DE L'AVENIR' and footer code 'BLM -VLG- DPC' (the VLG project code of the permit sheets); case study avenir (D53)",
+      "visualType": "notice page with three render details (materials notice, page 6)",
+      "textDisposition": "callouts → caption facts (translated, D17): 'Façades en béton bas carbone, revêtue de plaquettes de parement (teinte beige clair ou équivalent)', 'Garde-corps barreaudage métallique thermolaqué (teinte brune mocha ou équivalent)', 'Menuiserie en bois' (x2), 'Nez de dalles en béton bas carbone teinté dans la masse (teinte beige clair ou équivalent)', 'Socle en brique pleine'; titles: 'FIGURE 3. FAÇADE SUD DU PLOT A (DÉTAIL).', 'FIGURE 4. COMMERCE SUR L'AVENUE DE VERDUN (DÉTAIL).', 'FIGURE 5. SOCLE EN BRIQUE PLEINE DEPUIS L'AVENUE DE VERDUN (DÉTAIL).'; furniture: header 'STUDIO BELEM', 'RUE DE L'AVENIR', footer 'PC 10-1 - BLM -VLG- DPC - NOTICE COMPLÉMENTAIRE MATÉRIAUX', page number '6'",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "Office credit only: the page header 'STUDIO BELEM'; the page credits the render to Studio BELEM and names no individual",
+      "roleEvidence": "No personal-role statement: the case study has no role section (D53, [CONTENT NEEDED: role]); this record adds no role claim",
+      "reason": "Withheld, duplicate: figures 3-5 are enlarged details of figures 2, 7 and 6 at lower resolution, with leader lines drawn across the render pixels; the callouts are used as caption text"
+    },
+    {
+      "source": "Images HQ/Villneuve la garenne/PC40-2_DOCUMENTS DESCRIPTIFS SECURITE INCENDIE ERP_merge [21-40]_page-0011.jpg",
+      "sha256": "f9f0f07f1bd7116b8fa08c0556931f297ee6d9d3631d2ed59011ff769d838032",
+      "width": 4961,
+      "height": 3508,
+      "projectMapping": {
+        "slug": "avenir",
+        "status": "confirmed"
+      },
+      "mappingEvidence": "Cartouche PROJET 'Construction d'un bâtiment de logemebt, Rue de l'Avenir - Villeneuve la Garenne', the plot and blocks of the Studio BELEM sheets; case study avenir (D53)",
+      "visualType": "landscape consultant's site plan (1:200, provisional)",
+      "textDisposition": "title: 'PROJET : PLANS GENERAUX', 'Plan de masse', ECHELLE (A3) '1:200', N° PLAN '1,1.1.10', DATE '10/12/2025', PHASE 'PC', stamp 'PROVISOIRE'; MAITRISE D'OEUVRE 'Symbiose par Bouchaud architectes' (logo), MAITRISE D'OUVRAGE (client representative's name, not published), PROJET 'Construction d'un bâtiment de logemebt' (sic) 'Rue de l'Avenir - Villeneuve la Garenne'; notes 'NOTA 1 : Ce détail de principe définit l'aspect architectural de l'ouvrage…' and 'NOTA 2 : Aucune modification ou reproduction de ce document ne peut être faite sans l'accord exprès de l'architecte qui en conserve la propriété artistique et intellectuelle, conformément à la loi du 1er juillet 1992.'; intrinsic: scale bar '0 1 2 3 4 5', north sign (read on a 1600 px preview; not published)",
+      "duplicateOf": null,
+      "disposition": "withheld",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "Maîtrise d'oeuvre panel 'Symbiose par Bouchaud architectes': a landscape consultant's sheet, not a Studio BELEM sheet",
+      "roleEvidence": "No personal-role statement: the case study has no role section (D53, [CONTENT NEEDED: role]); this record adds no role claim",
+      "reason": "Withheld: a provisional ('PROVISOIRE') sheet by another firm, whose NOTA 2 reserves reproduction to its author"
+    }
+  ]
+}

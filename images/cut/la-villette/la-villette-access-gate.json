@@ -1,0 +1,161 @@
+{
+ "src": "images/la-villette/la-villette-access-gate.png",
+ "hash": "57e2f75fa293805e",
+ "mode": "ink",
+ "from": [
+  2560,
+  1263
+ ],
+ "to": [
+  2558,
+  1263
+ ],
+ "offset": [
+  0,
+  0
+ ],
+ "paper": [
+  255,
+  255,
+  255
+ ],
+ "clip": [
+  "top",
+  "bottom"
+ ],
+ "ink": {
+  "ink": 172462,
+  "chromaticFraction": 0.407,
+  "midtoneFraction": 0.7505,
+  "suggest": "colour"
+ },
+ "dark": "invert-accent",
+ "keep": null,
+ "specks": 1528,
+ "tile": [
+  320,
+  600,
+  640,
+  400
+ ],
+ "background": null,
+ "labels": [
+  {
+   "id": "door-closer",
+   "removed": 5,
+   "kept": 0,
+   "x": 56.45,
+   "y": 11.56,
+   "w": 4.965,
+   "h": 1.821
+  },
+  {
+   "id": "frame",
+   "removed": 20,
+   "kept": 0,
+   "x": 56.45,
+   "y": 16.785,
+   "w": 12.236,
+   "h": 1.821
+  },
+  {
+   "id": "frame-ral",
+   "removed": 6,
+   "kept": 0,
+   "x": 56.45,
+   "y": 18.923,
+   "w": 4.027,
+   "h": 1.425
+  },
+  {
+   "id": "batten",
+   "removed": 20,
+   "kept": 0,
+   "x": 56.411,
+   "y": 25.178,
+   "w": 12.236,
+   "h": 1.821
+  },
+  {
+   "id": "structure",
+   "removed": 14,
+   "kept": 0,
+   "x": 56.45,
+   "y": 31.671,
+   "w": 6.411,
+   "h": 3.484
+  },
+  {
+   "id": "tie-rod",
+   "removed": 10,
+   "kept": 0,
+   "x": 56.411,
+   "y": 40.222,
+   "w": 5.747,
+   "h": 1.425
+  },
+  {
+   "id": "hinge",
+   "removed": 34,
+   "kept": 0,
+   "x": 56.45,
+   "y": 48.377,
+   "w": 14.073,
+   "h": 3.563
+  },
+  {
+   "id": "handle",
+   "removed": 5,
+   "kept": 0,
+   "x": 56.45,
+   "y": 57.086,
+   "w": 3.323,
+   "h": 1.821
+  },
+  {
+   "id": "slats",
+   "removed": 29,
+   "kept": 0,
+   "x": 56.45,
+   "y": 63.341,
+   "w": 13.448,
+   "h": 3.563
+  },
+  {
+   "id": "stop",
+   "removed": 28,
+   "kept": 0,
+   "x": 56.411,
+   "y": 76.01,
+   "w": 11.493,
+   "h": 3.8
+  },
+  {
+   "id": "pivot",
+   "removed": 44,
+   "kept": 0,
+   "x": 56.411,
+   "y": 89.074,
+   "w": 13.761,
+   "h": 3.88
+  },
+  {
+   "id": "elevation",
+   "removed": 7,
+   "kept": 0,
+   "x": 20.172,
+   "y": 93.983,
+   "w": 4.457,
+   "h": 1.425
+  },
+  {
+   "id": "section",
+   "removed": 18,
+   "kept": 1,
+   "x": 89.132,
+   "y": 93.666,
+   "w": 3.44,
+   "h": 1.742
+  }
+ ]
+}

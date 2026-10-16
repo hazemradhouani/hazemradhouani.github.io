@@ -1,0 +1,12 @@
+{
+  "$comment": "Tamansourt cutouts (tools/cutout.mjs; D46, D49, D50). One drawing: the A0 site plan ('Plan Masse', 1:500), cropped to the campus block and reduced 4x to the cap. Grey linework with hatched shadows and pale stippled planting strips that must survive: floor/knee 0.015/0.03. Its printed title, scale and page number are left outside by the crop, so nothing is erased. Clips on all four sides: the plan's context (roads, housing, empty plots) runs off every edge of the A0 sheet by design, and the crop keeps the campus whole with only context cut at the edges. Greyscale ink: invert.",
+  "images": {
+    "images/tamansourt/tamansourt-site-plan.png": {
+      "paper": [255, 255, 255],
+      "floor": 0.015,
+      "knee": 0.03,
+      "clip": ["left", "right", "top", "bottom"],
+      "dark": "invert"
+    }
+  }
+}

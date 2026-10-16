@@ -1,0 +1,40 @@
+{
+ "src": "images/foubert/foubert-east-facade.png",
+ "hash": "d8f789e6835b12e5",
+ "mode": "ink",
+ "from": [
+  2560,
+  2056
+ ],
+ "to": [
+  2560,
+  2056
+ ],
+ "offset": [
+  0,
+  0
+ ],
+ "paper": [
+  255,
+  255,
+  255
+ ],
+ "clip": [],
+ "ink": {
+  "ink": 553250,
+  "chromaticFraction": 0.2096,
+  "midtoneFraction": 0.8219,
+  "suggest": "colour"
+ },
+ "dark": "invert-accent",
+ "keep": null,
+ "specks": 5,
+ "tile": [
+  1280,
+  1400,
+  640,
+  400
+ ],
+ "background": null,
+ "labels": []
+}

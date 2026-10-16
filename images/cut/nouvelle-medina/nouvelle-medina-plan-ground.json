@@ -1,0 +1,40 @@
+{
+ "src": "images/nouvelle-medina/nouvelle-medina-plan-ground.png",
+ "hash": "c756936b47e47ab2",
+ "mode": "ink",
+ "from": [
+  2560,
+  1783
+ ],
+ "to": [
+  2560,
+  1783
+ ],
+ "offset": [
+  0,
+  0
+ ],
+ "paper": [
+  255,
+  255,
+  255
+ ],
+ "clip": [],
+ "ink": {
+  "ink": 358694,
+  "chromaticFraction": 0.0008,
+  "midtoneFraction": 0.2988,
+  "suggest": "mono"
+ },
+ "dark": "invert-accent",
+ "keep": null,
+ "specks": 61,
+ "tile": [
+  640,
+  1000,
+  640,
+  400
+ ],
+ "background": null,
+ "labels": []
+}

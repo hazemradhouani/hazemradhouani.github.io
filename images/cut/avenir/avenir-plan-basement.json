@@ -1,0 +1,45 @@
+{
+ "src": "images/avenir/avenir-plan-basement.png",
+ "hash": "b652eb83fd83d7fb",
+ "mode": "ink",
+ "from": [
+  2560,
+  809
+ ],
+ "to": [
+  2560,
+  809
+ ],
+ "offset": [
+  0,
+  0
+ ],
+ "paper": [
+  255,
+  255,
+  255
+ ],
+ "clip": [
+  "left",
+  "top",
+  "right",
+  "bottom"
+ ],
+ "ink": {
+  "ink": 108834,
+  "chromaticFraction": 0.0926,
+  "midtoneFraction": 0.3173,
+  "suggest": "colour"
+ },
+ "dark": "invert-accent",
+ "keep": null,
+ "specks": 56,
+ "tile": [
+  1920,
+  0,
+  640,
+  400
+ ],
+ "background": null,
+ "labels": []
+}

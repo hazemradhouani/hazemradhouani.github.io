@@ -1,0 +1,40 @@
+{
+ "src": "images/foubert/foubert-street-window-section.png",
+ "hash": "6c2cadb9b64c5354",
+ "mode": "ink",
+ "from": [
+  1373,
+  2114
+ ],
+ "to": [
+  1335,
+  2079
+ ],
+ "offset": [
+  19,
+  16
+ ],
+ "paper": [
+  255,
+  255,
+  255
+ ],
+ "clip": [],
+ "ink": {
+  "ink": 117421,
+  "chromaticFraction": 0.3358,
+  "midtoneFraction": 0.5935,
+  "suggest": "colour"
+ },
+ "dark": "invert-accent",
+ "keep": null,
+ "specks": 5,
+ "tile": [
+  640,
+  1400,
+  640,
+  400
+ ],
+ "background": null,
+ "labels": []
+}

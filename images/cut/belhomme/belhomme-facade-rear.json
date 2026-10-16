@@ -1,0 +1,40 @@
+{
+ "src": "images/belhomme/belhomme-facade-rear.png",
+ "hash": "0e21b96d7c1fcfe1",
+ "mode": "ink",
+ "from": [
+  2560,
+  2096
+ ],
+ "to": [
+  2546,
+  2082
+ ],
+ "offset": [
+  7,
+  7
+ ],
+ "paper": [
+  255,
+  255,
+  255
+ ],
+ "clip": [],
+ "ink": {
+  "ink": 436787,
+  "chromaticFraction": 0.011,
+  "midtoneFraction": 0.1678,
+  "suggest": "accent"
+ },
+ "dark": "invert-accent",
+ "keep": null,
+ "specks": 74,
+ "tile": [
+  960,
+  1200,
+  640,
+  400
+ ],
+ "background": null,
+ "labels": []
+}

@@ -32,11 +32,12 @@ console.log('icons done');
 const site = rd('content/site.json');
 const projects = fs.readdirSync(path.join(REPO, 'content/projects')).map((f) => rd('content/projects/' + f));
 const home = rd('content/pages/home.json');
+const years = projects.map((p) => parseInt(p.year, 10)).filter(Number.isFinite);
 // Field cards (D35): a white field, the image contained at its natural ratio (never cropped), credits kept
 const cards = [
   { name: 'home', title: site.person.name, line: site.person.line, img: home.flagship.hero.image },
-  { name: 'work', title: 'Work', line: `${projects.length} projects in Paris, Morocco and Tunisia, 2022 to 2026`, img: 'images/la-villette/la-villette-street-render.jpg', credit: 'Render: Studio BELEM' },
-  { name: 'research', title: 'Research', line: 'Between the Poetics of Place and the Value of Heritage', img: 'images/books/thesis-book-closed.png' },
+  { name: 'work', title: 'Work', line: `${projects.length} projects in Tunisia, France and Morocco, ${Math.min(...years)} to ${Math.max(...years)}`, img: 'images/la-villette/la-villette-street-render-hq.jpg', credit: 'Render: Studio BELEM' },
+  { name: 'research', title: 'Research', line: 'Between the Poetics of Place and the Value of Heritage', img: 'images/cut/books/thesis-mockup-1.png' },
   { name: 'about', title: 'About', line: site.person.credential, img: 'images/portrait.jpg' },
   { name: 'motion', title: 'Films and motion', line: 'Architectural films and motion graphic reels', img: 'images/zenata/zenata-platform-render.jpg' },
   ...projects.filter((p) => p.hero).map((p) => ({ name: 'project-' + p.slug, title: p.title, line: `${p.descriptor} | ${p.place} | ${p.year}`, img: p.hero.src, credit: p.hero.credit }))

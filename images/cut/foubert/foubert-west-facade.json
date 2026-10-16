@@ -1,0 +1,56 @@
+{
+ "src": "images/foubert/foubert-west-facade.png",
+ "hash": "4ae004cc8bf3cb42",
+ "mode": "ink",
+ "from": [
+  2560,
+  1700
+ ],
+ "to": [
+  2560,
+  1700
+ ],
+ "offset": [
+  0,
+  0
+ ],
+ "paper": [
+  255,
+  255,
+  255
+ ],
+ "clip": [],
+ "ink": {
+  "ink": 516020,
+  "chromaticFraction": 0.8226,
+  "midtoneFraction": 0.866,
+  "suggest": "colour"
+ },
+ "dark": "keep",
+ "keep": {
+  "file": "images/cut/foubert/foubert-west-facade--keep.png",
+  "share": 0.4967,
+  "radius": 4,
+  "t": 0.06,
+  "fill": true
+ },
+ "specks": 5,
+ "tile": [
+  640,
+  1000,
+  640,
+  400
+ ],
+ "background": null,
+ "labels": [
+  {
+   "id": "legend",
+   "removed": 24,
+   "kept": 0,
+   "x": 94.961,
+   "y": 0,
+   "w": 5.039,
+   "h": 6.294
+  }
+ ]
+}

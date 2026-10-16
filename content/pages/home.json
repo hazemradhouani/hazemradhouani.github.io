@@ -1,6 +1,6 @@
 {
-  "title": "Hazem Radhouani | Architect, heritage documentation and earthen architecture",
-  "description": "Hazem Radhouani, architect specialising in heritage documentation and earthen architecture. Survey and documentation, BIM delivery in Revit, and visualisation in Unreal Engine and D5 Render.",
+  "title": "Hazem Radhouani | Architect — Tunisia, France & Morocco",
+  "description": "Hazem Radhouani is an architect with project work in Tunisia, France and Morocco, and research experience in Japan. Survey, BIM delivery in Revit, and visualisation in Unreal Engine and D5 Render.",
   "og": "images/og/home.jpg",
   "cover": {
     "image": "images/cover/alley.jpg",
@@ -20,15 +20,15 @@
     "line": "The ruined village that founded the conviction.",
     "text": "The thesis operates at three scales simultaneously: a territorial analysis of the conditions that produced the abandonment, an urban proposal for the reactivation of the village as a place of memory, culture, and temporary dwelling, and an architectural intervention on a key building within the fabric.",
     "hero": {
-      "image": "images/al-arg/al-arg-aerial-sunset.jpg",
-      "alt": "Aerial render of the rehabilitated Al-Arg village at sunset, earth volumes and open courtyards among palm groves"
+      "image": "images/al-arg/al-arg-aerial-sunset-hq.jpg",
+      "alt": "Aerial render of Al-Arg at sunset: earth-walled buildings, roof terraces and open courtyards below a grove of date palms, in deep orange light"
     },
     "scales": [
       {
         "label": "Territorial",
         "caption": "Site map | Al-Arg within the Jérid. Reading of the oasis territory as a system | water, road, inhabited fabric.",
-        "image": "images/al-arg/al-arg-territory-map-2026.jpg",
-        "alt": "Territory map of the Jérid oasis around Al-Arg, roads, water and inhabited fabric"
+        "image": "images/al-arg/al-arg-territory-map-hq.png",
+        "alt": "Coloured map of the oasis territory around Al-Arg: palm groves in three greens, residential, saline and unplanted areas, roads and routes towards the neighbouring oases and towns"
       },
       {
         "label": "Urban",
@@ -39,8 +39,8 @@
       {
         "label": "Architectural",
         "caption": "Ground floor plan | proposed",
-        "image": "images/al-arg/al-arg-ground-floor-proposed.png",
-        "alt": "Proposed ground floor plan of the rehabilitated building"
+        "image": "images/al-arg/al-arg-ground-floor-proposed-hq.png",
+        "alt": "Coloured plan of the rehabilitated building: black earth walls around several courtyards, small planted patios and pale blue rooms among the surrounding houses"
       }
     ],
     "sources": {
@@ -50,11 +50,11 @@
     }
   },
   "selected": [
-    "la-villette",
     "bolivar",
+    "foubert",
+    "ain-sebaa",
     "zenata",
-    "belhomme",
-    "nouvelle-medina",
+    "cinephile",
     "corallum"
   ],
   "proofs": [
@@ -74,8 +74,8 @@
       "context": "La Villette, Paris 19th | Studio BELEM",
       "tools": "Revit | ArchiCAD | Rhino | Grasshopper",
       "project": "la-villette",
-      "image": "images/la-villette/la-villette-gate-detail.jpg",
-      "alt": "Construction detail of the access gate and entry door, north elevation of building A",
+      "image": "images/la-villette/la-villette-access-gate-annotated.png",
+      "alt": "Construction elevation and section of the access gate and entry door, north elevation of building A, with its French callouts on leader lines",
       "kind": "drawing",
       "source": "pdf2026:p3, pdf2026:p28 (tools)"
     },
@@ -96,8 +96,8 @@
     "titleAr": "بين شاعرية المكان و قيمة الأثر",
     "meta": "Architecture thesis | ENAU, University of Carthage | Highest Honours, unanimous jury, June 2024",
     "award": "Sakura Science Program, Japan 2025 | Most Appreciated Research",
-    "cover": "images/books/thesis-book-closed.png",
-    "coverAlt": "The printed thesis Between the Poetics of Place and the Value of Heritage, closed, its cover showing an earthen wall",
+    "cover": "images/cut/books/thesis-mockup-1.png",
+    "coverAlt": "The printed thesis Between the Poetics of Place and the Value of Heritage, laid open face down to show its cover: the Arabic title over a photograph of a rubble-stone wall",
     "sources": {
       "title": "site:books + pdf2025:p3",
       "titleAr": "pdf2025:p46",

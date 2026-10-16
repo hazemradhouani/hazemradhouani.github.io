@@ -1,0 +1,45 @@
+{
+ "src": "images/tamansourt/tamansourt-site-plan.png",
+ "hash": "9211fd95e65e0185",
+ "mode": "ink",
+ "from": [
+  2560,
+  1961
+ ],
+ "to": [
+  2560,
+  1961
+ ],
+ "offset": [
+  0,
+  0
+ ],
+ "paper": [
+  255,
+  255,
+  255
+ ],
+ "clip": [
+  "left",
+  "top",
+  "right",
+  "bottom"
+ ],
+ "ink": {
+  "ink": 137914,
+  "chromaticFraction": 0.0001,
+  "midtoneFraction": 0.5938,
+  "suggest": "mono"
+ },
+ "dark": "invert",
+ "keep": null,
+ "specks": 550,
+ "tile": [
+  0,
+  200,
+  640,
+  400
+ ],
+ "background": null,
+ "labels": []
+}

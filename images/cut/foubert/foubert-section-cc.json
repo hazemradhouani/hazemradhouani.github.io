@@ -1,0 +1,40 @@
+{
+ "src": "images/foubert/foubert-section-cc.png",
+ "hash": "89fd819c0e067e36",
+ "mode": "ink",
+ "from": [
+  2560,
+  2334
+ ],
+ "to": [
+  2560,
+  2334
+ ],
+ "offset": [
+  0,
+  0
+ ],
+ "paper": [
+  255,
+  255,
+  255
+ ],
+ "clip": [],
+ "ink": {
+  "ink": 256482,
+  "chromaticFraction": 0.1376,
+  "midtoneFraction": 0.8074,
+  "suggest": "colour"
+ },
+ "dark": "invert-accent",
+ "keep": null,
+ "specks": 0,
+ "tile": [
+  320,
+  1200,
+  640,
+  400
+ ],
+ "background": null,
+ "labels": []
+}

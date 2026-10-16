@@ -1,0 +1,140 @@
+{
+  "version": 1,
+  "sourceRoot": "Images HQ",
+  "folder": "Tabarka",
+  "assets": [
+    {
+      "source": "Images HQ/Tabarka/.trashed-1762728296-Image_1.png",
+      "sha256": "222c0568eaff912734cc90ac1c83e5331293f51996db809d1256268835378892",
+      "width": 5806,
+      "height": 2609,
+      "projectMapping": {
+        "slug": "corallum",
+        "status": "confirmed"
+      },
+      "mappingEvidence": "The building is on it: the oval perforated roof opening of the 'PLAN NIVEAU 01' plan (pdf2025:p24) on a planted rectangular plot between the town's seafront road and the beach, where the massing model of pdf2025:p25 marks the site; the wooded peninsula, port and jetty of the same coast",
+      "visualType": "render (top-down site plan: the town's white blocks, wooded hills, the beach and esplanade, the port and a wooded peninsula, dark green water)",
+      "textDisposition": "no text in the scene",
+      "duplicateOf": null,
+      "disposition": "approved",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "No credit printed on the render; the owner's academic project at ENAU (site)",
+      "roleEvidence": "The case study makes no personal-role statement (role: []); the image adds none",
+      "reason": "New material: the only view that places the building in the town and on the coast; published as images/corallum/corallum-site-plan.jpg"
+    },
+    {
+      "source": "Images HQ/Tabarka/.trashed-1762728296-Image_2.png",
+      "sha256": "537c121913a7cb9cbfac11fdc49186b45cf3e1213a70eceb51f62acd0243661d",
+      "width": 7680,
+      "height": 4874,
+      "projectMapping": {
+        "slug": "corallum",
+        "status": "confirmed"
+      },
+      "mappingEvidence": "Same camera as the bottom render of the existing composite corallum-renders.jpg (site): the box wrapped in twisting vertical fins, its reflection in the water, a bed of grasses and trees behind",
+      "visualType": "render (exterior: the building across the water in daylight)",
+      "textDisposition": "no text in the scene",
+      "duplicateOf": null,
+      "disposition": "approved",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "No credit printed on the render; the owner's academic project at ENAU (site)",
+      "roleEvidence": "The case study makes no personal-role statement (role: []); the image adds none",
+      "reason": "Replaces the low-resolution exterior render inside the composite corallum-renders.jpg; published as images/corallum/corallum-water-day.jpg"
+    },
+    {
+      "source": "Images HQ/Tabarka/.trashed-1762728296-Image_4.png",
+      "sha256": "554e81101a507087c30131cb298e239bf7214eef69e38641406b504b1e051257",
+      "width": 7680,
+      "height": 4874,
+      "projectMapping": {
+        "slug": "corallum",
+        "status": "confirmed"
+      },
+      "mappingEvidence": "The same corner and tear-shaped entrance opening in the fin screen as the line-render collage of pdf2025:p23 (the existing hero thumb.jpg); the same fins as Image_2 and Image_6",
+      "visualType": "render (exterior: the corner of the building from the ground, the fins parting into a tall tear-shaped opening over a glazed entrance, grasses and a sandy forecourt)",
+      "textDisposition": "no text in the scene",
+      "duplicateOf": null,
+      "disposition": "approved",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "No credit printed on the render; the owner's academic project at ENAU (site)",
+      "roleEvidence": "The case study makes no personal-role statement (role: []); the image adds none",
+      "reason": "The strongest full-size render: the whole building and its entrance; published as the hero images/corallum/corallum-corner.jpg"
+    },
+    {
+      "source": "Images HQ/Tabarka/.trashed-1762728296-Image_6.png",
+      "sha256": "39856e9d9d82e14334f7d537c60f99d6710bae531270be2bbb678540f389c783",
+      "width": 7680,
+      "height": 4874,
+      "projectMapping": {
+        "slug": "corallum",
+        "status": "confirmed"
+      },
+      "mappingEvidence": "The view across the water of Image_2, from a little further left, in low warm light: the same fins, grasses, trees and neighbouring blocks",
+      "visualType": "render (exterior: the building across the water in low evening light, clouds)",
+      "textDisposition": "no text in the scene",
+      "duplicateOf": null,
+      "disposition": "approved",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "No credit printed on the render; the owner's academic project at ENAU (site)",
+      "roleEvidence": "The case study makes no personal-role statement (role: []); the image adds none",
+      "reason": "New material: the fins' relief in raking light, paired with the daylight view; published as images/corallum/corallum-water-evening.jpg"
+    },
+    {
+      "source": "Images HQ/Tabarka/2025 - Hazem radhouani - Portfolio - HQ [21-25]_page-0003.jpg",
+      "sha256": "e15fb0d5b0543d1e2650c50f1afe82bc22698167f66dffd711c8096c6068644c",
+      "width": 3508,
+      "height": 2481,
+      "projectMapping": {
+        "slug": "corallum",
+        "status": "confirmed"
+      },
+      "mappingEvidence": "pdf2025:p23 of the Corallum chapter (the name 'Corallum' in the printed text); its collage is the existing hero thumb.jpg and its eight diagrams the existing 'Formal Research, Volume' figure",
+      "visualType": "portfolio page: a line-render collage of the building with a pink sun, birds and inked figures (left), the project's fact panel and 'ABOUT' text (below it), eight form diagrams with titles in two columns (right), the page tab '23'",
+      "textDisposition": "fact panel, prose/fact: 'LOCATION: Tarabka, historic waterfront' (location already published as Tabarka, Tunisia, ledger C09; 'historic waterfront' not published), 'AREA: 900 m²' (already published, D26), 'TYPE: Coral Museum & Research Center – Marine heritage site' (consistent with the published type 'Research and Exhibition Centre'; not re-worded), 'YEAR: March 2023' (consistent with 2023); prose/fact 'ABOUT: A sinuous pavilion of undulating glass and steel, Corallum mirrors the living reefs it celebrates. Daylight flows through wave-shaped skylights, illuminating exhibits of living coral and echoing the eternal dance of sea and stone.' WITHHELD: 'glass and steel' conflicts with the site's 'reinforced concrete cast against rock formwork' (D07); the rest adds no fact the drawings show. Quotation 'The sea, once it casts its spell, holds one in its net of wonder forever.' — Jacques Yves Cousteau: another author's words, not published. Titles → caption (cropped out above each diagram): 'Phase 01 Verticality', 'Phase 02 Transformation', 'Helical Form', '2D Expansion', 'Phase 03 Guided', 'Phase 04 Pseudo-sinusoidal', 'Restrict movement', 'Change the rhythm'. Furniture (dropped): page tab '23'",
+      "duplicateOf": null,
+      "disposition": "approved",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "No credit printed on the page; the owner's academic project at ENAU (site)",
+      "roleEvidence": "The case study makes no personal-role statement (role: []); the page adds none",
+      "reason": "Split into nine outputs: the collage (corallum-collage.jpg, replacing thumb.jpg at 1.5x) and the eight diagrams as a series at one scale (corallum-volume-*.png, replacing corallum-volume-research.jpg at 1.75x). The fact panel and prose are left outside every crop"
+    },
+    {
+      "source": "Images HQ/Tabarka/2025 - Hazem radhouani - Portfolio - HQ [21-25]_page-0004.jpg",
+      "sha256": "868eabd332e91cc2c0863827f2686197af4b92190c3a921b82162c93e7ca7f58",
+      "width": 3508,
+      "height": 2481,
+      "projectMapping": {
+        "slug": "corallum",
+        "status": "confirmed"
+      },
+      "mappingEvidence": "pdf2025:p24 of the Corallum chapter: its three façade studies are the existing 'Formal Research, Facade' figure; the plan shows the building of the renders (oval roof opening, the plot of Image_1)",
+      "visualType": "portfolio page: three façade studies, each an axonometric of a panel with an orange profile, its numeral and text, and a light diagram with orange rays (top); a sectional perspective render with the page tab '24' over its lower-left corner, a render looking up through the oval void, and a rendered plan of level 01 in its context (bottom)",
+      "textDisposition": "intrinsic (stays): numerals '1', '2', '3' under the axonometrics. Callouts → caption (erased from blank paper inside each column, D49): '1' 'Sliding / Parallel to the East / Perpendicular to the South', '2' 'Overlapping / Parallel to the North / Perpendicular to the East', '3' 'Pulling / Perpendicular to the West'. Plan title → figure title and caption (cropped out): 'PLAN NIVEAU 01 | 15.00 m' (Level 01 plan, 15.00 m), '1/500', footer 'Level 01 = 15.00' and 'Scale: 1 / 500'; the north arrow sits in the title group and leaves with it. Furniture (dropped): page tab '24' (over the render)",
+      "duplicateOf": null,
+      "disposition": "approved",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "No credit printed on the page; the owner's academic project at ENAU (site)",
+      "roleEvidence": "The case study makes no personal-role statement (role: []); the page adds none",
+      "reason": "Split into six outputs: the three façade studies as a series at one scale (corallum-facade-*.png, replacing corallum-facade-research.jpg at 2.4x), the sectional perspective (cropped above the page tab, D58), the oval void and the level 01 plan (new)"
+    },
+    {
+      "source": "Images HQ/Tabarka/2025 - Hazem radhouani - Portfolio - HQ [21-25]_page-0005.jpg",
+      "sha256": "9a131ee16612ad5d3432ebc81e138370f1a9f6c1b2e6ed6125645385413ef89c",
+      "width": 3508,
+      "height": 2481,
+      "projectMapping": {
+        "slug": "corallum",
+        "status": "confirmed"
+      },
+      "mappingEvidence": "pdf2025:p25 of the Corallum chapter: its upper-left render is the top render of the existing composite corallum-renders.jpg and its massing render the existing 'Site' figure corallum-site.jpg",
+      "visualType": "portfolio page: an interior render of a curving ramp under the oval opening (upper left), an aerial massing render with the building in pink (lower left), the western elevation and section A-A on grey screened panels, a massing model of the town with the site marked by a pink ellipse (right), the page tab '25'",
+      "textDisposition": "titles → figure titles (cropped out below each panel): 'Western Facade', 'Section A-A'; title on the section panel (cropped out): 'COUPE A-A' / '1/500' (Section A-A, 1:500); a line of capitals cut off by the top edge of the elevation panel, illegible (only the bottoms of the letters, y 118-119; cropped out). Furniture (dropped): page tab '25'",
+      "duplicateOf": null,
+      "disposition": "approved",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "creditEvidence": "No credit printed on the page; the owner's academic project at ENAU (site)",
+      "roleEvidence": "The case study makes no personal-role statement (role: []); the page adds none",
+      "reason": "Split into five outputs: the interior ramp render (replacing the composite's top render at 2.2x), the massing aerial (new), the western elevation and section A-A as a series at one scale (new), the massing model (replacing corallum-site.jpg at 1.3x)"
+    }
+  ]
+}

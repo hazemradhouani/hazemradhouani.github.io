@@ -37,7 +37,7 @@
     {
       "label": "Surface",
       "value": "600 m²",
-      "source": "answer:2026-10-12"
+      "source": "answer:2026-10-12 + hq:Station Hay Mohammadi/2025 - Hazem radhouani - Portfolio - HQ [46-50]_page-0001.jpg ('AREA: 600 m²')"
     }
   ],
   "tag": "Yassir Khalil Studio / Infrastructure / Casablanca",
@@ -52,34 +52,28 @@
     }
   ],
   "hero": {
-    "src": "images/hay-mohammadi/thumb.jpg",
-    "alt": "Render of Hay Mohammadi Station, Casablanca",
-    "credit": null
+    "src": "images/hay-mohammadi/hay-mohammadi-front.jpg",
+    "alt": "Render of the front of Hay Mohammadi Station: a long white roof bearing the station's name in Latin and Arabic letters over a glazed hall with patterned screens, steps rising from a drop-off road where a car passes",
+    "credit": null,
+    "source": "site + pdf2025:p44 + hq:Station Hay Mohammadi/2025 - Hazem radhouani - Portfolio - HQ [46-50]_page-0002.jpg (upper render; signage 'STATION HAY MOHAMMADI' and 'محطة حي المحمدي', intrinsic)"
   },
   "figures": [
     {
-      "src": "images/hay-mohammadi/hay-mohammadi-render.jpg",
-      "title": "Render, Aerial View",
-      "caption": "Aerial render. White diamond canopy covering the passenger concourse and rail platform at grade. Bus shelters and soft mobility connections along the boulevard. Landscaped perimeter integrating the station into the dense Hay Mohammadi neighbourhood. Yassir Khalil Studio. 2025.",
-      "alt": "Aerial render of Hay Mohammadi Station, white diamond canopy over the rail platform, bus shelters, parking and palm-lined boulevard",
+      "src": "images/hay-mohammadi/hay-mohammadi-aerial.jpg",
+      "title": "Aerial view",
+      "caption": "The station's white roof beside the tracks, between the platform shelters and the car park.",
+      "alt": "Aerial render at dusk: the station's white diamond-shaped roof next to a rail line with two platforms and their shelters, palm trees in front and a car park with parked cars to the right",
       "kind": "render",
-      "source": "site"
+      "source": "site + pdf2025:p43 + hq:Station Hay Mohammadi/2025 - Hazem radhouani - Portfolio - HQ [46-50]_page-0001.jpg (cropped above the text panel printed on the render)",
+      "size": "full"
     },
     {
-      "title": "Street views",
-      "caption": "Station Hay Mohammadi, street frontage and entrance.",
+      "src": "images/hay-mohammadi/hay-mohammadi-platform-view.jpg",
+      "title": "From the platform",
+      "caption": "The station seen across the tracks from the opposite platform.",
+      "alt": "Render of the station from the opposite platform: the white roof slopes up to a high point over a glazed hall lined with patterned screens, behind a fence along its platform, with travellers on both platforms and palm trees behind",
       "kind": "render",
-      "items": [
-        {
-          "src": "images/hay-mohammadi/hay-mohammadi-render-street.jpg",
-          "alt": "Render of Hay Mohammadi Station from the street, white folded roof and patterned screen"
-        },
-        {
-          "src": "images/hay-mohammadi/hay-mohammadi-render-entrance.jpg",
-          "alt": "Render of the station entrance with its sign"
-        }
-      ],
-      "source": "pdf2025:p44"
+      "source": "pdf2025:p44 + hq:Station Hay Mohammadi/2025 - Hazem radhouani - Portfolio - HQ [46-50]_page-0002.jpg (lower render)"
     }
   ],
   "date": "2025",
