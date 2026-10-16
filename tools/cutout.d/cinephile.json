@@ -1,10 +1,12 @@
 {
-  "$comment": "Cinephile cutouts (tools/cutout.mjs; D46, D49, D50). Small owner exports, never upscaled. Site study, tree cover and building heights are colour diagrams with pale fills (field, low floor/knee); the site study's printed title 'Site Study' is erased (it sits inside the drawing's bounding box, beside the park) and becomes the figure title; its English route and place callouts stay with their arrows and dotted leaders. The two maps lose their legends and titles by crop. The sketch is a noisy JPEG scan (defaults); its notebook number 'No 13' stays because the '13' touches a pencil line (D49). Clips (the owner's exports, uncropped): the sketch's ground stroke runs off the right edge of the scan; the level +0.00 plan's site hatch and trees run off its left edge. The level +0.00 plan and the four details are greyscale linework (invert). The section and the eastern facade from the 2025 portfolio sheet keep their teal sky band and rendered white panels, so they are published as rectangles, like the composite they replace.",
-  "exclude": {
-    "images/cinephile/cinephile-section.jpg": "mixed: a teal sky band behind the section; keying would make the sky translucent",
-    "images/cinephile/cinephile-east-facade.jpg": "mixed: a teal sky band and rendered white facade panels; keying would make both translucent"
+  "$comment": "Cinephile cutouts (tools/cutout.mjs; D46, D49, D50). Small owner exports, never upscaled. Site study, tree cover and building heights are colour diagrams with pale fills (field, low floor/knee); the site study's printed title 'Site Study' is erased (it sits inside the drawing's bounding box, beside the park) and becomes the figure title; its English route and place callouts stay with their arrows and dotted leaders. The two maps lose their legends and titles by crop. The sketch is a noisy JPEG scan (defaults); its notebook number 'No 13' stays because the '13' touches a pencil line (D49). Clips (the owner's exports, uncropped): the sketch's ground stroke runs off the right edge of the scan; the level +0.00 plan's site hatch and trees run off its left edge. The level +0.00 plan and the four details are greyscale linework (invert). The section and the eastern facade from the 2025 portfolio sheet keep their teal sky band and rendered white panels: they are plates (D69), kept whole, inverted with their hues held in the dark scheme so they never show a light sheet there.",
+  "fullBleed": {
+    "images/cinephile/cinephile-section.jpg": "a section under a teal sky band: keying would make the sky translucent, so it is kept whole (a plate, D69)",
+    "images/cinephile/cinephile-east-facade.jpg": "an elevation of rendered white panels under a teal sky band: keying would make both translucent, so it is kept whole (a plate, D69)"
   },
   "images": {
+    "images/cinephile/cinephile-section.jpg": { "mode": "plate", "dark": "invert-accent" },
+    "images/cinephile/cinephile-east-facade.jpg": { "mode": "plate", "dark": "invert-accent" },
     "images/cinephile/cinephile-site-study.png": {
       "paper": [255, 255, 255],
       "floor": 0.015,

@@ -1,0 +1,41 @@
+{
+ "src": "images/cinephile/cinephile-east-facade.jpg",
+ "hash": "7262de6b6ccb2d08",
+ "mode": "plate",
+ "from": [
+  743,
+  1510
+ ],
+ "to": [
+  743,
+  1510
+ ],
+ "offset": [
+  0,
+  0
+ ],
+ "paper": null,
+ "clip": [
+  "left",
+  "top",
+  "right",
+  "bottom"
+ ],
+ "ink": {
+  "ink": 280105,
+  "chromaticFraction": 0,
+  "midtoneFraction": 0,
+  "suggest": "mono"
+ },
+ "dark": "invert-accent",
+ "keep": null,
+ "specks": 0,
+ "tile": [
+  0,
+  0,
+  640,
+  400
+ ],
+ "background": null,
+ "labels": []
+}

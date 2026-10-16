@@ -1,0 +1,41 @@
+{
+ "src": "images/cinephile/cinephile-section.jpg",
+ "hash": "efe5cce8ce5f6ae8",
+ "mode": "plate",
+ "from": [
+  741,
+  582
+ ],
+ "to": [
+  741,
+  582
+ ],
+ "offset": [
+  0,
+  0
+ ],
+ "paper": null,
+ "clip": [
+  "left",
+  "top",
+  "right",
+  "bottom"
+ ],
+ "ink": {
+  "ink": 107670,
+  "chromaticFraction": 0,
+  "midtoneFraction": 0,
+  "suggest": "mono"
+ },
+ "dark": "invert-accent",
+ "keep": null,
+ "specks": 0,
+ "tile": [
+  0,
+  0,
+  640,
+  400
+ ],
+ "background": null,
+ "labels": []
+}
