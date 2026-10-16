@@ -1,0 +1,39 @@
+{
+ "src": "images/al-arg/al-arg-panoramic-views.png",
+ "hash": "77fee631cfd46e29",
+ "mode": "ink",
+ "from": [
+  690,
+  505
+ ],
+ "to": [
+  649,
+  490
+ ],
+ "offset": [
+  17,
+  8
+ ],
+ "paper": [
+  255,
+  255,
+  255
+ ],
+ "clip": [],
+ "ink": {
+  "ink": 39041,
+  "chromaticFraction": 0.0238,
+  "midtoneFraction": 0.5663,
+  "suggest": "accent"
+ },
+ "dark": "field",
+ "specks": 142,
+ "tile": [
+  0,
+  0,
+  640,
+  400
+ ],
+ "background": null,
+ "labels": []
+}

@@ -1,0 +1,145 @@
+{
+  "$comment": "Al-Arg cutouts (tools/cutout.mjs; D46, D49, D50, D54). JPEG exports keep the default floor/knee; the small shaded axonometrics and structure details use 0.015/0.03 so their pale ground planes survive (the past-present-future drawing keeps the defaults: its planes survive them, and the low floor counted JPEG ringing as erased glyphs). Plans that fill their frame key white paper and clip all four sides. Thesis mockups: objects on a fitted studio ground; tol 0.6 lets the flood take the whole soft shadow (core alpha about 0.5, so it keys to translucent dark), grad 0.045 stops it at the light page block (0.03 left a jagged opaque line on the shadow ramp, 0.06 flooded the pages); mockup 3 keeps a 34 x 4 px strip at the right page top corner, where page and ground meet with no drawn edge.",
+  "images": {
+    "images/al-arg/al-arg-territory-map-hq.png": {
+      "dark": "field"
+    },
+    "images/al-arg/al-arg-ground-floor-existing.png": {
+      "paper": [
+        255,
+        255,
+        255
+      ],
+      "clip": [
+        "left",
+        "top",
+        "right",
+        "bottom"
+      ],
+      "dark": "field"
+    },
+    "images/al-arg/al-arg-ground-floor-proposed-hq.png": {
+      "paper": [
+        255,
+        255,
+        255
+      ],
+      "clip": [
+        "left",
+        "top",
+        "right",
+        "bottom"
+      ],
+      "dark": "field"
+    },
+    "images/al-arg/al-arg-section-aa.png": {
+      "erase": [
+        {
+          "id": "title",
+          "x": 75,
+          "y": 296,
+          "w": 200,
+          "h": 46
+        }
+      ],
+      "dark": "invert"
+    },
+    "images/al-arg/al-arg-section-bb.png": {
+      "erase": [
+        {
+          "id": "title",
+          "x": 26,
+          "y": 337,
+          "w": 195,
+          "h": 46
+        }
+      ],
+      "dark": "invert"
+    },
+    "images/al-arg/al-arg-past-present-future.png": {
+      "erase": [
+        {
+          "id": "past",
+          "x": 672,
+          "y": 131,
+          "w": 106,
+          "h": 52
+        },
+        {
+          "id": "present",
+          "x": 672,
+          "y": 980,
+          "w": 178,
+          "h": 52
+        },
+        {
+          "id": "future",
+          "x": 672,
+          "y": 1775,
+          "w": 165,
+          "h": 52
+        }
+      ],
+      "dark": "field"
+    },
+    "images/al-arg/al-arg-functional-spaces.png": {
+      "floor": 0.015,
+      "knee": 0.03,
+      "dark": "field"
+    },
+    "images/al-arg/al-arg-open-ceilings.png": {
+      "floor": 0.015,
+      "knee": 0.03,
+      "dark": "field"
+    },
+    "images/al-arg/al-arg-panoramic-views.png": {
+      "floor": 0.015,
+      "knee": 0.03,
+      "dark": "field"
+    },
+    "images/al-arg/al-arg-exterior-courtyards.png": {
+      "floor": 0.015,
+      "knee": 0.03,
+      "dark": "field"
+    },
+    "images/al-arg/al-arg-structure-01.png": {
+      "floor": 0.015,
+      "knee": 0.03,
+      "dark": "field"
+    },
+    "images/al-arg/al-arg-structure-03.png": {
+      "floor": 0.015,
+      "knee": 0.03,
+      "dark": "field"
+    },
+    "images/books/thesis-mockup-1.png": {
+      "mode": "object",
+      "paper": "field",
+      "dark": "object",
+      "tol": 0.6,
+      "grad": 0.045
+    },
+    "images/books/thesis-mockup-2.png": {
+      "mode": "object",
+      "paper": "field",
+      "dark": "object",
+      "tol": 0.6,
+      "grad": 0.045
+    },
+    "images/books/thesis-mockup-3.png": {
+      "mode": "object",
+      "paper": "field",
+      "dark": "object",
+      "tol": 0.6,
+      "grad": 0.045,
+      "keep": [
+        {
+          "x": 1580,
+          "y": 166,
+          "w": 34,
+          "h": 4
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,49 @@
+{
+ "src": "images/al-arg/al-arg-section-aa.png",
+ "hash": "2a03659c82acec6e",
+ "mode": "ink",
+ "from": [
+  2560,
+  363
+ ],
+ "to": [
+  2440,
+  340
+ ],
+ "offset": [
+  60,
+  23
+ ],
+ "paper": [
+  255,
+  255,
+  255
+ ],
+ "clip": [],
+ "ink": {
+  "ink": 28171,
+  "chromaticFraction": 0,
+  "midtoneFraction": 0.1921,
+  "suggest": "mono"
+ },
+ "dark": "invert",
+ "specks": 1,
+ "tile": [
+  1280,
+  0,
+  640,
+  340
+ ],
+ "background": null,
+ "labels": [
+  {
+   "id": "title",
+   "removed": 10,
+   "kept": 0,
+   "x": 1.107,
+   "y": 83.824,
+   "w": 7.131,
+   "h": 6.765
+  }
+ ]
+}

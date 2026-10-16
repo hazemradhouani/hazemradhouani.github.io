@@ -1,0 +1,39 @@
+{
+ "src": "images/al-arg/al-arg-exterior-courtyards.png",
+ "hash": "968bca0256e278d6",
+ "mode": "ink",
+ "from": [
+  690,
+  480
+ ],
+ "to": [
+  636,
+  464
+ ],
+ "offset": [
+  29,
+  14
+ ],
+ "paper": [
+  255,
+  255,
+  255
+ ],
+ "clip": [],
+ "ink": {
+  "ink": 35227,
+  "chromaticFraction": 0.0567,
+  "midtoneFraction": 0.6047,
+  "suggest": "accent"
+ },
+ "dark": "field",
+ "specks": 62,
+ "tile": [
+  0,
+  0,
+  636,
+  400
+ ],
+ "background": null,
+ "labels": []
+}

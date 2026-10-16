@@ -1,0 +1,43 @@
+{
+ "src": "images/al-arg/al-arg-ground-floor-existing.png",
+ "hash": "1fd830516a23e19a",
+ "mode": "ink",
+ "from": [
+  958,
+  958
+ ],
+ "to": [
+  958,
+  958
+ ],
+ "offset": [
+  0,
+  0
+ ],
+ "paper": [
+  255,
+  255,
+  255
+ ],
+ "clip": [
+  "left",
+  "top",
+  "right"
+ ],
+ "ink": {
+  "ink": 107673,
+  "chromaticFraction": 0,
+  "midtoneFraction": 0.2876,
+  "suggest": "mono"
+ },
+ "dark": "field",
+ "specks": 3283,
+ "tile": [
+  0,
+  0,
+  640,
+  400
+ ],
+ "background": null,
+ "labels": []
+}

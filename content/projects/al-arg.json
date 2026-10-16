@@ -74,30 +74,228 @@
   ],
   "honour": "Highest Honours | Unanimous jury | ENAU, University of Carthage | June 2024",
   "hero": {
-    "src": "images/al-arg/al-arg-aerial-sunset.jpg",
-    "alt": "Aerial render of the rehabilitated Al-Arg village at sunset, earth volumes and open courtyards among palm groves",
+    "src": "images/al-arg/al-arg-aerial-sunset-hq.jpg",
+    "alt": "Aerial render of Al-Arg at sunset: earth-walled buildings, roof terraces and open courtyards below a grove of date palms, in deep orange light",
     "credit": null,
     "caption": "Aerial view of the rehabilitated project at sunset. Reading of the reconstituted urban fabric, open courtyards, and earth volumes within the oasis landscape.",
-    "source": "pdf2026:p27"
+    "source": "pdf2026:p27 + hq:EL erg/Render.jpg (full frame of the earlier band crop)"
   },
   "figures": [
     {
-      "src": "images/al-arg/al-arg-territory-map-2026.jpg",
+      "src": "images/al-arg/al-arg-territory-map-hq.png",
       "title": "Territory",
       "caption": "Site map | Al-Arg within the Jérid. Reading of the oasis territory as a system | water, road, inhabited fabric.",
-      "alt": "Map of the Jérid oasis territory around Al-Arg: roads, water and inhabited fabric, towards the new oasis, the town, Tozeur, Tamaghzah, Chott El Gharsa and Oasis Chamsa",
+      "alt": "Coloured map of the oasis territory: palm groves in three greens, residential, saline and unplanted areas, a hatched archaeological area, roads and dashed routes between shrines, and arrows towards the New oasis, the City, Tozeur, Tamaghza, Chott El Gharsa and Chamsa oasis",
       "kind": "drawing",
-      "source": "pdf2026:p24",
-      "size": "wide"
+      "legend": [
+        {
+          "swatch": "#23201F",
+          "text": "Shrine"
+        },
+        {
+          "swatch": "#CEB49F",
+          "text": "Residential area"
+        },
+        {
+          "swatch": "#C6B1A0",
+          "text": "Underground archaeological area"
+        },
+        {
+          "swatch": "#CBBDB2",
+          "text": "Saline area"
+        },
+        {
+          "swatch": "#DFCFC1",
+          "text": "Unplanted area"
+        },
+        {
+          "swatch": "#8F9974",
+          "text": "Palm trees less than 10 years old"
+        },
+        {
+          "swatch": "#B1B38B",
+          "text": "Palm trees less than 40 years old"
+        },
+        {
+          "swatch": "#B9B679",
+          "text": "Palm trees older than 40 years"
+        }
+      ],
+      "source": "hq:EL erg/Map.jpg (legend re-set from the sheet: 'Shrine', 'Residential area', 'Underground archaeological area', 'Saline area', 'Unplanted area', 'Palm trees less than 10 y.o', 'Palm trees less than 40', 'Palm trees older than 40 y.o'; swatches are the mean of each printed swatch; the destination callouts and the north sign 'الشمال' stay on the map); pdf2026:p24 (caption)"
     },
     {
-      "src": "images/al-arg/al-arg-plans-section.jpg",
-      "title": "Village and building, existing and proposed",
-      "caption": "Site plan | existing state. Site plan | rehabilitation proposal. Ground floor plan | existing state. Ground floor plan | proposed. Longitudinal section A-A. Sequential reading of spaces | thresholds, courtyards, covered passages.",
-      "alt": "Site plans and ground floor plans of Al-Arg in the existing state and the rehabilitation proposal, exploded axonometric of three levels, and longitudinal section A-A",
+      "src": "images/al-arg/al-arg-site-plan-detail.jpg",
+      "title": "Site plan, rehabilitation proposal",
+      "caption": "The rehabilitated building, in colour, among the walls of the surrounding houses and the palm groves.",
+      "alt": "Site plan on watercolour-textured paper: the rehabilitated building drawn in cream and pale green at the centre, the surrounding houses as black wall outlines, lanes, contour lines and palm trees",
+      "kind": "render",
+      "source": "hq:EL erg/Plan 02.jpg (no printed title; the coloured proposal of 'Site plan | rehabilitation proposal', pdf2026:p25, framed closer)"
+    },
+    {
+      "src": "images/al-arg/al-arg-ground-floor-existing.png",
+      "title": "Ground floor plan, existing state",
+      "caption": "The building today: its remaining walls, scattered rubble and palm trees inside the enclosure.",
+      "alt": "Plan of a ruined walled enclosure: dark wall stubs, scattered stones along fallen walls, palm trees in the open rooms, a palm grove at the top right and neighbouring houses at the edges, with a north sign and a graphic scale",
       "kind": "drawing",
-      "source": "pdf2026:p25",
-      "size": "full"
+      "source": "hq:EL erg/Site.jpg (printed title 'Site Plan Today', kept on the plan's own ground; 'NORTH'; scale 0-25); pdf2026:p25 ('Ground floor plan | existing state')"
+    },
+    {
+      "src": "images/al-arg/al-arg-ground-floor-proposed-hq.png",
+      "title": "Ground floor plan, proposed",
+      "caption": "Courtyards and planted patios between the earth walls; the cuts of sections A and B are marked.",
+      "alt": "Coloured plan of the rehabilitated building: black walls around several courtyards, small green planted patios, pale blue rooms, red entrance triangles, section marks A and B, a north sign and the surrounding houses in grey",
+      "kind": "drawing",
+      "source": "hq:EL erg/Plan 01.jpg (no printed title; north sign 'الشمال', 'North'; section marks A, B); pdf2026:p25 ('Ground floor plan | proposed')"
+    },
+    {
+      "title": "Sections A-A and B-B",
+      "caption": "The two cuts marked on the proposed plan, at one scale.",
+      "kind": "drawing",
+      "items": [
+        {
+          "src": "images/al-arg/al-arg-section-aa.png",
+          "alt": "Long section A-A: thick walls cut in black, a raised room with a beamed ceiling, a stair, walls with small square openings and lower buildings to either side, with a graphic scale"
+        },
+        {
+          "src": "images/al-arg/al-arg-section-bb.png",
+          "alt": "Section B-B: a two-storey block, a stair climbing over an arched passage, a slatted shading frame on posts at the left, walls with grids of small square openings, and a graphic scale"
+        }
+      ],
+      "source": "hq:EL erg/Section AA.jpg, Section bb.jpg (printed titles 'SECTION A-A', 'SECTION B-B', removed and restated, D49; graphic scales kept; set at one scale by their scale bars); pdf2026:p25 (A-A)"
+    },
+    {
+      "src": "images/al-arg/al-arg-past-present-future.png",
+      "title": "Past, present, future",
+      "caption": "Three layers on one axis: the building over an aerial photograph, the walls standing today, and the proposal.",
+      "alt": "Exploded axonometric in three stacked layers joined by a vertical shaft: at the top, white building volumes on a greyscale aerial photograph; in the middle, fragments of standing walls on a pale ground; at the bottom, the proposed building with pink rooms and courtyards",
+      "kind": "drawing",
+      "labels": [
+        {
+          "at": "past",
+          "text": "Past"
+        },
+        {
+          "at": "present",
+          "text": "Present"
+        },
+        {
+          "at": "future",
+          "text": "Future"
+        }
+      ],
+      "source": "hq:EL erg/Time.jpg (callouts 'PAST', 'PRESENT', 'FUTURE' re-set as labels, D49); pdf2026:p25"
+    },
+    {
+      "src": "images/al-arg/al-arg-functional-spaces.png",
+      "title": "Functional spaces",
+      "caption": "The colour key is printed with the drawing.",
+      "alt": "Shaded axonometric of the rehabilitated building with rooms coloured brown, red and yellow-green, and a printed key: Residential, Staff Housing, Meditation, Administrative, Service",
+      "kind": "drawing",
+      "source": "hq:EL erg/Functions.jpg (printed title 'Functional Spaces'; key kept on the drawing: five labels share three swatches, so it is not re-set); pdf2026:p26"
+    },
+    {
+      "src": "images/al-arg/al-arg-open-ceilings.png",
+      "title": "Open ceilings and ventilation voids",
+      "caption": "Open ceilings and ventilation voids serve as a unique source of natural light and ventilation, fostering a healthy and invigorating environment.",
+      "alt": "Shaded axonometric of the building's walls and courtyards, with small green squares marking the open ceilings and voids, and a graphic scale",
+      "kind": "drawing",
+      "source": "hq:EL erg/OPen.jpg (printed title 'Open Ceilings and Ventilation Voids' and the caption sentence); pdf2026:p26"
+    },
+    {
+      "src": "images/al-arg/al-arg-panoramic-views.png",
+      "title": "Panoramic views",
+      "caption": "The accessible ceilings offer panoramic views of the surrounding landscape, while the relative height of the walls ensures additional privacy.",
+      "alt": "Shaded axonometric of one building: roof terraces behind parapet walls, a stair up to the roof, planted green strips and small red figures",
+      "kind": "drawing",
+      "source": "hq:EL erg/Panoramic.jpg (printed title 'Panoramic Views' and the caption sentence, a missing space after the comma restored); pdf2026:p26"
+    },
+    {
+      "src": "images/al-arg/al-arg-exterior-courtyards.png",
+      "title": "Multifunctional exterior courtyards",
+      "caption": "The exterior courtyards provide a versatile space for various activities, including gatherings, movement, recreation, and dining.",
+      "alt": "Shaded axonometric of the building and its outdoor spaces: green lawns and courtyards between the walls, small red figures and a path along the outer wall",
+      "kind": "drawing",
+      "source": "hq:EL erg/Ext Court.jpg (printed title 'Multifunctional Exterior Courtyards' and the caption sentence)"
+    },
+    {
+      "title": "Structures",
+      "caption": "Left, Structure 01. Timber frame | palm wood joists and posts, accessible roof. Right, Structure 03.",
+      "kind": "drawing",
+      "items": [
+        {
+          "src": "images/al-arg/al-arg-structure-01.png",
+          "alt": "Construction axonometric of Structure 01: a timber roof frame of trusses and joists resting on an earth wall pierced with a grid of small square openings, beside a doorway, on a dark base"
+        },
+        {
+          "src": "images/al-arg/al-arg-structure-03.png",
+          "alt": "Construction axonometric of Structure 03: a frame of timber posts and beams carrying curved slatted shading panels over a square platform"
+        }
+      ],
+      "source": "hq:EL erg/Structures.jpg (printed titles 'Structure 01', 'Structure 03'; one sheet, one scale); pdf2026:p26 (Structure 01 caption; its Structure 03 caption 'Ventilation void | natural thermal chimney integrated into the earth masonry' is withheld: the drawing shows a timber frame with curved slatted shades, D64)"
+    },
+    {
+      "src": "images/al-arg/al-arg-render-shade-frame.jpg",
+      "title": "Shaded courtyard",
+      "caption": "A slatted timber frame over the courtyard; the shadow of a palm on the earth wall.",
+      "alt": "Render of a courtyard under a frame of timber posts and slatted shading, dry grasses on the ground, earth walls with small square openings and the shadow of a palm across the far wall",
+      "kind": "render",
+      "source": "hq:EL erg/Render 01.jpg (no printed title)"
+    },
+    {
+      "title": "Clay wall material",
+      "caption": "Texture maps made by Hazem Radhouani, in order: base colour, normal, roughness, specular and ORD. Each map is 6201 px square at source, shown reduced.",
+      "kind": "render",
+      "items": [
+        {
+          "src": "images/al-arg/al-arg-clay-base-colour.jpg",
+          "alt": "Clay wall texture, base colour map: ochre earth bricks in irregular courses with small dark voids"
+        },
+        {
+          "src": "images/al-arg/al-arg-clay-normal.jpg",
+          "alt": "Clay wall texture, normal map: the brick relief rendered in blue and violet"
+        },
+        {
+          "src": "images/al-arg/al-arg-clay-roughness.jpg",
+          "alt": "Clay wall texture, roughness map: an even mid grey with the voids marked darker"
+        },
+        {
+          "src": "images/al-arg/al-arg-clay-specular.jpg",
+          "alt": "Clay wall texture, specular map: a dark grey field with faint brick courses"
+        },
+        {
+          "src": "images/al-arg/al-arg-clay-ord.jpg",
+          "alt": "Clay wall texture, ORD map: pale grey with the brick courses and voids picked out"
+        }
+      ],
+      "source": "hq:EL erg/Clay Wall By hazem/Clay.jpg, Normal Map Clay01.jpg, Roughness Clay.jpg, Spec Clay.jpg, ORD.jpg (folder name 'By hazem'; map types from the file names, 'ORD' not expanded); downscaled from 6201 to 1200 px"
+    },
+    {
+      "title": "Stone wall material",
+      "caption": "Texture maps made by Hazem Radhouani, in order: base colour, normal, roughness, specular and ORD. Each map is 6201 px square at source, shown reduced.",
+      "kind": "render",
+      "items": [
+        {
+          "src": "images/al-arg/al-arg-stone-base-colour.jpg",
+          "alt": "Stone wall texture, base colour map: rounded sandy stones in rough courses"
+        },
+        {
+          "src": "images/al-arg/al-arg-stone-normal.jpg",
+          "alt": "Stone wall texture, normal map: the stone relief rendered in blue and violet"
+        },
+        {
+          "src": "images/al-arg/al-arg-stone-roughness.jpg",
+          "alt": "Stone wall texture, roughness map: the stones in mid grey with darker joints"
+        },
+        {
+          "src": "images/al-arg/al-arg-stone-specular.jpg",
+          "alt": "Stone wall texture, specular map: the stones in dark grey"
+        },
+        {
+          "src": "images/al-arg/al-arg-stone-ord.jpg",
+          "alt": "Stone wall texture, ORD map: the stones pale grey, the joints dark"
+        }
+      ],
+      "source": "hq:EL erg/Stone_Wall By hazem/Stone wall.jpg, Normal Map.jpg, Roughness.jpg, Specular Map.jpg, ORD.jpg (folder name 'By hazem'; map types from the file names, 'ORD' not expanded); downscaled from 6201 to 1200 px"
     },
     {
       "title": "Atmosphere",
@@ -105,28 +303,19 @@
       "kind": "render",
       "items": [
         {
-          "src": "images/al-arg/al-arg-render-palms.jpg",
-          "alt": "Render of the entry approach through palms towards the ochre perimeter wall at evening light"
+          "src": "images/al-arg/al-arg-render-palms-hq.jpg",
+          "alt": "Render of the ochre perimeter wall seen through palm fronds at evening light, white volumes and date palms beyond under a pink sky"
         },
         {
-          "src": "images/al-arg/al-arg-render-walls.jpg",
-          "alt": "Render of stone and earth walls in raking light"
+          "src": "images/al-arg/al-arg-render-walls-hq.jpg",
+          "alt": "Render of stone and earth walls in low sunlight, the shadows of palm fronds across them and a lit block behind"
         },
         {
           "src": "images/al-arg/al-arg-render-courtyard.jpg",
           "alt": "Render of a courtyard threshold with an arched entry and a merlonated perimeter wall"
         }
       ],
-      "source": "pdf2026:p23 (images), site (caption)"
-    },
-    {
-      "src": "images/al-arg/al-arg-axonometrics-structures.jpg",
-      "title": "Structures",
-      "caption": "Exploded axonometrics | three levels of reading. Accessible roof, ventilation void, inhabited level. Structure 01. Timber frame | palm wood joists and posts, accessible roof. Structure 02. Claustra screen and shading | solar filtering device, lightweight cladding. Structure 03. Ventilation void | natural thermal chimney integrated into the earth masonry.",
-      "alt": "Three exploded axonometrics of the rehabilitated building and three structural details: palm wood timber frame, claustra screen, ventilation void",
-      "kind": "drawing",
-      "source": "pdf2026:p26",
-      "size": "wide"
+      "source": "pdf2026:p23 (images), site (caption) + hq:EL erg/Render 03.jpg, Render 02.jpg (the first two at full frame; the earlier crops had their alt texts swapped); the courtyard render has no HQ source"
     }
   ],
   "date": "2024",

@@ -199,6 +199,12 @@ ${when(film, () => html`<section class="block wrap g" aria-labelledby="film-h" d
 }
 
 /* ------------------------------------------------------------------ research */
+// further views of the printed book (optional): one justified row, every view whole
+const gallery = (b, p) => {
+  if (!b.gallery?.length) return '';
+  const r = row(b.gallery.map((g) => ({ rel: g.src, alt: g.alt })), { prefix: p, max: 'wide' });
+  return html`<div class="s-${r.span} block" data-rv>${r.html}</div>`;
+};
 const book = (b, p, { id, extra = '', after = '' }) => {
   const { w, h } = dims(b.cover);
   const span = spanFor(w, h, { max: 'narrow' });
@@ -212,6 +218,7 @@ ${extra}
 ${spec(b.spec)}
 </div>
 ${after}
+${gallery(b, p)}
 <div class="s-narrow block"><div class="prose">${b.text.map((t) => html`<p>${t.text}</p>`)}${when(b.honour, () => html`<p class="label honour">${b.honour}</p>`)}</div></div>
 <p class="s-text center in actions">${more(b.read, 'Read online', p, { ext: true })}${when(b.case, () => more(p + b.case, 'Al-Arg case study', p))}</p>
 </article>`;

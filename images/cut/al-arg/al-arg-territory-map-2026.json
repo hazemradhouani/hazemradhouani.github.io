@@ -1,0 +1,39 @@
+{
+ "src": "images/al-arg/al-arg-territory-map-2026.jpg",
+ "hash": "2176ba6279b64cf9",
+ "mode": "ink",
+ "from": [
+  1404,
+  1040
+ ],
+ "to": [
+  1388,
+  1039
+ ],
+ "offset": [
+  6,
+  0
+ ],
+ "paper": [
+  245,
+  239,
+  232
+ ],
+ "clip": [],
+ "ink": {
+  "ink": 224200,
+  "chromaticFraction": 0.7055,
+  "midtoneFraction": 0.9468,
+  "suggest": "colour"
+ },
+ "dark": null,
+ "specks": 26,
+ "tile": [
+  320,
+  200,
+  640,
+  400
+ ],
+ "background": null,
+ "labels": []
+}

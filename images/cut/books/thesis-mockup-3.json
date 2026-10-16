@@ -1,0 +1,35 @@
+{
+ "src": "images/books/thesis-mockup-3.png",
+ "hash": "5bc40e9c8a0b07e1",
+ "mode": "object",
+ "from": [
+  2560,
+  1707
+ ],
+ "to": [
+  1998,
+  1460
+ ],
+ "offset": [
+  296,
+  139
+ ],
+ "paper": "field",
+ "clip": [],
+ "ink": {
+  "ink": 397668,
+  "chromaticFraction": 0.4108,
+  "midtoneFraction": 0.1042,
+  "suggest": "colour"
+ },
+ "dark": "object",
+ "specks": 0,
+ "tile": [
+  640,
+  400,
+  640,
+  400
+ ],
+ "background": 0.6765,
+ "labels": []
+}

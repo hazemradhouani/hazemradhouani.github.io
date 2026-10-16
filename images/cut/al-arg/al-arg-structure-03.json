@@ -1,0 +1,39 @@
+{
+ "src": "images/al-arg/al-arg-structure-03.png",
+ "hash": "6f7a15202ebd8178",
+ "mode": "ink",
+ "from": [
+  700,
+  560
+ ],
+ "to": [
+  660,
+  524
+ ],
+ "offset": [
+  19,
+  9
+ ],
+ "paper": [
+  255,
+  255,
+  255
+ ],
+ "clip": [],
+ "ink": {
+  "ink": 44165,
+  "chromaticFraction": 0.2399,
+  "midtoneFraction": 0.8503,
+  "suggest": "colour"
+ },
+ "dark": "field",
+ "specks": 401,
+ "tile": [
+  0,
+  0,
+  640,
+  400
+ ],
+ "background": null,
+ "labels": []
+}

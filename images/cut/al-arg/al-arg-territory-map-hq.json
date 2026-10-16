@@ -1,0 +1,39 @@
+{
+ "src": "images/al-arg/al-arg-territory-map-hq.png",
+ "hash": "8c9ef693d0c88a8c",
+ "mode": "ink",
+ "from": [
+  1535,
+  1309
+ ],
+ "to": [
+  1504,
+  1114
+ ],
+ "offset": [
+  2,
+  103
+ ],
+ "paper": [
+  255,
+  255,
+  255
+ ],
+ "clip": [],
+ "ink": {
+  "ink": 265840,
+  "chromaticFraction": 0.6889,
+  "midtoneFraction": 0.9689,
+  "suggest": "colour"
+ },
+ "dark": "field",
+ "specks": 0,
+ "tile": [
+  320,
+  200,
+  640,
+  400
+ ],
+ "background": null,
+ "labels": []
+}

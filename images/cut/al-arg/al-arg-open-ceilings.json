@@ -1,0 +1,39 @@
+{
+ "src": "images/al-arg/al-arg-open-ceilings.png",
+ "hash": "0af90e9dd8231652",
+ "mode": "ink",
+ "from": [
+  667,
+  455
+ ],
+ "to": [
+  633,
+  429
+ ],
+ "offset": [
+  20,
+  16
+ ],
+ "paper": [
+  255,
+  255,
+  255
+ ],
+ "clip": [],
+ "ink": {
+  "ink": 32494,
+  "chromaticFraction": 0.013,
+  "midtoneFraction": 0.5047,
+  "suggest": "accent"
+ },
+ "dark": "field",
+ "specks": 105,
+ "tile": [
+  0,
+  0,
+  633,
+  400
+ ],
+ "background": null,
+ "labels": []
+}

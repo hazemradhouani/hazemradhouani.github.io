@@ -1,0 +1,39 @@
+{
+ "src": "images/al-arg/al-arg-functional-spaces.png",
+ "hash": "99ff162c8e06d0f3",
+ "mode": "ink",
+ "from": [
+  740,
+  600
+ ],
+ "to": [
+  656,
+  561
+ ],
+ "offset": [
+  35,
+  23
+ ],
+ "paper": [
+  255,
+  255,
+  255
+ ],
+ "clip": [],
+ "ink": {
+  "ink": 36926,
+  "chromaticFraction": 0.082,
+  "midtoneFraction": 0.6721,
+  "suggest": "colour"
+ },
+ "dark": "field",
+ "specks": 289,
+ "tile": [
+  0,
+  0,
+  640,
+  400
+ ],
+ "background": null,
+ "labels": []
+}

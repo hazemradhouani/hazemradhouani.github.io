@@ -8,57 +8,48 @@
       "sha256": "f2e3f5a47c5f8942ddfa1716e6f918167f91d73a0a0c67eff3f3665248f88f28",
       "width": 4500,
       "height": 3000,
-      "projectMapping": {
-        "slug": null,
-        "status": "unresolved"
-      },
-      "mappingEvidence": "Brief 10 keeps Memoire unpublished pending a verified title, author and relationship to the portfolio owner.",
-      "visualType": "unreviewed",
-      "textDisposition": "review-required",
+      "projectMapping": { "slug": "al-arg", "status": "confirmed" },
+      "mappingEvidence": "Printed title and author checked against content/pages/research.json (D54): front cover 'بين شاعرية المكان و قيمة الأثر' = titleAr; 'لإحياء الروح بقرية العرق، بحامة الجريد' = the subtitle 'To Revive the Spirit of Al Erg Village, Hammat Al Jarid'; 'إنجاز: حازم رضواني' (by Hazem Radhouani); supervisors 'أ. عدنان بن نجمة' and 'أ. المنصف الفراتي' = the Supervisors row; 'جامعة قرطاج' and the ENAU name = Institution; '2024' on the back cover. Same camera as images/books/thesis-book-closed.png (pdf2025:p46)",
+      "visualType": "book mockup (closed thesis, front and back covers) on a light grey studio ground with a soft shadow",
+      "textDisposition": "printed cover text (Arabic, part of the object; stays): 'وزارة التعليم العالي والبحث العلمي', 'جامعة قرطاج', 'المدرسة الوطنية للهندسة المعمارية والتعمير بتونس', 'رسالة في الهندسة المعمارية', title, subtitle, author, supervisors, back-cover paragraph and '2024'; nothing re-set",
       "duplicateOf": null,
-      "disposition": "unresolved",
+      "disposition": "approved",
       "authorizationEvidence": "owner-direct:2026-10-13",
-      "creditEvidence": "not established",
-      "roleEvidence": "not established",
-      "reason": "Withheld because the supplied material does not establish a publishable project relationship or personal role."
+      "creditEvidence": "Owner's own thesis: author 'حازم رضواني' printed on the cover; no third-party credit printed on the mockup",
+      "roleEvidence": "Research presents the thesis as the owner's (research.json); the mockup adds no claim",
+      "reason": "Cut out as an object (images/cut/books/thesis-mockup-1.png); the full-resolution file of the closed-book view the home page and the Research Open Graph image use"
     },
     {
       "source": "Images HQ/Memoire/002.png",
       "sha256": "5cbf8a511daf70e4918187d66dc8a6fdb4b4ad08b8173f97d66cfc5238fd2c32",
       "width": 4500,
       "height": 3000,
-      "projectMapping": {
-        "slug": null,
-        "status": "unresolved"
-      },
-      "mappingEvidence": "Brief 10 keeps Memoire unpublished pending a verified title, author and relationship to the portfolio owner.",
-      "visualType": "unreviewed",
-      "textDisposition": "review-required",
+      "projectMapping": { "slug": "al-arg", "status": "confirmed" },
+      "mappingEvidence": "Same camera and spread as images/books/thesis-book-open.png (pdf2025:p47), the Research cover; the left page carries the thesis's past-present-future axonometric (Images HQ/EL erg/Time.jpg) and the right page site photographs of Al-Arg; the book's title and author are verified on 001.png (D54)",
+      "visualType": "book mockup (thesis open on a spread) on a light grey studio ground with a soft shadow",
+      "textDisposition": "a small Arabic photo caption on the right page (part of the printed page; stays, not legible at publication size); nothing re-set",
       "duplicateOf": null,
-      "disposition": "unresolved",
+      "disposition": "approved",
       "authorizationEvidence": "owner-direct:2026-10-13",
-      "creditEvidence": "not established",
-      "roleEvidence": "not established",
-      "reason": "Withheld because the supplied material does not establish a publishable project relationship or personal role."
+      "creditEvidence": "Owner's own thesis (author verified on 001.png); no third-party credit printed on the mockup",
+      "roleEvidence": "Research presents the thesis as the owner's (research.json); the mockup adds no claim",
+      "reason": "Research cover at full resolution, cut out as an object (images/cut/books/thesis-mockup-2.png); replaces thesis-book-open.png"
     },
     {
       "source": "Images HQ/Memoire/003.png",
       "sha256": "dde0b4ae38f7a2f157d264eac23dac6051ad8a60a2d8d650fceff8fed68f3cd7",
       "width": 4500,
       "height": 3000,
-      "projectMapping": {
-        "slug": null,
-        "status": "unresolved"
-      },
-      "mappingEvidence": "Brief 10 keeps Memoire unpublished pending a verified title, author and relationship to the portfolio owner.",
-      "visualType": "unreviewed",
-      "textDisposition": "review-required",
+      "projectMapping": { "slug": "al-arg", "status": "confirmed" },
+      "mappingEvidence": "The thesis open on a spread of the Al-Arg renders (Images HQ/EL erg/Render.jpg, Render 02.jpg, Render 03.jpg on the pages); the book's title and author are verified on 001.png (D54)",
+      "visualType": "book mockup (thesis open on a spread of renders) on a light grey studio ground with a soft shadow",
+      "textDisposition": "small Arabic image captions on both pages (part of the printed pages; stay, not legible at publication size); nothing re-set",
       "duplicateOf": null,
-      "disposition": "unresolved",
+      "disposition": "approved",
       "authorizationEvidence": "owner-direct:2026-10-13",
-      "creditEvidence": "not established",
-      "roleEvidence": "not established",
-      "reason": "Withheld because the supplied material does not establish a publishable project relationship or personal role."
+      "creditEvidence": "Owner's own thesis (author verified on 001.png); no third-party credit printed on the mockup",
+      "roleEvidence": "Research presents the thesis as the owner's (research.json); the mockup adds no claim",
+      "reason": "Cut out as an object (images/cut/books/thesis-mockup-3.png); the Research template has no slot for a second thesis image yet"
     }
   ]
 }

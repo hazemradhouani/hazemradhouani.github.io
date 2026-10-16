@@ -1,0 +1,67 @@
+{
+ "src": "images/al-arg/al-arg-past-present-future.png",
+ "hash": "6e848dd036d62363",
+ "mode": "ink",
+ "from": [
+  1004,
+  2323
+ ],
+ "to": [
+  886,
+  2226
+ ],
+ "offset": [
+  80,
+  97
+ ],
+ "paper": [
+  255,
+  255,
+  255
+ ],
+ "clip": [],
+ "ink": {
+  "ink": 177309,
+  "chromaticFraction": 0.0114,
+  "midtoneFraction": 0.6619,
+  "suggest": "accent"
+ },
+ "dark": "field",
+ "specks": 21,
+ "tile": [
+  0,
+  0,
+  640,
+  400
+ ],
+ "background": null,
+ "labels": [
+  {
+   "id": "past",
+   "removed": 4,
+   "kept": 0,
+   "x": 67.833,
+   "y": 2.022,
+   "w": 9.481,
+   "h": 1.438
+  },
+  {
+   "id": "present",
+   "removed": 7,
+   "kept": 0,
+   "x": 67.833,
+   "y": 40.117,
+   "w": 17.833,
+   "h": 1.438
+  },
+  {
+   "id": "future",
+   "removed": 6,
+   "kept": 0,
+   "x": 67.833,
+   "y": 75.921,
+   "w": 15.914,
+   "h": 1.393
+  }
+ ]
+}

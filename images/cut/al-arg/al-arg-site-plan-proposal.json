@@ -1,0 +1,39 @@
+{
+ "src": "images/al-arg/al-arg-site-plan-proposal.png",
+ "hash": "07e5c8f877160c37",
+ "mode": "ink",
+ "from": [
+  494,
+  322
+ ],
+ "to": [
+  483,
+  322
+ ],
+ "offset": [
+  10,
+  0
+ ],
+ "paper": [
+  246,
+  240,
+  233
+ ],
+ "clip": [],
+ "ink": {
+  "ink": 22379,
+  "chromaticFraction": 0.0067,
+  "midtoneFraction": 0.6037,
+  "suggest": "accent"
+ },
+ "dark": null,
+ "specks": 349,
+ "tile": [
+  0,
+  0,
+  483,
+  322
+ ],
+ "background": null,
+ "labels": []
+}
