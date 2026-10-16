@@ -1,6 +1,6 @@
 {
  "src": "images/belhomme/belhomme-plu-section-rue-belhomme.jpg",
- "hash": "9b4f130bd4c296dc",
+ "hash": "c0e54f579f5da91c",
  "mode": "ink",
  "from": [
   560,
@@ -26,7 +26,7 @@
   "midtoneFraction": 0.5929,
   "suggest": "colour"
  },
- "dark": null,
+ "dark": "field",
  "specks": 184,
  "tile": [
   0,

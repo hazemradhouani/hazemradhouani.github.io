@@ -1,0 +1,41 @@
+{
+ "src": "images/belhomme/belhomme-plan-n02.jpg",
+ "hash": "4e962dfd93742231",
+ "mode": "ink",
+ "from": [
+  634,
+  460
+ ],
+ "to": [
+  619,
+  454
+ ],
+ "offset": [
+  15,
+  0
+ ],
+ "paper": [
+  246,
+  240,
+  233
+ ],
+ "clip": [
+  "top"
+ ],
+ "ink": {
+  "ink": 15161,
+  "chromaticFraction": 0.0962,
+  "midtoneFraction": 0.6111,
+  "suggest": "colour"
+ },
+ "dark": "invert-accent",
+ "specks": 1265,
+ "tile": [
+  0,
+  0,
+  619,
+  400
+ ],
+ "background": null,
+ "labels": []
+}

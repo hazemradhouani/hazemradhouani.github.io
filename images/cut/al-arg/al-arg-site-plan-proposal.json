@@ -1,6 +1,6 @@
 {
  "src": "images/al-arg/al-arg-site-plan-proposal.png",
- "hash": "07e5c8f877160c37",
+ "hash": "437a254bd3a28496",
  "mode": "ink",
  "from": [
   494,
@@ -26,7 +26,7 @@
   "midtoneFraction": 0.6037,
   "suggest": "accent"
  },
- "dark": null,
+ "dark": "field",
  "specks": 349,
  "tile": [
   0,

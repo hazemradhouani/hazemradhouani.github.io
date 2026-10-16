@@ -1,6 +1,13 @@
 {
   "$comment": "Belhomme cutouts (tools/cutout.mjs; D46, D49, D50). Studio BELEM permit sheets exported at 300 dpi on clean white paper (blank areas read 255): low floor/knee so the pale ghosted neighbouring buildings and grey fills survive. Greyscale linework with thin red dimensions and property lines, blue room names and two tinted entrance markers: invert-accent. No clip: every crop leaves about 40 px of paper.",
   "images": {
+    "images/belhomme/belhomme-plan-n00.jpg": { "clip": ["top"], "dark": "invert-accent" },
+    "images/belhomme/belhomme-plan-n02.jpg": { "clip": ["top"], "dark": "invert-accent" },
+    "images/belhomme/belhomme-demolition-plans.jpg": { "dark": "field" },
+    "images/belhomme/belhomme-existing-facades-survey.jpg": { "dark": "invert" },
+    "images/belhomme/belhomme-plu-section-rochechouart.jpg": { "dark": "field" },
+    "images/belhomme/belhomme-plu-section-rue-belhomme-detailed.jpg": { "dark": "invert-accent" },
+    "images/belhomme/belhomme-plu-section-rue-belhomme.jpg": { "dark": "field" },
     "images/belhomme/belhomme-roof-plan.png": {
       "paper": [255, 255, 255],
       "floor": 0.015,

@@ -1,6 +1,6 @@
 {
  "src": "images/belhomme/belhomme-existing-facades-survey.jpg",
- "hash": "ffbf819470b96048",
+ "hash": "a4b25383821f429b",
  "mode": "ink",
  "from": [
   1634,
@@ -26,7 +26,7 @@
   "midtoneFraction": 0.3672,
   "suggest": "mono"
  },
- "dark": null,
+ "dark": "invert",
  "specks": 517,
  "tile": [
   0,

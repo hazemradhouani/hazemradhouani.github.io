@@ -1,6 +1,7 @@
 {
-  "$comment": "Villa Papillon cutouts (tools/cutout.mjs; D46, D49, D50). The site plan from 2_page-0001 (Plan Situation, 1:200), cropped to the whole drawing with 40 px of paper: grey linework, a shaded roof, a blue pool and yellow-green lawns, so low floor/knee keeps the pale fills and the dark scheme uses the inspection field (colour-coded fills). Its title, north arrow and wind rose are left outside by the crop, so nothing is erased; its dimensions and the pool label 'PISCINE' are intrinsic and stay. The existing papillon-plans.jpg (pdf2025:p30) keeps the default settings it was cut with.",
+  "$comment": "Villa Papillon cutouts (tools/cutout.mjs; D46, D49, D50). The site plan from 2_page-0001 (Plan Situation, 1:200), cropped to the whole drawing with 40 px of paper: grey linework, a shaded roof, a blue pool and yellow-green lawns, so low floor/knee keeps the pale fills and the dark scheme uses the inspection field (colour-coded fills). Its title, north arrow and wind rose are left outside by the crop, so nothing is erased; its dimensions and the pool label 'PISCINE' are intrinsic and stay. The plans from pdf2025:p30 (no HQ source) keep the default floor/knee; their plot lines and pool run off the left and top of the page crop (context, clipped by design); greyscale with a blue pool: invert-accent.",
   "images": {
+    "images/papillon/papillon-plans.jpg": { "clip": ["left", "top"], "dark": "invert-accent" },
     "images/papillon/papillon-site-plan.png": {
       "paper": [255, 255, 255],
       "floor": 0.015,
