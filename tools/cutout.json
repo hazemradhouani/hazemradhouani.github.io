@@ -11,9 +11,7 @@
   "extra": [
     "images/al-arg/al-arg-site-plan-proposal.png"
   ],
-  "exclude": {
-    "images/corallum/corallum-site.jpg": "a massing model photographed on a tinted full-bleed ground; no paper to key"
-  },
+  "exclude": {},
   "images": {
     "images/al-arg/al-arg-site-plan-proposal.png": {
       "paper": [
