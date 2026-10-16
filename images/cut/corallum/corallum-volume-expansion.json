@@ -1,0 +1,39 @@
+{
+ "src": "images/corallum/corallum-volume-expansion.png",
+ "hash": "caab33a38a462e15",
+ "mode": "ink",
+ "from": [
+  608,
+  237
+ ],
+ "to": [
+  541,
+  169
+ ],
+ "offset": [
+  34,
+  34
+ ],
+ "paper": [
+  255,
+  255,
+  255
+ ],
+ "clip": [],
+ "ink": {
+  "ink": 8887,
+  "chromaticFraction": 0.1463,
+  "midtoneFraction": 0.5157,
+  "suggest": "colour"
+ },
+ "dark": "field",
+ "specks": 17,
+ "tile": [
+  0,
+  0,
+  541,
+  169
+ ],
+ "background": null,
+ "labels": []
+}

@@ -1,0 +1,39 @@
+{
+ "src": "images/corallum/corallum-volume-rhythm.png",
+ "hash": "7471ab4c0850a4d5",
+ "mode": "ink",
+ "from": [
+  493,
+  341
+ ],
+ "to": [
+  423,
+  327
+ ],
+ "offset": [
+  35,
+  14
+ ],
+ "paper": [
+  255,
+  255,
+  255
+ ],
+ "clip": [],
+ "ink": {
+  "ink": 10721,
+  "chromaticFraction": 0.1857,
+  "midtoneFraction": 0.4022,
+  "suggest": "colour"
+ },
+ "dark": "field",
+ "specks": 19,
+ "tile": [
+  0,
+  0,
+  423,
+  327
+ ],
+ "background": null,
+ "labels": []
+}

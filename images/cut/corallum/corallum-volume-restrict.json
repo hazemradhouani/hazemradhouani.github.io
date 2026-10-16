@@ -1,0 +1,39 @@
+{
+ "src": "images/corallum/corallum-volume-restrict.png",
+ "hash": "aac56a16213d06da",
+ "mode": "ink",
+ "from": [
+  479,
+  385
+ ],
+ "to": [
+  409,
+  326
+ ],
+ "offset": [
+  35,
+  24
+ ],
+ "paper": [
+  255,
+  255,
+  255
+ ],
+ "clip": [],
+ "ink": {
+  "ink": 17934,
+  "chromaticFraction": 0.6701,
+  "midtoneFraction": 0.7618,
+  "suggest": "colour"
+ },
+ "dark": "field",
+ "specks": 24,
+ "tile": [
+  0,
+  0,
+  409,
+  326
+ ],
+ "background": null,
+ "labels": []
+}
