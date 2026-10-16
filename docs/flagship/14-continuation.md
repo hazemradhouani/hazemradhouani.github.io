@@ -2,37 +2,20 @@
 
 | | |
 |---|---|
-| Date | 2026-10-16 (second update) |
-| Read first | `12-hq-dissection-plan.md` (plan), `13-dissection-protocol.md` (procedure), `decision-log.md` D45–D67 |
-| Branch | `flagship-upgrade`, pushed to origin |
+| Date | 2026-10-16 (third update) |
+| Read first | `12-hq-dissection-plan.md` (plan), `13-dissection-protocol.md` (procedure), `decision-log.md` D45–D70 |
+| Branch | `flagship-upgrade`; merged to `main` through a PR once the gates below pass |
 
-## Done (committed and pushed)
-- **Engine and front end:**
-  - `tools/lib/matte.mjs`: ink and object matting, annotation removal, edge gate, ink classes.
-  - `tools/cutout.mjs` with per-project `tools/cutout.d/*.json`.
-  - `tools/import-hq-media.mjs`: 2560 px cap, crops in RGB, cache.
-  - `tools/media.mjs`: exact WebP heights, premultiplied alpha.
-  - Dark treatments: `invert`, `invert-accent`, `field` and `object`.
-  - Labels and legends re-set in HTML; an optional Research `gallery` row (D64).
-  - QA gates for treatments and labels.
-  - 36 tests in `tools/tests/`, all passing.
-- **All 15 case studies re-derived from `Images HQ/`:** ain-sebaa (the reference case), hay-mohammadi, zenata, belhomme, nouvelle-medina, bolivar, foubert, la-villette, avenir (D53/D61), cinephile (D62), al-arg with the PBR plates and thesis mockups (D64), and corallum, sentry, tamansourt, papillon (D66). Every folder's audit has no `review-required` record; `node tools/hq-audit.mjs --check` and every `import-hq-media --check` pass.
-- **Shared files:**
-  - Home flagship, capabilities (D63) and selected work (D67) use the HQ media.
-  - `tools/og.mjs` points at the HQ images; the Work card line follows D45.
-  - The content ledger is regenerated (`node tools/ledger.mjs`).
-  - 201 superseded media files are removed (D65), with the owner's permission.
-- **Docs:** `tools/README.md` (HQ pipeline), `08-direction.md` (D46–D63 amendment), protocol 13 (`maxH` note).
+## Done
+- **All 15 case studies re-derived from `Images HQ/`** (D45–D68); the audit, the import checks and the build pass.
+- **Dark scheme without paper boxes (D69):** no drawing sits on the cream field any more. 49 colour drawings are inverted with their hues held (`invert-accent`); 14 with rendered material, photographs or shaded models carry a `keep` layer (`keepLayer()` in `tools/lib/matte.mjs`, `<stem>--keep.png` beside the cutout) laid over the inverted drawing in their authored colours; six drawings whose own ground makes them legible are opaque `plate` cutouts, inverted in dark (Corallum level 01, western elevation, section A-A; Al-Arg watercolour site plan; Cinephile section and eastern facade). Renders and photographs stay as authored in both schemes. The Aïn Sebaâ and Cinephile ground floors are re-keyed against their own paper.
+- **Vertical labels (D70)** for a street name along a section end.
+- **QA:** fails any paper field in dark, checks keep layers per scheme; the stale mobile theme check and the strip crop tolerance are fixed. 40 tests pass.
+- **Share cards and CV** regenerated with the HQ heroes and the D45 identity line.
+- **Local settings:** `.claude/settings.json` (gitignored) allows `npm run serve`, `qa`, `perf`, `og`, `cv` and `curl` to the local server, so the browser gates can run.
 
-## Blocked: the preview server
-The owner allowed restarting it (2026-10-16), but the Claude Code auto-mode classifier refuses `npm run serve` and even `curl http://127.0.0.1:8090/…` ("Interfere With Workloads"). Do not work around it. Either the owner runs `npm run serve` in a separate terminal, or adds allow rules to `.claude/settings.json` (`Bash(npm run serve)`, `Bash(npm run qa*)`, `Bash(npm run perf*)`, `Bash(npm run og)`, `Bash(npm run cv)`, `Bash(node tools/qa.mjs*)`, `Bash(curl -s*127.0.0.1:8090*)`).
-
-## Still to do, in order (all need the server except where noted)
-1. `npm run og` and `npm run cv`: the share cards and the CV still show the old heroes and the old "heritage documentation and earthen architecture" line.
-2. `npm run qa -- --shots` (all pages, both schemes, 6 widths), `npm run perf`, then look at the screenshots: especially the long drawings, the Tamansourt site plan (reduced 4x), the small Sentry Revit callouts and the label positions.
-3. A design critique from the screenshots (the code and static accessibility reviews were run without the server; see `09-qa-report.md`).
-4. Update `09-qa-report.md` with the browser results.
-5. Open the PR `flagship-upgrade` → `main` and merge once every gate passes.
+## How to verify
+`npm run serve` (background), then `node --test tools/tests/*.test.mjs`, `npm run build`, `npm run qa` (add `-- --shots` for screenshots in `tools/.cache/`), `npm run perf`. A rare `ERR_NO_BUFFER_SPACE` console line is the Windows local server under screenshot load, not the site; re-run.
 
 ## Open owner questions (`[CONTENT NEEDED]`, collect into the final report)
 - Rue de l'Avenir: role; render credit.
