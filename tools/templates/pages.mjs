@@ -132,9 +132,10 @@ export function work(site, projects, ctx) {
   const p = ctx.prefix;
   const groups = site.groups.map((g) => ({ ...g, items: projects.filter((x) => x.group === g.id) })).filter((g) => g.items.length);
   const chapters = projects.map((x, i) => chapter(x, ctx, i === 0));
+  const years = projects.map((x) => parseInt(x.year, 10)).filter(Number.isFinite);
   const body = html`
 <header class="intro wrap g">
-<div class="s-text center"><h1 class="h1">Work</h1><p class="lead in">Places already alive. ${projects.length} projects in Paris, Morocco and Tunisia, from 2022 to 2026.</p></div>
+<div class="s-text center"><h1 class="h1">Work</h1><p class="lead in">Places already alive. ${projects.length} projects in Tunisia, France and Morocco, from ${Math.min(...years)} to ${Math.max(...years)}.</p></div>
 <nav class="s-wide block index center" aria-label="Projects by place">
 ${groups.map((g) => html`<div><p class="label" id="g-${g.id}">${g.label}</p><ul role="list" aria-labelledby="g-${g.id}">${g.items.map((x) => html`<li><a href="#${x.slug}">${x.title}</a></li>`)}</ul></div>`)}
 </nav>
