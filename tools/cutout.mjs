@@ -128,11 +128,16 @@ const failed = [];
 for (const rel of list) {
   const o = { ...DEF, ...(conf.images || {})[rel], fullBleed: rel in (conf.fullBleed || {}) };
   // an HQ drawing master is a local intermediate (D55): without it, keep the committed cutout
+  if (o.alpha === 'halo') { failed.push(`${rel}: the "halo" alpha mode is retired (D46, D50); remove it`); continue; }
   if (!fs.existsSync(path.join(ROOT, rel))) {
-    if (fs.existsSync(path.join(ROOT, cutFor(rel))) && fs.existsSync(path.join(ROOT, sidecarFor(rel)))) { done.push({ rel, sidecar: JSON.parse(fs.readFileSync(path.join(ROOT, sidecarFor(rel)), 'utf8')) }); continue; }
-    failed.push(`${rel}: neither the master nor a committed cutout exists (run node tools/import-hq-media.mjs --write)`); continue;
+    if (fs.existsSync(path.join(ROOT, cutFor(rel))) && fs.existsSync(path.join(ROOT, sidecarFor(rel)))) {
+      const kept = JSON.parse(fs.readFileSync(path.join(ROOT, sidecarFor(rel)), 'utf8'));
+      // settings changed (or --force) but nothing to cut from: say so instead of keeping old pixels silently
+      if (FORCE || kept.hash !== optionsHash(rel, o)) { failed.push(`${rel}: STALE, its settings changed but the master is absent (run node tools/import-hq-media.mjs --write first)`); continue; }
+      done.push({ rel, sidecar: kept }); continue;
+    }
+    failed.push(`${rel}: neither the master nor a committed cutout with its sidecar exists (run node tools/import-hq-media.mjs --write)`); continue;
   }
-  if (o.alpha === 'halo') throw new Error(`${rel}: the "halo" alpha mode is retired (D46, D50); remove it`);
   const dest = path.join(ROOT, cutFor(rel)); const side = path.join(ROOT, sidecarFor(rel));
   const prev = fs.existsSync(side) ? JSON.parse(fs.readFileSync(side, 'utf8')) : null;
   const fresh = prev && fs.existsSync(dest) && fs.statSync(dest).mtimeMs > fs.statSync(path.join(ROOT, rel)).mtimeMs && prev.hash === optionsHash(rel, o);

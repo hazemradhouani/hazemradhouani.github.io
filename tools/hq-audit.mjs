@@ -327,6 +327,8 @@ export function validateProductionManifest(document, audit) {
         for (const field of ['x', 'y', 'width', 'height']) if (!Number.isInteger(media.crop[field]) || media.crop[field] < (field === 'width' || field === 'height' ? 1 : 0)) errors.push(`${label}.crop.${field} must be a valid source-pixel integer`);
       }
     }
+    // an optional long-edge cap below the 2560 px master cap: a missing, zero or negative value would write a 1x1 master
+    if ('maxEdge' in media && !(Number.isInteger(media.maxEdge) && media.maxEdge > 0)) errors.push(`${label}.maxEdge must be a positive integer of pixels`);
     for (const field of ['treatment', 'darkTreatment', 'credit', 'authorizationEvidence', 'captionEvidence', 'reviewStatus']) if (!nonEmptyString(media[field])) errors.push(`${label}.${field} must be a non-empty string`);
     if (!establishedEvidence(media.credit)) errors.push(`${label}.credit must be established before publication`);
     if (!establishedEvidence(media.captionEvidence)) errors.push(`${label}.captionEvidence must be established before publication`);

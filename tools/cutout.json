@@ -1,5 +1,5 @@
 {
-  "$comment": "Settings for tools/cutout.mjs (D29, D30, D40, D46). Targets = every image of a kind:drawing figure + extra - exclude. Per-image overrides: paper [r,g,b], floor, knee, margin, band, halo (px), alpha ('halo' legacy light-only | 'graded' required for dark-compatible drawings).",
+  "$comment": "Settings for tools/cutout.mjs (D29, D30, D40, D46, D49, D50), merged with one tools/cutout.d/<slug>.json per case study. Targets = every image of a kind:drawing figure + extra + every configured image - exclude. Per-image options: mode ('ink' | 'object' with tol, grad, keep, bg), paper ([r,g,b] | 'field'), floor, knee, margin, band, clip [sides], erase [{id, x, y, w, h}], dark ('invert' | 'invert-accent' | 'field' | 'object'). The defaults 'halo' and 'alpha' are retired and read by nothing; they stay only because they are part of every sidecar's settings hash.",
   "defaults": {
     "floor": 0.06,
     "knee": 0.14,
@@ -20,7 +20,8 @@
         233
       ],
       "floor": 0.1,
-      "knee": 0.18
+      "knee": 0.18,
+      "dark": "field"
     }
   },
   "fullBleed": {

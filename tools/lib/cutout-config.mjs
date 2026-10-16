@@ -22,6 +22,3 @@ export function loadCutoutConfig(root) {
   }
   return conf;
 }
-
-// newest modification time of any cutout settings file (a changed setting makes cutouts stale)
-export const configTime = (root, conf) => Math.max(...conf.files.map((f) => fs.statSync(path.join(root, f)).mtimeMs));

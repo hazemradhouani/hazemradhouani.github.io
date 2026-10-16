@@ -22,6 +22,14 @@ const walk = (dir) => fs.readdirSync(path.join(ROOT, dir), { withFileTypes: true
 // a drawing master that has a cutout is never served (pages show the cutout), so it gets no derivatives
 const sources = walk('images').filter((f) => /\.(jpe?g|png)$/i.test(f) && !SKIP.test(f) && (!only.length || only.some((o) => f.startsWith(o)))
   && (f.startsWith('images/cut/') || !fs.existsSync(path.join(ROOT, cutFor(f)))));
+// ...and derivatives such a master still carries from before its cutout are stale: remove them (exact stem only)
+for (const f of walk('images').filter((f) => /\.(jpe?g|png)$/i.test(f) && !SKIP.test(f) && !f.startsWith('images/cut/')
+  && (!only.length || only.some((o) => f.startsWith(o))) && fs.existsSync(path.join(ROOT, cutFor(f))))) {
+  const stem = path.join(ROOT, optStem(f)), dir = path.dirname(stem), base = path.basename(stem) + '-';
+  if (fs.existsSync(dir)) for (const x of fs.readdirSync(dir)) if (x.startsWith(base) && /^\d+\.(avif|webp)$/.test(x.slice(base.length))) {
+    fs.unlinkSync(path.join(dir, x)); console.log(`pruned ${path.relative(ROOT, path.join(dir, x)).split(path.sep).join('/')} (its master is served as a cutout)`);
+  }
+}
 
 let made = 0;
 for (const rel of sources) {

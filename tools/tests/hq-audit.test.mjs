@@ -177,6 +177,19 @@ test('production manifest source is refused until the matching audit entry is ap
   assert.deepEqual(validateProductionManifest(manifest, audit), []);
 });
 
+test('production manifest refuses a long-edge cap that is not a positive integer (it would write a 1x1 master)', () => {
+  const audit = auditDocument([auditAsset({
+    disposition: 'approved',
+    creditEvidence: 'Studio BELEM credit verified in the supplied source.',
+    roleEvidence: 'Existing Aïn Sebaâ case-study evidence establishes the owner\'s role.',
+  })]);
+  for (const maxEdge of [null, 0, -5, 12.5, '1200']) {
+    const errors = validateProductionManifest({ version: 1, sourceRoot: 'Images HQ', assets: [mediaAsset({ maxEdge })] }, audit);
+    assert.ok(errors.some((error) => error.includes('maxEdge must be a positive integer')), `maxEdge ${JSON.stringify(maxEdge)}`);
+  }
+  assert.deepEqual(validateProductionManifest({ version: 1, sourceRoot: 'Images HQ', assets: [mediaAsset({ maxEdge: 1200 })] }, audit), []);
+});
+
 test('production manifest rejects an incomplete derivative recipe', () => {
   const audit = auditDocument([auditAsset({
     disposition: 'approved',
