@@ -1,4 +1,24 @@
-# 09 · QA report: Field (2026-10-13)
+# 09 · QA report: Field (2026-10-13), with the HQ re-derivation update (2026-10-16)
+
+## Update 2026-10-16: HQ re-derivation (D45–D68), before the browser run
+All 15 case studies were re-derived from `Images HQ/`. The local preview server could not be started: the owner allowed it, but the Claude Code permission classifier refused `npm run serve` and any request to `127.0.0.1:8090`. So **no browser check of the new pages has run yet**; the 2026-10-13 results below describe the previous release.
+
+**Run and passing (commit `1baf307`):**
+| Check | How | Result |
+|---|---|---|
+| Unit tests | `node --test tools/tests/*.test.mjs` | 39 / 39 pass, including: every shipped cutout has a sidecar and a dark treatment; every image a built page references is tracked by git; theme control naming; viewer treatment per image |
+| HQ audit | `node tools/hq-audit.mjs --check` | 193 sources, 211 recipes valid; no `review-required` record in any folder |
+| Masters | `node tools/import-hq-media.mjs --check --only=images/<slug>/` for every slug | all current |
+| Build | `npm run build` | 22 pages, 15 projects |
+| Missing images | every `images/…` reference in every built page checked on disk | 0 missing |
+| Unreferenced media | exact-path scan of pages, content, tools, CSS and JS | 303 superseded files removed (D65, D68), 0 referenced |
+| Cutout review | every new or re-made cutout's sheet (white, charcoal, magenta, dark rendering) and 1:1 detail, by eye; at least a quarter of each agent's sheets re-checked in the main session | passed; edge gate and erase counts clean |
+| Independent static reviews | an accessibility review (WCAG 2.2 AA) and a code review of the diff, by subagents | 14 + 8 findings; adopted or declined with reasons in D68 |
+| Identity sweep | grep of shipped files for the superseded wording | none left in pages or content (the share cards and CV still need regenerating) |
+
+**Not yet run (needs the server):** `npm run qa -- --shots` (axe in both schemes, overflow, crop, grid, palette, alpha, label and pin gates at 6 widths), `npm run perf`, a screenshot review and design critique, `npm run og` and `npm run cv` (the share cards and the CV still show the old heroes and the old identity line).
+
+---
 
 Everything below was run on branch `flagship-upgrade` against the local server (`npm run serve`, base `/portfolio/`), with Chrome 155 unless stated otherwise.
 
