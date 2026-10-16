@@ -91,7 +91,7 @@
       ],
       "floor": 0.015,
       "knee": 0.03,
-      "dark": "keep"
+      "dark": "invert-accent"
     },
     "images/foubert/foubert-street-window-section.png": {
       "paper": [

@@ -31,6 +31,12 @@ for (const f of walk('images').filter((f) => /\.(jpe?g|png)$/i.test(f) && !SKIP.
   }
 }
 
+// ...and a cutout's derivatives outlive it when the cutout is removed (a keep layer dropped, D69): remove them
+if (fs.existsSync(path.join(ROOT, 'images/opt/cut'))) for (const f of walk('images/opt/cut')) {
+  const m = /^images\/opt\/cut\/(.+)-\d+\.(?:avif|webp)$/u.exec(f);
+  if (m && !fs.existsSync(path.join(ROOT, `images/cut/${m[1]}.png`))) { fs.unlinkSync(path.join(ROOT, f)); console.log(`pruned ${f} (its cutout no longer exists)`); }
+}
+
 let made = 0;
 for (const rel of sources) {
   const { w } = dims(rel);

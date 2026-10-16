@@ -1,6 +1,6 @@
 {
  "src": "images/foubert/foubert-east-facade.png",
- "hash": "26637a8a1524668b",
+ "hash": "d8f789e6835b12e5",
  "mode": "ink",
  "from": [
   2560,
@@ -26,14 +26,8 @@
   "midtoneFraction": 0.8219,
   "suggest": "colour"
  },
- "dark": "keep",
- "keep": {
-  "file": "images/cut/foubert/foubert-east-facade--keep.png",
-  "share": 0.4222,
-  "radius": 4,
-  "t": 0.06,
-  "fill": true
- },
+ "dark": "invert-accent",
+ "keep": null,
  "specks": 5,
  "tile": [
   1280,

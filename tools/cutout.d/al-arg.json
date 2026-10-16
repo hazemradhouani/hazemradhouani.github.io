@@ -1,6 +1,10 @@
 {
   "$comment": "Al-Arg cutouts (tools/cutout.mjs; D46, D49, D50, D54). JPEG exports keep the default floor/knee; the small shaded axonometrics and structure details use 0.015/0.03 so their pale ground planes survive (the past-present-future drawing keeps the defaults: its planes survive them, and the low floor counted JPEG ringing as erased glyphs). Plans that fill their frame key white paper and clip all four sides. Thesis mockups: objects on a fitted studio ground; tol 0.6 lets the flood take the whole soft shadow (core alpha about 0.5, so it keys to translucent dark), grad 0.045 stops it at the light page block (0.03 left a jagged opaque line on the shadow ramp, 0.06 flooded the pages); mockup 3 keeps a 34 x 4 px strip at the right page top corner, where page and ground meet with no drawn edge.",
+  "fullBleed": {
+    "images/al-arg/al-arg-site-plan-detail.jpg": "a site plan drawn and washed on watercolour paper: the paper's grain is the medium, so it is kept whole (a plate, D69)"
+  },
   "images": {
+    "images/al-arg/al-arg-site-plan-detail.jpg": { "mode": "plate", "dark": "invert-accent" },
     "images/al-arg/al-arg-territory-map-hq.png": {
       "dark": "keep"
     },
