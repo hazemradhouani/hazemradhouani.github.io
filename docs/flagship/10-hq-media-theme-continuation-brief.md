@@ -137,4 +137,3 @@ The audit found several high-confidence sources for later recipe work. These are
 - Every crop has a reproducible rectangular recipe, preserves all required geometry and text, and has required credit/authorization evidence.
 - The public portfolio makes no personal-role claim for Villeneuve-la-Garenne, `Memoire` or another unresolved source.
 - The complete build, dual-theme QA, media checks, metadata generation and performance measurements pass with recorded evidence.
-
