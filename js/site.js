@@ -28,11 +28,12 @@
     root.setAttribute('data-theme', dark ? 'dark' : 'light');
     root.style.colorScheme = dark ? 'dark' : 'light';
     if (themeMeta) themeMeta.setAttribute('content', dark ? '#121311' : '#FFFFFF');
+    // the name is the visible state plus the action (WCAG 2.5.3: the visible words begin the name)
     themeControls.forEach(function (button) {
-      button.setAttribute('aria-pressed', String(dark));
-      button.setAttribute('aria-label', dark ? 'Switch to light theme' : 'Switch to dark theme');
       var label = button.querySelector('[data-theme-label]');
       if (label) label.textContent = 'theme: ' + (dark ? 'dark' : 'light');
+      var action = button.querySelector('[data-theme-action]');
+      if (action) action.textContent = ', switch to ' + (dark ? 'light' : 'dark');
     });
     if (persist) {
       explicitTheme = dark ? 'dark' : 'light';
@@ -153,11 +154,13 @@
       return { a: a, w: +a.getAttribute('data-w'), h: +a.getAttribute('data-h'), full: a.getAttribute('data-webp') || a.getAttribute('href'),
         title: a.getAttribute('data-title') || '', alt: a.getAttribute('data-alt') || '', dark: a.getAttribute('data-dark') || '' };
     };
-    // the figure's dark treatment (D50): the inspection field, or inverted linework
-    var treat = function (it) {
-      stage.classList.toggle('is-inspection', it.dark === 'field');
-      stage.classList.toggle('is-invert', it.dark === 'invert');
-      stage.classList.toggle('is-invert-accent', it.dark === 'invert-accent');
+    // the figure's dark treatment (D50) travels with its own image box, so a crossfade never re-treats the outgoing one
+    var TREAT = { field: 'is-inspection', invert: 'is-invert', 'invert-accent': 'is-invert-accent' };
+    // labels re-set from the drawing (D49) keep the page's proportion (1.15% of the drawing's width, the wide layout);
+    // where that falls under 13px on screen they wait for actual size
+    var LAB = 0.0115, LAB_MIN = 13;
+    var sizeLabels = function (s) {
+      viewer.classList.toggle('is-small-labels', !!img && img.hasAttribute('data-labels') && info(cur).w * LAB * s < LAB_MIN);
     };
     var fit = function (it) {
       var r = stage.getBoundingClientRect();
@@ -171,18 +174,27 @@
       return visible ? { x: r.left - s.left, y: r.top - s.top, s: r.width / it.w } : null;
     };
     var makeImg = function (it) {
+      var box = document.createElement('div');                // the image box moves; the image and its labels move with it
+      box.className = 'viewer__img' + (TREAT[it.dark] ? ' ' + TREAT[it.dark] : '');
+      box.style.width = it.w + 'px'; box.style.height = it.h + 'px';
       var el = document.createElement('img');
       var thumb = it.a.querySelector('img');
-      el.className = 'viewer__img';
       el.alt = it.alt;
       el.width = it.w; el.height = it.h;
-      el.style.width = it.w + 'px'; el.style.height = it.h + 'px';
       el.src = (thumb && thumb.currentSrc) || it.full;     // instant: the picture already on screen
       if (el.src !== new URL(it.full, document.baseURI).href) { // then the full-size file, swapped once decoded
         var hi = new Image(); hi.src = it.full;
         (hi.decode ? hi.decode() : Promise.resolve()).then(function () { if (el.isConnected) el.src = it.full; }).catch(function () {});
       }
-      return el;
+      box.appendChild(el);
+      var lab = it.a.closest('.lab'), list = lab && lab.querySelector('.lab__list');
+      if (list) {
+        var labs = list.cloneNode(true);
+        labs.className = 'viewer__labs';
+        labs.style.fontSize = (it.w * LAB) + 'px';
+        box.appendChild(labs); box.setAttribute('data-labels', '');
+      }
+      return box;
     };
     var label = function () {
       var it = info(cur);
@@ -206,6 +218,7 @@
       actual = on;
       viewer.classList.toggle('is-actual', on);
       vToggle.querySelector('span').textContent = on ? 'fit to screen' : 'actual size';
+      sizeLabels(on ? 1 : fit(it).s);
       if (on) {
         img.style.transform = 'none'; img.style.position = 'relative';
         requestAnimationFrame(function () {
@@ -221,7 +234,7 @@
       var old = img, prev = cur; cur = k; resetToggle();
       if (old) { old.style.position = ''; old.style.transform = tf(fit(info(prev))); }   // leaving actual size: fade out from its fitted place
       stage.scrollLeft = 0; stage.scrollTop = 0;
-      var it = info(k); treat(it); img = makeImg(it); img.style.transform = tf(fit(it)); stage.appendChild(img); label();
+      var it = info(k); img = makeImg(it); img.style.transform = tf(fit(it)); stage.appendChild(img); label(); sizeLabels(fit(it).s);
       if (reduce.matches || !img.animate) { if (old) old.remove(); return; }
       img.animate([{ opacity: 0, translate: (dir * 24) + 'px 0' }, { opacity: 1, translate: '0 0' }], { duration: 280, easing: css('--ease-out') });
       if (old) {
@@ -234,8 +247,7 @@
       stage.textContent = '';
       viewer.showModal();
       var it = info(k);
-      treat(it);
-      img = makeImg(it); stage.appendChild(img); label();
+      img = makeImg(it); stage.appendChild(img); label(); sizeLabels(fit(it).s);
       busy = true; viewer.classList.add('is-moving');
       animate(img, sourceRect(it), fit(it)).then(function () { busy = false; viewer.classList.remove('is-moving'); });
     };
@@ -261,7 +273,7 @@
     vClose.addEventListener('click', function (e) { e.preventDefault(); closeViewer(); });
     viewer.addEventListener('cancel', function (e) { e.preventDefault(); closeViewer(); });
     viewer.addEventListener('close', function () {
-      stage.textContent = ''; treat({ dark: '' }); img = null; cur = -1; busy = false;
+      stage.textContent = ''; img = null; cur = -1; busy = false; viewer.classList.remove('is-small-labels');
       if (returnTo) { var r = returnTo.getBoundingClientRect(); returnTo.focus({ preventScroll: r.bottom > 0 && r.top < window.innerHeight }); returnTo = null; }
     });
     vPrev.addEventListener('click', function () { show(cur - 1, -1); });
@@ -274,7 +286,7 @@
       if (e.key === 'ArrowRight') { e.preventDefault(); show(cur + 1, 1); }
       else if (e.key === 'ArrowLeft') { e.preventDefault(); show(cur - 1, -1); }
     });
-    window.addEventListener('resize', function () { if (img && viewer.open && !actual) img.style.transform = tf(fit(info(cur))); });
+    window.addEventListener('resize', function () { if (img && viewer.open && !actual) { var f = fit(info(cur)); img.style.transform = tf(f); sizeLabels(f.s); } });
 
     /* pointer: swipe between figures when fitted (follows the gesture's direction); drag to pan at actual size */
     var drag = null;

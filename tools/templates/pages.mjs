@@ -5,14 +5,16 @@ import { dims, shown, preloadFor } from '../lib/images.mjs';
 import { icon, image, row, cells, figure, hero, heroPartner, creditLine, heroCaption, sizesFor, spanFor, projectHref, vtTitle, vtHero } from './partials.mjs';
 
 const q = (s) => `“${s}”`;
-const more = (href, label, p, { dir = 'right', ext = false } = {}) => dir === 'left'
+// `of`: what a repeated label leads to, read after the visible words (WCAG 2.4.4, 2.5.3)
+const more = (href, label, p, { dir = 'right', ext = false, of = '' } = {}) => dir === 'left'
   ? html`<a class="more" href="${href}">${icon('arrow-left', p)}<span>${label}</span></a>`
-  : html`<a class="more" href="${href}"${attrs({ target: ext ? '_blank' : null, rel: ext ? 'noopener' : null })}><span>${label}</span>${icon(ext ? 'arrow-up-right' : 'arrow-right', p)}${when(ext, () => html`<span class="vh"> (opens in a new tab)</span>`)}</a>`;
+  : html`<a class="more" href="${href}"${attrs({ target: ext ? '_blank' : null, rel: ext ? 'noopener' : null })}><span>${label}</span>${when(of, () => html`<span class="vh">: ${of}</span>`)}${icon(ext ? 'arrow-up-right' : 'arrow-right', p)}${when(ext, () => html`<span class="vh"> (opens in a new tab)</span>`)}</a>`;
 const lines = (...xs) => xs.filter(Boolean).map((x, i) => html`${i ? html`<br>` : ''}${x}`);
 const spec = (rows) => html`<dl class="spec in">${rows.map((s) => html`<dt>${s.label}</dt><dd${attrs({ lang: s.lang })}>${s.value}</dd>`)}</dl>`;
 
-// an image group that is also a link to its project: out of the tab order; the title link carries the name
-const linked = (href, markup) => html`<a class="card" href="${href}" tabindex="-1">${markup}</a>`;
+// an image group that is also a link to its project: out of the tab order and the accessibility tree,
+// since the title link beside it carries the same destination and the name
+const linked = (href, markup) => html`<a class="card" href="${href}" tabindex="-1" aria-hidden="true">${markup}</a>`;
 
 /* ------------------------------------------------------------------ home */
 export function home(site, d, projects, ctx) {
@@ -124,7 +126,7 @@ function chapter(x, ctx, first) {
 <p class="meta">${lines(x.descriptor, `${x.place} | ${x.year}`, x.office, credit ? html`<span class="credit">${credit}</span>` : '')}</p>
 </div>
 ${when(r, () => html`<div class="s-${r.span} block" data-rv>${linked(href, r.html)}</div>`)}
-<p class="s-text center chapter__more in">${more(href, 'View project', p)}</p>
+<p class="s-text center chapter__more in">${more(href, 'View project', p, { of: x.title })}</p>
 </article>` };
 }
 
@@ -221,7 +223,7 @@ ${spec(b.spec)}
 ${after}
 ${gallery(b, p)}
 <div class="s-narrow block"><div class="prose">${b.text.map((t) => html`<p>${t.text}</p>`)}${when(b.honour, () => html`<p class="label honour">${b.honour}</p>`)}</div></div>
-<p class="s-text center in actions">${more(b.read, 'Read online', p, { ext: true })}${when(b.case, () => more(p + b.case, 'Al-Arg case study', p))}</p>
+<p class="s-text center in actions">${more(b.read, 'Read online', p, { ext: true, of: b.title })}${when(b.case, () => more(p + b.case, 'Al-Arg case study', p))}</p>
 </article>`;
 };
 export function research(site, d, ctx) {
@@ -230,7 +232,7 @@ export function research(site, d, ctx) {
   const body = html`
 <header class="intro wrap g"><div class="s-text center"><h1 class="h1">Research</h1><p class="lead in">${d.intro}</p></div></header>
 ${book(t, p, { id: 'thesis-h', extra: html`<p class="book__ar in" lang="ar" dir="rtl">${t.titleAr}</p>`,
-    after: html`<blockquote class="s-narrow block"><div class="prose"><p class="abstract">${t.abstract}</p></div></blockquote>` })}
+    after: html`<div class="s-narrow block"><div class="prose"><p class="abstract">${t.abstract}</p></div></div>` })}
 ${book(r, p, { id: 'report-h' })}
 <article class="chapter wrap g" aria-labelledby="sakura-h">
 <div class="s-text center"><p class="label">${d.sakura.label}</p><h2 class="h1 in" id="sakura-h">${d.sakura.title}</h2><p class="lead in">${d.sakura.subtitle}</p><p class="label in honour">${d.sakura.award}</p></div>

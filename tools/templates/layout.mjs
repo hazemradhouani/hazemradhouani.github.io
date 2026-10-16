@@ -18,7 +18,7 @@ export function layout(site, page, body, ctx) {
   const home = p || './';
   const brand = (cur) => html`<a class="brand" href="${home}"${attrs({ 'aria-current': cur && page.nav === 'home' ? 'page' : null })}>${P.name}</a>`;
   const menuButton = html`<button class="menu-button" type="button" commandfor="menu" command="show-modal" aria-haspopup="dialog" aria-controls="menu">menu</button>`;
-  const themeButton = (scope) => html`<button class="theme-button" type="button" data-theme-toggle data-theme-scope="${scope}" aria-pressed="false" aria-label="Switch to dark theme"><span class="theme-button__glyph" aria-hidden="true">◐</span><span class="theme-button__label" data-theme-label aria-hidden="true">theme: light</span></button>`;
+  const themeButton = (scope) => html`<button class="theme-button" type="button" data-theme-toggle data-theme-scope="${scope}"><span class="theme-button__glyph" aria-hidden="true">◐</span><span class="theme-button__label" data-theme-label>theme: light</span><span class="vh" data-theme-action>, switch to dark</span></button>`;
   return html`<!DOCTYPE html>
 <html lang="${site.lang}" data-ga="${site.ga4}" data-theme="light">
 <head>

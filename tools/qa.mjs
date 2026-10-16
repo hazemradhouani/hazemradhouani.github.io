@@ -69,14 +69,14 @@ async function runThemeInteractions() {
       theme: document.documentElement.getAttribute('data-theme'),
       saved: (() => { try { return localStorage.getItem('hazem-theme'); } catch (e) { return 'storage-error'; } })(),
       chrome: document.getElementById('theme-color')?.getAttribute('content'),
-      controls: [...document.querySelectorAll('[data-theme-toggle]')].map((b) => ({ pressed: b.getAttribute('aria-pressed'), label: b.getAttribute('aria-label'), text: b.querySelector('[data-theme-label]')?.textContent?.trim() }))
+      controls: [...document.querySelectorAll('[data-theme-toggle]')].map((b) => ({ overridden: b.hasAttribute('aria-label') || b.hasAttribute('aria-pressed'), action: b.querySelector('[data-theme-action]')?.textContent, text: b.querySelector('[data-theme-label]')?.textContent?.trim() }))
     }));
     if (state.theme !== expected) failures.push(`${where}: theme ${state.theme}, expected ${expected}`);
     if (state.saved !== expected) failures.push(`${where}: stored ${state.saved}, expected ${expected}`);
     if (state.chrome !== (expected === 'dark' ? '#121311' : '#FFFFFF')) failures.push(`${where}: theme-color ${state.chrome}`);
     for (const control of state.controls) {
-      if (control.pressed !== String(expected === 'dark')) failures.push(`${where}: unsynchronised aria-pressed`);
-      if (control.label !== (expected === 'dark' ? 'Switch to light theme' : 'Switch to dark theme')) failures.push(`${where}: incorrect control action`);
+      if (control.overridden) failures.push(`${where}: control name overridden by aria-label or aria-pressed`);
+      if (control.action !== `, switch to ${expected === 'dark' ? 'light' : 'dark'}`) failures.push(`${where}: incorrect control action`);
       if (control.text !== `theme: ${expected}`) failures.push(`${where}: incorrect visible control label`);
     }
   };
@@ -198,7 +198,20 @@ for (const url of urls) {
       out.labels = [];
       for (const lab of document.querySelectorAll('.lab')) {
         const box = lab.getBoundingClientRect(); const items = [...lab.querySelectorAll('.lab__item')];
-        if (getComputedStyle(items[0] || lab).position !== 'absolute') continue;   // narrow: pins and a list
+        if (getComputedStyle(items[0] || lab).position !== 'absolute') {   // narrow: pins on the drawing, the words in a list
+          const fig = lab.querySelector('.lab__fig img'); const pins = [...lab.querySelectorAll('.lab__pin')].filter((pn) => pn.offsetParent);
+          if (fig && pins.length) {
+            const ib = fig.getBoundingClientRect(); const ps = pins.map((pn) => pn.getBoundingClientRect());
+            pins.forEach((pn, i) => {
+              const st = getComputedStyle(pn);
+              const want = ib.top + (parseFloat(st.getPropertyValue('--y')) + parseFloat(st.getPropertyValue('--h')) / 2) / 100 * ib.height;
+              const got = ps[i].top + ps[i].height / 2;
+              if (Math.abs(got - want) > 2) out.labels.push(`pin ${i + 1} sits ${Math.round(got - want)}px from its label's place`);
+              for (let j = i + 1; j < ps.length; j++) { const r = ps[i], q = ps[j]; if (r.left < q.right && q.left < r.right && r.top < q.bottom && q.top < r.bottom) out.labels.push(`pins ${i + 1} and ${j + 1} overlap`); }
+            });
+          }
+          continue;
+        }
         const rs = items.map((it) => it.getBoundingClientRect());
         rs.forEach((r, i) => {
           if (r.left < box.left - 1 || r.right > box.right + 1 || r.top < box.top - 1 || r.bottom > box.bottom + 1) out.labels.push(`"${items[i].textContent.trim()}" outside its drawing`);
@@ -210,11 +223,12 @@ for (const url of urls) {
       const controls = [...document.querySelectorAll('[data-theme-toggle]')];
       if (controls.length !== 3) out.theme.push(`theme controls ${controls.length}, expected 3`);
       else for (const control of controls) {
-        const expectedPressed = String(theme === 'dark');
-        const expectedAction = theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme';
+        // the name is the visible state followed by the action (WCAG 2.5.3); no aria-label may replace it
+        const expectedAction = `, switch to ${theme === 'dark' ? 'light' : 'dark'}`;
         const label = control.querySelector('[data-theme-label]')?.textContent?.trim();
-        if (control.getAttribute('aria-pressed') !== expectedPressed) out.theme.push(`${control.dataset.themeScope} aria-pressed ${control.getAttribute('aria-pressed')}`);
-        if (control.getAttribute('aria-label') !== expectedAction) out.theme.push(`${control.dataset.themeScope} aria-label ${control.getAttribute('aria-label')}`);
+        const action = control.querySelector('[data-theme-action]')?.textContent;
+        if (control.hasAttribute('aria-label') || control.hasAttribute('aria-pressed')) out.theme.push(`${control.dataset.themeScope} name overridden by aria-label or aria-pressed`);
+        if (action !== expectedAction) out.theme.push(`${control.dataset.themeScope} action ${action}`);
         if (label !== `theme: ${theme}`) out.theme.push(`${control.dataset.themeScope} label ${label}`);
       }
       return out;

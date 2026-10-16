@@ -40,7 +40,8 @@ test('the preference controller synchronises controls, persists safely and updat
   assert.match(js, /data-theme-toggle/u);
   assert.match(js, /localStorage\.setItem\('hazem-theme'/u);
   assert.match(js, /theme-color/u);
-  assert.match(js, /aria-pressed/u);
+  assert.match(js, /data-theme-action/u);
+  assert.doesNotMatch(js, /aria-pressed/u, 'the toggle is named by its visible state plus its action (WCAG 2.5.3)');
   assert.match(js, /matchMedia\('\(prefers-color-scheme: dark\)'\)/u);
 });
 
@@ -61,7 +62,8 @@ test('drawings get their dark treatment in the page and in the viewer: inverted 
   assert.match(css, /html\[data-theme="dark"\] \.nw--invert img[^{]*\{[^}]*filter:\s*invert\(\.965\)/u);
   assert.match(css, /html\[data-theme="dark"\] \.nw--invert-accent img[^{]*\{[^}]*filter:\s*invert\(\.965\) hue-rotate\(180deg\)/u);
   assert.match(css, /\.nw--drawing\.nw--field\s*\{[^}]*background:\s*var\(--drawing-bg\)/u);
-  assert.match(css, /\.viewer__stage\.is-invert img/u);
+  assert.match(css, /\.viewer__img\.is-invert > img/u);
+  assert.match(js, /TREAT\[it\.dark\]/u, 'the treatment travels with each viewer image, not the stage');
   assert.match(js, /data-dark/u);
   assert.match(partials, /darkOf\(/u);
   assert.match(css, /@media print[\s\S]*filter:\s*none/u, 'print shows every drawing as authored, black on white');

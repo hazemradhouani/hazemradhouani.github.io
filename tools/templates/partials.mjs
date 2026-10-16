@@ -103,13 +103,36 @@ function labelsFor(rel, labels) {
     return { ...box, text: l.text, align: l.align === 'end' ? 'end' : 'start' };
   });
 }
-function labelled(pic, rel, labels) {
-  const { w } = dims(rel);
+// pins are 22px squares; where two would touch on the narrowest phone drawing (a 320px page less its margins),
+// the figure keeps the list alone on phones rather than stacking numbers over each other
+const PIN = 24, PHONE_W = 280;
+function dense(labels, w, h) {
+  const c = labels.map((l) => [(l.x + l.w / 2) / 100 * PHONE_W, (l.y + l.h / 2) / 100 * PHONE_W * h / w]);
+  return c.some((a, i) => c.some((b, j) => j > i && Math.abs(a[0] - b[0]) < PIN && Math.abs(a[1] - b[1]) < PIN));
+}
+function labelled(pic, rel, labels, title) {
+  const { w, h } = dims(rel);
   const pos = (l) => `--x: ${l.x}%; --y: ${l.y}%; --w: ${l.w}%; --h: ${l.h}%`;
-  return html`<div class="lab lab--${darkOf(rel)}" style="--nw: ${w}px">${pic}<div class="lab__pins" aria-hidden="true">${labels.map((l, i) => html`<span class="lab__pin" style="${pos(l)}">${i + 1}</span>`)}</div><ol class="lab__list" aria-label="Labels on the drawing">${labels.map((l, i) => html`<li class="lab__item${l.align === 'end' ? ' lab__item--end' : ''}" style="${pos(l)}"><span class="lab__n" aria-hidden="true">${i + 1}</span><span class="lab__t">${l.text.split('\n').map((t, j) => html`${j ? html` <br>` : ''}${t}`)}</span></li>`)}</ol></div>`;
+  const cls = `lab lab--${darkOf(rel)}${dense(labels, w, h) ? ' lab--dense' : ''}`;
+  // the pins' frame is the drawing alone (.lab__fig), so a pin's % position never includes the list below it
+  return html`<div class="${cls}" style="--nw: ${w}px"><div class="lab__fig">${pic}<div class="lab__pins" aria-hidden="true">${labels.map((l, i) => html`<span class="lab__pin" style="${pos(l)}">${i + 1}</span>`)}</div></div><ol class="lab__list" role="list" aria-label="${title ? `Labels on the drawing: ${title}` : 'Labels on the drawing'}">${labels.map((l, i) => html`<li class="lab__item${l.align === 'end' ? ' lab__item--end' : ''}" style="${pos(l)}"><span class="lab__n" aria-hidden="true">${i + 1}</span><span class="lab__t">${l.text.split('\n').map((t, j) => html`${j ? html` <br>` : ''}${t}`)}</span></li>`)}</ol></div>`;
+}
+// a plain colour name for a swatch, so the colour-to-meaning key also reaches assistive technology (WCAG 1.1.1)
+function colourName(hex) {
+  const n = parseInt(hex.slice(1), 16), r = (n >> 16 & 255) / 255, g = (n >> 8 & 255) / 255, b = (n & 255) / 255;
+  const mx = Math.max(r, g, b), mn = Math.min(r, g, b), l = (mx + mn) / 2, d = mx - mn;
+  const s = d === 0 ? 0 : d / (1 - Math.abs(2 * l - 1));
+  const tone = l > 0.82 ? 'pale ' : l > 0.62 ? 'light ' : l < 0.36 ? 'dark ' : '';
+  if (s < 0.15) return l > 0.92 ? 'white' : l < 0.1 ? 'black' : `${tone}grey`;
+  const hue = ((mx === r ? ((g - b) / d) % 6 : mx === g ? (b - r) / d + 2 : (r - g) / d + 4) * 60 + 360) % 360;
+  let name = [[15, 'red'], [40, 'orange'], [65, 'yellow'], [80, 'yellow-green'], [165, 'green'], [195, 'teal'], [255, 'blue'], [290, 'purple'], [345, 'pink'], [361, 'red']].find(([lim]) => hue < lim)[1];
+  if (name === 'orange' && l < 0.45) name = 'brown';
+  if ((name === 'orange' || name === 'yellow') && s < 0.45 && l > 0.6) name = 'beige';
+  if ((name === 'yellow' || name === 'yellow-green') && l < 0.35) name = 'olive';
+  return tone + name;
 }
 // a legend printed on the sheet, re-set as a list with the drawing's own colours
-const legendOf = (f) => (f.legend?.length ? html`<ul class="legend s-narrow" aria-label="Legend">${f.legend.map((it) => html`<li><span class="legend__sw" style="background: ${it.swatch}" aria-hidden="true"></span>${it.text}</li>`)}</ul>` : '');
+const legendOf = (f) => (f.legend?.length ? html`<ul class="legend s-narrow" role="list" aria-label="${f.title ? `Legend: ${f.title}` : 'Legend'}">${f.legend.map((it) => html`<li><span class="legend__sw" style="background: ${it.swatch}" aria-hidden="true"></span>${it.text}<span class="vh"> (${colourName(it.swatch)})</span></li>`)}</ul>` : '');
 
 /* ---------------------------------------------------------- figures of a case study */
 const capOf = (f) => (f.title || f.caption || f.credit) ? html`<figcaption class="cap s-narrow">${when(f.title, () => html`<span class="cap__t">${f.title}.</span> `)}${inline(f.caption || '')}${when(f.credit, () => html` <span class="credit">${f.credit}.</span>`)}</figcaption>` : '';
@@ -129,7 +152,7 @@ export function figure(f, n, ctx) {
   const span = spanFor(w, h, f.maxH ? { maxH: Math.min(820, f.maxH) } : {});
   const pic = image(rel, { alt: f.alt, sz: sizesFor(span), prefix: p, zoom: true, title: f.title });
   const labels = drawing ? labelsFor(rel, f.labels) : [];
-  return html`<figure class="fig block wrap g" id="fig-${n}" data-rv><div class="s-${span}">${labels.length ? labelled(pic, rel, labels) : pic}</div>${legendOf(f)}${capOf(f)}</figure>`;
+  return html`<figure class="fig block wrap g" id="fig-${n}" data-rv><div class="s-${span}">${labels.length ? labelled(pic, rel, labels, f.title) : pic}</div>${legendOf(f)}${capOf(f)}</figure>`;
 }
 
 /* ---------------------------------------------------------- heroes */
