@@ -208,11 +208,12 @@ const gallery = (b, p) => {
   const r = row(b.gallery.map((g) => ({ rel: g.src, alt: g.alt })), { prefix: p, max: 'wide' });
   return html`<div class="s-${r.span} block" data-rv>${r.html}</div>`;
 };
-const book = (b, p, { id, extra = '', after = '' }) => {
+// priority: the first book is above the fold and is the page's largest paint, so it loads eagerly at high priority
+const book = (b, p, { id, extra = '', after = '', priority = false }) => {
   const { w, h } = dims(b.cover);
   const span = spanFor(w, h, { max: 'narrow' });
   return html`<article class="chapter wrap g" aria-labelledby="${id}">
-<div class="s-${span}" data-rv>${image(b.cover, { alt: b.coverAlt, sz: sizesFor(span), prefix: p })}</div>
+<div class="s-${span}" data-rv>${image(b.cover, { alt: b.coverAlt, sz: sizesFor(span), prefix: p, priority })}</div>
 <div class="s-text center chapter__text">
 <p class="label">${b.label}</p>
 <h2 class="h1 in" id="${id}">${b.title}</h2>
@@ -231,7 +232,7 @@ export function research(site, d, ctx) {
   const t = d.thesis; const r = d.report;
   const body = html`
 <header class="intro wrap g"><div class="s-text center"><h1 class="h1">Research</h1><p class="lead in">${d.intro}</p></div></header>
-${book(t, p, { id: 'thesis-h', extra: html`<p class="book__ar in" lang="ar" dir="rtl">${t.titleAr}</p>`,
+${book(t, p, { id: 'thesis-h', priority: true, extra: html`<p class="book__ar in" lang="ar" dir="rtl">${t.titleAr}</p>`,
     after: html`<div class="s-narrow block"><div class="prose"><p class="abstract">${t.abstract}</p></div></div>` })}
 ${book(r, p, { id: 'report-h' })}
 <article class="chapter wrap g" aria-labelledby="sakura-h">
