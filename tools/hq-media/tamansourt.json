@@ -1,0 +1,78 @@
+{
+  "version": 1,
+  "sourceRoot": "Images HQ",
+  "assets": [
+    {
+      "source": "Images HQ/Hospital/Scene 32.png",
+      "output": "images/tamansourt/tamansourt-path.jpg",
+      "sha256": "37db783dbdd893827b8852a56d2022ac719567aeea2a27f54a2660632b0bcfef",
+      "crop": null,
+      "treatment": "the full scene, untouched; area downscale from 5 760 px to the render cap",
+      "darkTreatment": "preserve-colour-scene",
+      "credit": "Owner-supplied office work (Yassir Khalil Studio, site); no third-party credit is printed on the source",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "captionEvidence": "Same camera as the existing hero thumb.jpg, the full-page render of pdf2025:p33 ('TAMANSOURT HOSPITAL'): the footpath along the building, the faceless figure in the foreground, the trees and parked cars; this file has none of the page's printed text over the sky and facade and shows the full 3:2 frame",
+      "reviewStatus": "approved"
+    },
+    {
+      "source": "Images HQ/Hospital/A0 Plie [1]_page-0001.jpg",
+      "output": "images/tamansourt/tamansourt-site-plan.png",
+      "sha256": "fe8470a7e911dbbe10dce63c602a49c7a7d9d06de93a6dd6ae6f12a9e48013c3",
+      "crop": { "x": 1680, "y": 1320, "width": 10260, "height": 7860 },
+      "treatment": "crop of the campus block with the roads around it, part of the neighbouring blocks across the road at left and the roundabout below (the sheet has no north arrow); the plan's context (roads, housing, empty plots) runs off every edge of the A0 sheet, so the crop cuts only context. The printed title 'Plan Masse' (top at y 9276), the scale 'ECH : 1/500' (from y 9265) and the page number '1' are left outside below (crop ends at y 9180). A 4x area reduction to 2 560 px, checked on a simulated tile: the trees, hatching and parking lines still read",
+      "darkTreatment": "invert",
+      "credit": "Owner-supplied office work (Yassir Khalil Studio, site); no credit, cartouche or studio name is printed on the sheet",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "captionEvidence": "Printed title 'Plan Masse' (site plan, translated from French) and scale 'ECH : 1/500'; the same fan of curved wings, parking courts and roundabout as the aerial render Scene 12_1 (pdf2025:p34)",
+      "reviewStatus": "approved"
+    },
+    {
+      "source": "Images HQ/Hospital/Scene 12_1.png",
+      "output": "images/tamansourt/tamansourt-aerial.jpg",
+      "sha256": "79ec0c929ec047f529e45ae30037b9539425280679bffc251a6714161a512e8c",
+      "crop": null,
+      "treatment": "the full scene, untouched; area downscale from 5 760 px to the render cap",
+      "darkTreatment": "preserve-colour-scene",
+      "credit": "Owner-supplied office work (Yassir Khalil Studio, site); no third-party credit is printed on the source",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "captionEvidence": "Same camera as the existing 'Render, Campus Aerial' figure (500 px, the middle-left render of pdf2025:p34): the fan of curved wings with the parking courts between them and the housing blocks at lower right, under the same shadows; this file shows the full frame",
+      "reviewStatus": "approved"
+    },
+    {
+      "source": "Images HQ/Hospital/Scene 9_1.png",
+      "output": "images/tamansourt/tamansourt-frontage.jpg",
+      "sha256": "24aeb6dc157dad3ecfb23ccce27b9c9d33b6f24924e4920f2b901a3f827cb08a",
+      "crop": null,
+      "treatment": "the full scene, untouched, with its sandy foreground (part of the scene); area downscale from 5 760 px to the render cap",
+      "darkTreatment": "preserve-colour-scene",
+      "credit": "Owner-supplied office work (Yassir Khalil Studio, site); no third-party credit is printed on the source",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "captionEvidence": "Same camera as the middle-right render of pdf2025:p34, which crops it to the buildings: the low wings with curved roofs, the dark glazed volume and the four-storey block with stepped external stairs",
+      "reviewStatus": "approved"
+    },
+    {
+      "source": "Images HQ/Hospital/Scene 14_1.png",
+      "output": "images/tamansourt/tamansourt-facade.jpg",
+      "sha256": "63bb03635d43f6b4118d457c1374c3840a284e0fc09cb183e526794f7e763f73",
+      "crop": null,
+      "treatment": "the full scene, untouched; area downscale from 5 760 px to the render cap",
+      "darkTreatment": "preserve-colour-scene",
+      "credit": "Owner-supplied office work (Yassir Khalil Studio, site); no third-party credit is printed on the source",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "captionEvidence": "Same camera as the bottom-middle render of pdf2025:p34, which crops it: the facade of deep-set windows under the thin overhanging roof, with a glazed recess at the lower right",
+      "reviewStatus": "approved"
+    },
+    {
+      "source": "Images HQ/Hospital/Scene 24_1.png",
+      "output": "images/tamansourt/tamansourt-between-wings.jpg",
+      "sha256": "ae5f41817374457cc1b2d0f0c6f2496642dd0e3a48f261ae875dbeca88ec3aa8",
+      "crop": null,
+      "treatment": "the full scene, untouched; area downscale from 5 760 px to the render cap",
+      "darkTreatment": "preserve-colour-scene",
+      "credit": "Owner-supplied office work (Yassir Khalil Studio, site); no third-party credit is printed on the source",
+      "authorizationEvidence": "owner-direct:2026-10-13",
+      "captionEvidence": "Same camera as the bottom-right render of pdf2025:p34, which crops it: the stepped external stairs at the end of one wing, the curved wing opposite, the two bridges between them and the planted bed",
+      "reviewStatus": "approved"
+    }
+  ]
+}

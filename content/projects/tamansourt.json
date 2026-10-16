@@ -43,7 +43,7 @@
   "tag": "Yassir Khalil Studio / Healthcare / Feasibility and schematic design",
   "narrative": [
     {
-      "text": "A hospital and wellness campus on the outskirts of Tamansourt, a planned city in the Marrakech metropolitan region. The programme combines a general hospital, a specialist wellness centre, and ancillary support facilities on a greenfield site, with the master plan organised to allow phased construction while maintaining functional coherence at each stage.",
+      "text": "A hospital and wellness campus on the outskirts of Tamansourt. The programme combines a general hospital, a specialist wellness centre, and ancillary support facilities on a greenfield site, with the master plan organised to allow phased construction while maintaining functional coherence at each stage.",
       "source": "site"
     },
     {
@@ -52,26 +52,59 @@
     }
   ],
   "hero": {
-    "src": "images/tamansourt/thumb.jpg",
-    "alt": "Render of the Tamansourt hospital and wellness campus",
-    "credit": null
+    "src": "images/tamansourt/tamansourt-path.jpg",
+    "alt": "Render of a footpath along the foot of the building in low sun: terracotta-coloured upper floors cantilevered overhead, a glazed wall at left, slender trees and tall grasses in planted beds, a few people walking further on and two parked cars, with a faceless figure in a coat in the foreground",
+    "credit": null,
+    "source": "site + pdf2025:p33 + hq:Hospital/Scene 32.png"
   },
   "figures": [
     {
-      "src": "images/tamansourt/tamansourt-render-aerial.jpg",
-      "title": "Render, Campus Aerial",
-      "caption": "Aerial render. Fan-shaped master plan. Curved hospital ward wings arranged around the central landscaped spine. Perimeter road with structured parking. Wellness centre separated from clinical zones by planted courtyard. Terracotta-toned facade system responsive to the Moroccan climate. Greenfield site within the Tamansourt planned development. Yassir Khalil Studio. 2024.",
-      "alt": "Aerial render of Tamansourt Campus, fan-shaped master plan with curved ward wings, central spine and landscaped courtyards within the arid Marrakech plain",
+      "src": "images/tamansourt/tamansourt-site-plan.png",
+      "title": "Site plan",
+      "caption": "1:500. Curved wings fan out from a long curved building along one road, with parking courts and tree-lined planted strips between them; neighbouring blocks across the road and a roundabout below.",
+      "alt": "Site plan in grey linework: a fan of curved building wings with grey cast shadows on a block bounded by two curved roads, striped parking courts between the wings edged by planted strips with tree symbols, neighbouring buildings with shadows at upper left, empty plots at upper right and a roundabout at lower right",
+      "kind": "drawing",
+      "source": "hq:Hospital/A0 Plie [1]_page-0001.jpg (printed title 'Plan Masse' and scale 'ECH : 1/500', translated from French, D17; both cropped out with the page number '1')"
+    },
+    {
+      "src": "images/tamansourt/tamansourt-aerial.jpg",
+      "title": "Aerial view",
+      "caption": "The wings fan out across the block, with parked cars in the courts between them and a roundabout beyond.",
+      "alt": "Aerial render in low sun: light-roofed wings with terracotta-coloured walls fanning out across the block, parked cars in the dark courts between them, long shadows, curved roads and a roundabout on sandy ground, and pale apartment blocks at lower right",
       "kind": "render",
-      "source": "site"
+      "source": "site + pdf2025:p34 + hq:Hospital/Scene 12_1.png (no printed title)"
+    },
+    {
+      "src": "images/tamansourt/tamansourt-frontage.jpg",
+      "title": "Frontage",
+      "caption": "Low wings with upturned roof edges, a dark glazed volume and a four-storey block with stepped external stairs, seen across open ground.",
+      "alt": "Render of the long frontage across a wide stretch of sand: low terracotta-coloured wings whose roofs curve up at their edges on the left, a dark glazed volume in the middle, a four-storey block with deep balconies and a zigzag of external stairs on the right, young trees and cars along the road in front, under a pale blue sky",
+      "kind": "render",
+      "source": "pdf2025:p34 + hq:Hospital/Scene 9_1.png (no printed title)"
+    },
+    {
+      "src": "images/tamansourt/tamansourt-facade.jpg",
+      "title": "Façade",
+      "caption": "Deep-set windows with splayed reveals under a thin overhanging roof, and a glazed recess at the base.",
+      "alt": "Frontal render of a four-storey terracotta-coloured façade: small deep-set windows with angled reveals casting sharp shadows, a thin roof slab overhanging the top, a two-storey glazed recess with a small tree in front at lower right, and a low curved wall and trees at left",
+      "kind": "render",
+      "source": "pdf2025:p34 + hq:Hospital/Scene 14_1.png (no printed title)"
     },
     {
       "src": "images/tamansourt/tamansourt-render-facade.jpg",
-      "title": "Render, Street Facade",
-      "caption": "Street facade render. Main hospital block. Rammed earth-toned masonry cladding. Deep-set windows reducing solar gain on east and west orientations. Stepped balcony volumes articulating the patient ward floors. Corner condition with exposed concrete structural frame. Glazed ground-floor entrance and waiting zone. Clear sky, arid landscape character of the Marrakech plateau.",
+      "title": "Street façade",
+      "caption": "Street facade render. Main hospital block. Rammed earth-toned masonry cladding. Deep-set windows reducing solar gain on east and west orientations. Stepped balcony volumes articulating the patient ward floors. Corner condition with exposed concrete structural frame. Glazed ground-floor entrance and waiting zone. Clear sky, arid landscape.",
       "alt": "Street-level render of Tamansourt Campus main facade, rammed earth-toned masonry, deep recessed windows, stepped balcony volumes and clear sky",
       "kind": "render",
-      "source": "site"
+      "source": "site + pdf2025:p34 (no HQ source; title shortened from 'Render, Street Facade')"
+    },
+    {
+      "src": "images/tamansourt/tamansourt-between-wings.jpg",
+      "title": "Between the wings",
+      "caption": "Stepped external stairs at the end of one wing; two bridges cross to the curved wing opposite, above a planted bed.",
+      "alt": "Render of two terracotta-coloured wings across a paved forecourt: a zigzag of external stairs climbing the end of the left wing, a curved wing with tall windows on the right, two pale bridges spanning between them in front of a dark glazed volume, a tree and grasses in a planted bed, and two parked cars at left",
+      "kind": "render",
+      "source": "pdf2025:p34 + hq:Hospital/Scene 24_1.png (no printed title)"
     }
   ],
   "date": "2024",
