@@ -1,0 +1,39 @@
+{
+ "src": "images/papillon/papillon-site-plan.png",
+ "hash": "d9b7840f5b0e9c38",
+ "mode": "ink",
+ "from": [
+  2560,
+  1523
+ ],
+ "to": [
+  2554,
+  1517
+ ],
+ "offset": [
+  3,
+  3
+ ],
+ "paper": [
+  255,
+  255,
+  255
+ ],
+ "clip": [],
+ "ink": {
+  "ink": 99250,
+  "chromaticFraction": 0.2469,
+  "midtoneFraction": 0.6504,
+  "suggest": "colour"
+ },
+ "dark": "field",
+ "specks": 49,
+ "tile": [
+  1280,
+  800,
+  640,
+  400
+ ],
+ "background": null,
+ "labels": []
+}
