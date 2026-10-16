@@ -1,6 +1,6 @@
 {
  "src": "images/nouvelle-medina/nouvelle-medina-plan-ground.png",
- "hash": "3ca11256641f4827",
+ "hash": "c756936b47e47ab2",
  "mode": "ink",
  "from": [
   2560,
@@ -26,7 +26,8 @@
   "midtoneFraction": 0.2988,
   "suggest": "mono"
  },
- "dark": "field",
+ "dark": "invert-accent",
+ "keep": null,
  "specks": 61,
  "tile": [
   640,

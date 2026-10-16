@@ -5,7 +5,7 @@ import { html, raw, inline, when } from '../lib/html.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { picture, dims, largest, shown, darkOf } from '../lib/images.mjs';
+import { picture, dims, largest, shown, darkOf, keepOf } from '../lib/images.mjs';
 import { loadCutoutConfig } from '../lib/cutout-config.mjs';
 // drawings excluded from cutouts on purpose (tools/cutout.json, tools/cutout.d); any other drawing must have its cutout
 const ROOT_DIR = fileURLToPath(new URL('../..', import.meta.url));
@@ -50,12 +50,15 @@ export function planRow(items, { max = 'full', maxH = MAX_H } = {}) {
 export function image(rel, { alt, sz, prefix = '', priority = false, zoom = false, title = '', vt = null }) {
   const { w, h } = dims(rel);
   const style = `--nw: ${w}px${vt ? `; view-transition-name: ${vt}` : ''}`;
-  // a cutout carries its dark-scheme treatment (D50): inverted linework, or the inspection field
-  const dark = darkOf(rel);
+  // a cutout carries its dark-scheme treatment (D50, D69): inverted linework, or inverted linework with its
+  // solid rendered regions laid back on top in their own colours (keep: a second, decorative picture that
+  // stays hidden, and so is never fetched, in the light scheme)
+  const dark = darkOf(rel), keep = keepOf(rel);
   const cls = `nw${dark ? ` nw--drawing nw--${dark}` : ''}`;
-  if (!zoom) return picture(rel, { alt, sizes: sz, prefix, priority, cls, style });
+  const layer = keep ? picture(keep, { alt: '', sizes: sz, prefix, cls: 'nw__keep' }) : '';
+  if (!zoom) return keep ? html`<span class="${cls}" style="${style}">${picture(rel, { alt, sizes: sz, prefix, priority })}${layer}</span>` : picture(rel, { alt, sizes: sz, prefix, priority, cls, style });
   const big = largest(rel, prefix);
-  return html`<a class="zoom-link ${cls}" style="${style}" href="${prefix}${rel}" data-viewer data-title="${title}" data-alt="${alt}" data-w="${w}" data-h="${h}" data-webp="${big.webp}" data-avif="${big.avif}"${dark ? html` data-dark="${dark}"` : ''}><span class="vh">Open full size: ${title || alt}</span>${picture(rel, { alt, sizes: sz, prefix, priority })}</a>`;
+  return html`<a class="zoom-link ${cls}" style="${style}" href="${prefix}${rel}" data-viewer data-title="${title}" data-alt="${alt}" data-w="${w}" data-h="${h}" data-webp="${big.webp}" data-avif="${big.avif}"${dark ? html` data-dark="${dark}"` : ''}${keep ? html` data-keep="${largest(keep, prefix).webp}"` : ''}><span class="vh">Open full size: ${title || alt}</span>${picture(rel, { alt, sizes: sz, prefix, priority })}${layer}</a>`;
 }
 
 // a row of images sharing one height; `stack`: one per line on phones (drawings, or more than two).
@@ -100,7 +103,7 @@ function labelsFor(rel, labels) {
   return labels.map((l) => {
     const box = side.labels?.find((b) => b.id === l.at);
     if (!box) throw new Error(`${rel}: label "${l.text}" points at erase "${l.at}", which the cutout does not have`);
-    return { ...box, text: l.text, align: l.align === 'end' ? 'end' : 'start' };
+    return { ...box, text: l.text, align: l.align === 'end' ? 'end' : 'start', vertical: l.vertical === true };
   });
 }
 // pins are 22px squares; where two would touch on the narrowest phone drawing (a 320px page less its margins),
@@ -115,7 +118,7 @@ function labelled(pic, rel, labels, title) {
   const pos = (l) => `--x: ${l.x}%; --y: ${l.y}%; --w: ${l.w}%; --h: ${l.h}%`;
   const cls = `lab lab--${darkOf(rel)}${dense(labels, w, h) ? ' lab--dense' : ''}`;
   // the pins' frame is the drawing alone (.lab__fig), so a pin's % position never includes the list below it
-  return html`<div class="${cls}" style="--nw: ${w}px"><div class="lab__fig">${pic}<div class="lab__pins" aria-hidden="true">${labels.map((l, i) => html`<span class="lab__pin" style="${pos(l)}">${i + 1}</span>`)}</div></div><ol class="lab__list" role="list" aria-label="${title ? `Labels on the drawing: ${title}` : 'Labels on the drawing'}">${labels.map((l, i) => html`<li class="lab__item${l.align === 'end' ? ' lab__item--end' : ''}" style="${pos(l)}"><span class="lab__n" aria-hidden="true">${i + 1}</span><span class="lab__t">${l.text.split('\n').map((t, j) => html`${j ? html` <br>` : ''}${t}`)}</span></li>`)}</ol></div>`;
+  return html`<div class="${cls}" style="--nw: ${w}px"><div class="lab__fig">${pic}<div class="lab__pins" aria-hidden="true">${labels.map((l, i) => html`<span class="lab__pin" style="${pos(l)}">${i + 1}</span>`)}</div></div><ol class="lab__list" role="list" aria-label="${title ? `Labels on the drawing: ${title}` : 'Labels on the drawing'}">${labels.map((l, i) => html`<li class="lab__item${l.vertical ? ' lab__item--v' : l.align === 'end' ? ' lab__item--end' : ''}" style="${pos(l)}"><span class="lab__n" aria-hidden="true">${i + 1}</span><span class="lab__t">${l.text.split('\n').map((t, j) => html`${j ? html` <br>` : ''}${t}`)}</span></li>`)}</ol></div>`;
 }
 // a plain colour name for a swatch, so the colour-to-meaning key also reaches assistive technology (WCAG 1.1.1)
 function colourName(hex) {

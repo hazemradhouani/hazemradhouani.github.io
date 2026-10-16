@@ -1,0 +1,41 @@
+{
+ "src": "images/corallum/corallum-plan-level-01.jpg",
+ "hash": "5fc7e796a7921a5b",
+ "mode": "plate",
+ "from": [
+  1278,
+  879
+ ],
+ "to": [
+  1278,
+  879
+ ],
+ "offset": [
+  0,
+  0
+ ],
+ "paper": null,
+ "clip": [
+  "left",
+  "top",
+  "right",
+  "bottom"
+ ],
+ "ink": {
+  "ink": 280521,
+  "chromaticFraction": 0.0372,
+  "midtoneFraction": 0,
+  "suggest": "accent"
+ },
+ "dark": "invert-accent",
+ "keep": null,
+ "specks": 0,
+ "tile": [
+  0,
+  0,
+  640,
+  400
+ ],
+ "background": null,
+ "labels": []
+}

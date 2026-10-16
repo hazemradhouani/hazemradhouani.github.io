@@ -1,6 +1,6 @@
 {
  "src": "images/cinephile/cinephile-tree-cover.png",
- "hash": "06f0db0eda128534",
+ "hash": "72f1a8c87a22863b",
  "mode": "ink",
  "from": [
   464,
@@ -26,7 +26,8 @@
   "midtoneFraction": 0.6531,
   "suggest": "colour"
  },
- "dark": "field",
+ "dark": "invert-accent",
+ "keep": null,
  "specks": 28,
  "tile": [
   0,

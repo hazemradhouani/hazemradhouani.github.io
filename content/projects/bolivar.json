@@ -177,7 +177,7 @@
         {
           "at": "avenue",
           "text": "Avenue Simon Bolivar",
-          "align": "end"
+          "vertical": true
         }
       ],
       "source": "hq:BOLIVAR/PC3 - 1 - COUPES DU TERRAIN AVEC IMPLANTATION DU PROJET-A_page-0002.jpg (printed title 'Coupe Longitudinale AA', scale '1/200', legend 'PROJET', 'EXISTANT CONCERVE' [sic], label 'AVENUE SIMON BOLIVAR', levels 'N00 Haut' to 'N08 Bat O', 'TT Bat E', 'SS1', 'SS2', dimension 50.48; translated, D17, D49); pdf2026:p21"

@@ -1,6 +1,6 @@
 {
  "src": "images/foubert/foubert-site-plan.png",
- "hash": "3c6d07aab0bd4ebf",
+ "hash": "24427fd5f2ff100d",
  "mode": "ink",
  "from": [
   2560,
@@ -27,6 +27,7 @@
   "suggest": "accent"
  },
  "dark": "invert-accent",
+ "keep": null,
  "specks": 1330,
  "tile": [
   640,

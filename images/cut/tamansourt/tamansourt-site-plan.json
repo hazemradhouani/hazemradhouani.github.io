@@ -1,6 +1,6 @@
 {
  "src": "images/tamansourt/tamansourt-site-plan.png",
- "hash": "a34c75c475b721d6",
+ "hash": "9211fd95e65e0185",
  "mode": "ink",
  "from": [
   2560,
@@ -32,6 +32,7 @@
   "suggest": "mono"
  },
  "dark": "invert",
+ "keep": null,
  "specks": 550,
  "tile": [
   0,

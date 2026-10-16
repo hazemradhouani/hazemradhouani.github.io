@@ -1,6 +1,6 @@
 {
  "src": "images/sentry/sentry-section-bb.png",
- "hash": "d2c8a2e9547d101d",
+ "hash": "ebd6616e5becf492",
  "mode": "ink",
  "from": [
   1580,
@@ -29,6 +29,7 @@
   "suggest": "accent"
  },
  "dark": "invert-accent",
+ "keep": null,
  "specks": 572,
  "tile": [
   320,

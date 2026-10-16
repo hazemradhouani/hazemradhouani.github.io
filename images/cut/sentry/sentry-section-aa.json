@@ -1,6 +1,6 @@
 {
  "src": "images/sentry/sentry-section-aa.png",
- "hash": "cd6fa756c1437986",
+ "hash": "3fc1557f6944bb76",
  "mode": "ink",
  "from": [
   1312,
@@ -29,6 +29,7 @@
   "suggest": "mono"
  },
  "dark": "invert",
+ "keep": null,
  "specks": 266,
  "tile": [
   640,

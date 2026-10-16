@@ -42,14 +42,22 @@ export const cutFor = (rel) => path.posix.join('images/cut', path.posix.dirname(
 // The file to show: the cutout when the image is a drawing and its cutout exists, else the master.
 export const shown = (rel, drawing) => (drawing && fs.existsSync(path.join(ROOT, cutFor(rel))) ? cutFor(rel) : rel);
 
-// The dark-scheme treatment of a shown file (D50): a cutout's reviewed choice from its sidecar
-// ('invert' | 'invert-accent' | 'field' | 'object'), the inspection field until one is chosen,
+// The dark-scheme treatment of a shown file (D50, D69): a cutout's reviewed choice from its sidecar
+// ('invert' | 'invert-accent' | 'keep' | 'field' | 'object'), the inspection field until one is chosen,
 // and null for anything that is not a cutout (renders and photographs are never changed).
+export const DARK = ['invert', 'invert-accent', 'keep', 'field', 'object'];
 export function darkOf(rel) {
   if (!rel.startsWith('images/cut/')) return null;
   const side = path.join(ROOT, rel.replace(/\.png$/u, '.json'));
   const dark = fs.existsSync(side) ? JSON.parse(fs.readFileSync(side, 'utf8')).dark : null;
-  return ['invert', 'invert-accent', 'field', 'object'].includes(dark) ? dark : 'field';
+  return DARK.includes(dark) ? dark : 'field';
+}
+// A "keep" cutout's layer of solid rendered regions (D69), laid over the inverted drawing in the dark scheme.
+export function keepOf(rel) {
+  if (darkOf(rel) !== 'keep') return null;
+  const k = rel.replace(/\.png$/u, '--keep.png');
+  if (!fs.existsSync(path.join(ROOT, k))) throw new Error(`${rel}: dark "keep" but ${k} is missing (run node tools/cutout.mjs ${rel})`);
+  return k;
 }
 
 // PNG colour types 4 (grey + alpha) and 6 (RGBA) carry an alpha channel

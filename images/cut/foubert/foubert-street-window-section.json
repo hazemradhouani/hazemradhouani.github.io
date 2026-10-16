@@ -1,6 +1,6 @@
 {
  "src": "images/foubert/foubert-street-window-section.png",
- "hash": "2163875bb87cec9a",
+ "hash": "6c2cadb9b64c5354",
  "mode": "ink",
  "from": [
   1373,
@@ -27,6 +27,7 @@
   "suggest": "colour"
  },
  "dark": "invert-accent",
+ "keep": null,
  "specks": 5,
  "tile": [
   640,

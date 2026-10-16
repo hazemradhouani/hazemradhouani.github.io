@@ -1,6 +1,6 @@
 {
  "src": "images/zenata/zenata-end-elevation.png",
- "hash": "03030f5190c9b9dd",
+ "hash": "aeb4414f8ff8a74d",
  "mode": "ink",
  "from": [
   1127,
@@ -27,6 +27,7 @@
   "suggest": "colour"
  },
  "dark": "invert-accent",
+ "keep": null,
  "specks": 2,
  "tile": [
   0,

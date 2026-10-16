@@ -1,6 +1,6 @@
 {
  "src": "images/zenata/zenata-programme-775.png",
- "hash": "7d342ef7af0d80c6",
+ "hash": "da965ca1416b0d2f",
  "mode": "ink",
  "from": [
   1222,
@@ -26,7 +26,8 @@
   "midtoneFraction": 0.3122,
   "suggest": "colour"
  },
- "dark": "field",
+ "dark": "invert-accent",
+ "keep": null,
  "specks": 3925,
  "tile": [
   0,

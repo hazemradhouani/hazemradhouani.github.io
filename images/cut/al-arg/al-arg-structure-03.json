@@ -1,6 +1,6 @@
 {
  "src": "images/al-arg/al-arg-structure-03.png",
- "hash": "6f7a15202ebd8178",
+ "hash": "d7fe440196e072bd",
  "mode": "ink",
  "from": [
   700,
@@ -26,7 +26,14 @@
   "midtoneFraction": 0.8503,
   "suggest": "colour"
  },
- "dark": "field",
+ "dark": "keep",
+ "keep": {
+  "file": "images/cut/al-arg/al-arg-structure-03--keep.png",
+  "share": 0.4307,
+  "radius": 4,
+  "t": 0.06,
+  "fill": false
+ },
  "specks": 401,
  "tile": [
   0,

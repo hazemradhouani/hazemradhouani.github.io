@@ -1,6 +1,6 @@
 {
  "src": "images/al-arg/al-arg-ground-floor-existing.png",
- "hash": "1fd830516a23e19a",
+ "hash": "ec12aa4916249871",
  "mode": "ink",
  "from": [
   958,
@@ -30,7 +30,8 @@
   "midtoneFraction": 0.2876,
   "suggest": "mono"
  },
- "dark": "field",
+ "dark": "invert-accent",
+ "keep": null,
  "specks": 3283,
  "tile": [
   0,

@@ -1,6 +1,6 @@
 {
  "src": "images/corallum/corallum-facade-sliding.png",
- "hash": "ac04de997fc7dded",
+ "hash": "22548837a119a905",
  "mode": "ink",
  "from": [
   727,
@@ -26,7 +26,8 @@
   "midtoneFraction": 0.8886,
   "suggest": "colour"
  },
- "dark": "field",
+ "dark": "invert-accent",
+ "keep": null,
  "specks": 286,
  "tile": [
   0,

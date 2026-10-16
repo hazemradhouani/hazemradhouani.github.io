@@ -1,6 +1,6 @@
 {
  "src": "images/sentry/sentry-plan-floor.png",
- "hash": "54c1bbe6dbf64bfc",
+ "hash": "0f00abe61c4e4ae8",
  "mode": "ink",
  "from": [
   1165,
@@ -27,6 +27,7 @@
   "suggest": "colour"
  },
  "dark": "invert-accent",
+ "keep": null,
  "specks": 112,
  "tile": [
   0,

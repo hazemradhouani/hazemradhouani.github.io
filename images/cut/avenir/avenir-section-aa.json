@@ -1,6 +1,6 @@
 {
  "src": "images/avenir/avenir-section-aa.png",
- "hash": "f07b34f23b510a50",
+ "hash": "680e79032eba8010",
  "mode": "ink",
  "from": [
   2560,
@@ -26,7 +26,14 @@
   "midtoneFraction": 0.7171,
   "suggest": "colour"
  },
- "dark": "field",
+ "dark": "keep",
+ "keep": {
+  "file": "images/cut/avenir/avenir-section-aa--keep.png",
+  "share": 0.1149,
+  "radius": 4,
+  "t": 0.06,
+  "fill": false
+ },
  "specks": 297,
  "tile": [
   1600,

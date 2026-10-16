@@ -1,6 +1,6 @@
 {
  "src": "images/bolivar/bolivar-vegetation-section.jpg",
- "hash": "16e1328b3b06621f",
+ "hash": "bdc815992c286a58",
  "mode": "ink",
  "from": [
   888,
@@ -26,7 +26,8 @@
   "midtoneFraction": 0.6709,
   "suggest": "colour"
  },
- "dark": "field",
+ "dark": "invert-accent",
+ "keep": null,
  "specks": 391,
  "tile": [
   0,

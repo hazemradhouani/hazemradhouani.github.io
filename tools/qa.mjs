@@ -99,7 +99,9 @@ async function runThemeInteractions() {
     await mobilePage.locator('.menu-button').first().click();
     await mobilePage.locator('#menu[open] [data-theme-scope="menu"]').focus();
     await mobilePage.locator('#menu[open] [data-theme-scope="menu"]').press('Enter');
-    const state = await mobilePage.evaluate(() => ({ theme: document.documentElement.getAttribute('data-theme'), all: [...document.querySelectorAll('[data-theme-toggle]')].every((b) => b.getAttribute('aria-pressed') === 'false') }));
+    // every control (header, bar, menu) follows: visible state "theme: light", action ", switch to dark" (D68: no aria-pressed)
+    const state = await mobilePage.evaluate(() => ({ theme: document.documentElement.getAttribute('data-theme'), all: [...document.querySelectorAll('[data-theme-toggle]')].every((b) => !b.hasAttribute('aria-pressed')
+      && b.querySelector('[data-theme-label]')?.textContent?.trim() === 'theme: light' && b.querySelector('[data-theme-action]')?.textContent === ', switch to dark') }));
     if (state.theme !== 'light' || !state.all) failures.push('mobile menu keyboard toggle did not synchronise light preference');
   } catch (e) { failures.push(`mobile menu interaction: ${e.message}`); }
   await mobile.close();
@@ -155,7 +157,8 @@ for (const url of urls) {
         const b = img.getBoundingClientRect(); const w = +img.getAttribute('width'), h = +img.getAttribute('height');
         if (!b.width || !w || !h) continue;
         const src = img.getAttribute('src');
-        if (Math.abs(b.width / b.height - w / h) / (w / h) > 0.01) out.crop.push(`${src} ${Math.round(b.width)}x${Math.round(b.height)} vs ${w}x${h}`);
+        // 1%, or the half pixel a box snaps by on each axis when it is that small (a long strip on a phone)
+        if (Math.abs(b.width / b.height - w / h) / (w / h) > Math.max(0.01, 0.5 / b.height + 0.5 / b.width)) out.crop.push(`${src} ${Math.round(b.width)}x${Math.round(b.height)} vs ${w}x${h}`);
         if (getComputedStyle(img).objectFit === 'cover') out.crop.push(`${src} object-fit: cover`);
         if (b.width > w + 1) out.upscale.push(`${src} ${Math.round(b.width)}px > ${w}px`);
         // the file actually served (a derivative) must have the master's ratio, or the browser stretches it
@@ -181,18 +184,23 @@ for (const url of urls) {
         if (el.closest('video, svg, .legend__sw, .lab__pin')) continue;
         const c = getComputedStyle(el).backgroundColor; if (!ok.has(c)) out.palette.push(`${el.tagName.toLowerCase()}.${[...el.classList].join('.')} ${c}`);
       }
-      // dark treatments (D50): inverted linework is filtered only in the dark scheme; the inspection
-      // field shows only in the dark scheme; light pages show every drawing as authored
+      // dark treatments (D50, D69): inverted linework is filtered only in the dark scheme; a keep drawing
+      // shows its layer of solid regions, unfiltered, only in the dark scheme; no drawing may sit on a paper
+      // rectangle in the dark scheme (the owner's requirement); light pages show every drawing as authored
       for (const el of document.querySelectorAll('main .nw--drawing')) {
         const img = el.querySelector('img'); if (!img) continue;
         const f = getComputedStyle(img).filter; const bg = getComputedStyle(el).backgroundColor;
-        const kind = ['invert-accent', 'invert', 'field', 'object'].find((k) => el.classList.contains(`nw--${k}`)) || 'none';
+        const kind = ['invert-accent', 'invert', 'keep', 'field', 'object'].find((k) => el.classList.contains(`nw--${k}`)) || 'none';
         const name = (img.getAttribute('src') || '').split('/').pop();
+        const layer = el.querySelector('.nw__keep'), layerImg = layer?.querySelector('img');
         if (theme === 'light' && f !== 'none') out.theme.push(`${name} filtered in light: ${f}`);
-        if (theme === 'dark' && kind.startsWith('invert') && !/invert\(0\.965\)/u.test(f)) out.theme.push(`${name} ${kind} not inverted in dark: ${f}`);
-        if (theme === 'dark' && kind === 'invert-accent' && !/hue-rotate\(180deg\)/u.test(f)) out.theme.push(`${name} invert-accent without hue-rotate: ${f}`);
-        if (theme === 'dark' && kind === 'field' && bg !== 'rgb(247, 245, 239)') out.theme.push(`${name} field drawing without its inspection field: ${bg}`);
-        if (theme === 'dark' && kind !== 'field' && bg !== 'rgba(0, 0, 0, 0)') out.theme.push(`${name} ${kind} drawing has a background: ${bg}`);
+        if (theme === 'dark' && (kind.startsWith('invert') || kind === 'keep') && !/invert\(0\.965\)/u.test(f)) out.theme.push(`${name} ${kind} not inverted in dark: ${f}`);
+        if (theme === 'dark' && (kind === 'invert-accent' || kind === 'keep') && !/hue-rotate\(180deg\)/u.test(f)) out.theme.push(`${name} ${kind} without hue-rotate: ${f}`);
+        if (kind === 'keep' && !layerImg) out.theme.push(`${name} keep drawing without its layer`);
+        if (kind === 'keep' && layerImg && (getComputedStyle(layer).display === 'none') !== (theme === 'light')) out.theme.push(`${name} keep layer ${theme === 'light' ? 'shown in light' : 'hidden in dark'}`);
+        if (kind === 'keep' && layerImg && getComputedStyle(layerImg).filter !== 'none') out.theme.push(`${name} keep layer filtered: ${getComputedStyle(layerImg).filter}`);
+        if (theme === 'dark' && kind === 'field') out.theme.push(`${name} sits on a paper field in dark (D69: invert, invert-accent or keep)`);
+        if (bg !== 'rgba(0, 0, 0, 0)' && !(theme === 'light' && kind === 'field')) out.theme.push(`${name} ${kind} drawing has a background in ${theme}: ${bg}`);
       }
       // labels re-set from a drawing (D49): in place, they stay inside the drawing and never overlap
       out.labels = [];
@@ -246,6 +254,7 @@ for (const url of urls) {
         const bad = []; const fringe = [];
       for (const img of document.querySelectorAll('main img[src*="images/cut/"], main img[src*="thesis-book"]')) {
         if (fullBleed.some((s) => img.getAttribute('src').includes(s))) continue;
+        if (img.closest('.nw__keep')) continue;   // a keep layer is opaque by design inside its regions (D69); its drawing is checked
         img.loading = 'eager';
         const ok = await Promise.race([img.decode().then(() => true, () => false), new Promise((r) => setTimeout(() => r(false), 4000))]);
         if (!ok || !img.naturalWidth) { bad.push(`${img.getAttribute('src').split('/').pop()} did not load`); continue; }

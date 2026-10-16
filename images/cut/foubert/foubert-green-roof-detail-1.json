@@ -1,6 +1,6 @@
 {
  "src": "images/foubert/foubert-green-roof-detail-1.png",
- "hash": "36ed00dac47cd662",
+ "hash": "942936720ea26918",
  "mode": "ink",
  "from": [
   2560,
@@ -27,6 +27,7 @@
   "suggest": "accent"
  },
  "dark": "invert-accent",
+ "keep": null,
  "specks": 37,
  "tile": [
   320,

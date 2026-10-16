@@ -1,6 +1,6 @@
 {
  "src": "images/cinephile/cinephile-detail-facade-attachment.png",
- "hash": "ab7e2f8675630eb1",
+ "hash": "f60beecdb5a6013e",
  "mode": "ink",
  "from": [
   462,
@@ -27,6 +27,7 @@
   "suggest": "mono"
  },
  "dark": "invert",
+ "keep": null,
  "specks": 313,
  "tile": [
   0,

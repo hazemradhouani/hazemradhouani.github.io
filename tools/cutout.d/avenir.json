@@ -38,13 +38,13 @@
       "paper": [255, 255, 255],
       "floor": 0.015,
       "knee": 0.03,
-      "dark": "field"
+      "dark": "keep", "keepFill": false
     },
     "images/avenir/avenir-section-ee.png": {
       "paper": [255, 255, 255],
       "floor": 0.015,
       "knee": 0.03,
-      "dark": "field"
+      "dark": "keep", "keepFill": false
     },
     "images/avenir/avenir-west-elevation.png": {
       "paper": [255, 255, 255],
@@ -52,14 +52,14 @@
       "knee": 0.03,
       "clip": ["bottom"],
       "erase": [{ "id": "key-plan-edge", "x": 66, "y": 0, "w": 340, "h": 55 }],
-      "dark": "field"
+      "dark": "keep"
     },
     "images/avenir/avenir-south-elevation.png": {
       "paper": [255, 255, 255],
       "floor": 0.015,
       "knee": 0.03,
       "clip": ["left", "right"],
-      "dark": "field"
+      "dark": "keep"
     }
   }
 }

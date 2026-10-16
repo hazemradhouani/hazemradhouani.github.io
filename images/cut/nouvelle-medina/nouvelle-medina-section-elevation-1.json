@@ -1,6 +1,6 @@
 {
  "src": "images/nouvelle-medina/nouvelle-medina-section-elevation-1.png",
- "hash": "00687f3dbed25c32",
+ "hash": "dc8812b5a27ccc22",
  "mode": "ink",
  "from": [
   2422,
@@ -29,6 +29,7 @@
   "suggest": "accent"
  },
  "dark": "invert-accent",
+ "keep": null,
  "specks": 23,
  "tile": [
   0,

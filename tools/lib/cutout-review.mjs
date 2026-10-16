@@ -10,15 +10,18 @@ const INVERT = 'lutrgb=r=0.035*val+0.965*(255-val):g=0.035*val+0.965*(255-val):b
 /** The dark-scheme rendering of a cutout: [filter applied to the cutout, the ground it sits on]. */
 export function darkRendering(dark) {
   if (dark === 'invert') return [INVERT, '0x121311'];
-  if (dark === 'invert-accent') return [`${INVERT},hue=h=180`, '0x121311'];
+  // keep (D69): the drawing inverted like invert-accent, its solid rendered regions laid back on top (input 1)
+  if (dark === 'invert-accent' || dark === 'keep') return [`${INVERT},hue=h=180`, '0x121311'];
   if (dark === 'field') return ['null', '0xF7F5EF'];
   return ['null', '0x121311'];
 }
 
-export function reviewFilter(dark = null) {
+// With a keep layer (input 1, the same size as the cutout), the dark panel composites it over the inverted drawing.
+export function reviewFilter(dark = null, { keep = false } = {}) {
   const [transform, ground] = darkRendering(dark);
   return [
     '[0:v]scale=640:-2:flags=lanczos,split=8[a][b][c][d][e][f][g][h]',
+    ...(keep ? ['[1:v]scale=640:-2:flags=lanczos[kp]'] : []),
     '[b]drawbox=c=white:t=fill:replace=1[w]',
     '[d]drawbox=c=0x121311:t=fill:replace=1[k]',
     '[f]drawbox=c=0xff00ff:t=fill:replace=1[m]',
@@ -27,21 +30,22 @@ export function reviewFilter(dark = null) {
     '[w][a]overlay[ow]',
     '[k][c]overlay[od]',
     '[m][e]overlay[om]',
-    '[z][gd]overlay[oz]',
+    ...(keep ? ['[z][gd]overlay[zg]', '[zg][kp]overlay[oz]'] : ['[z][gd]overlay[oz]']),
     '[ow][od][om][oz]hstack=inputs=4'
   ].join(';');
 }
 
 /** The densest region at 1:1: on white beside its dark-scheme rendering. tile = [x, y, w, h]. */
-export function detailFilter(dark, [x, y, w, h]) {
+export function detailFilter(dark, [x, y, w, h], { keep = false } = {}) {
   const [transform, ground] = darkRendering(dark);
   return [
     `[0:v]crop=${w}:${h}:${x}:${y},split=4[a][b][c][d]`,
+    ...(keep ? [`[1:v]crop=${w}:${h}:${x}:${y}[kp]`] : []),
     '[b]drawbox=c=white:t=fill:replace=1[w]',
     `[d]drawbox=c=${ground}:t=fill:replace=1[z]`,
     `[c]${transform}[ct]`,
     '[w][a]overlay[ow]',
-    '[z][ct]overlay[oz]',
+    ...(keep ? ['[z][ct]overlay[zc]', '[zc][kp]overlay[oz]'] : ['[z][ct]overlay[oz]']),
     '[ow][oz]hstack=inputs=2'
   ].join(';');
 }

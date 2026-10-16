@@ -1,6 +1,6 @@
 {
  "src": "images/belhomme/belhomme-section-cc.png",
- "hash": "dabc9f8fc750cbb5",
+ "hash": "5a15916ef84f099a",
  "mode": "ink",
  "from": [
   2526,
@@ -27,6 +27,7 @@
   "suggest": "accent"
  },
  "dark": "invert-accent",
+ "keep": null,
  "specks": 197,
  "tile": [
   320,

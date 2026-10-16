@@ -1,6 +1,6 @@
 {
  "src": "images/al-arg/al-arg-exterior-courtyards.png",
- "hash": "968bca0256e278d6",
+ "hash": "6ed6c947ac71ae1e",
  "mode": "ink",
  "from": [
   690,
@@ -26,7 +26,14 @@
   "midtoneFraction": 0.6047,
   "suggest": "accent"
  },
- "dark": "field",
+ "dark": "keep",
+ "keep": {
+  "file": "images/cut/al-arg/al-arg-exterior-courtyards--keep.png",
+  "share": 0.4766,
+  "radius": 4,
+  "t": 0.06,
+  "fill": true
+ },
  "specks": 62,
  "tile": [
   0,

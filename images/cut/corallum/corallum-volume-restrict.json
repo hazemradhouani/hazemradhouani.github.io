@@ -1,6 +1,6 @@
 {
  "src": "images/corallum/corallum-volume-restrict.png",
- "hash": "aac56a16213d06da",
+ "hash": "35a0a3029341c0c1",
  "mode": "ink",
  "from": [
   479,
@@ -26,7 +26,8 @@
   "midtoneFraction": 0.7618,
   "suggest": "colour"
  },
- "dark": "field",
+ "dark": "invert-accent",
+ "keep": null,
  "specks": 24,
  "tile": [
   0,

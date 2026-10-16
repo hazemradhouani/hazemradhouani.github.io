@@ -1,6 +1,6 @@
 {
  "src": "images/cinephile/cinephile-detail-corner-insulation.png",
- "hash": "e4ee112c940862fd",
+ "hash": "0dff2c179841b45f",
  "mode": "ink",
  "from": [
   458,
@@ -27,6 +27,7 @@
   "suggest": "mono"
  },
  "dark": "invert",
+ "keep": null,
  "specks": 950,
  "tile": [
   0,

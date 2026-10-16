@@ -1,6 +1,6 @@
 {
  "src": "images/belhomme/belhomme-facade-rochechouart.png",
- "hash": "1a2b3c68d923eb1f",
+ "hash": "823060b0c20239b8",
  "mode": "ink",
  "from": [
   2560,
@@ -27,6 +27,7 @@
   "suggest": "accent"
  },
  "dark": "invert-accent",
+ "keep": null,
  "specks": 28,
  "tile": [
   960,

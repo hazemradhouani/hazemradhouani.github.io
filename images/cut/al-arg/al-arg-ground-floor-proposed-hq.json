@@ -1,6 +1,6 @@
 {
  "src": "images/al-arg/al-arg-ground-floor-proposed-hq.png",
- "hash": "f72d59d9221d12c5",
+ "hash": "581540936d068750",
  "mode": "ink",
  "from": [
   1528,
@@ -30,7 +30,8 @@
   "midtoneFraction": 0.1627,
   "suggest": "mono"
  },
- "dark": "field",
+ "dark": "invert-accent",
+ "keep": null,
  "specks": 2268,
  "tile": [
   640,

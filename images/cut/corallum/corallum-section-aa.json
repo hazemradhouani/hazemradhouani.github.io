@@ -1,0 +1,41 @@
+{
+ "src": "images/corallum/corallum-section-aa.jpg",
+ "hash": "8033e809173df791",
+ "mode": "plate",
+ "from": [
+  1724,
+  206
+ ],
+ "to": [
+  1724,
+  206
+ ],
+ "offset": [
+  0,
+  0
+ ],
+ "paper": null,
+ "clip": [
+  "left",
+  "top",
+  "right",
+  "bottom"
+ ],
+ "ink": {
+  "ink": 88786,
+  "chromaticFraction": 0,
+  "midtoneFraction": 0,
+  "suggest": "mono"
+ },
+ "dark": "invert-accent",
+ "keep": null,
+ "specks": 0,
+ "tile": [
+  0,
+  0,
+  640,
+  206
+ ],
+ "background": null,
+ "labels": []
+}

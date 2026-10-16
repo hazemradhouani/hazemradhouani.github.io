@@ -3,11 +3,11 @@
   "images": {
     "images/belhomme/belhomme-plan-n00.jpg": { "clip": ["top"], "dark": "invert-accent" },
     "images/belhomme/belhomme-plan-n02.jpg": { "clip": ["top"], "dark": "invert-accent" },
-    "images/belhomme/belhomme-demolition-plans.jpg": { "dark": "field" },
+    "images/belhomme/belhomme-demolition-plans.jpg": { "dark": "invert-accent" },
     "images/belhomme/belhomme-existing-facades-survey.jpg": { "dark": "invert" },
-    "images/belhomme/belhomme-plu-section-rochechouart.jpg": { "dark": "field" },
+    "images/belhomme/belhomme-plu-section-rochechouart.jpg": { "dark": "invert-accent" },
     "images/belhomme/belhomme-plu-section-rue-belhomme-detailed.jpg": { "dark": "invert-accent" },
-    "images/belhomme/belhomme-plu-section-rue-belhomme.jpg": { "dark": "field" },
+    "images/belhomme/belhomme-plu-section-rue-belhomme.jpg": { "dark": "invert-accent" },
     "images/belhomme/belhomme-roof-plan.png": {
       "paper": [255, 255, 255],
       "floor": 0.015,

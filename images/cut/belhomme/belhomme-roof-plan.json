@@ -1,6 +1,6 @@
 {
  "src": "images/belhomme/belhomme-roof-plan.png",
- "hash": "143b16f3b80011eb",
+ "hash": "c165d0564f0a9ae4",
  "mode": "ink",
  "from": [
   2420,
@@ -27,6 +27,7 @@
   "suggest": "accent"
  },
  "dark": "invert-accent",
+ "keep": null,
  "specks": 94,
  "tile": [
   320,

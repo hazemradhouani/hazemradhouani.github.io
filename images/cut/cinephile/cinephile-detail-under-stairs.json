@@ -1,6 +1,6 @@
 {
  "src": "images/cinephile/cinephile-detail-under-stairs.png",
- "hash": "48aa937dcf1cc983",
+ "hash": "7feda128d0ed11de",
  "mode": "ink",
  "from": [
   478,
@@ -27,6 +27,7 @@
   "suggest": "mono"
  },
  "dark": "invert",
+ "keep": null,
  "specks": 1015,
  "tile": [
   0,

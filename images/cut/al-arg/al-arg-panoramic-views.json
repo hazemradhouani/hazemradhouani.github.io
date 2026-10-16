@@ -1,6 +1,6 @@
 {
  "src": "images/al-arg/al-arg-panoramic-views.png",
- "hash": "77fee631cfd46e29",
+ "hash": "a6af0f20e1f55976",
  "mode": "ink",
  "from": [
   690,
@@ -26,7 +26,14 @@
   "midtoneFraction": 0.5663,
   "suggest": "accent"
  },
- "dark": "field",
+ "dark": "keep",
+ "keep": {
+  "file": "images/cut/al-arg/al-arg-panoramic-views--keep.png",
+  "share": 0.4887,
+  "radius": 4,
+  "t": 0.06,
+  "fill": true
+ },
  "specks": 142,
  "tile": [
   0,

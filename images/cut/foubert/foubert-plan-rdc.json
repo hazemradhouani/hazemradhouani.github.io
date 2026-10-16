@@ -1,6 +1,6 @@
 {
  "src": "images/foubert/foubert-plan-rdc.png",
- "hash": "db4f37c396ec68ab",
+ "hash": "6a66c9a6494098e9",
  "mode": "ink",
  "from": [
   2560,
@@ -27,6 +27,7 @@
   "suggest": "accent"
  },
  "dark": "invert-accent",
+ "keep": null,
  "specks": 34,
  "tile": [
   960,

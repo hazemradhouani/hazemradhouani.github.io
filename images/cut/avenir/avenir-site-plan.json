@@ -1,6 +1,6 @@
 {
  "src": "images/avenir/avenir-site-plan.png",
- "hash": "cade06efbf43f097",
+ "hash": "950909649ddbccd8",
  "mode": "ink",
  "from": [
   2560,
@@ -31,6 +31,7 @@
   "suggest": "accent"
  },
  "dark": "invert-accent",
+ "keep": null,
  "specks": 1177,
  "tile": [
   320,

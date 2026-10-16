@@ -21,7 +21,7 @@
           "h": 174
         }
       ],
-      "dark": "field"
+      "dark": "invert-accent"
     },
     "images/zenata/zenata-plan-000.png": {
       "paper": [
@@ -61,7 +61,7 @@
       ],
       "floor": 0.01,
       "knee": 0.02,
-      "dark": "field"
+      "dark": "invert-accent"
     },
     "images/zenata/zenata-programme-420.png": {
       "paper": [
@@ -71,7 +71,7 @@
       ],
       "floor": 0.01,
       "knee": 0.02,
-      "dark": "field"
+      "dark": "invert-accent"
     },
     "images/zenata/zenata-programme-775.png": {
       "paper": [
@@ -81,7 +81,7 @@
       ],
       "floor": 0.01,
       "knee": 0.02,
-      "dark": "field"
+      "dark": "invert-accent"
     },
     "images/zenata/zenata-long-elevation.png": {
       "paper": [

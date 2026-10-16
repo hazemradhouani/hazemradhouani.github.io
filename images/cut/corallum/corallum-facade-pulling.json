@@ -1,6 +1,6 @@
 {
  "src": "images/corallum/corallum-facade-pulling.png",
- "hash": "cfcc05ccddffdd5b",
+ "hash": "aa16bb00c97a840b",
  "mode": "ink",
  "from": [
   747,
@@ -26,7 +26,8 @@
   "midtoneFraction": 0.9232,
   "suggest": "colour"
  },
- "dark": "field",
+ "dark": "invert-accent",
+ "keep": null,
  "specks": 264,
  "tile": [
   0,

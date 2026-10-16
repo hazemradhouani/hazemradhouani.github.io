@@ -1,6 +1,6 @@
 {
  "src": "images/sentry/sentry-elevation-cladding.png",
- "hash": "78eb3a398fa4949f",
+ "hash": "53cd025a1071d59f",
  "mode": "ink",
  "from": [
   1492,
@@ -27,6 +27,7 @@
   "suggest": "mono"
  },
  "dark": "invert",
+ "keep": null,
  "specks": 348,
  "tile": [
   640,

@@ -1,6 +1,6 @@
 {
  "src": "images/sentry/sentry-3d-view.png",
- "hash": "22a1f652007e4e3b",
+ "hash": "e425a8cf51ad45d3",
  "mode": "ink",
  "from": [
   1679,
@@ -26,7 +26,8 @@
   "midtoneFraction": 0.5307,
   "suggest": "mono"
  },
- "dark": "field",
+ "dark": "invert-accent",
+ "keep": null,
  "specks": 530,
  "tile": [
   320,

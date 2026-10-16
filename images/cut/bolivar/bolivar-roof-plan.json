@@ -1,6 +1,6 @@
 {
  "src": "images/bolivar/bolivar-roof-plan.png",
- "hash": "f87dd2c3d58f4dde",
+ "hash": "4c07e2a3e171dbfd",
  "mode": "ink",
  "from": [
   2560,
@@ -31,7 +31,8 @@
   "midtoneFraction": 0.9078,
   "suggest": "colour"
  },
- "dark": "field",
+ "dark": "invert-accent",
+ "keep": null,
  "specks": 135,
  "tile": [
   960,

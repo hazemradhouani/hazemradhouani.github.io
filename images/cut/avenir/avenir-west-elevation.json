@@ -1,6 +1,6 @@
 {
  "src": "images/avenir/avenir-west-elevation.png",
- "hash": "43c54ecc8261d93f",
+ "hash": "70f460e3bc53a4bb",
  "mode": "ink",
  "from": [
   2560,
@@ -28,7 +28,14 @@
   "midtoneFraction": 0.6779,
   "suggest": "colour"
  },
- "dark": "field",
+ "dark": "keep",
+ "keep": {
+  "file": "images/cut/avenir/avenir-west-elevation--keep.png",
+  "share": 0.3415,
+  "radius": 4,
+  "t": 0.06,
+  "fill": true
+ },
  "specks": 128,
  "tile": [
   1600,

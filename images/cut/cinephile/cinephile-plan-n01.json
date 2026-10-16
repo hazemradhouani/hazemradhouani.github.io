@@ -1,6 +1,6 @@
 {
  "src": "images/cinephile/cinephile-plan-n01.jpg",
- "hash": "da1053a3bc26d26d",
+ "hash": "f448168b0835cc4f",
  "mode": "ink",
  "from": [
   1003,
@@ -27,6 +27,7 @@
   "suggest": "mono"
  },
  "dark": "invert",
+ "keep": null,
  "specks": 339,
  "tile": [
   0,

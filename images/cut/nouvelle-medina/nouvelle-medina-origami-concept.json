@@ -1,6 +1,6 @@
 {
  "src": "images/nouvelle-medina/nouvelle-medina-origami-concept.png",
- "hash": "fca6596f3f2f379a",
+ "hash": "8213ee157c3abf8c",
  "mode": "ink",
  "from": [
   2560,
@@ -27,6 +27,7 @@
   "suggest": "colour"
  },
  "dark": "invert-accent",
+ "keep": null,
  "specks": 28,
  "tile": [
   1280,

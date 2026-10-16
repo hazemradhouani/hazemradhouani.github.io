@@ -9,6 +9,6 @@
     "images/sentry/sentry-elevation-cladding.png": { "paper": [255, 255, 255], "floor": 0.015, "knee": 0.03, "dark": "invert" },
     "images/sentry/sentry-elevation-side.png": { "paper": [255, 255, 255], "floor": 0.015, "knee": 0.03, "dark": "invert-accent" },
     "images/sentry/sentry-section-bb.png": { "paper": [255, 255, 255], "floor": 0.015, "knee": 0.03, "clip": ["bottom"], "dark": "invert-accent" },
-    "images/sentry/sentry-3d-view.png": { "paper": [255, 255, 255], "floor": 0.015, "knee": 0.03, "dark": "field" }
+    "images/sentry/sentry-3d-view.png": { "paper": [255, 255, 255], "floor": 0.015, "knee": 0.03, "dark": "invert-accent" }
   }
 }

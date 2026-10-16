@@ -1,6 +1,6 @@
 {
  "src": "images/foubert/foubert-attic-terrace-detail.png",
- "hash": "863306ecdafc72fb",
+ "hash": "66faf8dac8633562",
  "mode": "ink",
  "from": [
   2196,
@@ -27,6 +27,7 @@
   "suggest": "accent"
  },
  "dark": "invert-accent",
+ "keep": null,
  "specks": 35,
  "tile": [
   1280,

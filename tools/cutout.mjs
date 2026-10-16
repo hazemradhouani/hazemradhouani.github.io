@@ -5,6 +5,8 @@
 // specks, gates the crop edges, trims to the ink plus a margin and writes:
 //   images/cut/<dir>/<stem>.png   the cutout (graded alpha, unblended colour)
 //   images/cut/<dir>/<stem>.json  its sidecar: label boxes (% of the cutout), ink class, trim, clip
+//   images/cut/<dir>/<stem>--keep.png  dark "keep" only (D69): the solid rendered regions, opaque, in their
+//                                      own colours, laid over the inverted drawing in the dark scheme
 // Masters are never touched. Settings: tools/cutout.json + tools/cutout.d/<slug>.json (D52).
 // Usage: node tools/cutout.mjs [--force] [--sheet] [path-prefix ...]
 //   --sheet  also writes review sheets to tools/.cache/cutouts/: <name>.jpg (white | Field charcoal |
@@ -17,7 +19,7 @@ import { fileURLToPath } from 'node:url';
 import { setRoot, dims, cutFor } from './lib/images.mjs';
 import { reviewFilter, detailFilter } from './lib/cutout-review.mjs';
 import { loadCutoutConfig } from './lib/cutout-config.mjs';
-import { keyInk, objectMatte, eraseComponents, despeckle, clippedSides, classifyInk, paperField } from './lib/matte.mjs';
+import { keyInk, objectMatte, eraseComponents, despeckle, clippedSides, classifyInk, paperField, keepLayer } from './lib/matte.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 setRoot(ROOT);
@@ -55,6 +57,8 @@ const decode = (rel, w, h) => {
 };
 const median = (a) => { a.sort((m, n) => m - n); return a[a.length >> 1]; };
 const sidecarFor = (rel) => cutFor(rel).replace(/\.png$/u, '.json');
+// the dark scheme's keep layer (D69): the solid rendered regions, laid over the inverted drawing
+const keepFor = (rel) => cutFor(rel).replace(/\.png$/u, '--keep.png');
 const optionsHash = (rel, o) => crypto.createHash('sha256').update(JSON.stringify([rel, o, ENGINE])).digest('hex').slice(0, 16);
 
 function borderMedian(px, W, H, band) {
@@ -67,7 +71,25 @@ function borderMedian(px, W, H, band) {
   return ch.map(median);
 }
 
+// mode "plate" (D69): a drawing whose own ground makes it legible (white massing against a screened
+// sky, a rendered plan on a shaded ground) is kept whole and opaque: nothing keyed, nothing trimmed.
+// It joins the cutouts only to carry a reviewed dark treatment; it must be declared full-bleed.
+function plate(rel, o) {
+  const { w: W, h: H } = dims(rel);
+  if (!o.fullBleed) throw new Error(`${rel}: mode "plate" keeps its ground; declare it in "fullBleed" with the reason`);
+  const px = decode(rel, W, H);
+  const dest = path.join(ROOT, cutFor(rel));
+  fs.mkdirSync(path.dirname(dest), { recursive: true });
+  execFileSync('ffmpeg', ['-v', 'error', '-y', '-f', 'rawvideo', '-pix_fmt', 'rgba', '-s', `${W}x${H}`, '-i', '-', '-frames:v', '1', '-compression_level', '9', dest], { input: px });
+  const sidecar = { src: rel, hash: optionsHash(rel, o), mode: 'plate', from: [W, H], to: [W, H], offset: [0, 0], paper: null,
+    clip: ['left', 'top', 'right', 'bottom'], ink: classifyInk(px, W, H), dark: o.dark || null, keep: null, specks: 0,
+    tile: [0, 0, Math.min(640, W), Math.min(400, H)], background: null, labels: [] };
+  fs.writeFileSync(path.join(ROOT, sidecarFor(rel)), `${JSON.stringify(sidecar, null, 1)}\n`);
+  return { paper: 'none', from: [W, H], to: [W, H], sidecar };
+}
+
 function cut(rel, o) {
+  if (o.mode === 'plate') return plate(rel, o);
   const { w: W, h: H } = dims(rel);
   const px = decode(rel, W, H);
   // 1. paper: declared colour, a fitted field (uneven grounds), or the border median
@@ -103,6 +125,13 @@ function cut(rel, o) {
   const dest = path.join(ROOT, cutFor(rel));
   fs.mkdirSync(path.dirname(dest), { recursive: true });
   execFileSync('ffmpeg', ['-v', 'error', '-y', '-f', 'rawvideo', '-pix_fmt', 'rgba', '-s', `${cw}x${chh}`, '-i', '-', '-frames:v', '1', '-compression_level', '9', dest], { input: out });
+  // 5b. the keep layer, only for a drawing whose dark treatment is "keep"; any other choice removes a stale one
+  let keep = null; const keepDest = path.join(ROOT, keepFor(rel));
+  if (o.dark === 'keep') {
+    const k = keepLayer(out, cw, chh, { radius: o.keepRadius ?? 4, t: o.keepT ?? 0.06, fill: o.keepFill ?? true });
+    execFileSync('ffmpeg', ['-v', 'error', '-y', '-f', 'rawvideo', '-pix_fmt', 'rgba', '-s', `${cw}x${chh}`, '-i', '-', '-frames:v', '1', '-compression_level', '9', keepDest], { input: k.layer });
+    keep = { file: keepFor(rel), share: +k.share.toFixed(4), radius: o.keepRadius ?? 4, t: o.keepT ?? 0.06, fill: o.keepFill ?? true };
+  } else if (fs.existsSync(keepDest)) fs.unlinkSync(keepDest);
   // densest region (for the 1:1 review tile)
   const tw = Math.min(640, cw), th = Math.min(400, chh); let tile = [0, 0, tw, th], bestSum = -1;
   const sx = Math.max(1, tw >> 1), sy = Math.max(1, th >> 1);
@@ -114,7 +143,7 @@ function cut(rel, o) {
   const pct = (v, n) => +((100 * v) / n).toFixed(3);
   const sidecar = {
     src: rel, hash: optionsHash(rel, o), mode: o.mode, from: [W, H], to: [cw, chh], offset: [x0, y0],
-    paper: Array.isArray(paper) ? paper : 'field', clip: clipped, ink, dark: o.dark || null, specks, tile,
+    paper: Array.isArray(paper) ? paper : 'field', clip: clipped, ink, dark: o.dark || null, keep, specks, tile,
     background: matte ? +matte.background.toFixed(4) : null,
     labels: erased.map((e) => ({ id: e.id, removed: e.removed, kept: e.kept, x: pct(e.bbox.x - x0, cw), y: pct(e.bbox.y - y0, chh), w: pct(e.bbox.w, cw), h: pct(e.bbox.h, chh) })),
   };
@@ -140,13 +169,15 @@ for (const rel of list) {
   }
   const dest = path.join(ROOT, cutFor(rel)); const side = path.join(ROOT, sidecarFor(rel));
   const prev = fs.existsSync(side) ? JSON.parse(fs.readFileSync(side, 'utf8')) : null;
-  const fresh = prev && fs.existsSync(dest) && fs.statSync(dest).mtimeMs > fs.statSync(path.join(ROOT, rel)).mtimeMs && prev.hash === optionsHash(rel, o);
+  const fresh = prev && fs.existsSync(dest) && fs.statSync(dest).mtimeMs > fs.statSync(path.join(ROOT, rel)).mtimeMs && prev.hash === optionsHash(rel, o)
+    && (o.dark !== 'keep' || fs.existsSync(path.join(ROOT, keepFor(rel))));
   if (!FORCE && fresh) { done.push({ rel, sidecar: prev }); continue; }
   let r;
   try { r = cut(rel, o); } catch (e) { failed.push(e.message); continue; }
   const s = r.sidecar;
-  console.log(`${rel}: ${o.mode} | paper ${Array.isArray(r.paper) ? r.paper.join(',') : 'field'} | ${r.from.join('x')} -> ${r.to.join('x')} | ink ${s.ink.suggest} (${(s.ink.chromaticFraction * 100).toFixed(2)}% chromatic) | dark ${s.dark || 'unset'}${s.labels.length ? ` | ${s.labels.map((l) => `${l.id}: -${l.removed}${l.kept ? ` (kept ${l.kept} crossing)` : ''}`).join(', ')}` : ''}${s.specks ? ` | ${s.specks} specks` : ''}`);
-  if (s.dark && ((s.dark === 'invert' && s.ink.suggest !== 'mono') || (s.dark === 'invert-accent' && s.ink.suggest === 'colour'))) console.log(`  note: dark "${s.dark}" chosen although the ink measures "${s.ink.suggest}"; confirm it on the review sheet`);
+  console.log(`${rel}: ${o.mode} | paper ${Array.isArray(r.paper) ? r.paper.join(',') : o.mode === 'plate' ? 'none (kept whole)' : 'field'} | ${r.from.join('x')} -> ${r.to.join('x')} | ink ${s.ink.suggest} (${(s.ink.chromaticFraction * 100).toFixed(2)}% chromatic) | dark ${s.dark || 'unset'}${s.labels.length ? ` | ${s.labels.map((l) => `${l.id}: -${l.removed}${l.kept ? ` (kept ${l.kept} crossing)` : ''}`).join(', ')}` : ''}${s.specks ? ` | ${s.specks} specks` : ''}`);
+  // plain invert is exact only for grey; colour drawings take invert-accent (hues held) or keep (D69)
+  if (s.dark === 'invert' && s.ink.suggest !== 'mono') console.log(`  note: dark "invert" chosen although the ink measures "${s.ink.suggest}"; confirm it on the review sheet`);
   made++; done.push({ rel, sidecar: s });
 }
 console.log(`${made} cutout(s) written, ${done.length} current${failed.length ? `, ${failed.length} FAILED` : ''}`);
@@ -160,9 +191,10 @@ if (SHEET) {
   for (const { rel, sidecar } of done) {
     const src = path.join(ROOT, cutFor(rel));
     const name = cutFor(rel).replace(/^images\/cut\//, '').replace(/[\/.]/g, '_');
-    execFileSync('ffmpeg', ['-v', 'error', '-y', '-i', src, '-filter_complex', reviewFilter(sidecar.dark), '-frames:v', '1', path.join(dir, name + '.jpg')]);
+    const keep = sidecar.keep ? ['-i', path.join(ROOT, sidecar.keep.file)] : [];
+    execFileSync('ffmpeg', ['-v', 'error', '-y', '-i', src, ...keep, '-filter_complex', reviewFilter(sidecar.dark, { keep: !!keep.length }), '-frames:v', '1', path.join(dir, name + '.jpg')]);
     const tile = sidecar.tile || [0, 0, Math.min(640, sidecar.to[0]), Math.min(400, sidecar.to[1])];
-    execFileSync('ffmpeg', ['-v', 'error', '-y', '-i', src, '-filter_complex', detailFilter(sidecar.dark, tile), '-frames:v', '1', path.join(dir, name + '-detail.jpg')]);
+    execFileSync('ffmpeg', ['-v', 'error', '-y', '-i', src, ...keep, '-filter_complex', detailFilter(sidecar.dark, tile, { keep: !!keep.length }), '-frames:v', '1', path.join(dir, name + '-detail.jpg')]);
   }
   console.log(`review sheets in ${path.relative(ROOT, dir)}`);
 }

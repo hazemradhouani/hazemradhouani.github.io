@@ -1,6 +1,6 @@
 {
  "src": "images/bolivar/bolivar-long-section-aa.png",
- "hash": "98a5ffb7993d808e",
+ "hash": "e13129c8c74e06a3",
  "mode": "ink",
  "from": [
   2560,
@@ -31,6 +31,7 @@
   "suggest": "colour"
  },
  "dark": "invert-accent",
+ "keep": null,
  "specks": 3041,
  "tile": [
   320,

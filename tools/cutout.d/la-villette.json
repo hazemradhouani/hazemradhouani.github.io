@@ -1,12 +1,12 @@
 {
   "$comment": "La Villette cutouts (tools/cutout.mjs; D46, D49, D50). DCE sheets at 300 dpi, clean vector exports: floor/knee 0.015/0.03 keep the pale fills. French callouts and view titles are erased (boxes in master pixels) and re-set as English labels; a box is drawn taller than its words where the label must stand clear of a leader line that runs on to a second view. The axonometric keeps a wide margin (0.1): its labels are longer than the French they replace and need the blank paper the crop left beside them. Clips: the gate's wall band runs to the sheet frame (top) and its two projection lines run on to the plan left outside (bottom); the elevation's grid and property lines run past the ground hatch to the viewport edge (bottom).",
   "images": {
-    "images/la-villette/la-villette-site-plan.jpg": { "dark": "field" },
+    "images/la-villette/la-villette-site-plan.jpg": { "dark": "invert-accent" },
     "images/la-villette/la-villette-plan-level-2-room-types.png": {
       "paper": [255, 255, 255],
       "floor": 0.015,
       "knee": 0.03,
-      "dark": "field"
+      "dark": "invert-accent"
     },
     "images/la-villette/la-villette-south-elevation-c.png": {
       "paper": [255, 255, 255],
@@ -32,7 +32,7 @@
         { "id": "joint", "x": 2028, "y": 1569, "w": 232, "h": 54 },
         { "id": "band", "x": 2028, "y": 1729, "w": 377, "h": 108 }
       ],
-      "dark": "field"
+      "dark": "invert-accent"
     },
     "images/la-villette/la-villette-facade-module-details.png": {
       "paper": [255, 255, 255],
@@ -46,7 +46,7 @@
         { "id": "form-lined", "x": 1607, "y": 1159, "w": 185, "h": 148 },
         { "id": "band-bottom", "x": 1607, "y": 1406, "w": 241, "h": 168 }
       ],
-      "dark": "field"
+      "dark": "invert-accent"
     },
     "images/la-villette/la-villette-access-gate.png": {
       "paper": [255, 255, 255],
@@ -68,14 +68,14 @@
         { "id": "elevation", "x": 504, "y": 1177, "w": 137, "h": 37 },
         { "id": "section", "x": 2280, "y": 1183, "w": 88, "h": 39 }
       ],
-      "dark": "field"
+      "dark": "invert-accent"
     },
     "images/la-villette/la-villette-access-gate-annotated.png": {
       "paper": [255, 255, 255],
       "floor": 0.015,
       "knee": 0.03,
       "clip": ["top", "bottom"],
-      "dark": "field"
+      "dark": "invert-accent"
     },
     "images/la-villette/la-villette-window-guardrail.png": {
       "paper": [255, 255, 255],

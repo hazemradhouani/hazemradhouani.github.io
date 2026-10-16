@@ -1,6 +1,6 @@
 {
  "src": "images/foubert/foubert-street-window-elevation.png",
- "hash": "f48cc582134303e4",
+ "hash": "a19174e46b4a9996",
  "mode": "ink",
  "from": [
   1370,
@@ -26,7 +26,14 @@
   "midtoneFraction": 0.6103,
   "suggest": "colour"
  },
- "dark": "field",
+ "dark": "keep",
+ "keep": {
+  "file": "images/cut/foubert/foubert-street-window-elevation--keep.png",
+  "share": 0.9514,
+  "radius": 4,
+  "t": 0.06,
+  "fill": true
+ },
  "specks": 12,
  "tile": [
   640,

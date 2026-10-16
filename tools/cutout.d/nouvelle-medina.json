@@ -9,7 +9,7 @@
       ],
       "floor": 0.015,
       "knee": 0.03,
-      "dark": "field"
+      "dark": "invert-accent"
     },
     "images/nouvelle-medina/nouvelle-medina-plan-ground.png": {
       "paper": [
@@ -19,7 +19,7 @@
       ],
       "floor": 0.015,
       "knee": 0.03,
-      "dark": "field"
+      "dark": "invert-accent"
     },
     "images/nouvelle-medina/nouvelle-medina-plan-roof.png": {
       "paper": [
@@ -29,7 +29,7 @@
       ],
       "floor": 0.015,
       "knee": 0.03,
-      "dark": "field"
+      "dark": "invert-accent"
     },
     "images/nouvelle-medina/nouvelle-medina-facade-main.png": {
       "floor": 0.015,
@@ -180,12 +180,12 @@
           "h": 222
         }
       ],
-      "dark": "field"
+      "dark": "invert-accent"
     },
     "images/nouvelle-medina/nouvelle-medina-corner-perspective.png": {
       "floor": 0.01,
       "knee": 0.02,
-      "dark": "field"
+      "dark": "invert-accent"
     }
   }
 }

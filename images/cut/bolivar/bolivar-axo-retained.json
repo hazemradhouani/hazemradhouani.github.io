@@ -1,6 +1,6 @@
 {
  "src": "images/bolivar/bolivar-axo-retained.png",
- "hash": "393231ae0842dff2",
+ "hash": "710d88b3930ad90c",
  "mode": "ink",
  "from": [
   1724,
@@ -30,7 +30,8 @@
   "midtoneFraction": 0.2494,
   "suggest": "mono"
  },
- "dark": "field",
+ "dark": "invert-accent",
+ "keep": null,
  "specks": 399,
  "tile": [
   640,

@@ -1,6 +1,6 @@
 {
  "src": "images/nouvelle-medina/nouvelle-medina-flows.png",
- "hash": "1241ff0321f107ce",
+ "hash": "9647d9450e398d6f",
  "mode": "ink",
  "from": [
   2560,
@@ -26,7 +26,8 @@
   "midtoneFraction": 0.6661,
   "suggest": "colour"
  },
- "dark": "field",
+ "dark": "invert-accent",
+ "keep": null,
  "specks": 3068,
  "tile": [
   320,

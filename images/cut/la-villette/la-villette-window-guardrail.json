@@ -1,6 +1,6 @@
 {
  "src": "images/la-villette/la-villette-window-guardrail.png",
- "hash": "360265ca4cf83c16",
+ "hash": "ef4a2ff4d7f5d98c",
  "mode": "ink",
  "from": [
   2536,
@@ -27,6 +27,7 @@
   "suggest": "accent"
  },
  "dark": "invert-accent",
+ "keep": null,
  "specks": 906,
  "tile": [
   320,

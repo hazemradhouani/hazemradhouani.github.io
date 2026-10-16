@@ -1,6 +1,6 @@
 {
  "src": "images/sentry/sentry-elevation-roof.png",
- "hash": "0eeffc1d998f2e4c",
+ "hash": "35d7ee5d8c6d6bab",
  "mode": "ink",
  "from": [
   1312,
@@ -27,6 +27,7 @@
   "suggest": "accent"
  },
  "dark": "invert-accent",
+ "keep": null,
  "specks": 187,
  "tile": [
   320,

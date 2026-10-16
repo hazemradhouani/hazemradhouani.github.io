@@ -1,6 +1,6 @@
 {
  "src": "images/corallum/corallum-volume-expansion.png",
- "hash": "caab33a38a462e15",
+ "hash": "2b5ebe3c15f34edd",
  "mode": "ink",
  "from": [
   608,
@@ -26,7 +26,8 @@
   "midtoneFraction": 0.5157,
   "suggest": "colour"
  },
- "dark": "field",
+ "dark": "invert-accent",
+ "keep": null,
  "specks": 17,
  "tile": [
   0,

@@ -199,6 +199,55 @@ export function clippedSides(px, W, H, { alpha = 0.1 } = {}) {
   return sides;
 }
 
+/**
+ * The dark scheme's "keep" layer (D69): the solid rendered regions of a keyed cutout (materials,
+ * photographs, shaded models), opaque and in the colours they show over white, to lay over the
+ * CSS-inverted drawing. Solid = alpha above `t` that survives an opening by a (2r+1) square, so
+ * text, dimension lines and hatching stay with the inverted linework. With `fill`, regions the
+ * solids enclose are kept too (white faces of a model, window frames in a rendered facade); without
+ * it, gaps between members stay see-through (an open timber frame). The region's outermost pixels
+ * keep the cutout's own graded alpha, so the seam over the inverted drawing has no hard edge.
+ * Returns the layer (RGBA, same size, transparent elsewhere) and the share of pixels kept.
+ */
+export function keepLayer(px, W, H, { radius = 4, t = 0.06, fill = true } = {}) {
+  const N = W * H, r = radius;
+  const M = new Uint8Array(N); for (let p = 0; p < N; p++) M[p] = px[p * 4 + 3] > t * 255 ? 1 : 0;
+  // separable binary erosion (every pixel of the window set) or dilation (any set); outside the image is empty
+  const pass = (src, horizontal, all) => {
+    const out = new Uint8Array(N); const len = horizontal ? W : H, lines = horizontal ? H : W;
+    const pre = new Int32Array(len + 1);
+    for (let l = 0; l < lines; l++) {
+      for (let i = 0; i < len; i++) pre[i + 1] = pre[i] + src[horizontal ? l * W + i : i * W + l];
+      for (let i = 0; i < len; i++) {
+        const s = pre[Math.min(len - 1, i + r) + 1] - pre[Math.max(0, i - r)];
+        out[horizontal ? l * W + i : i * W + l] = all ? (s === 2 * r + 1 ? 1 : 0) : (s > 0 ? 1 : 0);
+      }
+    }
+    return out;
+  };
+  const O = pass(pass(pass(pass(M, true, true), false, true), true, false), false, false);
+  // outside = not solid and (with fill) connected to the border; without fill, simply not solid
+  const B = new Uint8Array(N);
+  if (fill) {
+    const q = new Int32Array(N); let head = 0, tail = 0;
+    const seed = (p) => { if (!O[p] && !B[p]) { B[p] = 1; q[tail++] = p; } };
+    for (let x = 0; x < W; x++) { seed(x); seed((H - 1) * W + x); }
+    for (let y = 0; y < H; y++) { seed(y * W); seed(y * W + W - 1); }
+    while (head < tail) { const p = q[head++]; const x = p % W; if (x > 0) seed(p - 1); if (x < W - 1) seed(p + 1); if (p >= W) seed(p - W); if (p < N - W) seed(p + W); }
+  } else for (let p = 0; p < N; p++) B[p] = O[p] ? 0 : 1;
+  const out = Buffer.alloc(N * 4); let kept = 0;
+  for (let p = 0; p < N; p++) {
+    if (B[p]) continue; kept++;
+    const i = p * 4, x = p % W;
+    const edge = (x > 0 && B[p - 1]) || (x < W - 1 && B[p + 1]) || (p >= W && B[p - W]) || (p < N - W && B[p + W]);
+    if (edge) { out.set(px.subarray(i, i + 4), i); continue; }
+    const a = px[i + 3] / 255;
+    for (let c = 0; c < 3; c++) out[i + c] = Math.round(a * px[i + c] + (1 - a) * 255);
+    out[i + 3] = 255;
+  }
+  return { layer: out, share: kept / N };
+}
+
 // sRGB 8-bit -> OKLab chroma
 const lin = (c) => { c /= 255; return c <= 0.04045 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4; };
 function chroma(r, g, b) {

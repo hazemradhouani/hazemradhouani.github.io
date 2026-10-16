@@ -1,6 +1,6 @@
 {
  "src": "images/belhomme/belhomme-facade-rue-belhomme.png",
- "hash": "c9ef9bbd661b5002",
+ "hash": "a4bb5e7bf283da5b",
  "mode": "ink",
  "from": [
   2560,
@@ -27,6 +27,7 @@
   "suggest": "accent"
  },
  "dark": "invert-accent",
+ "keep": null,
  "specks": 40,
  "tile": [
   960,

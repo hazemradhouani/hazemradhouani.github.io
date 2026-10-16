@@ -1,6 +1,6 @@
 {
  "src": "images/belhomme/belhomme-plan-n00.jpg",
- "hash": "784edaf110fe067c",
+ "hash": "b0715494e3b592e6",
  "mode": "ink",
  "from": [
   656,
@@ -29,6 +29,7 @@
   "suggest": "colour"
  },
  "dark": "invert-accent",
+ "keep": null,
  "specks": 801,
  "tile": [
   0,

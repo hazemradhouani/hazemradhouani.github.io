@@ -1,6 +1,6 @@
 {
  "src": "images/corallum/corallum-facade-overlapping.png",
- "hash": "c0a8b6d3ce534447",
+ "hash": "8bf953467daa6e78",
  "mode": "ink",
  "from": [
   693,
@@ -26,7 +26,8 @@
   "midtoneFraction": 0.9189,
   "suggest": "colour"
  },
- "dark": "field",
+ "dark": "invert-accent",
+ "keep": null,
  "specks": 295,
  "tile": [
   0,

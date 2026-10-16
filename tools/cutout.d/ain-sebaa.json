@@ -3,19 +3,19 @@
   "images": {
     "images/ain-sebaa/ain-sebaa-plan-main.png": {
       "paper": [
-        255,
-        255,
-        255
+        243,
+        243,
+        243
       ],
-      "floor": 0.015,
-      "knee": 0.03,
+      "floor": 0.008,
+      "knee": 0.016,
       "clip": [
         "left",
         "top",
         "right",
         "bottom"
       ],
-      "dark": "field"
+      "dark": "invert-accent"
     },
     "images/ain-sebaa/ain-sebaa-facade-main.png": {
       "floor": 0.02,
@@ -77,7 +77,7 @@
           "h": 114
         }
       ],
-      "dark": "field"
+      "dark": "invert-accent"
     },
     "images/ain-sebaa/ain-sebaa-flows-main.png": {
       "paper": [
@@ -90,7 +90,7 @@
       "clip": [
         "left"
       ],
-      "dark": "field"
+      "dark": "invert-accent"
     },
     "images/ain-sebaa/ain-sebaa-flows-secondary.png": {
       "paper": [
@@ -103,7 +103,7 @@
       "clip": [
         "right"
       ],
-      "dark": "field"
+      "dark": "invert-accent"
     }
   }
 }

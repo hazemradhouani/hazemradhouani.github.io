@@ -1,6 +1,6 @@
 {
  "src": "images/ain-sebaa/ain-sebaa-flows-secondary.png",
- "hash": "7cbfcf8fe112918e",
+ "hash": "5405aa3127a9a627",
  "mode": "ink",
  "from": [
   1300,
@@ -28,7 +28,8 @@
   "midtoneFraction": 0.2781,
   "suggest": "accent"
  },
- "dark": "field",
+ "dark": "invert-accent",
+ "keep": null,
  "specks": 771,
  "tile": [
   320,

@@ -1,6 +1,6 @@
 {
  "src": "images/zenata/zenata-programme-420.png",
- "hash": "daaed475d37f040f",
+ "hash": "b4a110d560c65429",
  "mode": "ink",
  "from": [
   1222,
@@ -26,7 +26,8 @@
   "midtoneFraction": 0.2768,
   "suggest": "accent"
  },
- "dark": "field",
+ "dark": "invert-accent",
+ "keep": null,
  "specks": 3762,
  "tile": [
   320,

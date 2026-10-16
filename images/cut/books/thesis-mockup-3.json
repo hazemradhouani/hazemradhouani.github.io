@@ -1,6 +1,6 @@
 {
  "src": "images/books/thesis-mockup-3.png",
- "hash": "5bc40e9c8a0b07e1",
+ "hash": "2040860d045f3a35",
  "mode": "object",
  "from": [
   2560,
@@ -23,6 +23,7 @@
   "suggest": "colour"
  },
  "dark": "object",
+ "keep": null,
  "specks": 0,
  "tile": [
   640,

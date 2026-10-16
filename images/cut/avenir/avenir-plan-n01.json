@@ -1,6 +1,6 @@
 {
  "src": "images/avenir/avenir-plan-n01.png",
- "hash": "2dcfc88afea34d07",
+ "hash": "34a710cbe6e39fae",
  "mode": "ink",
  "from": [
   2560,
@@ -27,6 +27,7 @@
   "suggest": "colour"
  },
  "dark": "invert-accent",
+ "keep": null,
  "specks": 874,
  "tile": [
   1280,

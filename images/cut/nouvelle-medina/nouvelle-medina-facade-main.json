@@ -1,6 +1,6 @@
 {
  "src": "images/nouvelle-medina/nouvelle-medina-facade-main.png",
- "hash": "5669d81bbb4fa69b",
+ "hash": "6c6c5a401cfd8fcc",
  "mode": "ink",
  "from": [
   2556,
@@ -29,6 +29,7 @@
   "suggest": "accent"
  },
  "dark": "invert-accent",
+ "keep": null,
  "specks": 0,
  "tile": [
   960,

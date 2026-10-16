@@ -81,7 +81,7 @@
           "h": 121
         }
       ],
-      "dark": "field"
+      "dark": "keep"
     },
     "images/foubert/foubert-east-facade.png": {
       "paper": [
@@ -91,7 +91,7 @@
       ],
       "floor": 0.015,
       "knee": 0.03,
-      "dark": "field"
+      "dark": "keep"
     },
     "images/foubert/foubert-street-window-section.png": {
       "paper": [
@@ -111,7 +111,7 @@
       ],
       "floor": 0.015,
       "knee": 0.03,
-      "dark": "field"
+      "dark": "keep"
     },
     "images/foubert/foubert-attic-terrace-detail.png": {
       "paper": [

@@ -1,6 +1,6 @@
 {
  "src": "images/al-arg/al-arg-past-present-future.png",
- "hash": "6e848dd036d62363",
+ "hash": "98bffa9a263ba08c",
  "mode": "ink",
  "from": [
   1004,
@@ -26,7 +26,14 @@
   "midtoneFraction": 0.6619,
   "suggest": "accent"
  },
- "dark": "field",
+ "dark": "keep",
+ "keep": {
+  "file": "images/cut/al-arg/al-arg-past-present-future--keep.png",
+  "share": 0.3759,
+  "radius": 4,
+  "t": 0.06,
+  "fill": true
+ },
  "specks": 21,
  "tile": [
   0,

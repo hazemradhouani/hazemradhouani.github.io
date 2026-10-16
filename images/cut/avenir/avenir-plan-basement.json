@@ -1,6 +1,6 @@
 {
  "src": "images/avenir/avenir-plan-basement.png",
- "hash": "cedf1c8e3f9b2b47",
+ "hash": "b652eb83fd83d7fb",
  "mode": "ink",
  "from": [
   2560,
@@ -32,6 +32,7 @@
   "suggest": "colour"
  },
  "dark": "invert-accent",
+ "keep": null,
  "specks": 56,
  "tile": [
   1920,

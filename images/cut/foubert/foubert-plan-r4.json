@@ -1,6 +1,6 @@
 {
  "src": "images/foubert/foubert-plan-r4.png",
- "hash": "2d1f32e0a0a4df7b",
+ "hash": "93559c85cb0db70c",
  "mode": "ink",
  "from": [
   2560,
@@ -27,6 +27,7 @@
   "suggest": "colour"
  },
  "dark": "invert-accent",
+ "keep": null,
  "specks": 26,
  "tile": [
   960,

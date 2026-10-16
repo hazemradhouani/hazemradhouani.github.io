@@ -1,6 +1,6 @@
 {
  "src": "images/corallum/corallum-volume-phase-02.png",
- "hash": "bae0206f5a38aa3a",
+ "hash": "2d8eb2a8cbff9611",
  "mode": "ink",
  "from": [
   582,
@@ -26,7 +26,8 @@
   "midtoneFraction": 0.1494,
   "suggest": "colour"
  },
- "dark": "field",
+ "dark": "invert-accent",
+ "keep": null,
  "specks": 32,
  "tile": [
   0,

@@ -1,6 +1,6 @@
 {
  "src": "images/cinephile/cinephile-detail-upper-facade.png",
- "hash": "1fe1f5e6fe2b5a32",
+ "hash": "dc76da7772b5d74f",
  "mode": "ink",
  "from": [
   458,
@@ -27,6 +27,7 @@
   "suggest": "mono"
  },
  "dark": "invert",
+ "keep": null,
  "specks": 411,
  "tile": [
   0,

@@ -6,21 +6,21 @@
       "floor": 0.015,
       "knee": 0.03,
       "clip": ["left", "top", "right", "bottom"],
-      "dark": "field"
+      "dark": "invert-accent"
     },
     "images/bolivar/bolivar-plan-n04.png": {
       "paper": [255, 255, 255],
       "floor": 0.015,
       "knee": 0.03,
       "clip": ["left", "top", "right", "bottom"],
-      "dark": "field"
+      "dark": "invert-accent"
     },
     "images/bolivar/bolivar-roof-plan.png": {
       "paper": [255, 255, 255],
       "floor": 0.015,
       "knee": 0.03,
       "clip": ["left", "top", "right", "bottom"],
-      "dark": "field"
+      "dark": "invert-accent"
     },
     "images/bolivar/bolivar-long-section-aa.png": {
       "paper": [255, 255, 255],
@@ -46,24 +46,24 @@
       "floor": 0.02,
       "knee": 0.05,
       "clip": ["left", "top", "right", "bottom"],
-      "dark": "field"
+      "dark": "invert-accent"
     },
     "images/bolivar/bolivar-axo-retained.png": {
       "paper": [249, 249, 249],
       "floor": 0.02,
       "knee": 0.05,
       "clip": ["left", "top", "right", "bottom"],
-      "dark": "field"
+      "dark": "invert-accent"
     },
     "images/bolivar/bolivar-vegetation-section.jpg": {
-      "dark": "field"
+      "dark": "invert-accent"
     },
     "images/bolivar/bolivar-axo-raised-lowered.png": {
       "paper": [249, 249, 249],
       "floor": 0.02,
       "knee": 0.05,
       "clip": ["left", "top", "right", "bottom"],
-      "dark": "field"
+      "dark": "invert-accent"
     }
   }
 }

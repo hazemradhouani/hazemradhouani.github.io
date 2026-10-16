@@ -1,6 +1,6 @@
 {
  "src": "images/la-villette/la-villette-south-elevation-c.png",
- "hash": "a4f2379b3bfcb956",
+ "hash": "761fc6883c83b0c1",
  "mode": "ink",
  "from": [
   2412,
@@ -29,6 +29,7 @@
   "suggest": "accent"
  },
  "dark": "invert-accent",
+ "keep": null,
  "specks": 57,
  "tile": [
   1600,

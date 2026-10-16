@@ -1,6 +1,6 @@
 {
  "src": "images/nouvelle-medina/nouvelle-medina-corner-perspective.png",
- "hash": "f2db8cd91b2dad99",
+ "hash": "4af11a7d87d064ed",
  "mode": "ink",
  "from": [
   2560,
@@ -26,7 +26,8 @@
   "midtoneFraction": 0.677,
   "suggest": "accent"
  },
- "dark": "field",
+ "dark": "invert-accent",
+ "keep": null,
  "specks": 1213,
  "tile": [
   640,

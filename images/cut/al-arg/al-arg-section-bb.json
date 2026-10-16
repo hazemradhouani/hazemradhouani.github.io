@@ -1,6 +1,6 @@
 {
  "src": "images/al-arg/al-arg-section-bb.png",
- "hash": "d2860222b99a8049",
+ "hash": "95ef18cc70c8f4cd",
  "mode": "ink",
  "from": [
   1914,
@@ -27,6 +27,7 @@
   "suggest": "mono"
  },
  "dark": "invert",
+ "keep": null,
  "specks": 0,
  "tile": [
   640,

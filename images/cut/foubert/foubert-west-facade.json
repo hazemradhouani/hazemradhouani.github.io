@@ -1,6 +1,6 @@
 {
  "src": "images/foubert/foubert-west-facade.png",
- "hash": "2c3a6e286553a423",
+ "hash": "4ae004cc8bf3cb42",
  "mode": "ink",
  "from": [
   2560,
@@ -26,7 +26,14 @@
   "midtoneFraction": 0.866,
   "suggest": "colour"
  },
- "dark": "field",
+ "dark": "keep",
+ "keep": {
+  "file": "images/cut/foubert/foubert-west-facade--keep.png",
+  "share": 0.4967,
+  "radius": 4,
+  "t": 0.06,
+  "fill": true
+ },
  "specks": 5,
  "tile": [
   640,

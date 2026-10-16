@@ -1,6 +1,6 @@
 {
  "src": "images/cinephile/cinephile-site-study.png",
- "hash": "f9a25ee9b758e79c",
+ "hash": "95503f3b2e6dd7f4",
  "mode": "ink",
  "from": [
   1540,
@@ -26,7 +26,8 @@
   "midtoneFraction": 0.8096,
   "suggest": "colour"
  },
- "dark": "field",
+ "dark": "invert-accent",
+ "keep": null,
  "specks": 892,
  "tile": [
   640,

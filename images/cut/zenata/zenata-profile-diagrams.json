@@ -1,6 +1,6 @@
 {
  "src": "images/zenata/zenata-profile-diagrams.png",
- "hash": "a13bb79d1fe6a7f9",
+ "hash": "84c3cca7114c2503",
  "mode": "ink",
  "from": [
   697,
@@ -27,6 +27,7 @@
   "suggest": "colour"
  },
  "dark": "invert-accent",
+ "keep": null,
  "specks": 55,
  "tile": [
   0,

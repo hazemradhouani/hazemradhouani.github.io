@@ -1,6 +1,6 @@
 {
  "src": "images/nouvelle-medina/nouvelle-medina-structure-exploded.png",
- "hash": "1be04039e2d95e28",
+ "hash": "0b5a16708db41bf3",
  "mode": "ink",
  "from": [
   2560,
@@ -27,6 +27,7 @@
   "suggest": "mono"
  },
  "dark": "invert",
+ "keep": null,
  "specks": 1541,
  "tile": [
   1600,

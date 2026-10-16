@@ -276,11 +276,21 @@
 
   /* figures: images at their natural ratio, never cropped, never above native pixels (--nw) */
   .nw { display: block; width: 100%; max-width: var(--nw, 100%); margin-inline: auto; }
-  /* a drawing's dark treatment (D50): colour-coded or shaded drawings sit on the inspection field;
-     greyscale linework is inverted, so in dark mode its background is truly gone (exact for grey) */
+  /* a drawing's dark treatment (D50, D69): no drawing keeps a paper rectangle in dark mode.
+     Greyscale linework is inverted (exact for grey); colour drawings are inverted with their hues held;
+     drawings with rendered material, photographs or shaded models ("keep") are inverted the same way and
+     their solid regions are laid back on top, opaque and in their authored colours, from a second layer */
   .nw--drawing.nw--field { background: var(--drawing-bg); }
   html[data-theme="dark"] .nw--invert img { filter: invert(.965); }
-  html[data-theme="dark"] .nw--invert-accent img { filter: invert(.965) hue-rotate(180deg); }
+  html[data-theme="dark"] .nw--invert-accent img,
+  html[data-theme="dark"] .nw--keep > picture:not(.nw__keep) img { filter: invert(.965) hue-rotate(180deg); }
+  .nw--keep { position: relative; }
+  .nw__keep { display: none; }
+  html[data-theme="dark"] .nw--keep > .nw__keep { display: block; position: absolute; inset: 0; pointer-events: none; }
+  html[data-theme="dark"] .nw--keep > .nw__keep img { width: 100%; height: 100%; }
+  /* a legend's swatches follow their drawing's treatment, so the key matches what the reader sees */
+  html[data-theme="dark"] .fig:has(.nw--invert) .legend__sw { filter: invert(.965); }
+  html[data-theme="dark"] .fig:has(.nw--invert-accent) .legend__sw { filter: invert(.965) hue-rotate(180deg); }
   .nw img, .nw picture { width: 100%; height: auto; }
   .cap { margin-top: var(--s3); text-align: center; font-size: var(--fs-cap); line-height: 1.55; color: var(--ink-2); }
   .cap__t { color: var(--ink); }
@@ -312,6 +322,8 @@
     .lab__item { position: absolute; left: var(--x); top: calc(var(--y) + var(--h) / 2); translate: 0 -50%; white-space: nowrap;
       text-shadow: 0 0 0.12em var(--lab-paper), 0 0 0.25em var(--lab-paper); }   /* a paper halo where a word meets linework */
     .lab__item--end { left: auto; right: calc(100% - var(--x) - var(--w)); text-align: end; }
+    /* a street name along a section's end: set up the cut, centred on where it was printed (D70) */
+    .lab__item--v { left: calc(var(--x) + var(--w) / 2); right: auto; translate: -50% -50%; writing-mode: vertical-rl; rotate: 180deg; }
     .lab__n { display: none; }
     .lab__t br { display: initial; }
   }
@@ -374,7 +386,10 @@
   /* each image carries its own dark treatment (D50): the inspection field behind it, or inverted linework */
   .viewer__img.is-inspection { background: var(--drawing-bg); }
   html[data-theme="dark"] .viewer__img.is-invert > img { filter: invert(.965); }
-  html[data-theme="dark"] .viewer__img.is-invert-accent > img { filter: invert(.965) hue-rotate(180deg); }
+  html[data-theme="dark"] .viewer__img.is-invert-accent > img,
+  html[data-theme="dark"] .viewer__img.is-keep > img:not(.viewer__keep) { filter: invert(.965) hue-rotate(180deg); }
+  .viewer__img > img.viewer__keep { display: none; position: absolute; inset: 0; }
+  html[data-theme="dark"] .viewer__img.is-keep > img.viewer__keep { display: block; }
   /* the drawing's re-set labels at full size: where they stood on the page, scaled with the image (never filtered) */
   .viewer__labs { position: absolute; inset: 0; margin: 0; padding: 0; list-style: none; pointer-events: none;
     font-family: var(--sans); font-weight: 600; letter-spacing: 0.01em; line-height: 1.25; color: var(--ink);
@@ -382,6 +397,7 @@
   .viewer__img.is-inspection .viewer__labs { color: #111111; --lab-paper: var(--drawing-bg); }
   .viewer__labs .lab__item { position: absolute; display: block; left: var(--x); top: calc(var(--y) + var(--h) / 2); translate: 0 -50%; white-space: nowrap; }
   .viewer__labs .lab__item--end { left: auto; right: calc(100% - var(--x) - var(--w)); text-align: end; }
+  .viewer__labs .lab__item--v { left: calc(var(--x) + var(--w) / 2); right: auto; translate: -50% -50%; writing-mode: vertical-rl; rotate: 180deg; }
   .viewer__labs .lab__n { display: none; }
   .viewer__labs .lab__t br { display: initial; }
   .viewer.is-small-labels:not(.is-actual) .viewer__labs { visibility: hidden; }
@@ -554,7 +570,8 @@
     @page { size: A4; margin: 16mm 16mm 18mm; }
     :root { --bg: #FFFFFF; --ink: #111111; --ink-2: #5E5E5E; --line: #E6E6E6; --ui: #8A8A8A; --error: #A61B1B; --bar-bg: #FFFFFF; --drawing-bg: #FFFFFF; --gap-group: 6mm; --gap-chapter: 8mm; --cols: 12; --gutter: 4mm; color-scheme: light; }
     body { font-size: 10.5pt; line-height: 1.45; }
-    .nw--drawing img { filter: none !important; }  /* print shows every drawing as authored, black on white */
+    .nw--drawing img, .legend__sw { filter: none !important; }  /* print shows every drawing as authored, black on white */
+    .nw__keep { display: none !important; }
     .wrap { width: 100%; }
     .print-only { display: block; }
     .print-name { font-family: var(--sans); font-weight: 600; font-size: 18pt; letter-spacing: var(--tr-display); text-transform: uppercase; }

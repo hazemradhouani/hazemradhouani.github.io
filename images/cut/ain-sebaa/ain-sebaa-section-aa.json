@@ -1,6 +1,6 @@
 {
  "src": "images/ain-sebaa/ain-sebaa-section-aa.png",
- "hash": "224b52bf427702bc",
+ "hash": "8457a76c55aae699",
  "mode": "ink",
  "from": [
   2560,
@@ -30,6 +30,7 @@
   "suggest": "accent"
  },
  "dark": "invert-accent",
+ "keep": null,
  "specks": 3,
  "tile": [
   640,

@@ -1,6 +1,6 @@
 {
  "src": "images/ain-sebaa/ain-sebaa-structure.png",
- "hash": "540e11a6375cba7b",
+ "hash": "8169415998804fd8",
  "mode": "ink",
  "from": [
   2299,
@@ -26,7 +26,8 @@
   "midtoneFraction": 0.4934,
   "suggest": "accent"
  },
- "dark": "field",
+ "dark": "invert-accent",
+ "keep": null,
  "specks": 1714,
  "tile": [
   640,

@@ -1,6 +1,6 @@
 {
  "src": "images/zenata/zenata-plan-000.png",
- "hash": "c793ad42636270aa",
+ "hash": "6bd60eb16be8ff75",
  "mode": "ink",
  "from": [
   1070,
@@ -27,6 +27,7 @@
   "suggest": "mono"
  },
  "dark": "invert",
+ "keep": null,
  "specks": 0,
  "tile": [
   320,

@@ -1,6 +1,6 @@
 {
  "src": "images/al-arg/al-arg-functional-spaces.png",
- "hash": "99ff162c8e06d0f3",
+ "hash": "c204a333709bd5ec",
  "mode": "ink",
  "from": [
   740,
@@ -26,7 +26,14 @@
   "midtoneFraction": 0.6721,
   "suggest": "colour"
  },
- "dark": "field",
+ "dark": "keep",
+ "keep": {
+  "file": "images/cut/al-arg/al-arg-functional-spaces--keep.png",
+  "share": 0.3814,
+  "radius": 4,
+  "t": 0.06,
+  "fill": true
+ },
  "specks": 289,
  "tile": [
   0,

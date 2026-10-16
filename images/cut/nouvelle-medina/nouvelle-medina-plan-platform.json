@@ -1,6 +1,6 @@
 {
  "src": "images/nouvelle-medina/nouvelle-medina-plan-platform.png",
- "hash": "572a3e4baf9ed153",
+ "hash": "82908f235956b901",
  "mode": "ink",
  "from": [
   1258,
@@ -26,7 +26,8 @@
   "midtoneFraction": 0.3977,
   "suggest": "mono"
  },
- "dark": "field",
+ "dark": "invert-accent",
+ "keep": null,
  "specks": 9,
  "tile": [
   320,

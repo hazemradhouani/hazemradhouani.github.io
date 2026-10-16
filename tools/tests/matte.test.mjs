@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { keyInk, eraseComponents, objectMatte, clippedSides, classifyInk, despeckle, paperField } from '../lib/matte.mjs';
+import { keyInk, eraseComponents, objectMatte, clippedSides, classifyInk, despeckle, paperField, keepLayer } from '../lib/matte.mjs';
 
 // a W x H RGBA canvas filled with paper, and helpers to paint on it
 function canvas(W, H, paper = [255, 255, 255]) {
@@ -87,4 +87,20 @@ test('a fitted paper field white-balances an uneven, vignetted ground', () => {
   assert.equal(c.at(1, 1)[3], 0);           // vignetted corner reads as paper
   assert.equal(c.at(30, 5)[3], 0);
   assert.equal(c.at(19, 19)[3], 255);
+});
+
+test('keep layer (D69): solids return opaque in their colour over white, thin lines stay with the inverted drawing, fill decides enclosed paper', () => {
+  const c = canvas(60, 40);
+  rect(c, 4, 4, 14, 14, [180, 60, 40]);                        // a brick-red solid
+  for (let x = 4; x < 56; x++) c.set(x, 30, [0, 0, 0]);       // a 1px dimension line
+  rect(c, 30, 4, 20, 20, [90, 90, 90]); rect(c, 36, 10, 8, 8, [255, 255, 255]);   // a thick frame around paper
+  keyInk(c.px, 60, 40, OPTS);
+  const filled = keepLayer(c.px, 60, 40, { radius: 2, t: 0.06, fill: true }).layer;
+  const open = keepLayer(c.px, 60, 40, { radius: 2, t: 0.06, fill: false }).layer;
+  const at = (L, x, y) => [...L.subarray((y * 60 + x) * 4, (y * 60 + x) * 4 + 4)];
+  assert.deepEqual(at(filled, 10, 10), [180, 60, 40, 255]);    // the solid, as it shows over white
+  assert.equal(at(filled, 20, 30)[3], 0);                       // the line is not kept
+  assert.deepEqual(at(filled, 40, 14), [255, 255, 255, 255]);   // enclosed paper kept (a white face)
+  assert.equal(at(open, 40, 14)[3], 0);                         // ...or left see-through
+  assert.equal(at(filled, 1, 1)[3], 0);                         // outside paper never kept
 });

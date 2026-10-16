@@ -1,6 +1,6 @@
 {
  "src": "images/nouvelle-medina/nouvelle-medina-plan-roof.png",
- "hash": "5e01de0f018499d4",
+ "hash": "99be056e75bd1c1b",
  "mode": "ink",
  "from": [
   2532,
@@ -26,7 +26,8 @@
   "midtoneFraction": 0.3126,
   "suggest": "mono"
  },
- "dark": "field",
+ "dark": "invert-accent",
+ "keep": null,
  "specks": 738,
  "tile": [
   0,

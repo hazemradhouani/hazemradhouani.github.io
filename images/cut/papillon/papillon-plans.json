@@ -1,6 +1,6 @@
 {
  "src": "images/papillon/papillon-plans.jpg",
- "hash": "a300b3a8f6701687",
+ "hash": "e6ded039025a76bb",
  "mode": "ink",
  "from": [
   1178,
@@ -30,6 +30,7 @@
   "suggest": "accent"
  },
  "dark": "invert-accent",
+ "keep": null,
  "specks": 1062,
  "tile": [
   0,

@@ -1,6 +1,6 @@
 {
  "src": "images/avenir/avenir-south-elevation.png",
- "hash": "0133df6727e7671d",
+ "hash": "8c53454259d65d9b",
  "mode": "ink",
  "from": [
   2560,
@@ -29,7 +29,14 @@
   "midtoneFraction": 0.6114,
   "suggest": "accent"
  },
- "dark": "field",
+ "dark": "keep",
+ "keep": {
+  "file": "images/cut/avenir/avenir-south-elevation--keep.png",
+  "share": 0.2402,
+  "radius": 4,
+  "t": 0.06,
+  "fill": true
+ },
  "specks": 1279,
  "tile": [
   960,

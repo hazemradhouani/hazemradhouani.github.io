@@ -1,6 +1,6 @@
 {
  "src": "images/cinephile/cinephile-sketch.png",
- "hash": "c5274c1930b825d2",
+ "hash": "765e96d86b180b92",
  "mode": "ink",
  "from": [
   1599,
@@ -29,6 +29,7 @@
   "suggest": "mono"
  },
  "dark": "invert",
+ "keep": null,
  "specks": 2456,
  "tile": [
   640,

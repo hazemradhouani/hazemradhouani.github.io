@@ -152,10 +152,11 @@
     var info = function (k) {
       var a = links[k];
       return { a: a, w: +a.getAttribute('data-w'), h: +a.getAttribute('data-h'), full: a.getAttribute('data-webp') || a.getAttribute('href'),
-        title: a.getAttribute('data-title') || '', alt: a.getAttribute('data-alt') || '', dark: a.getAttribute('data-dark') || '' };
+        title: a.getAttribute('data-title') || '', alt: a.getAttribute('data-alt') || '', dark: a.getAttribute('data-dark') || '',
+        keep: a.getAttribute('data-keep') || '' };
     };
-    // the figure's dark treatment (D50) travels with its own image box, so a crossfade never re-treats the outgoing one
-    var TREAT = { field: 'is-inspection', invert: 'is-invert', 'invert-accent': 'is-invert-accent' };
+    // the figure's dark treatment (D50, D69) travels with its own image box, so a crossfade never re-treats the outgoing one
+    var TREAT = { field: 'is-inspection', invert: 'is-invert', 'invert-accent': 'is-invert-accent', keep: 'is-keep' };
     // labels re-set from the drawing (D49) keep the page's proportion (1.15% of the drawing's width, the wide layout);
     // where that falls under 13px on screen they wait for actual size
     var LAB = 0.0115, LAB_MIN = 13;
@@ -187,6 +188,11 @@
         (hi.decode ? hi.decode() : Promise.resolve()).then(function () { if (el.isConnected) el.src = it.full; }).catch(function () {});
       }
       box.appendChild(el);
+      if (it.keep) {                                           // the solid rendered regions, shown over the inverted drawing in the dark scheme
+        var kp = document.createElement('img');
+        kp.className = 'viewer__keep'; kp.alt = ''; kp.width = it.w; kp.height = it.h; kp.src = it.keep;
+        box.appendChild(kp);
+      }
       var lab = it.a.closest('.lab'), list = lab && lab.querySelector('.lab__list');
       if (list) {
         var labs = list.cloneNode(true);

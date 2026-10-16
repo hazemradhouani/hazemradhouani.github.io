@@ -12,26 +12,26 @@
       "erase": [
         { "id": "title", "x": 1348, "y": 885, "w": 180, "h": 58 }
       ],
-      "dark": "field"
+      "dark": "invert-accent"
     },
     "images/cinephile/cinephile-tree-cover.png": {
       "paper": [255, 255, 255],
       "floor": 0.01,
       "knee": 0.02,
-      "dark": "field"
+      "dark": "invert-accent"
     },
     "images/cinephile/cinephile-building-heights.png": {
       "paper": [255, 255, 255],
       "floor": 0.01,
       "knee": 0.02,
-      "dark": "field"
+      "dark": "invert-accent"
     },
     "images/cinephile/cinephile-sketch.png": {
       "clip": ["right"],
       "dark": "invert"
     },
     "images/cinephile/cinephile-plan-000.png": {
-      "paper": [255, 255, 255],
+      "paper": [250, 250, 250],
       "floor": 0.015,
       "knee": 0.03,
       "clip": ["left"],

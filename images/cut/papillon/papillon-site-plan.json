@@ -1,6 +1,6 @@
 {
  "src": "images/papillon/papillon-site-plan.png",
- "hash": "d9b7840f5b0e9c38",
+ "hash": "bc856499a2afc705",
  "mode": "ink",
  "from": [
   2560,
@@ -26,7 +26,8 @@
   "midtoneFraction": 0.6504,
   "suggest": "colour"
  },
- "dark": "field",
+ "dark": "invert-accent",
+ "keep": null,
  "specks": 49,
  "tile": [
   1280,

@@ -1,6 +1,6 @@
 {
  "src": "images/belhomme/belhomme-facade-rear.png",
- "hash": "2b9ffc95f6889da4",
+ "hash": "0e21b96d7c1fcfe1",
  "mode": "ink",
  "from": [
   2560,
@@ -27,6 +27,7 @@
   "suggest": "accent"
  },
  "dark": "invert-accent",
+ "keep": null,
  "specks": 74,
  "tile": [
   960,

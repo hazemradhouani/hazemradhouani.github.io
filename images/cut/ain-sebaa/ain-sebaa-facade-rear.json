@@ -1,6 +1,6 @@
 {
  "src": "images/ain-sebaa/ain-sebaa-facade-rear.png",
- "hash": "66351cf1ef5739a7",
+ "hash": "d25b65e36824b63f",
  "mode": "ink",
  "from": [
   2560,
@@ -30,6 +30,7 @@
   "suggest": "mono"
  },
  "dark": "invert",
+ "keep": null,
  "specks": 4,
  "tile": [
   960,

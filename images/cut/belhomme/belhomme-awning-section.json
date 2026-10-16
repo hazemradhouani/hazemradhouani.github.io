@@ -1,6 +1,6 @@
 {
  "src": "images/belhomme/belhomme-awning-section.png",
- "hash": "0820246d7284c2f0",
+ "hash": "8e3f56dc4d848a82",
  "mode": "ink",
  "from": [
   1152,
@@ -27,6 +27,7 @@
   "suggest": "accent"
  },
  "dark": "invert-accent",
+ "keep": null,
  "specks": 42,
  "tile": [
   320,

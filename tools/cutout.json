@@ -21,7 +21,7 @@
       ],
       "floor": 0.1,
       "knee": 0.18,
-      "dark": "field"
+      "dark": "invert-accent"
     }
   },
   "fullBleed": {

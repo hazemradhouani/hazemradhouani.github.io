@@ -1,6 +1,6 @@
 {
  "src": "images/belhomme/belhomme-demolition-plans.jpg",
- "hash": "ecfaf08b47b9bb56",
+ "hash": "0218a091c6795924",
  "mode": "ink",
  "from": [
   1626,
@@ -26,7 +26,8 @@
   "midtoneFraction": 0.4221,
   "suggest": "colour"
  },
- "dark": "field",
+ "dark": "invert-accent",
+ "keep": null,
  "specks": 4491,
  "tile": [
   640,

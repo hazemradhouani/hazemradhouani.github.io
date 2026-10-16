@@ -1,6 +1,6 @@
 {
  "src": "images/zenata/zenata-site-access.png",
- "hash": "88b634ead8507b0e",
+ "hash": "93b77e490d7292ee",
  "mode": "ink",
  "from": [
   1065,
@@ -28,7 +28,8 @@
   "midtoneFraction": 0.1814,
   "suggest": "colour"
  },
- "dark": "field",
+ "dark": "invert-accent",
+ "keep": null,
  "specks": 4310,
  "tile": [
   0,

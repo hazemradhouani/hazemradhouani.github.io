@@ -17,14 +17,21 @@ test.afterEach(() => {
 const REPO = fileURLToPath(new URL('../..', import.meta.url));
 const walk = (dir) => fs.readdirSync(dir, { withFileTypes: true }).flatMap((e) => (e.isDirectory() ? walk(path.join(dir, e.name)) : [path.join(dir, e.name)]));
 
-test('every shipped cutout has its sidecar and a reviewed dark treatment (D49, D50)', () => {
+test('every shipped cutout has its sidecar and a reviewed dark treatment, and none keeps a paper field in dark (D49, D50, D69)', () => {
   const missing = [];
   for (const png of walk(path.join(REPO, 'images/cut')).filter((f) => f.endsWith('.png'))) {
-    const side = png.replace(/\.png$/u, '.json');
     const rel = path.relative(REPO, png).split(path.sep).join('/');
+    if (rel.endsWith('--keep.png')) {   // a keep layer belongs to the cutout beside it, whose sidecar names it
+      const owner = png.replace(/--keep\.png$/u, '.json');
+      const s = fs.existsSync(owner) ? JSON.parse(fs.readFileSync(owner, 'utf8')) : null;
+      if (!s || s.dark !== 'keep' || s.keep?.file !== rel) missing.push(`${rel}: stray keep layer`);
+      continue;
+    }
+    const side = png.replace(/\.png$/u, '.json');
     if (!fs.existsSync(side)) { missing.push(`${rel}: no sidecar`); continue; }
-    const dark = JSON.parse(fs.readFileSync(side, 'utf8')).dark;
-    if (!['invert', 'invert-accent', 'field', 'object'].includes(dark)) missing.push(`${rel}: dark ${dark}`);
+    const s = JSON.parse(fs.readFileSync(side, 'utf8'));
+    if (!['invert', 'invert-accent', 'keep', 'object'].includes(s.dark)) missing.push(`${rel}: dark ${s.dark}`);
+    if (s.dark === 'keep' && !fs.existsSync(path.join(REPO, s.keep?.file || '-'))) missing.push(`${rel}: keep layer missing`);
   }
   assert.deepEqual(missing, []);
 });

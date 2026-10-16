@@ -1,6 +1,6 @@
 {
  "src": "images/la-villette/la-villette-access-gate-annotated.png",
- "hash": "8486226c190fb74b",
+ "hash": "04052cec9198dcc3",
  "mode": "ink",
  "from": [
   2560,
@@ -29,7 +29,8 @@
   "midtoneFraction": 0.7439,
   "suggest": "colour"
  },
- "dark": "field",
+ "dark": "invert-accent",
+ "keep": null,
  "specks": 1536,
  "tile": [
   320,

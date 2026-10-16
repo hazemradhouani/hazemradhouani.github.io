@@ -1,6 +1,6 @@
 {
  "src": "images/belhomme/belhomme-plu-section-rochechouart.jpg",
- "hash": "3579e71adf1ab2f2",
+ "hash": "b3f436558b7a0103",
  "mode": "ink",
  "from": [
   568,
@@ -26,7 +26,8 @@
   "midtoneFraction": 0.5202,
   "suggest": "colour"
  },
- "dark": "field",
+ "dark": "invert-accent",
+ "keep": null,
  "specks": 245,
  "tile": [
   0,

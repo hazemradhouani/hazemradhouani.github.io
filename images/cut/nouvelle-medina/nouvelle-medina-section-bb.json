@@ -1,6 +1,6 @@
 {
  "src": "images/nouvelle-medina/nouvelle-medina-section-bb.png",
- "hash": "1bcb5a0d1f0bdebe",
+ "hash": "b15daf0cfe9f4ef3",
  "mode": "ink",
  "from": [
   2075,
@@ -29,6 +29,7 @@
   "suggest": "mono"
  },
  "dark": "invert-accent",
+ "keep": null,
  "specks": 134,
  "tile": [
   960,

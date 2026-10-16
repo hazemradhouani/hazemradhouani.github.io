@@ -1,6 +1,6 @@
 {
  "src": "images/la-villette/la-villette-facade-module-axo.png",
- "hash": "885af00ae3bd4f80",
+ "hash": "93e74ddc5ae2a516",
  "mode": "ink",
  "from": [
   2560,
@@ -26,7 +26,8 @@
   "midtoneFraction": 0.7189,
   "suggest": "colour"
  },
- "dark": "field",
+ "dark": "invert-accent",
+ "keep": null,
  "specks": 4,
  "tile": [
   960,

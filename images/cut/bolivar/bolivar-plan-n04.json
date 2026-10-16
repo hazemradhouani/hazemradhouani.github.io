@@ -1,6 +1,6 @@
 {
  "src": "images/bolivar/bolivar-plan-n04.png",
- "hash": "9c15f94c66fdac3d",
+ "hash": "dc6d8ec3d0c02418",
  "mode": "ink",
  "from": [
   2560,
@@ -31,7 +31,8 @@
   "midtoneFraction": 0.632,
   "suggest": "colour"
  },
- "dark": "field",
+ "dark": "invert-accent",
+ "keep": null,
  "specks": 184,
  "tile": [
   1280,

@@ -1,6 +1,6 @@
 {
  "src": "images/zenata/zenata-long-elevation.png",
- "hash": "99f978e9b0c23d23",
+ "hash": "fe55e03b6a0888d9",
  "mode": "ink",
  "from": [
   2560,
@@ -27,6 +27,7 @@
   "suggest": "accent"
  },
  "dark": "invert-accent",
+ "keep": null,
  "specks": 113,
  "tile": [
   1280,

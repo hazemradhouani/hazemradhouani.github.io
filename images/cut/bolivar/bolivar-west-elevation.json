@@ -1,6 +1,6 @@
 {
  "src": "images/bolivar/bolivar-west-elevation.png",
- "hash": "f0e7366520192e0e",
+ "hash": "b309cfe4efdcc670",
  "mode": "ink",
  "from": [
   2560,
@@ -31,6 +31,7 @@
   "suggest": "accent"
  },
  "dark": "invert-accent",
+ "keep": null,
  "specks": 239,
  "tile": [
   640,

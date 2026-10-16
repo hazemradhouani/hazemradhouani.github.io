@@ -1,6 +1,6 @@
 {
  "src": "images/sentry/sentry-plan-roof.png",
- "hash": "f8820f97de8b8cdf",
+ "hash": "dba2139dbf0e70ca",
  "mode": "ink",
  "from": [
   1219,
@@ -27,6 +27,7 @@
   "suggest": "accent"
  },
  "dark": "invert-accent",
+ "keep": null,
  "specks": 181,
  "tile": [
   320,

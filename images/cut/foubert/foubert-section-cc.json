@@ -1,6 +1,6 @@
 {
  "src": "images/foubert/foubert-section-cc.png",
- "hash": "60c1397e09e95c25",
+ "hash": "89fd819c0e067e36",
  "mode": "ink",
  "from": [
   2560,
@@ -27,6 +27,7 @@
   "suggest": "colour"
  },
  "dark": "invert-accent",
+ "keep": null,
  "specks": 0,
  "tile": [
   320,

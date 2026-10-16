@@ -1,6 +1,6 @@
 {
  "src": "images/sentry/sentry-elevation-side.png",
- "hash": "7d1b0b9a0c37ac00",
+ "hash": "dd98522350054b46",
  "mode": "ink",
  "from": [
   1515,
@@ -27,6 +27,7 @@
   "suggest": "accent"
  },
  "dark": "invert-accent",
+ "keep": null,
  "specks": 462,
  "tile": [
   320,
