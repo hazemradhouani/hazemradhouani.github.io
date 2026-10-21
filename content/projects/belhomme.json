@@ -75,7 +75,6 @@
     "src": "images/belhomme/belhomme-corner-render-hq.jpg",
     "alt": "Render of the white rendered corner building at rue Belhomme and boulevard de Rochechouart on an autumn day, shopfronts lit at street level and bicycles parked in the foreground",
     "caption": "The corner of rue Belhomme and boulevard de Rochechouart, then the rear courtyard: the project set in its surroundings, from permit sheet PC6.",
-    "credit": "Render: Studio BELEM",
     "source": "pdf2026:p9 + hq:BELHOMME/ANX1_merge [31-60]_page-0004.jpg (permit sheet PC6, rue Belhomme / bd Rochechouart)"
   },
   "figures": [
@@ -116,9 +115,13 @@
     {
       "src": "images/belhomme/belhomme-roof-plan.png",
       "title": "Proposed roof plan",
-      "caption": "Permit sheet PC5, 1/150. Callout 1 marks the dark grey zinc roofing; on the garden side, a planted terrace carries a semicircular glass roof.",
+      "caption": "Permit sheet PC5, 1/150. On the garden side, a planted terrace carries a semicircular glass roof.",
       "alt": "Roof plan of the corner building: hatched zinc roof slopes with their pitches and NGF levels, a planted terrace with a semicircular glass roof towards the garden, and the neighbouring buildings in grey",
       "kind": "drawing",
+      "legendTitle": "Materials",
+      "legend": [
+        { "code": "1", "text": "Dark grey zinc roofing" }
+      ],
       "source": "hq:BELHOMME/ANX1_merge [1-30]_page-0029.jpg (printed title 'PC5 PLAN DE TOITURE PROJET', scale 1/150, legend '1 Toiture en zinc gris foncé'; translated, D17)"
     },
     {
@@ -134,6 +137,11 @@
       "title": "Regulatory sections",
       "caption": "PLU Section | Rue Belhomme. Verification of the regulatory building envelope, facade height, footprint, and rear setback. PLU Section | Boulevard Rochechouart Facade. Same regulatory logic at the corner | reading of the maximum allowable total height.",
       "kind": "drawing",
+      "legend": [
+        { "swatch": "#D3CDC6", "text": "Existing" },
+        { "mark": "hatch", "swatch": "#BD927C", "text": "Demolished" },
+        { "mark": "hatch", "swatch": "#87A6BB", "text": "Proposed" }
+      ],
       "items": [
         {
           "src": "images/belhomme/belhomme-plu-section-rue-belhomme.jpg",
@@ -153,35 +161,86 @@
     {
       "src": "images/belhomme/belhomme-facade-rue-belhomme.png",
       "title": "Rue Belhomme elevation",
-      "caption": "Permit sheet PC5, 1/150. Materials, by the numbers on the drawing: 1 existing facades in render (RAL 9010 or equivalent); 2 new facades in white floated natural lime render (RAL 9010 or equivalent); 3 zinc roofs; 4 light grey sandblasted concrete base with exposed aggregate; 5 varnished natural timber windows and doors; 6 off-white fabric awnings (RAL 9002 or equivalent); 7 light grey aluminium bands and frames; 8 neighbouring building; 9 stainless-steel mesh guardrails with a light grey anodised rail; 10 light grey aluminium frames; 11 light grey metal band housing the shop grilles; 12 glass roof with light grey aluminium frames; 13 cornice (RAL 9010 or equivalent).",
+      "caption": "Permit sheet PC5, 1/150.",
       "alt": "Elevation along rue Belhomme: two blocks of five floors with tall French windows and zinc roofs over a light concrete shop base, entrance markers below the street line and NGF levels on the left",
       "kind": "drawing",
+      "legendTitle": "Materials",
+      "legend": [
+        { "code": "1", "text": "Existing facades in render (RAL 9010 or equivalent)" },
+        { "code": "2", "text": "New facades in white floated natural lime render (RAL 9010 or equivalent)" },
+        { "code": "3", "text": "Zinc roofs" },
+        { "code": "4", "text": "Light grey sandblasted concrete base with exposed aggregate" },
+        { "code": "5", "text": "Varnished natural timber windows and doors" },
+        { "code": "6", "text": "Off-white fabric awnings (RAL 9002 or equivalent)" },
+        { "code": "7", "text": "Light grey aluminium bands and frames" },
+        { "code": "8", "text": "Neighbouring building" },
+        { "code": "9", "text": "Stainless-steel mesh guardrails with a light grey anodised rail" },
+        { "code": "10", "text": "Light grey aluminium frames" },
+        { "code": "11", "text": "Light grey metal band housing the shop grilles" },
+        { "code": "12", "text": "Glass roof with light grey aluminium frames" },
+        { "code": "13", "text": "Cornice (RAL 9010 or equivalent)" }
+      ],
       "source": "hq:BELHOMME/ANX1_merge [1-30]_page-0030.jpg (printed title 'PC5 FACADE RUE BELHOMME', scale 1/150, numbered material legend; translated, D17); replaces the pdf2026:p11 crop of the same drawing",
       "maxH": 820
     },
     {
       "src": "images/belhomme/belhomme-facade-rochechouart.png",
       "title": "Boulevard Rochechouart elevation",
-      "caption": "Permit sheet PC5, 1/150. The 7.67 m front between the plot boundaries; material numbers as listed for the Rue Belhomme elevation.",
+      "caption": "Permit sheet PC5, 1/150. The 7.67 m front between the plot boundaries.",
       "alt": "Elevation on boulevard de Rochechouart: a narrow five-floor front with paired French windows and a hipped zinc roof between red plot-boundary lines, the rue Belhomme block receding on the right and a taller neighbour ghosted on the left",
       "kind": "drawing",
+      "legendTitle": "Materials",
+      "legend": [
+        { "code": "1", "text": "Existing facades in render (RAL 9010 or equivalent)" },
+        { "code": "2", "text": "New facades in white floated natural lime render (RAL 9010 or equivalent)" },
+        { "code": "3", "text": "Zinc roofs" },
+        { "code": "4", "text": "Light grey sandblasted concrete base with exposed aggregate" },
+        { "code": "5", "text": "Varnished natural timber windows and doors" },
+        { "code": "6", "text": "Off-white fabric awnings (RAL 9002 or equivalent)" },
+        { "code": "7", "text": "Light grey aluminium bands and frames" },
+        { "code": "8", "text": "Neighbouring building" },
+        { "code": "9", "text": "Stainless-steel mesh guardrails with a light grey anodised rail" },
+        { "code": "10", "text": "Light grey aluminium frames" },
+        { "code": "11", "text": "Light grey metal band housing the shop grilles" },
+        { "code": "12", "text": "Glass roof with light grey aluminium frames" },
+        { "code": "13", "text": "Cornice (RAL 9010 or equivalent)" }
+      ],
       "source": "hq:BELHOMME/ANX1_merge [31-60]_page-0001.jpg (printed title 'PC5 FACADE BD ROCHECHOUART', scale 1/150, dimension 7.67, 'Limite parcellaire'; translated, D17)",
       "maxH": 820
     },
     {
       "src": "images/belhomme/belhomme-facade-rear.png",
       "title": "Rear elevation",
-      "caption": "Permit sheet PC5, 1/150. The courtyard front between the neighbouring buildings; material numbers as listed for the Rue Belhomme elevation.",
+      "caption": "Permit sheet PC5, 1/150. The courtyard front between the neighbouring buildings.",
       "alt": "Rear elevation onto the courtyard: a five-floor rendered front under a zinc roof, set between the grey walls of the neighbouring buildings, with a tree drawn at its foot",
       "kind": "drawing",
+      "legendTitle": "Materials",
+      "legend": [
+        { "code": "1", "text": "Existing facades in render (RAL 9010 or equivalent)" },
+        { "code": "2", "text": "New facades in white floated natural lime render (RAL 9010 or equivalent)" },
+        { "code": "3", "text": "Zinc roofs" },
+        { "code": "4", "text": "Light grey sandblasted concrete base with exposed aggregate" },
+        { "code": "5", "text": "Varnished natural timber windows and doors" },
+        { "code": "6", "text": "Off-white fabric awnings (RAL 9002 or equivalent)" },
+        { "code": "7", "text": "Light grey aluminium bands and frames" },
+        { "code": "8", "text": "Neighbouring building" },
+        { "code": "9", "text": "Stainless-steel mesh guardrails with a light grey anodised rail" },
+        { "code": "10", "text": "Light grey aluminium frames" },
+        { "code": "11", "text": "Light grey metal band housing the shop grilles" },
+        { "code": "12", "text": "Glass roof with light grey aluminium frames" },
+        { "code": "13", "text": "Cornice (RAL 9010 or equivalent)" }
+      ],
       "source": "hq:BELHOMME/ANX1_merge [31-60]_page-0002.jpg (printed title 'PC5 FACADE ARRIERE', scale 1/150, 'Heberge voisine'; translated, D17)"
     },
     {
       "src": "images/belhomme/belhomme-awning-section.png",
       "title": "Zoom section",
-      "caption": "Permit sheet PC10, 1:50, drawn for the agreement of the public-domain manager, to open the procedure for temporary occupation of the public domain. The sheet notes that the awning projects 1 m from the boulevard de Rochechouart facade, over 5.3 m² of ground. The red dashed line is the property boundary.",
+      "caption": "Permit sheet PC10, 1:50, drawn for the agreement of the public-domain manager, to open the procedure for temporary occupation of the public domain. The sheet notes that the awning projects 1 m from the boulevard de Rochechouart facade, over 5.3 m² of ground.",
       "alt": "Detail section of the shop front at 1:50: an awning projecting from the facade wall above the pavement, a standing figure for scale, and heights and NGF levels",
       "kind": "drawing",
+      "legend": [
+        { "mark": "dash", "swatch": "#FE0000", "text": "Property boundary" }
+      ],
       "source": "hq:BELHOMME/ANX1_merge [31-60]_page-0017.jpg (drawing title '1 ZOOM - Coupe 1 : 50' on sheet 'PC10 ACCORD DU GESTIONNAIRE'; sheet notes and legend 'Limite de propriété'; translated, D17)"
     },
     {
@@ -190,7 +249,6 @@
       "caption": "",
       "alt": "Render of the white rear facade with timber-framed windows, seen through trees from the courtyard, with a planted terrace and a semicircular glass roof at its foot",
       "kind": "render",
-      "credit": "Render: Studio BELEM",
       "source": "pdf2026:p12 + hq:BELHOMME/ANX1_merge [31-60]_page-0005.jpg (printed title 'PC6 INSERTION DU PROJET DANS L'ENVIRONNEMENT - PROJETE -COURS ARRIERE'; translated, D17)"
     }
   ],

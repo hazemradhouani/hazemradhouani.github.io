@@ -74,7 +74,6 @@
   "hero": {
     "src": "images/bolivar/bolivar-courtyard-render-hq.jpg",
     "alt": "Courtyard render of the Bolivar hotel and student residence with planted terraces",
-    "credit": "Render: Studio BELEM",
     "source": "pdf2026:p17 + hq:BOLIVAR/NB_StudioBelem_SimonBolivar_E-02_AvSimonBolivar-Reprise2V-Sun1_20240522-mod.jpg"
   },
   "figures": [
@@ -82,7 +81,6 @@
       "title": "Before and after",
       "caption": "The block from the air before the project, with a low building, a ramp and parked cars at its heart; and the same view with the project inserted, its planted roofs among the neighbouring roofs.",
       "kind": "render",
-      "credit": "Permit sheets PC6, Studio BELEM",
       "items": [
         {
           "src": "images/bolivar/bolivar-aerial-existing.jpg",
@@ -112,7 +110,7 @@
       "legend": [
         {
           "swatch": "#C0C0C0",
-          "text": "Project"
+          "text": "Proposed"
         },
         {
           "swatch": "#0000FE",
@@ -152,9 +150,24 @@
     {
       "src": "images/bolivar/bolivar-roof-plan.png",
       "title": "Roof plan",
-      "caption": "1:200. Five non-accessible planted roofs of 32 to 130 m² on 25 to 85 cm of substrate, one area planted in open ground, and accessible terraces. Key: 1 glazed roof; 2 aluminium joinery; 3 guardrail or separator: aluminium and stainless-steel mesh, fishing net or expanded metal; 4 glazing; 5 timber decking; 6 steel structure; 7 planting; 8 grille, aluminium-tone RAL; 9 acoustic cladding and aluminium panel; 10 existing concrete structure; 11 steel grating; 12 metal rainwater downpipe.",
+      "caption": "1:200. Five non-accessible planted roofs of 32 to 130 m² on 25 to 85 cm of substrate, one area planted in open ground, and accessible terraces.",
       "alt": "Colour roof plan of the two buildings: speckled planted roofs in olive, dark green and pale yellow-green, white accessible terraces, grey gratings and a glazed roof between them, with numbered callouts, levels and overall dimensions",
       "kind": "drawing",
+      "legendTitle": "Materials",
+      "legend": [
+        { "code": "1", "text": "Glazed roof" },
+        { "code": "2", "text": "Aluminium joinery" },
+        { "code": "3", "text": "Guardrail or separator: aluminium and stainless-steel mesh, fishing net or expanded metal" },
+        { "code": "4", "text": "Glazing" },
+        { "code": "5", "text": "Timber decking" },
+        { "code": "6", "text": "Steel structure" },
+        { "code": "7", "text": "Planting" },
+        { "code": "8", "text": "Grille, aluminium-tone RAL" },
+        { "code": "9", "text": "Acoustic cladding and aluminium panel" },
+        { "code": "10", "text": "Existing concrete structure" },
+        { "code": "11", "text": "Steel grating" },
+        { "code": "12", "text": "Metal rainwater downpipe" }
+      ],
       "source": "hq:BOLIVAR/PC5-UN PLAN DES FACADES ET DES TOITURES PROJET-A_page-0002.jpg (printed title 'Plan de Toiture', scale '1 : 200', key 1-12, labels 'Surface végétalisée non accessible : 90m² pour 55cm de substrat' with 32, 103, 97 and 130 m² for 55, 85, 25 and 55 cm, 'Pleine terre', 'Terrasse accessible'; translated, D17); pdf2026:p20"
     },
     {
@@ -166,7 +179,7 @@
       "legend": [
         {
           "swatch": "#C0C0C0",
-          "text": "Project"
+          "text": "Proposed"
         },
         {
           "swatch": "#0000FE",
@@ -185,15 +198,36 @@
     {
       "src": "images/bolivar/bolivar-west-elevation.png",
       "title": "West elevation, avenue Simon Bolivar",
-      "caption": "1:150; 20.31 m between the property lines. Along the street, left to right: hotel entrance 4, hotel entrance 3, and the hotel exit (1) with the student residence entrance (2). Key: 1 white render, RAL 9003; 2 aluminium joinery; 3 guardrail or separator: aluminium and stainless-steel mesh, fishing net or expanded metal; 4 glazing; 5 aluminium cassette; 6 steel structure; 7 planting; 8 grille, aluminium-tone RAL; 9 acoustic cladding and aluminium panel; 10 aluminium rainwater hopper; 11 glazed roof; 12 metal rainwater downpipe; 13 bush-hammered concrete, non-load-bearing; 14 existing concrete structure.",
+      "caption": "1:150; 20.31 m between the property lines. Along the street, left to right: hotel entrance 4, hotel entrance 3, and the hotel exit (1) with the student residence entrance (2), as numbered under the street line.",
       "alt": "Elevation of the street front between grey neighbouring buildings: a glazed base with the entrances, floors of balconies with fine railings in three bays, a glazed top floor, numbered callouts, red property lines and dimensions",
       "kind": "drawing",
+      "legendTitle": "Materials",
+      "legend": [
+        { "code": "1", "text": "White render, RAL 9003" },
+        { "code": "2", "text": "Aluminium joinery" },
+        { "code": "3", "text": "Guardrail or separator: aluminium and stainless-steel mesh, fishing net or expanded metal" },
+        { "code": "4", "text": "Glazing" },
+        { "code": "5", "text": "Aluminium cassette" },
+        { "code": "6", "text": "Steel structure" },
+        { "code": "7", "text": "Planting" },
+        { "code": "8", "text": "Grille, aluminium-tone RAL" },
+        { "code": "9", "text": "Acoustic cladding and aluminium panel" },
+        { "code": "10", "text": "Aluminium rainwater hopper" },
+        { "code": "11", "text": "Glazed roof" },
+        { "code": "12", "text": "Metal rainwater downpipe" },
+        { "code": "13", "text": "Bush-hammered concrete, non-load-bearing" },
+        { "code": "14", "text": "Existing concrete structure" }
+      ],
       "source": "hq:BOLIVAR/PC5-UN PLAN DES FACADES ET DES TOITURES PROJET-A_page-0003.jpg (printed title 'Façade OUEST 1 (Avenue Simon Bolivar)', scale '1/150', key 1-14, labels '4. Entrée Hôtel', '3. Entrée Hôtel', '1. Sortie Hôtel', '2. Entrée Résidence Etudiante'; translated, D17); pdf2026:p19"
     },
     {
       "title": "Volumetric strategy",
-      "caption": "Schematic axonometrics: the volumes to be demolished (red), the volumes retained, and the volumes raised and lowered (blue).",
+      "caption": "Schematic axonometrics, in order: the volumes to be demolished, the volumes retained, and the volumes raised and lowered.",
       "kind": "drawing",
+      "legend": [
+        { "swatch": "#FB7A7B", "text": "To be demolished" },
+        { "swatch": "#5A69FB", "text": "Raised and lowered" }
+      ],
       "items": [
         {
           "src": "images/bolivar/bolivar-axo-demolished.png",
@@ -224,7 +258,6 @@
       "caption": "",
       "alt": "Street render of the Bolivar building on avenue Simon Bolivar",
       "kind": "render",
-      "credit": "Render: Studio BELEM",
       "source": "pdf2026:p18 + hq:BOLIVAR/NB_StudioBelem_SimonBolivar_E-01_AvSimonBolivar-Reprise2_S2_20240522.jpg"
     }
   ],

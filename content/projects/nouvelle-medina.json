@@ -211,18 +211,22 @@
       "source": "hq:Nouvelle Medina/A0 MEDINA F [1]_page-0001.jpg (printed legend 'FLUX PIETONS : INTERMODALITÉ - GARE', 'FLUX DES VOYAGEURS - GARE', 'FLUX DES VOYAGEURS - ACCES AUX QUAIS', 'FLUX DES VOYAGEURS - SORTIE DES QUAIS/ GARE', 'CONNEXION VERTICALE GARE/QUAIS'; translated, D17, D49; the light-blue swatch touches a road line and stays on the drawing); pdf2025:p38",
       "legend": [
         {
+          "mark": "dash",
           "swatch": "#D4D4D4",
           "text": "Pedestrian flows: intermodal links to the station"
         },
         {
+          "mark": "dash",
           "swatch": "#293D93",
           "text": "Passenger flows: station"
         },
         {
+          "mark": "dash",
           "swatch": "#F0B723",
           "text": "Passenger flows: to the platforms"
         },
         {
+          "mark": "dash",
           "swatch": "#A85C6D",
           "text": "Passenger flows: leaving the platforms and the station"
         },

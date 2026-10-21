@@ -45,11 +45,11 @@ Translations from French are literal and marked "(translated from French)". Line
 
 1. Sentry surface (C02).
 2. The 2020-2021 CV entry: Société de Préservation or BATN, and whether SKI (2022) belongs on the CV (C13).
-3. Place and author of the cover photograph (C17); higher-resolution originals of the renders when available.
+3. Higher-resolution originals of the renders when available.
 4. Captions or transcripts for films with speech.
 5. Analytics consent for EU visitors (GA4 is idle-loaded and off under Do Not Track / Global Privacy Control; not legal advice).
 6. Where you are based (C18).
 7. Links and material for your website and app, when ready.
-8. Project-specific personal-role, credit and caption evidence for any HQ source selected beyond the existing portfolio records; no such source is selected in `tools/hq-media.json` yet.
+Resolved on 2026-10-16 under the owner's rule of that day (D72): renders and photographs carry no author line (every render is the owner's), which closes the credit questions, including the cover photograph's author (C17; the photograph is not published, D37); Al-Arg Structure 03 takes the owner's pdf2026:p26 caption; Tamansourt is near Marrakech (geography); the remaining project questions (roles, scales, room details, Corallum's site and structure, Hotel W, Poutres Al and others listed in D72) are closed as not needed, with nothing published in their place.
 
 Resolved by the owner on 2026-10-12: surfaces, Sakura wording, Zenata ranking, supervisors, Studio BELEM dates, Nouvelle Medina and Aïn Sebaâ office, publication permission for office drawings (the owner produced them). Resolved by the owner on 2026-10-13: the broad identity wording and authority to derive/publish a suitable supplied HQ asset, subject to the project-specific evidence rules above.

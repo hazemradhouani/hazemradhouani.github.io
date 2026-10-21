@@ -84,11 +84,11 @@
       "alt": "Map of the park and the blocks beside it with trees drawn as dots coloured by species, dense in the park and lining the streets",
       "kind": "drawing",
       "legend": [
-        { "swatch": "#29794B", "text": "Eucalyptus" },
-        { "swatch": "#C4DA66", "text": "Palm tree" },
-        { "swatch": "#4AA646", "text": "Pine" },
-        { "swatch": "#D51C8F", "text": "Olive tree" },
-        { "swatch": "#235562", "text": "Sempervivum" }
+        { "mark": "point", "swatch": "#29794B", "text": "Eucalyptus" },
+        { "mark": "point", "swatch": "#C4DA66", "text": "Palm tree" },
+        { "mark": "point", "swatch": "#4AA646", "text": "Pine" },
+        { "mark": "point", "swatch": "#D51C8F", "text": "Olive tree" },
+        { "mark": "point", "swatch": "#235562", "text": "Sempervivum" }
       ],
       "source": "hq:Cinema/Tree cover.png (printed title 'Tree cover'; legend 'Eucalyptus', 'Palm tree', 'Pine', 'Olive tree', 'Sempervivum', re-set); pdf2025:p12"
     },

@@ -68,16 +68,21 @@
     "src": "images/avenir/avenir-avenue-de-verdun-render.jpg",
     "alt": "Render of the eight-storey corner building in pale brick, its curved balconies full of plants, seen across avenue de Verdun on a sunny day, a shop with white awnings and café tables at its foot, the lower block behind on the left and a white neighbouring building on the right",
     "caption": "The building from avenue de Verdun.",
-    "credit": "Render: Studio BELEM",
     "source": "hq:Villneuve la garenne/PC40-2_DOCUMENTS DESCRIPTIFS SECURITE INCENDIE ERP_merge [141-160] [11-20]_page-0005.jpg (printed caption 'FIGURE 2. VUE DU BÂTIMENT DEPUIS L'AVENUE DE VERDUN.'; translated, D17)"
   },
   "figures": [
     {
       "src": "images/avenir/avenir-site-plan.png",
       "title": "Site plan",
-      "caption": "Fire-safety site plan, PC40 sheet, 1/500, December 2025. The corner block (R+7) on avenue de Verdun and the lower block (R+5) along rue de l'Avenir, joined by an R+1 link. Following the sheet's legend, green arrows mark the accesses and red ones the emergency exits; the red dot and line give the fire hydrant on avenue de Verdun and its 60.41 m distance to the shop entrance.",
+      "caption": "Fire-safety site plan, PC40 sheet, 1/500, December 2025. The corner block (R+7) on avenue de Verdun and the lower block (R+5) along rue de l'Avenir, joined by an R+1 link. The fire hydrant stands on avenue de Verdun, 60.41 m from the shop entrance.",
       "alt": "Site plan: two pale blocks on a narrow plot along rue de l'Avenir, the square corner block and the long lower block, a curved link between them, avenue de Verdun on the left, houses and trees around, and red and green access marks",
       "kind": "drawing",
+      "legend": [
+        { "mark": "measure", "swatch": "#FD0000", "text": "Distance from hydrant to building" },
+        { "mark": "point", "swatch": "#FD0000", "text": "Fire hydrant" },
+        { "mark": "triangle", "swatch": "#FD0000", "text": "Emergency exit" },
+        { "mark": "triangle", "swatch": "#007E3E", "text": "Access to the premises" }
+      ],
       "source": "hq:Villneuve la garenne/PC40-2_DOCUMENTS DESCRIPTIFS SECURITE INCENDIE ERP_merge [1-20]_page-0003.jpg (printed title 'PC40 - Dossier destiné à la vérification de la conformité aux règles de sécurité incendie', 'Plan masse securité', scale 1/500; legend 'Distance borne - établissement', 'Borne incendie', 'Sortie de secours', 'Accès à l'établissement'; labels 'Accès Logement', 'Accès Parking', 'Accès Commerce', '60,41 m'; translated, D17)"
     },
     {
@@ -127,17 +132,37 @@
     {
       "src": "images/avenir/avenir-west-elevation.png",
       "title": "West elevation, rue de l'Avenir",
-      "caption": "PC5 sheet, 1/200, December 2025. The rue de l'Avenir front, 67.52 m between the property lines: the lower block (left) on columns above the planted plinth, the corner block (right). At street level, the bicycle and parking accesses and a pedestrian emergency exit at the left, the residents' entrance between the blocks. Materials, by the codes on the drawing: M1 timber joinery; M2 low-carbon concrete tinted in the mass, light beige; M3 glass bricks; M4 solid brick; M5 powder-coated metalwork, 'mocha' brown; M6 planter; M7 light beige facing tiles.",
+      "caption": "PC5 sheet, 1/200, December 2025. The rue de l'Avenir front, 67.52 m between the property lines: the lower block (left) on columns above the planted plinth, the corner block (right). At street level, the bicycle and parking accesses and a pedestrian emergency exit at the left, the residents' entrance between the blocks.",
       "alt": "Coloured street elevation of two beige brick blocks with dark balcony railings and planted roofs: a six-storey block on the left raised on columns over a planted plinth, a glazed entrance between the blocks, and an eight-storey block on the right; red property lines and blue NGF levels",
       "kind": "drawing",
+      "legendTitle": "Materials",
+      "legend": [
+        { "code": "M1", "text": "Timber joinery" },
+        { "code": "M2", "text": "Low-carbon concrete tinted in the mass, light beige" },
+        { "code": "M3", "text": "Glass bricks" },
+        { "code": "M4", "text": "Solid brick" },
+        { "code": "M5", "text": "Powder-coated metalwork, ‘mocha’ brown" },
+        { "code": "M6", "text": "Planter" },
+        { "code": "M7", "text": "Light beige facing tiles" }
+      ],
       "source": "hq:Villneuve la garenne/PC40-2_DOCUMENTS DESCRIPTIFS SECURITE INCENDIE ERP_merge [121-140]_page-0014.jpg (printed title 'PC5 - PLANS DE FACADES ET TOITURES', 'Élévation ouest', scale 1/200; dimension '67,52'; labels 'Accès vélo', 'Accès parking', 'Sortie de secours piétons', 'Accès piéton aux logements'; legend 'M1 Menuiseries en bois', 'M2 Béton bas carbone teinté dans la masse, teinte beige claire', 'M3 Briques de verre', 'M4 Brique pleine', 'M5 Serrurerie en métal thermolaqué, brune \" mocha \"', 'M6 Jardinière', 'M7 Plaquette de parement beige clair'; translated, D17)"
     },
     {
       "src": "images/avenir/avenir-south-elevation.png",
       "title": "South elevation, avenue de Verdun",
-      "caption": "PC5 sheet, 1/200, December 2025. The corner block's front on avenue de Verdun, 19.22 m between the property lines, with the glazed shop at street level, its access and its emergency exit; natural ground at +27.98 NGF. Material codes as listed for the west elevation.",
+      "caption": "PC5 sheet, 1/200, December 2025. The corner block's front on avenue de Verdun, 19.22 m between the property lines, with the glazed shop at street level, its access and its emergency exit; natural ground at +27.98 NGF.",
       "alt": "Elevation of the eight-storey corner block: seven floors of beige brick with tall windows and dark railings, terraces stepping back at the upper left, a fully glazed shop on the ground floor, neighbouring buildings in outline on both sides",
       "kind": "drawing",
+      "legendTitle": "Materials",
+      "legend": [
+        { "code": "M1", "text": "Timber joinery" },
+        { "code": "M2", "text": "Low-carbon concrete tinted in the mass, light beige" },
+        { "code": "M3", "text": "Glass bricks" },
+        { "code": "M4", "text": "Solid brick" },
+        { "code": "M5", "text": "Powder-coated metalwork, ‘mocha’ brown" },
+        { "code": "M6", "text": "Planter" },
+        { "code": "M7", "text": "Light beige facing tiles" }
+      ],
       "source": "hq:Villneuve la garenne/PC40-2_DOCUMENTS DESCRIPTIFS SECURITE INCENDIE ERP_merge [121-140]_page-0015.jpg (printed title 'PC5 - PLANS DE FACADES ET TOITURES', 'Élévation sud', scale 1/200; dimension '19,22'; labels 'Sortie de secours commerce', 'Accès commerce', 'NIV SOL NATUREL +27,98 NGF'; translated, D17)"
     },
     {
@@ -146,7 +171,6 @@
       "caption": "",
       "alt": "Render at street level: passers-by beside a red-brick low wall topped by a continuous planter, slender columns and a tall timber-framed glazed entrance behind, a kiosk with a blue shutter on the left",
       "kind": "render",
-      "credit": "Render: Studio BELEM",
       "source": "hq:Villneuve la garenne/PC40-2_DOCUMENTS DESCRIPTIFS SECURITE INCENDIE ERP_merge [121-140]_page-0001.jpg (printed caption 'FIGURE 6. VUE DES JARDINIÈRES DEPUIS L'AVENUE DE VERDUN.'; translated, D17)"
     },
     {
@@ -155,7 +179,6 @@
       "caption": "",
       "alt": "Render of the shop front: white awnings marked Epicerie, Vins and Thé over a timber-framed glazed front, customers at the window and café tables under parasols on the pavement, brick upper floors above",
       "kind": "render",
-      "credit": "Render: Studio BELEM",
       "source": "hq:Villneuve la garenne/PC40-2_DOCUMENTS DESCRIPTIFS SECURITE INCENDIE ERP_merge [121-140]_page-0001.jpg (printed caption 'FIGURE 7. VUE DU COMMERCE DEPUIS L'AVENUE DE VERDUN.'; translated, D17)"
     }
   ],

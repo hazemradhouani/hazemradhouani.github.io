@@ -151,18 +151,22 @@
       ],
       "legend": [
         {
+          "mark": "dash",
           "swatch": "#CCCCCC",
           "text": "Pedestrian flows: intermodal links to the station"
         },
         {
+          "mark": "dash",
           "swatch": "#2A3F92",
           "text": "Passenger flows: station"
         },
         {
+          "mark": "dash",
           "swatch": "#F7B61A",
           "text": "Passenger flows: to the platforms"
         },
         {
+          "mark": "dash",
           "swatch": "#AB5C6F",
           "text": "Passenger flows: leaving the platforms and the station"
         },

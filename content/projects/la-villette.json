@@ -65,7 +65,6 @@
   "hero": {
     "src": "images/la-villette/la-villette-street-render-hq.jpg",
     "alt": "Street render of the building on avenue Jean Jaurès: a white rendered façade over a pale green shopfront, between a taller white building with a red restaurant front and a lower neighbour, a white car at the kerb",
-    "credit": "Render: Studio BELEM",
     "source": "pdf2026:p3 + hq:La villette/NB_StudioBeleem_JJaures_LaVillette_CAM-03_AvenueJeanJaures_Rep-3_PC_20260224.jpg"
   },
   "figures": [
@@ -75,7 +74,6 @@
       "caption": "The framed concrete façade along the planted path.",
       "alt": "Render of a planted path beside a long building whose concrete frame repeats storey after storey, with timber-framed windows set deep in each bay, young trees and flowering plants along the path",
       "kind": "render",
-      "credit": "Render: Studio BELEM",
       "source": "hq:La villette/NB_StudioBeleem_JJaures_LaVillette_CAM-01_Rep-Julliet _20240716.jpg (no printed title)"
     },
     {
@@ -84,7 +82,6 @@
       "caption": "Reading of the three buildings A, B and C.",
       "alt": "Hazy high view: a low block of grey pitched roofs in front, two framed concrete blocks with planted roofs behind it, and older Paris buildings beyond",
       "kind": "render",
-      "credit": "Render: Studio BELEM",
       "source": "pdf2026:p8 + hq:La villette/NB_StudioBeleem_JJaures_LaVillette_CAM-02_AvenueJeanJaures_Rep-Julliet_20240720_modifié.jpg"
     },
     {
@@ -327,7 +324,6 @@
       "caption": "",
       "alt": "Render of the courtyard between the buildings",
       "kind": "render",
-      "credit": "Render: Studio BELEM",
       "source": "pdf2026:p5 (no HQ source)"
     }
   ],
