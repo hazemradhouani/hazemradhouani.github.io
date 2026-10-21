@@ -346,5 +346,7 @@ ${cvBlock('tools-h', 'Tools', d.tools.map((t) => ({ when: t.name, what: t.text }
 export function notFound(site, ctx) {
   const p = ctx.prefix;
   const body = html`<div class="intro wrap g"><div class="s-text center"><h1 class="h1">${words('This page does not exist')}</h1><p class="lead in">The address may have changed when the portfolio was rebuilt.</p><p class="actions in">${more(p + 'architecture.html', 'View work', p)}${more(p, 'Home', p)}</p></div></div>`;
-  return { body, viewer: false, page: { path: '404.html', nav: null, noindex: true, title: 'Page not found | Hazem Radhouani', description: 'This page does not exist.', bodyClass: 'page-404' } };
+  // an old address under /portfolio/ that has no page of its own (a file, an image) moves to the same path at the root (D81)
+  const moved = html`<script>if(location.pathname.indexOf('/portfolio/')===0)location.replace(location.pathname.slice(10)+location.search+location.hash);</script>`;
+  return { body, viewer: false, page: { path: '404.html', nav: null, noindex: true, title: 'Page not found | Hazem Radhouani', description: 'This page does not exist.', bodyClass: 'page-404', preload: moved } };
 }

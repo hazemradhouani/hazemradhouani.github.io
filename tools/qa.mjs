@@ -15,7 +15,7 @@ const REPO = path.join(here, '..');
 const ARGS = process.argv.slice(2);
 const BASE = ARGS.find((a) => a.startsWith('--base='))?.slice('--base='.length)
   || ARGS.find((a) => !a.startsWith('--'))
-  || 'http://127.0.0.1:8090/portfolio/';
+  || 'http://127.0.0.1:8090/';
 fs.mkdirSync(path.join(here, '.cache'), { recursive: true });
 const SHOTS = process.argv.includes('--shots');
 const ONLY = process.argv.find((a) => a.startsWith('--only='))?.slice(7);
@@ -53,7 +53,8 @@ const axeSrc = fs.readFileSync(path.join(here, '..', 'node_modules/axe-core/axe.
 // need the server's routing (the 404 page links from the site root) and are skipped, and said so
 const FILE = BASE.startsWith('file:');
 const sitemap = FILE ? fs.readFileSync(path.join(REPO, 'sitemap.xml'), 'utf8') : await (await fetch(BASE + 'sitemap.xml')).text();
-let urls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1].replace('https://hazemradhouani.github.io/portfolio/', BASE))
+const LIVE = (({ origin, base }) => origin + base)(JSON.parse(fs.readFileSync(path.join(REPO, 'content/site.json'), 'utf8')));
+let urls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1].replace(LIVE, BASE))
   .map((u) => (FILE && u.endsWith('/') ? u + 'index.html' : u));   // the server answers a folder with its index.html
 if (FILE) console.log('note  file: base, no server: 404.html and the missing-page check are not run');
 else urls.push(BASE + '404.html', BASE + 'does-not-exist/x.html');

@@ -1,8 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-  <!-- Maskable / touch icon (D35): the favicon's "HR" monogram scaled into the 80% safe zone, white field -->
+  <!-- Maskable / touch icon (D35, D82): the favicon's "HR", same strokes, scaled x12 about the centre so every
+       corner stays inside the 80% safe circle (farthest corner 159 px from the centre, the circle 205 px), white field -->
   <rect width="512" height="512" fill="#FFFFFF"/>
-  <g fill="none" stroke="#111111" stroke-width="2.75" stroke-linecap="butt" stroke-linejoin="miter" transform="translate(128 128) scale(8)">
-    <path d="M2 4v24M12 4v24M2 16h10"/>
-    <path d="M18 28V4h5.5a6 6 0 0 1 0 12H18M23.5 16l6 12"/>
+  <g fill="none" stroke="#111111" stroke-width="3" stroke-linecap="butt" stroke-linejoin="miter" transform="translate(64 64) scale(12)">
+    <path d="M6.25 9v14M12.75 9v14M6.25 16h6.5"/>
+    <path d="M18.75 23V9h3a3.5 3.5 0 0 1 0 7h-3M21.75 16l4 7"/>
   </g>
 </svg>

@@ -40,6 +40,7 @@ ${page.preload || ''}
 <meta name="author" content="${P.name}">
 ${when(page.verification, () => html`<meta name="google-site-verification" content="${site.googleSiteVerification}">`)}
 <link rel="icon" href="${p}favicon.svg" type="image/svg+xml">
+<link rel="icon" href="${p}favicon-96x96.png" type="image/png" sizes="96x96">
 <link rel="icon" href="${p}favicon.ico" sizes="32x32">
 <link rel="apple-touch-icon" href="${p}apple-touch-icon.png">
 <link rel="manifest" href="${p}site.webmanifest">

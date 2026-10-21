@@ -1,6 +1,6 @@
-// Zero-dependency static server: serves the repo under /portfolio/ like GitHub Pages, gzip, real 404s.
+// Zero-dependency static server: serves the repo at the root, as GitHub Pages does (D81), gzip, real 404s.
 import http from 'node:http'; import fs from 'node:fs'; import path from 'node:path'; import zlib from 'node:zlib';
-const root = path.resolve(process.argv[2] || "."); const port = +process.argv[3] || 8090; const base = '/portfolio/';
+const root = path.resolve(process.argv[2] || "."); const port = +process.argv[3] || 8090; const base = '/';
 const types = {'.html':'text/html; charset=utf-8','.css':'text/css; charset=utf-8','.js':'text/javascript; charset=utf-8','.mjs':'text/javascript; charset=utf-8','.json':'application/json','.svg':'image/svg+xml','.png':'image/png','.jpg':'image/jpeg','.jpeg':'image/jpeg','.webp':'image/webp','.avif':'image/avif','.ico':'image/x-icon','.woff2':'font/woff2','.mp4':'video/mp4','.xml':'application/xml','.txt':'text/plain; charset=utf-8','.webmanifest':'application/manifest+json'};
 http.createServer((req, res) => {
   let u = decodeURIComponent(new URL(req.url, 'http://x').pathname);
