@@ -716,6 +716,8 @@
     ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; }
     ::view-transition-old(root) { animation: 160ms linear both vt-out !important; }
     ::view-transition-new(root) { animation: 160ms linear both vt-fade !important; }
+    /* no shared heroes or titles: without their fades the old and new snapshots would sit double-exposed */
+    [style*="view-transition-name"] { view-transition-name: none !important; }
     .rv-g { opacity: 1; transform: none; }
     .menu[open], .menu[open] .menu__list li, .viewer[open]::backdrop { animation: none; }
     *, *::before, *::after { transition-duration: 1ms !important; }

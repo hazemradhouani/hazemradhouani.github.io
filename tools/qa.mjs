@@ -153,6 +153,8 @@ async function runMotionPass() {
         for (let t = 0; t < 50 && document.querySelector('.rv:not(.is-in), .rv-g:not(.is-in)'); t++) await sleep(100);
         await Promise.race([Promise.all(document.getAnimations().map((a) => a.finished.catch(() => {}))), sleep(8000)]);
         const out = [];
+        // a page with plates below the fold must have arrival groups at all, or this pass would pass on nothing
+        if (!document.querySelector('.rv-g')) out.push('no arrival groups: the arrival module did not run');
         for (const el of document.querySelectorAll('.rv, .rv-g')) {
           if (!el.classList.contains('is-in')) out.push(`not arrived: ${el.tagName.toLowerCase()}.${[...el.classList].join('.')}`);
           else if (getComputedStyle(el).opacity !== '1') out.push(`opacity ${getComputedStyle(el).opacity}: ${el.tagName.toLowerCase()}.${[...el.classList].join('.')}`);
@@ -189,19 +191,28 @@ async function runScrollPass() {
       if (motion === 'reduce') { if (lenis) fail('the smooth-scroll engine loaded under reduced motion'); await ctx.close(); continue; }
       if (!lenis) { fail('the smooth-scroll engine did not load'); await ctx.close(); continue; }
       await page.mouse.move(700, 450);
-      const glide = page.evaluate(() => new Promise((res) => { const s = []; const t0 = performance.now(); const tick = () => { s.push([performance.now() - t0, scrollY]); if (s.length < 60) requestAnimationFrame(tick); else res(s); }; requestAnimationFrame(tick); }));
+      // sampled for 1.4 s of time (not a frame count), so a faster display cannot cut the glide short
+      const glide = page.evaluate(() => new Promise((res) => { const s = []; const t0 = performance.now(); const tick = () => { const t = performance.now() - t0; s.push([t, scrollY]); if (t < 1400) requestAnimationFrame(tick); else res(s); }; requestAnimationFrame(tick); }));
       await page.mouse.wheel(0, 400);
       const s = await glide;
       const at = (ms) => (s.find(([t]) => t >= ms) || s[s.length - 1])[1];
       if (!(at(80) > 8 && at(80) < 380)) fail(`a 400px wheel is not eased: ${Math.round(at(80))}px after 80ms`);
       if (s[s.length - 1][1] < 392) fail(`a 400px wheel settles at ${Math.round(s[s.length - 1][1])}px`);
+      // the keyboard takes over a glide: PageDown pressed mid-glide moves the page one page from where it is,
+      // the wheel's remaining distance is dropped (without the hand-over the glide would run on to its target)
+      const yRest = await page.evaluate(() => scrollY);
       await page.keyboard.press('PageDown');
-      await page.waitForTimeout(900);
-      const afterKey = await page.evaluate(() => scrollY);
-      await page.mouse.wheel(0, 200);
       await page.waitForTimeout(1200);
-      const afterWheel = await page.evaluate(() => scrollY);
-      if (Math.abs(afterWheel - afterKey - 200) > 8) fail(`after a keyboard scroll the wheel moved ${Math.round(afterWheel - afterKey)}px, not 200`);
+      const page1 = (await page.evaluate(() => scrollY)) - yRest;   // one native page, measured here
+      await page.evaluate(() => scrollTo({ top: 0, behavior: 'instant' }));
+      await page.waitForTimeout(500);
+      await page.mouse.wheel(0, 3000);
+      await page.waitForTimeout(150);
+      const y1 = await page.evaluate(() => scrollY);
+      await page.keyboard.press('PageDown');
+      await page.waitForTimeout(1600);
+      const y2 = await page.evaluate(() => scrollY);
+      if (Math.abs(y2 - (y1 + page1)) > Math.max(48, page1 * 0.12)) fail(`PageDown during a glide ended at ${Math.round(y2)}px, not one page (${Math.round(page1)}px) from ${Math.round(y1)}px: the glide was not handed over`);
       await page.mouse.wheel(0, -300);
       await page.waitForTimeout(900);
       if (!(await page.evaluate(() => document.getElementById('bar')?.classList.contains('is-shown')))) fail('the compact bar did not answer a scroll back up');

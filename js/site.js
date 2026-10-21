@@ -169,11 +169,12 @@
         // the target from the page's true position now (a scroll just before the click may not have reached
         // Lenis yet), less the scroll padding that keeps it clear of the compact bar, as a native jump does
         var y = el.getBoundingClientRect().top + window.scrollY - (parseFloat(getComputedStyle(root).scrollPaddingTop) || 0);
-        lenis.scrollTo(y, { duration: 1.1, easing: inOut, force: true, onComplete: function () {
-          if (location.hash !== '#' + id) history.pushState(null, '', '#' + id);
-          if (!el.matches('a[href], button, input, select, textarea, [tabindex]')) el.setAttribute('tabindex', '-1');
-          el.focus({ preventScroll: true });
-        } });
+        // the address and focus change at once, as a jump would: Back then returns to where the reader
+        // clicked, the next Tab starts from the target, and an interrupted glide loses neither
+        if (location.hash !== '#' + id) history.pushState(null, '', '#' + id);
+        if (!el.matches('a[href], button, input, select, textarea, [tabindex]')) el.setAttribute('tabindex', '-1');
+        el.focus({ preventScroll: true });
+        lenis.scrollTo(y, { duration: 1.1, easing: inOut, force: true });
       });
     };
     document.head.appendChild(lenisScript);
