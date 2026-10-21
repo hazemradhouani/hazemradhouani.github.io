@@ -162,6 +162,18 @@
     .g > .s-third-b { grid-column: 5 / span 4; }
     .g > .s-third-c { grid-column: 9 / span 4; }
   }
+  /* case studies (D73): two left edges. The rail (col 1) names; the copy axis (col 4) explains; a plate
+     fills the row or hangs from the copy axis (.page-case below). Below 64rem both stack flush-left. */
+  @media (min-width: 48rem) {
+    .g > .s-copy { grid-column: 1 / span 6; }
+    .g > .s-key { grid-column: 2 / span 6; }
+  }
+  @media (min-width: 64rem) {
+    .g > .s-rail { grid-column: 1 / span 3; }
+    .g > .s-copy { grid-column: 4 / span 6; }
+    .g > .s-key { grid-column: 1 / -1; }
+    .g > .s-nine { grid-column: 4 / span 9; }
+  }
 
   /* vertical rhythm: three gaps only */
   .block { margin-top: var(--gap-group); }
@@ -187,6 +199,10 @@
   .meta { font-size: var(--fs-cap); line-height: 1.6; color: var(--ink-2); }
   .quote { font-family: var(--serif); font-style: italic; font-weight: 400; text-transform: none; letter-spacing: 0;
     font-size: var(--fs-quote); line-height: 1.15; text-wrap: balance; }
+  /* a title in masked words (D76): each word's clip leaves room for accents over capitals (Aïn Sebaâ) and
+     for descenders, given back by the negative margin so the line box is unchanged; all words align by top */
+  .w { display: inline-block; overflow: clip; padding-block: 0.25em; margin-block: -0.25em; vertical-align: top; }
+  .w__i { display: inline-block; }
   .center { text-align: center; }
   .measure { max-width: var(--measure); }
   .center .measure { margin-inline: auto; }
@@ -332,18 +348,24 @@
      tracked-capital title, on the page grid. The 8-column key holds two long entries a row (four grid columns
      each) or four short ones (two each), so every column of the key starts on a grid line; up to three short
      entries stand on one centred line. Each entry: its mark in a fixed column, then the words. */
+  /* D73: the key reads from the left edge like the captions; at 64rem its title stands on the rail and its
+     entries on the 6-column copy axis (long entries 2 to a row, 3 grid columns each; short ones 3, 2 each) */
   .key { margin-top: var(--s5); }
-  .key__t { margin-bottom: var(--s3); text-align: center; font-family: var(--sans); font-size: var(--fs-label); font-weight: 600;
+  .key__t { margin-bottom: var(--s3); font-family: var(--sans); font-size: var(--fs-label); font-weight: 600;
     letter-spacing: var(--tr-caps); text-transform: uppercase; line-height: 1.25; color: var(--ink-2); }
-  .key__list { display: grid; grid-auto-flow: column; justify-content: center; grid-template-columns: minmax(0, 1fr); grid-template-rows: repeat(var(--r1), auto);
+  .key__list { display: grid; grid-auto-flow: column; justify-content: start; grid-template-columns: minmax(0, 1fr); grid-template-rows: repeat(var(--r1), auto);
     gap: var(--s3) var(--gutter); font-family: var(--sans); font-size: 0.875rem; line-height: 1.4; color: var(--ink-2); }
   .key--short .key__list { grid-template-columns: repeat(var(--c2), calc((100% - var(--gutter)) / 2)); grid-template-rows: repeat(var(--r2), auto); gap: var(--s2) var(--gutter); }
-  .key--row .key__list { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--s2) var(--s6); }
+  .key--row .key__list { display: flex; flex-wrap: wrap; justify-content: flex-start; gap: var(--s2) var(--s6); }
   @media (min-width: 48rem) {
     .key--long .key__list { grid-template-columns: repeat(var(--c2), calc((100% - var(--gutter)) / 2)); grid-template-rows: repeat(var(--r2), auto); }
     .key--short .key__list { grid-template-columns: repeat(var(--c3), calc((100% - 2 * var(--gutter)) / 3)); grid-template-rows: repeat(var(--r3), auto); }
   }
-  @media (min-width: 64rem) { .key--short .key__list { grid-template-columns: repeat(var(--c4), calc((100% - 3 * var(--gutter)) / 4)); grid-template-rows: repeat(var(--r4), auto); } }
+  @media (min-width: 64rem) {
+    .g > .key { display: grid; grid-template-columns: subgrid; align-items: start; }
+    .key__t { grid-column: 1 / span 3; margin: 0; line-height: 1.4; }
+    .key__list { grid-column: 4 / span 6; }
+  }
   .key__i { display: grid; grid-template-columns: 1.625rem minmax(0, 1fr); column-gap: var(--s2); align-items: start; }
   .key--row .key__i { display: inline-grid; grid-template-columns: 1.625rem auto; }
   /* the mark sits on the first line of its words (1.4 x 14px) */
@@ -521,14 +543,58 @@
   .index a { display: inline-flex; align-items: center; min-height: 2.25rem; text-decoration: none; color: var(--ink); }
   .index a:hover { color: var(--ink-2); }
 
-  /* case study */
-  .case-head__text { margin-top: var(--s7); }
-  .case-head .spec { margin-top: var(--s5); }
-  .case-head__tag { margin-top: var(--s5); }
+  /* case study ("rail and copy", D73): the plates of the case ladder hang from the copy axis */
+  @media (min-width: 64rem) {
+    .page-case .g > .s-text { grid-column: 4 / span 8; }
+    .page-case .g > .s-narrow { grid-column: 4 / span 6; }
+    .page-case .g > .s-four { grid-column: 4 / span 4; }
+  }
+  /* the opening: who and where, the name, then what it is in one plain sentence (the 10-second test) */
+  .case-run, .case-name { grid-column: 1 / -1; }
+  .case-name { margin-top: var(--s4); }
+  .case-title { width: fit-content; max-width: 100%; font-size: var(--fs-display); letter-spacing: var(--tr-display); line-height: 1.05; }
+  .case-lead { margin-top: var(--s5); }
+  .case-lead .honour { margin-top: var(--s4); }
+  /* the title block: type and status on a strip under a full rule, then the specification in cells of three
+     columns, each under a hairline (an architect's title block: the facts in fixed fields) */
+  .tb { margin-top: var(--s7); }
+  .tb__strip { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--s1) var(--s5); padding-top: var(--s3); border-top: 1px solid var(--ink); }
+  .tb__cells { display: grid; grid-template-columns: subgrid; row-gap: var(--s5); margin-top: var(--s5); }
+  .tb__cell { grid-column: span 2; padding-top: var(--s3); border-top: 1px solid var(--line); }
+  @media (max-width: 29.99rem) { .tb__cell { grid-column: 1 / -1; } }
+  @media (min-width: 64rem) { .tb__cell { grid-column: span 3; } }
+  .tb__cell dt { font-family: var(--sans); font-size: var(--fs-label); font-weight: 600; letter-spacing: var(--tr-caps); text-transform: uppercase; color: var(--ink-2); line-height: 1.5; }
+  .tb__cell dd { margin-top: var(--s1); font-size: var(--fs-cap); line-height: 1.5; }
+  @media (min-width: 64rem) { .case-quote { grid-column: 4 / -1; } }
   .role { display: grid; gap: var(--s4); }
   .role li { position: relative; padding-left: var(--s5); }
   .role li::before { content: ""; position: absolute; left: 0; top: 0.8em; width: 0.625rem; height: 1px; background: var(--ink-2); }
-  .next__media { margin-top: var(--s6); }
+  /* captions: the plate's name in the title voice, then what it shows; flush-left under the plate below
+     64rem; above, a row (name on the rail, words on the copy axis), or beside a hanging plate on the rail,
+     bottom-aligned, meeting the drawing's ground line */
+  .page-case .cap { text-align: left; }
+  .page-case .cap__t { display: block; margin-bottom: var(--s1); font-family: var(--sans); font-size: var(--fs-label); font-weight: 600;
+    letter-spacing: var(--tr-caps); text-transform: uppercase; line-height: 1.4; }
+  .page-case .cap .label { margin-right: var(--s2); }
+  @media (min-width: 64rem) {
+    .page-case .g > .cap:not(.cap--side) { grid-column: 1 / -1; display: grid; grid-template-columns: subgrid; margin-top: var(--s4); }
+    .page-case .cap:not(.cap--side) > .cap__t { grid-column: 1 / span 3; margin: 0; }
+    .page-case .cap:not(.cap--side) > .cap__x { grid-column: 4 / span 6; }
+    .page-case .fig--dock { align-items: end; }
+    .page-case .fig--dock > .fig__plate { grid-row: 1; }
+    .page-case .g > .cap--side { grid-column: 1 / span 3; grid-row: 1; margin-top: 0; }
+  }
+  /* next project: the index, the name at display size (it morphs into the next page's title), the plate */
+  .next .ch__bar { border-top: 1px solid var(--line); }
+  .next__label { margin-top: var(--s4); }
+  .next__i { margin-left: var(--s3); font-variant-numeric: tabular-nums; }
+  .next__t { margin-top: var(--s3); }
+  .next__t a { display: inline-block; font-family: var(--sans); font-weight: 600; font-size: var(--fs-display); letter-spacing: var(--tr-display);
+    line-height: 1.05; text-transform: uppercase; text-decoration: none; transition: color var(--t-hover) var(--ease-out); }
+  .next__t a:hover { color: var(--ink-2); }
+  .next__meta { margin-top: var(--s4); }
+  .next__media { margin-top: var(--s7); }
+  .next__all { margin-top: var(--s4); }
 
   /* research */
   .book__ar { font-size: var(--fs-lead); line-height: 1.6; color: var(--ink-2); }
