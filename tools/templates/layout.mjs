@@ -34,6 +34,7 @@ ${page.preload || ''}
 <meta id="theme-color" name="theme-color" content="${site.themeColor}">
 <meta name="color-scheme" content="light dark">
 <script data-theme-bootstrap>(function(){var t;try{t=localStorage.getItem('hazem-theme');}catch(e){}if(t!=='light'&&t!=='dark'){try{t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}catch(e){t='light';}}var d=document.documentElement;d.setAttribute('data-theme',t);d.style.colorScheme=t;var m=document.getElementById('theme-color');if(m)m.content=t==='dark'?'#121311':'#FFFFFF';}());</script>
+<script>addEventListener('pagereveal',function(e){if(e.viewTransition)document.documentElement.classList.add('vt-arrived');});</script>
 <link rel="stylesheet" href="${p}css/site.css?v=${v.css}">
 <script src="${p}js/site.js?v=${v.js}" defer></script>
 <meta name="author" content="${P.name}">
@@ -88,14 +89,14 @@ ${body}
 </div>
 </div>
 </footer>
-<dialog class="menu" id="menu" aria-label="Site menu">
+<dialog class="menu" id="menu" aria-label="Site menu" data-lenis-prevent>
 <div class="wrap">
 <div class="menu__top">${brand(false)}<div class="menu__controls">${themeButton('menu')}<form method="dialog"><button class="menu__close" type="submit" autofocus>close</button></form></div></div>
 <nav aria-label="Main"><ul class="menu__list" role="list">${site.nav.map(navItem)}</ul></nav>
 <p class="menu__contact"><a href="mailto:${P.email}">${P.email}</a><a href="${P.linkedin}" target="_blank" rel="noopener">LinkedIn<span class="vh"> (opens in a new tab)</span></a></p>
 </div>
 </dialog>
-${when(ctx.viewer, () => html`<dialog class="viewer" id="viewer" aria-labelledby="viewer-title">
+${when(ctx.viewer, () => html`<dialog class="viewer" id="viewer" aria-labelledby="viewer-title" data-lenis-prevent>
 <div class="viewer__top"><span class="viewer__count" aria-hidden="true"></span><p class="viewer__title" id="viewer-title"></p><form method="dialog"><button class="viewer__btn" type="submit" autofocus>close${icon('x', p)}</button></form></div>
 <div class="viewer__stage" tabindex="0" role="group" aria-roledescription="image viewer" aria-label="Full-size image. Arrow keys: previous and next; double click or the actual size button: zoom"></div>
 <div class="viewer__bottom"><button class="viewer__btn" type="button" data-viewer-toggle><span>actual size</span></button><div class="viewer__nav"><button class="viewer__btn" type="button" data-viewer-prev aria-label="Previous image">${icon('arrow-left', p)}</button><button class="viewer__btn" type="button" data-viewer-next aria-label="Next image">${icon('arrow-right', p)}</button></div></div>

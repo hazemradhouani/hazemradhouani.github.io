@@ -68,7 +68,8 @@
     },
     {
       "text": "The facade system is designed to read as a coherent architectural gesture while modulating its openings and materiality to signal the change in programme. The project involves significant coordination with structural engineers and the urban planning authority.",
-      "source": "site (first sentence withheld, D59)"
+      "source": "site (first sentence withheld, D59)",
+      "chapter": "Elevation, volumes, planting"
     }
   ],
   "hero": {
@@ -76,6 +77,11 @@
     "alt": "Courtyard render of the Bolivar hotel and student residence with planted terraces",
     "source": "pdf2026:p17 + hq:BOLIVAR/NB_StudioBelem_SimonBolivar_E-02_AvSimonBolivar-Reprise2V-Sun1_20240522-mod.jpg"
   },
+  "chapters": [
+    { "title": "Site", "from": "Before and after" },
+    { "title": "Plans and sections", "from": "Plans, levels N01 and N04" },
+    { "title": "Elevation, volumes, planting", "from": "West elevation, avenue Simon Bolivar" }
+  ],
   "figures": [
     {
       "title": "Before and after",

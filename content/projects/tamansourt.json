@@ -48,7 +48,8 @@
     },
     {
       "text": "The architectural proposal structures the campus around a central landscaped spine that connects arrival, administration, and clinical zones in a legible sequence. Patient wards are oriented to maximise natural light and ventilation while minimising solar gain in the summer months. The wellness centre is separated from the hospital by a planted courtyard, creating a clear spatial and experiential distinction between the two programmes. The project was developed by the team at Yassir Khalil Studio at feasibility and schematic design level, with full BIM coordination between architectural and engineering disciplines.",
-      "source": "site"
+      "source": "site",
+      "chapter": "Site"
     }
   ],
   "hero": {
@@ -57,6 +58,10 @@
     "credit": null,
     "source": "site + pdf2025:p33 + hq:Hospital/Scene 32.png"
   },
+  "chapters": [
+    { "title": "Site", "from": "Site plan" },
+    { "title": "Views", "from": "Frontage" }
+  ],
   "figures": [
     {
       "src": "images/tamansourt/tamansourt-site-plan.png",

@@ -135,6 +135,123 @@ const themeWorkflowFailures = [...await runThemeInteractions(), ...await runThem
 gateFails += themeWorkflowFailures.length;
 if (themeWorkflowFailures.length) console.log(`FAIL theme interaction/fallback: ${themeWorkflowFailures.join(' | ')}`);
 else console.log('ok   theme interaction/fallback: keyboard, persistence, navigation, menu and storage fallback');
+
+// Motion (D75): every other check runs with reduced motion, so this pass proves the animated path ends in the
+// plain layout. Each page is read top to bottom with motion on; once every arrival has fired and every running
+// animation has finished, nothing may stay hidden (opacity) or offset (transform) on a group, plate or word.
+async function runMotionPass() {
+  const failures = [];
+  const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 }, deviceScaleFactor: 1, colorScheme: 'light', reducedMotion: 'no-preference' });
+  for (const url of urls.filter((u) => /project-|index\.html$|\/$|architecture\.html$/.test(u))) {
+    const page = await ctx.newPage();
+    try {
+      await page.goto(url, { waitUntil: 'load' });
+      const bad = await page.evaluate(async () => {
+        const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+        for (let y = 0; y < document.documentElement.scrollHeight; y += innerHeight * 0.8) { window.scrollTo({ top: y, behavior: 'instant' }); await sleep(120); }
+        window.scrollTo({ top: document.documentElement.scrollHeight, behavior: 'instant' });
+        for (let t = 0; t < 50 && document.querySelector('.rv:not(.is-in), .rv-g:not(.is-in)'); t++) await sleep(100);
+        await Promise.race([Promise.all(document.getAnimations().map((a) => a.finished.catch(() => {}))), sleep(8000)]);
+        const out = [];
+        // a page with plates below the fold must have arrival groups at all, or this pass would pass on nothing
+        if (!document.querySelector('.rv-g')) out.push('no arrival groups: the arrival module did not run');
+        for (const el of document.querySelectorAll('.rv, .rv-g')) {
+          if (!el.classList.contains('is-in')) out.push(`not arrived: ${el.tagName.toLowerCase()}.${[...el.classList].join('.')}`);
+          else if (getComputedStyle(el).opacity !== '1') out.push(`opacity ${getComputedStyle(el).opacity}: ${el.tagName.toLowerCase()}.${[...el.classList].join('.')}`);
+        }
+        for (const el of document.querySelectorAll('.rv, .rv-g, .nw, .nw > picture, .nw > img, .w__i')) {
+          const tf = getComputedStyle(el).transform;
+          if (tf !== 'none' && tf !== 'matrix(1, 0, 0, 1, 0, 0)') out.push(`offset ${tf}: ${el.tagName.toLowerCase()}.${[...el.classList].join('.')}`);
+        }
+        return out;
+      });
+      failures.push(...bad.slice(0, 5).map((s) => `${url.replace(BASE, '')}: ${s}`));
+    } catch (e) { failures.push(`${url.replace(BASE, '')}: ${e.message}`); }
+    await page.close();
+  }
+  await ctx.close();
+  return failures;
+}
+// Smooth scroll (D79): with motion and a fine pointer a wheel glides (moving over several frames, settling on
+// its target); a keyboard scroll in between is followed, never undone; a contents link glides to its chapter,
+// stops clear of the bar, updates the address and moves focus; an open dialog holds the page still; the bar
+// still answers a scroll back up. Under reduced motion the engine never loads and scrolling stays native.
+async function runScrollPass() {
+  const failures = [];
+  const page0 = urls.find((u) => u.includes('project-ain-sebaa')) || urls.find((u) => u.includes('project-'));
+  if (!page0) return failures;
+  for (const motion of ['no-preference', 'reduce']) {
+    const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 }, deviceScaleFactor: 1, reducedMotion: motion });
+    const page = await ctx.newPage();
+    const fail = (s) => failures.push(`${motion}: ${s}`);
+    try {
+      await page.goto(page0, { waitUntil: 'load' });
+      await page.waitForTimeout(800);
+      const lenis = await page.evaluate(() => document.documentElement.classList.contains('lenis'));
+      if (motion === 'reduce') { if (lenis) fail('the smooth-scroll engine loaded under reduced motion'); await ctx.close(); continue; }
+      if (!lenis) { fail('the smooth-scroll engine did not load'); await ctx.close(); continue; }
+      await page.mouse.move(700, 450);
+      // sampled for 1.4 s of time (not a frame count), so a faster display cannot cut the glide short
+      const glide = page.evaluate(() => new Promise((res) => { const s = []; const t0 = performance.now(); const tick = () => { const t = performance.now() - t0; s.push([t, scrollY]); if (t < 1400) requestAnimationFrame(tick); else res(s); }; requestAnimationFrame(tick); }));
+      await page.mouse.wheel(0, 400);
+      const s = await glide;
+      const at = (ms) => (s.find(([t]) => t >= ms) || s[s.length - 1])[1];
+      if (!(at(80) > 8 && at(80) < 380)) fail(`a 400px wheel is not eased: ${Math.round(at(80))}px after 80ms`);
+      if (s[s.length - 1][1] < 392) fail(`a 400px wheel settles at ${Math.round(s[s.length - 1][1])}px`);
+      // the keyboard takes over a glide: PageDown pressed mid-glide moves the page one page from where it is,
+      // the wheel's remaining distance is dropped (without the hand-over the glide would run on to its target)
+      const yRest = await page.evaluate(() => scrollY);
+      await page.keyboard.press('PageDown');
+      await page.waitForTimeout(1200);
+      const page1 = (await page.evaluate(() => scrollY)) - yRest;   // one native page, measured here
+      await page.evaluate(() => scrollTo({ top: 0, behavior: 'instant' }));
+      await page.waitForTimeout(500);
+      await page.mouse.wheel(0, 3000);
+      await page.waitForTimeout(150);
+      const y1 = await page.evaluate(() => scrollY);
+      await page.keyboard.press('PageDown');
+      await page.waitForTimeout(1600);
+      const y2 = await page.evaluate(() => scrollY);
+      if (Math.abs(y2 - (y1 + page1)) > Math.max(48, page1 * 0.12)) fail(`PageDown during a glide ended at ${Math.round(y2)}px, not one page (${Math.round(page1)}px) from ${Math.round(y1)}px: the glide was not handed over`);
+      await page.mouse.wheel(0, -300);
+      await page.waitForTimeout(900);
+      if (!(await page.evaluate(() => document.getElementById('bar')?.classList.contains('is-shown')))) fail('the compact bar did not answer a scroll back up');
+      const link = page.locator('.toc a').last();
+      if (await link.count()) {
+        const id = (await link.getAttribute('href')).slice(1);
+        await page.evaluate(() => scrollTo({ top: 0, behavior: 'instant' }));
+        await page.waitForTimeout(400);
+        await link.click();
+        await page.waitForTimeout(1900);
+        const r = await page.evaluate((id) => { const el = document.getElementById(id); return { top: el.getBoundingClientRect().top, pad: parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop), hash: location.hash, focus: document.activeElement === el }; }, id);
+        if (Math.abs(r.top - r.pad) > 2) fail(`a contents link stopped ${Math.round(r.top)}px from the top, not ${r.pad}px`);
+        if (r.hash !== `#${id}` || !r.focus) fail('a contents link did not update the address or move focus');
+      }
+      const opener = page.locator('[data-viewer]').nth(2);
+      await opener.scrollIntoViewIfNeeded();
+      await page.waitForTimeout(400);
+      await opener.click();
+      await page.waitForTimeout(900);
+      const y0 = await page.evaluate(() => scrollY);
+      await page.mouse.wheel(0, 500);
+      await page.waitForTimeout(700);
+      if ((await page.evaluate(() => scrollY)) !== y0) fail('the page scrolled behind the open viewer');
+      await page.keyboard.press('Escape');
+      await page.waitForTimeout(900);
+      if (await page.evaluate(() => document.documentElement.classList.contains('lenis-stopped'))) fail('smooth scroll did not resume after the viewer closed');
+    } catch (e) { fail(e.message); }
+    await ctx.close();
+  }
+  return failures;
+}
+const scrollFailures = await runScrollPass();
+gateFails += scrollFailures.length;
+if (scrollFailures.length) console.log(`FAIL smooth scroll: ${scrollFailures.join(' | ')}`);
+else console.log('ok   smooth scroll: wheel glides and settles, keyboard followed, contents glide, dialog holds, native under reduced motion');
+const motionFailures = await runMotionPass();
+gateFails += motionFailures.length;
+if (motionFailures.length) console.log(`FAIL motion (no-preference): ${motionFailures.length} issue(s)\n  ${motionFailures.slice(0, 20).join('\n  ')}`);
+else console.log('ok   motion (no-preference): every arrival fired and every animation ended in the plain layout');
 const report = [];
 for (const url of urls) {
   const name = url.replace(BASE, '') || 'index';

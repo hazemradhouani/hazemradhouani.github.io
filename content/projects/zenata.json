@@ -58,6 +58,12 @@
     "credit": null,
     "source": "pdf2025:p7 + hq:Zenata/Scene 51.png"
   },
+  "chapters": [
+    { "title": "Site", "from": "Aerial view" },
+    { "title": "Plans and elevations", "from": "Plans" },
+    { "title": "Programme", "from": "Programme, level +00.00" },
+    { "title": "Views", "from": "Exterior" }
+  ],
   "figures": [
     {
       "src": "images/zenata/zenata-aerial-model.jpg",

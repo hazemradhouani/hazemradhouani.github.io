@@ -13,8 +13,9 @@
 <meta id="theme-color" name="theme-color" content="#FFFFFF">
 <meta name="color-scheme" content="light dark">
 <script data-theme-bootstrap>(function(){var t;try{t=localStorage.getItem('hazem-theme');}catch(e){}if(t!=='light'&&t!=='dark'){try{t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}catch(e){t='light';}}var d=document.documentElement;d.setAttribute('data-theme',t);d.style.colorScheme=t;var m=document.getElementById('theme-color');if(m)m.content=t==='dark'?'#121311':'#FFFFFF';}());</script>
-<link rel="stylesheet" href="css/site.css?v=05426f21a9">
-<script src="js/site.js?v=4419c121b9" defer></script>
+<script>addEventListener('pagereveal',function(e){if(e.viewTransition)document.documentElement.classList.add('vt-arrived');});</script>
+<link rel="stylesheet" href="css/site.css?v=340a7405d3">
+<script src="js/site.js?v=7c03c8b016" defer></script>
 <meta name="author" content="Hazem Radhouani">
 
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
@@ -56,7 +57,7 @@
 </div>
 <main id="main" tabindex="-1">
 
-<header class="intro wrap g"><div class="s-text center"><h1 class="h1">Research</h1><p class="lead in">Architectural thesis and internship report produced between 2024 and 2026.</p></div></header>
+<header class="intro wrap g"><div class="s-text center"><h1 class="h1"><span class="w"><span class="w__i" style="--w: 0">Research</span></span></h1><p class="lead in">Architectural thesis and internship report produced between 2024 and 2026.</p></div></header>
 <article class="chapter wrap g" aria-labelledby="thesis-h">
 <div class="s-narrow" data-rv><picture class="nw nw--drawing nw--object" style="--nw: 1662px"><source type="image/webp" srcset="images/opt/cut/books/thesis-mockup-2-480.webp 480w, images/opt/cut/books/thesis-mockup-2-800.webp 800w, images/opt/cut/books/thesis-mockup-2-1200.webp 1200w, images/opt/cut/books/thesis-mockup-2-1600.webp 1600w, images/opt/cut/books/thesis-mockup-2-1662.webp 1662w" sizes="(min-width: 90rem) 624px, (min-width: 64rem) 45vw, (min-width: 48rem) 45vw, 90vw"><img src="images/cut/books/thesis-mockup-2.png" alt="The printed thesis Between the Poetics of Place and the Value of Heritage, open on a spread: an exploded axonometric of the building in three layers on a black page, facing a grid of site photographs of Al-Arg" width="1662" height="1298" loading="eager" fetchpriority="high"></picture></div>
 <div class="s-text center chapter__text">
@@ -100,7 +101,7 @@
 </div>
 </div>
 </footer>
-<dialog class="menu" id="menu" aria-label="Site menu">
+<dialog class="menu" id="menu" aria-label="Site menu" data-lenis-prevent>
 <div class="wrap">
 <div class="menu__top"><a class="brand" href="./">Hazem Radhouani</a><div class="menu__controls"><button class="theme-button" type="button" data-theme-toggle data-theme-scope="menu"><span class="theme-button__glyph" aria-hidden="true">◐</span><span class="theme-button__label" data-theme-label>theme: light</span><span class="vh" data-theme-action>, switch to dark</span></button><form method="dialog"><button class="menu__close" type="submit" autofocus>close</button></form></div></div>
 <nav aria-label="Main"><ul class="menu__list" role="list"><li style="--i: 0"><a href="architecture.html">Work</a></li><li style="--i: 1"><a href="books.html" aria-current="page">Research</a></li><li style="--i: 2"><a href="about.html">About</a></li><li style="--i: 3"><a href="about.html#contact">Contact</a></li></ul></nav>

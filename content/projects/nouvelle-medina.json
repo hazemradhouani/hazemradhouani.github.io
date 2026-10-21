@@ -43,15 +43,18 @@
   "narrative": [
     {
       "text": "The architectural concept rests on a contemporary interpretation of origami, where the roof becomes a structuring element, both functional and expressive. Composed of dynamic folds, it generates a volume in tension that seems to unfold towards the public space, expressing the notion of movement inherent to travel.",
-      "source": "pdf2025:p36 (translated from French)"
+      "source": "pdf2025:p36 (translated from French)",
+      "chapter": "Folding and structure"
     },
     {
       "text": "This play of facets allows a subtle modulation of natural light through the interior spaces, while optimising rainwater runoff and solar protection. The glazed facade, in dialogue with this sculptural roof, ensures transparency and lightness, reinforcing the porosity between the city and the platforms. This architectural composition, both fluid and assertive, gives the station a strong identity, where structure and aesthetics merge in a dynamic balance.",
-      "source": "pdf2025:p36 (translated from French)"
+      "source": "pdf2025:p36 (translated from French)",
+      "chapter": "Folding and structure"
     },
     {
       "text": "Accessibility is reinforced by underground passages leading directly to the platforms, thereby avoiding conflicts of circulation. In addition, a public footbridge, conceived as an urban bridge, provides a safe pedestrian link between the two sides of the district, contributing to better urban porosity.",
-      "source": "hq:Nouvelle Medina/A0 MEDINA F [1]_page-0001.jpg (board 1/2, 'Orientations d'aménagement proposées du Concept Global', second paragraph; translated from French, D17)"
+      "source": "hq:Nouvelle Medina/A0 MEDINA F [1]_page-0001.jpg (board 1/2, 'Orientations d'aménagement proposées du Concept Global', second paragraph; translated from French, D17)",
+      "chapter": "Circulation"
     }
   ],
   "hero": {
@@ -60,6 +63,13 @@
     "credit": null,
     "source": "pdf2025:p35 + hq:Nouvelle Medina/Scene 39_2.png"
   },
+  "chapters": [
+    { "title": "Site", "from": "Site plan" },
+    { "title": "Plans, façades and sections", "from": "Plans" },
+    { "title": "Folding and structure", "from": "Folding concept" },
+    { "title": "Circulation", "from": "Passenger flows" },
+    { "title": "Views", "from": "Corner perspective" }
+  ],
   "figures": [
     {
       "src": "images/nouvelle-medina/nouvelle-medina-site-plan.jpg",

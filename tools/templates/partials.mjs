@@ -12,16 +12,23 @@ const ROOT_DIR = fileURLToPath(new URL('../..', import.meta.url));
 const EXCLUDED = new Set(Object.keys(loadCutoutConfig(ROOT_DIR).exclude));
 const cutOrFail = (src) => { const rel = shown(src, true); if (rel === src && !EXCLUDED.has(src)) throw new Error(`No cutout for drawing ${src}: run npm run cutout`); return rel; };
 
+// a page title in masked words (D76): each word rises inside its own clip; real spaces stay between the
+// words, so reading, search, copy and the content check see the plain title
+export const words = (text) => html`${String(text).split(/\s+/u).filter(Boolean).map((w, i) => html`${i ? ' ' : ''}<span class="w"><span class="w__i" style="--w: ${i}">${w}</span></span>`)}`;
+
 export const icon = (name, p) => raw(`<svg class="icon" width="16" height="16" aria-hidden="true" focusable="false"><use href="${p}images/icons.svg#${name}"></use></svg>`);
 
 /* ---------------------------------------------------------- geometry, mirrored from css/site.css */
 const CANVAS = 1280, GUT = 32, COLW = (CANVAS - 11 * GUT) / 12;
 const MAX_H = 720;                                  // 80% of a 900px desktop viewport
-const SPANS = [['full', 12], ['wide', 10], ['text', 8], ['narrow', 6], ['four', 4]];
-const N12 = Object.fromEntries(SPANS);
-const N8 = { full: 8, wide: 8, text: 6, narrow: 4, four: 4 };  // the same classes on 8 columns
+const N12 = { full: 12, wide: 10, nine: 9, text: 8, narrow: 6, four: 4 };
+const N8 = { full: 8, wide: 8, nine: 8, text: 6, narrow: 4, four: 4 };  // the same classes on 8 columns
+// a ladder is the spans an image may take, largest first: centred everywhere, except case studies, where a
+// plate fills the row or hangs from the copy axis at column 4 (D73: nine 4-12, text 4-11, narrow 4-9, four 4-7)
+export const CENTRED = ['full', 'wide', 'text', 'narrow', 'four'];
+export const CASE = ['full', 'nine', 'text', 'narrow', 'four'];
 const spanPx = (s) => N12[s] * COLW + (N12[s] - 1) * GUT;
-const from = (max) => SPANS.slice(SPANS.findIndex(([s]) => s === max));
+const from = (max, ladder) => ladder.filter((s) => N12[s] <= N12[max]);
 
 // `sizes` for something occupying `frac` of a span (`phone`: its fraction of the phone canvas)
 export function sizesFor(span, frac = 1, phone = 1, tab = frac) {
@@ -30,15 +37,15 @@ export function sizesFor(span, frac = 1, phone = 1, tab = frac) {
 }
 
 // the largest span that keeps the image at or under its native width and under MAX_H
-export function spanFor(w, h, { max = 'full', maxH = MAX_H } = {}) {
-  for (const [s] of from(max)) if (spanPx(s) <= w && spanPx(s) * h / w <= maxH) return s;
+export function spanFor(w, h, { max = 'full', maxH = MAX_H, ladder = CENTRED } = {}) {
+  for (const s of from(max, ladder)) if (spanPx(s) <= w && spanPx(s) * h / w <= maxH) return s;
   return 'four';
 }
 
 // a justified row: the largest span where the shared height stays under maxH and no item is enlarged
-export function planRow(items, { max = 'full', maxH = MAX_H } = {}) {
+export function planRow(items, { max = 'full', maxH = MAX_H, ladder = CENTRED } = {}) {
   const sum = items.reduce((a, it) => a + it.w / it.h, 0);
-  for (const [s] of from(max)) {
+  for (const s of from(max, ladder)) {
     const height = (spanPx(s) - (items.length - 1) * GUT) / sum;
     if (height <= maxH && items.every((it) => height * it.w / it.h <= it.w)) return { span: s, sum };
   }
@@ -63,9 +70,9 @@ export function image(rel, { alt, sz, prefix = '', priority = false, zoom = fals
 
 // a row of images sharing one height; `stack`: one per line on phones (drawings, or more than two).
 // An item with `href` becomes a card: the image and its `label` in one link.
-export function row(items, { prefix, max = 'full', zoom = false, after = () => '', maxH } = {}) {
+export function row(items, { prefix, max = 'full', zoom = false, after = () => '', maxH, ladder } = {}) {
   const dimsOf = items.map((it) => ({ ...it, ...dims(it.rel) }));
-  const { span, sum } = planRow(dimsOf, { max, maxH });
+  const { span, sum } = planRow(dimsOf, { max, maxH, ladder });
   const stack = items.length > 2 || sum > 2.4 || items.some((it) => it.drawing || it.href);
   const free = 1 - (items.length - 1) * GUT / spanPx(span);
   const sizes = [];
@@ -80,7 +87,8 @@ export function row(items, { prefix, max = 'full', zoom = false, after = () => '
 
 // a series in equal cells, each image contained at or under its native width, standing on one line;
 // with `after`, each cell has a second row (caption, text) aligned across cells (subgrid, .cells--2)
-export function cells(items, { prefix, zoom = true, after = null, cls = '', scale = false }) {
+// `rv: false` when an enclosing figure arrives as one group (its key and caption arrive with the series)
+export function cells(items, { prefix, zoom = true, after = null, cls = '', scale = false, rv = true }) {
   // long strips (elevations, sections: wider than 2.4:1) stack one per line at full width, still at one scale
   const strips = items.every((it) => { const d = dims(it.rel); return d.w / d.h > 2.4; });
   const k = items.length; const n = strips ? 1 : k <= 4 ? k : k % 3 === 0 ? 3 : 4; const n8 = Math.min(n, after ? 3 : 2);
@@ -90,7 +98,7 @@ export function cells(items, { prefix, zoom = true, after = null, cls = '', scal
     const pic = image(it.rel, { alt: it.alt, sz: sizesFor('full', f / n, f, f / n8), prefix, zoom, title: it.title });
     return html`<div class="cell"${scale ? html` style="--sc: ${(f * 100).toFixed(2)}%"` : ''}>${pic}${after ? after(it, i) : ''}</div>`;
   });
-  return html`<div class="s-full cells${after ? ' cells--2' : ''}${scale ? ' cells--scale' : ''}${cls ? ' ' + cls : ''}" style="--n: ${n}; --n8: ${n8}; --n4: 1" data-rv>${out}</div>`;
+  return html`<div class="s-full cells${after ? ' cells--2' : ''}${scale ? ' cells--scale' : ''}${cls ? ' ' + cls : ''}" style="--n: ${n}; --n8: ${n8}; --n4: 1"${rv ? html` data-rv` : ''}>${out}</div>`;
 }
 
 /* ---------------------------------------------------------- labels re-set from a drawing (D49) */
@@ -174,28 +182,60 @@ function keyOf(f) {
   const codes = items.every((it) => markOf(it) === 'code');
   const title = f.legendTitle || 'Key';
   const rows = [1, 2, 3, 4].map((c) => { const r = Math.ceil(n / c); return `--r${c}: ${r}; --c${c}: ${Math.ceil(n / r)}`; }).join('; ');
-  return html`<div class="key key--${layout}${codes ? ' key--codes' : ''} s-text"><p class="key__t" aria-hidden="true">${title}</p><ul class="key__list" role="list" aria-label="${f.title ? `${title}: ${f.title}` : title}" style="${rows}">${items.map(keyItem)}</ul></div>`;
+  return html`<div class="key key--${layout}${codes ? ' key--codes' : ''} s-key"><p class="key__t" aria-hidden="true">${title}</p><ul class="key__list" role="list" aria-label="${f.title ? `${title}: ${f.title}` : title}" style="${rows}">${items.map(keyItem)}</ul></div>`;
 }
 
-/* ---------------------------------------------------------- figures of a case study */
-const capOf = (f) => (f.title || f.caption || f.credit) ? html`<figcaption class="cap s-narrow">${when(f.title, () => html`<span class="cap__t">${f.title}.</span> `)}${inline(f.caption || '')}${when(f.credit, () => html` <span class="credit">${f.credit}.</span>`)}</figcaption>` : '';
+/* ---------------------------------------------------------- figures of a case study (D73) */
+// The caption names the plate on the rail and explains it on the copy axis. A plate hanging from column 4
+// keeps its caption beside it, bottom-aligned, meeting the drawing's ground line as a title does on a sheet;
+// a full-width plate, or a caption too long for the 3-column rail (a 355-character caption runs 12 lines at
+// 1024), takes a row below. Below 64rem the caption sits under the plate on the plate's own span.
+const SIDE_MAX = 240;
+export const capSide = (span, text) => span !== 'full' && !!text && text.length <= SIDE_MAX;
+export const capOf = (f, span, side) => (f.title || f.caption || f.credit)
+  ? html`<figcaption class="cap s-${span}${side ? ' cap--side' : ''}">${when(f.title, () => html`<span class="cap__t">${f.title}</span>`)}${when(f.caption || f.credit, () => html` <span class="cap__x">${inline(f.caption || '')}${when(f.credit, () => html` <span class="credit">${f.credit}.</span>`)}</span>`)}</figcaption>` : '';
+const plate = (f, n, span, body, { rv = true, key = '' } = {}) => {
+  const side = capSide(span, `${f.title || ''}${f.caption || ''}`);
+  return html`<figure class="fig block wrap g${side ? ' fig--dock' : ''}" id="fig-${n}"${rv ? html` data-rv` : ''}>${body}${key}${capOf(f, span, side)}</figure>`;
+};
 
 export function figure(f, n, ctx) {
-  const p = ctx.prefix;
+  const p = ctx.prefix; const ladder = ctx.ladder;
   const drawing = f.kind === 'drawing';
   if (f.items) {
     const items = f.items.map((it, k) => ({ rel: drawing ? cutOrFail(it.src) : it.src, alt: it.alt, drawing, title: `${f.title} (${k + 1} of ${f.items.length})` }));
-    if (drawing) return html`<figure class="fig block wrap g" id="fig-${n}">${cells(items, { prefix: p, scale: true })}${keyOf(f)}${capOf(f)}</figure>`;
-    const r = row(items, { prefix: p, zoom: true });
-    return html`<figure class="fig block wrap g" id="fig-${n}" data-rv><div class="s-${r.span}">${r.html}</div>${capOf(f)}</figure>`;
+    if (drawing) return plate(f, n, 'full', cells(items, { prefix: p, scale: true, rv: false }), { key: keyOf(f) });
+    const r = row(items, { prefix: p, zoom: true, ladder });
+    return plate(f, n, r.span, html`<div class="s-${r.span} fig__plate">${r.html}</div>`);
   }
   const rel = drawing ? cutOrFail(f.src) : f.src;
   const { w, h } = dims(rel);
   // a tall drawing may allow a little more height (at most 820px) where its legibility needs a wider span
-  const span = spanFor(w, h, f.maxH ? { maxH: Math.min(820, f.maxH) } : {});
+  const span = spanFor(w, h, { ladder, ...(f.maxH ? { maxH: Math.min(820, f.maxH) } : {}) });
   const pic = image(rel, { alt: f.alt, sz: sizesFor(span), prefix: p, zoom: true, title: f.title });
   const labels = drawing ? labelsFor(rel, f.labels) : [];
-  return html`<figure class="fig block wrap g" id="fig-${n}" data-rv><div class="s-${span}">${labels.length ? labelled(pic, rel, labels, f.title) : pic}</div>${keyOf(f)}${capOf(f)}</figure>`;
+  return plate(f, n, span, html`<div class="s-${span} fig__plate">${labels.length ? labelled(pic, rel, labels, f.title) : pic}</div>`, { key: keyOf(f) });
+}
+
+/* ---------------------------------------------------------- chapters of a case study (D74) */
+// A chapter runs from the figure titled `from` up to the next chapter's: the figures keep their authored
+// order (which decides the hero partner, the Work previews and the fig-n anchors), and a chapter can never
+// be split. A paragraph joins the chapter it names; one naming none stays in the overview.
+const slug = (s) => s.normalize('NFD').replace(/[̀-ͯ]/gu, '').toLowerCase().replace(/[^a-z0-9]+/gu, '-').replace(/^-|-$/gu, '');
+export function chaptersOf(x, figs) {
+  const list = x.chapters || [];
+  if (!list.length) throw new Error(`${x.slug}: no chapters (content/projects/${x.slug}.json, D74)`);
+  const at = list.map((c) => {
+    const hits = figs.flatMap((f, i) => (f.title === c.from ? [i] : []));
+    if (hits.length !== 1) throw new Error(`${x.slug}: chapter "${c.title}" starts at "${c.from}", which names ${hits.length} figures (hero partner excluded), not 1`);
+    return hits[0];
+  });
+  if (at[0] !== 0) throw new Error(`${x.slug}: the first chapter must start at the first figure, "${figs[0]?.title}"`);
+  at.forEach((k, j) => { if (j && k <= at[j - 1]) throw new Error(`${x.slug}: chapter "${list[j].title}" starts before the chapter above it`); });
+  const titles = list.map((c) => c.title);
+  if (new Set(titles).size !== titles.length) throw new Error(`${x.slug}: two chapters share a title`);
+  for (const t of x.narrative) if (t.chapter && !titles.includes(t.chapter)) throw new Error(`${x.slug}: a paragraph names chapter "${t.chapter}", which does not exist`);
+  return list.map((c, j) => ({ title: c.title, id: slug(c.title), n: j + 1, figs: figs.slice(at[j], at[j + 1] ?? figs.length), text: x.narrative.filter((t) => t.chapter === c.title) }));
 }
 
 /* ---------------------------------------------------------- heroes */
@@ -212,17 +252,17 @@ export function heroPartner(x) {
 
 // the hero of a project: one plate, or a justified pair with its partner (no crop, never enlarged)
 export function hero(x, ctx, { priority = false, max = 'full', zoom = false, vt = true } = {}) {
-  const p = ctx.prefix;
+  const p = ctx.prefix; const ladder = ctx.ladder;
   const partner = heroPartner(x);
   if (partner) {
     const items = [
       { rel: x.hero.src, alt: x.hero.alt, title: x.title, vt: vt ? vtHero(x) : null, priority },
       { rel: partner.src, alt: partner.alt, title: partner.title || x.title }];
-    const r = row(items, { prefix: p, max, zoom });
+    const r = row(items, { prefix: p, max, zoom, ladder });
     return { span: r.span, html: r.html, partner, lcpSizes: r.sizes[0] };
   }
   const { w, h } = dims(x.hero.src);
-  const span = spanFor(w, h, { max });
+  const span = spanFor(w, h, { max, ladder });
   const sz = sizesFor(span);
   return { span, html: image(x.hero.src, { alt: x.hero.alt, sz, prefix: p, priority, zoom, title: x.title, vt: vt ? vtHero(x) : null }), partner: null, lcpSizes: sz };
 }

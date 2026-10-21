@@ -43,15 +43,18 @@
   "narrative": [
     {
       "text": "The project provides for the demolition of the existing station and the construction of a new two-headed rail infrastructure, organised around a main hub located on the major axis and a secondary hub positioned on the secondary axis.",
-      "source": "pdf2025:p40 (translated from French; the sentence that follows is cut off in the PDF)"
+      "source": "pdf2025:p40 (translated from French; the sentence that follows is cut off in the PDF)",
+      "chapter": "Site"
     },
     {
       "text": "An urban footbridge will be integrated to ensure a fluid and safe connection between the two sides of the railway tracks, facilitating the movement of pedestrians and cyclists while improving intermodality with other means of transport. The platforms include underground accesses to guarantee fluid circulation and the safety of users.",
-      "source": "pdf2025:p42 (translated from French)"
+      "source": "pdf2025:p42 (translated from French)",
+      "chapter": "Structure and flows"
     },
     {
       "text": "The architecture of the project rests on a roof with clean lines, designed to provide optimal protection while offering a recognisable visual identity. The use of materials adapted to technical and climatic requirements guarantees the durability and efficiency of the structure.",
-      "source": "pdf2025:p42 (translated from French)"
+      "source": "pdf2025:p42 (translated from French)",
+      "chapter": "Structure and flows"
     }
   ],
   "hero": {
@@ -60,6 +63,12 @@
     "credit": null,
     "source": "pdf2025:p39 + hq:Ain Sbaa/Scene 72_1.png"
   },
+  "chapters": [
+    { "title": "Site", "from": "Site plan" },
+    { "title": "Plans and sections", "from": "Ground floor, main building" },
+    { "title": "Structure and flows", "from": "Structural concept" },
+    { "title": "Views", "from": "Across the tracks" }
+  ],
   "figures": [
     {
       "src": "images/ain-sebaa/ain-sebaa-site-plan.jpg",

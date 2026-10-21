@@ -42,7 +42,8 @@
     },
     {
       "text": "The pavilion is positioned at the boundary between the public road and the controlled domain, its geometry derived from this threshold condition. The structure is detailed to respond to the urban and institutional scale of Casablanca Finance City, with a compact material palette and a folded roof profile that gives the building a precise, legible silhouette.",
-      "source": "site"
+      "source": "site",
+      "chapter": "Site"
     }
   ],
   "hero": {
@@ -51,6 +52,11 @@
     "credit": null,
     "source": "site + pdf2025:p26 + hq:Guerite/2025 - Hazem radhouani - Portfolio - HQ [26-30]_page-0001.jpg (cropped above the page tab printed over it, D58)"
   },
+  "chapters": [
+    { "title": "Site", "from": "Aerial view" },
+    { "title": "Plans, elevations and sections", "from": "Roof and floor plans" },
+    { "title": "Views", "from": "At the window" }
+  ],
   "figures": [
     {
       "src": "images/sentry/sentry-aerial-road.jpg",

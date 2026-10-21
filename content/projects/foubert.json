@@ -72,7 +72,8 @@
     },
     {
       "text": "The structural system is concrete with masonry infill, detailed in Revit for direct handover to the engineer. All PC documentation was prepared by the team at Studio BELEM with Hazem contributing from concept through to technical drawings and regulatory compliance checks.",
-      "source": "site (first sentence withheld, D60)"
+      "source": "site (first sentence withheld, D60)",
+      "chapter": "Details"
     }
   ],
   "hero": {
@@ -80,6 +81,12 @@
     "alt": "Render of the Foubert residential building in aged red brick with a claustra screen",
     "source": "pdf2026:p13 + hq:FOUBERT/20240105_BLM_FOU_Perspective rue.jpg"
   },
+  "chapters": [
+    { "title": "Site and plans", "from": "Site plan" },
+    { "title": "Sections and facades", "from": "Longitudinal section B-B" },
+    { "title": "Details", "from": "Street window" },
+    { "title": "Views", "from": "Rear view" }
+  ],
   "figures": [
     {
       "src": "images/foubert/foubert-site-plan.png",
