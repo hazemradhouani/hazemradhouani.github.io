@@ -170,6 +170,73 @@ async function runMotionPass() {
   await ctx.close();
   return failures;
 }
+// Smooth scroll (D79): with motion and a fine pointer a wheel glides (moving over several frames, settling on
+// its target); a keyboard scroll in between is followed, never undone; a contents link glides to its chapter,
+// stops clear of the bar, updates the address and moves focus; an open dialog holds the page still; the bar
+// still answers a scroll back up. Under reduced motion the engine never loads and scrolling stays native.
+async function runScrollPass() {
+  const failures = [];
+  const page0 = urls.find((u) => u.includes('project-ain-sebaa')) || urls.find((u) => u.includes('project-'));
+  if (!page0) return failures;
+  for (const motion of ['no-preference', 'reduce']) {
+    const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 }, deviceScaleFactor: 1, reducedMotion: motion });
+    const page = await ctx.newPage();
+    const fail = (s) => failures.push(`${motion}: ${s}`);
+    try {
+      await page.goto(page0, { waitUntil: 'load' });
+      await page.waitForTimeout(800);
+      const lenis = await page.evaluate(() => document.documentElement.classList.contains('lenis'));
+      if (motion === 'reduce') { if (lenis) fail('the smooth-scroll engine loaded under reduced motion'); await ctx.close(); continue; }
+      if (!lenis) { fail('the smooth-scroll engine did not load'); await ctx.close(); continue; }
+      await page.mouse.move(700, 450);
+      const glide = page.evaluate(() => new Promise((res) => { const s = []; const t0 = performance.now(); const tick = () => { s.push([performance.now() - t0, scrollY]); if (s.length < 60) requestAnimationFrame(tick); else res(s); }; requestAnimationFrame(tick); }));
+      await page.mouse.wheel(0, 400);
+      const s = await glide;
+      const at = (ms) => (s.find(([t]) => t >= ms) || s[s.length - 1])[1];
+      if (!(at(80) > 8 && at(80) < 380)) fail(`a 400px wheel is not eased: ${Math.round(at(80))}px after 80ms`);
+      if (s[s.length - 1][1] < 392) fail(`a 400px wheel settles at ${Math.round(s[s.length - 1][1])}px`);
+      await page.keyboard.press('PageDown');
+      await page.waitForTimeout(900);
+      const afterKey = await page.evaluate(() => scrollY);
+      await page.mouse.wheel(0, 200);
+      await page.waitForTimeout(1200);
+      const afterWheel = await page.evaluate(() => scrollY);
+      if (Math.abs(afterWheel - afterKey - 200) > 8) fail(`after a keyboard scroll the wheel moved ${Math.round(afterWheel - afterKey)}px, not 200`);
+      await page.mouse.wheel(0, -300);
+      await page.waitForTimeout(900);
+      if (!(await page.evaluate(() => document.getElementById('bar')?.classList.contains('is-shown')))) fail('the compact bar did not answer a scroll back up');
+      const link = page.locator('.toc a').last();
+      if (await link.count()) {
+        const id = (await link.getAttribute('href')).slice(1);
+        await page.evaluate(() => scrollTo({ top: 0, behavior: 'instant' }));
+        await page.waitForTimeout(400);
+        await link.click();
+        await page.waitForTimeout(1900);
+        const r = await page.evaluate((id) => { const el = document.getElementById(id); return { top: el.getBoundingClientRect().top, pad: parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop), hash: location.hash, focus: document.activeElement === el }; }, id);
+        if (Math.abs(r.top - r.pad) > 2) fail(`a contents link stopped ${Math.round(r.top)}px from the top, not ${r.pad}px`);
+        if (r.hash !== `#${id}` || !r.focus) fail('a contents link did not update the address or move focus');
+      }
+      const opener = page.locator('[data-viewer]').nth(2);
+      await opener.scrollIntoViewIfNeeded();
+      await page.waitForTimeout(400);
+      await opener.click();
+      await page.waitForTimeout(900);
+      const y0 = await page.evaluate(() => scrollY);
+      await page.mouse.wheel(0, 500);
+      await page.waitForTimeout(700);
+      if ((await page.evaluate(() => scrollY)) !== y0) fail('the page scrolled behind the open viewer');
+      await page.keyboard.press('Escape');
+      await page.waitForTimeout(900);
+      if (await page.evaluate(() => document.documentElement.classList.contains('lenis-stopped'))) fail('smooth scroll did not resume after the viewer closed');
+    } catch (e) { fail(e.message); }
+    await ctx.close();
+  }
+  return failures;
+}
+const scrollFailures = await runScrollPass();
+gateFails += scrollFailures.length;
+if (scrollFailures.length) console.log(`FAIL smooth scroll: ${scrollFailures.join(' | ')}`);
+else console.log('ok   smooth scroll: wheel glides and settles, keyboard followed, contents glide, dialog holds, native under reduced motion');
 const motionFailures = await runMotionPass();
 gateFails += motionFailures.length;
 if (motionFailures.length) console.log(`FAIL motion (no-preference): ${motionFailures.length} issue(s)\n  ${motionFailures.slice(0, 20).join('\n  ')}`);

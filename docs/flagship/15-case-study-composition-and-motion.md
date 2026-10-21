@@ -140,6 +140,7 @@ All three share the curve `(.22,1,.36,1)`, masked reveals and numbered key/value
 | M7 | Compact bar, menu | state | Bar 320 ms; menu as now (fade 240 ms, items rise 12 px, 40 ms apart), on the new curve. |
 | M8 | Viewer | orientation | The spring open and close is unchanged (D38). The crossfade becomes 320 ms in and 200 ms out with a 24 px drift, so exit is faster than entry. |
 | M9 | Groups without a plate (films, reels) | hierarchy | `.rv:not(:has(.nw))` keeps today's fade and 16 px rise on the new curve, so these groups do not pop in. |
+| M10 | Smooth, inertial scroll (D79) | orientation (the owner's request) | Lenis 1.3.26, vendored, 5.6 KB gzipped, loaded only for a fine pointer without reduced motion. `lerp: 0.1`; touch stays native; dialogs stop it; a scrolling key takes over from a glide; Contents links glide 1.1 s on an in-out curve, then update the address and move focus; the skip link stays instant. Checked by the QA smooth-scroll pass. |
 
 **Mechanism** (fixes from the review):
 - The existing arrival module is kept: IntersectionObserver, a decode wait of at most 700 ms, never above the fold, and reveal on focus.
@@ -159,7 +160,7 @@ All three share the curve `(.22,1,.36,1)`, masked reveals and numbered key/value
 **Reduced motion** is "fewer and gentler", not nothing: no movement anywhere, and view transitions keep an opacity-only root crossfade of 160 ms. Without JS everything is visible. The CSS-only h1 rise is gated by `no-preference`.
 
 **Rejected, and logged:**
-- Lenis or smooth scroll (D38): it breaks native scroll physics, find-in-page and anchor jumps, costs main-thread time (INP), and is a vestibular risk.
+- ~~Lenis or smooth scroll (D38)~~: **reversed by D79 at the owner's explicit request (2026-10-21)**; see M10 below.
 - Parallax: needs an overscanned, cropped frame, which breaks D32.
 - Preloaders and title cards: delay content and LCP.
 - Blur reveals: the cost of `filter` on 2560 px plates, and a clash with the dark filters.

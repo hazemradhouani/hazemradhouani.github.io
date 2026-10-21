@@ -85,13 +85,17 @@
     --measure: 36rem;                                         /* about 65 characters of Garamond at 19px */
     --bar-h: 3.5rem;
 
-    /* motion: one family. --spring = critically damped spring x(t) = 1 - (1 + wt) e^(-wt),
-       w = 2pi / 0.45s, settling to 0.1% in 662ms, sampled at 5% steps (D38) */
-    --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
-    --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+    /* motion: one family (D75). The house curve is the out-curve the three references share (it starts more
+       gently than expo-out, so motion reads eased, not abrupt); the in-out curve is for things travelling on
+       screen (page morphs, anchor glides). --spring = critically damped spring x(t) = 1 - (1 + wt) e^(-wt),
+       w = 2pi / 0.45s, settling to 0.1% in 662ms, sampled at 5% steps (D38): the viewer's open and close.
+       UI feedback stays at 300ms or less; only once-per-element arrivals run long. */
+    --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+    --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
     --spring: var(--ease-out);
     --spring-dur: 660ms;
     --t-press: 120ms; --t-hover: 160ms; --t-ui: 240ms; --t-bar: 320ms; --t-arrive: 700ms;
+    --t-rise: 700ms; --t-plate: 1100ms; --stagger: 90ms;
   }
   html[data-theme="dark"] {
     --bg: #121311;
@@ -137,6 +141,12 @@
   em, i { font-style: italic; }
   strong, b { font-weight: 600; }
   @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+  /* smooth scroll (D79), from Lenis 1.3.26's lenis.css: the page keeps native scrolling underneath; a stopped
+     instance (a dialog is open) holds the page still; a dialog scrolls on its own, never the page behind */
+  html.lenis, html.lenis body { height: auto; }
+  .lenis.lenis-stopped { overflow: clip; }
+  .lenis [data-lenis-prevent] { overscroll-behavior: contain; }
+  .lenis.lenis-smooth iframe { pointer-events: none; }
 }
 
 /* ------------------------------------------------------------------ layout: the only grid */
@@ -222,7 +232,12 @@
       linear-gradient(var(--ui), var(--ui)) 0 100% / 100% 1px no-repeat;
     transition: background-size var(--t-ui) var(--ease-out); }
   .more:hover > span, .more:focus-visible > span { background-size: 100% 1px, 100% 1px; }
-  .more svg { width: 0.875rem; height: 0.875rem; flex: none; }
+  .more svg { width: 0.875rem; height: 0.875rem; flex: none; transition: transform var(--t-ui) var(--ease-out); }
+  /* feedback: the arrow leans 3px the way the link goes (only where a pointer hovers) */
+  @media (hover: hover) and (pointer: fine) {
+    .more:hover > span + svg { transform: translateX(3px); }
+    .more:hover > svg:first-child { transform: translateX(-3px); }
+  }
   .actions { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--s1) var(--s6); }
 
   /* header: the wordmark centred over a lowercase nav */
@@ -643,18 +658,48 @@
 
 /* ------------------------------------------------------------------ motion (purpose in 08-direction.md) */
 @layer motion {
-  /* orientation: cross-document view transitions; titles morph between pages */
+  /* orientation (D75): cross-document view transitions. The old page fades out quickly, the new one rises
+     12px into place; heroes and titles travel between pages on the in-out curve. A title moves and
+     crossfades at its own size, so a 15px index title never becomes a scaled, blurred 52px heading. */
   @view-transition { navigation: auto; }
   ::view-transition-old(root) { animation: 200ms var(--ease-out) both vt-out; }
-  ::view-transition-new(root) { animation: 320ms var(--ease-out) both vt-in; }
-  ::view-transition-group(*) { animation-duration: 480ms; animation-timing-function: var(--ease-out); }
+  ::view-transition-new(root) { animation: 520ms var(--ease-out) 60ms both vt-in; }
+  ::view-transition-group(*) { animation-duration: 600ms; animation-timing-function: var(--ease-in-out); }
+  ::view-transition-old(*.vt-title), ::view-transition-new(*.vt-title) { height: 100%; object-fit: none; object-position: left top; }
   @keyframes vt-out { to { opacity: 0; } }
-  @keyframes vt-in { from { opacity: 0; } }
+  @keyframes vt-in { from { opacity: 0; transform: translateY(12px); } }
+  @keyframes vt-fade { from { opacity: 0; } }
 
-  /* hierarchy: below-the-fold groups arrive once, after their images decode (classes set by site.js only) */
-  .rv { opacity: 0; transform: translateY(16px); }
-  .rv.is-in { opacity: 1; transform: none; transition: opacity var(--t-arrive) var(--ease-out), transform var(--t-arrive) var(--ease-out);
-    transition-delay: calc(var(--i, 0) * 80ms); }
+  /* hierarchy (D76): the page's name rises word by word from its own mask on arrival (CSS only, so it runs
+     without the script); a page reached through a view transition skips it: its title has just moved there */
+  @media (prefers-reduced-motion: no-preference) {
+    h1 .w__i { animation: word var(--t-rise) var(--ease-out) backwards; animation-delay: calc(var(--w, 0) * 40ms + 60ms); }
+    .vt-arrived h1 .w__i { animation: none; }
+  }
+  @keyframes word { from { transform: translateY(110%); } }
+
+  /* hierarchy (D76): groups below the fold arrive once, after their images decode (classes set by site.js
+     only). A plate rises from its ground line: its frame moves up from below while the image inside moves
+     the same distance the other way, so the drawing itself stands still and is uncovered upwards, on the
+     compositor (transforms only; the dark-scheme filters are never animated). Cells follow in order, the
+     words that belong to a plate (caption, key, labels) follow it, and a chapter's rule draws from the left. */
+  .rv-g { opacity: 0; }
+  .rv-g.is-in { opacity: 1; }
+  .rv-g.is-in .nw { overflow: clip; animation: plate-in var(--t-plate) var(--ease-out) backwards; animation-delay: calc(var(--i, 0) * var(--stagger)); }
+  .rv-g.is-in .nw > :is(picture, img) { animation: plate-hold var(--t-plate) var(--ease-out) backwards; animation-delay: calc(var(--i, 0) * var(--stagger)); }
+  .rv-g.is-in :is(.cap, .key, .lab__list, .card__t, .card + .meta, .ch__t, .ch__text, .cells--2 > .cell > :last-child) {
+    animation: follow var(--t-arrive) var(--ease-out) backwards; animation-delay: calc(var(--i, 0) * var(--stagger) + 200ms); }
+  .rv-g.is-in .lab__pins { animation: fade-in var(--t-arrive) var(--ease-out) 500ms backwards; }
+  .rv-g.is-in .ch__bar { transform-origin: left; animation: draw 900ms var(--ease-out) backwards; }
+  /* a group without a plate or a rule (films, reels) fades and rises as one */
+  .rv-g:not(:has(.nw, .ch__bar)) { transform: translateY(16px); }
+  .rv-g.is-in:not(:has(.nw, .ch__bar)) { transform: none; transition: opacity var(--t-arrive) var(--ease-out), transform var(--t-arrive) var(--ease-out); }
+  /* reached by the keyboard before its turn: shown at once */
+  .rv--now, .rv--now * { animation: none !important; transition: none !important; }
+  @keyframes plate-in { from { transform: translateY(100%); } }
+  @keyframes plate-hold { from { transform: translateY(-100%); } }
+  @keyframes follow { from { opacity: 0; transform: translateY(12px); } }
+  @keyframes draw { from { transform: scaleX(0); } }
 
   /* state: the menu fades, its items rise in order */
   .menu[open] { animation: fade-in var(--t-ui) var(--ease-out); }
@@ -666,9 +711,12 @@
   .viewer__top, .viewer__bottom { transition: opacity var(--t-ui) var(--ease-out); }
   .viewer.is-moving .viewer__top, .viewer.is-moving .viewer__bottom { opacity: 0; }
 
+  /* reduced motion (D78): nothing moves; a change of page keeps a 160ms crossfade so it stays legible */
   @media (prefers-reduced-motion: reduce) {
     ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; }
-    .rv { opacity: 1; transform: none; }
+    ::view-transition-old(root) { animation: 160ms linear both vt-out !important; }
+    ::view-transition-new(root) { animation: 160ms linear both vt-fade !important; }
+    .rv-g { opacity: 1; transform: none; }
     .menu[open], .menu[open] .menu__list li, .viewer[open]::backdrop { animation: none; }
     *, *::before, *::after { transition-duration: 1ms !important; }
   }
@@ -699,6 +747,7 @@
     .cv__what p { font-size: 9pt; }
     .cv__h { font-size: 10pt; }
     a { text-decoration: none; }
-    .rv { opacity: 1 !important; transform: none !important; }
+    .rv, .rv-g { opacity: 1 !important; transform: none !important; }
+    *, *::before, *::after { animation: none !important; }   /* print shows every plate, word and rule in place */
   }
 }

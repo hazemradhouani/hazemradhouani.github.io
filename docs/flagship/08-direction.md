@@ -140,7 +140,7 @@ Easing:
 | Feedback | Underline draws from the left (240 ms); press 0.98 (120 ms) |
 | State | Menu dialog fade, items rise 12 px, staggered 40 ms |
 
-Never: autoplay, parallax, scroll-jacking or smooth-scroll libraries, custom cursors, hover zoom, loaders.
+Never: autoplay, parallax, scroll-jacking, custom cursors, hover zoom, loaders. Smooth (inertial) wheel scrolling was added at the owner's request (D79): native scroll position, touch native, off under reduced motion.
 
 ## Pages
 - **Home:** identity → Al-Arg aerial (LCP) → "Look before building." → Al-Arg at three scales → selected work in justified pairs → capabilities (4+4+4) → research (the thesis as an object) → footer.

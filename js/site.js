@@ -7,6 +7,7 @@
 
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
   var root = document.documentElement;
+  var thisScript = document.currentScript;   // this file, so a vendored script is found beside it at any depth
   var css = function (name) { return getComputedStyle(root).getPropertyValue(name).trim(); };
   var slice = function (list) { return Array.prototype.slice.call(list); };
 
@@ -96,15 +97,16 @@
     });
   }
 
-  /* ------------------------------------------------------------ arrival (hierarchy)
-     Groups that start below the fold fade and rise once, after their images decode, cells in order.
-     Nothing above the fold is touched and nothing is hidden if this script never runs. */
+  /* ------------------------------------------------------------ arrival (hierarchy, D76)
+     Groups that start below the fold arrive once, after their images decode: each plate rises from its
+     ground line inside its own frame, the cells of a row or series in order, and the words that belong to
+     a plate follow it (the motion itself is CSS, keyed to .is-in). The whole group arrives together, so a
+     figure's key and caption never show before its drawings. Nothing above the fold is touched, and
+     nothing is hidden if this script never runs. */
   var groups = slice(document.querySelectorAll('[data-rv]'));
   if (groups.length && 'IntersectionObserver' in window && !reduce.matches) {
-    var targetsOf = function (el) {
-      var cells = slice(el.querySelectorAll('.row > .cell, .cells > .cell'));
-      return cells.length ? cells : [el];
-    };
+    var cellsOf = function (el) { return slice(el.querySelectorAll('.row > .cell, .cells > .cell')); };
+    var arrive = function (g) { g.classList.add('is-in'); cellsOf(g).forEach(function (c) { c.classList.add('is-in'); }); };
     var decoded = function (el) {
       var waits = slice(el.querySelectorAll('img')).map(function (i) { return i.decode ? i.decode().catch(function () {}) : null; });
       return Promise.race([Promise.all(waits), new Promise(function (r) { setTimeout(r, 700); })]);
@@ -113,20 +115,68 @@
       entries.forEach(function (en) {
         if (!en.isIntersecting) return;
         io.unobserve(en.target);
-        decoded(en.target).then(function () {
-          requestAnimationFrame(function () { targetsOf(en.target).forEach(function (t) { t.classList.add('is-in'); }); });
-        });
+        decoded(en.target).then(function () { requestAnimationFrame(function () { arrive(en.target); }); });
       });
     }, { rootMargin: '0px 0px -6% 0px' });
+    // reached by the keyboard before its turn: shown at once, never animating under a focus ring
     document.addEventListener('focusin', function (e) {
-      var t = e.target.closest && e.target.closest('.rv:not(.is-in)'); if (!t) return;
-      var g = t.closest('[data-rv]') || t; targetsOf(g).forEach(function (x) { x.style.transition = 'none'; x.classList.add('is-in'); });
+      var g = e.target.closest && e.target.closest('.rv-g:not(.is-in)'); if (!g) return;
+      g.classList.add('rv--now'); arrive(g);
     });
     groups.forEach(function (el) {
       if (el.getBoundingClientRect().top < window.innerHeight) return;
-      targetsOf(el).forEach(function (t, i) { t.classList.add('rv'); t.style.setProperty('--i', String(i)); });
+      el.classList.add('rv-g');
+      cellsOf(el).forEach(function (c, i) { c.classList.add('rv'); c.style.setProperty('--i', String(i)); });
       io.observe(el);
     });
+  }
+
+  /* ------------------------------------------------------------ smooth scroll (orientation, D79)
+     The owner's request: wheel and trackpad scrolling glide with inertia, as on the reference sites. Lenis
+     (vendored, MIT, 5.6 KB gzipped) eases the page's own scroll position, so the compact bar, the arrivals,
+     find-in-page, the keyboard and the back button behave exactly as native. It loads only for a fine
+     pointer without reduced motion: touch keeps the device's own inertia, and reduced motion keeps native,
+     unsmoothed scrolling. An open dialog holds the page still and scrolls on its own. A link to a place on
+     the page glides there on the in-out curve, then updates the address and moves focus, as a jump would. */
+  var fine = window.matchMedia('(hover: hover) and (pointer: fine)');
+  if (thisScript && !reduce.matches && fine.matches) {
+    var lenisScript = document.createElement('script');
+    lenisScript.src = new URL('vendor/lenis-1.3.26.min.js', thisScript.src).href;
+    lenisScript.async = true;
+    lenisScript.onload = function () {
+      if (typeof window.Lenis !== 'function') return;
+      var lenis = new window.Lenis({ autoRaf: true, lerp: 0.1, wheelMultiplier: 1, smoothWheel: true, syncTouch: false, stopInertiaOnNavigate: true });
+      // a dialog (menu, viewer) holds the page still; the page resumes where it was when the last one closes
+      var dialogs = slice(document.querySelectorAll('dialog'));
+      var hold = function () { if (dialogs.some(function (d) { return d.open; })) lenis.stop(); else lenis.start(); };
+      dialogs.forEach(function (d) { new MutationObserver(hold).observe(d, { attributes: true, attributeFilter: ['open'] }); });
+      // a key that scrolls or moves focus takes over from a glide still settling, where the page is, so the
+      // browser's own keyboard scroll (and scrolling a focused element into view) is never fought
+      var KEYS = { ArrowUp: 1, ArrowDown: 1, PageUp: 1, PageDown: 1, Home: 1, End: 1, ' ': 1, Tab: 1 };
+      document.addEventListener('keydown', function (e) {
+        if (KEYS[e.key] && lenis.isScrolling === 'smooth' && !(e.target.closest && e.target.closest('input, textarea, select, [contenteditable], dialog'))) {
+          lenis.scrollTo(window.scrollY, { immediate: true, force: true });
+        }
+      }, true);
+      var inOut = function (t) { return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; };
+      document.addEventListener('click', function (e) {
+        var a = e.target.closest && e.target.closest('a[href^="#"]');
+        if (!a || a.classList.contains('skip') || e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+        var id = decodeURIComponent(a.getAttribute('href').slice(1));
+        var el = id && document.getElementById(id);
+        if (!el || el.closest('dialog')) return;
+        e.preventDefault();
+        // the target from the page's true position now (a scroll just before the click may not have reached
+        // Lenis yet), less the scroll padding that keeps it clear of the compact bar, as a native jump does
+        var y = el.getBoundingClientRect().top + window.scrollY - (parseFloat(getComputedStyle(root).scrollPaddingTop) || 0);
+        lenis.scrollTo(y, { duration: 1.1, easing: inOut, force: true, onComplete: function () {
+          if (location.hash !== '#' + id) history.pushState(null, '', '#' + id);
+          if (!el.matches('a[href], button, input, select, textarea, [tabindex]')) el.setAttribute('tabindex', '-1');
+          el.focus({ preventScroll: true });
+        } });
+      });
+    };
+    document.head.appendChild(lenisScript);
   }
 
   /* ------------------------------------------------------------ figure viewer (orientation, state)
@@ -242,7 +292,7 @@
       stage.scrollLeft = 0; stage.scrollTop = 0;
       var it = info(k); img = makeImg(it); img.style.transform = tf(fit(it)); stage.appendChild(img); label(); sizeLabels(fit(it).s);
       if (reduce.matches || !img.animate) { if (old) old.remove(); return; }
-      img.animate([{ opacity: 0, translate: (dir * 24) + 'px 0' }, { opacity: 1, translate: '0 0' }], { duration: 280, easing: css('--ease-out') });
+      img.animate([{ opacity: 0, translate: (dir * 24) + 'px 0' }, { opacity: 1, translate: '0 0' }], { duration: 320, easing: css('--ease-out') });
       if (old) {
         var gone = function () { old.remove(); };
         old.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 200, easing: css('--ease-out'), fill: 'forwards' }).finished.then(gone, gone);

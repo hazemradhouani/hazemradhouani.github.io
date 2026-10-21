@@ -14,8 +14,8 @@
 <meta name="color-scheme" content="light dark">
 <script data-theme-bootstrap>(function(){var t;try{t=localStorage.getItem('hazem-theme');}catch(e){}if(t!=='light'&&t!=='dark'){try{t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}catch(e){t='light';}}var d=document.documentElement;d.setAttribute('data-theme',t);d.style.colorScheme=t;var m=document.getElementById('theme-color');if(m)m.content=t==='dark'?'#121311':'#FFFFFF';}());</script>
 <script>addEventListener('pagereveal',function(e){if(e.viewTransition)document.documentElement.classList.add('vt-arrived');});</script>
-<link rel="stylesheet" href="../css/site.css?v=b43898a162">
-<script src="../js/site.js?v=4419c121b9" defer></script>
+<link rel="stylesheet" href="../css/site.css?v=89bd4bb49f">
+<script src="../js/site.js?v=ad8e4e9c8f" defer></script>
 <meta name="author" content="Hazem Radhouani">
 
 <link rel="icon" href="../favicon.svg" type="image/svg+xml">
@@ -101,14 +101,14 @@
 </div>
 </div>
 </footer>
-<dialog class="menu" id="menu" aria-label="Site menu">
+<dialog class="menu" id="menu" aria-label="Site menu" data-lenis-prevent>
 <div class="wrap">
 <div class="menu__top"><a class="brand" href="../">Hazem Radhouani</a><div class="menu__controls"><button class="theme-button" type="button" data-theme-toggle data-theme-scope="menu"><span class="theme-button__glyph" aria-hidden="true">◐</span><span class="theme-button__label" data-theme-label>theme: light</span><span class="vh" data-theme-action>, switch to dark</span></button><form method="dialog"><button class="menu__close" type="submit" autofocus>close</button></form></div></div>
 <nav aria-label="Main"><ul class="menu__list" role="list"><li style="--i: 0"><a href="../architecture.html" aria-current="true">Work</a></li><li style="--i: 1"><a href="../books.html">Research</a></li><li style="--i: 2"><a href="../about.html">About</a></li><li style="--i: 3"><a href="../about.html#contact">Contact</a></li></ul></nav>
 <p class="menu__contact"><a href="mailto:hazemradhouani@gmail.com">hazemradhouani@gmail.com</a><a href="https://www.linkedin.com/in/hazem-radhouani-b36616319/" target="_blank" rel="noopener">LinkedIn<span class="vh"> (opens in a new tab)</span></a></p>
 </div>
 </dialog>
-<dialog class="viewer" id="viewer" aria-labelledby="viewer-title">
+<dialog class="viewer" id="viewer" aria-labelledby="viewer-title" data-lenis-prevent>
 <div class="viewer__top"><span class="viewer__count" aria-hidden="true"></span><p class="viewer__title" id="viewer-title"></p><form method="dialog"><button class="viewer__btn" type="submit" autofocus>close<svg class="icon" width="16" height="16" aria-hidden="true" focusable="false"><use href="../images/icons.svg#x"></use></svg></button></form></div>
 <div class="viewer__stage" tabindex="0" role="group" aria-roledescription="image viewer" aria-label="Full-size image. Arrow keys: previous and next; double click or the actual size button: zoom"></div>
 <div class="viewer__bottom"><button class="viewer__btn" type="button" data-viewer-toggle><span>actual size</span></button><div class="viewer__nav"><button class="viewer__btn" type="button" data-viewer-prev aria-label="Previous image"><svg class="icon" width="16" height="16" aria-hidden="true" focusable="false"><use href="../images/icons.svg#arrow-left"></use></svg></button><button class="viewer__btn" type="button" data-viewer-next aria-label="Next image"><svg class="icon" width="16" height="16" aria-hidden="true" focusable="false"><use href="../images/icons.svg#arrow-right"></use></svg></button></div></div>
