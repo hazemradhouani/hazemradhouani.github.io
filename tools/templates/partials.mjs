@@ -216,6 +216,27 @@ export function figure(f, n, ctx) {
   return plate(f, n, span, html`<div class="s-${span} fig__plate">${labels.length ? labelled(pic, rel, labels, f.title) : pic}</div>`, { key: keyOf(f) });
 }
 
+/* ---------------------------------------------------------- chapters of a case study (D74) */
+// A chapter runs from the figure titled `from` up to the next chapter's: the figures keep their authored
+// order (which decides the hero partner, the Work previews and the fig-n anchors), and a chapter can never
+// be split. A paragraph joins the chapter it names; one naming none stays in the overview.
+const slug = (s) => s.normalize('NFD').replace(/[̀-ͯ]/gu, '').toLowerCase().replace(/[^a-z0-9]+/gu, '-').replace(/^-|-$/gu, '');
+export function chaptersOf(x, figs) {
+  const list = x.chapters || [];
+  if (!list.length) throw new Error(`${x.slug}: no chapters (content/projects/${x.slug}.json, D74)`);
+  const at = list.map((c) => {
+    const hits = figs.flatMap((f, i) => (f.title === c.from ? [i] : []));
+    if (hits.length !== 1) throw new Error(`${x.slug}: chapter "${c.title}" starts at "${c.from}", which names ${hits.length} figures (hero partner excluded), not 1`);
+    return hits[0];
+  });
+  if (at[0] !== 0) throw new Error(`${x.slug}: the first chapter must start at the first figure, "${figs[0]?.title}"`);
+  at.forEach((k, j) => { if (j && k <= at[j - 1]) throw new Error(`${x.slug}: chapter "${list[j].title}" starts before the chapter above it`); });
+  const titles = list.map((c) => c.title);
+  if (new Set(titles).size !== titles.length) throw new Error(`${x.slug}: two chapters share a title`);
+  for (const t of x.narrative) if (t.chapter && !titles.includes(t.chapter)) throw new Error(`${x.slug}: a paragraph names chapter "${t.chapter}", which does not exist`);
+  return list.map((c, j) => ({ title: c.title, id: slug(c.title), n: j + 1, figs: figs.slice(at[j], at[j + 1] ?? figs.length), text: x.narrative.filter((t) => t.chapter === c.title) }));
+}
+
 /* ---------------------------------------------------------- heroes */
 export const projectHref = (x, prefix) => `${prefix}projects/project-${x.slug}.html`;
 export const vtTitle = (x) => `title-${x.slug}`;
