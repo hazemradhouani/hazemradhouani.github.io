@@ -2,29 +2,27 @@
 
 | | |
 |---|---|
-| Date | 2026-10-16 (fourth update) |
-| Read first | `12-hq-dissection-plan.md` (plan), `13-dissection-protocol.md` (procedure), `decision-log.md` D45–D72 |
+| Date | 2026-10-21 (fifth update) |
+| Read first | `15-case-study-composition-and-motion.md` (the current plan), `decision-log.md` D73–D79; for the image pipeline, `12-hq-dissection-plan.md` and `13-dissection-protocol.md` |
 | Branch | `flagship-upgrade`; merged to `main` through a PR once the gates below pass |
 
 ## Done
-- **All 15 case studies re-derived from `Images HQ/`** (D45–D68); the audit, the import checks and the build pass.
-- **Dark scheme without paper boxes (D69):** no drawing sits on the cream field any more. 49 colour drawings are inverted with their hues held (`invert-accent`); 14 with rendered material, photographs or shaded models carry a `keep` layer (`keepLayer()` in `tools/lib/matte.mjs`, `<stem>--keep.png` beside the cutout) laid over the inverted drawing in their authored colours; six drawings whose own ground makes them legible are opaque `plate` cutouts, inverted in dark (Corallum level 01, western elevation, section A-A; Al-Arg watercolour site plan; Cinephile section and eastern facade). Renders and photographs stay as authored in both schemes. The Aïn Sebaâ and Cinephile ground floors are re-keyed against their own paper.
-- **Vertical labels (D70)** for a street name along a section end.
-- **QA:** fails any paper field in dark, checks keep layers per scheme; the stale mobile theme check and the strip crop tolerance are fixed. 40 tests pass.
-- **Share cards and CV** regenerated with the HQ heroes and the D45 identity line.
-- **Local settings:** `.claude/settings.json` (gitignored) allows `npm run serve`, `qa`, `perf`, `og`, `cv` and `curl` to the local server, so the browser gates can run.
-- **Keys (D71):** every printed key is out of the pixels and re-set as an HTML key (`legend`, optional `legendTitle` in a figure; entries `{ text, swatch, mark, code, dir, ground }`, marks `fill | hatch | line | dash | dot | point | triangle | measure | code`; `keyOf()` in `tools/templates/partials.mjs`, `.key*` in `css/site.css`). Material schedules left the captions. A flat swatch touching linework is lifted with an erase rectangle carrying `match: [r, g, b]`.
-- **Content questions closed (D72):** no render or photograph carries an author line; Al-Arg Structure 03 has the owner's pdf2026 caption; Tamansourt is "near Marrakech"; the rest are closed as not needed.
-- **QA without the server:** `node tools/qa.mjs --base=file:///C:/Users/Hazem/Desktop/portfolio-main/` runs every gate from the built files except the two 404 checks.
+- **All 15 case studies re-derived from `Images HQ/`** (D45–D68); dark scheme without paper boxes (D69); vertical labels (D70); keys re-set as HTML (D71); content questions closed (D72).
+- **Case-study composition (D73):** a "rail and copy" sheet. Rail `1 / span 3` (numbers, chapter and figure titles, labels), copy axis `4 / span 6` (sentences); plates on a case ladder (`CASE` in `tools/templates/partials.mjs`: `full` 1–12, `nine` 4–12, `text` 4–11, `narrow` 4–9, `four` 4–7). Opening: office and city, the h1, the existing `summary` as the lead, the hero hanging from col 4. Title block (`titleBlock()` in `pages.mjs`): descriptor and tag strip, spec cells, Contents from three chapters. Captions beside a hanging plate on the rail (240 characters or fewer, `capSide()`), otherwise a rail/copy row; keys as a row.
+- **Chapters (D74):** `chapters: [{ title, from }]` in each `content/projects/*.json`; a chapter runs from the figure titled `from` to the next (`chaptersOf()`, tested in `tools/tests/chapters.test.mjs`); a paragraph may carry `chapter`, otherwise it stays in the Overview row. Figure order is pinned (`tools/tests/hero-partner.test.mjs`). The film is the last chapter.
+- **Motion (D75, D76, D78):** house curve `cubic-bezier(.22,1,.36,1)`, in-out `cubic-bezier(.77,0,.175,1)`; plates rise from their ground line (`.rv-g` group arrival, `plate-in` / `plate-hold` counter-translate), captions and keys follow, chapter rules draw, h1 words rise (`words()`; skipped after a view-transition morph via the inline `pagereveal` hook); title morphs move without scaling (`view-transition-class: vt-title`); reduced motion keeps a 160 ms page crossfade only.
+- **Smooth, inertial scrolling (D79, the owner's request 2026-10-21):** Lenis 1.3.26 vendored at `js/vendor/lenis-1.3.26.min.js` (MIT, 5.6 KB gzipped; pinned devDependency, `tools/tests/vendor.test.mjs`), loaded by `js/site.js` only for a fine pointer without reduced motion. Dialogs stop it (`data-lenis-prevent` on both); scrolling keys hand over a settling glide; Contents links glide, then update the address and move focus; the skip link stays instant.
+- **QA:** `tools/qa.mjs` adds a normal-motion pass (every arrival ends in the plain layout) and a smooth-scroll pass (glide eased and settled, keyboard followed, anchors land at the scroll padding with hash and focus, dialog hold, native under reduced motion). `tools/perf.cjs` now reports the LCP element (it read an API that never exposes LCP entries).
 
 ## How to verify
-`npm run serve` (background), then `node --test tools/tests/*.test.mjs`, `npm run build`, `npm run qa` (add `-- --shots` for screenshots in `tools/.cache/`), `npm run perf`. A rare `ERR_NO_BUFFER_SPACE` console line is the Windows local server under screenshot load, not the site; re-run.
+`npm run serve` (background), then `node --test tools/tests/*.test.mjs`, `npm run build`, `npm run qa` (add `-- --shots` for screenshots in `tools/.cache/`), `npm run perf`. Without the server: `node tools/qa.mjs --base=file:///C:/Users/Hazem/Desktop/portfolio-main/` (skips the two 404 checks). The DevTools MCP browser window may run `requestAnimationFrame` at 1 fps when occluded: measure motion and scrolling in headless Playwright, as QA does.
 
 ## Open owner questions
-None for the case studies: the owner closed them on 2026-10-16 (D72). Renders carry no author line. The remaining site-wide items are in `content/ledger-notes.md` ("[CONTENT NEEDED]").
+`content/ledger-notes.md` ("[CONTENT NEEDED]"), now including a short La Villette project text (its chapters run on the captions alone).
 
 ## Known quirks
 - The GateGuard hook asks for facts before the first edit of each file and before the first shell command.
-- Node `-e` with `\n` or regex backslashes inside bash heredocs mangles escapes; use a `.cjs` file written with the Write tool.
+- Node `-e` with `\n` or regex backslashes inside bash heredocs mangles escapes; use a `.cjs` file or `node - <<'EOF'`.
 - A bare `node tools/cutout.mjs` regenerates every project's cutouts. Always pass paths.
+- Six project JSON files hold hand-formatted one-line key entries: edit them as text (or check that a rewrite keeps the formatting), never `JSON.stringify` the whole file.
 - Subagents hit rate limits often. Resume them with SendMessage, since their work is saved on disk.
