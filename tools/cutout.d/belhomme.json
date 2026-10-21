@@ -7,7 +7,7 @@
     "images/belhomme/belhomme-existing-facades-survey.jpg": { "dark": "invert" },
     "images/belhomme/belhomme-plu-section-rochechouart.jpg": { "dark": "invert-accent" },
     "images/belhomme/belhomme-plu-section-rue-belhomme-detailed.jpg": { "dark": "invert-accent" },
-    "images/belhomme/belhomme-plu-section-rue-belhomme.jpg": { "dark": "invert-accent" },
+    "images/belhomme/belhomme-plu-section-rue-belhomme.jpg": { "erase": [{ "id": "key", "x": 6, "y": 44, "w": 52, "h": 40 }], "dark": "invert-accent" },
     "images/belhomme/belhomme-roof-plan.png": {
       "paper": [255, 255, 255],
       "floor": 0.015,
