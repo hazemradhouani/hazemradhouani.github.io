@@ -135,6 +135,45 @@ const themeWorkflowFailures = [...await runThemeInteractions(), ...await runThem
 gateFails += themeWorkflowFailures.length;
 if (themeWorkflowFailures.length) console.log(`FAIL theme interaction/fallback: ${themeWorkflowFailures.join(' | ')}`);
 else console.log('ok   theme interaction/fallback: keyboard, persistence, navigation, menu and storage fallback');
+
+// Motion (D75): every other check runs with reduced motion, so this pass proves the animated path ends in the
+// plain layout. Each page is read top to bottom with motion on; once every arrival has fired and every running
+// animation has finished, nothing may stay hidden (opacity) or offset (transform) on a group, plate or word.
+async function runMotionPass() {
+  const failures = [];
+  const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 }, deviceScaleFactor: 1, colorScheme: 'light', reducedMotion: 'no-preference' });
+  for (const url of urls.filter((u) => /project-|index\.html$|\/$|architecture\.html$/.test(u))) {
+    const page = await ctx.newPage();
+    try {
+      await page.goto(url, { waitUntil: 'load' });
+      const bad = await page.evaluate(async () => {
+        const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+        for (let y = 0; y < document.documentElement.scrollHeight; y += innerHeight * 0.8) { window.scrollTo({ top: y, behavior: 'instant' }); await sleep(120); }
+        window.scrollTo({ top: document.documentElement.scrollHeight, behavior: 'instant' });
+        for (let t = 0; t < 50 && document.querySelector('.rv:not(.is-in), .rv-g:not(.is-in)'); t++) await sleep(100);
+        await Promise.race([Promise.all(document.getAnimations().map((a) => a.finished.catch(() => {}))), sleep(8000)]);
+        const out = [];
+        for (const el of document.querySelectorAll('.rv, .rv-g')) {
+          if (!el.classList.contains('is-in')) out.push(`not arrived: ${el.tagName.toLowerCase()}.${[...el.classList].join('.')}`);
+          else if (getComputedStyle(el).opacity !== '1') out.push(`opacity ${getComputedStyle(el).opacity}: ${el.tagName.toLowerCase()}.${[...el.classList].join('.')}`);
+        }
+        for (const el of document.querySelectorAll('.rv, .rv-g, .nw, .nw > picture, .nw > img, .w__i')) {
+          const tf = getComputedStyle(el).transform;
+          if (tf !== 'none' && tf !== 'matrix(1, 0, 0, 1, 0, 0)') out.push(`offset ${tf}: ${el.tagName.toLowerCase()}.${[...el.classList].join('.')}`);
+        }
+        return out;
+      });
+      failures.push(...bad.slice(0, 5).map((s) => `${url.replace(BASE, '')}: ${s}`));
+    } catch (e) { failures.push(`${url.replace(BASE, '')}: ${e.message}`); }
+    await page.close();
+  }
+  await ctx.close();
+  return failures;
+}
+const motionFailures = await runMotionPass();
+gateFails += motionFailures.length;
+if (motionFailures.length) console.log(`FAIL motion (no-preference): ${motionFailures.length} issue(s)\n  ${motionFailures.slice(0, 20).join('\n  ')}`);
+else console.log('ok   motion (no-preference): every arrival fired and every animation ended in the plain layout');
 const report = [];
 for (const url of urls) {
   const name = url.replace(BASE, '') || 'index';
