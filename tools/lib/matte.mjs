@@ -97,6 +97,10 @@ function components(mask, W, H) {
  * (8-connected, above the noise floor) is removed only when its bounding box lies wholly inside a
  * declared rectangle; one that reaches outside (a line, a wall, a hatch) is kept and counted.
  * Removed pixels become pure white, which keys to clear. Returns one report per rectangle.
+ *
+ * A rectangle with `match: [r, g, b]` removes a flat printed key swatch that touches linework (D71):
+ * inside it, only pixels on the line from the paper to that colour (the swatch and its antialiased
+ * edge, residual under `tol`) become paper; every other pixel, the touching line included, stays.
  */
 export function eraseComponents(px, W, H, rects, { paper, floor }) {
   if (!rects?.length) return [];
@@ -105,6 +109,7 @@ export function eraseComponents(px, W, H, rects, { paper, floor }) {
   for (let p = 0, i = 0; p < W * H; p++, i += 4) mask[p] = key(px[i], px[i + 1], px[i + 2], P(p)).a > floor ? 1 : 0;
   const { label, boxes } = components(mask, W, H);
   return rects.map((r) => {
+    if (r.match) return eraseSwatch(px, W, H, r, P);
     const rx1 = r.x + r.w - 1, ry1 = r.y + r.h - 1;
     const hit = new Set();
     for (let y = Math.max(0, r.y); y <= Math.min(H - 1, ry1); y++) for (let x = Math.max(0, r.x); x <= Math.min(W - 1, rx1); x++) { const l = label[y * W + x]; if (l >= 0) hit.add(l); }
@@ -117,6 +122,25 @@ export function eraseComponents(px, W, H, rects, { paper, floor }) {
     }
     return { id: r.id, removed: inside.length, kept: hit.size - inside.length, bbox: inside.length ? { x: x0, y: y0, w: x1 - x0 + 1, h: y1 - y0 + 1 } : null };
   });
+}
+
+// a colour-matched erase (see eraseComponents): pixel c is removed when it lies on the segment from the
+// paper P to the swatch S, c = P + t (S - P) with t in (0.05, 1] and a residual under tol
+function eraseSwatch(px, W, H, r, P) {
+  const S = r.match, tol = r.tol ?? 18;
+  let n = 0, x0 = W, y0 = H, x1 = -1, y1 = -1;
+  for (let y = Math.max(0, r.y); y < Math.min(H, r.y + r.h); y++) for (let x = Math.max(0, r.x); x < Math.min(W, r.x + r.w); x++) {
+    const p = y * W + x, i = p * 4, Q = P(p);
+    const d = [S[0] - Q[0], S[1] - Q[1], S[2] - Q[2]], len = d[0] * d[0] + d[1] * d[1] + d[2] * d[2];
+    if (!len) continue;
+    const t = Math.min(1, Math.max(0, ((px[i] - Q[0]) * d[0] + (px[i + 1] - Q[1]) * d[1] + (px[i + 2] - Q[2]) * d[2]) / len));
+    const res = Math.hypot(px[i] - Q[0] - t * d[0], px[i + 1] - Q[1] - t * d[1], px[i + 2] - Q[2] - t * d[2]);
+    if (t > 0.05 && res < tol) {
+      px[i] = Q[0]; px[i + 1] = Q[1]; px[i + 2] = Q[2]; n++;
+      x0 = Math.min(x0, x); y0 = Math.min(y0, y); x1 = Math.max(x1, x); y1 = Math.max(y1, y);
+    }
+  }
+  return { id: r.id, removed: n, kept: 0, bbox: n ? { x: x0, y: y0, w: x1 - x0 + 1, h: y1 - y0 + 1 } : null };
 }
 
 const inRects = (rects, x, y) => (rects || []).some((r) => x >= r.x && x < r.x + r.w && y >= r.y && y < r.y + r.h);

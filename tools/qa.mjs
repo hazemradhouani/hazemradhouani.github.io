@@ -26,7 +26,7 @@ let gateFails = 0;
   const rd = (p) => JSON.parse(fs.readFileSync(path.join(REPO, p), 'utf8'));
   const SKIP = new Set(['source', 'sources', 'og', '$comment', 'id', 'slug', 'group', 'filters', 'order', 'kind', 'size', 'fit', 'lang', 'film', 'knowsAbout',
     'project', 'coverSource', 'abstractSource', 'date', 'action', 'href', 'case',
-    'at', 'align', 'swatch']);  // label anchors, alignment and legend colours are not visible copy
+    'at', 'align', 'swatch', 'mark', 'dir']);  // label anchors, alignment and key colours and marks are not visible copy
   const strings = (v, key = '', out = []) => {
     if (SKIP.has(key) || /Source$/.test(key)) return out;
     if (typeof v === 'string') { if (v.length > 2 && !/^(images|videos|files|projects)\/|\.(jpe?g|png|webp|mp4)$/i.test(v)) out.push(v); }
@@ -49,14 +49,21 @@ let gateFails = 0;
   gateFails += missing.length;
 }
 const axeSrc = fs.readFileSync(path.join(here, '..', 'node_modules/axe-core/axe.min.js'), 'utf8');
-const sitemap = await (await fetch(BASE + 'sitemap.xml')).text();
-let urls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1].replace('https://hazemradhouani.github.io/portfolio/', BASE));
-urls.push(BASE + '404.html', BASE + 'does-not-exist/x.html');
+// a file: base runs the gates without the local server, straight from the built files; the two 404 checks
+// need the server's routing (the 404 page links from the site root) and are skipped, and said so
+const FILE = BASE.startsWith('file:');
+const sitemap = FILE ? fs.readFileSync(path.join(REPO, 'sitemap.xml'), 'utf8') : await (await fetch(BASE + 'sitemap.xml')).text();
+let urls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1].replace('https://hazemradhouani.github.io/portfolio/', BASE))
+  .map((u) => (FILE && u.endsWith('/') ? u + 'index.html' : u));   // the server answers a folder with its index.html
+if (FILE) console.log('note  file: base, no server: 404.html and the missing-page check are not run');
+else urls.push(BASE + '404.html', BASE + 'does-not-exist/x.html');
 if (ONLY) urls = urls.filter((u) => u.includes(ONLY));
 const WIDTHS = [320, 375, 768, 1024, 1440, 1920];
 const THEMES = ['light', 'dark'];
 const cutoutInspectorSource = inspectCutoutRgba.toString();
-const browser = await chromium.launch({ executablePath: process.env.CHROME_PATH || "C:/Program Files/Google/Chrome/Application/chrome.exe", headless: true });
+// from files, one page's images are same-origin only with this flag (the cutout gates read their pixels)
+const browser = await chromium.launch({ executablePath: process.env.CHROME_PATH || "C:/Program Files/Google/Chrome/Application/chrome.exe", headless: true,
+  args: FILE ? ['--allow-file-access-from-files'] : [] });
 
 // These interaction checks run once per QA execution rather than once per page. The page loop below
 // already proves both resolved schemes at every URL and width; this proves the state-changing path.
@@ -181,7 +188,7 @@ for (const url of urls) {
         ? new Set(['rgba(0, 0, 0, 0)', 'rgb(18, 19, 17)', 'rgb(247, 245, 239)', 'rgb(69, 70, 63)', 'rgba(18, 19, 17, 0.88)'])
         : new Set(['rgba(0, 0, 0, 0)', 'rgb(255, 255, 255)', 'rgb(17, 17, 17)', 'rgba(255, 255, 255, 0.86)']);
       if (innerWidth === 375 || innerWidth === 1440) for (const el of [document.documentElement, document.body, ...document.querySelectorAll('body *')]) {
-        if (el.closest('video, svg, .legend__sw, .lab__pin')) continue;
+        if (el.closest('video, svg, .lab__pin')) continue;
         const c = getComputedStyle(el).backgroundColor; if (!ok.has(c)) out.palette.push(`${el.tagName.toLowerCase()}.${[...el.classList].join('.')} ${c}`);
       }
       // dark treatments (D50, D69): inverted linework is filtered only in the dark scheme; a keep drawing

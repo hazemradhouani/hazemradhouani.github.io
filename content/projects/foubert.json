@@ -78,7 +78,6 @@
   "hero": {
     "src": "images/foubert/foubert-brick-render-hq.jpg",
     "alt": "Render of the Foubert residential building in aged red brick with a claustra screen",
-    "credit": "Render: Studio BELEM",
     "source": "pdf2026:p13 + hq:FOUBERT/20240105_BLM_FOU_Perspective rue.jpg"
   },
   "figures": [
@@ -130,17 +129,41 @@
     {
       "src": "images/foubert/foubert-west-facade.png",
       "title": "West facade",
-      "caption": "PRO sheet 20-01, January 2026. The street front on passage Foubert, 23.23 m between the property lines. Materials, by the numbers on the drawing: 1 solid-brick claustra screen, «fjord soda» type, aged red; 2 eco-brick bond, 6 cm thick, «fjord soda» type, aged red; 3 clear glazing; 4 metal-mesh guardrail with a powder-coated metal rail, RAL 9007; 5 varnished natural-timber joinery; 6 powder-coated metal frames and metalwork, RAL 3014; 7 powder-coated metal door, RAL 3014; 8 floated lime-render facade, RAL 9010 or equivalent; 9 metal screen panels, RAL 3014.",
+      "caption": "PRO sheet 20-01, January 2026. The street front on passage Foubert, 23.23 m between the property lines.",
       "alt": "Street elevation in aged red brick: four storeys of tall timber French windows with mesh guardrails over a ground floor of perforated brick claustra panels, a red metal workshop door and the entrances, a planted roof edge on top and the neighbouring facades ghosted on either side",
       "kind": "drawing",
+      "legendTitle": "Materials",
+      "legend": [
+        { "code": "1", "text": "Solid-brick claustra screen, «fjord soda» type, aged red" },
+        { "code": "2", "text": "Eco-brick bond, 6 cm thick, «fjord soda» type, aged red" },
+        { "code": "3", "text": "Clear glazing" },
+        { "code": "4", "text": "Metal-mesh guardrail with a powder-coated metal rail, RAL 9007" },
+        { "code": "5", "text": "Varnished natural-timber joinery" },
+        { "code": "6", "text": "Powder-coated metal frames and metalwork, RAL 3014" },
+        { "code": "7", "text": "Powder-coated metal door, RAL 3014" },
+        { "code": "8", "text": "Floated lime-render facade, RAL 9010 or equivalent" },
+        { "code": "9", "text": "Metal screen panels, RAL 3014" }
+      ],
       "source": "pdf2026:p14 + site + hq:FOUBERT/20260129_BLM_FOU_PRO_Plan de niveaux_merge [1-20] [16-20]_page-0003.jpg (printed title 'Façade Ouest'; numbered legend 1-9; translated, D17)"
     },
     {
       "src": "images/foubert/foubert-east-facade.png",
       "title": "East facade",
-      "caption": "PRO sheet 20-03. The garden front, 23.20 m between the property lines: timber windows in lime render, balconies with mesh guardrails and terrace exits at ground level; material numbers as listed for the west facade.",
+      "caption": "PRO sheet 20-03. The garden front, 23.20 m between the property lines: timber windows in lime render, balconies with mesh guardrails and terrace exits at ground level.",
       "alt": "Rear elevation in white render: rows of timber windows with red metal panels between them, two balconies with mesh guardrails on the left, a grey neighbouring building standing in front of the middle bays, and a planted roof edge on top",
       "kind": "drawing",
+      "legendTitle": "Materials",
+      "legend": [
+        { "code": "1", "text": "Solid-brick claustra screen, «fjord soda» type, aged red" },
+        { "code": "2", "text": "Eco-brick bond, 6 cm thick, «fjord soda» type, aged red" },
+        { "code": "3", "text": "Clear glazing" },
+        { "code": "4", "text": "Metal-mesh guardrail with a powder-coated metal rail, RAL 9007" },
+        { "code": "5", "text": "Varnished natural-timber joinery" },
+        { "code": "6", "text": "Powder-coated metal frames and metalwork, RAL 3014" },
+        { "code": "7", "text": "Powder-coated metal door, RAL 3014" },
+        { "code": "8", "text": "Floated lime-render facade, RAL 9010 or equivalent" },
+        { "code": "9", "text": "Metal screen panels, RAL 3014" }
+      ],
       "source": "pdf2026:p15 + site + hq:FOUBERT/20260129_BLM_FOU_PRO_Plan de niveaux_merge [1-20] [16-20]_page-0005.jpg (printed title 'Façade Est'; 'Sortie Terrasse'; translated, D17)"
     },
     {
@@ -189,7 +212,6 @@
       "caption": "From above the rear: the courtyard terrace and the planted roof.",
       "alt": "Render from above of the pale pink rear facade, with a paved courtyard terrace with planting and outdoor seating at its foot, a planted roof along the top, and neighbouring roofs in zinc and red tile all around",
       "kind": "render",
-      "credit": "Render: Studio BELEM",
       "source": "pdf2026:p16 + hq:FOUBERT/20240610_BLM_FOU_Perspective arrière.jpg"
     }
   ],

@@ -288,9 +288,10 @@
   .nw__keep { display: none; }
   html[data-theme="dark"] .nw--keep > .nw__keep { display: block; position: absolute; inset: 0; pointer-events: none; }
   html[data-theme="dark"] .nw--keep > .nw__keep img { width: 100%; height: 100%; }
-  /* a legend's swatches follow their drawing's treatment, so the key matches what the reader sees */
-  html[data-theme="dark"] .fig:has(.nw--invert) .legend__sw { filter: invert(.965); }
-  html[data-theme="dark"] .fig:has(.nw--invert-accent) .legend__sw { filter: invert(.965) hue-rotate(180deg); }
+  /* a key's colour marks follow their drawing's treatment, so the key matches what the reader sees; a keep
+     drawing shows its solid regions in their authored colours, so its marks stay authored too */
+  html[data-theme="dark"] .fig:has(.nw--invert) .key__c { filter: invert(.965); }
+  html[data-theme="dark"] .fig:has(.nw--invert-accent) .key__c { filter: invert(.965) hue-rotate(180deg); }
   .nw img, .nw picture { width: 100%; height: auto; }
   .cap { margin-top: var(--s3); text-align: center; font-size: var(--fs-cap); line-height: 1.55; color: var(--ink-2); }
   .cap__t { color: var(--ink); }
@@ -327,18 +328,42 @@
     .lab__n { display: none; }
     .lab__t br { display: initial; }
   }
-  /* a legend printed on the sheet, re-set with the drawing's own colours */
-  .legend { list-style: none; padding: 0; margin-top: var(--s3); display: flex; flex-wrap: wrap; justify-content: center;
-    gap: var(--s2) var(--s5); font-size: var(--fs-cap); line-height: 1.4; color: var(--ink-2); }
-  .legend li { display: inline-flex; align-items: center; gap: var(--s2); }
-  /* phones: one left-aligned column, centred as a block (the box itself stays on the grid lines) */
-  @media (max-width: 47.99rem) { .legend { display: grid; justify-content: center; justify-items: start; } }
-  /* the swatch keeps the drawing's colour; its outline (--ui, 3:1+ in both schemes) makes a dark swatch visible on charcoal
-     and a pale one on white (WCAG 1.4.11) */
-  .legend__sw { width: 0.875rem; height: 0.875rem; flex: none; outline: 1px solid var(--ui); outline-offset: 0; }
-  /* forced colours keep the drawing's own swatch colours (their meaning) and outline swatches and pins */
+  /* a key printed on the sheet, re-set (D71): the drawing's annotation voice (Plex Sans, sentence case) under a
+     tracked-capital title, on the page grid. The 8-column key holds two long entries a row (four grid columns
+     each) or four short ones (two each), so every column of the key starts on a grid line; up to three short
+     entries stand on one centred line. Each entry: its mark in a fixed column, then the words. */
+  .key { margin-top: var(--s5); }
+  .key__t { margin-bottom: var(--s3); text-align: center; font-family: var(--sans); font-size: var(--fs-label); font-weight: 600;
+    letter-spacing: var(--tr-caps); text-transform: uppercase; line-height: 1.25; color: var(--ink-2); }
+  .key__list { display: grid; grid-auto-flow: column; justify-content: center; grid-template-columns: minmax(0, 1fr); grid-template-rows: repeat(var(--r1), auto);
+    gap: var(--s3) var(--gutter); font-family: var(--sans); font-size: 0.875rem; line-height: 1.4; color: var(--ink-2); }
+  .key--short .key__list { grid-template-columns: repeat(var(--c2), calc((100% - var(--gutter)) / 2)); grid-template-rows: repeat(var(--r2), auto); gap: var(--s2) var(--gutter); }
+  .key--row .key__list { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--s2) var(--s6); }
+  @media (min-width: 48rem) {
+    .key--long .key__list { grid-template-columns: repeat(var(--c2), calc((100% - var(--gutter)) / 2)); grid-template-rows: repeat(var(--r2), auto); }
+    .key--short .key__list { grid-template-columns: repeat(var(--c3), calc((100% - 2 * var(--gutter)) / 3)); grid-template-rows: repeat(var(--r3), auto); }
+  }
+  @media (min-width: 64rem) { .key--short .key__list { grid-template-columns: repeat(var(--c4), calc((100% - 3 * var(--gutter)) / 4)); grid-template-rows: repeat(var(--r4), auto); } }
+  .key__i { display: grid; grid-template-columns: 1.625rem minmax(0, 1fr); column-gap: var(--s2); align-items: start; }
+  .key--row .key__i { display: inline-grid; grid-template-columns: 1.625rem auto; }
+  /* the mark sits on the first line of its words (1.4 x 14px) */
+  .key__m { height: 1.225rem; display: grid; place-items: center; position: relative; }
+  .key__m > .key__c { width: 1.5rem; height: 1rem; overflow: hidden; }
+  /* an area: a 14px square; its outline (--ui, 3:1+ in both schemes, never filtered) keeps a pale fill visible
+     on white and a dark one on charcoal (WCAG 1.4.11) */
+  .key__m--box > .key__c { width: 0.875rem; height: 0.875rem; }
+  .key__m--box::after { content: ""; position: absolute; left: 50%; top: 50%; width: 0.875rem; height: 0.875rem; translate: -50% -50%;
+    outline: 1px solid var(--ui); pointer-events: none; }
+  /* a code, circled as on the drawing */
+  .key__m--code { width: 1.75rem; height: 1.75rem; margin-top: -0.2625rem; border: 1px solid var(--ui); border-radius: 50%;
+    font-size: var(--fs-label); font-weight: 600; line-height: 1; letter-spacing: -0.01em; color: var(--ink); font-variant-numeric: tabular-nums; }
+  .key--codes .key__i { grid-template-columns: 1.75rem minmax(0, 1fr); }
+  .key--codes .key__list { row-gap: var(--s3); }
+  /* forced colours keep the drawing's own key colours (their meaning) and outline marks and pins */
   @media (forced-colors: active) {
-    .legend__sw { forced-color-adjust: none; outline-color: CanvasText; }
+    .key__c { forced-color-adjust: none; }
+    .key__m--box::after { outline-color: CanvasText; }
+    .key__m--code { border-color: CanvasText; }
     .lab__pin { border: 1px solid CanvasText; }
   }
   .zoom-link { display: block; cursor: zoom-in; text-decoration: none; }
@@ -570,7 +595,7 @@
     @page { size: A4; margin: 16mm 16mm 18mm; }
     :root { --bg: #FFFFFF; --ink: #111111; --ink-2: #5E5E5E; --line: #E6E6E6; --ui: #8A8A8A; --error: #A61B1B; --bar-bg: #FFFFFF; --drawing-bg: #FFFFFF; --gap-group: 6mm; --gap-chapter: 8mm; --cols: 12; --gutter: 4mm; color-scheme: light; }
     body { font-size: 10.5pt; line-height: 1.45; }
-    .nw--drawing img, .legend__sw { filter: none !important; }  /* print shows every drawing as authored, black on white */
+    .nw--drawing img, .key__c { filter: none !important; }  /* print shows every drawing as authored, black on white */
     .nw__keep { display: none !important; }
     .wrap { width: 100%; }
     .print-only { display: block; }

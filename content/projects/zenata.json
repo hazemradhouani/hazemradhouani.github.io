@@ -76,6 +76,7 @@
       "source": "hq:Zenata/2025 - Hazem radhouani - Portfolio - HQ [6-10]_page-0004.jpg (legend 'Accès Piétons', 'Espaces Parking', 'Avitaillement', 'Accès Véhicules'; translated, D17, D49); pdf2025:p8",
       "legend": [
         {
+          "mark": "triangle",
           "swatch": "#241E1E",
           "text": "Pedestrian access"
         },
@@ -88,6 +89,7 @@
           "text": "Provisioning"
         },
         {
+          "mark": "triangle",
           "swatch": "#DA2129",
           "text": "Vehicle access"
         }

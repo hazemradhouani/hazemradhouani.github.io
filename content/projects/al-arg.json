@@ -97,7 +97,9 @@
           "text": "Residential area"
         },
         {
-          "swatch": "#C6B1A0",
+          "mark": "hatch",
+          "swatch": "#9D8979",
+          "ground": "#E8D5C5",
           "text": "Underground archaeological area"
         },
         {
@@ -188,10 +190,15 @@
     {
       "src": "images/al-arg/al-arg-functional-spaces.png",
       "title": "Functional spaces",
-      "caption": "The colour key is printed with the drawing.",
-      "alt": "Shaded axonometric of the rehabilitated building with rooms coloured brown, red and yellow-green, and a printed key: Residential, Staff Housing, Meditation, Administrative, Service",
+      "caption": "Rooms by function. The sheet's key also lists residential and administrative spaces, with no colour printed for them.",
+      "alt": "Shaded axonometric of the rehabilitated building, its rooms coloured ochre, brown, yellow-green, red and dark grey among the earth walls and courtyards",
       "kind": "drawing",
-      "source": "hq:EL erg/Functions.jpg (printed title 'Functional Spaces'; key kept on the drawing: five labels share three swatches, so it is not re-set); pdf2026:p26"
+      "legend": [
+        { "swatch": "#B89378", "text": "Staff housing" },
+        { "swatch": "#E1E597", "text": "Meditation" },
+        { "swatch": "#CA7C6D", "text": "Service" }
+      ],
+      "source": "hq:EL erg/Functions.jpg (printed title 'Functional Spaces'; printed key 'Residential', 'Staff Housing', 'Meditation', 'Administrative', 'Service' with three swatches, each set 17-20 px left of its own label (brown, yellow-green, red), while 'Residential' and 'Administrative' stand at the left margin with no swatch; the three pairs are re-set in HTML with the printed swatch colours and the key is cropped out, D71); pdf2026:p26"
     },
     {
       "src": "images/al-arg/al-arg-open-ceilings.png",
@@ -219,7 +226,7 @@
     },
     {
       "title": "Structures",
-      "caption": "Left, Structure 01. Timber frame | palm wood joists and posts, accessible roof. Right, Structure 03.",
+      "caption": "Left, Structure 01. Timber frame | palm wood joists and posts, accessible roof. Right, Structure 03. Ventilation void | natural thermal chimney integrated into the earth masonry.",
       "kind": "drawing",
       "items": [
         {
@@ -231,7 +238,7 @@
           "alt": "Construction axonometric of Structure 03: a frame of timber posts and beams carrying curved slatted shading panels over a square platform"
         }
       ],
-      "source": "hq:EL erg/Structures.jpg (printed titles 'Structure 01', 'Structure 03'; one sheet, one scale); pdf2026:p26 (Structure 01 caption; its Structure 03 caption 'Ventilation void | natural thermal chimney integrated into the earth masonry' is withheld: the drawing shows a timber frame with curved slatted shades, D64)"
+      "source": "hq:EL erg/Structures.jpg (printed titles 'Structure 01', 'Structure 03'; one sheet, one scale); pdf2026:p26 (both captions: the owner's portfolio prints 'Structure 03. Ventilation void | natural thermal chimney integrated into the earth masonry.' beside this same drawing, D72)"
     },
     {
       "src": "images/al-arg/al-arg-render-shade-frame.jpg",

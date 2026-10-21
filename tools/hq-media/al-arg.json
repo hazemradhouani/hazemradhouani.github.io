@@ -112,9 +112,9 @@
         "x": 50,
         "y": 145,
         "width": 740,
-        "height": 600
+        "height": 470
       },
-      "treatment": "the axonometric and its printed legend (kept: five labels for three swatches cannot be paired without guessing); the title 'Functional Spaces' (y 80-120) left outside the crop",
+      "treatment": "the axonometric alone (its lowest pixel at y 593, 22 px of paper left below it); the printed key (y 619-660) and the title 'Functional Spaces' (y 80-120) left outside the crop. The key is re-set in HTML with the three pairs its swatches print (D71)",
       "darkTreatment": "field",
       "credit": "Owner's own work: the Al-Arg architecture thesis of Hazem Radhouani (author printed on the thesis cover, Images HQ/Memoire/001.png); no third-party credit printed on the source",
       "authorizationEvidence": "owner-direct:2026-10-13",

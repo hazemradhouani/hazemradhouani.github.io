@@ -2,8 +2,8 @@
 
 | | |
 |---|---|
-| Date | 2026-10-16 (third update) |
-| Read first | `12-hq-dissection-plan.md` (plan), `13-dissection-protocol.md` (procedure), `decision-log.md` D45–D70 |
+| Date | 2026-10-16 (fourth update) |
+| Read first | `12-hq-dissection-plan.md` (plan), `13-dissection-protocol.md` (procedure), `decision-log.md` D45–D72 |
 | Branch | `flagship-upgrade`; merged to `main` through a PR once the gates below pass |
 
 ## Done
@@ -13,25 +13,15 @@
 - **QA:** fails any paper field in dark, checks keep layers per scheme; the stale mobile theme check and the strip crop tolerance are fixed. 40 tests pass.
 - **Share cards and CV** regenerated with the HQ heroes and the D45 identity line.
 - **Local settings:** `.claude/settings.json` (gitignored) allows `npm run serve`, `qa`, `perf`, `og`, `cv` and `curl` to the local server, so the browser gates can run.
+- **Keys (D71):** every printed key is out of the pixels and re-set as an HTML key (`legend`, optional `legendTitle` in a figure; entries `{ text, swatch, mark, code, dir, ground }`, marks `fill | hatch | line | dash | dot | point | triangle | measure | code`; `keyOf()` in `tools/templates/partials.mjs`, `.key*` in `css/site.css`). Material schedules left the captions. A flat swatch touching linework is lifted with an erase rectangle carrying `match: [r, g, b]`.
+- **Content questions closed (D72):** no render or photograph carries an author line; Al-Arg Structure 03 has the owner's pdf2026 caption; Tamansourt is "near Marrakech"; the rest are closed as not needed.
+- **QA without the server:** `node tools/qa.mjs --base=file:///C:/Users/Hazem/Desktop/portfolio-main/` runs every gate from the built files except the two 404 checks.
 
 ## How to verify
 `npm run serve` (background), then `node --test tools/tests/*.test.mjs`, `npm run build`, `npm run qa` (add `-- --shots` for screenshots in `tools/.cache/`), `npm run perf`. A rare `ERR_NO_BUFFER_SPACE` console line is the Windows local server under screenshot load, not the site; re-run.
 
-## Open owner questions (`[CONTENT NEEDED]`, collect into the final report)
-- Rue de l'Avenir: role; render credit.
-- Bolívar: how the hotel and student programmes are distributed (D59); what "Hotel W" means; the drone photo's author.
-- Foubert: unit count and levels (D60); "Complexe dalle BB"; the scale of the street-window sheet.
-- Zenata: titles of the profile diagrams; whether to use the page-9 type and date.
-- Nouvelle Medina: role; "Poutres Al".
-- Hay Mohammadi: type and date from the 2025 page; plans or sections.
-- La Villette: the level-2 wing rooms; what "Elevation Sud 2" shows.
-- Belhomme: personal part beyond pdf2026:p9; render authorship.
-- Cinephile: where the film library and archive sit; the plans' scale (D62).
-- Al-Arg: HQ files of the village-scale site plans and Structure 02; the Functional Spaces colour key; the source of the Past-layer aerial photo; what Structure 03 is (D64).
-- Corallum: the site and the structural material (D66).
-- Tamansourt: the location (D66).
-- Villa Papillon: how it is organised and oriented (D66).
-- Sentry: the plans' scale.
+## Open owner questions
+None for the case studies: the owner closed them on 2026-10-16 (D72). Renders carry no author line. The remaining site-wide items are in `content/ledger-notes.md` ("[CONTENT NEEDED]").
 
 ## Known quirks
 - The GateGuard hook asks for facts before the first edit of each file and before the first shell command.

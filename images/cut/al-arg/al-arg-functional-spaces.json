@@ -1,17 +1,17 @@
 {
  "src": "images/al-arg/al-arg-functional-spaces.png",
- "hash": "c204a333709bd5ec",
+ "hash": "121b978b532c3d9e",
  "mode": "ink",
  "from": [
   740,
-  600
+  470
  ],
  "to": [
-  656,
-  561
+  654,
+  447
  ],
  "offset": [
-  35,
+  37,
   23
  ],
  "paper": [
@@ -21,20 +21,20 @@
  ],
  "clip": [],
  "ink": {
-  "ink": 36926,
-  "chromaticFraction": 0.082,
-  "midtoneFraction": 0.6721,
-  "suggest": "colour"
+  "ink": 33914,
+  "chromaticFraction": 0.0558,
+  "midtoneFraction": 0.6641,
+  "suggest": "accent"
  },
  "dark": "keep",
  "keep": {
   "file": "images/cut/al-arg/al-arg-functional-spaces--keep.png",
-  "share": 0.3814,
+  "share": 0.4629,
   "radius": 4,
   "t": 0.06,
   "fill": true
  },
- "specks": 289,
+ "specks": 65,
  "tile": [
   0,
   0,

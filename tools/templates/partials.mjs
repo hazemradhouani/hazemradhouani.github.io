@@ -134,8 +134,48 @@ function colourName(hex) {
   if ((name === 'yellow' || name === 'yellow-green') && l < 0.35) name = 'olive';
   return tone + name;
 }
-// a legend printed on the sheet, re-set as a list with the drawing's own colours
-const legendOf = (f) => (f.legend?.length ? html`<ul class="legend s-narrow" role="list" aria-label="${f.title ? `Legend: ${f.title}` : 'Legend'}">${f.legend.map((it) => html`<li><span class="legend__sw" style="background: ${it.swatch}" aria-hidden="true"></span>${it.text}<span class="vh"> (${colourName(it.swatch)})</span></li>`)}</ul>` : '');
+/* ---------------------------------------------------------- keys re-set from a drawing (D49, D71) */
+// A key printed on the sheet (or a material schedule printed beside it) returns as real text under the
+// drawing, each entry drawn in the drawing's own graphic code: a colour fill or hatch for an area, a solid,
+// dashed or dotted line for a route or boundary, a point, a triangle for an access or exit marker, a measure
+// line, or the circled code the drawing carries. Colour marks take the drawing's dark treatment in CSS, so the
+// key always matches what the reader sees; codes are interface ink.
+const svg = (box, body) => `<svg class="key__c" viewBox="${box}" aria-hidden="true" focusable="false">${body}</svg>`;
+const TRI = { left: '4,8 18,1.5 18,14.5', right: '20,8 6,1.5 6,14.5', up: '12,1 19,15 5,15', down: '12,15 19,1 5,1' };
+const HATCH = [-14, -10.5, -7, -3.5, 0, 3.5, 7, 10.5].map((k) => `M${k} 14L${k + 14} 0`).join('');
+const MARKS = {
+  fill: (c) => svg('0 0 14 14', `<rect width="14" height="14" fill="${c}"/>`),
+  hatch: (c, dir, ground) => svg('0 0 14 14', `${ground ? `<rect width="14" height="14" fill="${ground}"/>` : ''}<path d="${HATCH}" stroke="${c}" stroke-width="1.2" fill="none"/>`),
+  line: (c) => svg('0 0 24 16', `<path d="M1 8H23" stroke="${c}" stroke-width="2"/>`),
+  dash: (c) => svg('0 0 24 16', `<path d="M0.5 8H24" stroke="${c}" stroke-width="2.5" stroke-dasharray="4.5 3"/>`),
+  dot: (c) => svg('0 0 24 16', `<path d="M2 8H23" stroke="${c}" stroke-width="2.6" stroke-linecap="round" stroke-dasharray="0 4.75"/>`),
+  point: (c) => svg('0 0 24 16', `<circle cx="12" cy="8" r="5" fill="${c}"/>`),
+  triangle: (c, dir = 'left') => svg('0 0 24 16', `<polygon points="${TRI[dir] || TRI.left}" fill="${c}"/>`),
+  measure: (c) => svg('0 0 24 16', `<path d="M6 8H19" stroke="${c}" stroke-width="1.5"/><polygon points="1,8 8,4 8,12" fill="${c}"/><circle cx="20" cy="8" r="3.25" fill="${c}"/>`),
+};
+const MARK_WORDS = { fill: '', hatch: ' hatching', line: ' line', dash: ' dashed line', dot: ' dotted line', point: ' dot', triangle: ' triangle', measure: ' line from a triangle to a dot' };
+const markOf = (it) => it.mark || (it.code ? 'code' : 'fill');
+function keyItem(it) {
+  const m = markOf(it);
+  if (m === 'code') return html`<li class="key__i"><span class="key__m key__m--code">${it.code}</span><span class="key__x">${it.text}</span></li>`;
+  if (!MARKS[m]) throw new Error(`key mark "${m}" is not one of ${Object.keys(MARKS).join(', ')}, code`);
+  if (![it.swatch, it.ground ?? '#000000'].every((c) => /^#[0-9A-F]{6}$/iu.test(c || ''))) throw new Error(`key entry "${it.text}" needs #RRGGBB colours`);
+  const box = m === 'fill' || m === 'hatch';
+  return html`<li class="key__i"><span class="key__m${box ? ' key__m--box' : ''}">${raw(MARKS[m](it.swatch, it.dir, it.ground))}</span><span class="key__x">${it.text}<span class="vh"> (${colourName(it.swatch)}${MARK_WORDS[m]})</span></span></li>`;
+}
+// short entries stand four to a row on the 8-column key (two grid columns each), long ones two to a row;
+// up to three short entries stand on one centred line. Entries run down each column, as a printed
+// schedule does, so a numbered key reads 1, 2, 3 ... in order: --rK is the row count at K columns and
+// --cK the columns that row count fills (five entries at four columns fill three, centred as a block)
+function keyOf(f) {
+  if (!f.legend?.length) return '';
+  const items = f.legend, n = items.length, short = items.every((it) => it.text.length <= 26);
+  const layout = n <= 3 && short ? 'row' : short ? 'short' : 'long';
+  const codes = items.every((it) => markOf(it) === 'code');
+  const title = f.legendTitle || 'Key';
+  const rows = [1, 2, 3, 4].map((c) => { const r = Math.ceil(n / c); return `--r${c}: ${r}; --c${c}: ${Math.ceil(n / r)}`; }).join('; ');
+  return html`<div class="key key--${layout}${codes ? ' key--codes' : ''} s-text"><p class="key__t" aria-hidden="true">${title}</p><ul class="key__list" role="list" aria-label="${f.title ? `${title}: ${f.title}` : title}" style="${rows}">${items.map(keyItem)}</ul></div>`;
+}
 
 /* ---------------------------------------------------------- figures of a case study */
 const capOf = (f) => (f.title || f.caption || f.credit) ? html`<figcaption class="cap s-narrow">${when(f.title, () => html`<span class="cap__t">${f.title}.</span> `)}${inline(f.caption || '')}${when(f.credit, () => html` <span class="credit">${f.credit}.</span>`)}</figcaption>` : '';
@@ -145,7 +185,7 @@ export function figure(f, n, ctx) {
   const drawing = f.kind === 'drawing';
   if (f.items) {
     const items = f.items.map((it, k) => ({ rel: drawing ? cutOrFail(it.src) : it.src, alt: it.alt, drawing, title: `${f.title} (${k + 1} of ${f.items.length})` }));
-    if (drawing) return html`<figure class="fig block wrap g" id="fig-${n}">${cells(items, { prefix: p, scale: true })}${legendOf(f)}${capOf(f)}</figure>`;
+    if (drawing) return html`<figure class="fig block wrap g" id="fig-${n}">${cells(items, { prefix: p, scale: true })}${keyOf(f)}${capOf(f)}</figure>`;
     const r = row(items, { prefix: p, zoom: true });
     return html`<figure class="fig block wrap g" id="fig-${n}" data-rv><div class="s-${r.span}">${r.html}</div>${capOf(f)}</figure>`;
   }
@@ -155,7 +195,7 @@ export function figure(f, n, ctx) {
   const span = spanFor(w, h, f.maxH ? { maxH: Math.min(820, f.maxH) } : {});
   const pic = image(rel, { alt: f.alt, sz: sizesFor(span), prefix: p, zoom: true, title: f.title });
   const labels = drawing ? labelsFor(rel, f.labels) : [];
-  return html`<figure class="fig block wrap g" id="fig-${n}" data-rv><div class="s-${span}">${labels.length ? labelled(pic, rel, labels, f.title) : pic}</div>${legendOf(f)}${capOf(f)}</figure>`;
+  return html`<figure class="fig block wrap g" id="fig-${n}" data-rv><div class="s-${span}">${labels.length ? labelled(pic, rel, labels, f.title) : pic}</div>${keyOf(f)}${capOf(f)}</figure>`;
 }
 
 /* ---------------------------------------------------------- heroes */
