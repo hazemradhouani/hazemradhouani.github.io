@@ -57,11 +57,13 @@
   "narrative": [
     {
       "text": "The flood-risk prevention plan (PPRI) requires the whole building to be raised to 29.5 NGF, about 1.6 m above natural ground. The permit notice turns this into a plinth of bonded, perforated brick on which the two blocks sit: two offset low walls holding a continuous planter, so that the street is partly planted at passers-by's height. On the plinth, the active uses of the raised ground floor are arranged within a covered passage, wide open to the street, that links the two blocks; a semi-buried car park lies beneath, about 2.0 m below natural ground. A shop, at natural ground level, occupies the south end of block A, at the corner of avenue de Verdun and rue de l'Avenir.",
-      "source": "hq:Villneuve la garenne/PC40-2_DOCUMENTS DESCRIPTIFS SECURITE INCENDIE ERP_merge [121-140]_page-0001.jpg (architectural notice PC 4, page 8: 'La contrainte réglementaire liée au PPRI impose une surélévation générale du bâtiment jusqu'à la cote 29,5 NGF […] Un commerce, implanté au niveau du sol naturel, occupe la partie Sud du plot A, à l'angle de l'avenue de Verdun et de la rue de l'Avenir.'; translated, D17)"
+      "source": "hq:Villneuve la garenne/PC40-2_DOCUMENTS DESCRIPTIFS SECURITE INCENDIE ERP_merge [121-140]_page-0001.jpg (architectural notice PC 4, page 8: 'La contrainte réglementaire liée au PPRI impose une surélévation générale du bâtiment jusqu'à la cote 29,5 NGF […] Un commerce, implanté au niveau du sol naturel, occupe la partie Sud du plot A, à l'angle de l'avenue de Verdun et de la rue de l'Avenir.'; translated, D17)",
+      "chapter": "Site and plans"
     },
     {
       "text": "The materials notice names bio-sourced materials (timber windows, French windows and curtain walls; timber decking or slabs on pedestals for the terraces), a geo-sourced substrate for the planted roofs, and reused solid brick.",
-      "source": "hq:Villneuve la garenne/PC40-2_DOCUMENTS DESCRIPTIFS SECURITE INCENDIE ERP_merge [141-160] [11-20]_page-0005.jpg (materials notice PC 10-1, page 5, '3/ PROVENANCES DES MATÉRIAUX': 'Matériaux biosourcés', 'Matériaux géosourcés', 'Matériaux issus du réemploi : Brique pleine.'; translated, D17)"
+      "source": "hq:Villneuve la garenne/PC40-2_DOCUMENTS DESCRIPTIFS SECURITE INCENDIE ERP_merge [141-160] [11-20]_page-0005.jpg (materials notice PC 10-1, page 5, '3/ PROVENANCES DES MATÉRIAUX': 'Matériaux biosourcés', 'Matériaux géosourcés', 'Matériaux issus du réemploi : Brique pleine.'; translated, D17)",
+      "chapter": "Sections and elevations"
     }
   ],
   "hero": {
@@ -70,6 +72,11 @@
     "caption": "The building from avenue de Verdun.",
     "source": "hq:Villneuve la garenne/PC40-2_DOCUMENTS DESCRIPTIFS SECURITE INCENDIE ERP_merge [141-160] [11-20]_page-0005.jpg (printed caption 'FIGURE 2. VUE DU BÂTIMENT DEPUIS L'AVENUE DE VERDUN.'; translated, D17)"
   },
+  "chapters": [
+    { "title": "Site and plans", "from": "Site plan" },
+    { "title": "Sections and elevations", "from": "Longitudinal section A-A" },
+    { "title": "Views", "from": "Planters on avenue de Verdun" }
+  ],
   "figures": [
     {
       "src": "images/avenir/avenir-site-plan.png",

@@ -47,7 +47,8 @@
     },
     {
       "text": "The project was developed through physical model-making and hand drawing alongside digital production, exploring the tectonic possibilities of a building built in and with the materials of its site.",
-      "source": "site"
+      "source": "site",
+      "chapter": "Formal research"
     }
   ],
   "hero": {
@@ -56,6 +57,12 @@
     "credit": null,
     "source": "site + pdf2025:p23 + hq:Tabarka/.trashed-1762728296-Image_4.png"
   },
+  "chapters": [
+    { "title": "Site", "from": "Site plan" },
+    { "title": "Plan, façade and section", "from": "Level 01" },
+    { "title": "Formal research", "from": "Formal research, volume" },
+    { "title": "Views", "from": "Sectional perspective" }
+  ],
   "figures": [
     {
       "src": "images/corallum/corallum-site-plan.jpg",

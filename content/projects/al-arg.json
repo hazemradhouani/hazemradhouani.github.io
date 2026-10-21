@@ -69,7 +69,8 @@
     },
     {
       "text": "The project was founded on field surveys and heritage documentation carried out with the Société de Préservation du Village d'ARG over two years prior to the thesis, grounding the design work in direct material knowledge of the site.",
-      "source": "site"
+      "source": "site",
+      "chapter": "Existing state and proposal"
     }
   ],
   "honour": "Highest Honours | Unanimous jury | ENAU, University of Carthage | June 2024",
@@ -80,6 +81,13 @@
     "caption": "Aerial view of the rehabilitated project at sunset. Reading of the reconstituted urban fabric, open courtyards, and earth volumes within the oasis landscape.",
     "source": "pdf2026:p27 + hq:EL erg/Render.jpg (full frame of the earlier band crop)"
   },
+  "chapters": [
+    { "title": "Territory and site", "from": "Territory" },
+    { "title": "Existing state and proposal", "from": "Ground floor plan, existing state" },
+    { "title": "Spaces", "from": "Functional spaces" },
+    { "title": "Structure and materials", "from": "Structures" },
+    { "title": "Views", "from": "Atmosphere" }
+  ],
   "figures": [
     {
       "src": "images/al-arg/al-arg-territory-map-hq.png",

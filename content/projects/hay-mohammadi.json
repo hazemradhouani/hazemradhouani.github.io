@@ -57,6 +57,9 @@
     "credit": null,
     "source": "site + pdf2025:p44 + hq:Station Hay Mohammadi/2025 - Hazem radhouani - Portfolio - HQ [46-50]_page-0002.jpg (upper render; signage 'STATION HAY MOHAMMADI' and 'محطة حي المحمدي', intrinsic)"
   },
+  "chapters": [
+    { "title": "Views", "from": "Aerial view" }
+  ],
   "figures": [
     {
       "src": "images/hay-mohammadi/hay-mohammadi-aerial.jpg",

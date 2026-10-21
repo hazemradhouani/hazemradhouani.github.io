@@ -47,7 +47,8 @@
     },
     {
       "text": "The programme distributes four cinema screens, a film library and archive, a cafe, and public circulation spaces across a building that is simultaneously urban and introverted. The primary public space is a covered interior street that runs through the building from one facade to the other, accessible outside of cinema hours and acting as a shortcut through the block. This device allows the building to contribute to the pedestrian life of the neighbourhood rather than withdrawing from it.",
-      "source": "site"
+      "source": "site",
+      "chapter": "Plans and sections"
     },
     {
       "text": "The project was produced at the end of the first architectural cycle at ENAU and represents the first design work at urban scale, engaging seriously with questions of site, programme, and the relationship between architecture and the city.",
@@ -60,6 +61,12 @@
     "credit": null,
     "source": "site + pdf2025:p14 + hq:Cinema/.trashed-1762728296-Scene 2.png"
   },
+  "chapters": [
+    { "title": "Site", "from": "Aerial view" },
+    { "title": "Plans and sections", "from": "Sketching the ideas" },
+    { "title": "Façade", "from": "Eastern façade" },
+    { "title": "Programme and interiors", "from": "Exploded axonometric" }
+  ],
   "figures": [
     {
       "src": "images/cinephile/cinephile-aerial.jpg",

@@ -67,6 +67,12 @@
     "alt": "Street render of the building on avenue Jean Jaurès: a white rendered façade over a pale green shopfront, between a taller white building with a red restaurant front and a lower neighbour, a white car at the kerb",
     "source": "pdf2026:p3 + hq:La villette/NB_StudioBeleem_JJaures_LaVillette_CAM-03_AvenueJeanJaures_Rep-3_PC_20260224.jpg"
   },
+  "chapters": [
+    { "title": "Site", "from": "Aerial view" },
+    { "title": "Plan and elevation", "from": "Level 2, building C: room types" },
+    { "title": "Details", "from": "Façade module, constructive axonometric" },
+    { "title": "Views", "from": "Courtyard" }
+  ],
   "figures": [
     {
       "src": "images/la-villette/la-villette-garden-render.jpg",

@@ -53,6 +53,10 @@
     "credit": null,
     "source": "site + hq:VILLAS/Image_28.png"
   },
+  "chapters": [
+    { "title": "Site and plans", "from": "Site plan" },
+    { "title": "Views", "from": "Front façade" }
+  ],
   "figures": [
     {
       "src": "images/papillon/papillon-site-plan.png",

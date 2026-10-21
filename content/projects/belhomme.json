@@ -77,6 +77,11 @@
     "caption": "The corner of rue Belhomme and boulevard de Rochechouart, then the rear courtyard: the project set in its surroundings, from permit sheet PC6.",
     "source": "pdf2026:p9 + hq:BELHOMME/ANX1_merge [31-60]_page-0004.jpg (permit sheet PC6, rue Belhomme / bd Rochechouart)"
   },
+  "chapters": [
+    { "title": "Survey and demolition", "from": "Existing facades survey" },
+    { "title": "Plans and sections", "from": "Plans" },
+    { "title": "Elevations and detail", "from": "Rue Belhomme elevation" }
+  ],
   "figures": [
     {
       "src": "images/belhomme/belhomme-existing-facades-survey.jpg",

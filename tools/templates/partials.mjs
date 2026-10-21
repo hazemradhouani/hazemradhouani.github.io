@@ -87,7 +87,8 @@ export function row(items, { prefix, max = 'full', zoom = false, after = () => '
 
 // a series in equal cells, each image contained at or under its native width, standing on one line;
 // with `after`, each cell has a second row (caption, text) aligned across cells (subgrid, .cells--2)
-export function cells(items, { prefix, zoom = true, after = null, cls = '', scale = false }) {
+// `rv: false` when an enclosing figure arrives as one group (its key and caption arrive with the series)
+export function cells(items, { prefix, zoom = true, after = null, cls = '', scale = false, rv = true }) {
   // long strips (elevations, sections: wider than 2.4:1) stack one per line at full width, still at one scale
   const strips = items.every((it) => { const d = dims(it.rel); return d.w / d.h > 2.4; });
   const k = items.length; const n = strips ? 1 : k <= 4 ? k : k % 3 === 0 ? 3 : 4; const n8 = Math.min(n, after ? 3 : 2);
@@ -97,7 +98,7 @@ export function cells(items, { prefix, zoom = true, after = null, cls = '', scal
     const pic = image(it.rel, { alt: it.alt, sz: sizesFor('full', f / n, f, f / n8), prefix, zoom, title: it.title });
     return html`<div class="cell"${scale ? html` style="--sc: ${(f * 100).toFixed(2)}%"` : ''}>${pic}${after ? after(it, i) : ''}</div>`;
   });
-  return html`<div class="s-full cells${after ? ' cells--2' : ''}${scale ? ' cells--scale' : ''}${cls ? ' ' + cls : ''}" style="--n: ${n}; --n8: ${n8}; --n4: 1" data-rv>${out}</div>`;
+  return html`<div class="s-full cells${after ? ' cells--2' : ''}${scale ? ' cells--scale' : ''}${cls ? ' ' + cls : ''}" style="--n: ${n}; --n8: ${n8}; --n4: 1"${rv ? html` data-rv` : ''}>${out}</div>`;
 }
 
 /* ---------------------------------------------------------- labels re-set from a drawing (D49) */
@@ -203,7 +204,7 @@ export function figure(f, n, ctx) {
   const drawing = f.kind === 'drawing';
   if (f.items) {
     const items = f.items.map((it, k) => ({ rel: drawing ? cutOrFail(it.src) : it.src, alt: it.alt, drawing, title: `${f.title} (${k + 1} of ${f.items.length})` }));
-    if (drawing) return plate(f, n, 'full', cells(items, { prefix: p, scale: true }), { rv: false, key: keyOf(f) });
+    if (drawing) return plate(f, n, 'full', cells(items, { prefix: p, scale: true, rv: false }), { key: keyOf(f) });
     const r = row(items, { prefix: p, zoom: true, ladder });
     return plate(f, n, r.span, html`<div class="s-${r.span} fig__plate">${r.html}</div>`);
   }
