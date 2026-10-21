@@ -37,6 +37,21 @@ test('annotation removal takes only components wholly inside the rectangle; a cr
   assert.deepEqual(report[0].bbox, { x: 5, y: 5, w: 4, h: 6 });
 });
 
+test('a colour-matched erase lifts a flat key swatch and its pale edge but keeps the line it touches (D71)', () => {
+  const c = canvas(20, 12);
+  rect(c, 4, 2, 10, 6, [191, 231, 250]);   // the printed swatch
+  rect(c, 3, 2, 1, 6, [223, 243, 252]);    // its antialiased edge, half-way to paper
+  rect(c, 0, 8, 20, 1, [60, 60, 60]);      // a road line touching its lower edge
+  c.set(6, 7, [110, 120, 125]);             // a pixel where swatch and line blend
+  const report = eraseComponents(c.px, 20, 12, [{ id: 'swatch', x: 2, y: 1, w: 14, h: 9, match: [191, 231, 250] }], OPTS);
+  assert.deepEqual(c.at(8, 4), [255, 255, 255, 255]);
+  assert.deepEqual(c.at(3, 4), [255, 255, 255, 255]);
+  assert.deepEqual(c.at(8, 8), [60, 60, 60, 255]);
+  assert.deepEqual(c.at(6, 7), [110, 120, 125, 255]);
+  assert.equal(report[0].removed, 10 * 6 - 1 + 6);
+  assert.deepEqual(report[0].bbox, { x: 3, y: 2, w: 11, h: 6 });
+});
+
 test('object matte keeps enclosed white surfaces opaque and turns the cast shadow translucent', () => {
   const c = canvas(30, 30);
   rect(c, 8, 8, 12, 12, [0, 0, 0]);         // outline square...
