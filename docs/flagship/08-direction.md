@@ -102,6 +102,8 @@ No new font files: the self-hosted EB Garamond and IBM Plex Sans swap roles.
 | `s-narrow` | 4–9 | 2–7 | 1–4 |
 | `s-four` | 5–8 | 3–6 | 1–4 |
 
+Case studies use their own ladder and two text axes (rail `1 / span 3`, copy `4 / span 6`; plates `full` 1–12 or hung from col 4: `nine` 4–12, `text` 4–11, `narrow` 4–9, `four` 4–7): see `15-case-study-composition-and-motion.md` and D73.
+
 - Pairs and triples use the same lines.
 - Vertical rhythm uses three gaps only:
   - inside a group: the gutter;
@@ -123,10 +125,10 @@ No new font files: the self-hosted EB Garamond and IBM Plex Sans swap roles.
 - The PDF's own alpha cutouts (the thesis books, section cutaways) are used where they show the work.
 
 ## Motion
-Each motion has a purpose, and reduced motion removes it.
+Each motion has a purpose, and reduced motion removes it. **Superseded in detail by `15-case-study-composition-and-motion.md` §3 (D75–D78)**: the house curve, the plate rise, the masked h1 and the reduced-motion crossfade. The table below is the 2026-10-13 state.
 
 Easing:
-- `--ease-out: cubic-bezier(.16,1,.3,1)`;
+- `--ease-out: cubic-bezier(.16,1,.3,1)` (now `cubic-bezier(.22,1,.36,1)`, D75);
 - `--spring`: a critically damped spring (ω = 2π/0.45 s) sampled as `linear()`, 660 ms.
 
 | Purpose | Treatment |
@@ -143,7 +145,7 @@ Never: autoplay, parallax, scroll-jacking or smooth-scroll libraries, custom cur
 ## Pages
 - **Home:** identity → Al-Arg aerial (LCP) → "Look before building." → Al-Arg at three scales → selected work in justified pairs → capabilities (4+4+4) → research (the thesis as an object) → footer.
 - **Work:** a centred index grouped by place → 14 chapters (hero, centred title and metadata, one justified row, link).
-- **Project:** office | place label and title → hero (plate or hero pair) and its caption → descriptor, spec and tag → quote → role and narrative → figures (drawing series at one scale) → film → next project (image first).
+- **Project** (D73, D74; doc 15 §2): office | place line, title and the plain summary → hero → title block (descriptor and tag strip, spec cells, contents) → quote → role → overview → numbered chapters (rule, number and title on the rail, paragraphs on the copy axis, then their plates, captions beside or below) → film as the last chapter → next project.
 - **Research**, **About**, **Motion** and **404** use the same system.
 
 ## Brand
