@@ -24,7 +24,7 @@ This is the procedure for turning one `Images HQ/` folder into a case study's pu
   - the cartouche or title block, studio and client panels and logos;
   - project codes, page numbers, sheet frames and key-plan thumbnails;
   - north arrows only when they sit in the cartouche.
-- **Client names are not published** (discretion). Studio credits are: "Render: Studio BELEM", the office name.
+- **Client names are not published** (discretion). Renders and photographs carry no author line: every render is the owner's (D72). The office is named where the project was done.
 - **English site (D17).** French and Arabic text is published as faithful English, with the original quoted in the record.
 - **No upscaling, ever.** No generative or content-aware pixels, ever.
 
@@ -145,7 +145,7 @@ node tools/media.mjs --force images/<slug> images/cut/<slug>
   - Use `"align": "end"` when the label sits left of the drawing.
   - Use `\n` for a printed line break.
   - Keep labels short; the QA fails a label over ink.
-- **Legends:** `"legend": [{ "swatch": "#RRGGBB", "text": "…" }]`, with the swatch sampled from the source:
+- **Keys (D71):** a printed key never stays in the pixels: crop it out, or erase it (a flat swatch touching linework takes an erase rectangle with `"match": [r, g, b]`). Re-set it as `"legend": [{ "text": "…", "mark": "fill | hatch | line | dash | dot | point | triangle | measure", "swatch": "#RRGGBB", "ground"?: "#RRGGBB", "dir"?: "left" }]` or, for a numbered schedule, `{ "code": "M1", "text": "…" }` with `"legendTitle": "Materials"`. Pick the mark the drawing uses (a dashed route is `dash`, an area `fill`). Never put a schedule in a caption. Sample each colour from the source:
   ```
   ffmpeg -i src -vf crop=5:3:X:Y,scale=1:1 -f rawvideo -pix_fmt rgb24 - | od -An -tu1
   ```
