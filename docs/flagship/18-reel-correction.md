@@ -9,7 +9,7 @@
 |---|---|---|---|
 | P1a | Foundation: tokens, pills, footer, references, name-overlap gate | done | commit "Plan 18 P1a"; full QA 27/27 ok (file: base, 404 checks skipped) |
 | P1b | Email chip, form removal, theme sync + reveal | done | commit "Plan 18 P1b" (D107, D108); chip beside Contact only from 105 rem (measured: at the plan's 64 rem it covers the name); CV regenerated now as well as in P4 |
-| P2a | Home compositions (content only) | todo | |
+| P2a | Home compositions (content only) | done | commit "Plan 18 P2a" (D120); `home.json` `reel` (15 items, choices table under §4 P2a); old keys marked `$remove` for P2b; QA coverage gate skips `layout`/`layers`/`why`/`$…`; home QA all gates pass |
 | P2b | Home build and motion | todo | |
 | P3 | Index: tree first, rebuilt; grid without margins | todo | |
 | P4 | About sheet and about.html | todo | |
@@ -160,6 +160,28 @@ The owner supplied three screen recordings of dmcg.co as the target feel (§2). 
 3. Write `content/pages/home.json` as `reel: [{ project, layout, layers: [{ src, role, pos? }], why }]`.
 4. Mark the old `film`, `column`, `proofs`, `research` and `cover` for removal in P2b.
 5. Save the choices table to the progress doc.
+
+**P2a result (D120).** Chosen from per-project contact sheets of every image the project's content references, then checked in a static preview at the D104 shares in both schemes (scratchpad `compose.mjs`). Rules: main = the case-study hero when it crops well to 16:10 (keeps the home → case morph coherent); a portrait hero takes `duo-p` (4:5); side = another time, scale or inside/outside; drawing = the cutout that explains the project and still reads on a ~290–390 px card. Every layer is an image the project already publishes (checked by script), so alt text and sources are on record.
+
+| # | Project | Layout | Main | Side | Drawing (cutout) |
+|---|---|---|---|---|---|
+| 1 | Zenata | trio | platform render (hero), pos 50% 55% | dusk corner | site access axo |
+| 2 | Bolivar | duo-p | courtyard render (hero, portrait) | — | raised/lowered volumes axo |
+| 3 | Al-Arg | trio-m | aerial at sunset (hero) | shaded courtyard | structure 01 (wall and timber shade) |
+| 4 | Nouvelle Medina | trio | night section (hero) | aerial | passenger flows axo |
+| 5 | Foubert | trio-m | brick street render (hero), pos 50% 60% | rear aerial | west facade |
+| 6 | La Villette | duo-p | street render (hero, portrait) | — | facade module axo |
+| 7 | Sentry | film | scrub film (videos/scrub/sentry-*) | at the window | roof elevation |
+| 8 | Belhomme | duo-p | corner render (hero, portrait) | — | cross-section C-C' |
+| 9 | Corallum | trio | corner (hero) | interior ramp | volume study (restrict) |
+| 10 | Aïn Sebaâ | trio-m | screen facade (hero) | across the tracks | ground-floor plan |
+| 11 | Avenir | duo-p | avenue de Verdun render (hero), 4:5 at pos 35% 50% | — | south elevation |
+| 12 | Cinephile | trio | foyer (hero) | facade at dusk | concept sketch |
+| 13 | Hay Mohammadi | duo | aerial (not the hero: the 2.85:1 front loses its ends at 16:10) | front, pos 30% 50% (keeps the sign) | — (no drawing in the content) |
+| 14 | Papillon | trio-m | pool (hero), pos 40% 50% | front facade | plans |
+| 15 | Tamansourt | trio | path between the wings (hero) | aerial | site plan |
+
+Rejected after the preview: Nouvelle Medina exploded structure, Sentry section B-B, Aïn Sebaâ structural concept and Papillon site plan (too faint at card size); Hay Mohammadi front at pos 50 % (cut the sign). Order kept from plan 17's column (typologies alternate; no two `duo-p` adjacent). **For P2b:** `film` is the trio geometry with the scrub film as main (16:9); `duo` places main left and side bottom right, on top; drawings are referenced by their `images/cut/` path (A8); `why` is not published. Removed in P2b: `film`, `column`, `cover`, `proofs`, `research` (marked `$remove` in the JSON).
 
 ### P2b: Home build and motion
 1. `home()` in `pages.mjs`:

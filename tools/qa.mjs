@@ -24,11 +24,11 @@ let gateFails = 0;
 /* ---- content coverage: every content string (not paths, ids or sources) appears in its built page */
 {
   const rd = (p) => JSON.parse(fs.readFileSync(path.join(REPO, p), 'utf8'));
-  const SKIP = new Set(['source', 'sources', 'og', '$comment', 'id', 'slug', 'group', 'filters', 'order', 'kind', 'size', 'fit', 'lang', 'film', 'knowsAbout',
+  const SKIP = new Set(['source', 'sources', 'og', 'id', 'slug', 'group', 'filters', 'order', 'kind', 'size', 'fit', 'lang', 'film', 'knowsAbout',
     'project', 'coverSource', 'abstractSource', 'date', 'action', 'href', 'case',
-    'at', 'align', 'swatch', 'mark', 'dir']);  // label anchors, alignment and key colours and marks are not visible copy
+    'at', 'align', 'swatch', 'mark', 'dir', 'layout', 'layers', 'why']);  // label anchors, alignment, key colours and marks, composition data and its reasons are not visible copy
   const strings = (v, key = '', out = []) => {
-    if (SKIP.has(key) || /Source$/.test(key)) return out;
+    if (SKIP.has(key) || key.startsWith('$') || /Source$/.test(key)) return out;
     if (typeof v === 'string') { if (v.length > 2 && !/^(images|videos|files|projects)\/|\.(jpe?g|png|webp|mp4)$/i.test(v)) out.push(v); }
     else if (Array.isArray(v)) v.forEach((x) => strings(x, key, out));
     else if (v && typeof v === 'object') for (const [k, x] of Object.entries(v)) strings(x, k, out);
