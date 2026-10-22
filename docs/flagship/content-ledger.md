@@ -10,6 +10,7 @@ Every fact on the site comes from one of these sources (precedence in `05-brief.
 | `pdf2025:pN` | `2025 - Porfolio.pdf`, physical page N |
 | `claude-md` | The identity instruction in `CLAUDE.md`; its former heritage/earthen-specialist wording is superseded for identity claims by `owner:2026-10-13` |
 | `owner:2026-10-13` | The owner's current direct instruction: broad project-work identity and permission to derive/publish suitable assets from the supplied HQ library; it does not establish a project-specific personal role, author or credit |
+| `owner:2026-10-22` | The owner's plan-18 brief: the contact address is radhouani.hazem@enau.ucar.tn (replaces the former address everywhere: header and menu chip, footer, about page, JSON-LD, CV; the contact form is removed, D107) |
 
 Translations from French are literal and marked "(translated from French)". Line-break hyphens and obvious typos in the PDFs are normalised and marked.
 
@@ -50,6 +51,7 @@ Translations from French are literal and marked "(translated from French)". Line
 5. Analytics consent for EU visitors (GA4 is idle-loaded and off under Do Not Track / Global Privacy Control; not legal advice).
 6. Where you are based (C18).
 7. Links and material for your website and app, when ready.
+8. A short project text for La Villette, in your words: its case study now reads in four chapters (D74), but the conflicting site paragraphs were dropped (C07), so the chapters run on the captions alone. Nothing is published in their place.
 Resolved on 2026-10-16 under the owner's rule of that day (D72): renders and photographs carry no author line (every render is the owner's), which closes the credit questions, including the cover photograph's author (C17; the photograph is not published, D37); Al-Arg Structure 03 takes the owner's pdf2026:p26 caption; Tamansourt is near Marrakech (geography); the remaining project questions (roles, scales, room details, Corallum's site and structure, Hotel W, Poutres Al and others listed in D72) are closed as not needed, with nothing published in their place.
 
 Resolved by the owner on 2026-10-12: surfaces, Sakura wording, Zenata ranking, supervisors, Studio BELEM dates, Nouvelle Medina and Aïn Sebaâ office, publication permission for office drawings (the owner produced them). Resolved by the owner on 2026-10-13: the broad identity wording and authority to derive/publish a suitable supplied HQ asset, subject to the project-specific evidence rules above.

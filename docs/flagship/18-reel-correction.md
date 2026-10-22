@@ -8,7 +8,7 @@
 | Phase | Scope | Status | Commit / notes |
 |---|---|---|---|
 | P1a | Foundation: tokens, pills, footer, references, name-overlap gate | done | commit "Plan 18 P1a"; full QA 27/27 ok (file: base, 404 checks skipped) |
-| P1b | Email chip, form removal, theme sync + reveal | todo | |
+| P1b | Email chip, form removal, theme sync + reveal | done | commit "Plan 18 P1b" (D107, D108); chip beside Contact only from 105 rem (measured: at the plan's 64 rem it covers the name); CV regenerated now as well as in P4 |
 | P2a | Home compositions (content only) | todo | |
 | P2b | Home build and motion | todo | |
 | P3 | Index: tree first, rebuilt; grid without margins | todo | |

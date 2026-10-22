@@ -18,6 +18,11 @@ export const words = (text) => html`${String(text).split(/\s+/u).filter(Boolean)
 
 export const icon = (name, p) => raw(`<svg class="icon" width="16" height="16" aria-hidden="true" focusable="false"><use href="${p}images/icons.svg#${name}"></use></svg>`);
 
+// the email chip (D107): without the script "Contact" is a mailto: link; site.js makes it open a chip whose button
+// copies the address. Id-free, so the header, the menu and the footer each hold one (site.js gives the ids)
+const CHECK = raw('<svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5l3.2 3.1L13 4.6" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>');
+export const mailChip = (email, label = 'Contact') => html`<span class="mail"><a class="ctl mail__a" href="mailto:${email}">${label}</a><span class="mail__chip" hidden><button class="mail__b" type="button"><span class="mail__e">${email}</span><span class="mail__c" data-mail-copy>Copy</span><span class="mail__c" data-mail-done hidden>Copied${CHECK}</span></button></span><span class="vh" role="status" data-mail-status></span></span>`;
+
 /* ---------------------------------------------------------- geometry, mirrored from css/site.css */
 const CANVAS = 1280, GUT = 32, COLW = (CANVAS - 11 * GUT) / 12;
 const MAX_H = 720;                                  // 80% of a 900px desktop viewport

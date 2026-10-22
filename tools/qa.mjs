@@ -97,8 +97,62 @@ async function runThemeInteractions() {
     await verify('dark', 'persistence through reload');
     await page.goto(BASE + 'about.html', { waitUntil: 'load' });
     await verify('dark', 'persistence through navigation');
+    // D108: under reduced motion the change is instant (in the click's own task, no view transition)
+    const instant = await page.evaluate(() => { document.querySelector('[data-theme-scope="header"]').click(); return { theme: document.documentElement.getAttribute('data-theme'), vt: document.documentElement.classList.contains('theme-vt') }; });
+    if (instant.theme !== 'light' || instant.vt) failures.push(`reduced motion: the change was not instant (${instant.theme}, theme-vt ${instant.vt})`);
+    await verify('light', 'reduced-motion toggle');
+    // another open page follows through the storage event; a page left before the change shows it after Back
+    const other = await ctx.newPage();
+    await other.goto(BASE + 'architecture.html', { waitUntil: 'load' });
+    await page.evaluate(() => document.querySelector('[data-theme-scope="header"]').click());   // a background tab: no frames for a pointer click
+    await other.bringToFront();
+    await other.waitForTimeout(300);
+    if (await other.evaluate(() => document.documentElement.getAttribute('data-theme')) !== 'dark') failures.push('a second open page did not follow the change (storage)');
+    await other.goto(BASE + 'books.html', { waitUntil: 'load' });   // (from a file: base the name's "./" is a folder)
+    await other.locator('[data-theme-scope="header"]').click();
+    await other.goBack({ waitUntil: 'load' });
+    await other.waitForTimeout(200);
+    if (await other.evaluate(() => document.documentElement.getAttribute('data-theme')) !== 'light') failures.push('Back did not show the theme chosen on the next page');
+    await other.close();
   } catch (e) { failures.push(`header/persistence interaction: ${e.message}`); }
   await ctx.close();
+
+  // D108 with motion: a click starts the feathered reveal, a second one mid-reveal runs it back, a third forward
+  // again; the page always ends in the scheme of the last click, with no console error from a skipped transition
+  const live = await browser.newContext({ viewport: { width: 1440, height: 900 }, colorScheme: 'light', reducedMotion: 'no-preference' });
+  await live.addInitScript(() => { try { if (!sessionStorage.getItem('qa-seeded')) { localStorage.setItem('hazem-theme', 'light'); sessionStorage.setItem('qa-seeded', '1'); } } catch (e) {} });
+  const lp = await live.newPage();
+  const errors = [];
+  lp.on('console', (m) => { if (m.type() === 'error') errors.push(m.text().slice(0, 120)); });
+  lp.on('pageerror', (e) => errors.push(e.message.slice(0, 120)));
+  const state = () => lp.evaluate(() => ({ theme: document.documentElement.getAttribute('data-theme'), vt: document.documentElement.classList.contains('theme-vt'), saved: localStorage.getItem('hazem-theme') }));
+  try {
+    await lp.goto(BASE + 'index.html', { waitUntil: 'load' });
+    await lp.waitForTimeout(800);
+    // clicks timed in the page, 450ms then 150ms apart, all inside the running circle (a pointer click through
+    // Playwright can land after it ends): one
+    // transition for the whole run, its circle running backwards after an even number of clicks
+    // from light: one click ends dark; then two (light, back to dark) end dark; then three end light
+    for (const [clicks, end] of [[1, 'dark'], [2, 'dark'], [3, 'light']]) {
+      const start = (await state()).theme;
+      const mid = await lp.evaluate((clicks) => new Promise((res) => {
+        const b = document.querySelector('[data-theme-scope="header"]'); let vts = 0;
+        const orig = document.startViewTransition.bind(document); document.startViewTransition = (f) => { vts++; return orig(f); };
+        let k = 0;
+        const next = () => { b.click(); if (++k < clicks) setTimeout(next, k === 1 ? 450 : 150); else setTimeout(() => {
+          const a = document.getAnimations().find((x) => x.effect && x.effect.pseudoElement === '::view-transition-new(root)' && x.playState === 'running');
+          document.startViewTransition = orig; res({ vts, rate: a ? a.playbackRate : 0, vt: document.documentElement.classList.contains('theme-vt') });
+        }, 100); };
+        next();
+      }), clicks);
+      if (!mid.vt || mid.vts !== 1 || mid.rate !== (clicks % 2 ? 1 : -1)) failures.push(`motion, ${clicks} click(s): ${mid.vts} transition(s), circle rate ${mid.rate}, theme-vt ${mid.vt}`);
+      await lp.waitForTimeout(1500);
+      const s = await state();
+      if (s.theme !== end || s.saved !== end || s.vt) failures.push(`motion, ${clicks} click(s) from ${start}: ended ${s.theme}, stored ${s.saved}, theme-vt ${s.vt}; expected ${end}`);
+    }
+  } catch (e) { failures.push(`motion reveal: ${e.message}`); }
+  if (errors.length) failures.push(`motion reveal console: ${errors.join(' / ')}`);
+  await live.close();
 
   const mobile = await browser.newContext({ viewport: { width: 375, height: 812 }, colorScheme: 'dark', reducedMotion: 'reduce' });
   const mobilePage = await mobile.newPage();
@@ -132,10 +186,100 @@ async function runThemeFallback() {
   return failures;
 }
 
+// D107: the email chip opens by click and keyboard, copies the address, closes by Esc (inside the menu too, which stays
+// open) and by a click outside; it never covers the name in the header and stays on screen; without the script
+// Contact is a plain mailto: link
+async function runChipPass() {
+  const failures = [];
+  const box = (page, sel) => page.evaluate((sel) => { const el = document.querySelector(sel); if (!el) return null; const r = el.getBoundingClientRect(); return { l: r.left, r: r.right, t: r.top, b: r.bottom, vis: getComputedStyle(el).visibility, op: +getComputedStyle(el).opacity }; }, sel);
+  const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 }, colorScheme: 'light', reducedMotion: 'no-preference' });
+  await ctx.grantPermissions(['clipboard-read', 'clipboard-write']);
+  const page = await ctx.newPage();
+  const H = '.site-header .mail';
+  const expanded = () => page.evaluate((H) => document.querySelector(H + ' .mail__a').getAttribute('aria-expanded'), H);
+  try {
+    await page.goto(BASE + 'index.html', { waitUntil: 'load' });
+    if (await expanded() !== 'false') failures.push('the chip is not collapsed at load');
+    await page.locator(H + ' .mail__a').click();
+    await page.waitForTimeout(600);
+    const open = await box(page, H + ' .mail__chip');
+    if (await expanded() !== 'true' || open.vis !== 'visible' || open.op < 1) failures.push(`click did not open the chip (${open.vis}, ${open.op})`);
+    await page.locator(H + ' .mail__b').click();
+    await page.waitForTimeout(300);
+    const copied = await page.evaluate(async (H) => ({ clip: await navigator.clipboard.readText(), want: document.querySelector(H + ' .mail__a').getAttribute('href').slice(7), done: !document.querySelector(H + ' [data-mail-done]').hidden, status: document.querySelector(H + ' [data-mail-status]').textContent }), H);
+    if (copied.clip !== copied.want || !copied.done || copied.status !== 'Address copied') failures.push(`copy: clipboard "${copied.clip}", done ${copied.done}, status "${copied.status}"`);
+    await page.keyboard.press('Escape');
+    if (await expanded() !== 'false') failures.push('Esc did not close the chip');
+    await page.locator(H + ' .mail__a').focus();
+    await page.keyboard.press('Enter');
+    if (await expanded() !== 'true') failures.push('Enter did not open the chip');
+    await page.keyboard.press('Tab');
+    if (!await page.evaluate((H) => document.activeElement === document.querySelector(H + ' .mail__b'), H)) failures.push('Tab from Contact does not reach the copy button');
+    await page.keyboard.press('Escape');
+    if (await expanded() !== 'false' || !await page.evaluate((H) => document.activeElement === document.querySelector(H + ' .mail__a'), H)) failures.push('Esc from the copy button did not close the chip and return to Contact');
+    await page.locator(H + ' .mail__a').click();
+    await page.mouse.click(4, 450);   // the field at the screen's left edge: no link there
+    if (await expanded() !== 'false' || !page.url().endsWith('index.html')) failures.push('a click outside did not close the chip');
+    for (const w of [1024, 1152, 1280, 1366, 1440, 1920]) {
+      await page.setViewportSize({ width: w, height: 900 });
+      await page.waitForTimeout(150);
+      if (await expanded() !== 'true') await page.locator(H + ' .mail__a').click();
+      await page.waitForTimeout(600);
+      const c = await box(page, H + ' .mail__chip'), n = await box(page, '.site-header .brand');
+      if (c.l < n.r && c.r > n.l && c.t < n.b && c.b > n.t) failures.push(`${w}: the open chip covers the name`);
+      if (c.l < 0 || c.r > w) failures.push(`${w}: the open chip leaves the screen (${Math.round(c.l)}-${Math.round(c.r)})`);
+    }
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.evaluate(() => scrollTo({ top: document.documentElement.scrollHeight, behavior: 'instant' }));
+    await page.waitForTimeout(400);
+    await page.locator('.site-footer .mail__a').click();
+    await page.waitForTimeout(600);
+    const f = await box(page, '.site-footer .mail__chip');
+    if (f.vis !== 'visible' || f.t < 0 || f.l < 0 || f.r > 1440) failures.push(`footer chip ${f.vis} at ${Math.round(f.l)},${Math.round(f.t)}`);
+  } catch (e) { failures.push(`desktop: ${e.message}`); }
+  await ctx.close();
+  for (const w of [320, 375]) {
+    const phone = await browser.newContext({ viewport: { width: w, height: 812 }, colorScheme: 'light', reducedMotion: 'reduce', hasTouch: true });
+    const pp = await phone.newPage();
+    try {
+      await pp.goto(BASE + 'index.html', { waitUntil: 'load' });
+      await pp.locator('.menu-button').first().click();
+      await pp.locator('#menu[open] .mail__a').click();
+      await pp.waitForTimeout(100);
+      const c = await box(pp, '#menu .mail__chip');
+      if (c.vis !== 'visible' || c.l < 0 || c.r > w) failures.push(`${w} menu: chip ${c.vis} at ${Math.round(c.l)}-${Math.round(c.r)}`);
+      await pp.keyboard.press('Escape');
+      const s = await pp.evaluate(() => ({ chip: document.querySelector('#menu .mail__a').getAttribute('aria-expanded'), menu: document.getElementById('menu').open }));
+      if (s.chip !== 'false' || !s.menu) failures.push(`${w} menu: Esc closed ${s.menu ? 'nothing' : 'the menu'} (chip ${s.chip})`);
+      await pp.keyboard.press('Escape');
+      if (await pp.evaluate(() => document.getElementById('menu').open)) failures.push(`${w} menu: a second Esc did not close the menu`);
+      await pp.evaluate(() => scrollTo({ top: document.documentElement.scrollHeight, behavior: 'instant' }));
+      await pp.locator('.site-footer .mail__a').click();
+      await pp.waitForTimeout(100);
+      const f = await box(pp, '.site-footer .mail__chip');
+      if (f.vis !== 'visible' || f.l < 0 || f.r > w || f.t < 0) failures.push(`${w} footer: chip ${f.vis} at ${Math.round(f.l)}-${Math.round(f.r)}`);
+    } catch (e) { failures.push(`${w} menu: ${e.message}`); }
+    await phone.close();
+  }
+  const nojs = await browser.newContext({ viewport: { width: 1440, height: 900 }, javaScriptEnabled: false });
+  const np = await nojs.newPage();
+  try {
+    await np.goto(BASE + 'index.html', { waitUntil: 'load' });
+    const s = await np.evaluate(() => [...document.querySelectorAll('.mail')].map((m) => ({ href: m.querySelector('.mail__a').getAttribute('href'), hidden: m.querySelector('.mail__chip').hidden })));
+    if (!s.length || s.some((m) => !m.href.startsWith('mailto:') || !m.hidden)) failures.push(`without the script: ${JSON.stringify(s)}`);
+  } catch (e) { failures.push(`no script: ${e.message}`); }
+  await nojs.close();
+  return failures;
+}
+
 const themeWorkflowFailures = [...await runThemeInteractions(), ...await runThemeFallback()];
+const chipFailures = await runChipPass();
+gateFails += chipFailures.length;
+if (chipFailures.length) console.log(`FAIL email chip: ${chipFailures.join(' | ')}`);
+else console.log('ok   email chip: click and keyboard, copy, Esc (in the menu too), outside click, clear of the name 1024-1920, on screen at 320/375, mailto: without the script');
 gateFails += themeWorkflowFailures.length;
 if (themeWorkflowFailures.length) console.log(`FAIL theme interaction/fallback: ${themeWorkflowFailures.join(' | ')}`);
-else console.log('ok   theme interaction/fallback: keyboard, persistence, navigation, menu and storage fallback');
+else console.log('ok   theme interaction/fallback: keyboard, persistence, navigation, instant under reduced motion, other tabs, Back, reveal run back and forth, menu and storage fallback');
 
 // Motion (D75): every other check runs with reduced motion, so this pass proves the animated path ends in the
 // plain layout. Each page is read top to bottom with motion on; once every arrival has fired and every running

@@ -1,6 +1,6 @@
 /* Hazem Radhouani · site.js ("Field", docs/flagship/08-direction.md)
    Progressive enhancement only: every page reads, navigates, opens full-size images and plays films
-   without it. Modules: theme, menu dialog, scroll progress, arrival, smooth scroll, figure viewer, contact form, analytics.
+   without it. Modules: theme, menu dialog, email chip, scroll engine, arrival, smooth scroll, figure viewer, analytics.
    Every motion has a stated purpose and is skipped under prefers-reduced-motion. No dependencies. */
 (function () {
   'use strict';
@@ -13,9 +13,9 @@
   var slice = function (list) { return Array.prototype.slice.call(list); };
 
   /* ------------------------------------------------------------ theme (preference, state)
-     The inline bootstrap sets data-theme before CSS is parsed. This controller only synchronises
-     the two controls (header, menu), persists an explicit choice when storage is available, and keeps
-     the browser chrome colour in step. A failed storage read/write is deliberately non-fatal. */
+     The inline bootstrap sets data-theme before CSS is parsed. This controller synchronises the two
+     controls (header, menu) and every open page, persists an explicit choice when storage is available, and
+     keeps the browser chrome colour in step. A failed storage read/write is deliberately non-fatal. */
   var themeControls = slice(document.querySelectorAll('[data-theme-toggle]'));
   var themeMeta = document.getElementById('theme-color');
   var themeMedia = window.matchMedia('(prefers-color-scheme: dark)');
@@ -25,7 +25,11 @@
     if (savedTheme === 'light' || savedTheme === 'dark') explicitTheme = savedTheme;
   } catch (e) {}
   var currentTheme = function () { return root.getAttribute('data-theme') === 'dark' ? 'dark' : 'light'; };
-  var applyTheme = function (theme, persist) {
+  var saveTheme = function (theme) {
+    explicitTheme = theme;
+    try { window.localStorage.setItem('hazem-theme', theme); } catch (e) {}
+  };
+  var applyTheme = function (theme) {
     var dark = theme === 'dark';
     root.setAttribute('data-theme', dark ? 'dark' : 'light');
     root.style.colorScheme = dark ? 'dark' : 'light';
@@ -37,16 +41,57 @@
       var action = button.querySelector('[data-theme-action]');
       if (action) action.textContent = ', switch to ' + (dark ? 'light' : 'dark');
     });
-    if (persist) {
-      explicitTheme = dark ? 'dark' : 'light';
-      try { window.localStorage.setItem('hazem-theme', explicitTheme); } catch (e) {}
-    }
   };
-  applyTheme(currentTheme(), false);
+  applyTheme(currentTheme());
+  /* the change spreads from its button in a feathered circle (D108; state): a view transition whose new picture is
+     masked by a circle growing over 950ms on the in-out curve. The page stays live under it, so a click before it
+     ends runs the circle back. The scheme the reader wants is `wanted`, never read back from the page: mid-reveal
+     the page already wears the new scheme. A keeper animation holds the transition open until the circle lands,
+     then the page is set to `wanted` and the transition skipped, so no frame shows the wrong scheme. Reduced
+     motion, or a browser without view transitions, switches at once. */
+  var wanted = currentTheme();
+  var reveal = null;
+  var revealDone = function (run) {
+    if (reveal !== run) return;
+    reveal = null;
+    if (currentTheme() !== wanted) applyTheme(wanted);
+    run.t.skipTransition();
+    run.t.finished.then(function () { if (!reveal) root.classList.remove('theme-vt'); });
+  };
+  var swapTheme = function (button) {
+    wanted = wanted === 'dark' ? 'light' : 'dark';
+    saveTheme(wanted);
+    if (reveal) { if (reveal.anim) reveal.anim.reverse(); return; }
+    if (reduce.matches || typeof document.startViewTransition !== 'function') { applyTheme(wanted); return; }
+    var b = button.getBoundingClientRect(), x = b.left + b.width / 2, y = b.top + b.height / 2;
+    var r = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y)) + 6 * parseFloat(getComputedStyle(root).fontSize);
+    root.style.setProperty('--vt-x', x + 'px'); root.style.setProperty('--vt-y', y + 'px');
+    root.classList.add('theme-vt');
+    var to = wanted;
+    var run = { t: document.startViewTransition(function () { applyTheme(to); }), anim: null };
+    reveal = run;
+    run.t.ready.then(function () {
+      if (reveal !== run) return;
+      root.animate({ opacity: [1, 1] }, { duration: 1000, iterations: Infinity, pseudoElement: '::view-transition-old(root)' });
+      run.anim = root.animate({ '--vt-r': ['0px', r + 'px'] }, { duration: 950, easing: css('--ease-in-out'), fill: 'both', pseudoElement: '::view-transition-new(root)' });
+      if (wanted !== to) run.anim.reverse();   // a second click landed before the circle began
+      run.anim.finished.then(function () { revealDone(run); }, function () { revealDone(run); });
+    }, function () { revealDone(run); });
+  };
   themeControls.forEach(function (button) {
-    button.addEventListener('click', function () { applyTheme(currentTheme() === 'dark' ? 'light' : 'dark', true); });
+    button.addEventListener('click', function () { swapTheme(button); });
   });
-  var followSystemTheme = function (event) { if (!explicitTheme) applyTheme(event.matches ? 'dark' : 'light', false); };
+  // every open page follows: another tab's choice (storage) and a page restored by Back or Forward (pageshow)
+  var adopt = function (theme) {
+    if (theme !== 'light' && theme !== 'dark') return;
+    explicitTheme = wanted = theme;
+    if (reveal) { var run = reveal; reveal = null; run.t.skipTransition(); root.classList.remove('theme-vt'); }
+    if (currentTheme() !== theme) applyTheme(theme);
+  };
+  window.addEventListener('storage', function (e) { if (e.key === 'hazem-theme') adopt(e.newValue); });
+  window.addEventListener('pageshow', function (e) { if (e.persisted) { try { adopt(window.localStorage.getItem('hazem-theme')); } catch (err) {} } });
+  window.addEventListener('pagehide', function () { if (reveal) adopt(wanted); });
+  var followSystemTheme = function (event) { if (!explicitTheme) { wanted = event.matches ? 'dark' : 'light'; applyTheme(wanted); } };
   if (themeMedia.addEventListener) themeMedia.addEventListener('change', followSystemTheme);
   else if (themeMedia.addListener) themeMedia.addListener(followSystemTheme);
 
@@ -61,12 +106,61 @@
     menuButtons.forEach(function (b) {
       b.addEventListener('click', function () { opener = b; if (!nativeCommand && !menu.open) menu.showModal(); });
     });
-    menu.addEventListener('click', function (e) { if (e.target.closest('a')) menu.close(); });
+    menu.addEventListener('click', function (e) { if (e.target.closest('a:not(.mail__a)')) menu.close(); });
     menu.addEventListener('close', function () { (opener && !opener.closest('[inert]') ? opener : menuButtons[0]).focus(); });
     var wide = window.matchMedia('(min-width: 48rem)');
     var onWide = function () { if (wide.matches && menu.open) menu.close(); };
     if (wide.addEventListener) wide.addEventListener('change', onWide);
   }
+
+  /* ------------------------------------------------------------ the email chip (feedback, D107)
+     Contact opens a chip beside it whose button copies the address and says so ("Copied", and the polite status).
+     A modified click still follows the mailto: link. Esc or a click outside closes the chip. */
+  var mails = slice(document.querySelectorAll('.mail'));
+  var setChip = function (m, open) { m.classList.toggle('is-open', open); m.querySelector('.mail__a').setAttribute('aria-expanded', String(open)); };
+  mails.forEach(function (m, i) {
+    var a = m.querySelector('.mail__a'), chip = m.querySelector('.mail__chip'), status = m.querySelector('[data-mail-status]');
+    var copy = m.querySelector('[data-mail-copy]'), done = m.querySelector('[data-mail-done]'), address = a.getAttribute('href').slice(7);
+    chip.id = 'mail-chip-' + i; chip.hidden = false;
+    a.setAttribute('aria-controls', chip.id); setChip(m, false);
+    a.addEventListener('click', function (e) {
+      if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+      e.preventDefault();
+      var open = !m.classList.contains('is-open');
+      mails.forEach(function (o) { setChip(o, false); });
+      setChip(m, open);
+    });
+    var timer = 0;
+    var say = function (copied, words) {
+      copy.hidden = copied; done.hidden = !copied; status.textContent = words;
+      clearTimeout(timer); timer = setTimeout(function () { copy.hidden = false; done.hidden = true; status.textContent = ''; }, 2400);
+    };
+    // the clipboard, then the older copy command, then the address left selected for the reader's own copy
+    var fallback = function () {
+      var range = document.createRange(), sel = window.getSelection(), ok = false;
+      range.selectNodeContents(m.querySelector('.mail__e')); sel.removeAllRanges(); sel.addRange(range);
+      try { ok = document.execCommand('copy'); } catch (e) {}
+      if (ok) { sel.removeAllRanges(); say(true, 'Address copied'); } else status.textContent = 'Address selected';
+    };
+    m.querySelector('.mail__b').addEventListener('click', function () {
+      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(address).then(function () { say(true, 'Address copied'); }, fallback);
+      else fallback();
+    });
+  });
+  if (mails.length) document.addEventListener('click', function (e) {
+    mails.forEach(function (m) { if (m.classList.contains('is-open') && !m.contains(e.target)) setChip(m, false); });
+  });
+  /* Esc, one ordered handler (D107, D113): an open chip closes first (a dialog around it stays open); then a
+     modal dialog keeps its own Esc */
+  document.addEventListener('keydown', function (e) {
+    if (e.key !== 'Escape') return;
+    var m = mails.filter(function (x) { return x.classList.contains('is-open'); })[0];
+    if (!m) return;
+    e.preventDefault();
+    var inside = m.contains(document.activeElement);
+    setChip(m, false);
+    if (inside) m.querySelector('.mail__a').focus();
+  }, true);
 
   /* ------------------------------------------------------------ scroll engine (orientation, hierarchy: D83, D96)
      One measured list of [data-fx] elements, read in the frame the page moves (Lenis on a fine pointer, the
@@ -597,61 +691,6 @@
     });
     stage.addEventListener('pointercancel', function () { drag = null; stage.classList.remove('is-dragging'); });
   }
-
-  /* ------------------------------------------------------------ contact form (feedback)
-     Same FormSubmit endpoint and payload as before; inline field errors, a busy state and a polite status. */
-  var EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  slice(document.querySelectorAll('form[data-contact]')).forEach(function (form) {
-    var statusEl = form.querySelector('.form__status');
-    var btn = form.querySelector('button[type="submit"]');
-    var btnLabel = btn.querySelector('span');
-    var get = function (n) { return form.elements.namedItem(n); };
-    var fields = ['name', 'email', 'subject', 'message'];
-    var messages = { name: 'Enter your name.', email: 'Enter your email address.', subject: 'Enter a subject.', message: 'Enter your message.' };
-    var setError = function (input, msg) {
-      var err = document.getElementById(input.id + '-err');
-      if (msg) { input.setAttribute('aria-invalid', 'true'); err.textContent = msg; err.hidden = false; }
-      else { input.removeAttribute('aria-invalid'); err.textContent = ''; err.hidden = true; }
-    };
-    var say = function (msg, isError) { statusEl.textContent = msg; statusEl.classList.toggle('is-error', !!isError); };
-    fields.forEach(function (n) {
-      get(n).addEventListener('input', function () { if (this.getAttribute('aria-invalid') === 'true') setError(this, ''); });
-    });
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-      if (form.getAttribute('aria-busy') === 'true') return;
-      var hp = get('_honey');
-      if (hp && hp.value) { say('Message sent.', false); return; }
-      var values = {}; var firstBad = null;
-      fields.forEach(function (n) {
-        var input = get(n); var v = input.value.trim(); values[n] = v; var msg = '';
-        if (!v) msg = messages[n];
-        else if (n === 'email' && !EMAIL.test(v)) msg = 'Enter a valid email address, like name@example.com.';
-        setError(input, msg);
-        if (msg && !firstBad) firstBad = input;
-      });
-      if (firstBad) {
-        var onlyEmail = values.name && values.subject && values.message && values.email;
-        say(onlyEmail ? 'Please enter a valid email address.' : 'Please fill in all fields.', true);
-        firstBad.focus();
-        return;
-      }
-      var data = new FormData();
-      data.append('name', values.name); data.append('email', values.email);
-      data.append('subject', values.subject); data.append('message', values.message);
-      data.append('_subject', (form.getAttribute('data-subject-prefix') || 'Portfolio enquiry from ') + values.name + ': ' + values.subject);
-      data.append('_template', 'none'); data.append('_captcha', 'false'); data.append('_replyto', values.email);
-      form.setAttribute('aria-busy', 'true'); btn.setAttribute('aria-disabled', 'true'); btnLabel.textContent = 'Sending…'; say('', false);
-      var done = function (msg, isError) { form.removeAttribute('aria-busy'); btn.removeAttribute('aria-disabled'); btnLabel.textContent = 'Send'; say(msg, isError); };
-      fetch(form.getAttribute('action'), { method: 'POST', headers: { Accept: 'application/json' }, body: data })
-        .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, body: j }; }); })
-        .then(function (res) {
-          if (res.ok && (res.body.success === 'true' || res.body.success === true)) { form.reset(); done('Message sent. I will be in touch shortly.', false); }
-          else done('Something went wrong. Please email hazemradhouani@gmail.com directly.', true);
-        })
-        .catch(function () { done('Network error. Please email hazemradhouani@gmail.com directly.', true); });
-    });
-  });
 
   /* ------------------------------------------------------------ analytics
      GA4 is loaded once the page is idle, so it never competes with the first render. */

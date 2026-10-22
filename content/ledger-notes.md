@@ -10,6 +10,7 @@ Every fact on the site comes from one of these sources (precedence in `05-brief.
 | `pdf2025:pN` | `2025 - Porfolio.pdf`, physical page N |
 | `claude-md` | The identity instruction in `CLAUDE.md`; its former heritage/earthen-specialist wording is superseded for identity claims by `owner:2026-10-13` |
 | `owner:2026-10-13` | The owner's current direct instruction: broad project-work identity and permission to derive/publish suitable assets from the supplied HQ library; it does not establish a project-specific personal role, author or credit |
+| `owner:2026-10-22` | The owner's plan-18 brief: the contact address is radhouani.hazem@enau.ucar.tn (replaces the former address everywhere: header and menu chip, footer, about page, JSON-LD, CV; the contact form is removed, D107) |
 
 Translations from French are literal and marked "(translated from French)". Line-break hyphens and obvious typos in the PDFs are normalised and marked.
 

@@ -1,6 +1,6 @@
-// Document shell ("Reel", D93): head metadata, the fixed header on its edge, the corner captions, the sentence footer, dialogs.
+// Document shell ("Reel", D93): head metadata, the fixed header on its edge, the corner captions, the one-line footer, dialogs.
 import { html, raw, attrs, when } from '../lib/html.mjs';
-import { icon } from './partials.mjs';
+import { icon, mailChip } from './partials.mjs';
 
 const abs = (site, rel) => site.origin + site.base + rel.replace(/^\.\//, '').replace(/^index\.html$/, '');
 
@@ -13,6 +13,7 @@ export function layout(site, page, body, ctx) {
   const ld = (page.jsonld || []).map((o) => raw(`<script type="application/ld+json">${JSON.stringify(o).replace(/</g, '\\u003c')}</script>`));
   const navItem = (n, i) => {
     const cur = page.nav === n.id ? (page.navExact ? 'page' : 'true') : null;
+    if (n.id === 'contact') return html`<li style="--i: ${i}">${mailChip(P.email, n.label)}</li>`;
     return html`<li style="--i: ${i}"><a class="ctl" href="${p}${n.href}"${attrs({ 'aria-current': cur })}>${n.label}</a></li>`;
   };
   const home = p || './';
@@ -79,14 +80,14 @@ ${brand(true)}
 ${body}
 </main>
 <footer class="site-footer">
-<nav aria-label="Footer"><p class="site-footer__base"><span>&copy; 2026 ${P.name}</span><a class="ctl" href="mailto:${P.email}">${P.email}</a><a class="ctl" href="${P.linkedin}" target="_blank" rel="noopener">LinkedIn<span class="vh"> (opens in a new tab)</span></a><a class="ctl" href="${href('files/hazem-radhouani-cv.pdf')}">CV (PDF)</a><a class="ctl" href="${href('motion.html')}">Films and motion</a></p></nav>
+<nav aria-label="Footer"><p class="site-footer__base"><span>&copy; 2026 ${P.name}</span>${mailChip(P.email)}<a class="ctl" href="${P.linkedin}" target="_blank" rel="noopener">LinkedIn<span class="vh"> (opens in a new tab)</span></a><a class="ctl" href="${href('files/hazem-radhouani-cv.pdf')}">CV (PDF)</a><a class="ctl" href="${href('motion.html')}">Films and motion</a></p></nav>
 </footer>
 ${when(page.corners, () => html`${edge('bottom')}<p class="corner corner--l">${site.corners[0]}</p><p class="corner corner--r">${site.corners[1]}</p>`)}
 <dialog class="menu" id="menu" aria-label="Site menu" data-lenis-prevent>
 <div class="wrap">
 <div class="menu__top">${brand(false)}<div class="menu__controls">${themeButton('menu')}<form method="dialog"><button class="menu__close ctl" type="submit" autofocus>close</button></form></div></div>
 <nav aria-label="Main"><ul class="menu__list" role="list">${[...site.views, ...site.nav].map(navItem)}</ul></nav>
-<p class="menu__contact"><a href="mailto:${P.email}">${P.email}</a><a href="${P.linkedin}" target="_blank" rel="noopener">LinkedIn<span class="vh"> (opens in a new tab)</span></a></p>
+<p class="menu__contact"><a href="${P.linkedin}" target="_blank" rel="noopener">LinkedIn<span class="vh"> (opens in a new tab)</span></a></p>
 </div>
 </dialog>
 ${when(ctx.viewer, () => html`<dialog class="viewer" id="viewer" aria-labelledby="viewer-title" data-lenis-prevent>

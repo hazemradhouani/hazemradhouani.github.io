@@ -341,9 +341,6 @@ const tk = (s) => html`<span class="tale__k">${s}</span>`;
 const tc = (s) => html`<span class="tale__c">${s}</span>`;
 export function about(site, d, ctx) {
   const p = ctx.prefix; const P = site.person; const t = d.tale;
-  const field = (id, label, type = 'text', extra = {}) => html`<div class="field"><label for="cf-${id}">${label} <span>(required)</span></label>${type === 'textarea'
-    ? html`<textarea id="cf-${id}" name="${id}" required aria-describedby="cf-${id}-err"></textarea>`
-    : html`<input id="cf-${id}" name="${id}" type="${type}" required aria-describedby="cf-${id}-err"${attrs(extra)}>`}<p class="field__error" id="cf-${id}-err" hidden></p></div>`;
   const what = (r) => html`<b>${r.what}</b>${when(r.role, () => html`<p>${r.role}</p>`)}${when(r.text, () => html`<p>${r.text}</p>`)}`;
   const sakura = d.experience.find((r) => /Sakura/u.test(r.what));
   const practice = d.experience.filter((r) => r !== sakura);
@@ -386,15 +383,6 @@ ${cvBlock('lang-h', 'Languages', d.languages.map((l) => ({ when: l.level, what: 
 </div>
 <section class="chapter wrap g about-contact" id="contact" aria-labelledby="contact-h">
 <div class="s-text center"><h2 class="h1" id="contact-h">Contact</h2><p class="site-footer__mail in"><a href="mailto:${P.email}">${P.email}</a></p><p><a href="${P.linkedin}" target="_blank" rel="noopener">LinkedIn<span class="vh"> (opens in a new tab)</span></a></p></div>
-<form class="s-narrow block form" action="${d.form.action}" method="post" data-contact data-subject-prefix="${d.form.subjectPrefix}" novalidate>
-<div class="form__hp" aria-hidden="true"><label for="cf-hp">Leave this field empty</label><input id="cf-hp" name="_honey" type="text" tabindex="-1" autocomplete="off"></div>
-${field('name', 'Name', 'text', { autocomplete: 'name' })}
-${field('email', 'Email', 'email', { autocomplete: 'email' })}
-${field('subject', 'Subject')}
-${field('message', 'Message', 'textarea')}
-<p><button class="btn" type="submit"><span>Send</span></button></p>
-<p class="form__status" role="status"></p>
-</form>
 </section>`;
   const jsonld = [{ '@context': 'https://schema.org', '@type': 'ProfilePage', url: `${site.origin}${site.base}about.html`, mainEntity: { '@id': `${site.origin}${site.base}#person` } }, ctx.personLd];
   return { body, viewer: false, page: { path: 'about.html', nav: 'about', navExact: true, title: d.title, description: d.description, og: d.og, ogType: 'profile', jsonld,
