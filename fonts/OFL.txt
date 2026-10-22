@@ -4,9 +4,10 @@ EB Garamond (variable, wght 400-800; roman and italic; Latin and Latin-Ext subse
 Copyright 2017 The EB Garamond Project Authors (https://github.com/octaviopardo/EBGaramond12) EBGaramond-Italic[wght].ttf: Copyright 2017 The EB Garamond Project Authors (https://github.com/octaviopardo/EBGaramond12)
 Files: eb-garamond-*.woff2, from @fontsource-variable/eb-garamond 5.3.0, unmodified.
 
-IBM Plex Sans (variable, wght 100-700; roman; Latin and Latin-Ext subsets)
-Copyright 2019 IBM Corp. All rights reserved. IBMPlexSans-Italic[wdth,wght].ttf: Copyright 2019 IBM Corp. All rights reserved.
-Files: ibm-plex-sans-*.woff2, from @fontsource-variable/ibm-plex-sans 5.3.0, unmodified.
+Instrument Sans (variable, wght 400-700; roman; Latin and Latin-Ext subsets)
+Copyright 2022 The Instrument Sans Project Authors (https://github.com/Instrument/instrument-sans)
+Files: instrument-sans-*.woff2, the Google Fonts subsets of InstrumentSans[wdth,wght].ttf (wght axis only),
+fetched 2026-10-22 from fonts.googleapis.com, unmodified.
 
 Both are licensed under the SIL Open Font License, Version 1.1:
 

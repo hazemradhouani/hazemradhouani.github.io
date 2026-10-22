@@ -107,7 +107,7 @@ async function runThemeInteractions() {
     await mobilePage.locator('.menu-button').first().click();
     await mobilePage.locator('#menu[open] [data-theme-scope="menu"]').focus();
     await mobilePage.locator('#menu[open] [data-theme-scope="menu"]').press('Enter');
-    // every control (header, bar, menu) follows: visible state "theme: light", action ", switch to dark" (D68: no aria-pressed)
+    // every control (header, menu) follows: visible state "theme: light", action ", switch to dark" (D68: no aria-pressed)
     const state = await mobilePage.evaluate(() => ({ theme: document.documentElement.getAttribute('data-theme'), all: [...document.querySelectorAll('[data-theme-toggle]')].every((b) => !b.hasAttribute('aria-pressed')
       && b.querySelector('[data-theme-label]')?.textContent?.trim() === 'theme: light' && b.querySelector('[data-theme-action]')?.textContent === ', switch to dark') }));
     if (state.theme !== 'light' || !state.all) failures.push('mobile menu keyboard toggle did not synchronise light preference');
@@ -179,8 +179,8 @@ async function runMotionPass() {
 }
 // Smooth scroll (D79): with motion and a fine pointer a wheel glides (moving over several frames, settling on
 // its target); a keyboard scroll in between is followed, never undone; a contents link glides to its chapter,
-// stops clear of the bar, updates the address and moves focus; an open dialog holds the page still; the bar
-// still answers a scroll back up. Under reduced motion the engine never loads and scrolling stays native.
+// stops clear of the fixed header, updates the address and moves focus; an open dialog holds the page still; the header
+// stays at the top of the screen. Under reduced motion the engine never loads and scrolling stays native.
 async function runScrollPass() {
   const failures = [];
   const page0 = urls.find((u) => u.includes('project-ain-sebaa')) || urls.find((u) => u.includes('project-'));
@@ -223,7 +223,7 @@ async function runScrollPass() {
       if (Math.abs(y2 - (y1 + page1)) > Math.max(48, page1 * 0.12)) fail(`PageDown during a glide ended at ${Math.round(y2)}px, not one page (${Math.round(page1)}px) from ${Math.round(y1)}px: the glide was not handed over`);
       await page.mouse.wheel(0, -300);
       await page.waitForTimeout(900);
-      if (!(await page.evaluate(() => document.getElementById('bar')?.classList.contains('is-shown')))) fail('the compact bar did not answer a scroll back up');
+      if (!(await page.evaluate(() => { const r = document.querySelector('.site-header').getBoundingClientRect(); return getComputedStyle(document.querySelector('.site-header')).position === 'fixed' && r.top === 0; }))) fail('the fixed header (D93) left the top of the screen');
       const link = page.locator('.toc a').last();
       if (await link.count()) {
         const id = (await link.getAttribute('href')).slice(1);
@@ -465,7 +465,7 @@ for (const url of urls) {
       if (de.getAttribute('data-theme') !== theme) out.theme.push(`resolved ${de.getAttribute('data-theme') || 'none'}, expected ${theme}`);
       if (getComputedStyle(de).colorScheme !== theme) out.theme.push(`color-scheme ${getComputedStyle(de).colorScheme}, expected ${theme}`);
       const controls = [...document.querySelectorAll('[data-theme-toggle]')];
-      if (controls.length !== 3) out.theme.push(`theme controls ${controls.length}, expected 3`);
+      if (controls.length !== 2) out.theme.push(`theme controls ${controls.length}, expected 2 (header, menu: D93)`);
       else for (const control of controls) {
         // the name is the visible state followed by the action (WCAG 2.5.3); no aria-label may replace it
         const expectedAction = `, switch to ${theme === 'dark' ? 'light' : 'dark'}`;

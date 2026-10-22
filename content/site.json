@@ -26,18 +26,18 @@
     "linkedin": "https://www.linkedin.com/in/hazem-radhouani-b36616319/",
     "sources": { "line": "owner:2026-10-13", "knowsAbout": "owner:2026-10-13 + site", "credential": "site:about + answer:F01", "email": "site", "linkedin": "site + pdf2025:p48" }
   },
+  "$nav": "D93: the reader's routes stand left of the name, the two views of the work right of it (dmcg's frame)",
   "nav": [
-    { "id": "work", "label": "Work", "href": "architecture.html" },
-    { "id": "research", "label": "Research", "href": "books.html" },
     { "id": "about", "label": "About", "href": "about.html" },
+    { "id": "research", "label": "Research", "href": "books.html" },
     { "id": "contact", "label": "Contact", "href": "about.html#contact" }
   ],
-  "footerNav": [
-    { "label": "Work", "href": "architecture.html" },
-    { "label": "Research", "href": "books.html" },
-    { "label": "About", "href": "about.html" },
-    { "label": "Films and motion", "href": "motion.html" }
+  "views": [
+    { "id": "home", "label": "Projects", "href": "index.html" },
+    { "id": "work", "label": "Index", "href": "architecture.html" }
   ],
+  "corners": ["Architecture, survey and visualisation", "Tunisia · France · Morocco · Japan"],
+  "cornerSources": { "0": "owner:2026-10-13 (knowsAbout, D45)", "1": "owner:2026-10-13 (line, D45)" },
   "groups": [
     { "id": "paris", "label": "Professional | Paris" },
     { "id": "morocco", "label": "Professional | Morocco" },

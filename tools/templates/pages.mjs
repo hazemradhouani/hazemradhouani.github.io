@@ -124,7 +124,7 @@ ${cells(proofItems, { prefix: p, zoom: false, cls: 'block', after: proofText })}
 </div>
 </section>
 </div>`;
-  return { body, viewer: false, page: { path: 'index.html', nav: 'home', title: d.title, description: d.description, og: d.og, verification: true,
+  return { body, viewer: false, page: { path: 'index.html', nav: 'home', corners: true, title: d.title, description: d.description, og: d.og, verification: true,
     preload: preloadFor(slides[0].rel, '100vw', p), bodyClass: 'page-home', jsonld: [ctx.websiteLd, ctx.personLd] } };
 }
 
@@ -173,7 +173,7 @@ ${groups.map((g) => html`<div><p class="label" id="g-${g.id}">${g.label}</p><ul 
 </header>
 ${chapters.map((c) => c.html)}`;
   const items = projects.map((x, i) => ({ '@type': 'ListItem', position: i + 1, url: `${site.origin}${site.base}projects/project-${x.slug}.html`, name: x.title }));
-  return { body, viewer: false, page: { path: 'architecture.html', nav: 'work', navExact: true, title: 'Work | Hazem Radhouani, architect',
+  return { body, viewer: false, page: { path: 'architecture.html', nav: 'work', navExact: true, corners: true, title: 'Work | Hazem Radhouani, architect',
     description: `${projects.length} architecture projects by Hazem Radhouani: rehabilitation in Paris with Studio BELEM, rail infrastructure in Morocco, and heritage research in Tunisia.`,
     og: 'images/og/work.jpg', bodyClass: 'page-work', preload: preloadFor(projects[0].hero.src, chapters[0].h.lcpSizes, p),
     jsonld: [{ '@context': 'https://schema.org', '@type': 'CollectionPage', name: 'Work', url: `${site.origin}${site.base}architecture.html`, mainEntity: { '@type': 'ItemList', itemListElement: items } }] } };

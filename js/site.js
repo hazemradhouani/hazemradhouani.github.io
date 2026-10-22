@@ -1,6 +1,6 @@
 /* Hazem Radhouani · site.js ("Field", docs/flagship/08-direction.md)
    Progressive enhancement only: every page reads, navigates, opens full-size images and plays films
-   without it. Modules: menu dialog, compact bar, arrival, figure viewer, contact form, analytics.
+   without it. Modules: theme, menu dialog, scroll progress, arrival, smooth scroll, figure viewer, contact form, analytics.
    Every motion has a stated purpose and is skipped under prefers-reduced-motion. No dependencies. */
 (function () {
   'use strict';
@@ -13,7 +13,7 @@
 
   /* ------------------------------------------------------------ theme (preference, state)
      The inline bootstrap sets data-theme before CSS is parsed. This controller only synchronises
-     the three visible controls, persists an explicit choice when storage is available, and keeps
+     the two controls (header, menu), persists an explicit choice when storage is available, and keeps
      the browser chrome colour in step. A failed storage read/write is deliberately non-fatal. */
   var themeControls = slice(document.querySelectorAll('[data-theme-toggle]'));
   var themeMeta = document.getElementById('theme-color');
@@ -65,36 +65,6 @@
     var wide = window.matchMedia('(min-width: 48rem)');
     var onWide = function () { if (wide.matches && menu.open) menu.close(); };
     if (wide.addEventListener) wide.addEventListener('change', onWide);
-  }
-
-  /* ------------------------------------------------------------ compact bar (wayfinding)
-     Slides in when the reader scrolls back up a long page, so the nav is one gesture away; it hides
-     on scroll-down and whenever focus moves into the page, so it never covers a focused element. */
-  var bar = document.getElementById('bar');
-  var header = document.querySelector('.site-header');
-  if (bar && header) {
-    var shown = false, anchor = window.scrollY, ticking = false, quietUntil = 0;
-    var setBar = function (on) {
-      if (on === shown || (!on && bar.contains(document.activeElement))) return;
-      shown = on;
-      bar.classList.toggle('is-shown', on);
-      if (on) bar.removeAttribute('inert'); else bar.setAttribute('inert', '');
-    };
-    window.addEventListener('scroll', function () {
-      if (ticking) return;
-      ticking = true;
-      requestAnimationFrame(function () {
-        ticking = false;
-        var y = window.scrollY;
-        if (y < header.offsetHeight + 400) { setBar(false); anchor = y; return; }
-        if (y > anchor) { anchor = y; setBar(false); }              // going down: follow, keep hidden
-        else if (y < anchor - 40 && Date.now() > quietUntil) setBar(true);  // 40px back up: show
-      });
-    }, { passive: true });
-    document.addEventListener('focusin', function (e) {
-      if (bar.contains(e.target) || e.target.closest('dialog')) return;
-      quietUntil = Date.now() + 600; anchor = window.scrollY; setBar(false);
-    });
   }
 
   /* ------------------------------------------------------------ scroll progress (orientation, hierarchy: D83)
@@ -186,7 +156,7 @@
 
   /* ------------------------------------------------------------ smooth scroll (orientation, D79)
      The owner's request: wheel and trackpad scrolling glide with inertia, as on the reference sites. Lenis
-     (vendored, MIT, 5.6 KB gzipped) eases the page's own scroll position, so the compact bar, the arrivals,
+     (vendored, MIT, 5.6 KB gzipped) eases the page's own scroll position, so the fixed header, the arrivals,
      find-in-page, the keyboard and the back button behave exactly as native. It loads only for a fine
      pointer without reduced motion: touch keeps the device's own inertia, and reduced motion keeps native,
      unsmoothed scrolling. An open dialog holds the page still and scrolls on its own. A link to a place on
@@ -233,7 +203,7 @@
         if (!el || el.closest('dialog')) return;
         e.preventDefault();
         // the target from the page's true position now (a scroll just before the click may not have reached
-        // Lenis yet), less the scroll padding that keeps it clear of the compact bar, as a native jump does
+        // Lenis yet), less the scroll padding that keeps it clear of the fixed header, as a native jump does
         var y = el.getBoundingClientRect().top + window.scrollY - (parseFloat(getComputedStyle(root).scrollPaddingTop) || 0);
         // the address and focus change at once, as a jump would: Back then returns to where the reader
         // clicked, the next Tab starts from the target, and an interrupted glide loses neither

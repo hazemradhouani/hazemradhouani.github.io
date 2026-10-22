@@ -49,7 +49,7 @@ for (const c of cards) {
   await p.goto(BASE + '404.html');
   await p.setContent(`<!doctype html><html><head><base href="${BASE}"><style>
 @font-face{font-family:G;src:url(fonts/eb-garamond-latin-wght-normal.woff2) format("woff2");font-weight:400 800}
-@font-face{font-family:P;src:url(fonts/ibm-plex-sans-latin-wght-normal.woff2) format("woff2");font-weight:100 700}
+@font-face{font-family:P;src:url(fonts/instrument-sans-latin-wght-normal.woff2) format("woff2");font-weight:400 700}
 body{margin:0;width:1200px;height:630px;background:#fff;color:#111;display:grid;grid-template-columns:560px 640px;overflow:hidden}
 .t{padding:60px 40px 56px 64px;display:flex;flex-direction:column;justify-content:space-between}
 .who{font:600 15px P,sans-serif;letter-spacing:.22em;text-transform:uppercase}
