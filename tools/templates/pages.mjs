@@ -78,7 +78,7 @@ export function home(site, d, projects, ctx) {
 <div class="open__strip wrap g">
 <p class="open__line">${P.line}</p>
 <p class="open__cred label">${P.credential}</p>
-<div class="open__now"><ul class="meta" role="list">${slides.map((s, i) => html`<li${attrs({ hidden: i > 0 })}><a href="${projectHref(s.x, p)}">${s.x.title}</a><br>${s.x.place}</li>`)}</ul><button class="open__pause" type="button" hidden><span data-pause-label>pause</span><span class="vh"> the images</span></button></div>
+<div class="open__now"><ul class="meta" role="list">${slides.map((s, i) => html`<li${attrs({ hidden: i > 0 })}><a href="${projectHref(s.x, p)}">${s.x.title}</a><br>${s.x.place}</li>`)}</ul><button class="open__pause" type="button"><span data-pause-label>pause</span><span class="vh"> the images</span></button></div>
 <p class="open__go">${more(p + 'architecture.html', 'View work', p)}${more(p + 'books.html', 'Research', p)}</p>
 </div>
 <div class="open__win wrap" data-fx="top" style="--nw: ${slides[0].w}px; --ratio: ${r0.toFixed(4)}">
@@ -376,6 +376,7 @@ export function notFound(site, ctx) {
   const p = ctx.prefix;
   const body = html`<div class="intro wrap g"><div class="s-text center"><h1 class="h1">${words('This page does not exist')}</h1><p class="lead in">The address may have changed when the portfolio was rebuilt.</p><p class="actions in">${more(p + 'architecture.html', 'View work', p)}${more(p, 'Home', p)}</p></div></div>`;
   // an old address under /portfolio/ that has no page of its own (a file, an image) moves to the same path at the root (D81)
-  const moved = html`<script>if(location.pathname.indexOf('/portfolio/')===0)location.replace(location.pathname.slice(10)+location.search+location.hash);</script>`;
+  // (leading slashes collapse to one: "/portfolio//elsewhere.example" must stay on this site, never a protocol-relative URL)
+  const moved = html`<script>if(location.pathname.indexOf('/portfolio/')===0)location.replace(location.pathname.slice(10).replace(/^\\/+/,'/')+location.search+location.hash);</script>`;
   return { body, viewer: false, page: { path: '404.html', nav: null, noindex: true, title: 'Page not found | Hazem Radhouani', description: 'This page does not exist.', bodyClass: 'page-404', preload: moved } };
 }

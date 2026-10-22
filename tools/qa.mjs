@@ -160,12 +160,12 @@ async function runMotionPass() {
           if (!el.classList.contains('is-in')) out.push(`not arrived: ${el.tagName.toLowerCase()}.${[...el.classList].join('.')}`);
           else if (getComputedStyle(el).opacity !== '1') out.push(`opacity ${getComputedStyle(el).opacity}: ${el.tagName.toLowerCase()}.${[...el.classList].join('.')}`);
         }
-        // nothing left moved by transform, translate or scale; a [data-fx] element itself follows the scroll by
-        // design (the home pass checks those), what it carries must still have arrived plainly
+        // nothing left moved by transform, translate or scale; a [data-fx] element follows the scroll with its
+        // translate and scale by design (the home pass checks those), so on it only transform must be plain
         for (const el of document.querySelectorAll('.rv, .rv-g, .nw, .nw > picture, .nw > img, .w__i, .l__i')) {
-          if (el.matches('[data-fx]')) continue;
           const cs = getComputedStyle(el);
-          const moved = [['transform', cs.transform, ['none', 'matrix(1, 0, 0, 1, 0, 0)']], ['translate', cs.translate, ['none', '0px']], ['scale', cs.scale, ['none', '1']]].find(([, v, plain]) => !plain.includes(v));
+          const props = [['transform', cs.transform, ['none', 'matrix(1, 0, 0, 1, 0, 0)']], ['translate', cs.translate, ['none', '0px']], ['scale', cs.scale, ['none', '1']]];
+          const moved = (el.matches('[data-fx]') ? props.slice(0, 1) : props).find(([, v, plain]) => !plain.includes(v));
           if (moved) out.push(`${moved[0]} ${moved[1]}: ${el.tagName.toLowerCase()}.${[...el.classList].join('.')}`);
         }
         return out;
@@ -282,7 +282,8 @@ async function runHomePass() {
     for (const [i, y] of m.plates.entries()) {
       await go(y, 900);
       const s = await page.evaluate((i) => { const li = document.querySelectorAll('.seq__plate')[i]; const cs = getComputedStyle(li); return { scale: cs.scale, mono: getComputedStyle(li.querySelector('.seq__mono')).opacity, top: li.getBoundingClientRect().top }; }, i);
-      if (!['none', '1'].includes(s.scale) || +s.mono > 0.01 || Math.abs(s.top) > 1) fail(`plate ${i + 1} in view: scale ${s.scale}, greyscale ${s.mono}, top ${Math.round(s.top)}`);
+      // (a scroll position snaps to whole pixels, so a plate in place may sit a hair past 0.5: a 0.2% tolerance)
+      if (Math.abs((s.scale === 'none' ? 1 : +s.scale) - 1) > 0.002 || +s.mono > 0.01 || Math.abs(s.top) > 1) fail(`plate ${i + 1} in view: scale ${s.scale}, greyscale ${s.mono}, top ${Math.round(s.top)}`);
     }
     // Shift+Tab from plate 3 into plate 2 while plate 3 covers it: the link that takes focus must be the topmost thing at its centre
     await go(m.plates[2], 900);
@@ -296,7 +297,7 @@ async function runHomePass() {
     if (seen) fail(seen);
     // the renders: they advance, and hold for the pause button and for focus
     await go(0, 400);
-    await page.waitForFunction(() => !document.querySelector('.open__pause').hidden, null, { timeout: 8000 });
+    await page.waitForFunction(() => document.querySelector('.open__pause').classList.contains('is-on'), null, { timeout: 8000 });
     const shown = () => page.evaluate(() => [...document.querySelectorAll('.open__slide')].findIndex((s) => s.classList.contains('is-on')));
     const pb = await page.evaluate(() => { const r = document.querySelector('.open__pause').getBoundingClientRect(); return [r.width, r.height]; });
     if (pb[0] < 44 || pb[1] < 44) fail(`the pause button is ${pb.map(Math.round).join('x')}px`);
@@ -307,9 +308,17 @@ async function runHomePass() {
     await page.waitForTimeout(5600);
     if ((await shown()) !== s1) fail('the renders advanced while paused');
     await page.click('.open__pause'); await page.mouse.move(5, 5);
+    // play resumes, even with the button still holding focus
+    const s1b = await shown(); await page.waitForTimeout(5600);
+    if ((await shown()) === s1b) fail('the renders did not resume after play');
     await page.locator('.open__now li:not([hidden]) a').focus();
     const s2 = await shown(); await page.waitForTimeout(5600);
     if ((await shown()) !== s2) fail('the renders advanced while their caption held focus');
+    // one pass of the three countries, then the show rests on the first and offers to play
+    await page.evaluate(() => document.activeElement.blur());
+    try { await page.waitForFunction(() => document.querySelector('.open__pause [data-pause-label]').textContent === 'play', null, { timeout: 12000 }); }
+    catch (e) { fail('the renders did not come to rest after one pass'); }
+    if ((await shown()) !== 0) fail(`the renders rest on slide ${await shown()}, not the first`);
     // the research ground (light scheme)
     await go(m.inv - 900 * 0.2, 1600);
     const dark = await page.evaluate(() => getComputedStyle(document.querySelector('.inv')).backgroundColor);
@@ -392,19 +401,23 @@ for (const url of urls) {
         if (el.closest('video, svg, .lab__pin')) continue;
         const c = getComputedStyle(el).backgroundColor; if (!ok.has(c) && c !== ground(el)) out.palette.push(`${el.tagName.toLowerCase()}.${[...el.classList].join('.')} ${c}`);
       }
-      // the home opening and stack, still (D84-D86; this loop runs under reduced motion): the name fills its
-      // column without passing it, the first screen shows the name and at least 30% of the window of renders,
+      // the home opening and stack, still (D84-D86; this loop runs under reduced motion): the name stands centred
+      // in its column without passing it, the first screen shows the name and at least 30% of the window of renders,
       // only the first render is there and nothing offers to pause, and the plates read as a plain sequence
       if (document.body.classList.contains('page-home')) {
         const col = document.querySelector('.open__head').getBoundingClientRect();
-        const lines = {};   // the letters by line: one line from 48rem, a word per line below
+        const lines = {};   // the letters by line (the two words share one line where they fit)
         for (const l of document.querySelectorAll('.open__mark .l')) { const b = l.getBoundingClientRect(); const k = Math.round(b.top); lines[k] = [Math.min(b.left, lines[k]?.[0] ?? Infinity), Math.max(b.right, lines[k]?.[1] ?? -Infinity)]; }
-        const fill = Math.max(...Object.values(lines).map(([a, z]) => z - a)) / col.width;
-        if (fill < 0.95 || fill > 1.004) out.theme.push(`the name fills ${(fill * 100).toFixed(1)}% of its column`);
+        const mid = (col.left + col.right) / 2;
+        for (const [a, z] of Object.values(lines)) {
+          if (a < col.left - 1 || z > col.right + 1) out.theme.push(`the name runs past its column (${Math.round(a)}-${Math.round(z)})`);
+          if (Math.abs((a + z) / 2 - mid) > 3) out.theme.push(`the name sits ${Math.round((a + z) / 2 - mid)}px off the centre`);
+        }
         const win = document.querySelector('.open__win').getBoundingClientRect();
         if (document.querySelector('.open__name').getBoundingClientRect().bottom > innerHeight) out.theme.push('the name is below the first screen');
         if (Math.min(win.height, innerHeight - win.top) / win.height < 0.3) out.theme.push(`the first screen shows ${Math.round(100 * (innerHeight - win.top) / win.height)}% of the renders`);
-        if (document.querySelectorAll('.open__slide').length !== 1 || !document.querySelector('.open__pause').hidden) out.theme.push('the renders play under reduced motion');
+        const pause = document.querySelector('.open__pause');
+        if (document.querySelectorAll('.open__slide').length !== 1 || pause.classList.contains('is-on') || getComputedStyle(pause).visibility !== 'hidden') out.theme.push('the renders play under reduced motion');
         if ([...document.querySelectorAll('.seq__plate')].some((li) => getComputedStyle(li).position === 'sticky')) out.theme.push('plates stack under reduced motion');
       }
       // dark treatments (D50, D69): inverted linework is filtered only in the dark scheme; a keep drawing

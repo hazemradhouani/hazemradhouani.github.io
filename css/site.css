@@ -534,29 +534,30 @@
      this page, so the header's small one steps aside. */
   .page-home .site-header .brand { visibility: hidden; }
   @media (min-width: 48rem) { .page-home .site-header .brand { display: none; } }
-  .open__head { container-type: inline-size; padding-top: clamp(0.5rem, 2vw, 1.5rem); }
-  .open__name { font-size: var(--fs-title); line-height: 1; text-wrap: nowrap; }
-  /* the font size that sets the line exactly across the column: 100cqi divided by the line's width in em
-     (IBM Plex Sans 500, tracked 0.02em, measured in Chrome); one word per line on phones */
-  .open__mark { display: block; font-weight: 500; letter-spacing: 0.02em; margin-right: -0.02em; line-height: 0.9;
-    font-size: calc(100cqi / var(--fit-phone)); --fit-phone: 6.08; --fit: 9.82; }
-  .open__w { display: block; }
-  @media (min-width: 48rem) {
-    .open__mark { font-size: calc(100cqi / var(--fit)); white-space: nowrap; }
-    .open__w { display: inline; }
-  }
+  /* the name centred at a clear display size, 32 to 60px (the owner, 2026-10-22: "centered ... smaller ... clear
+     and readable"), tracked as the site's other display titles; the trailing tracking is given back on the left
+     so the letters sit on the centre */
+  .open__head { padding-top: clamp(1.5rem, 4vw, 3.5rem); text-align: center; }
+  .open__name { font-size: var(--fs-title); line-height: 1; }
+  .open__mark { display: block; font-weight: 500; font-size: clamp(2rem, 1.3rem + 2.8vw, 3.75rem); letter-spacing: var(--tr-display);
+    padding-left: var(--tr-display); line-height: 1.15; }
+  /* a word never breaks: where both do not fit on one line (phones, the reader's own spacing, WCAG 1.4.12)
+     they wrap between themselves */
+  .open__w { white-space: nowrap; }
   .l { display: inline-block; overflow: clip; padding-block: 0.08em; margin-block: -0.08em; vertical-align: top; }
   .l__i { display: inline-block; }
-  .open__strip { position: relative; margin-top: clamp(1rem, 2.4vw, 2rem); padding-top: var(--s4); row-gap: var(--s5); }
+  .open__strip { position: relative; margin-top: clamp(1.5rem, 3.5vw, 3rem); padding-top: var(--s4); row-gap: var(--s5); }
   .open__strip::before { content: ""; position: absolute; inset: 0 0 auto; border-top: 1px solid var(--ink); }
   .open__line { font-size: var(--fs-lead); line-height: 1.4; }
   .open__now { display: flex; flex-direction: column; align-items: flex-start; }
-  .open__now a { font-family: var(--sans); font-size: var(--fs-label); font-weight: 600; letter-spacing: var(--tr-caps); text-transform: uppercase;
-    text-decoration: none; color: var(--ink); }
+  .open__now a { display: inline-flex; align-items: center; min-height: 1.75rem; font-family: var(--sans); font-size: var(--fs-label); font-weight: 600;
+    letter-spacing: var(--tr-caps); text-transform: uppercase; text-decoration: none; color: var(--ink); }
   .open__now a:hover { color: var(--ink-2); }
   .open__pause { display: inline-flex; align-items: center; min-height: 2.75rem; min-width: 2.75rem; padding: 0; background: none; border: 0;
     color: var(--ink); font-family: var(--sans); font-size: var(--fs-label); font-weight: 600; letter-spacing: 0.06em; text-transform: lowercase;
-    text-decoration: underline; text-decoration-color: var(--ui); text-decoration-thickness: 1px; text-underline-offset: 0.25em; }
+    text-decoration: underline; text-decoration-color: var(--ui); text-decoration-thickness: 1px; text-underline-offset: 0.25em;
+    visibility: hidden; }   /* its place is kept from the first paint; it shows once the renders play (site.js) */
+  .open__pause.is-on { visibility: visible; }
   .open__go { display: flex; flex-wrap: wrap; gap: 0 var(--s5); align-items: flex-start; }
   @media (min-width: 48rem) {
     .g > .open__line, .g > .open__now { grid-column: 1 / span 5; }
@@ -586,7 +587,7 @@
   .seq__ni { display: inline-block; }
   .seq__of { margin-left: 0.5em; vertical-align: top; font-size: var(--fs-label); font-weight: 600; letter-spacing: var(--tr-caps); color: var(--ink-2); }
   .seq__about { margin-top: var(--s5); }
-  .seq__t a { text-decoration: none; }
+  .seq__t a { display: inline-flex; align-items: center; min-height: 1.75rem; text-decoration: none; }
   .seq__t a:hover { color: var(--ink-2); }
   .seq__about .meta { margin-top: var(--s2); }
   .seq__about > p:last-child { margin-top: var(--s3); }
@@ -604,6 +605,9 @@
     .seq__plate { position: sticky; top: 0; height: 100svh; padding-block: calc(var(--bar-h) + var(--s5)) var(--s6); }
     .seq__in { height: 100%; }
     .seq__frame { width: min(100%, calc((100svh - var(--bar-h) - var(--s5) - var(--s6)) * var(--r))); }
+    /* a plate whose words outgrow the screen (large text, the reader's own spacing) does not stick (site.js) */
+    .seq__plate.seq__plate--free { position: relative; height: auto; }
+    .seq__plate--free .seq__in { height: auto; }
   }
 
   /* the research ground (D87): in the light scheme the end of the home page (research, footer) stands on ink */
@@ -800,7 +804,8 @@
     .open__strip > :nth-child(3) { animation-delay: 610ms; }
     .open__strip > :nth-child(4) { animation-delay: 690ms; }
     .open__slide.is-on img { animation: settle var(--t-plate) var(--ease-out) backwards; }
-    .vt-arrived :is(.open__mark .l__i, .open__strip::before, .open__strip > *, .open__slide img) { animation: none; }
+    .vt-arrived :is(.open__mark .l__i, .open__strip > *, .open__slide img) { animation: none; }
+    .vt-arrived .open__strip::before { animation: none; }   /* a pseudo-element is not allowed inside :is() */
     /* orientation (D85): the renders dissolve as Studio KHOA VU's do, the next in over 1 s while the last
        leaves over 1.2 s, so for a moment both are there */
     .open__slide { transition: opacity 1200ms var(--ease-out); }
@@ -831,15 +836,17 @@
      light while it passes, and the ground is set when it has covered; going back up, the ground lifts at once
      and the disc closes. Only with the script and motion (site.js adds .inv--wait); otherwise the end simply
      stands on ink. */
+  /* going back up the words stay light while the disc closes over them, and darken as it leaves them */
   .inv--wait { position: relative; isolation: isolate; overflow: clip;
-    transition: --ink 500ms var(--ease-out), --ink-2 500ms var(--ease-out), --bg 0s; }
+    transition: --ink 300ms var(--ease-out) 600ms, --ink-2 300ms var(--ease-out) 600ms, --bg 0s; }
   .inv--wait.is-inv { transition: --ink 600ms var(--ease-out) 300ms, --ink-2 600ms var(--ease-out) 300ms, --bg 0s linear 1000ms; }
   html:not([data-theme="dark"]) .inv--wait::before { content: ""; position: absolute; z-index: -1; left: 50%; top: calc(var(--gap-chapter) + 1.5rem);
     width: 320vmax; aspect-ratio: 1; translate: -50% -50%; border-radius: 50%; background: #111111; scale: 0;
     transition: scale 1000ms var(--ease-in-out); }
   html:not([data-theme="dark"]) .inv--wait.is-inv::before { scale: 1; }
-  body:has(.inv--wait) .site-footer { transition: --ink 500ms var(--ease-out), --ink-2 500ms var(--ease-out), --bg 0s; }
-  body:has(.inv--wait.is-inv) .site-footer { transition: --ink 600ms var(--ease-out) 300ms, --ink-2 600ms var(--ease-out) 300ms, --bg 0s linear 1000ms; }
+  /* the footer has no disc: its ground and its words change together, once the disc above has covered */
+  body:has(.inv--wait) .site-footer { transition: --ink 0s, --ink-2 0s, --bg 0s; }
+  body:has(.inv--wait.is-inv) .site-footer { transition: --ink 0s linear 1000ms, --ink-2 0s linear 1000ms, --bg 0s linear 1000ms; }
 
   /* state: the menu fades, its items rise in order */
   .menu[open] { animation: fade-in var(--t-ui) var(--ease-out); }
@@ -890,6 +897,10 @@
     .cv__h { font-size: 10pt; }
     a { text-decoration: none; }
     .rv, .rv-g { opacity: 1 !important; transform: none !important; }
+    /* the home's grounds (D86, D87) print as paper: no tinted plates, and research in ink on white */
+    .seq__plate { background: none !important; }
+    .inv { --bg: #FFFFFF; --ink: #111111; --ink-2: #5E5E5E; --line: #E6E6E6; --ui: #8A8A8A; background: none !important; }
+    .inv--wait::before { display: none; }
     *, *::before, *::after { animation: none !important; }   /* print shows every plate, word and rule in place */
   }
 }
