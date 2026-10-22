@@ -2,7 +2,7 @@
 // Every block sits on the one grid (.wrap.g) through a centred span class; images are placed by partials.mjs.
 import { html, raw, attrs, when } from '../lib/html.mjs';
 import { dims, shown, preloadFor, picture } from '../lib/images.mjs';
-import { icon, image, row, cells, figure, hero, heroPartner, creditLine, heroCaption, sizesFor, spanFor, projectHref, vtTitle, vtHero, CASE, capSide, words, chaptersOf, scatter } from './partials.mjs';
+import { icon, image, row, figure, hero, heroPartner, creditLine, heroCaption, sizesFor, spanFor, projectHref, vtTitle, vtHero, CASE, capSide, words, chaptersOf, scatter, reelItem, reelSizes } from './partials.mjs';
 
 const q = (s) => `“${s}”`;
 // `of`: what a repeated label leads to, read after the visible words (WCAG 2.4.4, 2.5.3)
@@ -30,94 +30,38 @@ export function catalogOf(projects, films) {
 }
 export const FAMILIES = [{ id: 'drawing', label: 'Drawings' }, { id: 'render', label: 'Renders' }, { id: 'film', label: 'Films' }];
 
-/* ------------------------------------------------------------------ home ("Reel", D97) */
-// the film's chapters (D97): who, where, then what is on screen. The identity line is split where its own
-// comma falls, so the page still carries it whole; --c is where each chapter stands fully in view
-const CH = [0, 0.33, 0.64, 1];
-
+/* ------------------------------------------------------------------ home ("Reel, corrected", D103-D105) */
+// The page opens on the reel: one composition per project (reelItem), then the root of the index with its
+// families. Who and what stand in the fixed header and the corner captions; the identity block is for readers
+// of the page's text (screen readers, search) and stays visually hidden (D103).
 export function home(site, d, projects, ctx) {
   const p = ctx.prefix;
   const P = site.person;
   const by = Object.fromEntries(projects.map((x) => [x.slug, x]));
-  const f = d.film;
-  const fd = dims(f.poster);
-  const cut = P.line.indexOf(', and ');
-  const chapters = [
-    html`<h1 class="film__name" id="name">${P.name}</h1><p class="film__sub">${P.credential}</p>`,
-    html`<p>${P.line.slice(0, cut + 1)}</p>`,
-    html`<p>${P.line.slice(cut + 2)}</p>`,
-    html`<p class="film__credit">${f.caption}</p>`
-  ];
-  const steps = CH.map((c, i) => (i ? ((CH[i - 1] + c) / 2).toFixed(3) : '0')).join(',');
-  const filmSizes = '(min-width: 80rem) 1280px, 100vw';
-
-  // the column (D97): each project as an object on the field; its render opens beside its own drawing as it
-  // crosses the centre (the building as image and as drawing), a film runs with the scroll, a single render settles
-  const cols = d.column.map((c, i) => {
-    const x = by[c.project];
-    if (!x) throw new Error(`home: no project ${c.project}`);
-    if (c.mode === 'pair' && !c.key.startsWith('images/cut/')) throw new Error(`home: key drawing ${c.key} is not a cutout in images/cut/ (A8)`);
-    if (c.mode === 'pair') dims(c.key);   // throws when the file is missing (A8)
-    const { w, h } = dims(x.hero.src);
-    const card = c.mode === 'film'
-      ? html`<span class="col__card col__film" style="aspect-ratio: ${dims(c.poster).w} / ${dims(c.poster).h}">${picture(c.poster, { alt: '', sizes: '(min-width: 48rem) 46vw, 90vw', prefix: p })}<video class="film__v" data-scrub data-src="${p}${c.desktop}" data-src-small="${p}${c.mobile}" muted playsinline preload="none" aria-hidden="true" tabindex="-1"></video></span>`
-      : html`<span class="col__card" style="--nw: ${w}px; --r: ${(w / h).toFixed(4)}; aspect-ratio: ${w} / ${h}">${picture(x.hero.src, { alt: '', sizes: '(min-width: 64rem) 46vw, (min-width: 48rem) 60vw, 90vw', prefix: p })}</span>`;
-    const key = c.mode === 'pair' ? html`<span class="col__key" style="--kr: ${(dims(c.key).w / dims(c.key).h).toFixed(4)}">${image(c.key, { alt: '', sz: '(min-width: 48rem) 30vw, 1px', prefix: p })}</span>` : '';
-    return html`<li class="col__it col__it--${c.mode}" data-fx="centre">
-<a class="col__a" href="${projectHref(x, p)}" data-label="${x.title}">
-<span class="col__stage">${card}${key}</span>
-<span class="col__cap"><span class="col__n" aria-hidden="true">${pad(i + 1)}</span><span class="col__t">${x.title}</span><span class="col__m">${x.place} · ${x.year}</span></span>
-</a>
-</li>`;
+  const items = d.reel.map((c, i) => {
+    if (!by[c.project]) throw new Error(`home: no project ${c.project}`);
+    return reelItem(by[c.project], c, { prefix: p, priority: i === 0 });
   });
-
-  // practice: each capability proven by one document, standing on one line
-  const proofItems = d.proofs.map((x) => ({ rel: shown(x.image, x.kind === 'drawing'), alt: x.alt, title: x.name }));
-  const proofText = (it, i) => {
-    const x = d.proofs[i];
-    return html`<div class="stack-s"><h3 class="title">${x.name}</h3><p class="meta">${x.text}</p>${when(x.tools, () => html`<p class="meta">${x.tools}</p>`)}<p>${more(projectHref(by[x.project], p), x.context, p)}</p></div>`;
-  };
-  const book = dims(d.research.cover);
-  const bookSpan = spanFor(book.w, book.h, { max: 'four' });
+  const first = d.reel[0].layers.find((l) => l.role === 'main');
+  if (!first) throw new Error('home: the first composition needs a main render (the page\'s largest paint)');
   const cat = catalogOf(projects, ctx.films);
   const count = (k) => cat.filter((e) => e.kind === k).length;
+  // the root's connectors: from its middle to the middle of each family's row (equal rows, site.css)
+  const n = FAMILIES.length;
+  const lines = FAMILIES.map((f, i) => { const y = ((2 * i + 1) / (2 * n) * 100).toFixed(2); return `<path d="M0 50 C50 50, 50 ${y}, 100 ${y}"/>`; }).join('');
 
   const body = html`
-<section class="film" id="film" data-fx="track" data-steps="${steps}" aria-labelledby="name">
-<div class="film__stage">
-<div class="film__frame" style="--nw: ${fd.w}px; aspect-ratio: ${fd.w} / ${fd.h}">${picture(f.poster, { alt: f.alt, sizes: filmSizes, prefix: p, priority: true })}<video class="film__v" data-scrub data-src="${p}${f.desktop}" data-src-small="${p}${f.mobile}" muted playsinline preload="none" aria-hidden="true" tabindex="-1"></video></div>
-<ol class="film__ch" role="list">${chapters.map((c, i) => html`<li style="--c: ${CH[i]}">${c}</li>`)}</ol>
-<ol class="rail" data-rail="film" aria-hidden="true">${CH.map(() => html`<li data-step></li>`)}</ol>
-</div>
+<div class="vh"><h1>${P.name}</h1><p>${P.line}</p><p>${P.credential}</p></div>
+<section aria-labelledby="work-h"><h2 class="vh" id="work-h">Projects</h2>
+<ol class="reel" role="list">${items}</ol>
 </section>
-
-<section class="col" aria-labelledby="work-h">
-<h2 class="col__h" id="work-h">Projects <span class="col__count">${projects.length}</span></h2>
-<ol class="col__list" role="list">${cols}</ol>
-</section>
-
-<section class="coda wrap g" aria-labelledby="practice-h">
-<div class="s-text center"><h2 class="col__h" id="practice-h">Practice</h2></div>
-${cells(proofItems, { prefix: p, zoom: false, cls: 'block', after: proofText })}
-</section>
-
-<section class="coda wrap g" aria-labelledby="research-h">
-<div class="s-text center"><h2 class="col__h" id="research-h">Research</h2></div>
-<div class="s-${bookSpan} block" data-rv>${image(d.research.cover, { alt: d.research.coverAlt, sz: sizesFor(bookSpan), prefix: p })}</div>
-<div class="s-text center in">
-<h3 class="title">${d.research.title}</h3>
-<p class="book__ar in" lang="ar" dir="rtl">${d.research.titleAr}</p>
-<p class="meta in">${d.research.meta}<br>${d.research.award}</p>
-<p class="in">${more(p + 'books.html', 'Thesis, report and the Sakura programme', p)}</p>
-</div>
-</section>
-
-<nav class="coda tree-root" aria-label="The index of the work">
+<nav class="tree-root" aria-label="The index of the work">
 <a class="pill pill--root" href="${p}architecture.html">Index <span class="pill__n">${cat.length}</span></a>
+<svg class="tree-root__lines" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true" focusable="false">${raw(lines)}</svg>
 <ul class="tree-root__fam" role="list">${FAMILIES.map((fam) => html`<li><a class="pill" href="${p}architecture.html?family=${fam.id}">${fam.label} <span class="pill__n">${count(fam.id)}</span></a></li>`)}</ul>
 </nav>`;
   return { body, viewer: false, page: { path: 'index.html', nav: 'home', corners: true, title: d.title, description: d.description, og: d.og, verification: true,
-    preload: preloadFor(f.poster, filmSizes, p), bodyClass: 'page-home', jsonld: [ctx.websiteLd, ctx.personLd] } };
+    preload: preloadFor(first.src, reelSizes(d.reel[0].layout), p), bodyClass: 'page-home', jsonld: [ctx.websiteLd, ctx.personLd] } };
 }
 
 /* ------------------------------------------------------------------ index ("Reel", D98): dmcg's catalog of the work */

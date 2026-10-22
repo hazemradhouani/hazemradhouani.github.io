@@ -37,7 +37,7 @@ const home = rd('content/pages/home.json');
 const years = projects.map((p) => parseInt(p.year, 10)).filter(Number.isFinite);
 // Field cards (D35): a white field, the image contained at its natural ratio (never cropped); renders carry no credit line (D72)
 const cards = [
-  { name: 'home', title: site.person.name, line: site.person.line, img: home.film.poster },
+  { name: 'home', title: site.person.name, line: site.person.line, img: home.reel[0].layers.find((l) => l.role === 'main').src },
   { name: 'work', title: 'Work', line: `${projects.length} projects in Tunisia, France and Morocco, ${Math.min(...years)} to ${Math.max(...years)}`, img: 'images/la-villette/la-villette-street-render-hq.jpg' },
   { name: 'research', title: 'Research', line: 'Between the Poetics of Place and the Value of Heritage', img: 'images/cut/books/thesis-mockup-1.png' },
   { name: 'about', title: 'About', line: site.person.credential, img: 'images/about/portrait-sitting.jpg' },

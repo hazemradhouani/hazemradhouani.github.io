@@ -38,6 +38,8 @@
 @property --ink-2 { syntax: "<color>"; inherits: true; initial-value: #5E5E5E; }
 /* the radius of the change of scheme (D108), a length so site.js can animate it */
 @property --vt-r { syntax: "<length>"; inherits: false; initial-value: 0px; }
+/* the scroll engine's position (site.js) and what the reel derives from it, typed and not inherited: a change restyles
+   only the parts that move, never the pictures inside them (measured: 46 elements a frame became the moving few, D105) */
 
 /* ------------------------------------------------------------------ reset */
 @layer reset {
@@ -563,48 +565,68 @@
   .intro { padding-top: clamp(2.5rem, 6vw, 5rem); }
   .lead-fig { margin-top: clamp(2.5rem, 5vw, 4.5rem); }
 
-  /* home, "Reel" (D97). The film stands centred on the field as a card and opens towards the screen's width as
-     the reader scrolls, its time following the wheel; under it the chapters say who and where, one at a time.
-     Then the column: one project at a time on the field, its render opening beside its own drawing as it
-     crosses the centre. The home has no top padding: the film's stage keeps the header's room itself, so the
-     film moves from the first pixel of scroll. */
+  /* home, "Reel, corrected" (D104): one composition per project, one at a time on the centre axis. The stage is
+     5:4 at min(46vw, 60rem) (72vw on tablets) and never taller than the band between the header and the corner
+     captions, so a composition stands whole on one screen; the first is centred in the first. Every layer is
+     placed in stage widths (cqw), so the proportions hold at any size: main 70% (a portrait main 50%), side 46%,
+     the drawing's sheet at most 44% wide and 36% tall at the drawing's own ratio (--r). Renders are cropped to
+     their frame (16:10, a portrait 4:5) at the content's pos; the film is 16:9 and a drawing stands whole on a
+     raised sheet, so neither is cropped. --fx and --fy are each layer's offset to the main card's centre, where
+     it waits before it slides out (motion layer). Phones stack main and side; the drawing waits for the project. */
   .page-home { padding-top: 0; }
-  .film__stage { position: relative; display: grid; justify-items: center; align-content: start; gap: var(--s5);
-    padding: calc(var(--head-h) + var(--s5)) var(--site-edge) var(--s7); }
-  .film__frame { position: relative; width: min(100%, var(--nw), (100svh - var(--head-h) - 13rem) * 1.7778); border-radius: var(--r-card); overflow: clip; box-shadow: var(--shadow-card); }
-  .film__frame img, .film__frame picture { display: block; width: 100%; height: 100%; }
-  .film__v { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 400ms var(--ease-out); }
-  .is-live > .film__v { opacity: 1; }
-  .film__ch { display: grid; gap: var(--s3); max-width: 44rem; text-align: center; font-size: var(--fs-lead); line-height: 1.35; text-wrap: balance; }
-  .film__name { font-size: var(--fs-h1); font-weight: 400; letter-spacing: var(--tr-display); line-height: 1.15; }
-  .film__sub, .film__credit { margin-top: var(--s2); font-size: var(--fs-cap); line-height: 1.5; color: var(--ink-2); }
-  .film__credit { margin-top: 0; }
   .rail { display: none; }
-
-  /* the column */
-  .col { margin-top: var(--gap-group); }
   .col__h { text-align: center; font-size: var(--fs-cap); font-weight: 400; color: var(--ink-2); }
   .col__count { margin-left: 0.35em; font-variant-numeric: tabular-nums; }
-  .col__list { display: grid; gap: clamp(5rem, 16svh, 11rem); margin-top: var(--gap-group); }
-  .col__it { display: grid; justify-items: center; padding-inline: var(--site-edge); }
-  .col__a { display: grid; justify-items: center; gap: var(--s4); width: min(100%, 64rem); color: var(--ink); text-decoration: none; }
-  .col__stage { display: grid; grid-template-columns: minmax(0, 58fr) minmax(0, 38fr); column-gap: 4%; align-items: center; width: 100%; }
-  .col__card { position: relative; display: block; width: 100%; max-width: var(--nw, 100%); justify-self: center; border-radius: var(--r-card);
-    overflow: clip; box-shadow: var(--shadow-card); }
-  .col__card img, .col__card picture { display: block; width: 100%; height: 100%; }
-  .col__key { display: block; }
-  .col__card { max-width: min(var(--nw, 100%), calc(62svh * var(--r, 1.5))); }   /* the band between header and captions (D101) */
-  .col__key .nw { width: min(100%, calc(62svh * var(--kr, 1))); }
-  .col__it--single .col__stage, .col__it--film .col__stage { grid-template-columns: minmax(0, 1fr); width: min(100%, 46rem); }
-  .col__cap { display: flex; flex-wrap: wrap; justify-content: center; gap: 0 var(--s3); align-items: baseline; font-size: var(--fs-cap); line-height: 1.5; }
-  .col__n, .col__m { color: var(--ink-2); font-variant-numeric: tabular-nums; }
-  .col__t { text-decoration: underline; text-decoration-color: transparent; text-underline-offset: 0.2em; transition: text-decoration-color var(--t-hover) var(--ease-out); }
-  .col__a:hover .col__t, .col__a:focus-visible .col__t { text-decoration-color: currentColor; }
-  .col__a:focus-visible { outline-offset: 8px; }
-  @media (max-width: 47.99rem) { .col__stage { grid-template-columns: minmax(0, 1fr); } .col__key { display: none; } }
+  .reel { --share: 46vw; --stage-w: max(15rem, min(var(--share), 60rem, (100svh - var(--head-h) - var(--edge-bottom) - 4rem) * 1.25)); --sh: 80;
+    --gap: 1.5rem;   /* measured: the widest empty band while compositions pass stays at or under 25vh (D105) */
+    display: grid; gap: var(--gap); margin: 0; padding: calc((100svh - var(--stage-w) * 0.8) / 2) var(--site-edge) 0; list-style: none; }
+  @media (min-width: 48rem) and (max-width: 63.99rem) { .reel { --share: 72vw; } }
+  .reel__it { --ml: 0; --mt: 18.125; --mw: 70; --mh: 43.75; display: grid; justify-items: center; }
+  .reel__it--film { --mt: 20.3125; --mh: 39.375; }
+  .reel__it--duo { --mt: 8; }
+  .reel__it--duo-p { --ml: 8; --mt: 8.75; --mw: 50; --mh: 62.5; }
+  .reel__a { position: relative; display: block; color: var(--ink); text-decoration: none; border-radius: var(--r-card); }
+  .reel__a:focus-visible { outline-offset: 10px; }
+  .reel__stage { position: relative; display: block; width: var(--stage-w); aspect-ratio: 100 / var(--sh); container-type: inline-size; }
+  .reel__l { --lx: var(--l); position: absolute; left: calc(var(--lx) * 1cqw); top: calc(var(--t) * 1cqw); width: calc(var(--w) * 1cqw); height: calc(var(--h) * 1cqw);
+    --fx: calc(var(--ml) + var(--mw) / 2 - var(--l) - var(--w) / 2); --fy: calc(var(--mt) + var(--mh) / 2 - var(--t) - var(--h) / 2);
+    display: block; border-radius: var(--r-card); overflow: clip; box-shadow: var(--shadow-card); transition: box-shadow var(--t-hover) var(--ease-out); }
+  .reel__it--trio-m .reel__l { --lx: calc(100 - var(--l) - var(--w)); --fx: calc(var(--l) + var(--w) / 2 - var(--ml) - var(--mw) / 2); }
+  .reel__l--main { --l: var(--ml); --t: var(--mt); --w: var(--mw); --h: var(--mh); z-index: 2; }
+  .reel__l--side { --l: 54; --t: 0; --w: 46; --h: 28.75; z-index: 1; }
+  .reel__it--duo .reel__l--side { --t: 47.25; z-index: 3; }
+  .reel__l--drawing { --pad: 2.5; --w: min(44, (36 - 2 * var(--pad)) * var(--r) + 2 * var(--pad)); --h: calc((var(--w) - 2 * var(--pad)) / var(--r) + 2 * var(--pad));
+    --l: calc(98 - var(--w)); --t: calc(80 - var(--h)); z-index: 3; padding: calc(var(--pad) * 1cqw); background: var(--bg-raised); }
+  .reel__it--duo-p .reel__l--drawing { --t: calc(74 - var(--h)); }
+  :is(.reel__l[data-crop], .reel__film) :is(picture, img) { display: block; width: 100%; height: 100%; }   /* a drawing keeps its own .nw rules (and its dark-only keep layer) */
+  .reel__l[data-crop] img { object-fit: cover; object-position: var(--pos, 50% 50%); }
+  .reel__v { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 400ms var(--ease-out); }
+  .is-live > .reel__v { opacity: 1; }
+  .reel__a:hover .reel__l { box-shadow: var(--shadow-lift); }   /* feedback: the composition lifts under the pointer */
+  .reel__cap { display: flex; flex-wrap: wrap; justify-content: center; gap: 0 var(--s3); margin-top: var(--s4); font-size: var(--fs-cap); line-height: 1.5; text-align: center; }
+  .reel__m { color: var(--ink-2); }
+  /* a fine pointer reads the name from the label that follows it (D109): the caption steps out of the flow and out
+     of sight, stays the link's name, and shows again under a keyboard's focus */
+  @media (hover: hover) and (pointer: fine) and (min-width: 48rem) {
+    .reel__cap { position: absolute; inset: 100% 0 auto; opacity: 0; transition: opacity var(--t-hover) var(--ease-out); }
+    .reel__a:focus-visible .reel__cap { opacity: 1; }
+  }
+  @media (max-width: 47.99rem) {
+    .reel { --stage-w: calc(100vw - 2 * var(--site-edge)); --gap: var(--s6); padding-top: calc(var(--head-h) + var(--s4)); }
+    .reel__it { --sh: 74.25; --mt: 0; --mw: 86; --mh: 53.75; }
+    .reel__it--film { --sh: 68.875; --mh: 48.375; }
+    .reel__it--duo-p { --sh: 87.5; --ml: 15; --mw: 70; --mh: 87.5; }
+    .reel__l--side, .reel__it--duo .reel__l--side { --l: 48; --t: calc(var(--sh) - 32.5); --w: 52; --h: 32.5; }
+    .reel__l--drawing { display: none; }
+  }
 
-  /* the codas: practice, research, and the root of the index (dmcg's tree, its first branch) */
-  .coda { margin-top: var(--gap-chapter); }
+  /* the end of the page: the index's root joined to its families by curves, as dmcg's catalog tree begins */
+  .tree-root { display: grid; grid-template-columns: auto clamp(2.5rem, 7vw, 6rem) auto; align-items: center; justify-content: center;
+    margin-top: var(--gap-group); padding-inline: var(--site-edge); }
+  .tree-root__lines { align-self: stretch; width: 100%; height: 100%; min-height: 0; fill: none; stroke: var(--ui); opacity: 0.6; }
+  .tree-root__lines path { vector-effect: non-scaling-stroke; }
+  .tree-root__fam { display: grid; grid-auto-rows: 1fr; margin: 0; padding: 0; list-style: none; }
+  .tree-root__fam > li { display: flex; align-items: center; padding-block: var(--s1); }
   /* filters and the tree's nodes keep their pill at rest (dmcg's catalog): under the pointer it fills */
   .pill { display: inline-flex; align-items: center; gap: 0.5em; min-height: 2.75rem; padding: 0 var(--s4); border: 1px solid var(--line);
     border-radius: var(--r-ctl); background: var(--bg); color: var(--ink); font-size: var(--fs-cap); text-decoration: none;
@@ -612,8 +634,6 @@
   .pill:hover { border-color: var(--ui); background-color: var(--bg-raised); }
   .pill:active { scale: 0.98; }
   .pill__n { color: var(--ink-2); font-size: var(--fs-label); font-variant-numeric: tabular-nums; }
-  .tree-root { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: var(--s3) var(--s5); padding-inline: var(--site-edge); }
-  .tree-root__fam { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--s2); }
 
   /* index ("Reel", D98): dmcg's catalog. The grid shows every image of the work on its project's ground, each
      whole at its own ratio inside a 4:3 tile (D32, A10); the tree runs from the families to the projects; the list
@@ -930,41 +950,31 @@
   @keyframes draw { from { transform: scaleX(0); } }
 
 
-  /* orientation (D96, D97): the home's film and column, scroll-linked under html.fx from --p and --d (site.js).
-     The film's track is three screens tall (two on phones); its stage stands while the frame opens from a
-     card to the screen's width over the first 35% and the chapters pass one at a time, each fully in view at
-     its own --c. The column's items open as they cross the centre (--s: 0 away, 1 centred): the render steps
-     left and settles to its size while its drawing comes in beside it, and both close again as they leave;
-     items fade towards the edges, and on a fine pointer they also blur there, as dmcg's do. */
-  html.fx .film { height: 320svh; }
-  @media (max-width: 47.99rem) { html.fx .film { height: 220svh; } }
-  html.fx .film__stage { position: sticky; top: 0; height: 100svh; grid-template-rows: minmax(0, 1fr) auto; align-content: stretch;
-    padding-bottom: calc(var(--edge-bottom) + var(--s3)); contain: layout; }
-  html.fx .film__frame { --g: clamp(0, var(--p, 0) / 0.35, 1);
-    --w0: min(50vw, 60rem, var(--nw)); --w1: min(100vw - 2 * var(--site-edge), var(--nw), (100svh - var(--head-h) - 15rem) * 1.7778);
-    align-self: center; width: calc(var(--w0) + (var(--w1) - var(--w0)) * var(--g)); }
-  @media (max-width: 47.99rem) { html.fx .film__frame { --w0: calc(100vw - 2 * var(--site-edge) - 3rem); } }   /* a phone starts near its width */
-  html.fx .film__ch { grid-template-areas: "c"; min-height: 6.5rem; align-items: start; }
-  html.fx .film__ch > li { grid-area: c; opacity: clamp(0, 1 - max(var(--p, 0) - var(--c), var(--c) - var(--p, 0)) * 9, 1);
-    translate: 0 calc((var(--c) - var(--p, 0)) * 48px); }
+  /* orientation, hierarchy (D105): each composition passes through the screen as a function of its --d (site.js:
+     1 entering at the bottom, 0 centred, -1 leaving at the top), so it runs backwards when the reader scrolls up.
+     Within |d| < 0.14 it stands assembled. Entering, it rises 6vh into place while the main card shrinks from
+     1.28 into its frame and the other layers slide out from behind it (the side first, the drawing after it;
+     both land as the dead zone begins). Leaving, the layers drift up at their own rates (side 1.5, main 1.2,
+     drawing 0.9) and fade. On a fine pointer the stage alone blurs in both bands: one filter per composition.
+     Layers keep their compositor layer there (will-change), so their shadows are never repainted mid-scroll. */
+  html.fx .reel__it { --grow: 0.28; --rise: 6vh; --drift: 8vh; --in: clamp(0, (var(--d, 0) - 0.14) / 0.86, 1); --out: clamp(0, (-0.14 - var(--d, 0)) / 0.86, 1); }
+  html.fx .reel__a { translate: 0 calc(var(--in) * var(--rise)); opacity: calc(1 - 0.75 * max(var(--in), var(--out))); }   /* the caption travels with its stage */
+  html.fx .reel__l { --o: clamp(0, var(--in) / var(--lag, 1), 1); --k: 1.2; scale: calc(1 - 0.3 * var(--o));
+    translate: calc(var(--fx) * var(--o) * var(--o) * 1cqw) calc(var(--fy) * var(--o) * var(--o) * 1cqw - var(--out) * var(--k) * var(--drift)); }
+  html.fx .reel__l--main { --o: 0; scale: calc(1 + var(--grow) * var(--in)); }
+  html.fx .reel__l--side { --lag: 0.62; --k: 1.5; }
+  html.fx .reel__l--drawing { --lag: 0.4; --k: 0.9; }
+  html.fx :is(.reel__l--drawing, .reel__it--duo .reel__l--side) { opacity: calc(1 - var(--o)); }   /* above the main card: it fades in as it leaves the centre */
+  @media (max-width: 47.99rem) { html.fx .reel__it { --grow: 0.12; } }
+  html.fx .reel__it:focus-within { --in: 0; --out: 0; }   /* reached by the keyboard: assembled and sharp, its focus ring never faded (WCAG 2.4.7) */
+  @media (hover: hover) and (pointer: fine) {
+    html.fx .reel__stage { filter: blur(calc(max(var(--in), var(--out)) * 16px)); }
+    html.fx .reel__l { will-change: translate, scale; }
+  }
   html.fx .rail { display: grid; gap: 0.625rem; position: absolute; right: var(--site-edge); top: 50%; translate: 0 -50%; margin: 0; padding: 0; list-style: none; }
   .rail > li { justify-self: end; width: 0.875rem; height: 1px; background: var(--ink); opacity: 0.35;
     transition: width var(--t-ui) var(--ease-out), opacity var(--t-ui) var(--ease-out); }
   .rail > li.is-on { width: 1.75rem; opacity: 1; }
-  html.fx .col__it { --ad: max(var(--d, 0), -1 * var(--d, 0)); --s: clamp(0, 1 - var(--ad) * 2.4, 1); opacity: clamp(0, 1.7 - var(--ad) * 1.6, 1); }
-  @media (min-width: 48rem) {
-    html.fx .col__it--pair .col__card { translate: calc(36% * (1 - var(--s))) 0; scale: calc(1 + 0.25 * (1 - var(--s))); }
-    html.fx .col__it--pair .col__key { opacity: var(--s); translate: calc(12% * (1 - var(--s))) 0; }
-    html.fx :is(.col__it--single, .col__it--film) .col__card { scale: calc(1.06 - 0.06 * var(--s)); }
-  }
-  @media (hover: hover) and (pointer: fine) { html.fx .col__stage { filter: blur(calc(max(0, var(--ad, 0) - 0.55) * 16px)); } }
-  /* hierarchy: on its first load the film comes into focus in the frame it already fills (dmcg's card intro, blur
-     only: the poster is the largest paint and stays visible from the first frame) */
-  @media (prefers-reduced-motion: no-preference) {
-    .film__frame > picture { animation: focus-card 1200ms var(--ease-out) 120ms backwards; }
-    .vt-arrived .film__frame > picture { animation: none; }
-  }
-  @keyframes focus-card { from { filter: blur(12px); scale: 1.012; } }
 
   /* orientation (D98): a tile of the index rises 46px and settles from 94% as it enters at the bottom of the screen
      (--d from 1 to 0.35): dmcg's grid entry, scrubbed by the scroll so it runs back too. A tile a filter brings
@@ -994,10 +1004,14 @@
   /* orientation (D100): a case study's plate rises to its place as it enters the screen and goes back down the same way
      when the reader scrolls back (--d from 1 to 0.4), so the document itself follows the wheel, not only its arrivals */
   html.fx .fig[data-fx] { translate: 0 calc(clamp(0, var(--d, 0) - 0.4, 0.6) * 90px); }
-  /* the pointer's label (D97): dmcg's pill, following the cursor over a project */
-  .pill-label { position: fixed; left: 0; top: 0; z-index: 30; padding: 0.3rem 0.75rem; border-radius: var(--r-pill); background: var(--ink); color: var(--bg);
-    font-size: var(--fs-label); line-height: 1.4; white-space: nowrap; pointer-events: none; opacity: 0; scale: 0.9;
-    transition: opacity var(--t-hover) var(--ease-out), scale var(--t-hover) var(--ease-out); }
+  /* the pointer's label (D109, feedback): dmcg's frosted pill following the cursor, the name in ink and the
+     category in grey. The frost is the field at 86%, so the grey keeps 4.5:1 over the darkest render under it */
+  .pill-label { position: fixed; left: 0; top: 0; z-index: 30; display: flex; align-items: baseline; gap: 0.45em; padding: 0.3rem 0.85rem;
+    border: 1px solid var(--line); border-radius: var(--r-pill); background: color-mix(in srgb, var(--bg) 86%, transparent);
+    -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); color: var(--ink); font-size: var(--fs-brand); line-height: 1.35;
+    white-space: nowrap; pointer-events: none; opacity: 0; scale: 0.9; transition: opacity var(--t-hover) var(--ease-out), scale var(--t-hover) var(--ease-out); }
+  .pill-label__c { color: var(--ink-2); font-size: var(--fs-cap); }
+  .pill-label__c:empty { display: none; }
   .pill-label.is-on { opacity: 1; scale: 1; }
 
   /* orientation (D88): a case study's hero group drifts 16px against the page, so the plate reads as standing behind its words */

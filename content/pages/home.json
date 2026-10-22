@@ -1,6 +1,5 @@
 {
-  "$comment": "Home, \"Reel, corrected\" (plan 18, D103-D105): the page opens on the reel, one composition per project, and ends on the index root. Identity comes from site.person; every other string is here.",
-  "$remove": "P2b removes film, column, cover, proofs and research once home() reads reel (D103: film hero, Practice and Research removed; the Sidi Maarouf scrub files go with film).",
+  "$comment": "Home, \"Reel, corrected\" (plan 18, D103-D105): the page opens on the reel, one composition per project, and ends on the index root. Identity comes from site.person (a visually hidden h1 block); every other string is here.",
   "title": "HAZEM RADHOUANI",
   "description": "Architect with international experience: project work in Tunisia, France and Morocco, and research experience in Japan.",
   "og": "images/og/home.jpg",
@@ -76,84 +75,5 @@
       { "role": "side", "src": "images/tamansourt/tamansourt-aerial.jpg", "pos": "50% 50%" },
       { "role": "drawing", "src": "images/cut/tamansourt/tamansourt-site-plan.png" } ],
       "why": "The path between the wings at eye level and the campus from the air; the site plan places the wings." }
-  ],
-  "film": {
-    "title": "Sidi Maarouf Station",
-    "caption": "Sidi Maarouf Station, Casablanca. Architectural film, 2025.",
-    "poster": "images/film/sidi-maarouf-scrub.jpg",
-    "desktop": "videos/scrub/sidi-maarouf-desktop.mp4",
-    "mobile": "videos/scrub/sidi-maarouf-mobile.mp4",
-    "alt": "Aerial view at dusk of a single-storey station under a wide white roof beside the railway: platforms with canopies, trains, palm trees and car parks; the camera circles the building as the page scrolls",
-    "source": "videos/sidi-maarouf.mp4, 30.9 to 40.4 s, one continuous aerial take (D96); facts from content/pages/motion.json film-sidi-maarouf"
-  },
-  "column": [
-    { "project": "zenata", "mode": "pair", "key": "images/cut/zenata/zenata-site-access.png" },
-    { "project": "bolivar", "mode": "pair", "key": "images/cut/bolivar/bolivar-axo-retained.png" },
-    { "project": "al-arg", "mode": "pair", "key": "images/cut/al-arg/al-arg-past-present-future.png" },
-    { "project": "nouvelle-medina", "mode": "pair", "key": "images/cut/nouvelle-medina/nouvelle-medina-structure-exploded.png" },
-    { "project": "foubert", "mode": "pair", "key": "images/cut/foubert/foubert-west-facade.png" },
-    { "project": "la-villette", "mode": "pair", "key": "images/cut/la-villette/la-villette-facade-module-axo.png" },
-    { "project": "sentry", "mode": "film", "poster": "images/film/sentry-scrub.jpg", "desktop": "videos/scrub/sentry-desktop.mp4", "mobile": "videos/scrub/sentry-mobile.mp4" },
-    { "project": "belhomme", "mode": "pair", "key": "images/cut/belhomme/belhomme-facade-rue-belhomme.png" },
-    { "project": "corallum", "mode": "pair", "key": "images/cut/corallum/corallum-volume-helical.png" },
-    { "project": "ain-sebaa", "mode": "pair", "key": "images/cut/ain-sebaa/ain-sebaa-structure.png" },
-    { "project": "avenir", "mode": "pair", "key": "images/cut/avenir/avenir-south-elevation.png" },
-    { "project": "cinephile", "mode": "pair", "key": "images/cut/cinephile/cinephile-sketch.png" },
-    { "project": "hay-mohammadi", "mode": "single" },
-    { "project": "papillon", "mode": "pair", "key": "images/cut/papillon/papillon-site-plan.png" },
-    { "project": "tamansourt", "mode": "pair", "key": "images/cut/tamansourt/tamansourt-site-plan.png" }
-  ],
-  "cover": {
-    "image": "images/cover/alley.jpg",
-    "alt": "Black and white photograph of an earthen alley between rubble walls, with two lit doorways, in a ruined village",
-    "source": "pdf2026:p1 (cover photograph, uncredited)"
-  },
-  "proofs": [
-    {
-      "name": "Survey and documentation",
-      "text": "Facades. Complete existing elevation | reading of architectural mouldings, gutters, chimneys, and joinery. Survey base prior to selective demolition.",
-      "context": "Belhomme, Paris 18th | Studio BELEM",
-      "project": "belhomme",
-      "image": "images/belhomme/belhomme-existing-facades-survey.jpg",
-      "alt": "Existing facade survey elevations and selective demolition plans of the Belhomme building",
-      "kind": "drawing",
-      "source": "pdf2026:p10"
-    },
-    {
-      "name": "BIM delivery",
-      "text": "Development of the DCE detail booklet: interior and exterior joinery, systematic indexing of secondary works elements.",
-      "context": "La Villette, Paris 19th | Studio BELEM",
-      "tools": "Revit | ArchiCAD | Rhino | Grasshopper",
-      "project": "la-villette",
-      "image": "images/la-villette/la-villette-access-gate-annotated.png",
-      "alt": "Construction elevation and section of the access gate and entry door, north elevation of building A, with its French callouts on leader lines",
-      "kind": "drawing",
-      "source": "pdf2026:p3, pdf2026:p28 (tools)"
-    },
-    {
-      "name": "Visualisation",
-      "text": "Courtyard threshold, arched entry, merlonated perimeter wall, dry vegetation and ancient stone.",
-      "context": "Al-Arg | architecture thesis",
-      "tools": "D5 Render | Unreal Engine",
-      "project": "al-arg",
-      "image": "images/al-arg/al-arg-render-courtyard.jpg",
-      "alt": "Render of a courtyard threshold with an arched entry and a merlonated perimeter wall",
-      "kind": "render",
-      "source": "site:project-al-arg (caption), pdf2026:p28 (tools)"
-    }
-  ],
-  "research": {
-    "title": "Between the Poetics of Place and the Value of Heritage",
-    "titleAr": "بين شاعرية المكان و قيمة الأثر",
-    "meta": "Architecture thesis | ENAU, University of Carthage | Highest Honours, unanimous jury, June 2024",
-    "award": "Sakura Science Program, Japan 2025 | Most Appreciated Research",
-    "cover": "images/cut/books/thesis-mockup-1.png",
-    "coverAlt": "The printed thesis Between the Poetics of Place and the Value of Heritage, laid open face down to show its cover: the Arabic title over a photograph of a rubble-stone wall",
-    "sources": {
-      "title": "site:books + pdf2025:p3",
-      "titleAr": "pdf2025:p46",
-      "meta": "site:books + answer:F01",
-      "award": "answer:F02"
-    }
-  }
+  ]
 }

@@ -272,6 +272,35 @@ export function hero(x, ctx, { priority = false, max = 'full', zoom = false, vt 
   return { span, html: image(x.hero.src, { alt: x.hero.alt, sz, prefix: p, priority, zoom, title: x.title, vt: vt ? vtHero(x) : null }), partner: null, lcpSizes: sz };
 }
 
+/* ---------------------------------------------------------- a project as one composition (D104, D105, D120) */
+// One stage, one scale system: the main render, a second view and a key drawing, placed by their layout in
+// site.css. Renders are cropped to their frame (data-crop) at the content's pos; a drawing stands whole on its
+// sheet, sized by its ratio (--r). The pictures are decorative here: the caption names the link.
+// `sizes` allow for the main card's 1.28 entry scale; a phone never shows (so never fetches) the drawing.
+const LAYOUTS = ['trio', 'trio-m', 'duo-p', 'film', 'duo'];
+const SZ = { main: '(min-width: 64rem) 41vw, (min-width: 48rem) 65vw, 100vw', 'main-p': '(min-width: 64rem) 30vw, (min-width: 48rem) 46vw, 82vw',
+  side: '(min-width: 64rem) 21vw, (min-width: 48rem) 33vw, 48vw', drawing: '(min-width: 64rem) 20vw, (min-width: 48rem) 32vw, 1px' };
+export const reelSizes = (layout) => SZ[layout === 'duo-p' ? 'main-p' : 'main'];
+export function reelItem(x, c, { prefix: p, priority = false }) {
+  if (!LAYOUTS.includes(c.layout)) throw new Error(`${x.slug}: layout "${c.layout}" is not one of ${LAYOUTS.join(', ')} (D104)`);
+  const layer = (l) => {
+    if (l.role === 'film') return html`<span class="reel__l reel__l--main reel__film">${picture(l.poster, { alt: '', sizes: SZ.main, prefix: p })}<video class="reel__v" data-scrub data-src="${p}${l.desktop}" data-src-small="${p}${l.mobile}" muted playsinline preload="none" aria-hidden="true" tabindex="-1"></video></span>`;
+    if (l.role === 'drawing') {
+      if (!l.src.startsWith('images/cut/')) throw new Error(`${x.slug}: drawing ${l.src} is not a cutout in images/cut/ (A8)`);
+      const { w, h } = dims(l.src);
+      return html`<span class="reel__l reel__l--drawing" style="--r: ${(w / h).toFixed(4)}">${image(l.src, { alt: '', sz: SZ.drawing, prefix: p })}</span>`;
+    }
+    return html`<span class="reel__l reel__l--${l.role}" data-crop style="--pos: ${l.pos || '50% 50%'}">${picture(l.src, { alt: '', sizes: l.role === 'main' ? reelSizes(c.layout) : SZ.side, prefix: p, priority: priority && l.role === 'main' })}</span>`;
+  };
+  const cat = x.descriptor.split(' | ')[0];
+  return html`<li class="reel__it reel__it--${c.layout}" data-fx="centre">
+<a class="reel__a" href="${projectHref(x, p)}" data-label="${x.title}" data-cat="${cat}">
+<span class="reel__stage">${c.layers.map(layer)}</span>
+<span class="reel__cap"><span class="reel__t">${x.title}</span> <span class="reel__m">${cat} · ${x.place} · ${x.year}</span></span>
+</a>
+</li>`;
+}
+
 // render credits of what the hero shows, once each
 export const creditLine = (x) => [...new Set([x.hero.credit, heroPartner(x)?.credit].filter(Boolean))].join(' | ');
 // the full caption under a case-study hero: its caption, the partner's, then the credits

@@ -197,9 +197,12 @@
   var fxUpdate = function () {};
   var scrubKick = function () {};
   if (fxItems.length) {
-    var headH = 0;
+    var headH = 0, vhM = 0;
     var measure = function () {
       var hd = document.querySelector('.site-header'); headH = hd ? hd.offsetHeight : 0;
+      // clientHeight: the layout viewport, steady while a phone's toolbar shows and hides (A1); read here, never in
+      // the frame, where a layout read after the frame's writes would force a second style pass
+      vhM = document.documentElement.clientHeight;
       fxItems.forEach(function (it) {
         it.y = naturalTop(it.el); it.h = it.el.offsetHeight; it.p = -1; it.d = 2;
         // a chapter is current once its top passes the middle of the screen, wherever the layout put it
@@ -218,8 +221,7 @@
       });
     };
     fxUpdate = function () {
-      // clientHeight: the layout viewport, steady while a phone's toolbar shows and hides (A1)
-      var y = window.scrollY, vh = document.documentElement.clientHeight, band = y + headH / 2;
+      var y = window.scrollY, vh = vhM, band = y + headH / 2;
       fxItems.forEach(function (it) {
         if (!it.h) return;   // a hidden view of a page (display: none) has nothing to move
         // a dark ground (D99) under the header's middle turns the header to the ground's colours (CSS: html.on-dark)
@@ -316,16 +318,19 @@
     if (document.readyState === 'complete') whenIdle(); else window.addEventListener('load', whenIdle, { once: true });
   }
 
-  /* ------------------------------------------------------------ the label that follows the pointer (feedback, D97)
-     dmcg's pill: on a fine pointer, an element with data-label names itself beside the cursor. Decorative
-     (aria-hidden): the link it sits on already carries the same name. */
+  /* ------------------------------------------------------------ the label that follows the pointer (feedback, D109)
+     dmcg's pill: on a fine pointer, an element with data-label names itself beside the cursor, with its category
+     (data-cat) after it in grey. Decorative (aria-hidden): the link it sits on already carries the same name. */
   if (FX && fineQ.matches && document.querySelector('[data-label]')) {
     var pill = document.createElement('div');
     pill.className = 'pill-label'; pill.setAttribute('aria-hidden', 'true');
+    var pillName = document.createElement('span'), pillCat = document.createElement('span');
+    pillCat.className = 'pill-label__c';
+    pill.appendChild(pillName); pill.appendChild(pillCat);
     document.body.appendChild(pill);
     document.addEventListener('pointerover', function (e) {
       var t = e.target.closest && e.target.closest('[data-label]');
-      if (t) pill.textContent = t.getAttribute('data-label');
+      if (t) { pillName.textContent = t.getAttribute('data-label'); pillCat.textContent = t.getAttribute('data-cat') || ''; }
       pill.classList.toggle('is-on', !!t);
     });
     document.addEventListener('pointermove', function (e) { pill.style.translate = (e.clientX + 16) + 'px ' + (e.clientY + 18) + 'px'; }, { passive: true });
@@ -437,19 +442,19 @@
     scrubVideos.forEach(function (v) { v.pause(); v.removeAttribute('src'); v.load(); v.parentNode.classList.remove('is-live'); });
   });
 
-  /* ------------------------------------------------------------ the column's way into a project (orientation, D97)
-     Leaving the home for a project, only the chosen item's render and title take the names that carry them into
-     the project's page (dmcg's genie): names on all fifteen would capture every item for the transition. */
+  /* ------------------------------------------------------------ the reel's way into a project (orientation, D97, D105)
+     Leaving the home for a project, only the chosen composition's main render (and its caption's title, where the
+     caption shows) take the names that carry them into the project's page (dmcg's genie): names on all fifteen
+     would capture every item for the transition. */
   window.addEventListener('pageswap', function (e) {
     var to = e.viewTransition && e.activation && e.activation.entry && e.activation.entry.url;
     if (!to) return;
-    slice(document.querySelectorAll('a.col__a')).forEach(function (a) {
+    slice(document.querySelectorAll('a.reel__a')).forEach(function (a) {
       if (a.href !== to) return;
       var slug = to.replace(/^.*project-|\.html.*$/g, '');
-      var card = a.querySelector('.col__card:not(.col__film)'), t = a.querySelector('.col__t');
-      if (card) card.style.viewTransitionName = 'hero-' + slug;
-      t.style.viewTransitionName = 'title-' + slug;
-      t.style.viewTransitionClass = 'vt-title';
+      var main = a.querySelector('.reel__l--main:not(.reel__film)'), t = a.querySelector('.reel__t');
+      if (main) main.style.viewTransitionName = 'hero-' + slug;
+      if (t.checkVisibility({ opacityProperty: true })) { t.style.viewTransitionName = 'title-' + slug; t.style.viewTransitionClass = 'vt-title'; }
     });
   });
 

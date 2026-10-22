@@ -10,7 +10,7 @@
 | P1a | Foundation: tokens, pills, footer, references, name-overlap gate | done | commit "Plan 18 P1a"; full QA 27/27 ok (file: base, 404 checks skipped) |
 | P1b | Email chip, form removal, theme sync + reveal | done | commit "Plan 18 P1b" (D107, D108); chip beside Contact only from 105 rem (measured: at the plan's 64 rem it covers the name); CV regenerated now as well as in P4 |
 | P2a | Home compositions (content only) | done | commit "Plan 18 P2a" (D120); `home.json` `reel` (15 items, choices table under §4 P2a); old keys marked `$remove` for P2b; QA coverage gate skips `layout`/`layers`/`why`/`$…`; home QA all gates pass |
-| P2b | Home build and motion | todo | |
+| P2b | Home build and motion | done | commit "Plan 18 P2b" (D103–D105, D109, D112 gate); widest empty band 24vh at 1440 (gap 1.5 rem, rise 6vh, drift 8vh, measured); home LCP 1.36 s, CLS 0; frames at 1× 60 fps, at 4× CPU ~30 fps (logged in D105 with the recommendation); full QA 28/28 ok (file: base, 404 checks skipped) |
 | P3 | Index: tree first, rebuilt; grid without margins | todo | |
 | P4 | About sheet and about.html | todo | |
 | P5a | Case-study reel: engine, template, 4 reference projects | todo | |
