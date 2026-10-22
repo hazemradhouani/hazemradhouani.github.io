@@ -421,7 +421,7 @@ else console.log('ok   motion (no-preference): every arrival fired and every ani
 const report = [];
 for (const url of urls) {
   const name = url.replace(BASE, '') || 'index';
-  const row = { page: name, overflow: [], brokenImgs: [], console: [], small: [], targets: [], axe: {}, crop: [], upscale: [], grid: [], palette: [], alpha: [], fringe: [], theme: [], labels: [] };
+  const row = { page: name, overflow: [], brokenImgs: [], console: [], small: [], targets: [], axe: {}, crop: [], upscale: [], grid: [], palette: [], alpha: [], fringe: [], theme: [], labels: [], chrome: [] };
   for (const w of WIDTHS) {
     for (const theme of THEMES) {
     const ctx = await browser.newContext({ viewport: { width: w, height: w < 768 ? 812 : 900 }, deviceScaleFactor: 1, colorScheme: theme, reducedMotion: 'reduce' });
@@ -441,6 +441,13 @@ for (const url of urls) {
         if (cs.visibility === 'hidden' || el.closest('.vh,[hidden],dialog:not([open])')) continue; const fs = parseFloat(cs.fontSize); if (fs < 13) out.small.push(`${fs}px ${el.tagName.toLowerCase()}.${el.className}`); }
       for (const el of document.querySelectorAll('a[href], button, input, textarea, select, summary')) { if (el.closest('dialog:not([open]), [hidden], .vh, [inert]') || getComputedStyle(el).display === 'none') continue;
         const b = el.getBoundingClientRect(); if (b.width === 0) continue; if ((b.width < 24 || b.height < 24) && !el.closest('p, li, dd, figcaption, .cap__text')) out.targets.push(`${Math.round(b.width)}x${Math.round(b.height)} ${el.tagName.toLowerCase()}.${el.className}`); }
+      // chrome (D106, plan 18): with the full header (48rem and up) the centred name stands clear of the routes and the tools
+      out.chrome = [];
+      const nameBox = document.querySelector('.site-header .brand')?.getBoundingClientRect();
+      if (innerWidth >= 768 && nameBox) for (const sel of ['.site-header .nav ul', '.site-header__tools']) {
+        const b = document.querySelector(sel)?.getBoundingClientRect();
+        if (b && b.width && nameBox.left < b.right && b.left < nameBox.right && nameBox.top < b.bottom && b.top < nameBox.bottom) out.chrome.push(`the name overlaps ${sel} (${Math.round(Math.min(nameBox.right, b.right) - Math.max(nameBox.left, b.left))}px)`);
+      }
       // Field gates. crop: rendered ratio within 1% of the master's, never object-fit: cover; upscale: never wider than the master
       out.crop = []; out.upscale = []; out.grid = []; out.palette = [];
       for (const img of document.querySelectorAll('main img')) {
@@ -470,8 +477,8 @@ for (const url of urls) {
       // palette: no background colour outside the active Field tokens. Rendered scenes are skipped;
       // they carry their authored colour and do not define interface surfaces.
       const ok = theme === 'dark'
-        ? new Set(['rgba(0, 0, 0, 0)', 'rgb(18, 19, 17)', 'rgb(247, 245, 239)', 'rgb(69, 70, 63)', 'rgba(18, 19, 17, 0.88)'])
-        : new Set(['rgba(0, 0, 0, 0)', 'rgb(255, 255, 255)', 'rgb(17, 17, 17)', 'rgba(255, 255, 255, 0.86)']);
+        ? new Set(['rgba(0, 0, 0, 0)', 'rgb(18, 19, 17)', 'rgb(247, 245, 239)', 'rgb(69, 70, 63)', 'rgba(18, 19, 17, 0.88)', 'rgb(26, 27, 25)'])
+        : new Set(['rgba(0, 0, 0, 0)', 'rgb(255, 255, 255)', 'rgb(17, 17, 17)', 'rgba(255, 255, 255, 0.86)', 'rgb(245, 245, 243)']);
       // an element with data-ground stands on its project's declared ground (D86, A10: from its render, per scheme)
       const rgb = (h) => `rgb(${[1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16)).join(', ')})`;
       const ground = (el) => el.matches('[data-ground]') && rgb(getComputedStyle(el).getPropertyValue(theme === 'dark' ? '--g-dark' : '--g-light').trim());
@@ -545,7 +552,7 @@ for (const url of urls) {
       return out;
     }, theme);
     row.crop.push(...r.crop.map((s) => `${theme}/${w}: ${s}`)); row.upscale.push(...r.upscale.map((s) => `${theme}/${w}: ${s}`));
-    row.grid.push(...r.grid.map((s) => `${theme}/${w}: ${s}`)); row.labels.push(...r.labels.map((s) => `${theme}/${w}: ${s}`)); row.palette.push(...r.palette.map((s) => `${theme}/${w}: ${s}`)); row.theme.push(...r.theme.map((s) => `${theme}/${w}: ${s}`));
+    row.grid.push(...r.grid.map((s) => `${theme}/${w}: ${s}`)); row.labels.push(...r.labels.map((s) => `${theme}/${w}: ${s}`)); row.palette.push(...r.palette.map((s) => `${theme}/${w}: ${s}`)); row.theme.push(...r.theme.map((s) => `${theme}/${w}: ${s}`)); row.chrome.push(...r.chrome.map((s) => `${theme}/${w}: ${s}`));
     // alpha: every cutout keeps a transparent corner (decoded in the page, at 1440 only)
     // (drawings declared full-bleed in tools/cutout.json, with a reason, have no paper inside their frame)
     const fullBleed = Object.keys(loadCutoutConfig(REPO).fullBleed)
@@ -600,18 +607,18 @@ for (const url of urls) {
     await ctx.close();
     }
   }
-  for (const k of ['brokenImgs', 'small', 'targets', 'console', 'crop', 'upscale', 'grid', 'palette', 'alpha', 'fringe', 'theme', 'labels']) row[k] = [...new Set(row[k])];
+  for (const k of ['brokenImgs', 'small', 'targets', 'console', 'crop', 'upscale', 'grid', 'palette', 'alpha', 'fringe', 'theme', 'labels', 'chrome']) row[k] = [...new Set(row[k])];
   report.push(row);
-  const gates = row.crop.length + row.upscale.length + row.grid.length + row.palette.length + row.alpha.length + row.fringe.length + row.theme.length + row.labels.length;
+  const gates = row.crop.length + row.upscale.length + row.grid.length + row.palette.length + row.alpha.length + row.fringe.length + row.theme.length + row.labels.length + row.chrome.length;
   gateFails += gates;
   const axeBad = Object.values(row.axe).reduce((n, items) => n + items.length, 0);
   const bad = gates + row.overflow.length + row.brokenImgs.length + row.console.length + axeBad;
   const list = (k, n = 4) => (row[k].length ? ` | ${k} (${row[k].length}) ${row[k].slice(0, n).join(' ; ')}` : '');
   const axeList = Object.entries(row.axe).filter(([, items]) => items.length).map(([key, items]) => ` | axe${key} ${items.join(' ; ')}`).join('');
-  console.log(`${bad ? 'FAIL' : 'ok  '} ${name}${row.overflow.length ? ' | overflow ' + row.overflow.join(' ; ') : ''}${list('brokenImgs')}${list('console', 2)}${axeList}${list('crop')}${list('upscale')}${list('grid')}${list('palette')}${list('alpha')}${list('fringe')}${list('theme')}${list('labels')}${list('small', 3)}${list('targets', 3)}`);
+  console.log(`${bad ? 'FAIL' : 'ok  '} ${name}${row.overflow.length ? ' | overflow ' + row.overflow.join(' ; ') : ''}${list('brokenImgs')}${list('console', 2)}${axeList}${list('crop')}${list('upscale')}${list('grid')}${list('palette')}${list('alpha')}${list('fringe')}${list('theme')}${list('labels')}${list('chrome')}${list('small', 3)}${list('targets', 3)}`);
 }
 fs.writeFileSync(path.join(here, '.cache', 'qa-report.json'), JSON.stringify(report, null, 2));
 await browser.close();
-console.log(gateFails ? `Field gates: ${gateFails} failure(s)` : 'Field gates: all pass (crop, upscale, grid, palette, alpha/fringe/detail, dark treatments, labels, content coverage)');
+console.log(gateFails ? `Field gates: ${gateFails} failure(s)` : 'Field gates: all pass (crop, upscale, grid, palette, alpha/fringe/detail, dark treatments, labels, chrome, content coverage)');
 const failed = themeWorkflowFailures.length || report.some((r) => r.overflow.length || r.brokenImgs.length || r.console.length || Object.values(r.axe).some((items) => items.length));
 if (gateFails || failed) process.exitCode = 1;

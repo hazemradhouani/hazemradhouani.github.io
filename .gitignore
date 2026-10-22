@@ -20,3 +20,6 @@ node_modules/
 # which are committed; the masters are re-created from Images HQ/ by tools/import-hq-media.mjs.
 # (PNG files already tracked, such as the thesis books, stay tracked.)
 /images/*/*.png
+# Owner's screen recordings of the reference site and the montages cut from them (D119): reference only
+/docs/Recording*.mp4
+/docs/ref/

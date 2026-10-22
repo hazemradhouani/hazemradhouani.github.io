@@ -85,9 +85,14 @@
     --tr-caps: 0;
     --tr-display: -0.01em;
     --tr-tale: 0.3em;                                         /* Garamond capitals of a told story (P6) */
-    /* surfaces (D92): tiles 6px, cards and the viewer 8px, pills fully round; one soft shadow for a card on the field */
-    --r-tile: 6px; --r-card: 8px; --r-pill: 999px;
-    --shadow-card: 0 1px 2px rgb(0 0 0 / 0.06), 0 12px 32px -12px rgb(0 0 0 / 0.18);
+    /* surfaces (D92, D118): tiles 6px, cards and the viewer 8px, controls 10px (dmcg's rounded-rect pill), chips
+       fully round; one very soft, wide shadow for a card on the field and a lifted one for a card under the pointer;
+       a raised fill for chips and sheets */
+    --r-tile: 6px; --r-card: 8px; --r-ctl: 10px; --r-pill: 999px;
+    --shadow-card: 0 1px 2px rgb(0 0 0 / 0.04), 0 24px 48px -16px rgb(0 0 0 / 0.16);
+    --shadow-lift: 0 2px 4px rgb(0 0 0 / 0.05), 0 32px 64px -20px rgb(0 0 0 / 0.24);
+    --bg-raised: #F5F5F3;
+    --pill-x: clamp(0.5rem, 0.9vw, 0.875rem);                 /* a control's pill reaches this far past its words */
     /* the fixed chrome (D93): the header and the corner captions stand on the field's own edge, which melts
        the moving page under them (dmcg's progressive edge) */
     --site-edge: max(1rem, 2.2vw);
@@ -115,7 +120,8 @@
     --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
     --spring: var(--ease-out);
     --spring-dur: 660ms;
-    --t-press: 120ms; --t-hover: 160ms; --t-ui: 240ms; --t-bar: 320ms; --t-arrive: 700ms;
+    --t-press: 120ms; --t-hover: 200ms; --t-ui: 240ms; --t-bar: 320ms; --t-arrive: 700ms;
+    --t-chip: 420ms; --t-sheet: 600ms; --t-sheet-out: 450ms; --t-theme: 950ms;
     --t-rise: 700ms; --t-plate: 1100ms; --stagger: 90ms;
   }
   html[data-theme="dark"] {
@@ -126,6 +132,10 @@
     --ui: #B4B1A9;
     --error: #FFB4AB;
     --drawing-bg: #F7F5EF;
+    --bg-raised: #1A1B19;
+    /* a shadow does not read on charcoal: a card stands on a hairline instead */
+    --shadow-card: 0 0 0 1px rgb(255 255 255 / 0.06), 0 24px 48px -16px rgb(0 0 0 / 0.5);
+    --shadow-lift: 0 0 0 1px rgb(255 255 255 / 0.09), 0 32px 64px -20px rgb(0 0 0 / 0.6);
   }
   @supports (transition-timing-function: linear(0, 1)) {
     :root { --spring: linear(0, 0.079 5%, 0.236 10%, 0.403 15%, 0.551 20%, 0.672 25%, 0.764 30%, 0.833 35%, 0.884 40%, 0.919 45%, 0.945 50%, 0.962 55%, 0.974 60%, 0.983 65%, 0.988 70%, 0.992 75%, 0.995 80%, 0.997 85%, 0.998 90%, 1); }
@@ -245,14 +255,24 @@
   .stack-s > * + * { margin-top: var(--s2); }
   .credit { color: var(--ink-2); }
 
-  /* action link: a hairline that draws to full ink from the left (feedback) */
-  .more { display: inline-flex; align-items: center; gap: var(--s2); min-height: 2.75rem; color: var(--ink);
+  /* the pill (D106, dmcg's controls; feedback): a control at rest is its words; under the pointer or focus a
+     rounded pill with a hairline fades in around them, a press sinks it 2%, and the current page keeps it.
+     Words inside running text keep their underline (WCAG 1.4.1), so only controls take the pill. */
+  .ctl { border: 1px solid transparent; border-radius: var(--r-ctl); background-clip: padding-box;
+    transition: border-color var(--t-hover) var(--ease-out), background-color var(--t-hover) var(--ease-out),
+      box-shadow var(--t-hover) var(--ease-out), scale var(--t-press) var(--ease-out); }
+  .ctl:hover, .ctl:focus-visible { border-color: var(--line); background-color: var(--bg); box-shadow: 0 1px 2px rgb(0 0 0 / 0.04); }
+  .ctl:active { scale: 0.98; }
+  /* the current place keeps its pill, its edge at 3:1 or more so the state reads without the pointer (1.4.11) */
+  .ctl[aria-current], .ctl[aria-current]:hover { border-color: var(--ui); background-color: var(--bg); }
+
+  /* action link: a chip whose pill reaches past its words, so its words still stand on the text's own edge */
+  .more { display: inline-flex; align-items: center; gap: var(--s2); min-height: 2.75rem; padding-inline: var(--pill-x);
+    margin-inline: calc(-1 * var(--pill-x)); border: 1px solid transparent; border-radius: var(--r-pill); color: var(--ink);
     font-family: var(--sans); font-size: var(--fs-label); font-weight: var(--w-label); letter-spacing: var(--tr-caps); text-transform: var(--case);
-    text-decoration: none; }
-  .more > span { padding-block: 2px; background: linear-gradient(var(--ink), var(--ink)) 0 100% / 0% 1px no-repeat,
-      linear-gradient(var(--ui), var(--ui)) 0 100% / 100% 1px no-repeat;
-    transition: background-size var(--t-ui) var(--ease-out); }
-  .more:hover > span, .more:focus-visible > span { background-size: 100% 1px, 100% 1px; }
+    text-decoration: none; transition: border-color var(--t-hover) var(--ease-out), background-color var(--t-hover) var(--ease-out), scale var(--t-press) var(--ease-out); }
+  .more:hover, .more:focus-visible { border-color: var(--line); background-color: var(--bg-raised); }
+  .more:active { scale: 0.98; }
   .more svg { width: 0.875rem; height: 0.875rem; flex: none; transition: transform var(--t-ui) var(--ease-out); }
   /* feedback: the arrow leans 3px the way the link goes (only where a pointer hovers) */
   @media (hover: hover) and (pointer: fine) {
@@ -270,23 +290,14 @@
   .site-header__in > * { pointer-events: auto; }
   .brand { grid-column: 2; display: grid; justify-items: center; align-content: center; min-height: 2.75rem; padding-inline: var(--s2);
     color: var(--ink); text-decoration: none; font-size: var(--fs-brand); line-height: 1.12; text-align: center; white-space: nowrap; }
-  .nav ul { display: flex; flex-wrap: wrap; gap: 0 clamp(0.75rem, 1.8vw, 2rem); }
-  .nav a, .views a { display: inline-flex; align-items: center; min-height: 2.75rem; color: var(--ink); text-decoration: none;
-    font-size: var(--fs-brand); position: relative; }
+  /* the routes and the views of the work are pills (D106): the pointer's route and the current one stand in one */
+  .nav ul, .views ul { display: flex; flex-wrap: wrap; gap: 0 clamp(0.125rem, 0.5vw, 0.5rem); }
+  .nav a, .views a { display: inline-flex; align-items: center; min-height: 2.75rem; padding-inline: var(--pill-x); color: var(--ink);
+    text-decoration: none; font-size: var(--fs-brand); }
   .site-header .nav { grid-column: 1; justify-self: start; }
-  /* feedback: a hairline draws under the route the pointer is on, and stays under the current one */
-  .nav a::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0.6rem; height: 1px; background: currentColor;
-    transform: scaleX(0); transform-origin: left; transition: transform var(--t-ui) var(--ease-out); }
-  .nav a:hover::after, .nav a[aria-current]::after { transform: scaleX(1); }
   .site-header__tools { grid-column: 3; justify-self: end; display: flex; align-items: center; gap: var(--s2); }
-  /* the two views of the work, as dmcg's switch: the current one stands in a pill on the field */
-  .views ul { display: flex; gap: var(--s1); }
-  .views a { padding-inline: var(--s4); border-radius: var(--r-pill); border: 1px solid transparent;
-    transition: border-color var(--t-hover) var(--ease-out), background-color var(--t-hover) var(--ease-out); }
-  .views a:hover { border-color: var(--line); }
-  .views a[aria-current] { border-color: var(--ui); background: var(--bg); box-shadow: 0 1px 2px rgb(0 0 0 / 0.05); }
   .theme-button, .menu-button { display: inline-flex; align-items: center; justify-content: center; min-height: 2.75rem; min-width: 2.75rem;
-    padding: 0 var(--s2); background: none; border: 0; color: var(--ink); font-size: var(--fs-brand); }
+    padding: 0 var(--s2); background: none; color: var(--ink); font-size: var(--fs-brand); }
   .theme-button svg { width: 1.25rem; height: 1.25rem; transition: rotate var(--t-ui) var(--ease-out); }
   html[data-theme="dark"] .theme-button svg { rotate: 180deg; }   /* state: the lit half turns to the other side */
   .site-header__tools, .menu__controls { display: flex; align-items: center; gap: var(--s1); }
@@ -328,11 +339,11 @@
   .menu__top { display: flex; align-items: center; justify-content: space-between; min-height: var(--bar-h); }
   .menu__controls form { display: flex; }
   .menu__close { display: inline-flex; align-items: center; min-height: 2.75rem; padding: 0 var(--s3); margin-right: calc(-1 * var(--s3));
-    background: none; border: 0; font-size: 1.1875rem; text-transform: var(--case); }
+    background: none; font-size: 1.1875rem; text-transform: var(--case); }
   .menu__list { padding-top: var(--s7); display: grid; gap: var(--s2); text-align: center; }
-  .menu__list a { display: inline-block; padding-block: var(--s2); font-size: clamp(2rem, 9vw, 2.75rem); line-height: 1.2;
-    text-transform: var(--case); text-decoration: none; color: var(--ink-2); }
-  .menu__list a[aria-current] { color: var(--ink); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.18em; }
+  .menu__list a { display: inline-block; padding: var(--s2) var(--s4); font-size: clamp(2rem, 9vw, 2.75rem); line-height: 1.2;
+    text-transform: var(--case); text-decoration: none; color: var(--ink-2); border-radius: 14px; }
+  .menu__list a:hover, .menu__list a[aria-current] { color: var(--ink); }
   .menu__contact { margin-top: var(--s7); display: grid; justify-items: center; gap: var(--s1); }
   .menu__contact a { min-height: 2.75rem; display: inline-flex; align-items: center; }
 
@@ -502,10 +513,7 @@
   .viewer__count { font-family: var(--sans); font-size: var(--fs-label); letter-spacing: var(--tr-caps); color: var(--ink-2); min-width: 4.5rem;
     font-variant-numeric: tabular-nums; }
   .viewer__btn { display: inline-flex; align-items: center; justify-content: center; gap: var(--s2); min-height: 2.75rem; min-width: 2.75rem;
-    padding: 0 var(--s3); background: none; border: 0; color: var(--ink); font-size: 1.0625rem; text-transform: var(--case);
-    transition: color var(--t-hover) var(--ease-out), transform var(--t-press) var(--ease-out); }
-  .viewer__btn:hover { color: var(--ink-2); }
-  .viewer__btn:active { transform: scale(0.98); }
+    padding: 0 var(--s3); background: none; color: var(--ink); font-size: 1.0625rem; text-transform: var(--case); text-decoration: none; }
   .viewer__btn[aria-disabled="true"] { opacity: 0.35; cursor: default; }
   .viewer__stage:focus-visible { outline-offset: -4px; }
   .viewer__btn svg { width: 1.125rem; height: 1.125rem; }
@@ -535,20 +543,14 @@
   .form__status.is-error { color: var(--error); }
   .form__hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
 
-  /* footer (D94): Michael Gatt's sentence of routes. The routes are words in the told-story voice (Garamond
-     tracked capitals), the words between them stay small, so the page ends on one sentence, not a link grid.
-     Under it, the practical lines: mail, LinkedIn, the CV, the films, the year. */
-  .site-footer { margin-top: var(--gap-chapter); padding-block: var(--gap-group) var(--s6); text-align: center; }
-  .tale-nav { max-width: 46rem; margin-inline: auto; padding-inline: var(--site-edge); font-size: var(--fs-cap); line-height: 2.2;
-    color: var(--ink-2); text-wrap: balance; }
-  .tale-nav a { display: inline-flex; align-items: center; min-height: 2.75rem; padding-inline: 0.15em; vertical-align: middle;
-    font-family: var(--serif); font-size: clamp(1.25rem, 1rem + 1.1vw, 2rem); letter-spacing: var(--tr-tale); text-transform: uppercase;
-    color: var(--ink); text-decoration-color: var(--ui); text-underline-offset: 0.3em; margin-right: calc(-1 * var(--tr-tale)); }
-  .tale-nav a:hover { text-decoration-color: var(--ink); }
-  .site-footer__base { margin-top: var(--s7); display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 0 var(--s5);
-    padding-inline: var(--site-edge); font-size: var(--fs-cap); color: var(--ink-2); }
-  .site-footer__base a { min-height: 2.75rem; display: inline-flex; align-items: center; color: var(--ink-2); text-decoration: none; }
-  .site-footer__base a:hover { color: var(--ink); }
+  /* footer (D117): one quiet line in the one voice, the practical routes as pills (the reading routes are in
+     the header and the menu): the year and name, the address, LinkedIn, the CV, the films */
+  .site-footer { margin-top: var(--gap-group); padding: var(--s6) var(--site-edge); text-align: center; }
+  .site-footer__base { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 0 var(--s1);
+    font-size: var(--fs-cap); color: var(--ink-2); }
+  .site-footer__base > span { padding-inline: var(--pill-x); }
+  .site-footer__base a { min-height: 2.75rem; display: inline-flex; align-items: center; padding-inline: var(--pill-x); color: var(--ink-2); text-decoration: none; }
+  .site-footer__base a:hover, .site-footer__base a:focus-visible { color: var(--ink); }
   /* where the corner captions stand, the footer's last line stays above them */
   @media (min-width: 48rem) { body:has(.corner) .site-footer { padding-bottom: calc(var(--edge-bottom) + var(--s4)); } }
 }
@@ -600,10 +602,12 @@
 
   /* the codas: practice, research, and the root of the index (dmcg's tree, its first branch) */
   .coda { margin-top: var(--gap-chapter); }
+  /* filters and the tree's nodes keep their pill at rest (dmcg's catalog): under the pointer it fills */
   .pill { display: inline-flex; align-items: center; gap: 0.5em; min-height: 2.75rem; padding: 0 var(--s4); border: 1px solid var(--line);
-    border-radius: var(--r-pill); background: var(--bg); color: var(--ink); font-size: var(--fs-cap); text-decoration: none;
-    transition: border-color var(--t-hover) var(--ease-out); }
-  .pill:hover { border-color: var(--ink-2); }
+    border-radius: var(--r-ctl); background: var(--bg); color: var(--ink); font-size: var(--fs-cap); text-decoration: none;
+    transition: border-color var(--t-hover) var(--ease-out), background-color var(--t-hover) var(--ease-out), scale var(--t-press) var(--ease-out); }
+  .pill:hover { border-color: var(--ui); background-color: var(--bg-raised); }
+  .pill:active { scale: 0.98; }
   .pill__n { color: var(--ink-2); font-size: var(--fs-label); font-variant-numeric: tabular-nums; }
   .tree-root { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: var(--s3) var(--s5); padding-inline: var(--site-edge); }
   .tree-root__fam { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--s2); }
