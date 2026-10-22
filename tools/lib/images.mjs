@@ -89,10 +89,12 @@ function scan(rel) {
 export const variants = (rel) => scan(rel).ws;
 
 // <picture> with AVIF (when present) + WebP sources, the original as fallback, real width/height.
-export function picture(rel, { alt, sizes = '100vw', loading = 'lazy', priority = false, prefix = '', cls, style } = {}) {
+export function picture(rel, { alt, sizes = '100vw', loading = 'lazy', priority = false, prefix = '', cls, style, upto = 0 } = {}) {
   if (alt == null) throw new Error(`Missing alt for ${rel}`);
   const { w, h } = dims(rel);
-  const { ws, avif } = scan(rel);
+  const { ws: all, avif } = scan(rel);
+  // a thumbnail never needs the large widths (D101): up to `upto`, or the smallest when none is that small
+  const ws = upto ? (all.filter((x) => x <= upto).length ? all.filter((x) => x <= upto) : all.slice(0, 1)) : all;
   const set = (ext) => ws.map((x) => `${prefix}${optStem(rel)}-${x}.${ext} ${x}w`).join(', ');
   // alt is always written, even when empty: alt="" marks a decorative image (WCAG 1.1.1)
   return html`<picture${attrs({ class: cls, style })}>${when(avif, () => html`<source type="image/avif" srcset="${set('avif')}" sizes="${sizes}">`)}${when(ws.length, () => html`<source type="image/webp" srcset="${set('webp')}" sizes="${sizes}">`)}<img src="${prefix + rel}" alt="${alt}"${attrs({

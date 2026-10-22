@@ -284,7 +284,7 @@
   .views a { padding-inline: var(--s4); border-radius: var(--r-pill); border: 1px solid transparent;
     transition: border-color var(--t-hover) var(--ease-out), background-color var(--t-hover) var(--ease-out); }
   .views a:hover { border-color: var(--line); }
-  .views a[aria-current] { border-color: var(--line); background: var(--bg); box-shadow: 0 1px 2px rgb(0 0 0 / 0.05); }
+  .views a[aria-current] { border-color: var(--ui); background: var(--bg); box-shadow: 0 1px 2px rgb(0 0 0 / 0.05); }
   .theme-button, .menu-button { display: inline-flex; align-items: center; justify-content: center; min-height: 2.75rem; min-width: 2.75rem;
     padding: 0 var(--s2); background: none; border: 0; color: var(--ink); font-size: var(--fs-brand); }
   .theme-button svg { width: 1.25rem; height: 1.25rem; transition: rotate var(--t-ui) var(--ease-out); }
@@ -588,6 +588,8 @@
     overflow: clip; box-shadow: var(--shadow-card); }
   .col__card img, .col__card picture { display: block; width: 100%; height: 100%; }
   .col__key { display: block; }
+  .col__card { max-width: min(var(--nw, 100%), calc(62svh * var(--r, 1.5))); }   /* the band between header and captions (D101) */
+  .col__key .nw { width: min(100%, calc(62svh * var(--kr, 1))); }
   .col__it--single .col__stage, .col__it--film .col__stage { grid-template-columns: minmax(0, 1fr); width: min(100%, 46rem); }
   .col__cap { display: flex; flex-wrap: wrap; justify-content: center; gap: 0 var(--s3); align-items: baseline; font-size: var(--fs-cap); line-height: 1.5; }
   .col__n, .col__m { color: var(--ink-2); font-variant-numeric: tabular-nums; }
@@ -617,6 +619,7 @@
   .tile__fig { margin: 0; }
   .tile__frame { display: grid; place-items: center; aspect-ratio: 4 / 3; border-radius: var(--r-tile); background: var(--g-light); overflow: clip; text-decoration: none; }
   html[data-theme="dark"] .tile__frame { background: var(--g-dark); }
+  .tile[data-kind="drawing"] .tile__frame { background: var(--bg); box-shadow: inset 0 0 0 1px var(--line); }
   .tile__img { display: block; }
   .tile__img :is(a, picture:not(.nw__keep), img) { display: block; width: 100%; height: auto; }
   .tile__cap { margin-top: var(--s2); display: flex; flex-wrap: wrap; align-items: center; gap: 0 var(--s2); font-size: var(--fs-label); line-height: 1.45; color: var(--ink-2); }
@@ -631,7 +634,7 @@
   }
   body:is([data-ix-view="tree"], [data-ix-view="list"]) .az { display: none; }
   .ix-tree, .ix-list { padding: var(--s6) var(--site-edge) calc(var(--edge-bottom) + 5rem); }
-  .tree { position: relative; aspect-ratio: 1200 / 640; max-width: 90rem; margin-inline: auto; }
+  .tree { position: relative; aspect-ratio: 1200 / 640; width: min(100%, 90rem, calc((100svh - var(--head-h) - 9rem) * 1.875)); margin-inline: auto; }
   .tree__branch { position: absolute; inset: 0; }
   .tree__lines { position: absolute; inset: 0; width: 100%; height: 100%; fill: none; stroke: var(--ink); stroke-opacity: 0.18; stroke-width: 1; }
   .tree__lines path { vector-effect: non-scaling-stroke; }
@@ -647,7 +650,13 @@
   .ix-table a { display: inline-flex; align-items: center; min-height: 1.75rem; text-decoration: none; }
   .ix-table a:hover { text-decoration: underline; }
   .ix-bar { position: fixed; z-index: 17; left: 50%; bottom: clamp(0.75rem, 1.5vw, 1.5rem); translate: -50% 0; display: flex; gap: var(--s4); align-items: center; }
-  .ix-bar__group { display: flex; gap: var(--s1); }
+  .ix-bar__group { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--s1); }
+  html:has(.ix-bar) { scroll-padding-bottom: 8rem; }
+  body[data-ix-view="list"] .ix-bar__group:first-child { display: none; }   /* the list is of projects: no families (D101) */
+  @media (max-height: 32rem) {
+    .site-header { position: absolute; }
+    .ix-bar { position: static; translate: none; flex-wrap: wrap; justify-content: center; margin: var(--s4) var(--site-edge) 0; }
+  }
   .ix-bar .pill[aria-pressed="true"], .tree .pill[aria-pressed="true"] { border-color: var(--ink); }
   .pill--icon { width: 2.75rem; padding: 0; justify-content: center; }
   .pill--icon svg { width: 1.125rem; height: 1.125rem; fill: none; stroke: currentColor; stroke-width: 1.5; }
@@ -705,7 +714,7 @@
     .tale__pic--3 { right: 2%; top: 0; width: min(18rem, 26%); rotate: -2deg; }
   }
   .tale-rail { display: none; }
-  @media (min-width: 64rem) {
+  @media (min-width: 80rem) {
     .tale-rail { display: block; position: sticky; top: 0; z-index: 5; height: 0; }
     .tale-rail ol { position: absolute; right: var(--site-edge); top: 50svh; translate: 0 -50%; display: grid; gap: var(--s1); margin: 0; padding: 0; list-style: none; text-align: right; }
     .tale-rail a { display: inline-flex; align-items: center; justify-content: flex-end; gap: var(--s2); min-height: 1.75rem; font-size: var(--fs-label); color: var(--connector); text-decoration: none;
@@ -912,13 +921,13 @@
   html.fx .film { height: 320svh; }
   @media (max-width: 47.99rem) { html.fx .film { height: 220svh; } }
   html.fx .film__stage { position: sticky; top: 0; height: 100svh; grid-template-rows: minmax(0, 1fr) auto; align-content: stretch;
-    padding-bottom: var(--s6); contain: layout; }
+    padding-bottom: calc(var(--edge-bottom) + var(--s3)); contain: layout; }
   html.fx .film__frame { --g: clamp(0, var(--p, 0) / 0.35, 1);
-    --w0: min(56vw, 64rem, var(--nw)); --w1: min(100vw - 2 * var(--site-edge), var(--nw), (100svh - var(--head-h) - 10rem) * 1.7778);
+    --w0: min(50vw, 60rem, var(--nw)); --w1: min(100vw - 2 * var(--site-edge), var(--nw), (100svh - var(--head-h) - 15rem) * 1.7778);
     align-self: center; width: calc(var(--w0) + (var(--w1) - var(--w0)) * var(--g)); }
   @media (max-width: 47.99rem) { html.fx .film__frame { --w0: calc(100vw - 2 * var(--site-edge) - 3rem); } }   /* a phone starts near its width */
   html.fx .film__ch { grid-template-areas: "c"; min-height: 6.5rem; align-items: start; }
-  html.fx .film__ch > li { grid-area: c; opacity: clamp(0, 1 - max(var(--p, 0) - var(--c), var(--c) - var(--p, 0)) * 6, 1);
+  html.fx .film__ch > li { grid-area: c; opacity: clamp(0, 1 - max(var(--p, 0) - var(--c), var(--c) - var(--p, 0)) * 9, 1);
     translate: 0 calc((var(--c) - var(--p, 0)) * 48px); }
   html.fx .rail { display: grid; gap: 0.625rem; position: absolute; right: var(--site-edge); top: 50%; translate: 0 -50%; margin: 0; padding: 0; list-style: none; }
   .rail > li { justify-self: end; width: 0.875rem; height: 1px; background: var(--ink); opacity: 0.35;
@@ -950,7 +959,8 @@
      the portrait takes its colour as the reader starts; the letters of Al-Arg gather by 45% of their chapter;
      the three photographs of Japan drift at their own rates. The first chapter is in view from the first paint. */
   @media (min-width: 48rem) and (min-height: 40rem) {
-    html.fx .tale__ch { height: 170svh; }
+    html.fx .tale__ch { height: 170svh; scroll-margin-top: -25svh; }
+    html.fx .tale__ch:focus-within .tale__stage > * { opacity: 1 !important; }   /* above the first and last chapters' own rules */
     html.fx .tale__stage { position: sticky; top: 0; height: 100svh; min-height: 0; }
     html.fx .tale__stage > * { opacity: clamp(0, min(var(--p, 0) * 8, (1 - var(--p, 0)) * 8), 1); translate: 0 calc((0.5 - var(--p, 0)) * 28px); }
     html.fx #t-who .tale__stage > * { opacity: clamp(0, (1 - var(--p, 0)) * 8, 1); translate: 0 calc(var(--p, 0) * -28px); }
@@ -963,6 +973,9 @@
     html.fx .tale__pic--3 { translate: 0 calc((0.5 - var(--p, 0.5)) * 12svh); }
   }
 
+  /* orientation (D100): a case study's plate rises to its place as it enters the screen and goes back down the same way
+     when the reader scrolls back (--d from 1 to 0.4), so the document itself follows the wheel, not only its arrivals */
+  html.fx .fig[data-fx] { translate: 0 calc(clamp(0, var(--d, 0) - 0.4, 0.6) * 90px); }
   /* the pointer's label (D97): dmcg's pill, following the cursor over a project */
   .pill-label { position: fixed; left: 0; top: 0; z-index: 30; padding: 0.3rem 0.75rem; border-radius: var(--r-pill); background: var(--ink); color: var(--bg);
     font-size: var(--fs-label); line-height: 1.4; white-space: nowrap; pointer-events: none; opacity: 0; scale: 0.9;

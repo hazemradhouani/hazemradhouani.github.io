@@ -7,6 +7,7 @@
 
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
   var root = document.documentElement;
+  root.setAttribute('data-js', '');   // the head drops html.fx at load without this mark (D101): no script, nothing hidden
   var thisScript = document.currentScript;   // this file, so a vendored script is found beside it at any depth
   var css = function (name) { return getComputedStyle(root).getPropertyValue(name).trim(); };
   var slice = function (list) { return Array.prototype.slice.call(list); };
@@ -109,9 +110,6 @@
         it.y = naturalTop(it.el); it.h = it.el.offsetHeight; it.p = -1; it.d = 2;
         // a chapter is current once its top passes the middle of the screen, wherever the layout put it
         if (it.auto) { var vh0 = document.documentElement.clientHeight; it.steps = it.rail.map(function (a, i) { var t = document.getElementById(a.getAttribute('href').slice(1)); return i && t ? clamp((naturalTop(t) - vh0 / 2 - it.y) / Math.max(1, it.h - vh0), 0, 1) : 0; }); it.ch = -1; }
-        if (it.kind !== 'top') return;
-        var img = it.el.querySelector('img'), full = Math.min(it.el.parentNode.offsetWidth, img ? +img.getAttribute('width') : Infinity);
-        it.el.style.setProperty('--k', (full / it.el.offsetWidth).toFixed(4));
       });
       fxUpdate();
     };
@@ -122,7 +120,7 @@
       it.ch = c; it.el.setAttribute('data-chapter', String(c));
       it.rail.forEach(function (s, i) {
         s.classList.toggle('is-on', i === c);
-        if (s.tagName === 'A') { if (i === c) s.setAttribute('aria-current', 'step'); else s.removeAttribute('aria-current'); }
+        if (s.tagName === 'A') { if (i === c) s.setAttribute('aria-current', 'location'); else s.removeAttribute('aria-current'); }
       });
     };
     fxUpdate = function () {
@@ -139,8 +137,7 @@
           if (it.scrub) it.scrub.to((1 - d) / 2);
           return;
         }
-        var p = it.kind === 'top' ? y / Math.max(1, it.y)
-          : it.kind === 'track' ? (y - it.y) / Math.max(1, it.h - vh)
+        var p = it.kind === 'track' ? (y - it.y) / Math.max(1, it.h - vh)
           : (y + vh - it.y) / (vh + it.h);
         p = clamp(p, 0, 1);
         if (it.steps.length) chapter(it, p);
@@ -168,15 +165,14 @@
      A video[data-scrub] inside a track or centre item follows the scroll: its time eases toward the reading
      position (0.12 of the gap per frame, the Scroll map's weighted scrub), a new seek only once the last has
      landed (A2). Under the poster until its first frame lands, so the first paint is always the poster. A fine
-     pointer, or a touch screen from 48rem, scrubs (the small file on touch); a narrow touch screen plays the
-     film muted in a loop while it is on screen (A4); reduced motion, saved data or no script keep the poster.
+     pointer, or a touch screen from 48rem, scrubs (the small file on touch); a narrow touch screen, reduced
+     motion, saved data or no script keep the poster (A4, D101: a loop there would have nothing to pause it).
      A seek that never lands within 1.5 s leaves the poster in place. Safari on iOS: UNVERIFIED (no WebKit here). */
   var fineQ = window.matchMedia('(hover: hover) and (pointer: fine)');
   var saveData = navigator.connection && navigator.connection.saveData;
-  var scrubVideos = FX && !saveData ? slice(document.querySelectorAll('video[data-scrub]')) : [];
+  // a narrow touch screen keeps the poster: a looping film there would move with nothing to pause it (WCAG 2.2.2, D101)
+  var scrubVideos = FX && !saveData && (fineQ.matches || window.matchMedia('(min-width: 48rem)').matches) ? slice(document.querySelectorAll('video[data-scrub]')) : [];
   if (scrubVideos.length) {
-    var wideQ = window.matchMedia('(min-width: 48rem)');
-    var mode = fineQ.matches || wideQ.matches ? 'scrub' : 'loop';
     var films = [];
     var running = false;
     var tick = function () {
@@ -187,7 +183,7 @@
         f.t = Math.abs(gap) < 0.002 ? f.target : f.t + gap * 0.12;
         if (!f.v.seeking && Math.abs(f.v.currentTime - f.t) > 1 / 60) {
           f.v.currentTime = f.t;
-          if (!f.live && !f.watch) f.watch = setTimeout(function () { if (!f.live) { f.ready = false; console.warn('scrub: no frame landed, the poster stays'); } }, 1500);
+          if (!f.live && !f.watch) f.watch = setTimeout(function () { if (!f.live) { f.ready = false; f.dead = true; console.warn('scrub: no frame landed, the poster stays'); } }, 1500);
         }
         if (f.t !== f.target || f.v.seeking) running = true;
       });
@@ -199,38 +195,27 @@
       var it = fxItems.filter(function (x) { return x.el === host; })[0];
       var f = { v: v, frame: v.parentNode, t: 0, target: 0, frac: 0, ready: false, live: false, watch: 0,
         to: function (frac) { f.frac = frac; if (f.ready) { f.target = frac * v.duration; scrubKick(); } } };
-      if (it && mode === 'scrub') {
+      if (it) {
         it.scrub = f;
         // a page opened part-way down (a reload, Back) starts the film where the reader already is
         f.frac = it.kind === 'centre' ? (it.d <= 1 ? (1 - it.d) / 2 : 0) : Math.max(0, it.p);
       }
       films.push(f);
-      var show = function () { if (f.live) return; f.live = true; clearTimeout(f.watch); f.frame.classList.add('is-live'); };
+      var show = function () { if (f.live || f.dead) return; f.live = true; clearTimeout(f.watch); f.frame.classList.add('is-live'); };
       v.muted = true;
       v.setAttribute('playsinline', '');
-      if (mode === 'loop') {
-        v.loop = true;
-        v.addEventListener('playing', show);
-        if ('IntersectionObserver' in window) new IntersectionObserver(function (en) {
-          // never before the page is idle (loadFilms sets preload): the poster is the largest paint
-          if (en[0].isIntersecting && v.preload === 'auto') { var pr = v.play(); if (pr && pr.catch) pr.catch(function () {}); } else v.pause();
-        }).observe(f.frame);
-      } else {
-        v.addEventListener('seeked', show);
-        v.addEventListener('loadeddata', function () {
-          // one play and pause primes a phone's decoder for seeking; the time then belongs to the scroll
-          var go = function () { v.pause(); f.ready = true; f.to(f.frac); };
-          var pr = v.play(); if (pr && pr.then) pr.then(go, go); else go();
-        }, { once: true });
-      }
+      v.addEventListener('seeked', show);
+      v.addEventListener('loadeddata', function () {
+        // one play and pause primes a phone's decoder for seeking; the time then belongs to the scroll
+        var go = function () { v.pause(); f.ready = true; f.to(f.frac); };
+        var pr = v.play(); if (pr && pr.then) pr.then(go, go); else go();
+      }, { once: true });
       v.src = v.getAttribute(fineQ.matches ? 'data-src' : 'data-src-small') || v.getAttribute('data-src');
     });
     // loaded once the page is idle, after its first paint and its images (the poster is the largest paint)
     var loadFilms = function () {
       scrubVideos.forEach(function (v) {
         v.preload = 'auto'; v.load();
-        var r = v.parentNode.getBoundingClientRect();
-        if (mode === 'loop' && r.bottom > 0 && r.top < window.innerHeight) { var pr = v.play(); if (pr && pr.catch) pr.catch(function () {}); }
       });
     };
     var whenIdle = function () { if ('requestIdleCallback' in window) window.requestIdleCallback(loadFilms, { timeout: 2500 }); else setTimeout(loadFilms, 1200); };
@@ -337,7 +322,7 @@
         e.preventDefault();
         // the target from the page's true position now (a scroll just before the click may not have reached
         // Lenis yet), less the scroll padding that keeps it clear of the fixed header, as a native jump does
-        var y = el.getBoundingClientRect().top + window.scrollY - (parseFloat(getComputedStyle(root).scrollPaddingTop) || 0);
+        var y = (el.hasAttribute('data-fx') ? naturalTop(el) : el.getBoundingClientRect().top + window.scrollY) - (parseFloat(getComputedStyle(root).scrollPaddingTop) || 0) - (parseFloat(getComputedStyle(el).scrollMarginTop) || 0);
         // the address and focus change at once, as a jump would: Back then returns to where the reader
         // clicked, the next Tab starts from the target, and an interrupted glide loses neither
         if (location.hash !== '#' + id) history.pushState(null, '', '#' + id);
@@ -352,7 +337,10 @@
   // reduced motion switched on during the visit: the scroll-linked styles let go (everything returns to its
   // settled place)
   if (reduce.addEventListener) reduce.addEventListener('change', function (e) {
-    if (e.matches) root.classList.remove('fx');
+    if (!e.matches) return;
+    root.classList.remove('fx');
+    if (films) films.forEach(function (f) { f.ready = false; f.dead = true; });
+    scrubVideos.forEach(function (v) { v.pause(); v.removeAttribute('src'); v.load(); v.parentNode.classList.remove('is-live'); });
   });
 
   /* ------------------------------------------------------------ the column's way into a project (orientation, D97)
@@ -381,6 +369,7 @@
     var ixTiles = slice(document.querySelectorAll('.tile'));
     var ixWide = window.matchMedia('(min-width: 48rem)');
     var ixState = { view: 'grid', family: 'all' };
+    var ixStatus = document.querySelector('[data-ix-status]');
     var ixQuery = new URLSearchParams(location.search);
     if (/^(grid|tree|list)$/.test(ixQuery.get('view'))) ixState.view = ixQuery.get('view');
     if (/^(all|drawing|render|film)$/.test(ixQuery.get('family'))) ixState.family = ixQuery.get('family');
@@ -394,6 +383,11 @@
         t.hidden = !on;
       });
       slice(document.querySelectorAll('[data-branch]')).forEach(function (b) { b.hidden = b.getAttribute('data-branch') !== ixState.family; });
+      var shown = ixTiles.filter(function (t) { return !t.hidden; }), seen = {};
+      ixTiles.forEach(function (t) { if (t.id) t.removeAttribute('id'); });
+      shown.forEach(function (t) { var l = t.getAttribute('data-l'); if (!seen[l]) { seen[l] = 1; t.id = 'az-' + l; } });
+      slice(document.querySelectorAll('.az li')).forEach(function (li) { li.hidden = !seen[li.textContent.trim()]; });
+      if (!first && ixStatus) ixStatus.textContent = (view === 'list' ? document.querySelectorAll('.ix-table tbody tr').length + ' projects, list view' : shown.length + ' images, ' + (ixState.family === 'all' ? 'all kinds' : ixState.family + 's') + ', ' + view + ' view');
       slice(document.querySelectorAll('button[data-family]')).forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-family') === ixState.family)); });
       slice(document.querySelectorAll('[data-view-btn]')).forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-view-btn') === view)); });
       if (!first) {

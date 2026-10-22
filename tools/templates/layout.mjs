@@ -37,7 +37,7 @@ ${when(page.noindex, () => html`<meta name="robots" content="noindex, follow">`)
 ${page.preload || ''}
 <meta id="theme-color" name="theme-color" content="${site.themeColor}">
 <meta name="color-scheme" content="light dark">
-<script data-theme-bootstrap>(function(){var t;try{t=localStorage.getItem('hazem-theme');}catch(e){}if(t!=='light'&&t!=='dark'){try{t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}catch(e){t='light';}}var d=document.documentElement;try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches)d.classList.add('fx');}catch(e){}d.setAttribute('data-theme',t);d.style.colorScheme=t;var m=document.getElementById('theme-color');if(m)m.content=t==='dark'?'#121311':'#FFFFFF';}());</script>
+<script data-theme-bootstrap>(function(){var t;try{t=localStorage.getItem('hazem-theme');}catch(e){}if(t!=='light'&&t!=='dark'){try{t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}catch(e){t='light';}}var d=document.documentElement;try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches)d.classList.add('fx');}catch(e){}addEventListener('load',function(){if(!d.hasAttribute('data-js'))d.classList.remove('fx');});d.setAttribute('data-theme',t);d.style.colorScheme=t;var m=document.getElementById('theme-color');if(m)m.content=t==='dark'?'#121311':'#FFFFFF';}());</script>
 <script>addEventListener('pagereveal',function(e){if(e.viewTransition)document.documentElement.classList.add('vt-arrived');});</script>
 <link rel="stylesheet" href="${p}css/site.css?v=${v.css}">
 <script src="${p}js/site.js?v=${v.js}" defer></script>

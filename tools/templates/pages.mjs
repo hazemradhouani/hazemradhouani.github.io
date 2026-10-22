@@ -61,8 +61,8 @@ export function home(site, d, projects, ctx) {
     const { w, h } = dims(x.hero.src);
     const card = c.mode === 'film'
       ? html`<span class="col__card col__film" style="aspect-ratio: ${dims(c.poster).w} / ${dims(c.poster).h}">${picture(c.poster, { alt: '', sizes: '(min-width: 48rem) 46vw, 90vw', prefix: p })}<video class="film__v" data-scrub data-src="${p}${c.desktop}" data-src-small="${p}${c.mobile}" muted playsinline preload="none" aria-hidden="true" tabindex="-1"></video></span>`
-      : html`<span class="col__card" style="--nw: ${w}px; aspect-ratio: ${w} / ${h}">${picture(x.hero.src, { alt: '', sizes: '(min-width: 64rem) 46vw, (min-width: 48rem) 60vw, 90vw', prefix: p })}</span>`;
-    const key = c.mode === 'pair' ? html`<span class="col__key">${image(c.key, { alt: '', sz: '(min-width: 48rem) 30vw, 1px', prefix: p })}</span>` : '';
+      : html`<span class="col__card" style="--nw: ${w}px; --r: ${(w / h).toFixed(4)}; aspect-ratio: ${w} / ${h}">${picture(x.hero.src, { alt: '', sizes: '(min-width: 64rem) 46vw, (min-width: 48rem) 60vw, 90vw', prefix: p })}</span>`;
+    const key = c.mode === 'pair' ? html`<span class="col__key" style="--kr: ${(dims(c.key).w / dims(c.key).h).toFixed(4)}">${image(c.key, { alt: '', sz: '(min-width: 48rem) 30vw, 1px', prefix: p })}</span>` : '';
     return html`<li class="col__it col__it--${c.mode}" data-fx="centre">
 <a class="col__a" href="${projectHref(x, p)}" data-label="${x.title}">
 <span class="col__stage">${card}${key}</span>
@@ -146,16 +146,17 @@ export function work(site, projects, ctx) {
     const id = anchor ? html` id="az-${anchor[0]}"` : '';
     if (e.film) {
       const href = `${p}motion.html#${e.film.id}`;
-      const r = e.film.w / e.film.h, fw = r >= TILE ? 84 : 84 * r / TILE;
-      return html`<li class="tile" data-kind="film" data-fx="centre"${id}><figure class="tile__fig">
+      const r = e.film.w / e.film.h, fw = r >= TILE ? 100 : 100 * r / TILE;
+      return html`<li class="tile" data-kind="film" data-l="${letterOf(key(e))}" data-fx="centre"${id}><figure class="tile__fig">
 <a class="tile__frame tile__frame--film" href="${href}" data-label="${e.title}" data-ground style="--g-light: #1D1D1B; --g-dark: #050505"><span class="tile__img" style="width: ${fw.toFixed(2)}%"><img src="${p}videos/web/${e.film.slug}-poster.webp" alt="" width="${e.film.w}" height="${e.film.h}" loading="lazy" decoding="async"></span><span class="vh">${e.title}, film</span></a>
 <figcaption class="tile__cap"><span class="tile__p">${e.title}</span> <span>Film</span></figcaption></figure></li>`;
     }
     const x = e.project; const rel = e.kind === 'drawing' ? shown(e.src, true) : e.src;
-    const { w, h } = dims(rel); const r = w / h, fw = r >= TILE ? 84 : 84 * r / TILE;
+    const fill = e.kind === 'drawing' ? 90 : 100;
+    const { w, h } = dims(rel); const r = w / h, fw = r >= TILE ? fill : fill * r / TILE;
     const g = ctx.grounds[x.slug];
-    return html`<li class="tile" data-kind="${e.kind}" data-fx="centre"${id}><figure class="tile__fig">
-<span class="tile__frame" data-ground style="--g-light: ${g.light}; --g-dark: ${g.dark}"><span class="tile__img" style="width: ${fw.toFixed(2)}%" data-label="${x.title}">${image(rel, { alt: e.alt, sz: '(min-width: 56.25rem) 26vw, 44vw', prefix: p, zoom: true, title: `${x.title}: ${e.title}`, project: projectHref(x, p), priority: i < 3 })}</span></span>
+    return html`<li class="tile" data-kind="${e.kind}" data-l="${letterOf(key(e))}" data-fx="centre"${id}><figure class="tile__fig">
+<span class="tile__frame" data-ground style="--g-light: ${g.light}; --g-dark: ${g.dark}"><span class="tile__img" style="width: ${fw.toFixed(2)}%" data-label="${x.title}">${image(rel, { alt: e.alt, sz: '(min-width: 56.25rem) 26vw, 44vw', prefix: p, zoom: true, title: `${x.title}: ${e.title}`, project: projectHref(x, p), priority: i < 6, upto: 1200 })}</span></span>
 <figcaption class="tile__cap"><a class="tile__p" href="${projectHref(x, p)}">${x.title}</a> <span>${e.title}</span></figcaption></figure></li>`;
   };
 
@@ -166,11 +167,12 @@ export function work(site, projects, ctx) {
   const branch = (fam) => {
     const from = fam === 'all' ? { x: 9, y: 50 } : { x: 27, y: famY[fam] };
     const ls = leaves(fam);
+    if (ls.length > 15) throw new Error(`index: the tree has room for 15 leaves, ${fam} has ${ls.length}`);
     const paths = ls.map((e, i) => { const t = leafAt(i); const mx = (from.x + t.x) / 2; return `M ${from.x * 12} ${from.y * 6.4} C ${mx * 12} ${from.y * 6.4}, ${mx * 12} ${t.y * 6.4}, ${t.x * 12 - 40} ${t.y * 6.4}`; });
     const leaf = (e, i) => {
       const t = leafAt(i); const href = e.film ? `${p}motion.html#${e.film.id}` : projectHref(e.project, p);
       const pic = e.film ? html`<img src="${p}videos/web/${e.film.slug}-poster.webp" alt="" width="${e.film.w}" height="${e.film.h}" loading="lazy" decoding="async">`
-        : picture(e.kind === 'drawing' ? shown(e.src, true) : e.src, { alt: '', sizes: '8rem', prefix: p });
+        : picture(e.kind === 'drawing' ? shown(e.src, true) : e.src, { alt: '', sizes: '8rem', prefix: p, upto: 480 });
       return html`<a class="leaf" href="${href}" style="left: ${t.x}%; top: ${t.y}%" data-label="${key(e)}">${pic}<span class="vh">${key(e)}</span></a>`;
     };
     return html`<div class="tree__branch" data-branch="${fam}"${attrs({ hidden: fam !== 'all' })}><svg class="tree__lines" viewBox="0 0 1200 640" preserveAspectRatio="none" aria-hidden="true">${raw(paths.map((d) => `<path d="${d}"/>`).join(''))}</svg>${ls.map(leaf)}</div>`;
@@ -181,6 +183,11 @@ export function work(site, projects, ctx) {
   const body = html`
 <header class="ix-head"><h1 class="col__h" id="ix-h">Index <span class="col__count">${cat.length}</span></h1>
 <p class="ix-lead">Every drawing, render and film of the ${projects.length} projects, A to Z.</p></header>
+<div class="ix-bar" hidden>
+<div class="ix-bar__group" role="group" aria-label="Show work by type"><button class="pill" type="button" data-family="all" aria-pressed="true">All</button>${FAMILIES.map((f) => html`<button class="pill" type="button" data-family="${f.id}" aria-pressed="false">${f.label}</button>`)}</div>
+<div class="ix-bar__group" role="group" aria-label="View">${VIEWS.map((v) => html`<button class="pill pill--icon" type="button" data-view-btn="${v.id}" aria-pressed="${v.id === 'grid' ? 'true' : 'false'}"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">${raw(v.svg)}</svg><span class="vh">${v.label}</span></button>`)}</div>
+</div>
+<p class="vh" role="status" data-ix-status></p>
 <nav class="az" aria-label="Projects A to Z" data-view-only="grid"><ul role="list">${[...firstOf.keys()].map((l) => html`<li><a href="#az-${l}">${l}</a></li>`)}</ul></nav>
 <section class="ix-view ix-grid" data-view="grid" aria-labelledby="ix-h"><ol class="tiles" role="list">${cat.map(tile)}</ol></section>
 <section class="ix-view ix-tree" data-view="tree" aria-label="The index as a tree" hidden>
@@ -196,10 +203,7 @@ ${['all', ...FAMILIES.map((f) => f.id)].map(branch)}
 <thead><tr><th scope="col">No.</th><th scope="col">Project</th><th scope="col">Place</th><th scope="col">Year</th><th scope="col">Type</th><th scope="col">Office</th><th scope="col">Images</th></tr></thead>
 <tbody>${rows}</tbody></table>
 </section>
-<div class="ix-bar" hidden>
-<div class="ix-bar__group" role="group" aria-label="Show work by type"><button class="pill" type="button" data-family="all" aria-pressed="true">All</button>${FAMILIES.map((f) => html`<button class="pill" type="button" data-family="${f.id}" aria-pressed="false">${f.label}</button>`)}</div>
-<div class="ix-bar__group" role="group" aria-label="View">${VIEWS.map((v) => html`<button class="pill pill--icon" type="button" data-view-btn="${v.id}" aria-pressed="${v.id === 'grid' ? 'true' : 'false'}"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">${raw(v.svg)}</svg><span class="vh">${v.label}</span></button>`)}</div>
-</div>`;
+`;
   const items = projects.map((x, i) => ({ '@type': 'ListItem', position: i + 1, url: `${site.origin}${site.base}projects/project-${x.slug}.html`, name: x.title }));
   return { body, viewer: true, page: { path: 'architecture.html', nav: 'work', navExact: true, corners: true, title: 'Index | Hazem Radhouani, architect',
     description: `Index of the work of Hazem Radhouani, architect: ${cat.length} drawings, renders and films from ${projects.length} projects in Tunisia, France and Morocco.`,

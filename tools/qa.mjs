@@ -255,7 +255,7 @@ async function runScrollPass() {
 // The home "Reel" (D96, D97), with motion and a fine pointer at 1440: the film's frame opens from a card to
 // the screen's width; its time follows the scroll forwards and back; the chapters come one at a time and the
 // rail follows them; a project at the centre stands open beside its drawing; every project link takes focus
-// in view. Then a 375px touch screen (A4): motion on, no smooth-scroll engine, the film in a loop.
+// in view. Then a 375px touch screen (A4, D101): motion on, no smooth-scroll engine, the poster kept (no film loads).
 async function runHomePass() {
   const failures = [];
   const home = urls.find((u) => u === BASE || u.endsWith('/index.html'));
@@ -325,7 +325,7 @@ async function runHomePass() {
     const s = await tp.evaluate(() => { const v = document.querySelector('.film__frame video'); return { fx: document.documentElement.classList.contains('fx'), lenis: document.documentElement.classList.contains('lenis'), loop: v.loop, src: v.currentSrc }; });
     if (!s.fx) failures.push('touch: html.fx is not set');
     if (s.lenis) failures.push('touch: the smooth-scroll engine loaded on a touch screen');
-    if (!s.loop || !/mobile/.test(s.src)) failures.push(`touch: the film is not the small looping file (loop ${s.loop}, ${s.src.split('/').pop()})`);
+    if (s.src) failures.push(`touch: a film loads on a narrow touch screen (${s.src.split('/').pop()})`);
   } catch (e) { failures.push(`touch: ${e.message}`); }
   await tctx.close();
   return failures;
@@ -333,7 +333,7 @@ async function runHomePass() {
 const homeFailures = await runHomePass();
 gateFails += homeFailures.length;
 if (homeFailures.length) console.log(`FAIL home reel: ${homeFailures.join(' | ')}`);
-else console.log('ok   home reel: frame opens, film follows the scroll both ways, chapters and rail in order, centred project open, links focus in view, touch loops');
+else console.log('ok   home reel: frame opens, film follows the scroll both ways, chapters and rail in order, centred project open, links focus in view, touch keeps the poster');
 // The index (D98): the count matches its tiles; a family chosen by keyboard shows exactly its tiles, is pressed and
 // written to the address; the viewer's gallery is the visible tiles and offers their project; the tree and the list
 // open from the bar; an address with a view and a family restores both.
@@ -394,7 +394,7 @@ async function runAboutPass() {
       for (const [i, id] of ids.entries()) {
         await page.evaluate((id) => { const c = document.getElementById(id); scrollTo({ top: c.getBoundingClientRect().top + scrollY + c.offsetHeight * 0.3, behavior: 'instant' }); }, id);
         await page.waitForTimeout(motion === 'reduce' ? 300 : 900);
-        const s = await page.evaluate(() => ({ cur: [...document.querySelectorAll('.tale-rail a')].findIndex((a) => a.getAttribute('aria-current') === 'step'), dark: document.documentElement.classList.contains('on-dark') }));
+        const s = await page.evaluate(() => ({ cur: [...document.querySelectorAll('.tale-rail a')].findIndex((a) => a.getAttribute('aria-current') === 'location'), dark: document.documentElement.classList.contains('on-dark') }));
         if (s.cur !== i) failures.push(`${motion}: in chapter ${i + 1} the rail marks ${s.cur + 1}`);
         if (!s.dark) failures.push(`${motion}: the header is not light over chapter ${i + 1}`);
       }
@@ -449,8 +449,8 @@ for (const url of urls) {
         const src = img.getAttribute('src');
         // 1%, or the half pixel a box snaps by on each axis when it is that small (a long strip on a phone)
         // the layout box, not the screen box: a turned photograph (D99) is rotated, not cropped
-        const ow = img.offsetWidth, oh = img.offsetHeight;
-        if (Math.abs(ow / oh - w / h) / (w / h) > Math.max(0.01, 0.5 / oh + 0.5 / ow)) out.crop.push(`${src} ${ow}x${oh} vs ${w}x${h}`);
+        const cs = getComputedStyle(img); const ow = parseFloat(cs.width), oh = parseFloat(cs.height);
+        if (Math.abs(ow / oh - w / h) / (w / h) > Math.max(0.01, 0.5 / oh + 0.5 / ow)) out.crop.push(`${src} ${Math.round(ow)}x${Math.round(oh)} vs ${w}x${h}`);
         if (getComputedStyle(img).objectFit === 'cover') out.crop.push(`${src} object-fit: cover`);
         if (b.width > w + 1) out.upscale.push(`${src} ${Math.round(b.width)}px > ${w}px`);
         // the file actually served (a derivative) must have the master's ratio, or the browser stretches it
