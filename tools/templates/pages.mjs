@@ -1,7 +1,7 @@
-// Page bodies ("Field", docs/flagship/08-direction.md). Each returns { page, body, viewer } for layout().
+// Page bodies ("Reel" on the Field grid, docs/flagship/17-reel-direction.md). Each returns { page, body, viewer } for layout().
 // Every block sits on the one grid (.wrap.g) through a centred span class; images are placed by partials.mjs.
-import { html, attrs, when } from '../lib/html.mjs';
-import { dims, shown, preloadFor } from '../lib/images.mjs';
+import { html, raw, attrs, when } from '../lib/html.mjs';
+import { dims, shown, preloadFor, picture } from '../lib/images.mjs';
 import { icon, image, row, cells, figure, hero, heroPartner, creditLine, heroCaption, sizesFor, spanFor, projectHref, vtTitle, vtHero, CASE, capSide, words, chaptersOf } from './partials.mjs';
 
 const q = (s) => `“${s}”`;
@@ -16,105 +16,93 @@ const spec = (rows) => html`<dl class="spec in">${rows.map((s) => html`<dt>${s.l
 // since the title link beside it carries the same destination and the name
 const linked = (href, markup) => html`<a class="card" href="${href}" tabindex="-1" aria-hidden="true">${markup}</a>`;
 
-/* ------------------------------------------------------------------ home ("Sequence", D84) */
-// an image's alt from its own project: the hero, or a figure (one source of truth for every description)
-const altOf = (x, src) => {
-  const alt = x.hero.src === src ? x.hero.alt : x.figures.flatMap((f) => f.items || [f]).find((f) => f.src === src)?.alt;
-  if (!alt) throw new Error(`home: ${src} is not an image of ${x.slug}`);
-  return alt;
-};
-// the name as a wordmark: each letter rises from its own mask (D84); the words stay apart, one per line on phones
-const letters = (name) => { let n = 0; return html`${name.split(' ').map((w, i) => html`${i ? ' ' : ''}<span class="open__w">${[...w].map((c) => html`<span class="l"><span class="l__i" style="--l: ${n++}">${c}</span></span>`)}</span>`)}`; };
+/* ------------------------------------------------------------------ the catalog (D97, P5): every image and film of the work */
+// one entry per published picture: each project's hero, every figure (or each item of a multi-image figure), and
+// the films of the motion page; the families are the kinds the content already records (drawing, render, film)
+export function catalogOf(projects, films) {
+  const out = [];
+  for (const x of projects) {
+    out.push({ project: x, src: x.hero.src, alt: x.hero.alt, title: 'Lead image', kind: 'render', hero: true });
+    for (const f of x.figures) for (const it of f.items || [f]) out.push({ project: x, src: it.src, alt: it.alt, title: f.title, kind: f.kind === 'drawing' ? 'drawing' : 'render', fig: f });
+  }
+  for (const f of films) out.push({ project: null, film: f, title: f.title, kind: 'film' });
+  return out;
+}
+export const FAMILIES = [{ id: 'drawing', label: 'Drawings' }, { id: 'render', label: 'Renders' }, { id: 'film', label: 'Films' }];
+
+/* ------------------------------------------------------------------ home ("Reel", D97) */
+// the film's chapters (D97): who, where, then what is on screen. The identity line is split where its own
+// comma falls, so the page still carries it whole; --c is where each chapter stands fully in view
+const CH = [0, 0.33, 0.64, 1];
 
 export function home(site, d, projects, ctx) {
   const p = ctx.prefix;
   const P = site.person;
   const by = Object.fromEntries(projects.map((x) => [x.slug, x]));
-  const fl = d.flagship;
+  const f = d.film;
+  const fd = dims(f.poster);
+  const cut = P.line.indexOf(', and ');
+  const chapters = [
+    html`<h1 class="film__name" id="name">${P.name}</h1><p class="film__sub">${P.credential}</p>`,
+    html`<p>${P.line.slice(0, cut + 1)}</p>`,
+    html`<p>${P.line.slice(cut + 2)}</p>`,
+    html`<p class="film__credit">${f.caption}</p>`
+  ];
+  const steps = CH.map((c, i) => (i ? ((CH[i - 1] + c) / 2).toFixed(3) : '0')).join(',');
+  const filmSizes = '(min-width: 80rem) 1280px, 100vw';
 
-  // the opening (D85): one render per country of the work, in the identity's order. The frame takes the first
-  // slide's ratio and every slide stands whole inside it, so a slide may be wider than the first, never narrower
-  const slides = d.slides.map((s) => ({ x: by[s.project], rel: s.image, alt: altOf(by[s.project], s.image), ...dims(s.image) }));
-  const r0 = slides[0].w / slides[0].h;
-  for (const s of slides) if (s.w / s.h < r0) throw new Error(`home: slide ${s.rel} is narrower than the first; it would be cropped`);
-  const slide = (s, i) => html`<div class="open__slide${i ? '' : ' is-on'}">${linked(projectHref(s.x, p), image(s.rel, { alt: s.alt, sz: '100vw', prefix: p, priority: !i }))}</div>`;
-
-  // Al-Arg at three scales: whole drawings standing on one line, captions aligned below
-  const scaleItems = fl.scales.map((s) => ({ rel: shown(s.image, true), alt: s.alt, title: `${s.label} | ${s.caption}` }));
-  const scaleCap = (it, i) => html`<p class="cap"><span class="cap__t">${fl.scales[i].label}.</span> ${fl.scales[i].caption}</p>`;
-
-  // selected work as a stack of plates (D86): each on its own ground, numbered; the hero whole at its own ratio,
-  // over a greyscale copy of itself that fades as the plate settles (same file, so one download)
-  const sel = d.selected.map((s) => by[s]);
-  const plate = (x, i) => {
-    const { w, h } = dims(x.hero.src); const href = projectHref(x, p); const g = ctx.grounds[x.slug];
-    const sz = `(min-width: 64rem) ${Math.round(800 * w / h)}px, (min-width: 48rem) 60vw, 90vw`;
-    return html`<li class="seq__plate" data-fx data-slug="${x.slug}" style="--g-light: ${g.light}; --g-dark: ${g.dark}; --r: ${(w / h).toFixed(4)}">
-<article class="seq__in wrap g" aria-labelledby="sel-${x.slug}">
-<div class="seq__text">
-<p class="seq__n" aria-hidden="true"><span class="seq__m"><span class="seq__ni">${pad(i + 1)}</span></span><span class="seq__of">/ ${pad(sel.length)}</span></p>
-<div class="seq__about"><h3 class="title seq__t" id="sel-${x.slug}"><a href="${href}">${x.title}</a></h3>
-<p class="meta">${lines(x.descriptor, `${x.place} | ${x.year}`, x.office, x.hero.credit ? html`<span class="credit">${x.hero.credit}</span>` : '')}</p>
-<p>${more(href, 'View project', p, { of: x.title })}</p></div>
-</div>
-<div class="seq__fig"><div class="seq__frame">${linked(href, html`${image(x.hero.src, { alt: x.hero.alt, sz, prefix: p })}<span class="seq__mono">${image(x.hero.src, { alt: '', sz, prefix: p })}</span>`)}</div></div>
-</article>
+  // the column (D97): each project as an object on the field; its render opens beside its own drawing as it
+  // crosses the centre (the building as image and as drawing), a film runs with the scroll, a single render settles
+  const cols = d.column.map((c, i) => {
+    const x = by[c.project];
+    if (!x) throw new Error(`home: no project ${c.project}`);
+    if (c.mode === 'pair' && !c.key.startsWith('images/cut/')) throw new Error(`home: key drawing ${c.key} is not a cutout in images/cut/ (A8)`);
+    if (c.mode === 'pair') dims(c.key);   // throws when the file is missing (A8)
+    const { w, h } = dims(x.hero.src);
+    const card = c.mode === 'film'
+      ? html`<span class="col__card col__film" style="aspect-ratio: ${dims(c.poster).w} / ${dims(c.poster).h}">${picture(c.poster, { alt: '', sizes: '(min-width: 48rem) 46vw, 90vw', prefix: p })}<video class="film__v" data-scrub data-src="${p}${c.desktop}" data-src-small="${p}${c.mobile}" muted playsinline preload="none" aria-hidden="true" tabindex="-1"></video></span>`
+      : html`<span class="col__card" style="--nw: ${w}px; aspect-ratio: ${w} / ${h}">${picture(x.hero.src, { alt: '', sizes: '(min-width: 64rem) 46vw, (min-width: 48rem) 60vw, 90vw', prefix: p })}</span>`;
+    const key = c.mode === 'pair' ? html`<span class="col__key">${image(c.key, { alt: '', sz: '(min-width: 48rem) 30vw, 1px', prefix: p })}</span>` : '';
+    return html`<li class="col__it col__it--${c.mode}" data-fx="centre">
+<a class="col__a" href="${projectHref(x, p)}" data-label="${x.title}">
+<span class="col__stage">${card}${key}</span>
+<span class="col__cap"><span class="col__n" aria-hidden="true">${pad(i + 1)}</span><span class="col__t">${x.title}</span><span class="col__m">${x.place} · ${x.year}</span></span>
+</a>
 </li>`;
-  };
+  });
 
-  // capabilities: each proven by one document, the documents standing on one line
+  // practice: each capability proven by one document, standing on one line
   const proofItems = d.proofs.map((x) => ({ rel: shown(x.image, x.kind === 'drawing'), alt: x.alt, title: x.name }));
   const proofText = (it, i) => {
     const x = d.proofs[i];
-    return html`<div class="stack-s center"><h3 class="title">${x.name}</h3><p class="meta">${x.text}</p>${when(x.tools, () => html`<p class="label">${x.tools}</p>`)}<p>${more(projectHref(by[x.project], p), x.context, p)}</p></div>`;
+    return html`<div class="stack-s"><h3 class="title">${x.name}</h3><p class="meta">${x.text}</p>${when(x.tools, () => html`<p class="meta">${x.tools}</p>`)}<p>${more(projectHref(by[x.project], p), x.context, p)}</p></div>`;
   };
-
   const book = dims(d.research.cover);
-  const bookSpan = spanFor(book.w, book.h, { max: 'narrow' });
+  const bookSpan = spanFor(book.w, book.h, { max: 'four' });
+  const cat = catalogOf(projects, ctx.films);
+  const count = (k) => cat.filter((e) => e.kind === k).length;
 
   const body = html`
-<section class="open" aria-labelledby="name">
-<div class="open__head wrap"><h1 class="open__name" id="name"><span class="vh">${P.name}</span><span class="open__mark" aria-hidden="true">${letters(P.name)}</span></h1></div>
-<div class="open__strip wrap g">
-<p class="open__line">${P.line}</p>
-<p class="open__cred label">${P.credential}</p>
-<div class="open__now"><ul class="meta" role="list">${slides.map((s, i) => html`<li${attrs({ hidden: i > 0 })}><a href="${projectHref(s.x, p)}">${s.x.title}</a><br>${s.x.place}</li>`)}</ul><button class="open__pause" type="button"><span data-pause-label>pause</span><span class="vh"> the images</span></button></div>
-<p class="open__go">${more(p + 'architecture.html', 'View work', p)}${more(p + 'books.html', 'Research', p)}</p>
-</div>
-<div class="open__win wrap" data-fx="top" style="--nw: ${slides[0].w}px; --ratio: ${r0.toFixed(4)}">
-<div class="open__frame" style="aspect-ratio: ${slides[0].w} / ${slides[0].h}">${slide(slides[0], 0)}</div>
-<template>${slides.slice(1).map((s, i) => slide(s, i + 1))}</template>
+<section class="film" id="film" data-fx="track" data-steps="${steps}" aria-labelledby="name">
+<div class="film__stage">
+<div class="film__frame" style="--nw: ${fd.w}px; aspect-ratio: ${fd.w} / ${fd.h}">${picture(f.poster, { alt: f.alt, sizes: filmSizes, prefix: p, priority: true })}<video class="film__v" data-scrub data-src="${p}${f.desktop}" data-src-small="${p}${f.mobile}" muted playsinline preload="none" aria-hidden="true" tabindex="-1"></video></div>
+<ol class="film__ch" role="list">${chapters.map((c, i) => html`<li style="--c: ${CH[i]}">${c}</li>`)}</ol>
+<ol class="rail" data-rail="film" aria-hidden="true">${CH.map(() => html`<li data-step></li>`)}</ol>
 </div>
 </section>
 
-<section class="block wrap g" aria-labelledby="conviction">
-<div class="s-text center" data-rv>
-<h2 class="quote" id="conviction">${q(d.manifesto.quote)}</h2>
-<p class="lead in measure">${d.manifesto.text}</p>
-<p class="in">${more(p + d.manifesto.href, d.manifesto.attribution, p)}</p>
-</div>
+<section class="col" aria-labelledby="work-h">
+<h2 class="col__h" id="work-h">Projects <span class="col__count">${projects.length}</span></h2>
+<ol class="col__list" role="list">${cols}</ol>
 </section>
 
-<section class="chapter wrap g" aria-labelledby="flagship-h">
-<div class="s-text center"><h2 class="h1" id="flagship-h" style="view-transition-class: vt-title; view-transition-name: ${vtTitle(by[fl.project])}">${fl.title}</h2><p class="lead in">${fl.line}</p></div>
-<div class="s-narrow in"><div class="prose"><p>${fl.text}</p></div></div>
-<p class="s-text center in">${more(projectHref(by[fl.project], p), 'Read the case study', p)}</p>
-${cells(scaleItems, { prefix: p, zoom: false, after: scaleCap, cls: 'block' })}
-</section>
-
-<section class="chapter" aria-labelledby="selected-h">
-<div class="wrap g"><div class="head s-text"><h2 class="h1" id="selected-h">Selected work</h2>${more(p + 'architecture.html', `All ${projects.length} projects`, p)}</div></div>
-<ol class="seq block" role="list">${sel.map(plate)}</ol>
-</section>
-
-<section class="chapter wrap g" aria-labelledby="proofs-h">
-<div class="head s-text"><h2 class="h1" id="proofs-h">Capabilities</h2></div>
+<section class="coda wrap g" aria-labelledby="practice-h">
+<div class="s-text center"><h2 class="col__h" id="practice-h">Practice</h2></div>
 ${cells(proofItems, { prefix: p, zoom: false, cls: 'block', after: proofText })}
 </section>
 
-<div class="inv">
-<section class="wrap g" aria-labelledby="research-h">
-<div class="head s-text"><h2 class="h1" id="research-h">Research</h2></div>
+<section class="coda wrap g" aria-labelledby="research-h">
+<div class="s-text center"><h2 class="col__h" id="research-h">Research</h2></div>
 <div class="s-${bookSpan} block" data-rv>${image(d.research.cover, { alt: d.research.coverAlt, sz: sizesFor(bookSpan), prefix: p })}</div>
 <div class="s-text center in">
 <h3 class="title">${d.research.title}</h3>
@@ -123,60 +111,99 @@ ${cells(proofItems, { prefix: p, zoom: false, cls: 'block', after: proofText })}
 <p class="in">${more(p + 'books.html', 'Thesis, report and the Sakura programme', p)}</p>
 </div>
 </section>
-</div>`;
+
+<nav class="coda tree-root" aria-label="The index of the work">
+<a class="pill pill--root" href="${p}architecture.html">Index <span class="pill__n">${cat.length}</span></a>
+<ul class="tree-root__fam" role="list">${FAMILIES.map((fam) => html`<li><a class="pill" href="${p}architecture.html?family=${fam.id}">${fam.label} <span class="pill__n">${count(fam.id)}</span></a></li>`)}</ul>
+</nav>`;
   return { body, viewer: false, page: { path: 'index.html', nav: 'home', corners: true, title: d.title, description: d.description, og: d.og, verification: true,
-    preload: preloadFor(slides[0].rel, '100vw', p), bodyClass: 'page-home', jsonld: [ctx.websiteLd, ctx.personLd] } };
+    preload: preloadFor(f.poster, filmSizes, p), bodyClass: 'page-home', jsonld: [ctx.websiteLd, ctx.personLd] } };
 }
 
-/* ------------------------------------------------------------------ work: an index, then one chapter per project */
-// the preview row of a chapter: drawings first (the documentation), never the hero's partner, kept legible
-function previewItems(x) {
-  const partner = heroPartner(x);
-  const all = x.figures.filter((f) => f !== partner)
-    .flatMap((f) => (f.items ? f.items.map((it) => ({ src: it.src, alt: it.alt, kind: f.kind })) : [{ src: f.src, alt: f.alt, kind: f.kind }]))
-    .filter((it) => it.src !== x.hero.src);
-  const pick = [...all.filter((it) => it.kind === 'drawing'), ...all.filter((it) => it.kind !== 'drawing')].slice(0, 3)
-    .map((it) => ({ rel: shown(it.src, it.kind === 'drawing'), alt: it.alt, drawing: it.kind === 'drawing' }));
-  const ratio = (list) => list.reduce((a, it) => { const { w, h } = dims(it.rel); return a + w / h; }, 0);
-  while (pick.length > 2 && ratio(pick) > 4.5) pick.pop();
-  return pick;
-}
-
-function chapter(x, ctx, first) {
-  const p = ctx.prefix; const href = projectHref(x, p);
-  const h = hero(x, ctx, { priority: first });
-  const items = previewItems(x);
-  const r = items.length ? row(items, { prefix: p }) : null;
-  const credit = creditLine(x);
-  return { h, html: html`<article class="chapter wrap g" id="${x.slug}" aria-labelledby="t-${x.slug}">
-<div class="s-${h.span} fx-drift" data-fx${attrs({ 'data-rv': !first })}>${linked(href, h.html)}</div>
-<div class="s-text center chapter__text">
-<h2 class="title chapter__title" id="t-${x.slug}"><a href="${href}" style="view-transition-class: vt-title; view-transition-name: ${vtTitle(x)}">${x.title}</a></h2>
-<p class="meta">${lines(x.descriptor, `${x.place} | ${x.year}`, x.office, credit ? html`<span class="credit">${credit}</span>` : '')}</p>
-</div>
-${when(r, () => html`<div class="s-${r.span} block" data-rv>${linked(href, r.html)}</div>`)}
-<p class="s-text center chapter__more in">${more(href, 'View project', p, { of: x.title })}</p>
-</article>` };
-}
+/* ------------------------------------------------------------------ index ("Reel", D98): dmcg's catalog of the work */
+// Every drawing, render and film in three views the page holds at once (grid, tree, list); the script only
+// chooses which one shows and which family, and keeps both in the address. Without it the grid stands alone.
+const TILE = 4 / 3;                       // the tiles' frame; each image keeps its own ratio inside it (D32, A10)
+const plain = (s) => s.normalize('NFD').replace(/[̀-ͯ]/gu, '');
+const letterOf = (s) => plain(s).charAt(0).toUpperCase();
+// the tree's places for up to fifteen leaves: a 5 x 3 field right of the families, nudged by a fixed seed
+const leafAt = (i) => { const c = i % 5, r = Math.floor(i / 5); const j = Math.sin(i * 12.9898) * 43758.5453; const n = j - Math.floor(j);
+  return { x: 37 + c * 13.2 + (n - 0.5) * 4, y: 17 + r * 31 + ((n * 7) % 1 - 0.5) * 8 }; };
+const VIEWS = [{ id: 'grid', label: 'Grid', svg: '<rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/>' },
+  { id: 'tree', label: 'Tree', svg: '<circle cx="5" cy="12" r="2"/><circle cx="19" cy="5" r="2"/><circle cx="19" cy="12" r="2"/><circle cx="19" cy="19" r="2"/><path d="M7 12c6 0 6-7 10-7M7 12h10M7 12c6 0 6 7 10 7"/>' },
+  { id: 'list', label: 'List', svg: '<path d="M3 6h18M3 12h18M3 18h18"/>' }];
 
 export function work(site, projects, ctx) {
   const p = ctx.prefix;
-  const groups = site.groups.map((g) => ({ ...g, items: projects.filter((x) => x.group === g.id) })).filter((g) => g.items.length);
-  const chapters = projects.map((x, i) => chapter(x, ctx, i === 0));
-  const years = projects.map((x) => parseInt(x.year, 10)).filter(Number.isFinite);
+  const key = (e) => (e.project ? e.project.title : e.title);
+  const cat = catalogOf(projects, ctx.films).sort((a, b) => plain(key(a)).localeCompare(plain(key(b)), 'en', { sensitivity: 'base' }));
+  const firstOf = new Map();
+  cat.forEach((e, i) => { const l = letterOf(key(e)); if (!firstOf.has(l)) firstOf.set(l, i); });
+  const count = (k) => cat.filter((e) => e.kind === k).length;
+
+  const tile = (e, i) => {
+    const anchor = [...firstOf].find(([, k]) => k === i);
+    const id = anchor ? html` id="az-${anchor[0]}"` : '';
+    if (e.film) {
+      const href = `${p}motion.html#${e.film.id}`;
+      const r = e.film.w / e.film.h, fw = r >= TILE ? 84 : 84 * r / TILE;
+      return html`<li class="tile" data-kind="film" data-fx="centre"${id}><figure class="tile__fig">
+<a class="tile__frame tile__frame--film" href="${href}" data-label="${e.title}" data-ground style="--g-light: #1D1D1B; --g-dark: #050505"><span class="tile__img" style="width: ${fw.toFixed(2)}%"><img src="${p}videos/web/${e.film.slug}-poster.webp" alt="" width="${e.film.w}" height="${e.film.h}" loading="lazy" decoding="async"></span><span class="vh">${e.title}, film</span></a>
+<figcaption class="tile__cap"><span class="tile__p">${e.title}</span> <span>Film</span></figcaption></figure></li>`;
+    }
+    const x = e.project; const rel = e.kind === 'drawing' ? shown(e.src, true) : e.src;
+    const { w, h } = dims(rel); const r = w / h, fw = r >= TILE ? 84 : 84 * r / TILE;
+    const g = ctx.grounds[x.slug];
+    return html`<li class="tile" data-kind="${e.kind}" data-fx="centre"${id}><figure class="tile__fig">
+<span class="tile__frame" data-ground style="--g-light: ${g.light}; --g-dark: ${g.dark}"><span class="tile__img" style="width: ${fw.toFixed(2)}%" data-label="${x.title}">${image(rel, { alt: e.alt, sz: '(min-width: 56.25rem) 26vw, 44vw', prefix: p, zoom: true, title: `${x.title}: ${e.title}`, project: projectHref(x, p) })}</span></span>
+<figcaption class="tile__cap"><a class="tile__p" href="${projectHref(x, p)}">${x.title}</a> <span>${e.title}</span></figcaption></figure></li>`;
+  };
+
+  // the tree: the root, the three families, then the projects of the chosen family (each by its first image of it)
+  const leaves = (fam) => fam === 'film' ? cat.filter((e) => e.kind === 'film')
+    : projects.map((x) => cat.find((e) => e.project === x && (fam === 'all' ? e.hero : e.kind === fam && !e.hero))).filter(Boolean);
+  const famY = { all: 50, drawing: 30, render: 50, film: 70 };
+  const branch = (fam) => {
+    const from = fam === 'all' ? { x: 9, y: 50 } : { x: 27, y: famY[fam] };
+    const ls = leaves(fam);
+    const paths = ls.map((e, i) => { const t = leafAt(i); const mx = (from.x + t.x) / 2; return `M ${from.x * 12} ${from.y * 6.4} C ${mx * 12} ${from.y * 6.4}, ${mx * 12} ${t.y * 6.4}, ${t.x * 12 - 40} ${t.y * 6.4}`; });
+    const leaf = (e, i) => {
+      const t = leafAt(i); const href = e.film ? `${p}motion.html#${e.film.id}` : projectHref(e.project, p);
+      const pic = e.film ? html`<img src="${p}videos/web/${e.film.slug}-poster.webp" alt="" width="${e.film.w}" height="${e.film.h}" loading="lazy" decoding="async">`
+        : picture(e.kind === 'drawing' ? shown(e.src, true) : e.src, { alt: '', sizes: '8rem', prefix: p });
+      return html`<a class="leaf" href="${href}" style="left: ${t.x}%; top: ${t.y}%" data-label="${key(e)}">${pic}<span class="vh">${key(e)}</span></a>`;
+    };
+    return html`<div class="tree__branch" data-branch="${fam}"${attrs({ hidden: fam !== 'all' })}><svg class="tree__lines" viewBox="0 0 1200 640" preserveAspectRatio="none" aria-hidden="true">${raw(paths.map((d) => `<path d="${d}"/>`).join(''))}</svg>${ls.map(leaf)}</div>`;
+  };
+
+  const rows = projects.map((x, i) => html`<tr><td>${pad(i + 1)}</td><th scope="row"><a href="${projectHref(x, p)}" data-label="${x.title}">${x.title}</a></th><td>${x.place}</td><td>${x.year}</td><td>${x.descriptor.split(' | ')[0]}</td><td>${x.office || 'ENAU, academic'}</td><td>${cat.filter((e) => e.project === x).length}</td></tr>`);
+
   const body = html`
-<header class="intro wrap g">
-<div class="s-text center"><h1 class="h1">${words('Work')}</h1><p class="lead in">Places already alive. ${projects.length} projects in Tunisia, France and Morocco, from ${Math.min(...years)} to ${Math.max(...years)}.</p></div>
-<nav class="s-wide block index center" aria-label="Projects by place">
-${groups.map((g) => html`<div><p class="label" id="g-${g.id}">${g.label}</p><ul role="list" aria-labelledby="g-${g.id}">${g.items.map((x) => html`<li><a href="#${x.slug}">${x.title}</a></li>`)}</ul></div>`)}
-</nav>
-</header>
-${chapters.map((c) => c.html)}`;
+<header class="ix-head"><h1 class="col__h" id="ix-h">Index <span class="col__count">${cat.length}</span></h1>
+<p class="ix-lead">Every drawing, render and film of the ${projects.length} projects, A to Z.</p></header>
+<nav class="az" aria-label="Projects A to Z" data-view-only="grid"><ul role="list">${[...firstOf.keys()].map((l) => html`<li><a href="#az-${l}">${l}</a></li>`)}</ul></nav>
+<section class="ix-view ix-grid" data-view="grid" aria-labelledby="ix-h"><ol class="tiles" role="list">${cat.map(tile)}</ol></section>
+<section class="ix-view ix-tree" data-view="tree" aria-label="The index as a tree" hidden>
+<div class="tree">
+<button class="pill pill--root tree__root" type="button" data-family="all" aria-pressed="true" style="left: 1%; top: 50%">Index <span class="pill__n">${cat.length}</span></button>
+${FAMILIES.map((f) => html`<button class="pill tree__fam" type="button" data-family="${f.id}" aria-pressed="false" style="left: 17%; top: ${famY[f.id]}%">${f.label} <span class="pill__n">${count(f.id)}</span></button>`)}
+${['all', ...FAMILIES.map((f) => f.id)].map(branch)}
+</div>
+</section>
+<section class="ix-view ix-list" data-view="list" aria-label="The projects as a list" hidden>
+<table class="ix-table"><caption class="vh">The ${projects.length} projects, with place, year, type, office and the number of images</caption>
+<thead><tr><th scope="col">No.</th><th scope="col">Project</th><th scope="col">Place</th><th scope="col">Year</th><th scope="col">Type</th><th scope="col">Office</th><th scope="col">Images</th></tr></thead>
+<tbody>${rows}</tbody></table>
+</section>
+<div class="ix-bar" hidden>
+<div class="ix-bar__group" role="group" aria-label="Show work by type"><button class="pill" type="button" data-family="all" aria-pressed="true">All</button>${FAMILIES.map((f) => html`<button class="pill" type="button" data-family="${f.id}" aria-pressed="false">${f.label}</button>`)}</div>
+<div class="ix-bar__group" role="group" aria-label="View">${VIEWS.map((v) => html`<button class="pill pill--icon" type="button" data-view-btn="${v.id}" aria-pressed="${v.id === 'grid' ? 'true' : 'false'}"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">${raw(v.svg)}</svg><span class="vh">${v.label}</span></button>`)}</div>
+</div>`;
   const items = projects.map((x, i) => ({ '@type': 'ListItem', position: i + 1, url: `${site.origin}${site.base}projects/project-${x.slug}.html`, name: x.title }));
-  return { body, viewer: false, page: { path: 'architecture.html', nav: 'work', navExact: true, corners: true, title: 'Work | Hazem Radhouani, architect',
-    description: `${projects.length} architecture projects by Hazem Radhouani: rehabilitation in Paris with Studio BELEM, rail infrastructure in Morocco, and heritage research in Tunisia.`,
-    og: 'images/og/work.jpg', bodyClass: 'page-work', preload: preloadFor(projects[0].hero.src, chapters[0].h.lcpSizes, p),
-    jsonld: [{ '@context': 'https://schema.org', '@type': 'CollectionPage', name: 'Work', url: `${site.origin}${site.base}architecture.html`, mainEntity: { '@type': 'ItemList', itemListElement: items } }] } };
+  return { body, viewer: true, page: { path: 'architecture.html', nav: 'work', navExact: true, corners: true, title: 'Index | Hazem Radhouani, architect',
+    description: `Index of the work of Hazem Radhouani, architect: ${cat.length} drawings, renders and films from ${projects.length} projects in Tunisia, France and Morocco.`,
+    og: 'images/og/work.jpg', bodyClass: 'page-work',
+    jsonld: [{ '@context': 'https://schema.org', '@type': 'CollectionPage', name: 'Index', url: `${site.origin}${site.base}architecture.html`, mainEntity: { '@type': 'ItemList', itemListElement: items } }] } };
 }
 
 /* ------------------------------------------------------------------ case study ("rail and copy", D73) */

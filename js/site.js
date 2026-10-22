@@ -67,15 +67,19 @@
     if (wide.addEventListener) wide.addEventListener('change', onWide);
   }
 
-  /* ------------------------------------------------------------ scroll progress (orientation, hierarchy: D83)
-     Under html.fx (a fine pointer without reduced motion, set in the head before the first paint) every
-     [data-fx] element carries --p, its progress through the viewport: 0 as its top enters at the bottom, 0.5
-     as it reaches the top, 1 as its bottom leaves; data-fx="top" counts 0 at the top of the page to 1 when it
-     reaches the top of the viewport, and carries --k, the scale at which it fills its parent (never past its
-     image's own width). CSS maps
-     --p to translate, scale and opacity only. Positions are where an element stands without sticking or
-     moving, so a stuck plate keeps counting while the next one covers it. The values follow Lenis in its own
-     frame (below), or a native scroll in the next one. Without the class nothing is set and all stays still. */
+  /* ------------------------------------------------------------ scroll engine (orientation, hierarchy: D83, D96)
+     One measured list of [data-fx] elements, read in the frame the page moves (Lenis on a fine pointer, the
+     native scroll elsewhere). Every value is a pure function of the scroll position, so scrolling back runs
+     everything backwards; CSS maps the values to transform, opacity and, on a fine pointer, blur.
+       data-fx ("view"): --p, 0 as the element's top enters at the bottom, 1 as its bottom leaves at the top
+       data-fx="top":    --p, 0 at the top of the page, 1 when the element reaches the top; --k, its fill scale
+       data-fx="track":  --p, 0 when a tall section's top reaches the top of the screen, 1 when its bottom
+                         reaches the bottom: its sticky stage moves only while it stands (A1); data-steps
+                         ("0,.25,.5,.75") give data-chapter, and the steps of its rail [data-rail="id"] follow
+       data-fx="centre": --d, the element's centre against the screen's centre: 1 entering, 0 centred, -1 leaving
+     html.fx (set in the head before the first paint) is on whenever motion is allowed, touch included; without
+     it nothing is written and all stands settled. A rail follows the reading position either way. Positions are
+     where an element stands without sticking or moving, so a stuck stage keeps counting. */
   var naturalTop = function (el) {
     var t = 0;
     if (getComputedStyle(el).position === 'sticky') {
@@ -86,27 +90,57 @@
     for (var e = el; e; e = e.offsetParent) t += e.offsetTop;   // offsets ignore transforms: no feedback from --p
     return t;
   };
-  var fxItems = root.classList.contains('fx') ? slice(document.querySelectorAll('[data-fx]')).map(function (el) {
-    return { el: el, top: el.getAttribute('data-fx') === 'top', y: 0, h: 0, p: -1 };
-  }) : [];
+  var FX = root.classList.contains('fx');
+  var clamp = function (v, a, b) { return v < a ? a : v > b ? b : v; };
+  var fxItems = slice(document.querySelectorAll(FX ? '[data-fx]' : '[data-fx][data-steps]')).map(function (el) {
+    var kind = el.getAttribute('data-fx') || 'view';
+    var steps = (el.getAttribute('data-steps') || '').split(',').filter(Boolean).map(Number);
+    var rail = el.id ? slice(document.querySelectorAll('[data-rail="' + el.id + '"] [data-step]')) : [];
+    return { el: el, kind: kind, steps: steps, rail: rail, ch: -1, y: 0, h: 0, p: -1, d: 2, scrub: null };
+  });
   var fxUpdate = function () {};
+  var scrubKick = function () {};
   if (fxItems.length) {
     var measure = function () {
       fxItems.forEach(function (it) {
-        it.y = naturalTop(it.el); it.h = it.el.offsetHeight; it.p = -1;
-        if (!it.top) return;
+        it.y = naturalTop(it.el); it.h = it.el.offsetHeight; it.p = -1; it.d = 2;
+        if (it.kind !== 'top') return;
         var img = it.el.querySelector('img'), full = Math.min(it.el.parentNode.offsetWidth, img ? +img.getAttribute('width') : Infinity);
         it.el.style.setProperty('--k', (full / it.el.offsetWidth).toFixed(4));
       });
       fxUpdate();
     };
+    var chapter = function (it, p) {
+      var c = 0;
+      for (var i = 0; i < it.steps.length; i++) if (p >= it.steps[i]) c = i;
+      if (c === it.ch) return;
+      it.ch = c; it.el.setAttribute('data-chapter', String(c));
+      it.rail.forEach(function (s, i) {
+        s.classList.toggle('is-on', i === c);
+        if (s.tagName === 'A') { if (i === c) s.setAttribute('aria-current', 'step'); else s.removeAttribute('aria-current'); }
+      });
+    };
     fxUpdate = function () {
-      var y = window.scrollY, vh = window.innerHeight;
+      // clientHeight: the layout viewport, steady while a phone's toolbar shows and hides (A1)
+      var y = window.scrollY, vh = document.documentElement.clientHeight;
       fxItems.forEach(function (it) {
-        var p = it.top ? y / Math.max(1, it.y) : (y + vh - it.y) / (vh + it.h);
-        p = Math.min(1, Math.max(0, p));
+        if (!it.h) return;   // a hidden view of a page (display: none) has nothing to move
+        if (it.kind === 'centre') {
+          var d = clamp((it.y + it.h / 2 - y - vh / 2) / ((vh + it.h) / 2), -1, 1);
+          if (Math.abs(d - it.d) < 0.001) return;
+          it.d = d; it.el.style.setProperty('--d', d.toFixed(4));
+          if (it.scrub) it.scrub.to((1 - d) / 2);
+          return;
+        }
+        var p = it.kind === 'top' ? y / Math.max(1, it.y)
+          : it.kind === 'track' ? (y - it.y) / Math.max(1, it.h - vh)
+          : (y + vh - it.y) / (vh + it.h);
+        p = clamp(p, 0, 1);
+        if (it.steps.length) chapter(it, p);
         if (Math.abs(p - it.p) < 0.001) return;
-        it.p = p; it.el.style.setProperty('--p', p.toFixed(4));
+        it.p = p;
+        if (FX) it.el.style.setProperty('--p', p.toFixed(4));
+        if (it.scrub) it.scrub.to(p);
       });
     };
     var fxQueued = false;
@@ -115,9 +149,101 @@
       fxQueued = true;
       requestAnimationFrame(function () { fxQueued = false; fxUpdate(); });
     }, { passive: true });
-    window.addEventListener('resize', measure);
-    if ('ResizeObserver' in window) new ResizeObserver(measure).observe(document.body);
+    // re-measured once the layout settles, never on every observed change in a burst (A5)
+    var measureTimer = 0;
+    var measureSoon = function () { clearTimeout(measureTimer); measureTimer = setTimeout(measure, 120); };
+    window.addEventListener('resize', measureSoon);
+    if ('ResizeObserver' in window) new ResizeObserver(measureSoon).observe(document.body);
     measure();
+  }
+
+  /* ------------------------------------------------------------ the scrubbed films (orientation, D96)
+     A video[data-scrub] inside a track or centre item follows the scroll: its time eases toward the reading
+     position (0.12 of the gap per frame, the Scroll map's weighted scrub), a new seek only once the last has
+     landed (A2). Under the poster until its first frame lands, so the first paint is always the poster. A fine
+     pointer, or a touch screen from 48rem, scrubs (the small file on touch); a narrow touch screen plays the
+     film muted in a loop while it is on screen (A4); reduced motion, saved data or no script keep the poster.
+     A seek that never lands within 1.5 s leaves the poster in place. Safari on iOS: UNVERIFIED (no WebKit here). */
+  var fineQ = window.matchMedia('(hover: hover) and (pointer: fine)');
+  var saveData = navigator.connection && navigator.connection.saveData;
+  var scrubVideos = FX && !saveData ? slice(document.querySelectorAll('video[data-scrub]')) : [];
+  if (scrubVideos.length) {
+    var wideQ = window.matchMedia('(min-width: 48rem)');
+    var mode = fineQ.matches || wideQ.matches ? 'scrub' : 'loop';
+    var films = [];
+    var running = false;
+    var tick = function () {
+      running = false;
+      films.forEach(function (f) {
+        if (!f.ready) return;
+        var gap = f.target - f.t;
+        f.t = Math.abs(gap) < 0.002 ? f.target : f.t + gap * 0.12;
+        if (!f.v.seeking && Math.abs(f.v.currentTime - f.t) > 1 / 60) {
+          f.v.currentTime = f.t;
+          if (!f.live && !f.watch) f.watch = setTimeout(function () { if (!f.live) { f.ready = false; console.warn('scrub: no frame landed, the poster stays'); } }, 1500);
+        }
+        if (f.t !== f.target || f.v.seeking) running = true;
+      });
+      if (running) requestAnimationFrame(tick);
+    };
+    scrubKick = function () { if (!running) { running = true; requestAnimationFrame(tick); } };
+    scrubVideos.forEach(function (v) {
+      var host = v.closest('[data-fx]');
+      var it = fxItems.filter(function (x) { return x.el === host; })[0];
+      var f = { v: v, frame: v.parentNode, t: 0, target: 0, frac: 0, ready: false, live: false, watch: 0,
+        to: function (frac) { f.frac = frac; if (f.ready) { f.target = frac * v.duration; scrubKick(); } } };
+      if (it && mode === 'scrub') {
+        it.scrub = f;
+        // a page opened part-way down (a reload, Back) starts the film where the reader already is
+        f.frac = it.kind === 'centre' ? (it.d <= 1 ? (1 - it.d) / 2 : 0) : Math.max(0, it.p);
+      }
+      films.push(f);
+      var show = function () { if (f.live) return; f.live = true; clearTimeout(f.watch); f.frame.classList.add('is-live'); };
+      v.muted = true;
+      v.setAttribute('playsinline', '');
+      if (mode === 'loop') {
+        v.loop = true;
+        v.addEventListener('playing', show);
+        if ('IntersectionObserver' in window) new IntersectionObserver(function (en) {
+          // never before the page is idle (loadFilms sets preload): the poster is the largest paint
+          if (en[0].isIntersecting && v.preload === 'auto') { var pr = v.play(); if (pr && pr.catch) pr.catch(function () {}); } else v.pause();
+        }).observe(f.frame);
+      } else {
+        v.addEventListener('seeked', show);
+        v.addEventListener('loadeddata', function () {
+          // one play and pause primes a phone's decoder for seeking; the time then belongs to the scroll
+          var go = function () { v.pause(); f.ready = true; f.to(f.frac); };
+          var pr = v.play(); if (pr && pr.then) pr.then(go, go); else go();
+        }, { once: true });
+      }
+      v.src = v.getAttribute(fineQ.matches ? 'data-src' : 'data-src-small') || v.getAttribute('data-src');
+    });
+    // loaded once the page is idle, after its first paint and its images (the poster is the largest paint)
+    var loadFilms = function () {
+      scrubVideos.forEach(function (v) {
+        v.preload = 'auto'; v.load();
+        var r = v.parentNode.getBoundingClientRect();
+        if (mode === 'loop' && r.bottom > 0 && r.top < window.innerHeight) { var pr = v.play(); if (pr && pr.catch) pr.catch(function () {}); }
+      });
+    };
+    var whenIdle = function () { if ('requestIdleCallback' in window) window.requestIdleCallback(loadFilms, { timeout: 2500 }); else setTimeout(loadFilms, 1200); };
+    if (document.readyState === 'complete') whenIdle(); else window.addEventListener('load', whenIdle, { once: true });
+  }
+
+  /* ------------------------------------------------------------ the label that follows the pointer (feedback, D97)
+     dmcg's pill: on a fine pointer, an element with data-label names itself beside the cursor. Decorative
+     (aria-hidden): the link it sits on already carries the same name. */
+  if (FX && fineQ.matches && document.querySelector('[data-label]')) {
+    var pill = document.createElement('div');
+    pill.className = 'pill-label'; pill.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(pill);
+    document.addEventListener('pointerover', function (e) {
+      var t = e.target.closest && e.target.closest('[data-label]');
+      if (t) pill.textContent = t.getAttribute('data-label');
+      pill.classList.toggle('is-on', !!t);
+    });
+    document.addEventListener('pointermove', function (e) { pill.style.translate = (e.clientX + 16) + 'px ' + (e.clientY + 18) + 'px'; }, { passive: true });
+    root.addEventListener('pointerleave', function () { pill.classList.remove('is-on'); });
   }
 
   /* ------------------------------------------------------------ arrival (hierarchy, D76)
@@ -216,115 +342,27 @@
     document.head.appendChild(lenisScript);
   }
 
-  /* ------------------------------------------------------------ the opening (orientation, D85)
-     Three renders, one per country of the work, dissolve into one another (Studio KHOA VU's slideshow: a 4 s
-     hold, 1 s in, 1.2 s out). The first is the page's largest paint and is never touched; the other two are
-     added once the page is idle, and the show starts when they have decoded. It makes one pass of the three
-     countries and rests on the first, so the caption stops changing under a reader; "play" runs it again, on
-     a loop. The pause button (WCAG 2.2.2) says what it will do and keeps its place from the start (it only
-     shows once the show runs, so nothing moves when it appears); the show also rests while the opening is
-     off screen, hovered or holds focus, and in a hidden tab. Under reduced motion only the first image is
-     shown and there is nothing to pause. */
-  var win = document.querySelector('.open__win');
-  var stopShow = function () {};
-  if (win && !reduce.matches) {
-    var frame = win.querySelector('.open__frame'), extra = win.querySelector('template');
-    var nowItems = slice(document.querySelectorAll('.open__now li'));
-    var pause = document.querySelector('.open__pause'), pauseLabel = pause && pause.querySelector('[data-pause-label]');
-    var slides = slice(frame.children), at = 0, timer = 0, tour = true, held = { user: false, view: false, hover: false, focus: false };
-    var show = function (k) {
-      slides[at].classList.remove('is-on'); nowItems[at].hidden = true;
-      at = k; slides[at].classList.add('is-on'); nowItems[at].hidden = false;
-    };
-    var setHeld = function (on) { held.user = on; pauseLabel.textContent = on ? 'play' : 'pause'; };
-    var plan = function () {
-      clearTimeout(timer);
-      if (slides.length < 2 || held.user || held.view || held.hover || held.focus || document.hidden) return;
-      timer = setTimeout(function () {
-        show((at + 1) % slides.length);
-        if (tour && at === 0) { tour = false; setHeld(true); }   // the first pass is complete: rest on the first render
-        plan();
-      }, 5000);
-    };
-    stopShow = function () { setHeld(true); plan(); };
-    var start = function () {
-      frame.appendChild(extra.content.cloneNode(true));
-      var added = slice(frame.children).slice(1);
-      Promise.all(added.map(function (s) { var i = s.querySelector('img'); return i.decode ? i.decode().catch(function () {}) : null; })).then(function () {
-        slides = slice(frame.children);
-        pause.classList.add('is-on');
-        plan();
-      });
-    };
-    if (extra && pause) {
-      pause.addEventListener('click', function () { setHeld(!held.user); plan(); });
-      win.addEventListener('pointerenter', function () { held.hover = true; plan(); });
-      win.addEventListener('pointerleave', function () { held.hover = false; plan(); });
-      var now = document.querySelector('.open__now');
-      // focus on a caption link holds the show; focus on the button that runs it does not (clicking "play" focuses it)
-      now.addEventListener('focusin', function (e) { held.focus = !!e.target.closest('a'); plan(); });
-      now.addEventListener('focusout', function () { held.focus = false; plan(); });
-      document.addEventListener('visibilitychange', plan);
-      if ('IntersectionObserver' in window) new IntersectionObserver(function (en) { held.view = !en[0].isIntersecting; plan(); }).observe(win);
-      var idle = function () { if ('requestIdleCallback' in window) window.requestIdleCallback(start, { timeout: 3000 }); else setTimeout(start, 1500); };
-      if (document.readyState === 'complete') idle(); else window.addEventListener('load', idle, { once: true });
-    }
-  }
-
   // reduced motion switched on during the visit: the scroll-linked styles let go (everything returns to its
-  // settled place) and the renders stop
+  // settled place)
   if (reduce.addEventListener) reduce.addEventListener('change', function (e) {
-    if (e.matches) { root.classList.remove('fx'); stopShow(); }
+    if (e.matches) root.classList.remove('fx');
   });
 
-  /* ------------------------------------------------------------ the stack of selected work (D86)
-     A plate whose words would be covered by the next one is brought back to the top when focus reaches them
-     (Shift+Tab), so a focused link is never hidden under another plate (WCAG 2.4.11). A plate taller than the
-     screen (large text, user text spacing) does not stick, so none of it is ever covered (WCAG 1.4.10, 1.4.12).
-     Leaving for a project, only the chosen plate's image and title take the names that carry them into the
-     project's page (static names would lift every covered plate above the one in view during the transition). */
-  var plates = slice(document.querySelectorAll('.seq__plate'));
-  var freePlates = function () {
-    plates.forEach(function (li) {
-      li.classList.remove('seq__plate--free');
-      if (getComputedStyle(li).position === 'sticky' && li.scrollHeight > li.clientHeight + 1) li.classList.add('seq__plate--free');
-    });
-  };
-  if (plates.length) {
-    freePlates();
-    window.addEventListener('resize', freePlates);
-    if (document.fonts && document.fonts.ready) document.fonts.ready.then(freePlates);
-  }
-  document.addEventListener('focusin', function (e) {
-    var li = e.target.closest && e.target.closest('.seq__plate');
-    if (!li || getComputedStyle(li).position !== 'sticky') return;
-    var next = li.nextElementSibling;
-    if (next && next.getBoundingClientRect().top < e.target.getBoundingClientRect().bottom) jump(naturalTop(li));
-  });
+  /* ------------------------------------------------------------ the column's way into a project (orientation, D97)
+     Leaving the home for a project, only the chosen item's render and title take the names that carry them into
+     the project's page (dmcg's genie): names on all fifteen would capture every item for the transition. */
   window.addEventListener('pageswap', function (e) {
     var to = e.viewTransition && e.activation && e.activation.entry && e.activation.entry.url;
     if (!to) return;
-    slice(document.querySelectorAll('.seq__plate')).forEach(function (li) {
-      var a = li.querySelector('.seq__t a');
-      if (!a || a.href !== to) return;
-      var slug = li.getAttribute('data-slug');
-      li.querySelector('.seq__frame .nw').style.viewTransitionName = 'hero-' + slug;
-      a.style.viewTransitionName = 'title-' + slug;
-      a.style.viewTransitionClass = 'vt-title';
+    slice(document.querySelectorAll('a.col__a')).forEach(function (a) {
+      if (a.href !== to) return;
+      var slug = to.replace(/^.*project-|\.html.*$/g, '');
+      var card = a.querySelector('.col__card:not(.col__film)'), t = a.querySelector('.col__t');
+      if (card) card.style.viewTransitionName = 'hero-' + slug;
+      t.style.viewTransitionName = 'title-' + slug;
+      t.style.viewTransitionClass = 'vt-title';
     });
   });
-
-  /* ------------------------------------------------------------ the research ground (hierarchy, D87)
-     In the light scheme the end of the home page stands on ink. Format's circle wipe: when the research
-     heading crosses 60% of the viewport, a disc of ink grows from it and the words turn light; going back up
-     undoes it. Without this script, or under reduced motion, the end simply stands on ink from the start. */
-  var inv = document.querySelector('.inv');
-  if (inv && !reduce.matches && 'IntersectionObserver' in window) {
-    var line = function () { return inv.getBoundingClientRect().top < window.innerHeight * 0.6; };
-    inv.classList.add('inv--wait');
-    inv.classList.toggle('is-inv', line());
-    new IntersectionObserver(function () { inv.classList.toggle('is-inv', line()); }, { rootMargin: '0px 0px -40% 0px' }).observe(inv);
-  }
 
   /* ------------------------------------------------------------ figure viewer (orientation, state)
      Links to the full-size file work without JS. Here every [data-viewer] link on the page becomes one

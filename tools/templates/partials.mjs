@@ -54,7 +54,7 @@ export function planRow(items, { max = 'full', maxH = MAX_H, ladder = CENTRED } 
 
 /* ---------------------------------------------------------- one image */
 // alt and title come from content; zoom adds the full-size viewer link (works without JS)
-export function image(rel, { alt, sz, prefix = '', priority = false, zoom = false, title = '', vt = null }) {
+export function image(rel, { alt, sz, prefix = '', priority = false, zoom = false, title = '', vt = null, project = '' }) {
   const { w, h } = dims(rel);
   const style = `--nw: ${w}px${vt ? `; view-transition-name: ${vt}` : ''}`;
   // a cutout carries its dark-scheme treatment (D50, D69): inverted linework, or inverted linework with its
@@ -65,7 +65,7 @@ export function image(rel, { alt, sz, prefix = '', priority = false, zoom = fals
   const layer = keep ? picture(keep, { alt: '', sizes: sz, prefix, cls: 'nw__keep' }) : '';
   if (!zoom) return keep ? html`<span class="${cls}" style="${style}">${picture(rel, { alt, sizes: sz, prefix, priority })}${layer}</span>` : picture(rel, { alt, sizes: sz, prefix, priority, cls, style });
   const big = largest(rel, prefix);
-  return html`<a class="zoom-link ${cls}" style="${style}" href="${prefix}${rel}" data-viewer data-title="${title}" data-alt="${alt}" data-w="${w}" data-h="${h}" data-webp="${big.webp}" data-avif="${big.avif}"${dark ? html` data-dark="${dark}"` : ''}${keep ? html` data-keep="${largest(keep, prefix).webp}"` : ''}><span class="vh">Open full size: ${title || alt}</span>${picture(rel, { alt, sizes: sz, prefix, priority })}${layer}</a>`;
+  return html`<a class="zoom-link ${cls}" style="${style}" href="${prefix}${rel}" data-viewer data-title="${title}" data-alt="${alt}" data-w="${w}" data-h="${h}" data-webp="${big.webp}" data-avif="${big.avif}"${project ? html` data-href="${project}"` : ''}${dark ? html` data-dark="${dark}"` : ''}${keep ? html` data-keep="${largest(keep, prefix).webp}"` : ''}><span class="vh">Open full size: ${title || alt}</span>${picture(rel, { alt, sizes: sz, prefix, priority })}${layer}</a>`;
 }
 
 // a row of images sharing one height; `stack`: one per line on phones (drawings, or more than two).
