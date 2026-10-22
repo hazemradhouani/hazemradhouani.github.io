@@ -37,12 +37,13 @@ const personLd = {
   knowsLanguage: ['ar', 'fr', 'en'],
   award: ['Highest Honours, National Architecture Diploma, ENAU, 2026', 'Highest Honours, Final Year Architectural Thesis, ENAU, 2024', 'Most Appreciated Research, Sakura Science Program, 2025']
 };
-const websiteLd = { '@context': 'https://schema.org', '@type': 'WebSite', name: site.siteName, url: abs(''), author: { '@id': abs('#person') }, inLanguage: 'en' };
+const websiteLd = { '@context': 'https://schema.org', '@type': 'WebSite', name: site.siteName, alternateName: [site.person.name], url: abs(''), author: { '@id': abs('#person') }, inLanguage: 'en' };
 
 const ogFor = (name) => (fs.existsSync(path.join(ROOT, `images/og/${name}.jpg`)) ? `images/og/${name}.jpg` : 'images/og/home.jpg');
 const versions = { css: hash('css/site.css'), js: hash('js/site.js') };
 const films = pages.motion.films;
-const ctxFor = (rel) => ({ prefix: rel.includes('/') ? '../' : '', versions, personLd, websiteLd, ogFor, films });
+const grounds = read('content/grounds.json');   // the plates' grounds (D86), from node tools/grounds.mjs
+const ctxFor = (rel) => ({ prefix: rel.includes('/') ? '../' : '', versions, personLd, websiteLd, ogFor, films, grounds });
 
 const out = [];
 const emit = (r, rel) => { const ctx = ctxFor(rel); ctx.viewer = r.viewer; write(rel, layout(site, r.page, r.body, ctx)); out.push(r.page); };
@@ -85,5 +86,25 @@ write('site.webmanifest', JSON.stringify({ name: site.siteName, short_name: 'H. 
     { src: 'images/brand/icon-512.png', sizes: '512x512', type: 'image/png' },
     { src: 'images/brand/icon-maskable-512.png', sizes: '512x512', type: 'image/png', purpose: 'maskable' }] }, null, 2) + '\n');
 write('robots.txt', `User-agent: *\nAllow: /\n\nSitemap: ${abs('sitemap.xml')}\n`);
+
+// the site moved from /portfolio/ to the host root (D81): every old page address answers with its new one
+// (no noindex: an instant refresh is read as a permanent redirect, and noindex would contradict it)
+const moved = (rel) => {
+  const to = abs(rel === 'index.html' ? '' : rel);
+  write(`portfolio/${rel}`, `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>${site.siteName}</title>
+<link rel="canonical" href="${to}">
+<script>location.replace(${JSON.stringify(to)}+location.search+location.hash);</script>
+<meta http-equiv="refresh" content="0; url=${to}">
+</head>
+<body><p>This page has moved to <a href="${to}">${to}</a>.</p></body>
+</html>
+`);
+};
+for (const p of out) moved(p.path);
+moved('videos.html');
 if (!fs.existsSync(path.join(ROOT, '.nojekyll'))) write('.nojekyll', '');
 console.log(`built ${out.length + 2} pages (${projects.length} projects) | css ${versions.css} | js ${versions.js}`);

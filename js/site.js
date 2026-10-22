@@ -97,6 +97,59 @@
     });
   }
 
+  /* ------------------------------------------------------------ scroll progress (orientation, hierarchy: D83)
+     Under html.fx (a fine pointer without reduced motion, set in the head before the first paint) every
+     [data-fx] element carries --p, its progress through the viewport: 0 as its top enters at the bottom, 0.5
+     as it reaches the top, 1 as its bottom leaves; data-fx="top" counts 0 at the top of the page to 1 when it
+     reaches the top of the viewport, and carries --k, the scale at which it fills its parent (never past its
+     image's own width). CSS maps
+     --p to translate, scale and opacity only. Positions are where an element stands without sticking or
+     moving, so a stuck plate keeps counting while the next one covers it. The values follow Lenis in its own
+     frame (below), or a native scroll in the next one. Without the class nothing is set and all stays still. */
+  var naturalTop = function (el) {
+    var t = 0;
+    if (getComputedStyle(el).position === 'sticky') {
+      t = el.parentNode.getBoundingClientRect().top + window.scrollY;
+      for (var s = el.parentNode.firstElementChild; s !== el; s = s.nextElementSibling) t += s.offsetHeight;
+      return t;
+    }
+    for (var e = el; e; e = e.offsetParent) t += e.offsetTop;   // offsets ignore transforms: no feedback from --p
+    return t;
+  };
+  var fxItems = root.classList.contains('fx') ? slice(document.querySelectorAll('[data-fx]')).map(function (el) {
+    return { el: el, top: el.getAttribute('data-fx') === 'top', y: 0, h: 0, p: -1 };
+  }) : [];
+  var fxUpdate = function () {};
+  if (fxItems.length) {
+    var measure = function () {
+      fxItems.forEach(function (it) {
+        it.y = naturalTop(it.el); it.h = it.el.offsetHeight; it.p = -1;
+        if (!it.top) return;
+        var img = it.el.querySelector('img'), full = Math.min(it.el.parentNode.offsetWidth, img ? +img.getAttribute('width') : Infinity);
+        it.el.style.setProperty('--k', (full / it.el.offsetWidth).toFixed(4));
+      });
+      fxUpdate();
+    };
+    fxUpdate = function () {
+      var y = window.scrollY, vh = window.innerHeight;
+      fxItems.forEach(function (it) {
+        var p = it.top ? y / Math.max(1, it.y) : (y + vh - it.y) / (vh + it.h);
+        p = Math.min(1, Math.max(0, p));
+        if (Math.abs(p - it.p) < 0.001) return;
+        it.p = p; it.el.style.setProperty('--p', p.toFixed(4));
+      });
+    };
+    var fxQueued = false;
+    window.addEventListener('scroll', function () {
+      if (fxQueued) return;
+      fxQueued = true;
+      requestAnimationFrame(function () { fxQueued = false; fxUpdate(); });
+    }, { passive: true });
+    window.addEventListener('resize', measure);
+    if ('ResizeObserver' in window) new ResizeObserver(measure).observe(document.body);
+    measure();
+  }
+
   /* ------------------------------------------------------------ arrival (hierarchy, D76)
      Groups that start below the fold arrive once, after their images decode: each plate rises from its
      ground line inside its own frame, the cells of a row or series in order, and the words that belong to
@@ -138,6 +191,7 @@
      pointer without reduced motion: touch keeps the device's own inertia, and reduced motion keeps native,
      unsmoothed scrolling. An open dialog holds the page still and scrolls on its own. A link to a place on
      the page glides there on the in-out curve, then updates the address and moves focus, as a jump would. */
+  var jump = function (y) { window.scrollTo({ top: y, behavior: 'instant' }); };   // an instant move; through Lenis once it runs
   var fine = window.matchMedia('(hover: hover) and (pointer: fine)');
   if (thisScript && !reduce.matches && fine.matches) {
     var lenisScript = document.createElement('script');
@@ -145,23 +199,35 @@
     lenisScript.async = true;
     lenisScript.onload = function () {
       if (typeof window.Lenis !== 'function') return;
-      var lenis = new window.Lenis({ autoRaf: true, lerp: 0.1, wheelMultiplier: 1, smoothWheel: true, syncTouch: false, stopInertiaOnNavigate: true });
+      // lerp 0.08 (D83): between Format's 0.1 and huyml's 0.075, a gentler settle that still answers the wheel
+      var lenis = new window.Lenis({ autoRaf: true, lerp: 0.08, wheelMultiplier: 1, smoothWheel: true, syncTouch: false, stopInertiaOnNavigate: true });
+      lenis.on('scroll', fxUpdate);   // scroll-linked values in the frame Lenis moves the page, never one behind
+      jump = function (y) { lenis.scrollTo(y, { immediate: true, force: true }); };
+      // reduced motion switched on during the visit: native, unsmoothed scrolling from then on (every handler
+      // below lets the browser act as usual once the engine is gone)
+      var live = true;
+      if (reduce.addEventListener) reduce.addEventListener('change', function (e) {
+        if (!e.matches || !live) return;
+        live = false;
+        lenis.destroy();
+        jump = function (y) { window.scrollTo({ top: y, behavior: 'instant' }); };
+      });
       // a dialog (menu, viewer) holds the page still; the page resumes where it was when the last one closes
       var dialogs = slice(document.querySelectorAll('dialog'));
-      var hold = function () { if (dialogs.some(function (d) { return d.open; })) lenis.stop(); else lenis.start(); };
+      var hold = function () { if (!live) return; if (dialogs.some(function (d) { return d.open; })) lenis.stop(); else lenis.start(); };
       dialogs.forEach(function (d) { new MutationObserver(hold).observe(d, { attributes: true, attributeFilter: ['open'] }); });
       // a key that scrolls or moves focus takes over from a glide still settling, where the page is, so the
       // browser's own keyboard scroll (and scrolling a focused element into view) is never fought
       var KEYS = { ArrowUp: 1, ArrowDown: 1, PageUp: 1, PageDown: 1, Home: 1, End: 1, ' ': 1, Tab: 1 };
       document.addEventListener('keydown', function (e) {
-        if (KEYS[e.key] && lenis.isScrolling === 'smooth' && !(e.target.closest && e.target.closest('input, textarea, select, [contenteditable], dialog'))) {
+        if (live && KEYS[e.key] && lenis.isScrolling === 'smooth' && !(e.target.closest && e.target.closest('input, textarea, select, [contenteditable], dialog'))) {
           lenis.scrollTo(window.scrollY, { immediate: true, force: true });
         }
       }, true);
       var inOut = function (t) { return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; };
       document.addEventListener('click', function (e) {
         var a = e.target.closest && e.target.closest('a[href^="#"]');
-        if (!a || a.classList.contains('skip') || e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+        if (!live || !a || a.classList.contains('skip') || e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
         var id = decodeURIComponent(a.getAttribute('href').slice(1));
         var el = id && document.getElementById(id);
         if (!el || el.closest('dialog')) return;
@@ -178,6 +244,116 @@
       });
     };
     document.head.appendChild(lenisScript);
+  }
+
+  /* ------------------------------------------------------------ the opening (orientation, D85)
+     Three renders, one per country of the work, dissolve into one another (Studio KHOA VU's slideshow: a 4 s
+     hold, 1 s in, 1.2 s out). The first is the page's largest paint and is never touched; the other two are
+     added once the page is idle, and the show starts when they have decoded. It makes one pass of the three
+     countries and rests on the first, so the caption stops changing under a reader; "play" runs it again, on
+     a loop. The pause button (WCAG 2.2.2) says what it will do and keeps its place from the start (it only
+     shows once the show runs, so nothing moves when it appears); the show also rests while the opening is
+     off screen, hovered or holds focus, and in a hidden tab. Under reduced motion only the first image is
+     shown and there is nothing to pause. */
+  var win = document.querySelector('.open__win');
+  var stopShow = function () {};
+  if (win && !reduce.matches) {
+    var frame = win.querySelector('.open__frame'), extra = win.querySelector('template');
+    var nowItems = slice(document.querySelectorAll('.open__now li'));
+    var pause = document.querySelector('.open__pause'), pauseLabel = pause && pause.querySelector('[data-pause-label]');
+    var slides = slice(frame.children), at = 0, timer = 0, tour = true, held = { user: false, view: false, hover: false, focus: false };
+    var show = function (k) {
+      slides[at].classList.remove('is-on'); nowItems[at].hidden = true;
+      at = k; slides[at].classList.add('is-on'); nowItems[at].hidden = false;
+    };
+    var setHeld = function (on) { held.user = on; pauseLabel.textContent = on ? 'play' : 'pause'; };
+    var plan = function () {
+      clearTimeout(timer);
+      if (slides.length < 2 || held.user || held.view || held.hover || held.focus || document.hidden) return;
+      timer = setTimeout(function () {
+        show((at + 1) % slides.length);
+        if (tour && at === 0) { tour = false; setHeld(true); }   // the first pass is complete: rest on the first render
+        plan();
+      }, 5000);
+    };
+    stopShow = function () { setHeld(true); plan(); };
+    var start = function () {
+      frame.appendChild(extra.content.cloneNode(true));
+      var added = slice(frame.children).slice(1);
+      Promise.all(added.map(function (s) { var i = s.querySelector('img'); return i.decode ? i.decode().catch(function () {}) : null; })).then(function () {
+        slides = slice(frame.children);
+        pause.classList.add('is-on');
+        plan();
+      });
+    };
+    if (extra && pause) {
+      pause.addEventListener('click', function () { setHeld(!held.user); plan(); });
+      win.addEventListener('pointerenter', function () { held.hover = true; plan(); });
+      win.addEventListener('pointerleave', function () { held.hover = false; plan(); });
+      var now = document.querySelector('.open__now');
+      // focus on a caption link holds the show; focus on the button that runs it does not (clicking "play" focuses it)
+      now.addEventListener('focusin', function (e) { held.focus = !!e.target.closest('a'); plan(); });
+      now.addEventListener('focusout', function () { held.focus = false; plan(); });
+      document.addEventListener('visibilitychange', plan);
+      if ('IntersectionObserver' in window) new IntersectionObserver(function (en) { held.view = !en[0].isIntersecting; plan(); }).observe(win);
+      var idle = function () { if ('requestIdleCallback' in window) window.requestIdleCallback(start, { timeout: 3000 }); else setTimeout(start, 1500); };
+      if (document.readyState === 'complete') idle(); else window.addEventListener('load', idle, { once: true });
+    }
+  }
+
+  // reduced motion switched on during the visit: the scroll-linked styles let go (everything returns to its
+  // settled place) and the renders stop
+  if (reduce.addEventListener) reduce.addEventListener('change', function (e) {
+    if (e.matches) { root.classList.remove('fx'); stopShow(); }
+  });
+
+  /* ------------------------------------------------------------ the stack of selected work (D86)
+     A plate whose words would be covered by the next one is brought back to the top when focus reaches them
+     (Shift+Tab), so a focused link is never hidden under another plate (WCAG 2.4.11). A plate taller than the
+     screen (large text, user text spacing) does not stick, so none of it is ever covered (WCAG 1.4.10, 1.4.12).
+     Leaving for a project, only the chosen plate's image and title take the names that carry them into the
+     project's page (static names would lift every covered plate above the one in view during the transition). */
+  var plates = slice(document.querySelectorAll('.seq__plate'));
+  var freePlates = function () {
+    plates.forEach(function (li) {
+      li.classList.remove('seq__plate--free');
+      if (getComputedStyle(li).position === 'sticky' && li.scrollHeight > li.clientHeight + 1) li.classList.add('seq__plate--free');
+    });
+  };
+  if (plates.length) {
+    freePlates();
+    window.addEventListener('resize', freePlates);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(freePlates);
+  }
+  document.addEventListener('focusin', function (e) {
+    var li = e.target.closest && e.target.closest('.seq__plate');
+    if (!li || getComputedStyle(li).position !== 'sticky') return;
+    var next = li.nextElementSibling;
+    if (next && next.getBoundingClientRect().top < e.target.getBoundingClientRect().bottom) jump(naturalTop(li));
+  });
+  window.addEventListener('pageswap', function (e) {
+    var to = e.viewTransition && e.activation && e.activation.entry && e.activation.entry.url;
+    if (!to) return;
+    slice(document.querySelectorAll('.seq__plate')).forEach(function (li) {
+      var a = li.querySelector('.seq__t a');
+      if (!a || a.href !== to) return;
+      var slug = li.getAttribute('data-slug');
+      li.querySelector('.seq__frame .nw').style.viewTransitionName = 'hero-' + slug;
+      a.style.viewTransitionName = 'title-' + slug;
+      a.style.viewTransitionClass = 'vt-title';
+    });
+  });
+
+  /* ------------------------------------------------------------ the research ground (hierarchy, D87)
+     In the light scheme the end of the home page stands on ink. Format's circle wipe: when the research
+     heading crosses 60% of the viewport, a disc of ink grows from it and the words turn light; going back up
+     undoes it. Without this script, or under reduced motion, the end simply stands on ink from the start. */
+  var inv = document.querySelector('.inv');
+  if (inv && !reduce.matches && 'IntersectionObserver' in window) {
+    var line = function () { return inv.getBoundingClientRect().top < window.innerHeight * 0.6; };
+    inv.classList.add('inv--wait');
+    inv.classList.toggle('is-inv', line());
+    new IntersectionObserver(function () { inv.classList.toggle('is-inv', line()); }, { rootMargin: '0px 0px -40% 0px' }).observe(inv);
   }
 
   /* ------------------------------------------------------------ figure viewer (orientation, state)

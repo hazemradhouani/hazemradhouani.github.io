@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 const REPO = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const BASE = process.argv[2] || 'http://127.0.0.1:8090/portfolio/';
+const BASE = process.argv[2] || 'http://127.0.0.1:8090/';
 const b = await chromium.launch({ executablePath: process.env.CHROME_PATH || 'C:/Program Files/Google/Chrome/Application/chrome.exe' });
 const p = await b.newPage();
 await p.goto(BASE + 'about.html', { waitUntil: 'networkidle' });

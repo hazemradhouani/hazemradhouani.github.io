@@ -15,7 +15,7 @@ const REPO = path.join(here, '..');
 const ARGS = process.argv.slice(2);
 const BASE = ARGS.find((a) => a.startsWith('--base='))?.slice('--base='.length)
   || ARGS.find((a) => !a.startsWith('--'))
-  || 'http://127.0.0.1:8090/portfolio/';
+  || 'http://127.0.0.1:8090/';
 fs.mkdirSync(path.join(here, '.cache'), { recursive: true });
 const SHOTS = process.argv.includes('--shots');
 const ONLY = process.argv.find((a) => a.startsWith('--only='))?.slice(7);
@@ -53,7 +53,8 @@ const axeSrc = fs.readFileSync(path.join(here, '..', 'node_modules/axe-core/axe.
 // need the server's routing (the 404 page links from the site root) and are skipped, and said so
 const FILE = BASE.startsWith('file:');
 const sitemap = FILE ? fs.readFileSync(path.join(REPO, 'sitemap.xml'), 'utf8') : await (await fetch(BASE + 'sitemap.xml')).text();
-let urls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1].replace('https://hazemradhouani.github.io/portfolio/', BASE))
+const LIVE = (({ origin, base }) => origin + base)(JSON.parse(fs.readFileSync(path.join(REPO, 'content/site.json'), 'utf8')));
+let urls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1].replace(LIVE, BASE))
   .map((u) => (FILE && u.endsWith('/') ? u + 'index.html' : u));   // the server answers a folder with its index.html
 if (FILE) console.log('note  file: base, no server: 404.html and the missing-page check are not run');
 else urls.push(BASE + '404.html', BASE + 'does-not-exist/x.html');
@@ -159,9 +160,13 @@ async function runMotionPass() {
           if (!el.classList.contains('is-in')) out.push(`not arrived: ${el.tagName.toLowerCase()}.${[...el.classList].join('.')}`);
           else if (getComputedStyle(el).opacity !== '1') out.push(`opacity ${getComputedStyle(el).opacity}: ${el.tagName.toLowerCase()}.${[...el.classList].join('.')}`);
         }
-        for (const el of document.querySelectorAll('.rv, .rv-g, .nw, .nw > picture, .nw > img, .w__i')) {
-          const tf = getComputedStyle(el).transform;
-          if (tf !== 'none' && tf !== 'matrix(1, 0, 0, 1, 0, 0)') out.push(`offset ${tf}: ${el.tagName.toLowerCase()}.${[...el.classList].join('.')}`);
+        // nothing left moved by transform, translate or scale; a [data-fx] element follows the scroll with its
+        // translate and scale by design (the home pass checks those), so on it only transform must be plain
+        for (const el of document.querySelectorAll('.rv, .rv-g, .nw, .nw > picture, .nw > img, .w__i, .l__i')) {
+          const cs = getComputedStyle(el);
+          const props = [['transform', cs.transform, ['none', 'matrix(1, 0, 0, 1, 0, 0)']], ['translate', cs.translate, ['none', '0px']], ['scale', cs.scale, ['none', '1']]];
+          const moved = (el.matches('[data-fx]') ? props.slice(0, 1) : props).find(([, v, plain]) => !plain.includes(v));
+          if (moved) out.push(`${moved[0]} ${moved[1]}: ${el.tagName.toLowerCase()}.${[...el.classList].join('.')}`);
         }
         return out;
       });
@@ -206,10 +211,13 @@ async function runScrollPass() {
       const page1 = (await page.evaluate(() => scrollY)) - yRest;   // one native page, measured here
       await page.evaluate(() => scrollTo({ top: 0, behavior: 'instant' }));
       await page.waitForTimeout(500);
+      // where the page is when the key goes down, read in the page (a window capture listener runs before the
+      // site's own document listener): a separate read would race the glide by a frame or two
+      await page.evaluate(() => addEventListener('keydown', () => { window.__yKey = scrollY; }, true));
       await page.mouse.wheel(0, 3000);
       await page.waitForTimeout(150);
-      const y1 = await page.evaluate(() => scrollY);
       await page.keyboard.press('PageDown');
+      const y1 = await page.evaluate(() => window.__yKey);
       await page.waitForTimeout(1600);
       const y2 = await page.evaluate(() => scrollY);
       if (Math.abs(y2 - (y1 + page1)) > Math.max(48, page1 * 0.12)) fail(`PageDown during a glide ended at ${Math.round(y2)}px, not one page (${Math.round(page1)}px) from ${Math.round(y1)}px: the glide was not handed over`);
@@ -244,6 +252,88 @@ async function runScrollPass() {
   }
   return failures;
 }
+// The home sequence (D84-D87), with motion and a fine pointer at 1440: the window opens to the full width; the
+// plates stick, and each one in view stands at scale 1 in colour; focus reaching a covered plate brings it back
+// to the top; the renders advance, and hold for the pause button and for focus; the research ground turns to
+// ink past its line and back above it.
+async function runHomePass() {
+  const failures = [];
+  const home = urls.find((u) => u === BASE || u.endsWith('/index.html'));
+  if (!home) return failures;
+  const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 }, deviceScaleFactor: 1, colorScheme: 'light', reducedMotion: 'no-preference' });
+  await ctx.addInitScript(() => { try { localStorage.setItem('hazem-theme', 'light'); } catch (e) {} });
+  const page = await ctx.newPage();
+  const fail = (s) => failures.push(s);
+  const go = async (y, ms = 1300) => { await page.evaluate((y) => scrollTo({ top: y, behavior: 'instant' }), y); await page.waitForTimeout(ms); };
+  try {
+    await page.goto(home, { waitUntil: 'load' });
+    await page.waitForTimeout(600);
+    const m = await page.evaluate(() => {
+      const nat = (li) => { let t = li.parentNode.getBoundingClientRect().top + scrollY; for (let s = li.parentNode.firstElementChild; s !== li; s = s.nextElementSibling) t += s.offsetHeight; return t; };
+      const lis = [...document.querySelectorAll('.seq__plate')];
+      return { fx: document.documentElement.classList.contains('fx'), sticky: lis.every((li) => getComputedStyle(li).position === 'sticky'), plates: lis.map(nat),
+        win: document.querySelector('.open__win').getBoundingClientRect().top + scrollY, inv: document.querySelector('.inv').getBoundingClientRect().top + scrollY };
+    });
+    if (!m.fx) fail('html.fx is not set for a fine pointer with motion');
+    if (!m.sticky || m.plates.length < 2) fail('the plates do not stick at 1440');
+    await go(m.win);
+    const open = await page.evaluate(() => { const r = document.querySelector('.open__win').getBoundingClientRect(); return { w: r.width, full: document.documentElement.clientWidth }; });
+    if (Math.abs(open.w - open.full) > 2) fail(`the window opens to ${Math.round(open.w)}px of ${open.full}px`);
+    for (const [i, y] of m.plates.entries()) {
+      await go(y, 900);
+      const s = await page.evaluate((i) => { const li = document.querySelectorAll('.seq__plate')[i]; const cs = getComputedStyle(li); return { scale: cs.scale, mono: getComputedStyle(li.querySelector('.seq__mono')).opacity, top: li.getBoundingClientRect().top }; }, i);
+      // (a scroll position snaps to whole pixels, so a plate in place may sit a hair past 0.5: a 0.2% tolerance)
+      if (Math.abs((s.scale === 'none' ? 1 : +s.scale) - 1) > 0.002 || +s.mono > 0.01 || Math.abs(s.top) > 1) fail(`plate ${i + 1} in view: scale ${s.scale}, greyscale ${s.mono}, top ${Math.round(s.top)}`);
+    }
+    // Shift+Tab from plate 3 into plate 2 while plate 3 covers it: the link that takes focus must be the topmost thing at its centre
+    await go(m.plates[2], 900);
+    await page.locator('.seq__plate').nth(2).locator('.seq__t a').focus();
+    for (let k = 0; k < 6; k++) {
+      await page.keyboard.press('Shift+Tab');
+      if (await page.evaluate(() => !!document.activeElement.closest('.seq__plate:nth-child(2)'))) break;
+    }
+    await page.waitForTimeout(700);
+    const seen = await page.evaluate(() => { const a = document.activeElement; if (!a.closest('.seq__plate:nth-child(2)')) return 'focus never reached plate 2'; const r = a.getBoundingClientRect(); const top = document.elementFromPoint(r.left + r.width / 2, r.top + r.height / 2); return a.contains(top) || top === a ? '' : `the focused link in plate 2 is covered by ${top && top.className}`; });
+    if (seen) fail(seen);
+    // the renders: they advance, and hold for the pause button and for focus
+    await go(0, 400);
+    await page.waitForFunction(() => document.querySelector('.open__pause').classList.contains('is-on'), null, { timeout: 8000 });
+    const shown = () => page.evaluate(() => [...document.querySelectorAll('.open__slide')].findIndex((s) => s.classList.contains('is-on')));
+    const pb = await page.evaluate(() => { const r = document.querySelector('.open__pause').getBoundingClientRect(); return [r.width, r.height]; });
+    if (pb[0] < 44 || pb[1] < 44) fail(`the pause button is ${pb.map(Math.round).join('x')}px`);
+    const s0 = await shown(); await page.waitForTimeout(5600);
+    const s1 = await shown(); if (s1 === s0) fail('the renders did not advance in 5.6 s');
+    await page.click('.open__pause'); await page.mouse.move(5, 5);
+    if ((await page.textContent('.open__pause [data-pause-label]')) !== 'play') fail('the pause button does not say play once paused');
+    await page.waitForTimeout(5600);
+    if ((await shown()) !== s1) fail('the renders advanced while paused');
+    await page.click('.open__pause'); await page.mouse.move(5, 5);
+    // play resumes, even with the button still holding focus
+    const s1b = await shown(); await page.waitForTimeout(5600);
+    if ((await shown()) === s1b) fail('the renders did not resume after play');
+    await page.locator('.open__now li:not([hidden]) a').focus();
+    const s2 = await shown(); await page.waitForTimeout(5600);
+    if ((await shown()) !== s2) fail('the renders advanced while their caption held focus');
+    // one pass of the three countries, then the show rests on the first and offers to play
+    await page.evaluate(() => document.activeElement.blur());
+    try { await page.waitForFunction(() => document.querySelector('.open__pause [data-pause-label]').textContent === 'play', null, { timeout: 12000 }); }
+    catch (e) { fail('the renders did not come to rest after one pass'); }
+    if ((await shown()) !== 0) fail(`the renders rest on slide ${await shown()}, not the first`);
+    // the research ground (light scheme)
+    await go(m.inv - 900 * 0.2, 1600);
+    const dark = await page.evaluate(() => getComputedStyle(document.querySelector('.inv')).backgroundColor);
+    if (dark !== 'rgb(17, 17, 17)') fail(`research past its line stands on ${dark}`);
+    await go(m.inv - 900, 1600);
+    const light = await page.evaluate(() => [document.querySelector('.inv').classList.contains('is-inv'), getComputedStyle(document.querySelector('.inv')).backgroundColor]);
+    if (light[0] || light[1] !== 'rgb(255, 255, 255)') fail(`research above its line stands on ${light[1]}`);
+  } catch (e) { fail(e.message); }
+  await ctx.close();
+  return failures;
+}
+const homeFailures = await runHomePass();
+gateFails += homeFailures.length;
+if (homeFailures.length) console.log(`FAIL home sequence: ${homeFailures.join(' | ')}`);
+else console.log('ok   home sequence: window opens, plates stick and settle in colour, covered focus returns, renders play and pause, research ground turns');
 const scrollFailures = await runScrollPass();
 gateFails += scrollFailures.length;
 if (scrollFailures.length) console.log(`FAIL smooth scroll: ${scrollFailures.join(' | ')}`);
@@ -304,9 +394,31 @@ for (const url of urls) {
       const ok = theme === 'dark'
         ? new Set(['rgba(0, 0, 0, 0)', 'rgb(18, 19, 17)', 'rgb(247, 245, 239)', 'rgb(69, 70, 63)', 'rgba(18, 19, 17, 0.88)'])
         : new Set(['rgba(0, 0, 0, 0)', 'rgb(255, 255, 255)', 'rgb(17, 17, 17)', 'rgba(255, 255, 255, 0.86)']);
+      // a plate of the home stack stands on its own declared ground (D86: from its render, per scheme)
+      const rgb = (h) => `rgb(${[1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16)).join(', ')})`;
+      const ground = (el) => el.matches('.seq__plate') && rgb(getComputedStyle(el).getPropertyValue(theme === 'dark' ? '--g-dark' : '--g-light').trim());
       if (innerWidth === 375 || innerWidth === 1440) for (const el of [document.documentElement, document.body, ...document.querySelectorAll('body *')]) {
         if (el.closest('video, svg, .lab__pin')) continue;
-        const c = getComputedStyle(el).backgroundColor; if (!ok.has(c)) out.palette.push(`${el.tagName.toLowerCase()}.${[...el.classList].join('.')} ${c}`);
+        const c = getComputedStyle(el).backgroundColor; if (!ok.has(c) && c !== ground(el)) out.palette.push(`${el.tagName.toLowerCase()}.${[...el.classList].join('.')} ${c}`);
+      }
+      // the home opening and stack, still (D84-D86; this loop runs under reduced motion): the name stands centred
+      // in its column without passing it, the first screen shows the name and at least 30% of the window of renders,
+      // only the first render is there and nothing offers to pause, and the plates read as a plain sequence
+      if (document.body.classList.contains('page-home')) {
+        const col = document.querySelector('.open__head').getBoundingClientRect();
+        const lines = {};   // the letters by line (the two words share one line where they fit)
+        for (const l of document.querySelectorAll('.open__mark .l')) { const b = l.getBoundingClientRect(); const k = Math.round(b.top); lines[k] = [Math.min(b.left, lines[k]?.[0] ?? Infinity), Math.max(b.right, lines[k]?.[1] ?? -Infinity)]; }
+        const mid = (col.left + col.right) / 2;
+        for (const [a, z] of Object.values(lines)) {
+          if (a < col.left - 1 || z > col.right + 1) out.theme.push(`the name runs past its column (${Math.round(a)}-${Math.round(z)})`);
+          if (Math.abs((a + z) / 2 - mid) > 3) out.theme.push(`the name sits ${Math.round((a + z) / 2 - mid)}px off the centre`);
+        }
+        const win = document.querySelector('.open__win').getBoundingClientRect();
+        if (document.querySelector('.open__name').getBoundingClientRect().bottom > innerHeight) out.theme.push('the name is below the first screen');
+        if (Math.min(win.height, innerHeight - win.top) / win.height < 0.3) out.theme.push(`the first screen shows ${Math.round(100 * (innerHeight - win.top) / win.height)}% of the renders`);
+        const pause = document.querySelector('.open__pause');
+        if (document.querySelectorAll('.open__slide').length !== 1 || pause.classList.contains('is-on') || getComputedStyle(pause).visibility !== 'hidden') out.theme.push('the renders play under reduced motion');
+        if ([...document.querySelectorAll('.seq__plate')].some((li) => getComputedStyle(li).position === 'sticky')) out.theme.push('plates stack under reduced motion');
       }
       // dark treatments (D50, D69): inverted linework is filtered only in the dark scheme; a keep drawing
       // shows its layer of solid regions, unfiltered, only in the dark scheme; no drawing may sit on a paper

@@ -1,8 +1,8 @@
 {
-  "name": "Hazem Radhouani",
+  "name": "HAZEM RADHOUANI",
   "short_name": "H. Radhouani",
-  "start_url": "/portfolio/",
-  "scope": "/portfolio/",
+  "start_url": "/",
+  "scope": "/",
   "display": "browser",
   "background_color": "#FFFFFF",
   "theme_color": "#FFFFFF",

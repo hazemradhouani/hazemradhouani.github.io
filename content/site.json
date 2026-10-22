@@ -1,9 +1,9 @@
 {
   "$comment": "Site-wide content. Every fact carries a source key (see docs/flagship/content-ledger.md). Edit here, then run: node tools/build.mjs",
   "origin": "https://hazemradhouani.github.io",
-  "base": "/portfolio/",
+  "base": "/",
   "lang": "en",
-  "siteName": "Hazem Radhouani",
+  "siteName": "HAZEM RADHOUANI",
   "themeColor": "#FFFFFF",
   "ga4": "G-S61QWV2ZRE",
   "googleSiteVerification": "-RpzxjbAYzM2EPvzRWvclvAFbUdq5-gsDAD_FswL7Lc",

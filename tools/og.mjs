@@ -6,7 +6,7 @@ import path from 'node:path';
 import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 const REPO = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const BASE = process.argv[2] || 'http://127.0.0.1:8090/portfolio/';
+const BASE = process.argv[2] || 'http://127.0.0.1:8090/';
 const rd = (p) => JSON.parse(fs.readFileSync(path.join(REPO, p), 'utf8'));
 const b = await chromium.launch({ executablePath: process.env.CHROME_PATH || "C:/Program Files/Google/Chrome/Application/chrome.exe" });
 
@@ -21,6 +21,8 @@ const fav = svg('favicon.svg').replace('<svg ', '<svg width="100%" height="100%"
 const mask = svg('images/brand/mark-maskable.svg').replace('<svg ', '<svg style="display:block;width:SZpx;height:SZpx" ');
 await shoot(fav.replaceAll('SZ', 16), 16, 16, path.join(REPO, 'favicon-16x16.png'));
 await shoot(fav.replaceAll('SZ', 32), 32, 32, path.join(REPO, 'favicon-32x32.png'));
+// Google Search wants a square favicon whose side is a multiple of 48 px, declared on the root home page (D82)
+await shoot(fav.replaceAll('SZ', 96), 96, 96, path.join(REPO, 'favicon-96x96.png'));
 await shoot(mask.replaceAll('SZ', 180), 180, 180, path.join(REPO, 'apple-touch-icon.png'));
 await shoot(mask.replaceAll('SZ', 192), 192, 192, path.join(REPO, 'images/brand/icon-192.png'));
 await shoot(mask.replaceAll('SZ', 512), 512, 512, path.join(REPO, 'images/brand/icon-512.png'));

@@ -1,7 +1,12 @@
 {
-  "title": "Hazem Radhouani | Architect — Tunisia, France & Morocco",
-  "description": "Hazem Radhouani is an architect with project work in Tunisia, France and Morocco, and research experience in Japan. Survey, BIM delivery in Revit, and visualisation in Unreal Engine and D5 Render.",
+  "title": "HAZEM RADHOUANI",
+  "description": "Architect with international experience: project work in Tunisia, France and Morocco, and research experience in Japan.",
   "og": "images/og/home.jpg",
+  "slides": [
+    { "project": "al-arg", "image": "images/al-arg/al-arg-aerial-sunset-hq.jpg" },
+    { "project": "la-villette", "image": "images/la-villette/la-villette-aerial-render-hq.jpg" },
+    { "project": "zenata", "image": "images/zenata/zenata-platform-render.jpg" }
+  ],
   "cover": {
     "image": "images/cover/alley.jpg",
     "alt": "Black and white photograph of an earthen alley between rubble walls, with two lit doorways, in a ruined village",

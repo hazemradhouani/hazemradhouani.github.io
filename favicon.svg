@@ -1,8 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <!-- "HR", a monoline monogram drawn on the 32 grid (D35): white field, ink strokes, sharp joins -->
+  <!-- "HR" on the 32 grid (D35, redrawn D82): white field, ink strokes, sharp joins. The letters stand within 13 units
+       of the centre, so Google's circular crop of the icon never touches them; 3-unit strokes stay legible at 16 px -->
   <rect width="32" height="32" fill="#FFFFFF"/>
-  <g fill="none" stroke="#111111" stroke-width="2.6" stroke-linecap="butt" stroke-linejoin="miter">
-    <path d="M6 8v16M14 8v16M6 16h8"/>
-    <path d="M19 24V8h4.5a4 4 0 0 1 0 8H19M23 16l4.5 8"/>
+  <g fill="none" stroke="#111111" stroke-width="3" stroke-linecap="butt" stroke-linejoin="miter">
+    <path d="M6.25 9v14M12.75 9v14M6.25 16h6.5"/>
+    <path d="M18.75 23V9h3a3.5 3.5 0 0 1 0 7h-3M21.75 16l4 7"/>
   </g>
 </svg>

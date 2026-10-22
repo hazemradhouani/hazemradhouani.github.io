@@ -16,27 +16,51 @@ const spec = (rows) => html`<dl class="spec in">${rows.map((s) => html`<dt>${s.l
 // since the title link beside it carries the same destination and the name
 const linked = (href, markup) => html`<a class="card" href="${href}" tabindex="-1" aria-hidden="true">${markup}</a>`;
 
-/* ------------------------------------------------------------------ home */
+/* ------------------------------------------------------------------ home ("Sequence", D84) */
+// an image's alt from its own project: the hero, or a figure (one source of truth for every description)
+const altOf = (x, src) => {
+  const alt = x.hero.src === src ? x.hero.alt : x.figures.flatMap((f) => f.items || [f]).find((f) => f.src === src)?.alt;
+  if (!alt) throw new Error(`home: ${src} is not an image of ${x.slug}`);
+  return alt;
+};
+// the name as a wordmark: each letter rises from its own mask (D84); the words stay apart, one per line on phones
+const letters = (name) => { let n = 0; return html`${name.split(' ').map((w, i) => html`${i ? ' ' : ''}<span class="open__w">${[...w].map((c) => html`<span class="l"><span class="l__i" style="--l: ${n++}">${c}</span></span>`)}</span>`)}`; };
+
 export function home(site, d, projects, ctx) {
   const p = ctx.prefix;
   const P = site.person;
   const by = Object.fromEntries(projects.map((x) => [x.slug, x]));
-  const fl = d.flagship; const flp = by[fl.project];
-  const lead = dims(fl.hero.image);
-  const leadSpan = spanFor(lead.w, lead.h);
-  const leadSizes = sizesFor(leadSpan);
+  const fl = d.flagship;
+
+  // the opening (D85): one render per country of the work, in the identity's order. The frame takes the first
+  // slide's ratio and every slide stands whole inside it, so a slide may be wider than the first, never narrower
+  const slides = d.slides.map((s) => ({ x: by[s.project], rel: s.image, alt: altOf(by[s.project], s.image), ...dims(s.image) }));
+  const r0 = slides[0].w / slides[0].h;
+  for (const s of slides) if (s.w / s.h < r0) throw new Error(`home: slide ${s.rel} is narrower than the first; it would be cropped`);
+  const slide = (s, i) => html`<div class="open__slide${i ? '' : ' is-on'}">${linked(projectHref(s.x, p), image(s.rel, { alt: s.alt, sz: '100vw', prefix: p, priority: !i }))}</div>`;
 
   // Al-Arg at three scales: whole drawings standing on one line, captions aligned below
   const scaleItems = fl.scales.map((s) => ({ rel: shown(s.image, true), alt: s.alt, title: `${s.label} | ${s.caption}` }));
   const scaleCap = (it, i) => html`<p class="cap"><span class="cap__t">${fl.scales[i].label}.</span> ${fl.scales[i].caption}</p>`;
 
-  // selected work in justified pairs: each title under its own image
+  // selected work as a stack of plates (D86): each on its own ground, numbered; the hero whole at its own ratio,
+  // over a greyscale copy of itself that fades as the plate settles (same file, so one download)
   const sel = d.selected.map((s) => by[s]);
-  const pairs = [];
-  for (let i = 0; i < sel.length; i += 2) pairs.push(sel.slice(i, i + 2));
-  const pairRow = (pair) => row(pair.map((x) => ({ x, rel: x.hero.src, alt: '', title: x.title, vt: vtHero(x), href: projectHref(x, p),
-    label: html`<h3 class="card__t title" style="view-transition-class: vt-title; view-transition-name: ${vtTitle(x)}">${x.title}</h3>` })), {
-    prefix: p, after: (it) => html`<p class="meta">${lines(it.x.descriptor, `${it.x.place} | ${it.x.year}`, it.x.hero.credit ? html`<span class="credit">${it.x.hero.credit}</span>` : '')}</p>` });
+  const plate = (x, i) => {
+    const { w, h } = dims(x.hero.src); const href = projectHref(x, p); const g = ctx.grounds[x.slug];
+    const sz = `(min-width: 64rem) ${Math.round(800 * w / h)}px, (min-width: 48rem) 60vw, 90vw`;
+    return html`<li class="seq__plate" data-fx data-slug="${x.slug}" style="--g-light: ${g.light}; --g-dark: ${g.dark}; --r: ${(w / h).toFixed(4)}">
+<article class="seq__in wrap g" aria-labelledby="sel-${x.slug}">
+<div class="seq__text">
+<p class="seq__n" aria-hidden="true"><span class="seq__m"><span class="seq__ni">${pad(i + 1)}</span></span><span class="seq__of">/ ${pad(sel.length)}</span></p>
+<div class="seq__about"><h3 class="title seq__t" id="sel-${x.slug}"><a href="${href}">${x.title}</a></h3>
+<p class="meta">${lines(x.descriptor, `${x.place} | ${x.year}`, x.office, x.hero.credit ? html`<span class="credit">${x.hero.credit}</span>` : '')}</p>
+<p>${more(href, 'View project', p, { of: x.title })}</p></div>
+</div>
+<div class="seq__fig"><div class="seq__frame">${linked(href, html`${image(x.hero.src, { alt: x.hero.alt, sz, prefix: p })}<span class="seq__mono">${image(x.hero.src, { alt: '', sz, prefix: p })}</span>`)}</div></div>
+</article>
+</li>`;
+  };
 
   // capabilities: each proven by one document, the documents standing on one line
   const proofItems = d.proofs.map((x) => ({ rel: shown(x.image, x.kind === 'drawing'), alt: x.alt, title: x.name }));
@@ -49,19 +73,22 @@ export function home(site, d, projects, ctx) {
   const bookSpan = spanFor(book.w, book.h, { max: 'narrow' });
 
   const body = html`
-<section class="intro wrap g" aria-labelledby="name">
-<div class="s-text center">
-<h1 class="intro__name" id="name">${words(P.name)}</h1>
-<p class="intro__line">${P.line}</p>
-<p class="intro__cred label">${P.credential}</p>
-<p class="actions">${more(p + 'architecture.html', 'View work', p)}${more(p + 'books.html', 'Research', p)}</p>
+<section class="open" aria-labelledby="name">
+<div class="open__head wrap"><h1 class="open__name" id="name"><span class="vh">${P.name}</span><span class="open__mark" aria-hidden="true">${letters(P.name)}</span></h1></div>
+<div class="open__strip wrap g">
+<p class="open__line">${P.line}</p>
+<p class="open__cred label">${P.credential}</p>
+<div class="open__now"><ul class="meta" role="list">${slides.map((s, i) => html`<li${attrs({ hidden: i > 0 })}><a href="${projectHref(s.x, p)}">${s.x.title}</a><br>${s.x.place}</li>`)}</ul><button class="open__pause" type="button"><span data-pause-label>pause</span><span class="vh"> the images</span></button></div>
+<p class="open__go">${more(p + 'architecture.html', 'View work', p)}${more(p + 'books.html', 'Research', p)}</p>
+</div>
+<div class="open__win wrap" data-fx="top" style="--nw: ${slides[0].w}px; --ratio: ${r0.toFixed(4)}">
+<div class="open__frame" style="aspect-ratio: ${slides[0].w} / ${slides[0].h}">${slide(slides[0], 0)}</div>
+<template>${slides.slice(1).map((s, i) => slide(s, i + 1))}</template>
 </div>
 </section>
 
-<div class="lead-fig wrap g"><div class="s-${leadSpan}">${linked(projectHref(flp, p), image(fl.hero.image, { alt: fl.hero.alt, sz: leadSizes, prefix: p, priority: true, vt: vtHero(flp) }))}</div></div>
-
 <section class="block wrap g" aria-labelledby="conviction">
-<div class="s-text center">
+<div class="s-text center" data-rv>
 <h2 class="quote" id="conviction">${q(d.manifesto.quote)}</h2>
 <p class="lead in measure">${d.manifesto.text}</p>
 <p class="in">${more(p + d.manifesto.href, d.manifesto.attribution, p)}</p>
@@ -69,15 +96,15 @@ export function home(site, d, projects, ctx) {
 </section>
 
 <section class="chapter wrap g" aria-labelledby="flagship-h">
-<div class="s-text center"><h2 class="h1" id="flagship-h" style="view-transition-class: vt-title; view-transition-name: ${vtTitle(flp)}">${fl.title}</h2><p class="lead in">${fl.line}</p></div>
+<div class="s-text center"><h2 class="h1" id="flagship-h" style="view-transition-class: vt-title; view-transition-name: ${vtTitle(by[fl.project])}">${fl.title}</h2><p class="lead in">${fl.line}</p></div>
 <div class="s-narrow in"><div class="prose"><p>${fl.text}</p></div></div>
-<p class="s-text center in">${more(projectHref(flp, p), 'Read the case study', p)}</p>
+<p class="s-text center in">${more(projectHref(by[fl.project], p), 'Read the case study', p)}</p>
 ${cells(scaleItems, { prefix: p, zoom: false, after: scaleCap, cls: 'block' })}
 </section>
 
-<section class="chapter wrap g" aria-labelledby="selected-h">
-<div class="head s-text"><h2 class="h1" id="selected-h">Selected work</h2>${more(p + 'architecture.html', `All ${projects.length} projects`, p)}</div>
-${pairs.map((pair) => { const r = pairRow(pair); return html`<div class="s-${r.span} block" data-rv>${r.html}</div>`; })}
+<section class="chapter" aria-labelledby="selected-h">
+<div class="wrap g"><div class="head s-text"><h2 class="h1" id="selected-h">Selected work</h2>${more(p + 'architecture.html', `All ${projects.length} projects`, p)}</div></div>
+<ol class="seq block" role="list">${sel.map(plate)}</ol>
 </section>
 
 <section class="chapter wrap g" aria-labelledby="proofs-h">
@@ -85,7 +112,8 @@ ${pairs.map((pair) => { const r = pairRow(pair); return html`<div class="s-${r.s
 ${cells(proofItems, { prefix: p, zoom: false, cls: 'block', after: proofText })}
 </section>
 
-<section class="chapter wrap g" aria-labelledby="research-h">
+<div class="inv">
+<section class="wrap g" aria-labelledby="research-h">
 <div class="head s-text"><h2 class="h1" id="research-h">Research</h2></div>
 <div class="s-${bookSpan} block" data-rv>${image(d.research.cover, { alt: d.research.coverAlt, sz: sizesFor(bookSpan), prefix: p })}</div>
 <div class="s-text center in">
@@ -94,9 +122,10 @@ ${cells(proofItems, { prefix: p, zoom: false, cls: 'block', after: proofText })}
 <p class="meta in">${d.research.meta}<br>${d.research.award}</p>
 <p class="in">${more(p + 'books.html', 'Thesis, report and the Sakura programme', p)}</p>
 </div>
-</section>`;
+</section>
+</div>`;
   return { body, viewer: false, page: { path: 'index.html', nav: 'home', title: d.title, description: d.description, og: d.og, verification: true,
-    preload: preloadFor(fl.hero.image, leadSizes, p), bodyClass: 'page-home', jsonld: [ctx.websiteLd, ctx.personLd] } };
+    preload: preloadFor(slides[0].rel, '100vw', p), bodyClass: 'page-home', jsonld: [ctx.websiteLd, ctx.personLd] } };
 }
 
 /* ------------------------------------------------------------------ work: an index, then one chapter per project */
@@ -120,7 +149,7 @@ function chapter(x, ctx, first) {
   const r = items.length ? row(items, { prefix: p }) : null;
   const credit = creditLine(x);
   return { h, html: html`<article class="chapter wrap g" id="${x.slug}" aria-labelledby="t-${x.slug}">
-<div class="s-${h.span}"${attrs({ 'data-rv': !first })}>${linked(href, h.html)}</div>
+<div class="s-${h.span} fx-drift" data-fx${attrs({ 'data-rv': !first })}>${linked(href, h.html)}</div>
 <div class="s-text center chapter__text">
 <h2 class="title chapter__title" id="t-${x.slug}"><a href="${href}" style="view-transition-class: vt-title; view-transition-name: ${vtTitle(x)}">${x.title}</a></h2>
 <p class="meta">${lines(x.descriptor, `${x.place} | ${x.year}`, x.office, credit ? html`<span class="credit">${credit}</span>` : '')}</p>
@@ -194,7 +223,7 @@ export function project(site, x, projects, ctx0) {
 <div class="case-name"><h1 class="h1 case-title" style="view-transition-class: vt-title; view-transition-name: ${vtTitle(x)}">${words(x.title)}</h1></div>
 <div class="s-copy case-lead"><p class="lead">${x.summary}</p>${when(x.honour, () => html`<p class="label honour">${x.honour}</p>`)}</div>
 </div>
-<div class="lead-fig wrap g${capSideHero ? ' fig--dock' : ''}"><div class="s-${h.span} fig__plate">${h.html}</div>${when(cap, () => html`<p class="cap s-${h.span}${capSideHero ? ' cap--side' : ''}"><span class="cap__x">${cap}</span></p>`)}</div>
+<div class="lead-fig wrap g fx-drift${capSideHero ? ' fig--dock' : ''}" data-fx><div class="s-${h.span} fig__plate">${h.html}</div>${when(cap, () => html`<p class="cap s-${h.span}${capSideHero ? ' cap--side' : ''}"><span class="cap__x">${cap}</span></p>`)}</div>
 ${titleBlock(x, chs)}
 </header>
 ${when(x.quote, () => html`<section class="block wrap g" aria-label="In the architect's words"><blockquote class="case-quote"><p class="quote">${q(x.quote.text)}</p></blockquote></section>`)}
@@ -206,7 +235,7 @@ ${chs.map((c) => chapterOf(c, numbered, c.id === 'film' ? filmFig : c.figs.map((
 <p class="label s-rail next__label">Next project <span class="next__i">${pad((i + 1) % projects.length + 1)} / ${pad(projects.length)}</span></p>
 <p class="next__t"><a href="${projectHref(next, p)}" rel="next" style="view-transition-class: vt-title; view-transition-name: ${vtTitle(next)}">${next.title}</a></p>
 <p class="meta s-copy next__meta">${next.descriptor}<br>${next.place} | ${next.year}</p>
-<div class="s-${nh.span} next__media" data-rv>${linked(projectHref(next, p), nh.html)}</div>
+<div class="s-${nh.span} next__media fx-drift" data-fx data-rv>${linked(projectHref(next, p), nh.html)}</div>
 <p class="s-copy next__all">${more(p + 'architecture.html', 'All work', p, { dir: 'left' })}</p>
 </nav>
 </article>`;
@@ -346,5 +375,8 @@ ${cvBlock('tools-h', 'Tools', d.tools.map((t) => ({ when: t.name, what: t.text }
 export function notFound(site, ctx) {
   const p = ctx.prefix;
   const body = html`<div class="intro wrap g"><div class="s-text center"><h1 class="h1">${words('This page does not exist')}</h1><p class="lead in">The address may have changed when the portfolio was rebuilt.</p><p class="actions in">${more(p + 'architecture.html', 'View work', p)}${more(p, 'Home', p)}</p></div></div>`;
-  return { body, viewer: false, page: { path: '404.html', nav: null, noindex: true, title: 'Page not found | Hazem Radhouani', description: 'This page does not exist.', bodyClass: 'page-404' } };
+  // an old address under /portfolio/ that has no page of its own (a file, an image) moves to the same path at the root (D81)
+  // (leading slashes collapse to one: "/portfolio//elsewhere.example" must stay on this site, never a protocol-relative URL)
+  const moved = html`<script>if(location.pathname.indexOf('/portfolio/')===0)location.replace(location.pathname.slice(10).replace(/^\\/+/,'/')+location.search+location.hash);</script>`;
+  return { body, viewer: false, page: { path: '404.html', nav: null, noindex: true, title: 'Page not found | Hazem Radhouani', description: 'This page does not exist.', bodyClass: 'page-404', preload: moved } };
 }
