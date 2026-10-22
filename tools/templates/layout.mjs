@@ -93,7 +93,7 @@ ${when(page.corners, () => html`${edge('bottom')}<p class="corner corner--l">${s
 ${when(ctx.viewer, () => html`<dialog class="viewer" id="viewer" aria-labelledby="viewer-title" data-lenis-prevent>
 <div class="viewer__top"><span class="viewer__count" aria-hidden="true"></span><p class="viewer__title" id="viewer-title"></p><form method="dialog"><button class="viewer__btn" type="submit" autofocus>close${icon('x', p)}</button></form></div>
 <div class="viewer__stage" tabindex="0" role="group" aria-roledescription="image viewer" aria-label="Full-size image. Arrow keys: previous and next; double click or the actual size button: zoom"></div>
-<div class="viewer__bottom"><button class="viewer__btn" type="button" data-viewer-toggle><span>actual size</span></button><div class="viewer__nav"><button class="viewer__btn" type="button" data-viewer-prev aria-label="Previous image">${icon('arrow-left', p)}</button><button class="viewer__btn" type="button" data-viewer-next aria-label="Next image">${icon('arrow-right', p)}</button></div></div>
+<div class="viewer__bottom"><div class="viewer__nav"><button class="viewer__btn" type="button" data-viewer-toggle><span>actual size</span></button><a class="viewer__btn" data-viewer-project href="#" hidden>View project</a></div><div class="viewer__nav"><button class="viewer__btn" type="button" data-viewer-prev aria-label="Previous image">${icon('arrow-left', p)}</button><button class="viewer__btn" type="button" data-viewer-next aria-label="Next image">${icon('arrow-right', p)}</button></div></div>
 </dialog>`)}
 </body>
 </html>

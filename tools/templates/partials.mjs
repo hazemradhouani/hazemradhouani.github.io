@@ -275,3 +275,12 @@ export const heroCaption = (x) => {
   const credit = creditLine(x);
   return parts.length || credit ? html`${inline(parts.join(' '))}${when(credit, () => html`${parts.length ? ' ' : ''}<span class="credit">${credit}</span>`)}` : '';
 };
+
+/* ---------------------------------------------------------- a word that gathers (D99, A12) */
+// The word is read once, from hidden text; its letters are drawn apart by a fixed seed (mulberry32 of the word), so
+// the page is the same on every visit, and CSS brings them together as the reader scrolls (--q from 1 to 0).
+export const scatter = (word) => {
+  let a = [...word].reduce((h, c) => Math.imul(h ^ c.charCodeAt(0), 2654435761) >>> 0, 1779033703);
+  const rnd = () => { a = (a + 0x6D2B79F5) | 0; let t = Math.imul(a ^ (a >>> 15), 1 | a); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
+  return html`<span class="sc"><span class="vh">${word}</span>${[...word].map((c) => html`<span class="sc__l" aria-hidden="true" style="--x: ${((rnd() - 0.5) * 16).toFixed(2)}; --y: ${((rnd() - 0.5) * 10).toFixed(2)}; --r: ${((rnd() - 0.5) * 60).toFixed(1)}">${c}</span>`)}</span>`;
+};

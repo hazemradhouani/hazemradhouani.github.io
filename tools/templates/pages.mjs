@@ -2,7 +2,7 @@
 // Every block sits on the one grid (.wrap.g) through a centred span class; images are placed by partials.mjs.
 import { html, raw, attrs, when } from '../lib/html.mjs';
 import { dims, shown, preloadFor, picture } from '../lib/images.mjs';
-import { icon, image, row, cells, figure, hero, heroPartner, creditLine, heroCaption, sizesFor, spanFor, projectHref, vtTitle, vtHero, CASE, capSide, words, chaptersOf } from './partials.mjs';
+import { icon, image, row, cells, figure, hero, heroPartner, creditLine, heroCaption, sizesFor, spanFor, projectHref, vtTitle, vtHero, CASE, capSide, words, chaptersOf, scatter } from './partials.mjs';
 
 const q = (s) => `“${s}”`;
 // `of`: what a repeated label leads to, read after the visible words (WCAG 2.4.4, 2.5.3)
@@ -155,7 +155,7 @@ export function work(site, projects, ctx) {
     const { w, h } = dims(rel); const r = w / h, fw = r >= TILE ? 84 : 84 * r / TILE;
     const g = ctx.grounds[x.slug];
     return html`<li class="tile" data-kind="${e.kind}" data-fx="centre"${id}><figure class="tile__fig">
-<span class="tile__frame" data-ground style="--g-light: ${g.light}; --g-dark: ${g.dark}"><span class="tile__img" style="width: ${fw.toFixed(2)}%" data-label="${x.title}">${image(rel, { alt: e.alt, sz: '(min-width: 56.25rem) 26vw, 44vw', prefix: p, zoom: true, title: `${x.title}: ${e.title}`, project: projectHref(x, p) })}</span></span>
+<span class="tile__frame" data-ground style="--g-light: ${g.light}; --g-dark: ${g.dark}"><span class="tile__img" style="width: ${fw.toFixed(2)}%" data-label="${x.title}">${image(rel, { alt: e.alt, sz: '(min-width: 56.25rem) 26vw, 44vw', prefix: p, zoom: true, title: `${x.title}: ${e.title}`, project: projectHref(x, p), priority: i < 3 })}</span></span>
 <figcaption class="tile__cap"><a class="tile__p" href="${projectHref(x, p)}">${x.title}</a> <span>${e.title}</span></figcaption></figure></li>`;
   };
 
@@ -187,6 +187,7 @@ export function work(site, projects, ctx) {
 <div class="tree">
 <button class="pill pill--root tree__root" type="button" data-family="all" aria-pressed="true" style="left: 1%; top: 50%">Index <span class="pill__n">${cat.length}</span></button>
 ${FAMILIES.map((f) => html`<button class="pill tree__fam" type="button" data-family="${f.id}" aria-pressed="false" style="left: 17%; top: ${famY[f.id]}%">${f.label} <span class="pill__n">${count(f.id)}</span></button>`)}
+<svg class="tree__lines" viewBox="0 0 1200 640" preserveAspectRatio="none" aria-hidden="true">${raw(FAMILIES.map((f) => `<path d="M 108 320 C 156 320, 156 ${famY[f.id] * 6.4}, 204 ${famY[f.id] * 6.4}"/>`).join(''))}</svg>
 ${['all', ...FAMILIES.map((f) => f.id)].map(branch)}
 </div>
 </section>
@@ -327,27 +328,49 @@ ${book(r, p, { id: 'report-h' })}
   return { body, viewer: false, page: { path: 'books.html', nav: 'research', navExact: true, title: d.title, description: d.description, og: d.og, jsonld, bodyClass: 'page-research' } };
 }
 
-/* ------------------------------------------------------------------ about */
+/* ------------------------------------------------------------------ about ("Reel", D99): a told story, then the CV */
 // a CV list on the text span; its two columns are subgrid tracks, so they sit on grid lines
 const cvBlock = (id, title, rows) => html`<section class="s-text cv" aria-labelledby="${id}"><h2 class="label cv__h" id="${id}">${title}</h2>
 <ol class="cv" role="list">${rows.map((r) => html`<li class="cv__row"><span class="cv__when">${r.when}</span><div class="cv__what">${r.what}</div></li>`)}</ol></section>`;
+// Michael Gatt's register (D99): the key words in Garamond capitals, the words between them small
+const tk = (s) => html`<span class="tale__k">${s}</span>`;
+const tc = (s) => html`<span class="tale__c">${s}</span>`;
 export function about(site, d, ctx) {
-  const p = ctx.prefix; const P = site.person;
+  const p = ctx.prefix; const P = site.person; const t = d.tale;
   const field = (id, label, type = 'text', extra = {}) => html`<div class="field"><label for="cf-${id}">${label} <span>(required)</span></label>${type === 'textarea'
     ? html`<textarea id="cf-${id}" name="${id}" required aria-describedby="cf-${id}-err"></textarea>`
     : html`<input id="cf-${id}" name="${id}" type="${type}" required aria-describedby="cf-${id}-err"${attrs(extra)}>`}<p class="field__error" id="cf-${id}-err" hidden></p></div>`;
-  const pd = dims(d.portrait);
-  const pspan = spanFor(pd.w, pd.h, { max: 'four' });
   const what = (r) => html`<b>${r.what}</b>${when(r.role, () => html`<p>${r.role}</p>`)}${when(r.text, () => html`<p>${r.text}</p>`)}`;
+  const sakura = d.experience.find((r) => /Sakura/u.test(r.what));
+  const practice = d.experience.filter((r) => r !== sakura);
+  const [dna, thesis] = d.education;
+  const prize = d.distinctions.find((r) => /Sakura/u.test(r.role));
+  const fig = (ph, sz, cls = '') => html`<figure class="tale__fig ${cls}">${image(ph.src, { alt: ph.alt, sz, prefix: p })}<figcaption>${ph.caption}</figcaption></figure>`;
+  const portraitSizes = '(min-width: 64rem) 26rem, (min-width: 48rem) 40vw, 70vw';
+  const chs = [
+    { id: 'who', label: 'Architect', body: html`<div class="tale__portrait">${image(d.portrait, { alt: d.portraitAlt, sz: portraitSizes, prefix: p, priority: true })}</div>
+<div class="tale__copy"><h1 class="tale__line" id="t-who-h">${tk(P.name)} ${tc('is an')} ${tk(P.jobTitle)}</h1><p class="tale__text">${d.bio}</p></div>` },
+    { id: 'diploma', label: 'Diploma', body: html`<h2 class="tale__line" id="t-diploma-h">${tk(dna.what.split(' (')[0])} ${tc('with')} ${tk(dna.text)}</h2><p class="tale__sub">${dna.role}</p>${fig(t.graduation, '(min-width: 64rem) 64rem, 92vw', 'tale__fig--wide')}` },
+    { id: 'thesis', label: 'Thesis', body: html`<h2 class="tale__line" id="t-thesis-h">${tc('the thesis')} <a class="tale__k tale__link" href="${p}projects/project-al-arg.html">${scatter('Al-Arg')}</a></h2><p class="tale__sub">${thesis.what} | ${thesis.role}</p><p class="tale__sub">${thesis.text}</p>` },
+    { id: 'practice', label: 'Practice', body: html`<h2 class="tale__line" id="t-practice-h">${tc('practice in')} ${tk('Tunisia, France, Morocco')}</h2>
+<ol class="tale__list" role="list">${practice.map((r) => { const [org, city] = r.what.split(' | '); return html`<li>${tk(city || org)}<span class="tale__m">${city ? `${org} · ` : ''}${r.when} · ${r.role}</span></li>`; })}</ol>` },
+    { id: 'japan', label: 'Japan', body: html`<h2 class="tale__line" id="t-japan-h">${tk('Sakura Science Program')} ${tc('Japan,')} ${tk(sakura.when)}</h2><p class="tale__sub">${sakura.role}</p><p class="tale__sub tale__prize">${prize.what}</p>
+<div class="tale__photos">${t.japan.map((ph, i) => fig(ph, '(min-width: 48rem) 24rem, 80vw', `tale__pic tale__pic--${i + 1}`))}</div>` },
+    { id: 'tools', label: 'Tools', body: html`<h2 class="tale__line" id="t-tools-h">${tc('drawn and built with')}</h2>
+<ol class="tale__list" role="list">${d.skills.map((s) => html`<li>${tk(s.group)}<span class="tale__m">${s.items.join(' · ')}</span></li>`)}</ol>` }
+  ];
   const body = html`
-<header class="intro about-head wrap g">
+<div class="tale" id="tale" data-fx="track" data-steps="auto" data-dark>
+<nav class="tale-rail" aria-label="About chapters"><ol role="list" data-rail="tale">${chs.map((c) => html`<li><a data-step href="#t-${c.id}">${c.label}</a></li>`)}</ol></nav>
+${chs.map((c) => html`<section class="tale__ch tale__ch--${c.id}" id="t-${c.id}" data-fx="track" aria-labelledby="t-${c.id}-h"><div class="tale__stage">${c.body}</div></section>`)}
+</div>
+<header class="intro about-head wrap g" id="cv">
 <div class="s-text center">
 <p class="print-only print-name">${P.name} | ${P.jobTitle}</p>
 <p class="print-only">${P.line} ${P.email} | ${P.linkedin.replace('https://www.', '')} | ${site.origin.replace('https://', '')}${site.base}</p>
-<h1 class="h1">${words('About')}</h1>
+<h2 class="h1">Curriculum vitae</h2>
 </div>
-<div class="s-${pspan} block about-portrait">${image(d.portrait, { alt: d.portraitAlt, sz: sizesFor(pspan), prefix: p, priority: true })}</div>
-<div class="s-narrow block"><div class="prose"><p>${d.bio}</p></div></div>
+<div class="s-narrow block print-only"><div class="prose"><p>${d.bio}</p></div></div>
 <p class="s-text center in no-print">${more(p + 'files/hazem-radhouani-cv.pdf', 'Download CV (PDF)', p)}</p>
 </header>
 <div class="wrap g block">
@@ -371,7 +394,7 @@ ${field('message', 'Message', 'textarea')}
 </section>`;
   const jsonld = [{ '@context': 'https://schema.org', '@type': 'ProfilePage', url: `${site.origin}${site.base}about.html`, mainEntity: { '@id': `${site.origin}${site.base}#person` } }, ctx.personLd];
   return { body, viewer: false, page: { path: 'about.html', nav: 'about', navExact: true, title: d.title, description: d.description, og: d.og, ogType: 'profile', jsonld,
-    preload: preloadFor(d.portrait, sizesFor(pspan), p), bodyClass: 'page-about' } };
+    preload: preloadFor(d.portrait, portraitSizes, p), bodyClass: 'page-about' } };
 }
 
 /* ------------------------------------------------------------------ films */

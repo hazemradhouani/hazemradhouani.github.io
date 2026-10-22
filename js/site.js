@@ -94,16 +94,21 @@
   var clamp = function (v, a, b) { return v < a ? a : v > b ? b : v; };
   var fxItems = slice(document.querySelectorAll(FX ? '[data-fx]' : '[data-fx][data-steps]')).map(function (el) {
     var kind = el.getAttribute('data-fx') || 'view';
-    var steps = (el.getAttribute('data-steps') || '').split(',').filter(Boolean).map(Number);
+    var auto = el.getAttribute('data-steps') === 'auto';   // steps measured from the rail's own targets (D99)
+    var steps = auto ? [] : (el.getAttribute('data-steps') || '').split(',').filter(Boolean).map(Number);
     var rail = el.id ? slice(document.querySelectorAll('[data-rail="' + el.id + '"] [data-step]')) : [];
-    return { el: el, kind: kind, steps: steps, rail: rail, ch: -1, y: 0, h: 0, p: -1, d: 2, scrub: null };
+    return { el: el, kind: kind, steps: steps, auto: auto, rail: rail, dark: el.hasAttribute('data-dark'), ch: -1, y: 0, h: 0, p: -1, d: 2, scrub: null };
   });
   var fxUpdate = function () {};
   var scrubKick = function () {};
   if (fxItems.length) {
+    var headH = 0;
     var measure = function () {
+      var hd = document.querySelector('.site-header'); headH = hd ? hd.offsetHeight : 0;
       fxItems.forEach(function (it) {
         it.y = naturalTop(it.el); it.h = it.el.offsetHeight; it.p = -1; it.d = 2;
+        // a chapter is current once its top passes the middle of the screen, wherever the layout put it
+        if (it.auto) { var vh0 = document.documentElement.clientHeight; it.steps = it.rail.map(function (a, i) { var t = document.getElementById(a.getAttribute('href').slice(1)); return i && t ? clamp((naturalTop(t) - vh0 / 2 - it.y) / Math.max(1, it.h - vh0), 0, 1) : 0; }); it.ch = -1; }
         if (it.kind !== 'top') return;
         var img = it.el.querySelector('img'), full = Math.min(it.el.parentNode.offsetWidth, img ? +img.getAttribute('width') : Infinity);
         it.el.style.setProperty('--k', (full / it.el.offsetWidth).toFixed(4));
@@ -122,9 +127,11 @@
     };
     fxUpdate = function () {
       // clientHeight: the layout viewport, steady while a phone's toolbar shows and hides (A1)
-      var y = window.scrollY, vh = document.documentElement.clientHeight;
+      var y = window.scrollY, vh = document.documentElement.clientHeight, band = y + headH / 2;
       fxItems.forEach(function (it) {
         if (!it.h) return;   // a hidden view of a page (display: none) has nothing to move
+        // a dark ground (D99) under the header's middle turns the header to the ground's colours (CSS: html.on-dark)
+        if (it.dark) root.classList.toggle('on-dark', band >= it.y && band < it.y + it.h);
         if (it.kind === 'centre') {
           var d = clamp((it.y + it.h / 2 - y - vh / 2) / ((vh + it.h) / 2), -1, 1);
           if (Math.abs(d - it.d) < 0.001) return;
@@ -364,6 +371,48 @@
     });
   });
 
+  /* ------------------------------------------------------------ the index's views and families (state, D98)
+     The page holds the grid, the tree and the list; the bar shows one view and one family (dmcg's catalog) and
+     keeps both in the address, so a link or Back returns to the same view. The tree needs room: under 48rem it
+     gives way to the grid. A tile a filter brings back rises into place once (feedback). */
+  var ixBar = document.querySelector('.ix-bar');
+  if (ixBar) {
+    var ixViews = slice(document.querySelectorAll('[data-view]'));
+    var ixTiles = slice(document.querySelectorAll('.tile'));
+    var ixWide = window.matchMedia('(min-width: 48rem)');
+    var ixState = { view: 'grid', family: 'all' };
+    var ixQuery = new URLSearchParams(location.search);
+    if (/^(grid|tree|list)$/.test(ixQuery.get('view'))) ixState.view = ixQuery.get('view');
+    if (/^(all|drawing|render|film)$/.test(ixQuery.get('family'))) ixState.family = ixQuery.get('family');
+    var ixApply = function (first) {
+      var view = ixState.view === 'tree' && !ixWide.matches ? 'grid' : ixState.view;
+      ixViews.forEach(function (v) { v.hidden = v.getAttribute('data-view') !== view; });
+      document.body.setAttribute('data-ix-view', view);
+      ixTiles.forEach(function (t) {
+        var on = ixState.family === 'all' || t.getAttribute('data-kind') === ixState.family;
+        if (on && t.hidden && !first && !reduce.matches) { t.classList.remove('is-entering'); void t.offsetWidth; t.classList.add('is-entering'); }
+        t.hidden = !on;
+      });
+      slice(document.querySelectorAll('[data-branch]')).forEach(function (b) { b.hidden = b.getAttribute('data-branch') !== ixState.family; });
+      slice(document.querySelectorAll('button[data-family]')).forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-family') === ixState.family)); });
+      slice(document.querySelectorAll('[data-view-btn]')).forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-view-btn') === view)); });
+      if (!first) {
+        var u = new URLSearchParams(location.search); u.set('view', view); u.set('family', ixState.family);
+        history.replaceState(null, '', location.pathname + '?' + u.toString() + location.hash);
+      }
+      if (typeof measureSoon === 'function') measureSoon();   // the engine measures what is shown now
+    };
+    document.addEventListener('click', function (e) {
+      var b = e.target.closest && e.target.closest('button[data-family], button[data-view-btn]');
+      if (!b) return;
+      if (b.hasAttribute('data-view-btn')) ixState.view = b.getAttribute('data-view-btn'); else ixState.family = b.getAttribute('data-family');
+      ixApply(false);
+    });
+    if (ixWide.addEventListener) ixWide.addEventListener('change', function () { ixApply(true); });
+    ixBar.hidden = false;
+    ixApply(true);
+  }
+
   /* ------------------------------------------------------------ figure viewer (orientation, state)
      Links to the full-size file work without JS. Here every [data-viewer] link on the page becomes one
      gallery: the image grows out of the clicked picture and shrinks back into it (same path), on the
@@ -378,6 +427,7 @@
     var vPrev = viewer.querySelector('[data-viewer-prev]');
     var vNext = viewer.querySelector('[data-viewer-next]');
     var vClose = viewer.querySelector('form[method="dialog"] button');
+    var vProject = viewer.querySelector('[data-viewer-project]');
     vTitle.setAttribute('aria-live', 'polite');
     var cur = -1, img = null, actual = false, busy = false, returnTo = null;
     var spring = function () { return css('--spring') || 'cubic-bezier(0.16, 1, 0.3, 1)'; };
@@ -443,6 +493,8 @@
       vCount.textContent = (cur + 1) + ' / ' + links.length;
       vPrev.setAttribute('aria-disabled', String(cur === 0)); vNext.setAttribute('aria-disabled', String(cur === links.length - 1));
       vToggle.hidden = fit(it).s >= 1;
+      var proj = it.a.getAttribute('data-href');   // the index's tiles open their project from the viewer (A6)
+      if (vProject) { vProject.hidden = !proj; if (proj) vProject.href = proj; }
     };
     var animate = function (el, from, to, dur) {
       el.style.transform = tf(to);
@@ -509,6 +561,8 @@
       var a = e.target.closest('[data-viewer]');
       if (!a || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
       e.preventDefault();
+      // the gallery is what the reader can see: a filtered index leaves its hidden tiles out (A6)
+      links = slice(document.querySelectorAll('[data-viewer]')).filter(function (x) { return x.getClientRects().length > 0; });
       open(links.indexOf(a));
     });
     vClose.addEventListener('click', function (e) { e.preventDefault(); closeViewer(); });

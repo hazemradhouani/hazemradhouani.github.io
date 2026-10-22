@@ -606,6 +606,118 @@
   .tree-root { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: var(--s3) var(--s5); padding-inline: var(--site-edge); }
   .tree-root__fam { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--s2); }
 
+  /* index ("Reel", D98): dmcg's catalog. The grid shows every image of the work on its project's ground, each
+     whole at its own ratio inside a 4:3 tile (D32, A10); the tree runs from the families to the projects; the list
+     is for reading. The letters on the left and the bar below choose; the corner captions give way to the bar
+     where both would not fit. */
+  .ix-head { display: grid; justify-items: center; gap: var(--s2); padding: var(--s6) var(--site-edge) 0; text-align: center; }
+  .ix-lead { font-size: var(--fs-cap); color: var(--ink-2); }
+  .tiles { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s5) 12px; padding: var(--s7) var(--site-edge) calc(var(--edge-bottom) + 5rem); }
+  @media (min-width: 56.25rem) { .tiles { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 3vw 2.8vw; padding-inline: 6.2vw 4.8vw; } }
+  .tile__fig { margin: 0; }
+  .tile__frame { display: grid; place-items: center; aspect-ratio: 4 / 3; border-radius: var(--r-tile); background: var(--g-light); overflow: clip; text-decoration: none; }
+  html[data-theme="dark"] .tile__frame { background: var(--g-dark); }
+  .tile__img { display: block; }
+  .tile__img :is(a, picture:not(.nw__keep), img) { display: block; width: 100%; height: auto; }
+  .tile__cap { margin-top: var(--s2); display: flex; flex-wrap: wrap; align-items: center; gap: 0 var(--s2); font-size: var(--fs-label); line-height: 1.45; color: var(--ink-2); }
+  .tile__p { display: inline-flex; align-items: center; min-height: 1.5rem; color: var(--ink); text-decoration: none; }
+  a.tile__p:hover { text-decoration: underline; }
+  .az { display: none; }
+  @media (min-width: 64rem) {
+    .az { display: block; position: fixed; z-index: 14; left: var(--site-edge); top: 50%; translate: 0 -50%; }
+    .az ul { display: grid; }
+    .az a { display: grid; place-items: center; width: 1.5rem; height: 1.5rem; font-size: var(--fs-label); color: var(--ink-2); text-decoration: none; }
+    .az a:hover { color: var(--ink); }
+  }
+  body:is([data-ix-view="tree"], [data-ix-view="list"]) .az { display: none; }
+  .ix-tree, .ix-list { padding: var(--s6) var(--site-edge) calc(var(--edge-bottom) + 5rem); }
+  .tree { position: relative; aspect-ratio: 1200 / 640; max-width: 90rem; margin-inline: auto; }
+  .tree__branch { position: absolute; inset: 0; }
+  .tree__lines { position: absolute; inset: 0; width: 100%; height: 100%; fill: none; stroke: var(--ink); stroke-opacity: 0.18; stroke-width: 1; }
+  .tree__lines path { vector-effect: non-scaling-stroke; }
+  .tree .pill { position: absolute; z-index: 1; translate: 0 -50%; }
+  .leaf { position: absolute; width: 8.5%; translate: -50% -50%; display: block; border-radius: var(--r-tile); overflow: clip; background: var(--bg); box-shadow: var(--shadow-card); }
+  .leaf :is(picture, img) { display: block; width: 100%; height: auto; }
+  @media (max-width: 47.99rem) { .ix-tree { display: none !important; } }
+  .ix-list { overflow-x: auto; }
+  .ix-table { width: min(100%, 72rem); margin-inline: auto; border-collapse: collapse; font-size: var(--fs-cap); }
+  .ix-table :is(th, td) { padding: var(--s3) var(--s4) var(--s3) 0; border-bottom: 1px solid var(--line); text-align: left; font-weight: 400; vertical-align: baseline; white-space: nowrap; }
+  .ix-table thead th { color: var(--ink-2); font-size: var(--fs-label); }
+  .ix-table td:first-child, .ix-table td:last-child { color: var(--ink-2); font-variant-numeric: tabular-nums; }
+  .ix-table a { display: inline-flex; align-items: center; min-height: 1.75rem; text-decoration: none; }
+  .ix-table a:hover { text-decoration: underline; }
+  .ix-bar { position: fixed; z-index: 17; left: 50%; bottom: clamp(0.75rem, 1.5vw, 1.5rem); translate: -50% 0; display: flex; gap: var(--s4); align-items: center; }
+  .ix-bar__group { display: flex; gap: var(--s1); }
+  .ix-bar .pill[aria-pressed="true"], .tree .pill[aria-pressed="true"] { border-color: var(--ink); }
+  .pill--icon { width: 2.75rem; padding: 0; justify-content: center; }
+  .pill--icon svg { width: 1.125rem; height: 1.125rem; fill: none; stroke: currentColor; stroke-width: 1.5; }
+  @media (max-width: 47.99rem) {
+    .ix-bar { left: var(--site-edge); right: var(--site-edge); translate: none; flex-wrap: wrap; justify-content: center; gap: var(--s2); }
+    .ix-bar [data-view-btn="tree"] { display: none; }
+  }
+  @media (max-width: 89.99rem) { .page-work .corner { display: none; } }
+
+  /* about ("Reel", D99): Michael Gatt's told story on the dark ground in both schemes (A11), then the CV on the
+     field. Key words in Garamond capitals tracked .3em, the words between them small (--connector, 5.4:1 on the
+     ground, measured); six short chapters, the chapter rail on the right; the header turns light over the ground. */
+  .page-about { padding-top: 0; }
+  .tale { --bg: #111111; --ink: #F7F5EF; --ink-2: #C9C7C0; --line: #45463F; --ui: #B4B1A9; --connector: #8D8B85;
+    position: relative; background: var(--bg); color: var(--ink); }
+  html[data-theme="dark"] .tale { --bg: #121311; }
+  .tale__stage { display: grid; justify-items: center; align-content: center; gap: var(--s5); min-height: 100svh;
+    padding: calc(var(--head-h) + var(--s6)) var(--site-edge) var(--s7); text-align: center; }
+  .tale__line { margin: 0; max-width: 60rem; font-family: var(--serif); font-weight: 400; font-size: clamp(1.375rem, 1rem + 1.6vw, 2.5rem);
+    line-height: 1.55; letter-spacing: var(--tr-tale); text-transform: uppercase; text-wrap: balance; }
+  .tale__k { color: var(--ink); text-decoration: none; }
+  .tale__c { margin-inline: 0.35em; font-family: var(--sans); font-size: 0.8125rem; letter-spacing: 0.04em; text-transform: none; color: var(--connector); vertical-align: middle; }
+  .tale__link { text-decoration: underline; text-decoration-thickness: 1px; text-decoration-color: var(--ui); text-underline-offset: 0.25em; }
+  .tale__link:hover { text-decoration-color: var(--ink); }
+  .sc { display: inline-block; white-space: nowrap; }
+  .sc__l { display: inline-block; }
+  .tale__sub { max-width: 44rem; font-size: var(--fs-cap); line-height: 1.6; color: var(--ink-2); text-wrap: balance; }
+  .tale__prize { color: var(--ink); }
+  .tale__text { max-width: 36rem; font-size: var(--fs-lead); line-height: 1.5; text-align: left; color: var(--ink-2); }
+  .tale__ch--who .tale__stage { grid-template-columns: minmax(0, 1fr); }
+  .tale__portrait { width: min(70vw, 26rem, calc(68svh * 1442 / 2560)); }
+  .tale__portrait :is(picture, img) { display: block; width: 100%; height: auto; }
+  .tale__copy { display: grid; gap: var(--s5); justify-items: center; }
+  @media (min-width: 64rem) {
+    .tale__ch--who .tale__stage { grid-template-columns: auto minmax(0, 36rem); column-gap: clamp(2rem, 6vw, 6rem); justify-content: center; text-align: left; }
+    .tale__ch--who .tale__copy { justify-items: start; }
+    .tale__ch--who .tale__line { text-align: left; }
+  }
+  .tale__fig { margin: 0; display: grid; gap: var(--s2); }
+  .tale__fig figcaption { font-size: var(--fs-label); color: var(--ink-2); }
+  .tale__fig--wide { width: min(100%, 64rem); }
+  .tale__fig :is(picture, img) { display: block; width: 100%; height: auto; }
+  .tale__list { display: grid; gap: var(--s4); margin: 0; padding: 0; }
+  .tale__list li { display: grid; gap: var(--s1); justify-items: center; }
+  .tale__list .tale__k { font-family: var(--serif); font-size: clamp(1.25rem, 1rem + 1.1vw, 2rem); letter-spacing: var(--tr-tale); text-transform: uppercase; }
+  .tale__m { font-size: var(--fs-cap); color: var(--ink-2); }
+  .tale__photos { display: grid; gap: var(--s5); width: min(100%, 64rem); }
+  @media (min-width: 48rem) {
+    .tale__photos { position: relative; height: min(52svh, 30rem); }
+    .tale__pic { position: absolute; width: min(24rem, 34%); padding: 0.5rem 0.5rem 0.75rem; background: #FFFFFF; box-shadow: 0 12px 32px -12px rgb(0 0 0 / 0.6); }
+    html[data-theme="dark"] .tale__pic { background: #F7F5EF; }
+    .tale__pic figcaption { color: #3A3A37; }
+    .tale__pic--1 { left: 2%; top: 6%; rotate: -4deg; }
+    .tale__pic--2 { left: 36%; top: 22%; rotate: 3deg; z-index: 1; }
+    .tale__pic--3 { right: 2%; top: 0; width: min(18rem, 26%); rotate: -2deg; }
+  }
+  .tale-rail { display: none; }
+  @media (min-width: 64rem) {
+    .tale-rail { display: block; position: sticky; top: 0; z-index: 5; height: 0; }
+    .tale-rail ol { position: absolute; right: var(--site-edge); top: 50svh; translate: 0 -50%; display: grid; gap: var(--s1); margin: 0; padding: 0; list-style: none; text-align: right; }
+    .tale-rail a { display: inline-flex; align-items: center; justify-content: flex-end; gap: var(--s2); min-height: 1.75rem; font-size: var(--fs-label); color: var(--connector); text-decoration: none;
+      transition: color var(--t-ui) var(--ease-out); }
+    .tale-rail a::after { content: ""; width: 0.875rem; height: 1px; background: currentColor; transition: width var(--t-ui) var(--ease-out); }
+    .tale-rail a:hover, .tale-rail a[aria-current] { color: var(--ink); }
+    .tale-rail a[aria-current]::after { width: 1.75rem; }
+  }
+  /* the header over the ground (D99): its words and edge turn to the ground's own colours while it stands over it */
+  .site-header { transition: --bg 300ms var(--ease-out), --ink 300ms var(--ease-out), --ink-2 300ms var(--ease-out); }
+  html.on-dark:not([data-theme="dark"]) .site-header { --bg: #111111; --ink: #F7F5EF; --ink-2: #C9C7C0; --line: #45463F; --ui: #B4B1A9; color: var(--ink); }
+
   /* section heads: a title and its link, centred */
   .head { display: grid; justify-items: center; gap: var(--s1); text-align: center; }
 
@@ -827,6 +939,30 @@
   }
   @keyframes focus-card { from { filter: blur(12px); scale: 1.012; } }
 
+  /* orientation (D98): a tile of the index rises 46px and settles from 94% as it enters at the bottom of the screen
+     (--d from 1 to 0.35): dmcg's grid entry, scrubbed by the scroll so it runs back too. A tile a filter brings
+     back rises once (feedback). */
+  html.fx .tile { --e: clamp(0, var(--d, 0) - 0.35, 0.65); translate: 0 calc(var(--e) * 46px); scale: calc(1 - var(--e) * 0.09); }
+  .tile.is-entering { animation: rise 420ms var(--ease-out) backwards; }
+
+  /* orientation, hierarchy (D99): the told story, scroll-linked from each chapter's --p (site.js). From 48rem and
+     40rem of height each chapter is a 170svh track whose stage stands while its words come into focus and leave;
+     the portrait takes its colour as the reader starts; the letters of Al-Arg gather by 45% of their chapter;
+     the three photographs of Japan drift at their own rates. The first chapter is in view from the first paint. */
+  @media (min-width: 48rem) and (min-height: 40rem) {
+    html.fx .tale__ch { height: 170svh; }
+    html.fx .tale__stage { position: sticky; top: 0; height: 100svh; min-height: 0; }
+    html.fx .tale__stage > * { opacity: clamp(0, min(var(--p, 0) * 8, (1 - var(--p, 0)) * 8), 1); translate: 0 calc((0.5 - var(--p, 0)) * 28px); }
+    html.fx #t-who .tale__stage > * { opacity: clamp(0, (1 - var(--p, 0)) * 8, 1); translate: 0 calc(var(--p, 0) * -28px); }
+    html.fx #t-tools .tale__stage > * { opacity: clamp(0, var(--p, 0) * 8, 1); translate: 0 calc((0.5 - min(var(--p, 0), 0.5)) * 28px); }
+    html.fx #t-who .tale__portrait img { filter: grayscale(calc(1 - min(1, var(--p, 0) * 4))); }
+    html.fx #t-thesis { --q: clamp(0, 1 - var(--p, 0) / 0.45, 1); }
+    html.fx .sc__l { translate: calc(var(--x) * var(--q, 0) * 1rem) calc(var(--y) * var(--q, 0) * 1rem); rotate: calc(var(--r) * var(--q, 0) * 1deg); }
+    html.fx .tale__pic--1 { translate: 0 calc((0.5 - var(--p, 0.5)) * 18svh); }
+    html.fx .tale__pic--2 { translate: 0 calc((0.5 - var(--p, 0.5)) * 30svh); }
+    html.fx .tale__pic--3 { translate: 0 calc((0.5 - var(--p, 0.5)) * 12svh); }
+  }
+
   /* the pointer's label (D97): dmcg's pill, following the cursor over a project */
   .pill-label { position: fixed; left: 0; top: 0; z-index: 30; padding: 0.3rem 0.75rem; border-radius: var(--r-pill); background: var(--ink); color: var(--bg);
     font-size: var(--fs-label); line-height: 1.4; white-space: nowrap; pointer-events: none; opacity: 0; scale: 0.9;
@@ -866,7 +1002,7 @@
   .muted { color: var(--ink-2); }
   .print-only { display: none; }
   @media print {
-    .site-header, .edge, .corner, .site-footer, .menu, .viewer, .skip, .no-print, .form, .about-contact, .about-portrait { display: none !important; }
+    .site-header, .edge, .corner, .site-footer, .menu, .viewer, .skip, .no-print, .form, .about-contact, .about-portrait, .tale { display: none !important; }
     @page { size: A4; margin: 16mm 16mm 18mm; }
     :root { --bg: #FFFFFF; --ink: #111111; --ink-2: #5E5E5E; --line: #E6E6E6; --ui: #8A8A8A; --error: #A61B1B; --drawing-bg: #FFFFFF; --gap-group: 6mm; --gap-chapter: 8mm; --cols: 12; --gutter: 4mm; color-scheme: light; }
     body { font-size: 10.5pt; line-height: 1.45; padding-top: 0; }

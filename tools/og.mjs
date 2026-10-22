@@ -40,7 +40,7 @@ const cards = [
   { name: 'home', title: site.person.name, line: site.person.line, img: home.film.poster },
   { name: 'work', title: 'Work', line: `${projects.length} projects in Tunisia, France and Morocco, ${Math.min(...years)} to ${Math.max(...years)}`, img: 'images/la-villette/la-villette-street-render-hq.jpg' },
   { name: 'research', title: 'Research', line: 'Between the Poetics of Place and the Value of Heritage', img: 'images/cut/books/thesis-mockup-1.png' },
-  { name: 'about', title: 'About', line: site.person.credential, img: 'images/portrait.jpg' },
+  { name: 'about', title: 'About', line: site.person.credential, img: 'images/about/portrait-sitting.jpg' },
   { name: 'motion', title: 'Films and motion', line: 'Architectural films and motion graphic reels', img: 'images/zenata/zenata-platform-render.jpg' },
   ...projects.filter((p) => p.hero).map((p) => ({ name: 'project-' + p.slug, title: p.title, line: `${p.descriptor} | ${p.place} | ${p.year}`, img: p.hero.src, credit: p.hero.credit }))
 ];

@@ -13,8 +13,8 @@
 <meta name="color-scheme" content="light dark">
 <script data-theme-bootstrap>(function(){var t;try{t=localStorage.getItem('hazem-theme');}catch(e){}if(t!=='light'&&t!=='dark'){try{t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}catch(e){t='light';}}var d=document.documentElement;try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches)d.classList.add('fx');}catch(e){}d.setAttribute('data-theme',t);d.style.colorScheme=t;var m=document.getElementById('theme-color');if(m)m.content=t==='dark'?'#121311':'#FFFFFF';}());</script>
 <script>addEventListener('pagereveal',function(e){if(e.viewTransition)document.documentElement.classList.add('vt-arrived');});</script>
-<link rel="stylesheet" href="../css/site.css?v=cbcc9d2c99">
-<script src="../js/site.js?v=00cf234cf5" defer></script>
+<link rel="stylesheet" href="../css/site.css?v=6ffc33f76d">
+<script src="../js/site.js?v=4a9ae04697" defer></script>
 <meta name="author" content="Hazem Radhouani">
 
 <link rel="icon" href="../favicon.svg" type="image/svg+xml">
@@ -103,7 +103,7 @@
 <dialog class="viewer" id="viewer" aria-labelledby="viewer-title" data-lenis-prevent>
 <div class="viewer__top"><span class="viewer__count" aria-hidden="true"></span><p class="viewer__title" id="viewer-title"></p><form method="dialog"><button class="viewer__btn" type="submit" autofocus>close<svg class="icon" width="16" height="16" aria-hidden="true" focusable="false"><use href="../images/icons.svg#x"></use></svg></button></form></div>
 <div class="viewer__stage" tabindex="0" role="group" aria-roledescription="image viewer" aria-label="Full-size image. Arrow keys: previous and next; double click or the actual size button: zoom"></div>
-<div class="viewer__bottom"><button class="viewer__btn" type="button" data-viewer-toggle><span>actual size</span></button><div class="viewer__nav"><button class="viewer__btn" type="button" data-viewer-prev aria-label="Previous image"><svg class="icon" width="16" height="16" aria-hidden="true" focusable="false"><use href="../images/icons.svg#arrow-left"></use></svg></button><button class="viewer__btn" type="button" data-viewer-next aria-label="Next image"><svg class="icon" width="16" height="16" aria-hidden="true" focusable="false"><use href="../images/icons.svg#arrow-right"></use></svg></button></div></div>
+<div class="viewer__bottom"><div class="viewer__nav"><button class="viewer__btn" type="button" data-viewer-toggle><span>actual size</span></button><a class="viewer__btn" data-viewer-project href="#" hidden>View project</a></div><div class="viewer__nav"><button class="viewer__btn" type="button" data-viewer-prev aria-label="Previous image"><svg class="icon" width="16" height="16" aria-hidden="true" focusable="false"><use href="../images/icons.svg#arrow-left"></use></svg></button><button class="viewer__btn" type="button" data-viewer-next aria-label="Next image"><svg class="icon" width="16" height="16" aria-hidden="true" focusable="false"><use href="../images/icons.svg#arrow-right"></use></svg></button></div></div>
 </dialog>
 </body>
 </html>

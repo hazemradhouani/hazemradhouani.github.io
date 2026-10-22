@@ -2,8 +2,18 @@
   "title": "About | Hazem Radhouani, architect",
   "description": "Hazem Radhouani, architect (National Architecture Diploma, Highest Honours, ENAU 2026). Experience at Studio BELEM, Paris, and Yassir Khalil Studio, Casablanca; Sakura Science Program research in Japan.",
   "og": "images/og/about.jpg",
-  "portrait": "images/portrait.jpg",
-  "portraitAlt": "Portrait of Hazem Radhouani",
+  "portrait": "images/about/portrait-sitting.jpg",
+  "portraitAlt": "Hazem Radhouani seated on a low wooden bench against a wall of pale glazed tiles, beside a tall window full of daylight",
+  "tale": {
+    "$comment": "The told story (D99): photographs supplied by the owner for this page (docs/Images, 2026-10-22), re-encoded without metadata. People other than the owner are not named.",
+    "graduation": { "src": "images/about/graduation-2026.jpg", "alt": "Five people smiling in front of a wall of architecture presentation boards: plans, elevations, diagrams and tables of project information", "caption": "ENAU, 2026" },
+    "japan": [
+      { "src": "images/about/japan-group.jpg", "alt": "A large group of participants in front of a traditional wooden gate with a tiled roof, wooded hills behind", "caption": "Sakura Science Program, Japan, 2025" },
+      { "src": "images/about/japan-shrine.jpg", "alt": "Two participants at a shrine's purification fountain with bamboo ladles, under a red lacquered pavilion", "caption": "Japan, 2025" },
+      { "src": "images/about/sakura-certificate.jpg", "alt": "Hazem Radhouani holding his certificate of achievement in front of the projected programme poster, beside the person presenting it", "caption": "Certificate, Sakura Science Program 2025" }
+    ],
+    "sources": { "photos": "owner:2026-10-22 (docs/Images)", "certificate": "the certificate reads RADHOUANI HAZEM; the poster reads SAKURA SCIENCE PROGRAM 2025" }
+  },
   "bio": "Architect graduated with Highest Honours (ENAU, 2026), drawn to the architecture of the existing: the inhabited, the deteriorated, the overlooked. My project work spans Tunisia, France and Morocco, from regional rail infrastructure to residential rehabilitation and academic design work. In 2025, research experience in Japan extended a comparative study of historic-district rehabilitation and adaptive reuse.",
   "experience": [
     {

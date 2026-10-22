@@ -155,7 +155,7 @@ async function runMotionPass() {
         await Promise.race([Promise.all(document.getAnimations().map((a) => a.finished.catch(() => {}))), sleep(8000)]);
         const out = [];
         // a page with plates below the fold must have arrival groups at all, or this pass would pass on nothing
-        if (!document.querySelector('.rv-g')) out.push('no arrival groups: the arrival module did not run');
+        if (document.querySelector('[data-rv]') && !document.querySelector('.rv-g')) out.push('no arrival groups: the arrival module did not run');
         for (const el of document.querySelectorAll('.rv, .rv-g')) {
           if (!el.classList.contains('is-in')) out.push(`not arrived: ${el.tagName.toLowerCase()}.${[...el.classList].join('.')}`);
           else if (getComputedStyle(el).opacity !== '1') out.push(`opacity ${getComputedStyle(el).opacity}: ${el.tagName.toLowerCase()}.${[...el.classList].join('.')}`);
@@ -334,6 +334,82 @@ const homeFailures = await runHomePass();
 gateFails += homeFailures.length;
 if (homeFailures.length) console.log(`FAIL home reel: ${homeFailures.join(' | ')}`);
 else console.log('ok   home reel: frame opens, film follows the scroll both ways, chapters and rail in order, centred project open, links focus in view, touch loops');
+// The index (D98): the count matches its tiles; a family chosen by keyboard shows exactly its tiles, is pressed and
+// written to the address; the viewer's gallery is the visible tiles and offers their project; the tree and the list
+// open from the bar; an address with a view and a family restores both.
+async function runIndexPass() {
+  const failures = [];
+  const url = urls.find((u) => u.includes('architecture.html'));
+  if (!url) return failures;
+  const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 }, deviceScaleFactor: 1, colorScheme: 'light', reducedMotion: 'reduce' });
+  const page = await ctx.newPage();
+  const fail = (s) => failures.push(s);
+  try {
+    await page.goto(url, { waitUntil: 'load' });
+    const n = await page.evaluate(() => ({ all: document.querySelectorAll('.tile').length, said: +document.querySelector('.ix-head .col__count').textContent,
+      d: document.querySelectorAll('.tile[data-kind="drawing"]').length, bar: !document.querySelector('.ix-bar').hidden }));
+    if (n.all !== n.said) fail(`the index says ${n.said} and holds ${n.all} tiles`);
+    if (!n.bar) fail('the bar did not show');
+    await page.locator('.ix-bar button[data-family="drawing"]').focus();
+    await page.keyboard.press('Enter');
+    const s = await page.evaluate(() => ({ shown: [...document.querySelectorAll('.tile')].filter((t) => !t.hidden).length, q: location.search,
+      pressed: document.querySelector('.ix-bar button[data-family="drawing"]').getAttribute('aria-pressed') }));
+    if (s.shown !== n.d || !/family=drawing/.test(s.q) || s.pressed !== 'true') fail(`Drawings: ${s.shown} of ${n.d} tiles shown, address ${s.q}, pressed ${s.pressed}`);
+    await page.locator('.tile:not([hidden]) [data-viewer]').first().click();
+    await page.waitForTimeout(900);
+    const v = await page.evaluate(() => { const a = document.querySelector('[data-viewer-project]'); return { count: document.querySelector('.viewer__count').textContent.trim(), hidden: a.hidden, href: a.getAttribute('href') }; });
+    if (!v.count.endsWith(`/ ${n.d}`)) fail(`the viewer counts ${v.count}, not of the ${n.d} visible tiles`);
+    if (v.hidden || !/projects\/project-/.test(v.href)) fail('the viewer does not offer the project');
+    await page.keyboard.press('Escape');
+    await page.waitForTimeout(700);
+    for (const view of ['tree', 'list']) {
+      await page.locator(`.ix-bar [data-view-btn="${view}"]`).click();
+      if (!(await page.evaluate((view) => !document.querySelector(`[data-view="${view}"]`).hidden && document.querySelector('[data-view="grid"]').hidden, view))) fail(`the ${view} did not open`);
+    }
+    await page.goto(url.split('?')[0] + '?view=list&family=film', { waitUntil: 'load' });
+    const r = await page.evaluate(() => ({ list: !document.querySelector('[data-view="list"]').hidden, film: document.querySelector('.ix-bar button[data-family="film"]').getAttribute('aria-pressed') }));
+    if (!r.list || r.film !== 'true') fail('an address with view=list&family=film did not restore both');
+  } catch (e) { fail(e.message); }
+  await ctx.close();
+  return failures;
+}
+const indexFailures = await runIndexPass();
+gateFails += indexFailures.length;
+if (indexFailures.length) console.log(`FAIL index: ${indexFailures.join(' | ')}`);
+else console.log('ok   index views: count, family by keyboard and in the address, viewer of the visible tiles with its project, tree and list, address restored');
+// About (D99): with motion at 1440 the rail marks the chapter the reader is in and the header stands light over the
+// dark ground; the gathered word keeps its name; under reduced motion every chapter is there to read.
+async function runAboutPass() {
+  const failures = [];
+  const url = urls.find((u) => u.includes('about.html'));
+  if (!url) return failures;
+  for (const motion of ['no-preference', 'reduce']) {
+    const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 }, deviceScaleFactor: 1, colorScheme: 'light', reducedMotion: motion });
+    await ctx.addInitScript(() => { try { localStorage.setItem('hazem-theme', 'light'); } catch (e) {} });
+    const page = await ctx.newPage();
+    try {
+      await page.goto(url, { waitUntil: 'load' });
+      await page.waitForTimeout(600);
+      const ids = await page.evaluate(() => [...document.querySelectorAll('.tale__ch')].map((c) => c.id));
+      for (const [i, id] of ids.entries()) {
+        await page.evaluate((id) => { const c = document.getElementById(id); scrollTo({ top: c.getBoundingClientRect().top + scrollY + c.offsetHeight * 0.3, behavior: 'instant' }); }, id);
+        await page.waitForTimeout(motion === 'reduce' ? 300 : 900);
+        const s = await page.evaluate(() => ({ cur: [...document.querySelectorAll('.tale-rail a')].findIndex((a) => a.getAttribute('aria-current') === 'step'), dark: document.documentElement.classList.contains('on-dark') }));
+        if (s.cur !== i) failures.push(`${motion}: in chapter ${i + 1} the rail marks ${s.cur + 1}`);
+        if (!s.dark) failures.push(`${motion}: the header is not light over chapter ${i + 1}`);
+      }
+      const word = await page.evaluate(() => { const sc = document.querySelector('.sc'); return { name: sc.querySelector('.vh').textContent, hidden: [...sc.querySelectorAll('.sc__l')].every((l) => l.getAttribute('aria-hidden') === 'true') }; });
+      if (word.name !== 'Al-Arg' || !word.hidden) failures.push(`${motion}: the gathered word reads "${word.name}"`);
+      if (motion === 'reduce' && await page.evaluate(() => [...document.querySelectorAll('.tale__stage > *')].some((el) => +getComputedStyle(el).opacity < 1))) failures.push('reduce: a chapter is hidden');
+    } catch (e) { failures.push(`${motion}: ${e.message}`); }
+    await ctx.close();
+  }
+  return failures;
+}
+const aboutFailures = await runAboutPass();
+gateFails += aboutFailures.length;
+if (aboutFailures.length) console.log(`FAIL about: ${aboutFailures.join(' | ')}`);
+else console.log('ok   about: rail follows the chapters, header light over the ground, gathered word named, every chapter still under reduced motion');
 const scrollFailures = await runScrollPass();
 gateFails += scrollFailures.length;
 if (scrollFailures.length) console.log(`FAIL smooth scroll: ${scrollFailures.join(' | ')}`);
@@ -372,7 +448,9 @@ for (const url of urls) {
         if (!b.width || !w || !h) continue;
         const src = img.getAttribute('src');
         // 1%, or the half pixel a box snaps by on each axis when it is that small (a long strip on a phone)
-        if (Math.abs(b.width / b.height - w / h) / (w / h) > Math.max(0.01, 0.5 / b.height + 0.5 / b.width)) out.crop.push(`${src} ${Math.round(b.width)}x${Math.round(b.height)} vs ${w}x${h}`);
+        // the layout box, not the screen box: a turned photograph (D99) is rotated, not cropped
+        const ow = img.offsetWidth, oh = img.offsetHeight;
+        if (Math.abs(ow / oh - w / h) / (w / h) > Math.max(0.01, 0.5 / oh + 0.5 / ow)) out.crop.push(`${src} ${ow}x${oh} vs ${w}x${h}`);
         if (getComputedStyle(img).objectFit === 'cover') out.crop.push(`${src} object-fit: cover`);
         if (b.width > w + 1) out.upscale.push(`${src} ${Math.round(b.width)}px > ${w}px`);
         // the file actually served (a derivative) must have the master's ratio, or the browser stretches it
@@ -480,6 +558,7 @@ for (const url of urls) {
       for (const img of document.querySelectorAll('main img[src*="images/cut/"], main img[src*="thesis-book"]')) {
         if (fullBleed.some((s) => img.getAttribute('src').includes(s))) continue;
         if (img.closest('.nw__keep')) continue;   // a keep layer is opaque by design inside its regions (D69); its drawing is checked
+        if (img.closest('.tile, .leaf')) continue;   // index thumbnails (D98): the same masters, checked full size on their project pages; at 480px resampling blends edge pixels
         img.loading = 'eager';
         const ok = await Promise.race([img.decode().then(() => true, () => false), new Promise((r) => setTimeout(() => r(false), 4000))]);
         if (!ok || !img.naturalWidth) { bad.push(`${img.getAttribute('src').split('/').pop()} did not load`); continue; }
