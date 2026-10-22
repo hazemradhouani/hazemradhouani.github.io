@@ -1,19 +1,20 @@
 /* Hazem Radhouani · site.js ("Field", docs/flagship/08-direction.md)
    Progressive enhancement only: every page reads, navigates, opens full-size images and plays films
-   without it. Modules: menu dialog, compact bar, arrival, figure viewer, contact form, analytics.
+   without it. Modules: theme, menu dialog, scroll progress, arrival, smooth scroll, figure viewer, contact form, analytics.
    Every motion has a stated purpose and is skipped under prefers-reduced-motion. No dependencies. */
 (function () {
   'use strict';
 
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
   var root = document.documentElement;
+  root.setAttribute('data-js', '');   // the head drops html.fx at load without this mark (D101): no script, nothing hidden
   var thisScript = document.currentScript;   // this file, so a vendored script is found beside it at any depth
   var css = function (name) { return getComputedStyle(root).getPropertyValue(name).trim(); };
   var slice = function (list) { return Array.prototype.slice.call(list); };
 
   /* ------------------------------------------------------------ theme (preference, state)
      The inline bootstrap sets data-theme before CSS is parsed. This controller only synchronises
-     the three visible controls, persists an explicit choice when storage is available, and keeps
+     the two controls (header, menu), persists an explicit choice when storage is available, and keeps
      the browser chrome colour in step. A failed storage read/write is deliberately non-fatal. */
   var themeControls = slice(document.querySelectorAll('[data-theme-toggle]'));
   var themeMeta = document.getElementById('theme-color');
@@ -67,45 +68,19 @@
     if (wide.addEventListener) wide.addEventListener('change', onWide);
   }
 
-  /* ------------------------------------------------------------ compact bar (wayfinding)
-     Slides in when the reader scrolls back up a long page, so the nav is one gesture away; it hides
-     on scroll-down and whenever focus moves into the page, so it never covers a focused element. */
-  var bar = document.getElementById('bar');
-  var header = document.querySelector('.site-header');
-  if (bar && header) {
-    var shown = false, anchor = window.scrollY, ticking = false, quietUntil = 0;
-    var setBar = function (on) {
-      if (on === shown || (!on && bar.contains(document.activeElement))) return;
-      shown = on;
-      bar.classList.toggle('is-shown', on);
-      if (on) bar.removeAttribute('inert'); else bar.setAttribute('inert', '');
-    };
-    window.addEventListener('scroll', function () {
-      if (ticking) return;
-      ticking = true;
-      requestAnimationFrame(function () {
-        ticking = false;
-        var y = window.scrollY;
-        if (y < header.offsetHeight + 400) { setBar(false); anchor = y; return; }
-        if (y > anchor) { anchor = y; setBar(false); }              // going down: follow, keep hidden
-        else if (y < anchor - 40 && Date.now() > quietUntil) setBar(true);  // 40px back up: show
-      });
-    }, { passive: true });
-    document.addEventListener('focusin', function (e) {
-      if (bar.contains(e.target) || e.target.closest('dialog')) return;
-      quietUntil = Date.now() + 600; anchor = window.scrollY; setBar(false);
-    });
-  }
-
-  /* ------------------------------------------------------------ scroll progress (orientation, hierarchy: D83)
-     Under html.fx (a fine pointer without reduced motion, set in the head before the first paint) every
-     [data-fx] element carries --p, its progress through the viewport: 0 as its top enters at the bottom, 0.5
-     as it reaches the top, 1 as its bottom leaves; data-fx="top" counts 0 at the top of the page to 1 when it
-     reaches the top of the viewport, and carries --k, the scale at which it fills its parent (never past its
-     image's own width). CSS maps
-     --p to translate, scale and opacity only. Positions are where an element stands without sticking or
-     moving, so a stuck plate keeps counting while the next one covers it. The values follow Lenis in its own
-     frame (below), or a native scroll in the next one. Without the class nothing is set and all stays still. */
+  /* ------------------------------------------------------------ scroll engine (orientation, hierarchy: D83, D96)
+     One measured list of [data-fx] elements, read in the frame the page moves (Lenis on a fine pointer, the
+     native scroll elsewhere). Every value is a pure function of the scroll position, so scrolling back runs
+     everything backwards; CSS maps the values to transform, opacity and, on a fine pointer, blur.
+       data-fx ("view"): --p, 0 as the element's top enters at the bottom, 1 as its bottom leaves at the top
+       data-fx="top":    --p, 0 at the top of the page, 1 when the element reaches the top; --k, its fill scale
+       data-fx="track":  --p, 0 when a tall section's top reaches the top of the screen, 1 when its bottom
+                         reaches the bottom: its sticky stage moves only while it stands (A1); data-steps
+                         ("0,.25,.5,.75") give data-chapter, and the steps of its rail [data-rail="id"] follow
+       data-fx="centre": --d, the element's centre against the screen's centre: 1 entering, 0 centred, -1 leaving
+     html.fx (set in the head before the first paint) is on whenever motion is allowed, touch included; without
+     it nothing is written and all stands settled. A rail follows the reading position either way. Positions are
+     where an element stands without sticking or moving, so a stuck stage keeps counting. */
   var naturalTop = function (el) {
     var t = 0;
     if (getComputedStyle(el).position === 'sticky') {
@@ -116,27 +91,60 @@
     for (var e = el; e; e = e.offsetParent) t += e.offsetTop;   // offsets ignore transforms: no feedback from --p
     return t;
   };
-  var fxItems = root.classList.contains('fx') ? slice(document.querySelectorAll('[data-fx]')).map(function (el) {
-    return { el: el, top: el.getAttribute('data-fx') === 'top', y: 0, h: 0, p: -1 };
-  }) : [];
+  var FX = root.classList.contains('fx');
+  var clamp = function (v, a, b) { return v < a ? a : v > b ? b : v; };
+  var fxItems = slice(document.querySelectorAll(FX ? '[data-fx]' : '[data-fx][data-steps]')).map(function (el) {
+    var kind = el.getAttribute('data-fx') || 'view';
+    var auto = el.getAttribute('data-steps') === 'auto';   // steps measured from the rail's own targets (D99)
+    var steps = auto ? [] : (el.getAttribute('data-steps') || '').split(',').filter(Boolean).map(Number);
+    var rail = el.id ? slice(document.querySelectorAll('[data-rail="' + el.id + '"] [data-step]')) : [];
+    return { el: el, kind: kind, steps: steps, auto: auto, rail: rail, dark: el.hasAttribute('data-dark'), ch: -1, y: 0, h: 0, p: -1, d: 2, scrub: null };
+  });
   var fxUpdate = function () {};
+  var scrubKick = function () {};
   if (fxItems.length) {
+    var headH = 0;
     var measure = function () {
+      var hd = document.querySelector('.site-header'); headH = hd ? hd.offsetHeight : 0;
       fxItems.forEach(function (it) {
-        it.y = naturalTop(it.el); it.h = it.el.offsetHeight; it.p = -1;
-        if (!it.top) return;
-        var img = it.el.querySelector('img'), full = Math.min(it.el.parentNode.offsetWidth, img ? +img.getAttribute('width') : Infinity);
-        it.el.style.setProperty('--k', (full / it.el.offsetWidth).toFixed(4));
+        it.y = naturalTop(it.el); it.h = it.el.offsetHeight; it.p = -1; it.d = 2;
+        // a chapter is current once its top passes the middle of the screen, wherever the layout put it
+        if (it.auto) { var vh0 = document.documentElement.clientHeight; it.steps = it.rail.map(function (a, i) { var t = document.getElementById(a.getAttribute('href').slice(1)); return i && t ? clamp((naturalTop(t) - vh0 / 2 - it.y) / Math.max(1, it.h - vh0), 0, 1) : 0; }); it.ch = -1; }
       });
       fxUpdate();
     };
+    var chapter = function (it, p) {
+      var c = 0;
+      for (var i = 0; i < it.steps.length; i++) if (p >= it.steps[i]) c = i;
+      if (c === it.ch) return;
+      it.ch = c; it.el.setAttribute('data-chapter', String(c));
+      it.rail.forEach(function (s, i) {
+        s.classList.toggle('is-on', i === c);
+        if (s.tagName === 'A') { if (i === c) s.setAttribute('aria-current', 'location'); else s.removeAttribute('aria-current'); }
+      });
+    };
     fxUpdate = function () {
-      var y = window.scrollY, vh = window.innerHeight;
+      // clientHeight: the layout viewport, steady while a phone's toolbar shows and hides (A1)
+      var y = window.scrollY, vh = document.documentElement.clientHeight, band = y + headH / 2;
       fxItems.forEach(function (it) {
-        var p = it.top ? y / Math.max(1, it.y) : (y + vh - it.y) / (vh + it.h);
-        p = Math.min(1, Math.max(0, p));
+        if (!it.h) return;   // a hidden view of a page (display: none) has nothing to move
+        // a dark ground (D99) under the header's middle turns the header to the ground's colours (CSS: html.on-dark)
+        if (it.dark) root.classList.toggle('on-dark', band >= it.y && band < it.y + it.h);
+        if (it.kind === 'centre') {
+          var d = clamp((it.y + it.h / 2 - y - vh / 2) / ((vh + it.h) / 2), -1, 1);
+          if (Math.abs(d - it.d) < 0.001) return;
+          it.d = d; it.el.style.setProperty('--d', d.toFixed(4));
+          if (it.scrub) it.scrub.to((1 - d) / 2);
+          return;
+        }
+        var p = it.kind === 'track' ? (y - it.y) / Math.max(1, it.h - vh)
+          : (y + vh - it.y) / (vh + it.h);
+        p = clamp(p, 0, 1);
+        if (it.steps.length) chapter(it, p);
         if (Math.abs(p - it.p) < 0.001) return;
-        it.p = p; it.el.style.setProperty('--p', p.toFixed(4));
+        it.p = p;
+        if (FX) it.el.style.setProperty('--p', p.toFixed(4));
+        if (it.scrub) it.scrub.to(p);
       });
     };
     var fxQueued = false;
@@ -145,9 +153,89 @@
       fxQueued = true;
       requestAnimationFrame(function () { fxQueued = false; fxUpdate(); });
     }, { passive: true });
-    window.addEventListener('resize', measure);
-    if ('ResizeObserver' in window) new ResizeObserver(measure).observe(document.body);
+    // re-measured once the layout settles, never on every observed change in a burst (A5)
+    var measureTimer = 0;
+    var measureSoon = function () { clearTimeout(measureTimer); measureTimer = setTimeout(measure, 120); };
+    window.addEventListener('resize', measureSoon);
+    if ('ResizeObserver' in window) new ResizeObserver(measureSoon).observe(document.body);
     measure();
+  }
+
+  /* ------------------------------------------------------------ the scrubbed films (orientation, D96)
+     A video[data-scrub] inside a track or centre item follows the scroll: its time eases toward the reading
+     position (0.12 of the gap per frame, the Scroll map's weighted scrub), a new seek only once the last has
+     landed (A2). Under the poster until its first frame lands, so the first paint is always the poster. A fine
+     pointer, or a touch screen from 48rem, scrubs (the small file on touch); a narrow touch screen, reduced
+     motion, saved data or no script keep the poster (A4, D101: a loop there would have nothing to pause it).
+     A seek that never lands within 1.5 s leaves the poster in place. Safari on iOS: UNVERIFIED (no WebKit here). */
+  var fineQ = window.matchMedia('(hover: hover) and (pointer: fine)');
+  var saveData = navigator.connection && navigator.connection.saveData;
+  // a narrow touch screen keeps the poster: a looping film there would move with nothing to pause it (WCAG 2.2.2, D101)
+  var scrubVideos = FX && !saveData && (fineQ.matches || window.matchMedia('(min-width: 48rem)').matches) ? slice(document.querySelectorAll('video[data-scrub]')) : [];
+  if (scrubVideos.length) {
+    var films = [];
+    var running = false;
+    var tick = function () {
+      running = false;
+      films.forEach(function (f) {
+        if (!f.ready) return;
+        var gap = f.target - f.t;
+        f.t = Math.abs(gap) < 0.002 ? f.target : f.t + gap * 0.12;
+        if (!f.v.seeking && Math.abs(f.v.currentTime - f.t) > 1 / 60) {
+          f.v.currentTime = f.t;
+          if (!f.live && !f.watch) f.watch = setTimeout(function () { if (!f.live) { f.ready = false; f.dead = true; console.warn('scrub: no frame landed, the poster stays'); } }, 1500);
+        }
+        if (f.t !== f.target || f.v.seeking) running = true;
+      });
+      if (running) requestAnimationFrame(tick);
+    };
+    scrubKick = function () { if (!running) { running = true; requestAnimationFrame(tick); } };
+    scrubVideos.forEach(function (v) {
+      var host = v.closest('[data-fx]');
+      var it = fxItems.filter(function (x) { return x.el === host; })[0];
+      var f = { v: v, frame: v.parentNode, t: 0, target: 0, frac: 0, ready: false, live: false, watch: 0,
+        to: function (frac) { f.frac = frac; if (f.ready) { f.target = frac * v.duration; scrubKick(); } } };
+      if (it) {
+        it.scrub = f;
+        // a page opened part-way down (a reload, Back) starts the film where the reader already is
+        f.frac = it.kind === 'centre' ? (it.d <= 1 ? (1 - it.d) / 2 : 0) : Math.max(0, it.p);
+      }
+      films.push(f);
+      var show = function () { if (f.live || f.dead) return; f.live = true; clearTimeout(f.watch); f.frame.classList.add('is-live'); };
+      v.muted = true;
+      v.setAttribute('playsinline', '');
+      v.addEventListener('seeked', show);
+      v.addEventListener('loadeddata', function () {
+        // one play and pause primes a phone's decoder for seeking; the time then belongs to the scroll
+        var go = function () { v.pause(); f.ready = true; f.to(f.frac); };
+        var pr = v.play(); if (pr && pr.then) pr.then(go, go); else go();
+      }, { once: true });
+      v.src = v.getAttribute(fineQ.matches ? 'data-src' : 'data-src-small') || v.getAttribute('data-src');
+    });
+    // loaded once the page is idle, after its first paint and its images (the poster is the largest paint)
+    var loadFilms = function () {
+      scrubVideos.forEach(function (v) {
+        v.preload = 'auto'; v.load();
+      });
+    };
+    var whenIdle = function () { if ('requestIdleCallback' in window) window.requestIdleCallback(loadFilms, { timeout: 2500 }); else setTimeout(loadFilms, 1200); };
+    if (document.readyState === 'complete') whenIdle(); else window.addEventListener('load', whenIdle, { once: true });
+  }
+
+  /* ------------------------------------------------------------ the label that follows the pointer (feedback, D97)
+     dmcg's pill: on a fine pointer, an element with data-label names itself beside the cursor. Decorative
+     (aria-hidden): the link it sits on already carries the same name. */
+  if (FX && fineQ.matches && document.querySelector('[data-label]')) {
+    var pill = document.createElement('div');
+    pill.className = 'pill-label'; pill.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(pill);
+    document.addEventListener('pointerover', function (e) {
+      var t = e.target.closest && e.target.closest('[data-label]');
+      if (t) pill.textContent = t.getAttribute('data-label');
+      pill.classList.toggle('is-on', !!t);
+    });
+    document.addEventListener('pointermove', function (e) { pill.style.translate = (e.clientX + 16) + 'px ' + (e.clientY + 18) + 'px'; }, { passive: true });
+    root.addEventListener('pointerleave', function () { pill.classList.remove('is-on'); });
   }
 
   /* ------------------------------------------------------------ arrival (hierarchy, D76)
@@ -186,7 +274,7 @@
 
   /* ------------------------------------------------------------ smooth scroll (orientation, D79)
      The owner's request: wheel and trackpad scrolling glide with inertia, as on the reference sites. Lenis
-     (vendored, MIT, 5.6 KB gzipped) eases the page's own scroll position, so the compact bar, the arrivals,
+     (vendored, MIT, 5.6 KB gzipped) eases the page's own scroll position, so the fixed header, the arrivals,
      find-in-page, the keyboard and the back button behave exactly as native. It loads only for a fine
      pointer without reduced motion: touch keeps the device's own inertia, and reduced motion keeps native,
      unsmoothed scrolling. An open dialog holds the page still and scrolls on its own. A link to a place on
@@ -233,8 +321,8 @@
         if (!el || el.closest('dialog')) return;
         e.preventDefault();
         // the target from the page's true position now (a scroll just before the click may not have reached
-        // Lenis yet), less the scroll padding that keeps it clear of the compact bar, as a native jump does
-        var y = el.getBoundingClientRect().top + window.scrollY - (parseFloat(getComputedStyle(root).scrollPaddingTop) || 0);
+        // Lenis yet), less the scroll padding that keeps it clear of the fixed header, as a native jump does
+        var y = (el.hasAttribute('data-fx') ? naturalTop(el) : el.getBoundingClientRect().top + window.scrollY) - (parseFloat(getComputedStyle(root).scrollPaddingTop) || 0) - (parseFloat(getComputedStyle(el).scrollMarginTop) || 0);
         // the address and focus change at once, as a jump would: Back then returns to where the reader
         // clicked, the next Tab starts from the target, and an interrupted glide loses neither
         if (location.hash !== '#' + id) history.pushState(null, '', '#' + id);
@@ -246,114 +334,77 @@
     document.head.appendChild(lenisScript);
   }
 
-  /* ------------------------------------------------------------ the opening (orientation, D85)
-     Three renders, one per country of the work, dissolve into one another (Studio KHOA VU's slideshow: a 4 s
-     hold, 1 s in, 1.2 s out). The first is the page's largest paint and is never touched; the other two are
-     added once the page is idle, and the show starts when they have decoded. It makes one pass of the three
-     countries and rests on the first, so the caption stops changing under a reader; "play" runs it again, on
-     a loop. The pause button (WCAG 2.2.2) says what it will do and keeps its place from the start (it only
-     shows once the show runs, so nothing moves when it appears); the show also rests while the opening is
-     off screen, hovered or holds focus, and in a hidden tab. Under reduced motion only the first image is
-     shown and there is nothing to pause. */
-  var win = document.querySelector('.open__win');
-  var stopShow = function () {};
-  if (win && !reduce.matches) {
-    var frame = win.querySelector('.open__frame'), extra = win.querySelector('template');
-    var nowItems = slice(document.querySelectorAll('.open__now li'));
-    var pause = document.querySelector('.open__pause'), pauseLabel = pause && pause.querySelector('[data-pause-label]');
-    var slides = slice(frame.children), at = 0, timer = 0, tour = true, held = { user: false, view: false, hover: false, focus: false };
-    var show = function (k) {
-      slides[at].classList.remove('is-on'); nowItems[at].hidden = true;
-      at = k; slides[at].classList.add('is-on'); nowItems[at].hidden = false;
-    };
-    var setHeld = function (on) { held.user = on; pauseLabel.textContent = on ? 'play' : 'pause'; };
-    var plan = function () {
-      clearTimeout(timer);
-      if (slides.length < 2 || held.user || held.view || held.hover || held.focus || document.hidden) return;
-      timer = setTimeout(function () {
-        show((at + 1) % slides.length);
-        if (tour && at === 0) { tour = false; setHeld(true); }   // the first pass is complete: rest on the first render
-        plan();
-      }, 5000);
-    };
-    stopShow = function () { setHeld(true); plan(); };
-    var start = function () {
-      frame.appendChild(extra.content.cloneNode(true));
-      var added = slice(frame.children).slice(1);
-      Promise.all(added.map(function (s) { var i = s.querySelector('img'); return i.decode ? i.decode().catch(function () {}) : null; })).then(function () {
-        slides = slice(frame.children);
-        pause.classList.add('is-on');
-        plan();
-      });
-    };
-    if (extra && pause) {
-      pause.addEventListener('click', function () { setHeld(!held.user); plan(); });
-      win.addEventListener('pointerenter', function () { held.hover = true; plan(); });
-      win.addEventListener('pointerleave', function () { held.hover = false; plan(); });
-      var now = document.querySelector('.open__now');
-      // focus on a caption link holds the show; focus on the button that runs it does not (clicking "play" focuses it)
-      now.addEventListener('focusin', function (e) { held.focus = !!e.target.closest('a'); plan(); });
-      now.addEventListener('focusout', function () { held.focus = false; plan(); });
-      document.addEventListener('visibilitychange', plan);
-      if ('IntersectionObserver' in window) new IntersectionObserver(function (en) { held.view = !en[0].isIntersecting; plan(); }).observe(win);
-      var idle = function () { if ('requestIdleCallback' in window) window.requestIdleCallback(start, { timeout: 3000 }); else setTimeout(start, 1500); };
-      if (document.readyState === 'complete') idle(); else window.addEventListener('load', idle, { once: true });
-    }
-  }
-
   // reduced motion switched on during the visit: the scroll-linked styles let go (everything returns to its
-  // settled place) and the renders stop
+  // settled place)
   if (reduce.addEventListener) reduce.addEventListener('change', function (e) {
-    if (e.matches) { root.classList.remove('fx'); stopShow(); }
+    if (!e.matches) return;
+    root.classList.remove('fx');
+    if (films) films.forEach(function (f) { f.ready = false; f.dead = true; });
+    scrubVideos.forEach(function (v) { v.pause(); v.removeAttribute('src'); v.load(); v.parentNode.classList.remove('is-live'); });
   });
 
-  /* ------------------------------------------------------------ the stack of selected work (D86)
-     A plate whose words would be covered by the next one is brought back to the top when focus reaches them
-     (Shift+Tab), so a focused link is never hidden under another plate (WCAG 2.4.11). A plate taller than the
-     screen (large text, user text spacing) does not stick, so none of it is ever covered (WCAG 1.4.10, 1.4.12).
-     Leaving for a project, only the chosen plate's image and title take the names that carry them into the
-     project's page (static names would lift every covered plate above the one in view during the transition). */
-  var plates = slice(document.querySelectorAll('.seq__plate'));
-  var freePlates = function () {
-    plates.forEach(function (li) {
-      li.classList.remove('seq__plate--free');
-      if (getComputedStyle(li).position === 'sticky' && li.scrollHeight > li.clientHeight + 1) li.classList.add('seq__plate--free');
-    });
-  };
-  if (plates.length) {
-    freePlates();
-    window.addEventListener('resize', freePlates);
-    if (document.fonts && document.fonts.ready) document.fonts.ready.then(freePlates);
-  }
-  document.addEventListener('focusin', function (e) {
-    var li = e.target.closest && e.target.closest('.seq__plate');
-    if (!li || getComputedStyle(li).position !== 'sticky') return;
-    var next = li.nextElementSibling;
-    if (next && next.getBoundingClientRect().top < e.target.getBoundingClientRect().bottom) jump(naturalTop(li));
-  });
+  /* ------------------------------------------------------------ the column's way into a project (orientation, D97)
+     Leaving the home for a project, only the chosen item's render and title take the names that carry them into
+     the project's page (dmcg's genie): names on all fifteen would capture every item for the transition. */
   window.addEventListener('pageswap', function (e) {
     var to = e.viewTransition && e.activation && e.activation.entry && e.activation.entry.url;
     if (!to) return;
-    slice(document.querySelectorAll('.seq__plate')).forEach(function (li) {
-      var a = li.querySelector('.seq__t a');
-      if (!a || a.href !== to) return;
-      var slug = li.getAttribute('data-slug');
-      li.querySelector('.seq__frame .nw').style.viewTransitionName = 'hero-' + slug;
-      a.style.viewTransitionName = 'title-' + slug;
-      a.style.viewTransitionClass = 'vt-title';
+    slice(document.querySelectorAll('a.col__a')).forEach(function (a) {
+      if (a.href !== to) return;
+      var slug = to.replace(/^.*project-|\.html.*$/g, '');
+      var card = a.querySelector('.col__card:not(.col__film)'), t = a.querySelector('.col__t');
+      if (card) card.style.viewTransitionName = 'hero-' + slug;
+      t.style.viewTransitionName = 'title-' + slug;
+      t.style.viewTransitionClass = 'vt-title';
     });
   });
 
-  /* ------------------------------------------------------------ the research ground (hierarchy, D87)
-     In the light scheme the end of the home page stands on ink. Format's circle wipe: when the research
-     heading crosses 60% of the viewport, a disc of ink grows from it and the words turn light; going back up
-     undoes it. Without this script, or under reduced motion, the end simply stands on ink from the start. */
-  var inv = document.querySelector('.inv');
-  if (inv && !reduce.matches && 'IntersectionObserver' in window) {
-    var line = function () { return inv.getBoundingClientRect().top < window.innerHeight * 0.6; };
-    inv.classList.add('inv--wait');
-    inv.classList.toggle('is-inv', line());
-    new IntersectionObserver(function () { inv.classList.toggle('is-inv', line()); }, { rootMargin: '0px 0px -40% 0px' }).observe(inv);
+  /* ------------------------------------------------------------ the index's views and families (state, D98)
+     The page holds the grid, the tree and the list; the bar shows one view and one family (dmcg's catalog) and
+     keeps both in the address, so a link or Back returns to the same view. The tree needs room: under 48rem it
+     gives way to the grid. A tile a filter brings back rises into place once (feedback). */
+  var ixBar = document.querySelector('.ix-bar');
+  if (ixBar) {
+    var ixViews = slice(document.querySelectorAll('[data-view]'));
+    var ixTiles = slice(document.querySelectorAll('.tile'));
+    var ixWide = window.matchMedia('(min-width: 48rem)');
+    var ixState = { view: 'grid', family: 'all' };
+    var ixStatus = document.querySelector('[data-ix-status]');
+    var ixQuery = new URLSearchParams(location.search);
+    if (/^(grid|tree|list)$/.test(ixQuery.get('view'))) ixState.view = ixQuery.get('view');
+    if (/^(all|drawing|render|film)$/.test(ixQuery.get('family'))) ixState.family = ixQuery.get('family');
+    var ixApply = function (first) {
+      var view = ixState.view === 'tree' && !ixWide.matches ? 'grid' : ixState.view;
+      ixViews.forEach(function (v) { v.hidden = v.getAttribute('data-view') !== view; });
+      document.body.setAttribute('data-ix-view', view);
+      ixTiles.forEach(function (t) {
+        var on = ixState.family === 'all' || t.getAttribute('data-kind') === ixState.family;
+        if (on && t.hidden && !first && !reduce.matches) { t.classList.remove('is-entering'); void t.offsetWidth; t.classList.add('is-entering'); }
+        t.hidden = !on;
+      });
+      slice(document.querySelectorAll('[data-branch]')).forEach(function (b) { b.hidden = b.getAttribute('data-branch') !== ixState.family; });
+      var shown = ixTiles.filter(function (t) { return !t.hidden; }), seen = {};
+      ixTiles.forEach(function (t) { if (t.id) t.removeAttribute('id'); });
+      shown.forEach(function (t) { var l = t.getAttribute('data-l'); if (!seen[l]) { seen[l] = 1; t.id = 'az-' + l; } });
+      slice(document.querySelectorAll('.az li')).forEach(function (li) { li.hidden = !seen[li.textContent.trim()]; });
+      if (!first && ixStatus) ixStatus.textContent = (view === 'list' ? document.querySelectorAll('.ix-table tbody tr').length + ' projects, list view' : shown.length + ' images, ' + (ixState.family === 'all' ? 'all kinds' : ixState.family + 's') + ', ' + view + ' view');
+      slice(document.querySelectorAll('button[data-family]')).forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-family') === ixState.family)); });
+      slice(document.querySelectorAll('[data-view-btn]')).forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-view-btn') === view)); });
+      if (!first) {
+        var u = new URLSearchParams(location.search); u.set('view', view); u.set('family', ixState.family);
+        history.replaceState(null, '', location.pathname + '?' + u.toString() + location.hash);
+      }
+      if (typeof measureSoon === 'function') measureSoon();   // the engine measures what is shown now
+    };
+    document.addEventListener('click', function (e) {
+      var b = e.target.closest && e.target.closest('button[data-family], button[data-view-btn]');
+      if (!b) return;
+      if (b.hasAttribute('data-view-btn')) ixState.view = b.getAttribute('data-view-btn'); else ixState.family = b.getAttribute('data-family');
+      ixApply(false);
+    });
+    if (ixWide.addEventListener) ixWide.addEventListener('change', function () { ixApply(true); });
+    ixBar.hidden = false;
+    ixApply(true);
   }
 
   /* ------------------------------------------------------------ figure viewer (orientation, state)
@@ -370,6 +421,7 @@
     var vPrev = viewer.querySelector('[data-viewer-prev]');
     var vNext = viewer.querySelector('[data-viewer-next]');
     var vClose = viewer.querySelector('form[method="dialog"] button');
+    var vProject = viewer.querySelector('[data-viewer-project]');
     vTitle.setAttribute('aria-live', 'polite');
     var cur = -1, img = null, actual = false, busy = false, returnTo = null;
     var spring = function () { return css('--spring') || 'cubic-bezier(0.16, 1, 0.3, 1)'; };
@@ -435,6 +487,8 @@
       vCount.textContent = (cur + 1) + ' / ' + links.length;
       vPrev.setAttribute('aria-disabled', String(cur === 0)); vNext.setAttribute('aria-disabled', String(cur === links.length - 1));
       vToggle.hidden = fit(it).s >= 1;
+      var proj = it.a.getAttribute('data-href');   // the index's tiles open their project from the viewer (A6)
+      if (vProject) { vProject.hidden = !proj; if (proj) vProject.href = proj; }
     };
     var animate = function (el, from, to, dur) {
       el.style.transform = tf(to);
@@ -501,6 +555,8 @@
       var a = e.target.closest('[data-viewer]');
       if (!a || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
       e.preventDefault();
+      // the gallery is what the reader can see: a filtered index leaves its hidden tiles out (A6)
+      links = slice(document.querySelectorAll('[data-viewer]')).filter(function (x) { return x.getClientRects().length > 0; });
       open(links.indexOf(a));
     });
     vClose.addEventListener('click', function (e) { e.preventDefault(); closeViewer(); });

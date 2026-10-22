@@ -54,7 +54,7 @@ export function planRow(items, { max = 'full', maxH = MAX_H, ladder = CENTRED } 
 
 /* ---------------------------------------------------------- one image */
 // alt and title come from content; zoom adds the full-size viewer link (works without JS)
-export function image(rel, { alt, sz, prefix = '', priority = false, zoom = false, title = '', vt = null }) {
+export function image(rel, { alt, sz, prefix = '', priority = false, zoom = false, title = '', vt = null, project = '', upto = 0 }) {
   const { w, h } = dims(rel);
   const style = `--nw: ${w}px${vt ? `; view-transition-name: ${vt}` : ''}`;
   // a cutout carries its dark-scheme treatment (D50, D69): inverted linework, or inverted linework with its
@@ -63,9 +63,9 @@ export function image(rel, { alt, sz, prefix = '', priority = false, zoom = fals
   const dark = darkOf(rel), keep = keepOf(rel);
   const cls = `nw${dark ? ` nw--drawing nw--${dark}` : ''}`;
   const layer = keep ? picture(keep, { alt: '', sizes: sz, prefix, cls: 'nw__keep' }) : '';
-  if (!zoom) return keep ? html`<span class="${cls}" style="${style}">${picture(rel, { alt, sizes: sz, prefix, priority })}${layer}</span>` : picture(rel, { alt, sizes: sz, prefix, priority, cls, style });
+  if (!zoom) return keep ? html`<span class="${cls}" style="${style}">${picture(rel, { alt, sizes: sz, prefix, priority, upto })}${layer}</span>` : picture(rel, { alt, sizes: sz, prefix, priority, cls, style });
   const big = largest(rel, prefix);
-  return html`<a class="zoom-link ${cls}" style="${style}" href="${prefix}${rel}" data-viewer data-title="${title}" data-alt="${alt}" data-w="${w}" data-h="${h}" data-webp="${big.webp}" data-avif="${big.avif}"${dark ? html` data-dark="${dark}"` : ''}${keep ? html` data-keep="${largest(keep, prefix).webp}"` : ''}><span class="vh">Open full size: ${title || alt}</span>${picture(rel, { alt, sizes: sz, prefix, priority })}${layer}</a>`;
+  return html`<a class="zoom-link ${cls}" style="${style}" href="${prefix}${rel}" data-viewer data-title="${title}" data-alt="${alt}" data-w="${w}" data-h="${h}" data-webp="${big.webp}" data-avif="${big.avif}"${project ? html` data-href="${project}"` : ''}${dark ? html` data-dark="${dark}"` : ''}${keep ? html` data-keep="${largest(keep, prefix).webp}"` : ''}><span class="vh">Open full size: ${title || alt}</span>${picture(rel, { alt, sizes: sz, prefix, priority, upto })}${layer}</a>`;
 }
 
 // a row of images sharing one height; `stack`: one per line on phones (drawings, or more than two).
@@ -196,7 +196,7 @@ export const capOf = (f, span, side) => (f.title || f.caption || f.credit)
   ? html`<figcaption class="cap s-${span}${side ? ' cap--side' : ''}">${when(f.title, () => html`<span class="cap__t">${f.title}</span>`)}${when(f.caption || f.credit, () => html` <span class="cap__x">${inline(f.caption || '')}${when(f.credit, () => html` <span class="credit">${f.credit}.</span>`)}</span>`)}</figcaption>` : '';
 const plate = (f, n, span, body, { rv = true, key = '' } = {}) => {
   const side = capSide(span, `${f.title || ''}${f.caption || ''}`);
-  return html`<figure class="fig block wrap g${side ? ' fig--dock' : ''}" id="fig-${n}"${rv ? html` data-rv` : ''}>${body}${key}${capOf(f, span, side)}</figure>`;
+  return html`<figure class="fig block wrap g${side ? ' fig--dock' : ''}" id="fig-${n}" data-fx="centre"${rv ? html` data-rv` : ''}>${body}${key}${capOf(f, span, side)}</figure>`;
 };
 
 export function figure(f, n, ctx) {
@@ -274,4 +274,13 @@ export const heroCaption = (x) => {
   const parts = [x.hero.caption, heroPartner(x)?.caption].filter(Boolean);
   const credit = creditLine(x);
   return parts.length || credit ? html`${inline(parts.join(' '))}${when(credit, () => html`${parts.length ? ' ' : ''}<span class="credit">${credit}</span>`)}` : '';
+};
+
+/* ---------------------------------------------------------- a word that gathers (D99, A12) */
+// The word is read once, from hidden text; its letters are drawn apart by a fixed seed (mulberry32 of the word), so
+// the page is the same on every visit, and CSS brings them together as the reader scrolls (--q from 1 to 0).
+export const scatter = (word) => {
+  let a = [...word].reduce((h, c) => Math.imul(h ^ c.charCodeAt(0), 2654435761) >>> 0, 1779033703);
+  const rnd = () => { a = (a + 0x6D2B79F5) | 0; let t = Math.imul(a ^ (a >>> 15), 1 | a); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
+  return html`<span class="sc"><span class="vh">${word}</span>${[...word].map((c) => html`<span class="sc__l" aria-hidden="true" style="--x: ${((rnd() - 0.5) * 16).toFixed(2)}; --y: ${((rnd() - 0.5) * 10).toFixed(2)}; --r: ${((rnd() - 0.5) * 60).toFixed(1)}">${c}</span>`)}</span>`;
 };

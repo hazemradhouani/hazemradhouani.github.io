@@ -107,7 +107,7 @@ async function runThemeInteractions() {
     await mobilePage.locator('.menu-button').first().click();
     await mobilePage.locator('#menu[open] [data-theme-scope="menu"]').focus();
     await mobilePage.locator('#menu[open] [data-theme-scope="menu"]').press('Enter');
-    // every control (header, bar, menu) follows: visible state "theme: light", action ", switch to dark" (D68: no aria-pressed)
+    // every control (header, menu) follows: visible state "theme: light", action ", switch to dark" (D68: no aria-pressed)
     const state = await mobilePage.evaluate(() => ({ theme: document.documentElement.getAttribute('data-theme'), all: [...document.querySelectorAll('[data-theme-toggle]')].every((b) => !b.hasAttribute('aria-pressed')
       && b.querySelector('[data-theme-label]')?.textContent?.trim() === 'theme: light' && b.querySelector('[data-theme-action]')?.textContent === ', switch to dark') }));
     if (state.theme !== 'light' || !state.all) failures.push('mobile menu keyboard toggle did not synchronise light preference');
@@ -155,7 +155,7 @@ async function runMotionPass() {
         await Promise.race([Promise.all(document.getAnimations().map((a) => a.finished.catch(() => {}))), sleep(8000)]);
         const out = [];
         // a page with plates below the fold must have arrival groups at all, or this pass would pass on nothing
-        if (!document.querySelector('.rv-g')) out.push('no arrival groups: the arrival module did not run');
+        if (document.querySelector('[data-rv]') && !document.querySelector('.rv-g')) out.push('no arrival groups: the arrival module did not run');
         for (const el of document.querySelectorAll('.rv, .rv-g')) {
           if (!el.classList.contains('is-in')) out.push(`not arrived: ${el.tagName.toLowerCase()}.${[...el.classList].join('.')}`);
           else if (getComputedStyle(el).opacity !== '1') out.push(`opacity ${getComputedStyle(el).opacity}: ${el.tagName.toLowerCase()}.${[...el.classList].join('.')}`);
@@ -179,8 +179,8 @@ async function runMotionPass() {
 }
 // Smooth scroll (D79): with motion and a fine pointer a wheel glides (moving over several frames, settling on
 // its target); a keyboard scroll in between is followed, never undone; a contents link glides to its chapter,
-// stops clear of the bar, updates the address and moves focus; an open dialog holds the page still; the bar
-// still answers a scroll back up. Under reduced motion the engine never loads and scrolling stays native.
+// stops clear of the fixed header, updates the address and moves focus; an open dialog holds the page still; the header
+// stays at the top of the screen. Under reduced motion the engine never loads and scrolling stays native.
 async function runScrollPass() {
   const failures = [];
   const page0 = urls.find((u) => u.includes('project-ain-sebaa')) || urls.find((u) => u.includes('project-'));
@@ -223,7 +223,7 @@ async function runScrollPass() {
       if (Math.abs(y2 - (y1 + page1)) > Math.max(48, page1 * 0.12)) fail(`PageDown during a glide ended at ${Math.round(y2)}px, not one page (${Math.round(page1)}px) from ${Math.round(y1)}px: the glide was not handed over`);
       await page.mouse.wheel(0, -300);
       await page.waitForTimeout(900);
-      if (!(await page.evaluate(() => document.getElementById('bar')?.classList.contains('is-shown')))) fail('the compact bar did not answer a scroll back up');
+      if (!(await page.evaluate(() => { const r = document.querySelector('.site-header').getBoundingClientRect(); return getComputedStyle(document.querySelector('.site-header')).position === 'fixed' && r.top === 0; }))) fail('the fixed header (D93) left the top of the screen');
       const link = page.locator('.toc a').last();
       if (await link.count()) {
         const id = (await link.getAttribute('href')).slice(1);
@@ -252,10 +252,10 @@ async function runScrollPass() {
   }
   return failures;
 }
-// The home sequence (D84-D87), with motion and a fine pointer at 1440: the window opens to the full width; the
-// plates stick, and each one in view stands at scale 1 in colour; focus reaching a covered plate brings it back
-// to the top; the renders advance, and hold for the pause button and for focus; the research ground turns to
-// ink past its line and back above it.
+// The home "Reel" (D96, D97), with motion and a fine pointer at 1440: the film's frame opens from a card to
+// the screen's width; its time follows the scroll forwards and back; the chapters come one at a time and the
+// rail follows them; a project at the centre stands open beside its drawing; every project link takes focus
+// in view. Then a 375px touch screen (A4, D101): motion on, no smooth-scroll engine, the poster kept (no film loads).
 async function runHomePass() {
   const failures = [];
   const home = urls.find((u) => u === BASE || u.endsWith('/index.html'));
@@ -269,71 +269,147 @@ async function runHomePass() {
     await page.goto(home, { waitUntil: 'load' });
     await page.waitForTimeout(600);
     const m = await page.evaluate(() => {
-      const nat = (li) => { let t = li.parentNode.getBoundingClientRect().top + scrollY; for (let s = li.parentNode.firstElementChild; s !== li; s = s.nextElementSibling) t += s.offsetHeight; return t; };
-      const lis = [...document.querySelectorAll('.seq__plate')];
-      return { fx: document.documentElement.classList.contains('fx'), sticky: lis.every((li) => getComputedStyle(li).position === 'sticky'), plates: lis.map(nat),
-        win: document.querySelector('.open__win').getBoundingClientRect().top + scrollY, inv: document.querySelector('.inv').getBoundingClientRect().top + scrollY };
+      const f = document.querySelector('.film');
+      return { fx: document.documentElement.classList.contains('fx'), top: f.getBoundingClientRect().top + scrollY, h: f.offsetHeight, vh: document.documentElement.clientHeight,
+        w0: document.querySelector('.film__frame').getBoundingClientRect().width };
     });
-    if (!m.fx) fail('html.fx is not set for a fine pointer with motion');
-    if (!m.sticky || m.plates.length < 2) fail('the plates do not stick at 1440');
-    await go(m.win);
-    const open = await page.evaluate(() => { const r = document.querySelector('.open__win').getBoundingClientRect(); return { w: r.width, full: document.documentElement.clientWidth }; });
-    if (Math.abs(open.w - open.full) > 2) fail(`the window opens to ${Math.round(open.w)}px of ${open.full}px`);
-    for (const [i, y] of m.plates.entries()) {
-      await go(y, 900);
-      const s = await page.evaluate((i) => { const li = document.querySelectorAll('.seq__plate')[i]; const cs = getComputedStyle(li); return { scale: cs.scale, mono: getComputedStyle(li.querySelector('.seq__mono')).opacity, top: li.getBoundingClientRect().top }; }, i);
-      // (a scroll position snaps to whole pixels, so a plate in place may sit a hair past 0.5: a 0.2% tolerance)
-      if (Math.abs((s.scale === 'none' ? 1 : +s.scale) - 1) > 0.002 || +s.mono > 0.01 || Math.abs(s.top) > 1) fail(`plate ${i + 1} in view: scale ${s.scale}, greyscale ${s.mono}, top ${Math.round(s.top)}`);
+    if (!m.fx) fail('html.fx is not set with motion');
+    if (m.h < m.vh * 2.5) fail(`the film's track is ${Math.round(m.h / m.vh * 100)}svh, under 250`);
+    const at = (p) => m.top + p * (m.h - m.vh);
+    // the frame opens
+    await go(at(0.4));
+    const w1 = await page.evaluate(() => document.querySelector('.film__frame').getBoundingClientRect().width);
+    if (w1 < m.w0 * 1.3) fail(`the film's frame opens from ${Math.round(m.w0)}px to only ${Math.round(w1)}px`);
+    // the film: its first frame lands, then its time follows the scroll, forwards and back
+    try { await page.waitForFunction(() => document.querySelector('.film__frame').classList.contains('is-live'), null, { timeout: 10000 }); }
+    catch (e) { fail('the film never showed a frame (is-live)'); }
+    const t = () => page.evaluate(() => { const v = document.querySelector('.film__frame video'); return { t: v.currentTime, d: v.duration }; });
+    const seen = [];
+    for (const p of [0.2, 0.5, 0.8, 0.35]) { await go(at(p), 1600); const s = await t(); seen.push(s.t); if (Math.abs(s.t - p * s.d) > 0.25) fail(`at ${p} of the track the film stands at ${s.t.toFixed(2)}s, not ${(p * s.d).toFixed(2)}s`); }
+    if (!(seen[0] < seen[1] && seen[1] < seen[2] && seen[3] < seen[2])) fail(`the film's time does not follow the scroll both ways: ${seen.map((x) => x.toFixed(2)).join(', ')}`);
+    // the chapters, one at a time, and the rail with them
+    const cs = await page.evaluate(() => [...document.querySelectorAll('.film__ch > li')].map((li) => +li.style.getPropertyValue('--c')));
+    for (const [i, c] of cs.entries()) {
+      await go(at(c), 900);
+      const s = await page.evaluate((i) => ({ o: [...document.querySelectorAll('.film__ch > li')].map((li) => +getComputedStyle(li).opacity),
+        ch: document.querySelector('.film').getAttribute('data-chapter'), rail: [...document.querySelectorAll('.rail > li')].findIndex((li) => li.classList.contains('is-on')) }), i);
+      if (s.o[i] < 0.95 || s.o.some((o, k) => k !== i && o > 0.05)) fail(`chapter ${i + 1} at its place: opacities ${s.o.map((o) => o.toFixed(2)).join(', ')}`);
+      if (s.ch !== String(i) || s.rail !== i) fail(`chapter ${i + 1}: data-chapter ${s.ch}, rail step ${s.rail + 1}`);
     }
-    // Shift+Tab from plate 3 into plate 2 while plate 3 covers it: the link that takes focus must be the topmost thing at its centre
-    await go(m.plates[2], 900);
-    await page.locator('.seq__plate').nth(2).locator('.seq__t a').focus();
-    for (let k = 0; k < 6; k++) {
-      await page.keyboard.press('Shift+Tab');
-      if (await page.evaluate(() => !!document.activeElement.closest('.seq__plate:nth-child(2)'))) break;
-    }
-    await page.waitForTimeout(700);
-    const seen = await page.evaluate(() => { const a = document.activeElement; if (!a.closest('.seq__plate:nth-child(2)')) return 'focus never reached plate 2'; const r = a.getBoundingClientRect(); const top = document.elementFromPoint(r.left + r.width / 2, r.top + r.height / 2); return a.contains(top) || top === a ? '' : `the focused link in plate 2 is covered by ${top && top.className}`; });
-    if (seen) fail(seen);
-    // the renders: they advance, and hold for the pause button and for focus
+    // a project at the centre stands open beside its drawing
+    const y0 = await page.evaluate(() => { const li = document.querySelector('.col__it--pair'); const r = li.getBoundingClientRect(); return r.top + scrollY + r.height / 2 - document.documentElement.clientHeight / 2; });
+    await go(y0, 900);
+    const open = await page.evaluate(() => { const li = document.querySelector('.col__it--pair'); return { d: +li.style.getPropertyValue('--d'), key: +getComputedStyle(li.querySelector('.col__key')).opacity, card: getComputedStyle(li.querySelector('.col__card')).translate }; });
+    if (Math.abs(open.d) > 0.02 || open.key < 0.95 || !/^(none|0(px|%)?)(\s|$)/.test(open.card)) fail(`the centred project is not open: d ${open.d}, drawing ${open.key}, render moved ${open.card}`);
+    // every project link takes focus in view
     await go(0, 400);
-    await page.waitForFunction(() => document.querySelector('.open__pause').classList.contains('is-on'), null, { timeout: 8000 });
-    const shown = () => page.evaluate(() => [...document.querySelectorAll('.open__slide')].findIndex((s) => s.classList.contains('is-on')));
-    const pb = await page.evaluate(() => { const r = document.querySelector('.open__pause').getBoundingClientRect(); return [r.width, r.height]; });
-    if (pb[0] < 44 || pb[1] < 44) fail(`the pause button is ${pb.map(Math.round).join('x')}px`);
-    const s0 = await shown(); await page.waitForTimeout(5600);
-    const s1 = await shown(); if (s1 === s0) fail('the renders did not advance in 5.6 s');
-    await page.click('.open__pause'); await page.mouse.move(5, 5);
-    if ((await page.textContent('.open__pause [data-pause-label]')) !== 'play') fail('the pause button does not say play once paused');
-    await page.waitForTimeout(5600);
-    if ((await shown()) !== s1) fail('the renders advanced while paused');
-    await page.click('.open__pause'); await page.mouse.move(5, 5);
-    // play resumes, even with the button still holding focus
-    const s1b = await shown(); await page.waitForTimeout(5600);
-    if ((await shown()) === s1b) fail('the renders did not resume after play');
-    await page.locator('.open__now li:not([hidden]) a').focus();
-    const s2 = await shown(); await page.waitForTimeout(5600);
-    if ((await shown()) !== s2) fail('the renders advanced while their caption held focus');
-    // one pass of the three countries, then the show rests on the first and offers to play
-    await page.evaluate(() => document.activeElement.blur());
-    try { await page.waitForFunction(() => document.querySelector('.open__pause [data-pause-label]').textContent === 'play', null, { timeout: 12000 }); }
-    catch (e) { fail('the renders did not come to rest after one pass'); }
-    if ((await shown()) !== 0) fail(`the renders rest on slide ${await shown()}, not the first`);
-    // the research ground (light scheme)
-    await go(m.inv - 900 * 0.2, 1600);
-    const dark = await page.evaluate(() => getComputedStyle(document.querySelector('.inv')).backgroundColor);
-    if (dark !== 'rgb(17, 17, 17)') fail(`research past its line stands on ${dark}`);
-    await go(m.inv - 900, 1600);
-    const light = await page.evaluate(() => [document.querySelector('.inv').classList.contains('is-inv'), getComputedStyle(document.querySelector('.inv')).backgroundColor]);
-    if (light[0] || light[1] !== 'rgb(255, 255, 255)') fail(`research above its line stands on ${light[1]}`);
+    const links = await page.locator('a.col__a').count();
+    if (links !== 15) fail(`${links} project links in the column, expected 15`);
+    // reached as a reader reaches it: Tab from the header's last control into the column
+    await page.locator('[data-theme-scope="header"]').focus();
+    for (let k = 0; k < links; k++) {
+      await page.keyboard.press('Tab');
+      await page.waitForTimeout(400);
+      const r = await page.evaluate(() => { const a = document.activeElement; const b = a.getBoundingClientRect(); return { col: a.classList.contains('col__a'), top: b.top, bottom: b.bottom, vh: innerHeight }; });
+      if (!r.col) { fail(`Tab ${k + 1} left the column`); break; }
+      if (r.bottom < 0 || r.top > r.vh) fail(`project link ${k + 1} took focus out of view`);
+    }
   } catch (e) { fail(e.message); }
   await ctx.close();
+  // a touch screen at 375 (A4): motion on, the device's own scrolling, the film playing muted in a loop
+  const tctx = await browser.newContext({ viewport: { width: 375, height: 812 }, deviceScaleFactor: 2, hasTouch: true, isMobile: true, reducedMotion: 'no-preference' });
+  const tp = await tctx.newPage();
+  try {
+    await tp.goto(home, { waitUntil: 'load' });
+    await tp.waitForTimeout(3500);
+    const s = await tp.evaluate(() => { const v = document.querySelector('.film__frame video'); return { fx: document.documentElement.classList.contains('fx'), lenis: document.documentElement.classList.contains('lenis'), loop: v.loop, src: v.currentSrc }; });
+    if (!s.fx) failures.push('touch: html.fx is not set');
+    if (s.lenis) failures.push('touch: the smooth-scroll engine loaded on a touch screen');
+    if (s.src) failures.push(`touch: a film loads on a narrow touch screen (${s.src.split('/').pop()})`);
+  } catch (e) { failures.push(`touch: ${e.message}`); }
+  await tctx.close();
   return failures;
 }
 const homeFailures = await runHomePass();
 gateFails += homeFailures.length;
-if (homeFailures.length) console.log(`FAIL home sequence: ${homeFailures.join(' | ')}`);
-else console.log('ok   home sequence: window opens, plates stick and settle in colour, covered focus returns, renders play and pause, research ground turns');
+if (homeFailures.length) console.log(`FAIL home reel: ${homeFailures.join(' | ')}`);
+else console.log('ok   home reel: frame opens, film follows the scroll both ways, chapters and rail in order, centred project open, links focus in view, touch keeps the poster');
+// The index (D98): the count matches its tiles; a family chosen by keyboard shows exactly its tiles, is pressed and
+// written to the address; the viewer's gallery is the visible tiles and offers their project; the tree and the list
+// open from the bar; an address with a view and a family restores both.
+async function runIndexPass() {
+  const failures = [];
+  const url = urls.find((u) => u.includes('architecture.html'));
+  if (!url) return failures;
+  const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 }, deviceScaleFactor: 1, colorScheme: 'light', reducedMotion: 'reduce' });
+  const page = await ctx.newPage();
+  const fail = (s) => failures.push(s);
+  try {
+    await page.goto(url, { waitUntil: 'load' });
+    const n = await page.evaluate(() => ({ all: document.querySelectorAll('.tile').length, said: +document.querySelector('.ix-head .col__count').textContent,
+      d: document.querySelectorAll('.tile[data-kind="drawing"]').length, bar: !document.querySelector('.ix-bar').hidden }));
+    if (n.all !== n.said) fail(`the index says ${n.said} and holds ${n.all} tiles`);
+    if (!n.bar) fail('the bar did not show');
+    await page.locator('.ix-bar button[data-family="drawing"]').focus();
+    await page.keyboard.press('Enter');
+    const s = await page.evaluate(() => ({ shown: [...document.querySelectorAll('.tile')].filter((t) => !t.hidden).length, q: location.search,
+      pressed: document.querySelector('.ix-bar button[data-family="drawing"]').getAttribute('aria-pressed') }));
+    if (s.shown !== n.d || !/family=drawing/.test(s.q) || s.pressed !== 'true') fail(`Drawings: ${s.shown} of ${n.d} tiles shown, address ${s.q}, pressed ${s.pressed}`);
+    await page.locator('.tile:not([hidden]) [data-viewer]').first().click();
+    await page.waitForTimeout(900);
+    const v = await page.evaluate(() => { const a = document.querySelector('[data-viewer-project]'); return { count: document.querySelector('.viewer__count').textContent.trim(), hidden: a.hidden, href: a.getAttribute('href') }; });
+    if (!v.count.endsWith(`/ ${n.d}`)) fail(`the viewer counts ${v.count}, not of the ${n.d} visible tiles`);
+    if (v.hidden || !/projects\/project-/.test(v.href)) fail('the viewer does not offer the project');
+    await page.keyboard.press('Escape');
+    await page.waitForTimeout(700);
+    for (const view of ['tree', 'list']) {
+      await page.locator(`.ix-bar [data-view-btn="${view}"]`).click();
+      if (!(await page.evaluate((view) => !document.querySelector(`[data-view="${view}"]`).hidden && document.querySelector('[data-view="grid"]').hidden, view))) fail(`the ${view} did not open`);
+    }
+    await page.goto(url.split('?')[0] + '?view=list&family=film', { waitUntil: 'load' });
+    const r = await page.evaluate(() => ({ list: !document.querySelector('[data-view="list"]').hidden, film: document.querySelector('.ix-bar button[data-family="film"]').getAttribute('aria-pressed') }));
+    if (!r.list || r.film !== 'true') fail('an address with view=list&family=film did not restore both');
+  } catch (e) { fail(e.message); }
+  await ctx.close();
+  return failures;
+}
+const indexFailures = await runIndexPass();
+gateFails += indexFailures.length;
+if (indexFailures.length) console.log(`FAIL index: ${indexFailures.join(' | ')}`);
+else console.log('ok   index views: count, family by keyboard and in the address, viewer of the visible tiles with its project, tree and list, address restored');
+// About (D99): with motion at 1440 the rail marks the chapter the reader is in and the header stands light over the
+// dark ground; the gathered word keeps its name; under reduced motion every chapter is there to read.
+async function runAboutPass() {
+  const failures = [];
+  const url = urls.find((u) => u.includes('about.html'));
+  if (!url) return failures;
+  for (const motion of ['no-preference', 'reduce']) {
+    const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 }, deviceScaleFactor: 1, colorScheme: 'light', reducedMotion: motion });
+    await ctx.addInitScript(() => { try { localStorage.setItem('hazem-theme', 'light'); } catch (e) {} });
+    const page = await ctx.newPage();
+    try {
+      await page.goto(url, { waitUntil: 'load' });
+      await page.waitForTimeout(600);
+      const ids = await page.evaluate(() => [...document.querySelectorAll('.tale__ch')].map((c) => c.id));
+      for (const [i, id] of ids.entries()) {
+        await page.evaluate((id) => { const c = document.getElementById(id); scrollTo({ top: c.getBoundingClientRect().top + scrollY + c.offsetHeight * 0.3, behavior: 'instant' }); }, id);
+        await page.waitForTimeout(motion === 'reduce' ? 300 : 900);
+        const s = await page.evaluate(() => ({ cur: [...document.querySelectorAll('.tale-rail a')].findIndex((a) => a.getAttribute('aria-current') === 'location'), dark: document.documentElement.classList.contains('on-dark') }));
+        if (s.cur !== i) failures.push(`${motion}: in chapter ${i + 1} the rail marks ${s.cur + 1}`);
+        if (!s.dark) failures.push(`${motion}: the header is not light over chapter ${i + 1}`);
+      }
+      const word = await page.evaluate(() => { const sc = document.querySelector('.sc'); return { name: sc.querySelector('.vh').textContent, hidden: [...sc.querySelectorAll('.sc__l')].every((l) => l.getAttribute('aria-hidden') === 'true') }; });
+      if (word.name !== 'Al-Arg' || !word.hidden) failures.push(`${motion}: the gathered word reads "${word.name}"`);
+      if (motion === 'reduce' && await page.evaluate(() => [...document.querySelectorAll('.tale__stage > *')].some((el) => +getComputedStyle(el).opacity < 1))) failures.push('reduce: a chapter is hidden');
+    } catch (e) { failures.push(`${motion}: ${e.message}`); }
+    await ctx.close();
+  }
+  return failures;
+}
+const aboutFailures = await runAboutPass();
+gateFails += aboutFailures.length;
+if (aboutFailures.length) console.log(`FAIL about: ${aboutFailures.join(' | ')}`);
+else console.log('ok   about: rail follows the chapters, header light over the ground, gathered word named, every chapter still under reduced motion');
 const scrollFailures = await runScrollPass();
 gateFails += scrollFailures.length;
 if (scrollFailures.length) console.log(`FAIL smooth scroll: ${scrollFailures.join(' | ')}`);
@@ -372,7 +448,9 @@ for (const url of urls) {
         if (!b.width || !w || !h) continue;
         const src = img.getAttribute('src');
         // 1%, or the half pixel a box snaps by on each axis when it is that small (a long strip on a phone)
-        if (Math.abs(b.width / b.height - w / h) / (w / h) > Math.max(0.01, 0.5 / b.height + 0.5 / b.width)) out.crop.push(`${src} ${Math.round(b.width)}x${Math.round(b.height)} vs ${w}x${h}`);
+        // the layout box, not the screen box: a turned photograph (D99) is rotated, not cropped
+        const cs = getComputedStyle(img); const ow = parseFloat(cs.width), oh = parseFloat(cs.height);
+        if (Math.abs(ow / oh - w / h) / (w / h) > Math.max(0.01, 0.5 / oh + 0.5 / ow)) out.crop.push(`${src} ${Math.round(ow)}x${Math.round(oh)} vs ${w}x${h}`);
         if (getComputedStyle(img).objectFit === 'cover') out.crop.push(`${src} object-fit: cover`);
         if (b.width > w + 1) out.upscale.push(`${src} ${Math.round(b.width)}px > ${w}px`);
         // the file actually served (a derivative) must have the master's ratio, or the browser stretches it
@@ -394,31 +472,20 @@ for (const url of urls) {
       const ok = theme === 'dark'
         ? new Set(['rgba(0, 0, 0, 0)', 'rgb(18, 19, 17)', 'rgb(247, 245, 239)', 'rgb(69, 70, 63)', 'rgba(18, 19, 17, 0.88)'])
         : new Set(['rgba(0, 0, 0, 0)', 'rgb(255, 255, 255)', 'rgb(17, 17, 17)', 'rgba(255, 255, 255, 0.86)']);
-      // a plate of the home stack stands on its own declared ground (D86: from its render, per scheme)
+      // an element with data-ground stands on its project's declared ground (D86, A10: from its render, per scheme)
       const rgb = (h) => `rgb(${[1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16)).join(', ')})`;
-      const ground = (el) => el.matches('.seq__plate') && rgb(getComputedStyle(el).getPropertyValue(theme === 'dark' ? '--g-dark' : '--g-light').trim());
+      const ground = (el) => el.matches('[data-ground]') && rgb(getComputedStyle(el).getPropertyValue(theme === 'dark' ? '--g-dark' : '--g-light').trim());
       if (innerWidth === 375 || innerWidth === 1440) for (const el of [document.documentElement, document.body, ...document.querySelectorAll('body *')]) {
         if (el.closest('video, svg, .lab__pin')) continue;
         const c = getComputedStyle(el).backgroundColor; if (!ok.has(c) && c !== ground(el)) out.palette.push(`${el.tagName.toLowerCase()}.${[...el.classList].join('.')} ${c}`);
       }
-      // the home opening and stack, still (D84-D86; this loop runs under reduced motion): the name stands centred
-      // in its column without passing it, the first screen shows the name and at least 30% of the window of renders,
-      // only the first render is there and nothing offers to pause, and the plates read as a plain sequence
+      // the home "Reel", still (D97; this loop runs under reduced motion): the name stands in the first screen
+      // under the film's poster, every chapter is there to read, no film loads, and no project is moved
       if (document.body.classList.contains('page-home')) {
-        const col = document.querySelector('.open__head').getBoundingClientRect();
-        const lines = {};   // the letters by line (the two words share one line where they fit)
-        for (const l of document.querySelectorAll('.open__mark .l')) { const b = l.getBoundingClientRect(); const k = Math.round(b.top); lines[k] = [Math.min(b.left, lines[k]?.[0] ?? Infinity), Math.max(b.right, lines[k]?.[1] ?? -Infinity)]; }
-        const mid = (col.left + col.right) / 2;
-        for (const [a, z] of Object.values(lines)) {
-          if (a < col.left - 1 || z > col.right + 1) out.theme.push(`the name runs past its column (${Math.round(a)}-${Math.round(z)})`);
-          if (Math.abs((a + z) / 2 - mid) > 3) out.theme.push(`the name sits ${Math.round((a + z) / 2 - mid)}px off the centre`);
-        }
-        const win = document.querySelector('.open__win').getBoundingClientRect();
-        if (document.querySelector('.open__name').getBoundingClientRect().bottom > innerHeight) out.theme.push('the name is below the first screen');
-        if (Math.min(win.height, innerHeight - win.top) / win.height < 0.3) out.theme.push(`the first screen shows ${Math.round(100 * (innerHeight - win.top) / win.height)}% of the renders`);
-        const pause = document.querySelector('.open__pause');
-        if (document.querySelectorAll('.open__slide').length !== 1 || pause.classList.contains('is-on') || getComputedStyle(pause).visibility !== 'hidden') out.theme.push('the renders play under reduced motion');
-        if ([...document.querySelectorAll('.seq__plate')].some((li) => getComputedStyle(li).position === 'sticky')) out.theme.push('plates stack under reduced motion');
+        if (document.getElementById('name').getBoundingClientRect().bottom > innerHeight) out.theme.push('the name is below the first screen');
+        if ([...document.querySelectorAll('.film__ch > li')].some((li) => +getComputedStyle(li).opacity < 1)) out.theme.push('a chapter is hidden under reduced motion');
+        if ([...document.querySelectorAll('video[data-scrub]')].some((v) => v.currentSrc || v.getAttribute('src'))) out.theme.push('a film loads under reduced motion');
+        if ([...document.querySelectorAll('.col__card, .col__key')].some((el) => !['none', '0px'].includes(getComputedStyle(el).translate) || getComputedStyle(el).scale !== 'none')) out.theme.push('a project moves under reduced motion');
       }
       // dark treatments (D50, D69): inverted linework is filtered only in the dark scheme; a keep drawing
       // shows its layer of solid regions, unfiltered, only in the dark scheme; no drawing may sit on a paper
@@ -465,7 +532,7 @@ for (const url of urls) {
       if (de.getAttribute('data-theme') !== theme) out.theme.push(`resolved ${de.getAttribute('data-theme') || 'none'}, expected ${theme}`);
       if (getComputedStyle(de).colorScheme !== theme) out.theme.push(`color-scheme ${getComputedStyle(de).colorScheme}, expected ${theme}`);
       const controls = [...document.querySelectorAll('[data-theme-toggle]')];
-      if (controls.length !== 3) out.theme.push(`theme controls ${controls.length}, expected 3`);
+      if (controls.length !== 2) out.theme.push(`theme controls ${controls.length}, expected 2 (header, menu: D93)`);
       else for (const control of controls) {
         // the name is the visible state followed by the action (WCAG 2.5.3); no aria-label may replace it
         const expectedAction = `, switch to ${theme === 'dark' ? 'light' : 'dark'}`;
@@ -491,6 +558,7 @@ for (const url of urls) {
       for (const img of document.querySelectorAll('main img[src*="images/cut/"], main img[src*="thesis-book"]')) {
         if (fullBleed.some((s) => img.getAttribute('src').includes(s))) continue;
         if (img.closest('.nw__keep')) continue;   // a keep layer is opaque by design inside its regions (D69); its drawing is checked
+        if (img.closest('.tile, .leaf')) continue;   // index thumbnails (D98): the same masters, checked full size on their project pages; at 480px resampling blends edge pixels
         img.loading = 'eager';
         const ok = await Promise.race([img.decode().then(() => true, () => false), new Promise((r) => setTimeout(() => r(false), 4000))]);
         if (!ok || !img.naturalWidth) { bad.push(`${img.getAttribute('src').split('/').pop()} did not load`); continue; }

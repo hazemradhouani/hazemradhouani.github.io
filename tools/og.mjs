@@ -37,10 +37,10 @@ const home = rd('content/pages/home.json');
 const years = projects.map((p) => parseInt(p.year, 10)).filter(Number.isFinite);
 // Field cards (D35): a white field, the image contained at its natural ratio (never cropped); renders carry no credit line (D72)
 const cards = [
-  { name: 'home', title: site.person.name, line: site.person.line, img: home.flagship.hero.image },
+  { name: 'home', title: site.person.name, line: site.person.line, img: home.film.poster },
   { name: 'work', title: 'Work', line: `${projects.length} projects in Tunisia, France and Morocco, ${Math.min(...years)} to ${Math.max(...years)}`, img: 'images/la-villette/la-villette-street-render-hq.jpg' },
   { name: 'research', title: 'Research', line: 'Between the Poetics of Place and the Value of Heritage', img: 'images/cut/books/thesis-mockup-1.png' },
-  { name: 'about', title: 'About', line: site.person.credential, img: 'images/portrait.jpg' },
+  { name: 'about', title: 'About', line: site.person.credential, img: 'images/about/portrait-sitting.jpg' },
   { name: 'motion', title: 'Films and motion', line: 'Architectural films and motion graphic reels', img: 'images/zenata/zenata-platform-render.jpg' },
   ...projects.filter((p) => p.hero).map((p) => ({ name: 'project-' + p.slug, title: p.title, line: `${p.descriptor} | ${p.place} | ${p.year}`, img: p.hero.src, credit: p.hero.credit }))
 ];
@@ -49,7 +49,7 @@ for (const c of cards) {
   await p.goto(BASE + '404.html');
   await p.setContent(`<!doctype html><html><head><base href="${BASE}"><style>
 @font-face{font-family:G;src:url(fonts/eb-garamond-latin-wght-normal.woff2) format("woff2");font-weight:400 800}
-@font-face{font-family:P;src:url(fonts/ibm-plex-sans-latin-wght-normal.woff2) format("woff2");font-weight:100 700}
+@font-face{font-family:P;src:url(fonts/instrument-sans-latin-wght-normal.woff2) format("woff2");font-weight:400 700}
 body{margin:0;width:1200px;height:630px;background:#fff;color:#111;display:grid;grid-template-columns:560px 640px;overflow:hidden}
 .t{padding:60px 40px 56px 64px;display:flex;flex-direction:column;justify-content:space-between}
 .who{font:600 15px P,sans-serif;letter-spacing:.22em;text-transform:uppercase}

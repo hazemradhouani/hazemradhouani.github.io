@@ -1,67 +1,39 @@
 {
+  "$comment": "Home, \"Reel\" (plan 17, D95-D97): a film scrubbed by the scroll, the column of projects, then practice, research and the index. Chapters come from site.person; every other string is here.",
   "title": "HAZEM RADHOUANI",
   "description": "Architect with international experience: project work in Tunisia, France and Morocco, and research experience in Japan.",
   "og": "images/og/home.jpg",
-  "slides": [
-    { "project": "al-arg", "image": "images/al-arg/al-arg-aerial-sunset-hq.jpg" },
-    { "project": "la-villette", "image": "images/la-villette/la-villette-aerial-render-hq.jpg" },
-    { "project": "zenata", "image": "images/zenata/zenata-platform-render.jpg" }
+  "film": {
+    "title": "Sidi Maarouf Station",
+    "caption": "Sidi Maarouf Station, Casablanca. Architectural film, 2025.",
+    "poster": "images/film/sidi-maarouf-scrub.jpg",
+    "desktop": "videos/scrub/sidi-maarouf-desktop.mp4",
+    "mobile": "videos/scrub/sidi-maarouf-mobile.mp4",
+    "alt": "Aerial view at dusk of a single-storey station under a wide white roof beside the railway: platforms with canopies, trains, palm trees and car parks; the camera circles the building as the page scrolls",
+    "source": "videos/sidi-maarouf.mp4, 30.9 to 40.4 s, one continuous aerial take (D96); facts from content/pages/motion.json film-sidi-maarouf"
+  },
+  "column": [
+    { "project": "zenata", "mode": "pair", "key": "images/cut/zenata/zenata-site-access.png" },
+    { "project": "bolivar", "mode": "pair", "key": "images/cut/bolivar/bolivar-axo-retained.png" },
+    { "project": "al-arg", "mode": "pair", "key": "images/cut/al-arg/al-arg-past-present-future.png" },
+    { "project": "nouvelle-medina", "mode": "pair", "key": "images/cut/nouvelle-medina/nouvelle-medina-structure-exploded.png" },
+    { "project": "foubert", "mode": "pair", "key": "images/cut/foubert/foubert-west-facade.png" },
+    { "project": "la-villette", "mode": "pair", "key": "images/cut/la-villette/la-villette-facade-module-axo.png" },
+    { "project": "sentry", "mode": "film", "poster": "images/film/sentry-scrub.jpg", "desktop": "videos/scrub/sentry-desktop.mp4", "mobile": "videos/scrub/sentry-mobile.mp4" },
+    { "project": "belhomme", "mode": "pair", "key": "images/cut/belhomme/belhomme-facade-rue-belhomme.png" },
+    { "project": "corallum", "mode": "pair", "key": "images/cut/corallum/corallum-volume-helical.png" },
+    { "project": "ain-sebaa", "mode": "pair", "key": "images/cut/ain-sebaa/ain-sebaa-structure.png" },
+    { "project": "avenir", "mode": "pair", "key": "images/cut/avenir/avenir-south-elevation.png" },
+    { "project": "cinephile", "mode": "pair", "key": "images/cut/cinephile/cinephile-sketch.png" },
+    { "project": "hay-mohammadi", "mode": "single" },
+    { "project": "papillon", "mode": "pair", "key": "images/cut/papillon/papillon-site-plan.png" },
+    { "project": "tamansourt", "mode": "pair", "key": "images/cut/tamansourt/tamansourt-site-plan.png" }
   ],
   "cover": {
     "image": "images/cover/alley.jpg",
     "alt": "Black and white photograph of an earthen alley between rubble walls, with two lit doorways, in a ruined village",
     "source": "pdf2026:p1 (cover photograph, uncredited)"
   },
-  "manifesto": {
-    "quote": "Look before building.",
-    "text": "A village in the Tunisian Jérid region | raw earth architecture never previously documented. Multiple on-site survey campaigns conducted: measurements, documentary photography, interviews with former inhabitants.",
-    "attribution": "Al-Arg, architecture thesis",
-    "href": "projects/project-al-arg.html",
-    "source": "pdf2026:p23"
-  },
-  "flagship": {
-    "project": "al-arg",
-    "title": "Al-Arg",
-    "line": "The ruined village that founded the conviction.",
-    "text": "The thesis operates at three scales simultaneously: a territorial analysis of the conditions that produced the abandonment, an urban proposal for the reactivation of the village as a place of memory, culture, and temporary dwelling, and an architectural intervention on a key building within the fabric.",
-    "hero": {
-      "image": "images/al-arg/al-arg-aerial-sunset-hq.jpg",
-      "alt": "Aerial render of Al-Arg at sunset: earth-walled buildings, roof terraces and open courtyards below a grove of date palms, in deep orange light"
-    },
-    "scales": [
-      {
-        "label": "Territorial",
-        "caption": "Site map | Al-Arg within the Jérid. Reading of the oasis territory as a system | water, road, inhabited fabric.",
-        "image": "images/al-arg/al-arg-territory-map-hq.png",
-        "alt": "Coloured map of the oasis territory around Al-Arg: palm groves in three greens, residential, saline and unplanted areas, roads and routes towards the neighbouring oases and towns"
-      },
-      {
-        "label": "Urban",
-        "caption": "Site plan | rehabilitation proposal.",
-        "image": "images/al-arg/al-arg-site-plan-proposal.png",
-        "alt": "Site plan of the Al-Arg rehabilitation proposal"
-      },
-      {
-        "label": "Architectural",
-        "caption": "Ground floor plan | proposed",
-        "image": "images/al-arg/al-arg-ground-floor-proposed-hq.png",
-        "alt": "Coloured plan of the rehabilitated building: black earth walls around several courtyards, small planted patios and pale blue rooms among the surrounding houses"
-      }
-    ],
-    "sources": {
-      "line": "pdf2026:p2",
-      "text": "site:project-al-arg",
-      "captions": "pdf2026:p24-25"
-    }
-  },
-  "selected": [
-    "bolivar",
-    "foubert",
-    "ain-sebaa",
-    "zenata",
-    "cinephile",
-    "corallum"
-  ],
   "proofs": [
     {
       "name": "Survey and documentation",

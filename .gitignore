@@ -9,6 +9,13 @@ node_modules/
 /Images HQ/
 /Skills/
 /docs/Skills/
+# Owner-supplied references and raw photos (D90): other studios' saved pages and phone originals
+# must never be served by GitHub Pages; published photos are re-encoded copies in images/about/.
+/docs/01/
+/docs/KHOA VU/
+/docs/Images/
+/docs/Scroll map.txt
+/docs/Screenshot*
 # HQ drawing masters are local build intermediates (D55): pages show their cutouts in images/cut/,
 # which are committed; the masters are re-created from Images HQ/ by tools/import-hq-media.mjs.
 # (PNG files already tracked, such as the thesis books, stay tracked.)

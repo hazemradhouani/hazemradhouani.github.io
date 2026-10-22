@@ -31,7 +31,7 @@ if (digital.length && !site.nav.some((n) => n.id === 'digital')) site.nav.splice
 const abs = (rel) => site.origin + site.base + rel;
 const personLd = {
   '@context': 'https://schema.org', '@type': 'Person', '@id': abs('#person'), name: site.person.name, jobTitle: site.person.jobTitle,
-  description: site.person.line, url: abs(''), email: `mailto:${site.person.email}`, image: abs('images/portrait.jpg'), sameAs: [site.person.linkedin],
+  description: site.person.line, url: abs(''), email: `mailto:${site.person.email}`, image: abs('images/about/portrait-sitting.jpg'), sameAs: [site.person.linkedin],
   alumniOf: { '@type': 'CollegeOrUniversity', name: 'École Nationale d’Architecture et d’Urbanisme de Tunis (ENAU), Université de Carthage' },
   knowsAbout: site.person.knowsAbout,
   knowsLanguage: ['ar', 'fr', 'en'],
