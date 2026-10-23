@@ -85,7 +85,8 @@ export function row(items, { prefix, max = 'full', zoom = false, after = () => '
     const r = it.w / it.h, frac = free * r / sum;
     const sz = sizesFor(span, frac, stack ? 1 : frac); sizes.push(sz);
     const pic = image(it.rel, { alt: it.alt, sz, prefix, priority: it.priority, zoom, title: it.title, vt: it.vt });
-    return html`<div class="cell" style="--r: ${(r * 100).toFixed(2)}">${it.href ? html`<a class="card" href="${it.href}">${pic}${it.label || ''}</a>` : pic}${after(it, k)}</div>`;
+    // --c: the cell's place from the row's centre, in cells (a figure assembles from it, D115)
+    return html`<div class="cell" style="--r: ${(r * 100).toFixed(2)}; --c: ${k - (items.length - 1) / 2}">${it.href ? html`<a class="card" href="${it.href}">${pic}${it.label || ''}</a>` : pic}${after(it, k)}</div>`;
   });
   return { span, sizes, html: html`<div class="row${stack ? ' row--stack' : ''}">${out}</div>` };
 }
@@ -101,7 +102,8 @@ export function cells(items, { prefix, zoom = true, after = null, cls = '', scal
   const out = items.map((it, i) => {
     const f = scale ? dims(it.rel).w / maxW : 1;   // one scale across a series: each drawing as wide as its pixels say
     const pic = image(it.rel, { alt: it.alt, sz: sizesFor('full', f / n, f, f / n8), prefix, zoom, title: it.title });
-    return html`<div class="cell"${scale ? html` style="--sc: ${(f * 100).toFixed(2)}%"` : ''}>${pic}${after ? after(it, i) : ''}</div>`;
+    // --c: its place from the centre of its line on the 12 columns (n to a line)
+    return html`<div class="cell" style="--c: ${i % n - (n - 1) / 2}${scale ? `; --sc: ${(f * 100).toFixed(2)}%` : ''}">${pic}${after ? after(it, i) : ''}</div>`;
   });
   return html`<div class="s-full cells${after ? ' cells--2' : ''}${scale ? ' cells--scale' : ''}${cls ? ' ' + cls : ''}" style="--n: ${n}; --n8: ${n8}; --n4: 1"${rv ? html` data-rv` : ''}>${out}</div>`;
 }
@@ -199,14 +201,17 @@ const SIDE_MAX = 240;
 export const capSide = (span, text) => span !== 'full' && !!text && text.length <= SIDE_MAX;
 export const capOf = (f, span, side) => (f.title || f.caption || f.credit)
   ? html`<figcaption class="cap s-${span}${side ? ' cap--side' : ''}">${when(f.title, () => html`<span class="cap__t">${f.title}</span>`)}${when(f.caption || f.credit, () => html` <span class="cap__x">${inline(f.caption || '')}${when(f.credit, () => html` <span class="credit">${f.credit}.</span>`)}</span>`)}</figcaption>` : '';
-const plate = (f, n, span, body, { rv = true, key = '' } = {}) => {
+// a plate comes into focus, rises and assembles as it enters the screen, its words after it (D115: site.css, --e)
+const plate = (f, n, span, body, { key = '' } = {}) => {
   const side = capSide(span, `${f.title || ''}${f.caption || ''}`);
-  return html`<figure class="fig block wrap g${side ? ' fig--dock' : ''}" id="fig-${n}" data-fx="centre"${rv ? html` data-rv` : ''}>${body}${key}${capOf(f, span, side)}</figure>`;
+  return html`<figure class="fig block wrap g${side ? ' fig--dock' : ''}" id="fig-${n}" data-fx="enter">${body}${key}${capOf(f, span, side)}</figure>`;
 };
 
 export function figure(f, n, ctx) {
   const p = ctx.prefix; const ladder = ctx.ladder;
   const drawing = f.kind === 'drawing';
+  // a render may declare a crop { ratio, pos } where its frame helps the page's rhythm; a drawing never (D112, D115)
+  if (f.crop && (drawing || f.items)) throw new Error(`"${f.title}": a crop is for a single render, never a drawing or a series (D115)`);
   if (f.items) {
     const items = f.items.map((it, k) => ({ rel: drawing ? cutOrFail(it.src) : it.src, alt: it.alt, drawing, title: `${f.title} (${k + 1} of ${f.items.length})` }));
     if (drawing) return plate(f, n, 'full', cells(items, { prefix: p, scale: true, rv: false }), { key: keyOf(f) });
@@ -215,9 +220,12 @@ export function figure(f, n, ctx) {
   }
   const rel = drawing ? cutOrFail(f.src) : f.src;
   const { w, h } = dims(rel);
+  // the frame of a crop at most as large as the render covers at its own size, so it is never enlarged
+  const cw = f.crop ? Math.min(w, h * f.crop.ratio) : w;
   // a tall drawing may allow a little more height (at most 820px) where its legibility needs a wider span
-  const span = spanFor(w, h, { ladder, ...(f.maxH ? { maxH: Math.min(820, f.maxH) } : {}) });
-  const pic = image(rel, { alt: f.alt, sz: sizesFor(span), prefix: p, zoom: true, title: f.title });
+  const span = spanFor(cw, f.crop ? cw / f.crop.ratio : h, { ladder, ...(f.maxH ? { maxH: Math.min(820, f.maxH) } : {}) });
+  const img = image(rel, { alt: f.alt, sz: sizesFor(span), prefix: p, zoom: true, title: f.title });
+  const pic = f.crop ? html`<span class="crop" data-crop style="--ar: ${f.crop.ratio}; --pos: ${f.crop.pos || '50% 50%'}">${img}</span>` : img;
   const labels = drawing ? labelsFor(rel, f.labels) : [];
   return plate(f, n, span, html`<div class="s-${span} fig__plate">${labels.length ? labelled(pic, rel, labels, f.title) : pic}</div>`, { key: keyOf(f) });
 }
@@ -255,21 +263,20 @@ export function heroPartner(x) {
   return x.figures.find((f) => f.kind === 'render' && f.src && f.src !== x.hero.src) || null;
 }
 
-// the hero of a project: one plate, or a justified pair with its partner (no crop, never enlarged)
-export function hero(x, ctx, { priority = false, max = 'full', zoom = false, vt = true } = {}) {
-  const p = ctx.prefix; const ladder = ctx.ladder;
+// the opening of a case study (D115): the hero, with its partner beside a portrait, in one frame at 16:9 (a panorama
+// keeps its own ratio up to 2.4:1, so it loses little). Each render covers its share of the frame, by its own ratio,
+// at the content's pos (data-crop); the frame is laid out near full-bleed and settles into its slot (site.css). `ar`
+// and `nw` (the largest the frame may be: a lone render never wider than its pixels) go on the opening
+export function opening(x, ctx) {
+  const p = ctx.prefix;
   const partner = heroPartner(x);
-  if (partner) {
-    const items = [
-      { rel: x.hero.src, alt: x.hero.alt, title: x.title, vt: vt ? vtHero(x) : null, priority },
-      { rel: partner.src, alt: partner.alt, title: partner.title || x.title }];
-    const r = row(items, { prefix: p, max, zoom, ladder });
-    return { span: r.span, html: r.html, partner, lcpSizes: r.sizes[0] };
-  }
-  const { w, h } = dims(x.hero.src);
-  const span = spanFor(w, h, { max, ladder });
-  const sz = sizesFor(span);
-  return { span, html: image(x.hero.src, { alt: x.hero.alt, sz, prefix: p, priority, zoom, title: x.title, vt: vt ? vtHero(x) : null }), partner: null, lcpSizes: sz };
+  const items = [{ src: x.hero.src, alt: x.hero.alt, pos: x.hero.pos, title: x.title, vt: vtHero(x) }, ...(partner ? [{ src: partner.src, alt: partner.alt, title: partner.title || x.title }] : [])];
+  const r = items.map((it) => { const d = dims(it.src); return d.w / d.h; });
+  const sum = r.reduce((a, b) => a + b, 0);
+  const ar = partner ? 16 / 9 : Math.min(2.4, Math.max(16 / 9, r[0]));
+  const sizes = r.map((rk) => `(min-width: 64rem) ${Math.ceil(94 * rk / sum)}vw, ${Math.ceil(92 * rk / sum)}vw`);
+  const frames = items.map((it, k) => html`<span class="op__f" data-crop style="--r: ${r[k].toFixed(4)}; --pos: ${it.pos || '50% 50%'}">${image(it.src, { alt: it.alt, sz: sizes[k], prefix: p, priority: k === 0, zoom: true, title: it.title, vt: it.vt })}</span>`);
+  return { partner, ar, nw: partner ? null : dims(x.hero.src).w, lcpSizes: sizes[0], html: html`<div class="op__media">${frames}</div>` };
 }
 
 /* ---------------------------------------------------------- a project as one composition (D104, D105, D120) */

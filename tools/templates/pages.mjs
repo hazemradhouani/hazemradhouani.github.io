@@ -3,7 +3,7 @@
 import { html, raw, attrs, when } from '../lib/html.mjs';
 import { dims, shown, preloadFor, picture } from '../lib/images.mjs';
 import { placeLeaves, connector, TREE } from '../lib/tree-layout.mjs';
-import { icon, image, row, figure, hero, heroPartner, creditLine, heroCaption, sizesFor, spanFor, projectHref, vtTitle, vtHero, CASE, capSide, words, chaptersOf, reelItem, reelSizes, aboutColumn, PORTRAIT } from './partials.mjs';
+import { icon, image, row, figure, opening, heroCaption, sizesFor, spanFor, projectHref, vtTitle, CASE, capSide, words, chaptersOf, reelItem, reelSizes, aboutColumn, PORTRAIT } from './partials.mjs';
 
 const q = (s) => `“${s}”`;
 // `of`: what a repeated label leads to, read after the visible words (WCAG 2.4.4, 2.5.3)
@@ -12,10 +12,6 @@ const more = (href, label, p, { dir = 'right', ext = false, of = '' } = {}) => d
   : html`<a class="more" href="${href}"${attrs({ target: ext ? '_blank' : null, rel: ext ? 'noopener' : null })}><span>${label}</span>${when(of, () => html`<span class="vh">: ${of}</span>`)}${icon(ext ? 'arrow-up-right' : 'arrow-right', p)}${when(ext, () => html`<span class="vh"> (opens in a new tab)</span>`)}</a>`;
 const lines = (...xs) => xs.filter(Boolean).map((x, i) => html`${i ? html`<br>` : ''}${x}`);
 const spec = (rows) => html`<dl class="spec in">${rows.map((s) => html`<dt>${s.label}</dt><dd${attrs({ lang: s.lang })}>${s.value}</dd>`)}</dl>`;
-
-// an image group that is also a link to its project: out of the tab order and the accessibility tree,
-// since the title link beside it carries the same destination and the name
-const linked = (href, markup) => html`<a class="card" href="${href}" tabindex="-1" aria-hidden="true">${markup}</a>`;
 
 /* ------------------------------------------------------------------ the catalog (D97, P5): every image and film of the work */
 // one entry per published picture: each project's hero, every figure (or each item of a multi-image figure), and
@@ -176,64 +172,79 @@ ${FAMILIES.map(branch)}
     jsonld: [{ '@context': 'https://schema.org', '@type': 'CollectionPage', name: 'Index', url: `${site.origin}${site.base}architecture.html`, mainEntity: { '@type': 'ItemList', itemListElement: items } }] } };
 }
 
-/* ------------------------------------------------------------------ case study ("rail and copy", D73) */
-// the key facts as a drawing's title block: type and status on a strip, then the specification in cells
-// (the strip stands outside the dl, which may only hold dt/dd groups)
+/* ------------------------------------------------------------------ case study ("Reel, corrected", D115, D116) */
 const pad = (k) => String(k).padStart(2, '0');
-// the chapters as numbered links, from three chapters (fewer need no table of contents)
-const toc = (chs) => (chs.length < 3 ? '' : html`<nav class="toc" aria-labelledby="toc-h"><p class="label toc__h" id="toc-h">Contents</p><ol class="toc__list" role="list">${chs.map((c) => html`<li><a href="#ch-${c.id}"><span class="toc__n" aria-hidden="true">${pad(c.n)}</span>${c.title}</a></li>`)}</ol></nav>`);
-const titleBlock = (x, chs) => html`<div class="tb wrap g">
-<div class="tb__strip"><p class="label">${x.descriptor}</p><p class="label">${x.tag}</p></div>
-<dl class="tb__cells">${x.spec.map((s) => html`<div class="tb__cell"><dt>${s.label}</dt><dd${attrs({ lang: s.lang })}>${s.value}</dd></div>`)}</dl>
-${toc(chs)}
-</div>`;
 // a chapter (D74): a rule across the row, the number and name on the rail, its own words on the copy axis,
-// then its plates; a single chapter carries no number
+// then its plates; a single chapter carries no number. Its head rises into place as it enters (D115)
 const chapterOf = (c, numbered, plates) => html`<section class="ch" id="ch-${c.id}" aria-labelledby="ch-${c.id}-h">
-<div class="ch__head wrap g" data-rv><div class="ch__bar"></div><h2 class="ch__t s-rail" id="ch-${c.id}-h">${when(numbered, () => html`<span class="ch__n" aria-hidden="true">${pad(c.n)}</span>`)}${c.title}</h2>${when(c.text.length, () => html`<div class="prose s-copy ch__text">${c.text.map((t) => html`<p>${t.text}</p>`)}</div>`)}</div>
+<div class="ch__head wrap g" data-fx="enter"><div class="ch__bar"></div><h2 class="ch__t s-rail" id="ch-${c.id}-h">${when(numbered, () => html`<span class="ch__n" aria-hidden="true">${pad(c.n)}</span>`)}${c.title}</h2>${when(c.text.length, () => html`<div class="prose s-copy ch__text">${c.text.map((t) => html`<p>${t.text}</p>`)}</div>`)}</div>
 ${plates}
 </section>`;
+// D116: each fact once per page. A project's `$omit` names what its page leaves out because a field it shows already
+// says it: "run", "tag", "overview" (the paragraphs outside the chapters) or "spec:<label>". The strings stay in the
+// JSON, and QA's coverage leaves them out the same way
+const OMITTABLE = new Set(['run', 'tag', 'overview']);
+function omitsOf(x) {
+  const o = new Set(x.$omit || []);
+  for (const k of o) if (!OMITTABLE.has(k) && !(k.startsWith('spec:') && x.spec.some((s) => `spec:${s.label}` === k))) throw new Error(`${x.slug}: $omit "${k}" is not one of run, tag, overview, spec:<a label of its spec> (D116)`);
+  return o;
+}
 
 export function project(site, x, projects, ctx0) {
   const ctx = { ...ctx0, ladder: CASE };
   const p = ctx.prefix;
   const i = projects.indexOf(x);
   const next = projects[(i + 1) % projects.length];
-  const h = hero(x, ctx, { priority: true, zoom: true });
-  const figs = x.figures.filter((f) => f !== h.partner);
+  const omit = omitsOf(x);
+  const op = opening(x, ctx);
+  const figs = x.figures.filter((f) => f !== op.partner);
   const cap = heroCaption(x);
-  const capSideHero = capSide(h.span, [x.hero.caption, h.partner?.caption].filter(Boolean).join(' '));
   const film = x.film ? ctx.films.find((f) => f.slug === x.film) : null;
-  const nh = hero(next, ctx, { max: 'narrow' });
   const filmSpan = film ? spanFor(film.w, film.h, { max: 'nine', ladder: CASE }) : null;
   const filmSide = film && capSide(filmSpan, film.text);
-  const overview = x.narrative.filter((t) => !t.chapter);
+  const overview = omit.has('overview') ? [] : x.narrative.filter((t) => !t.chapter);
+  const facts = x.spec.filter((s) => !omit.has(`spec:${s.label}`));
+  const meta = [omit.has('run') ? '' : x.run, omit.has('tag') ? '' : x.tag].filter(Boolean);
+  const comp = ctx.reel.find((c) => c.project === next.slug);
+  if (!comp) throw new Error(`${x.slug}: the next project, ${next.slug}, has no composition in home.json (D115)`);
   // the film closes the case study as its last chapter
   const chs = [...chaptersOf(x, figs), ...(film ? [{ title: 'Film', id: 'film', figs: [], text: [] }] : [])].map((c, k) => ({ ...c, n: k + 1 }));
   const numbered = chs.length > 1;
-  const filmFig = film && html`<div class="fig block wrap g${filmSide ? ' fig--dock' : ''}" data-rv><div class="s-${filmSpan} fig__plate film"><video controls preload="none" playsinline poster="${p}videos/web/${film.slug}-poster.webp" width="${film.w}" height="${film.h}" aria-labelledby="ch-film-h" aria-describedby="film-desc"><source src="${p}videos/web/${film.slug}.mp4" type="video/mp4"><a href="${p}videos/web/${film.slug}.mp4">Download the film (MP4)</a></video></div><p class="cap s-${filmSpan}${filmSide ? ' cap--side' : ''}"><span class="cap__t">${film.label}</span> <span class="cap__x" id="film-desc">${film.text}</span></p></div>`;
+  const filmFig = film && html`<div class="fig block wrap g${filmSide ? ' fig--dock' : ''}" data-fx="enter"><div class="s-${filmSpan} fig__plate film"><video controls preload="none" playsinline poster="${p}videos/web/${film.slug}-poster.webp" width="${film.w}" height="${film.h}" aria-labelledby="ch-film-h" aria-describedby="film-desc"><source src="${p}videos/web/${film.slug}.mp4" type="video/mp4"><a href="${p}videos/web/${film.slug}.mp4">Download the film (MP4)</a></video></div><p class="cap s-${filmSpan}${filmSide ? ' cap--side' : ''}"><span class="cap__t">${film.label}</span> <span class="cap__x" id="film-desc">${film.text}</span></p></div>`;
+  // the opening (D115): a track whose stage stands still while the hero settles from near full-bleed into its slot
+  // beside the words, and the words, the caption and the facts arrive (site.css; --s: when each starts). The chapter
+  // rail stands in the chapters' own box (sticky), so it shows only while they pass; site.js marks the current one
   const body = html`
 <article class="case">
-<header class="case-head">
-<div class="intro wrap g">
-<p class="label case-run">${x.run}</p>
-<div class="case-name"><h1 class="h1 case-title" style="view-transition-class: vt-title; view-transition-name: ${vtTitle(x)}">${words(x.title)}</h1></div>
-<div class="s-copy case-lead"><p class="lead">${x.summary}</p>${when(x.honour, () => html`<p class="label honour">${x.honour}</p>`)}</div>
+<header class="op" data-fx="track" style="--ar: ${op.ar.toFixed(4)}${op.nw ? `; --nw: ${op.nw}px` : ''}">
+<div class="op__stage">
+<div class="op__in wrap g">
+<div class="op__text">
+<p class="label op__k" style="--s: .06">${x.descriptor}</p>
+<h1 class="h1 op__t" style="--s: .1; view-transition-class: vt-title; view-transition-name: ${vtTitle(x)}">${words(x.title)}</h1>
+<p class="lead op__lead" style="--s: .18">${x.summary}</p>
+${when(x.honour, () => html`<p class="label honour op__x" style="--s: .26">${x.honour}</p>`)}
+${meta.map((m) => html`<p class="label op__x" style="--s: .3">${m}</p>`)}
 </div>
-<div class="lead-fig wrap g fx-drift${capSideHero ? ' fig--dock' : ''}" data-fx><div class="s-${h.span} fig__plate">${h.html}</div>${when(cap, () => html`<p class="cap s-${h.span}${capSideHero ? ' cap--side' : ''}"><span class="cap__x">${cap}</span></p>`)}</div>
-${titleBlock(x, chs)}
+<div class="op__side">
+<div class="op__slot">${op.html}</div>
+${when(cap, () => html`<p class="cap op__cap" style="--s: .34"><span class="cap__x">${cap}</span></p>`)}
+<dl class="op__facts" style="--s: .4">${facts.map((s) => html`<div class="op__fact"><dt>${s.label}</dt><dd${attrs({ lang: s.lang })}>${s.value}</dd></div>`)}</dl>
+</div>
+</div>
+</div>
 </header>
 ${when(x.quote, () => html`<section class="block wrap g" aria-label="In the architect's words"><blockquote class="case-quote"><p class="quote">${q(x.quote.text)}</p></blockquote></section>`)}
 ${when(x.role.length, () => html`<section class="block wrap g" aria-labelledby="role-h"><h2 class="label s-rail" id="role-h">Role</h2><ul class="role s-copy" role="list">${x.role.map((r) => html`<li>${r.text}</li>`)}</ul></section>`)}
 ${when(overview.length, () => html`<section class="block wrap g" aria-labelledby="about-h"><h2 class="label s-rail" id="about-h">Project</h2><div class="prose s-copy">${overview.map((t) => html`<p>${t.text}</p>`)}</div></section>`)}
+<div class="chs" id="chs" data-fx="rail" data-steps="auto">
+${when(numbered, () => html`<nav class="rail" data-rail="chs" aria-label="Chapters"><ol role="list">${chs.map((c) => html`<li><a href="#ch-${c.id}" data-step><span class="rail__t"><span class="rail__n">${pad(c.n)}</span> ${c.title}</span></a></li>`)}</ol></nav>`)}
 ${chs.map((c) => chapterOf(c, numbered, c.id === 'film' ? filmFig : c.figs.map((f) => figure(f, figs.indexOf(f) + 1, ctx))))}
-<nav class="next chapter wrap g" aria-label="Next project">
-<div class="ch__bar"></div>
-<p class="label s-rail next__label">Next project <span class="next__i">${pad((i + 1) % projects.length + 1)} / ${pad(projects.length)}</span></p>
-<p class="next__t"><a href="${projectHref(next, p)}" rel="next" style="view-transition-class: vt-title; view-transition-name: ${vtTitle(next)}">${next.title}</a></p>
-<p class="meta s-copy next__meta">${next.descriptor}<br>${next.place} | ${next.year}</p>
-<div class="s-${nh.span} next__media fx-drift" data-fx data-rv>${linked(projectHref(next, p), nh.html)}</div>
-<p class="s-copy next__all">${more(p + 'architecture.html', 'All work', p, { dir: 'left' })}</p>
+</div>
+<nav class="next" aria-label="Next project">
+<div class="next__head wrap g" data-fx="enter"><div class="ch__bar"></div><p class="label s-rail next__label">Next project <span class="next__i">${pad((i + 1) % projects.length + 1)} / ${pad(projects.length)}</span></p></div>
+<ol class="reel reel--next" role="list">${reelItem(next, comp, { prefix: p })}</ol>
+<p class="next__all">${more(p + 'architecture.html', 'All work', p, { dir: 'left' })}</p>
 </nav>
 </article>`;
   const url = `${site.origin}${site.base}projects/project-${x.slug}.html`;
@@ -250,7 +261,7 @@ ${chs.map((c) => chapterOf(c, numbered, c.id === 'film' ? filmFig : c.figs.map((
     { '@type': 'ListItem', position: 3, name: x.title, item: url }] }];
   return { body, viewer: true, page: { path: `projects/project-${x.slug}.html`, nav: 'work', title: `${x.title} | ${x.descriptor.split(' | ')[0]} | Hazem Radhouani`,
     description: x.summary, og: ctx.ogFor(`project-${x.slug}`), ogType: 'article', ogAlt: x.hero.alt, jsonld,
-    preload: preloadFor(x.hero.src, h.lcpSizes, p), bodyClass: 'page-case' } };
+    preload: preloadFor(x.hero.src, op.lcpSizes, p), bodyClass: 'page-case' } };
 }
 
 /* ------------------------------------------------------------------ research */

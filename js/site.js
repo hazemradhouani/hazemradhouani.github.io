@@ -161,6 +161,9 @@
                          reaches the bottom: its sticky stage moves only while it stands (A1); data-steps
                          ("0,.25,.5,.75") give data-chapter, and the steps of its rail [data-rail="id"] follow
        data-fx="centre": --d, the element's centre against the screen's centre: 1 entering, 0 centred, -1 leaving
+       data-fx="enter":  --e, 1 as the element's top enters at the bottom of the screen, 0 once it is 45% up the
+                         screen (whatever the element's height, so a tall plate is settled before it is read)
+       data-fx="rail":   no value: only the data-chapter steps of a long section, for its rail (D115)
      html.fx (set in the head before the first paint) is on whenever motion is allowed, touch included; without
      it nothing is written and all stands settled. A rail follows the reading position either way. Positions are
      where an element stands without sticking or moving, so a stuck stage keeps counting. */
@@ -181,7 +184,15 @@
     var auto = el.getAttribute('data-steps') === 'auto';   // steps measured from the rail's own targets (D99)
     var steps = auto ? [] : (el.getAttribute('data-steps') || '').split(',').filter(Boolean).map(Number);
     var rail = el.id ? slice(document.querySelectorAll('[data-rail="' + el.id + '"] [data-step]')) : [];
-    return { el: el, kind: kind, steps: steps, auto: auto, rail: rail, ch: -1, y: 0, h: 0, p: -1, d: 2, scrub: null };
+    // a case study's opening (D115): its hero frame is laid out near full-bleed and settles into its slot by a move
+    // and a scale (--tx, --ty, --k), measured here from layout boxes, never from the moving frame's screen box
+    var slot = el.querySelector('.op__slot'), frame = slot && slot.firstElementChild;
+    var fit = frame ? function () {
+      el.style.setProperty('--k', (slot.offsetWidth / Math.max(1, frame.offsetWidth)).toFixed(4));
+      el.style.setProperty('--tx', (slot.offsetLeft - frame.offsetLeft) + 'px');
+      el.style.setProperty('--ty', (slot.offsetTop - frame.offsetTop) + 'px');
+    } : null;
+    return { el: el, kind: kind, steps: steps, auto: auto, rail: rail, fit: fit, ch: -1, y: 0, h: 0, p: -1, d: 2, scrub: null };
   });
   var fxUpdate = function () {};
   var scrubKick = function () {};
@@ -193,6 +204,7 @@
       vhM = document.documentElement.clientHeight;
       fxItems.forEach(function (it) {
         it.y = naturalTop(it.el); it.h = it.el.offsetHeight; it.p = -1; it.d = 2;
+        if (it.fit && FX) it.fit();
         // a chapter is current once its top passes the middle of the screen, wherever the layout put it
         if (it.auto) { var vh0 = document.documentElement.clientHeight; it.steps = it.rail.map(function (a, i) { var t = document.getElementById(a.getAttribute('href').slice(1)); return i && t ? clamp((naturalTop(t) - vh0 / 2 - it.y) / Math.max(1, it.h - vh0), 0, 1) : 0; }); it.ch = -1; }
       });
@@ -219,13 +231,19 @@
           if (it.scrub) it.scrub.to((1 - d) / 2);
           return;
         }
-        var p = it.kind === 'track' ? (y - it.y) / Math.max(1, it.h - vh)
+        if (it.kind === 'enter') {
+          var e = clamp((it.y - y - 0.55 * vh) / (0.45 * vh), 0, 1);
+          if (Math.abs(e - it.d) < 0.001) return;
+          it.d = e; it.el.style.setProperty('--e', e.toFixed(4));
+          return;
+        }
+        var p = it.kind === 'track' || it.kind === 'rail' ? (y - it.y) / Math.max(1, it.h - vh)
           : (y + vh - it.y) / (vh + it.h);
         p = clamp(p, 0, 1);
         if (it.steps.length) chapter(it, p);
         if (Math.abs(p - it.p) < 0.001) return;
         it.p = p;
-        if (FX) it.el.style.setProperty('--p', p.toFixed(4));
+        if (FX && it.kind !== 'rail') it.el.style.setProperty('--p', p.toFixed(4));
         if (it.scrub) it.scrub.to(p);
       });
     };

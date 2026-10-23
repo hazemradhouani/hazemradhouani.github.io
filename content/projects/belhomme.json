@@ -9,6 +9,7 @@
   ],
   "title": "Belhomme",
   "run": "Studio BELEM | Paris 18th",
+  "$omit": ["run", "spec:Project type"],
   "summary": "Rehabilitation and rooftop extension of a corner building in Paris 18th, documented from a full survey of the existing facades.",
   "place": "Paris 18th",
   "year": "2025-2026",

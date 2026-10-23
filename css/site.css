@@ -100,8 +100,8 @@
     --margin: clamp(1.25rem, 5vw, 5rem);
     --gutter: clamp(1rem, 0.55rem + 1.8vw, 2rem);             /* 16 to 32px */
     /* vertical rhythm: inside a group (the gutter), between groups, between chapters */
-    --gap-group: 4rem;
-    --gap-chapter: 7rem;
+    --gap-group: 3rem;
+    --gap-chapter: 5rem;
     --s1: 0.25rem; --s2: 0.5rem; --s3: 0.75rem; --s4: 1rem; --s5: 1.5rem; --s6: 2rem; --s7: 3rem;
     --measure: 36rem;                                         /* about 65 characters of Garamond at 19px */
     --bar-h: 3.5rem;
@@ -134,8 +134,9 @@
   @supports (transition-timing-function: linear(0, 1)) {
     :root { --spring: linear(0, 0.079 5%, 0.236 10%, 0.403 15%, 0.551 20%, 0.672 25%, 0.764 30%, 0.833 35%, 0.884 40%, 0.919 45%, 0.945 50%, 0.962 55%, 0.974 60%, 0.983 65%, 0.988 70%, 0.992 75%, 0.995 80%, 0.997 85%, 0.998 90%, 1); }
   }
-  @media (min-width: 48rem) { :root { --cols: 8; --gap-group: 5rem; --gap-chapter: 9rem; } }
-  @media (min-width: 64rem) { :root { --cols: 12; --gap-group: 6rem; --gap-chapter: 12rem; } }
+  /* D116: no empty band without need; between chapters 7.5rem, between groups 4rem on a desktop */
+  @media (min-width: 48rem) { :root { --cols: 8; --gap-group: 3.5rem; --gap-chapter: 6rem; } }
+  @media (min-width: 64rem) { :root { --cols: 12; --gap-group: 4rem; --gap-chapter: 7.5rem; } }
 }
 
 /* ------------------------------------------------------------------ base */
@@ -563,7 +564,6 @@
 /* ------------------------------------------------------------------ pages */
 @layer pages {
   .intro { padding-top: clamp(2.5rem, 6vw, 5rem); }
-  .lead-fig { margin-top: clamp(2.5rem, 5vw, 4.5rem); }
 
   /* home, "Reel, corrected" (D104): one composition per project, one at a time on the centre axis. The stage is
      5:4 at min(46vw, 60rem) (72vw on tablets) and never taller than the band between the header and the corner
@@ -574,7 +574,6 @@
      raised sheet, so neither is cropped. --fx and --fy are each layer's offset to the main card's centre, where
      it waits before it slides out (motion layer). Phones stack main and side; the drawing waits for the project. */
   .page-home { padding-top: 0; }
-  .rail { display: none; }
   .col__h { text-align: center; font-size: var(--fs-cap); font-weight: 400; color: var(--ink-2); }
   .col__count { margin-left: 0.35em; font-variant-numeric: tabular-nums; }
   .reel { --share: 46vw; --stage-w: max(15rem, min(var(--share), 60rem, (100svh - var(--head-h) - var(--edge-bottom) - 4rem) * 1.25)); --sh: 80;
@@ -619,6 +618,10 @@
     .reel__l--side, .reel__it--duo .reel__l--side { --l: 48; --t: calc(var(--sh) - 32.5); --w: 52; --h: 32.5; }
     .reel__l--drawing { display: none; }
   }
+  /* a case study's next project (D115): the home's own composition, its caption always shown (no label follows the
+     pointer there: the caption is the next page's name, read before the click) */
+  .reel--next { padding: var(--s6) var(--site-edge) 0; }
+  @media (hover: hover) and (pointer: fine) and (min-width: 48rem) { .reel--next .reel__cap { position: static; opacity: 1; } }
 
   /* the end of the page: the index's root joined to its families by curves, as dmcg's catalog tree begins */
   .tree-root { display: grid; grid-template-columns: auto clamp(2.5rem, 7vw, 6rem) auto; align-items: center; justify-content: center;
@@ -803,45 +806,61 @@
     .page-case .g > .s-narrow { grid-column: 4 / span 6; }
     .page-case .g > .s-four { grid-column: 4 / span 4; }
   }
-  /* the opening: who and where, the name, then what it is in one plain sentence (the 10-second test) */
-  .case-run, .case-name { grid-column: 1 / -1; }
-  .case-name { margin-top: var(--s4); }
-  .case-title { width: fit-content; max-width: 100%; font-size: var(--fs-display); letter-spacing: var(--tr-display); line-height: 1.05; }
-  .case-lead { margin-top: var(--s5); }
-  .case-lead .honour { margin-top: var(--s4); }
-  /* the title block: type and status on a strip under a full rule, then the specification in cells of three
-     columns, each under a hairline (an architect's title block: the facts in fixed fields) */
-  .tb { margin-top: var(--s7); }
-  .tb__strip { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--s1) var(--s5); padding-top: var(--s3); border-top: 1px solid var(--ink); }
-  .tb__cells { display: grid; grid-template-columns: subgrid; row-gap: var(--s5); margin-top: var(--s5); }
-  .tb__cell { grid-column: span 2; padding-top: var(--s3); border-top: 1px solid var(--line); }
-  @media (max-width: 29.99rem) { .tb__cell { grid-column: 1 / -1; } }
-  @media (min-width: 64rem) { .tb__cell { grid-column: span 3; } }
-  .tb__cell dt { font-family: var(--sans); font-size: var(--fs-label); font-weight: var(--w-label); letter-spacing: var(--tr-caps); text-transform: var(--case); color: var(--ink-2); line-height: 1.5; }
-  .tb__cell dd { margin-top: var(--s1); font-size: var(--fs-cap); line-height: 1.5; }
-  @media (min-width: 64rem) { .case-quote { grid-column: 4 / -1; } }
-  /* contents: the chapters as numbered links, on the copy axis in two columns of three grid columns */
-  .toc { display: grid; grid-template-columns: subgrid; margin-top: var(--s6); }
-  .toc > * { grid-column: 1 / -1; }
-  .toc__list { margin-top: var(--s2); display: grid; column-gap: var(--gutter); }
-  @media (min-width: 48rem) { .toc__list { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  /* the opening (D115): the project's words on the left, its hero, caption and facts on the right (7 of 12 columns, so
+     the hero's plate is 58% of the row); below 64rem they stack, words first. The hero frame keeps the opening's ratio
+     (--ar) everywhere and each render covers its share of it (data-crop); a declared figure crop works the same way */
+  .op__in { padding-top: clamp(2.5rem, 6vw, 5rem); row-gap: var(--s6); }
+  .op__k { color: var(--ink-2); }
+  .op__t { margin-top: var(--s3); font-size: var(--fs-display); letter-spacing: var(--tr-display); line-height: 1.05; }
+  .op__lead { margin-top: var(--s5); }
+  .op__x { margin-top: var(--s4); }
+  .op__x + .op__x { margin-top: var(--s2); }
+  .op__slot { aspect-ratio: var(--ar); }
+  .op__media { display: flex; gap: var(--s2); width: 100%; height: 100%; }
+  .op__f { flex: var(--r) 1 0%; min-width: 0; overflow: clip; }
+  .crop { display: block; aspect-ratio: var(--ar); overflow: clip; }
+  :is(.op__f, .crop) :is(.nw, picture, img) { display: block; width: 100%; height: 100%; max-width: none; }
+  :is(.op__f, .crop) img { object-fit: cover; object-position: var(--pos, 50% 50%); }
+  .op__cap { margin-top: var(--s4); }
+  /* the facts as an architect's title block: fixed fields, each under a hairline */
+  .op__facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s4) var(--gutter); margin-top: var(--s5); }
+  @media (min-width: 48rem) { .op__facts { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+  .op__fact { padding-top: var(--s2); border-top: 1px solid var(--line); }
+  .op__fact dt { font-size: var(--fs-label); color: var(--ink-2); line-height: 1.5; }
+  .op__fact dd { margin-top: var(--s1); font-size: var(--fs-cap); line-height: 1.45; }
   @media (min-width: 64rem) {
-    .toc > .toc__h { grid-column: 1 / span 3; padding-top: 0.75rem; }
-    .toc > .toc__list { grid-column: 4 / span 6; margin-top: 0; }
+    .op__in { align-items: center; }
+    .g > .op__text { grid-column: 1 / span 5; }
+    .g > .op__side { grid-column: 6 / -1; }
+    .case-quote { grid-column: 4 / -1; }
   }
-  .toc a { display: flex; align-items: center; gap: var(--s3); min-height: 2.75rem; color: var(--ink); text-decoration: none; font-family: var(--sans);
-    font-size: var(--fs-title); font-weight: var(--w-label); letter-spacing: var(--tr-caps); text-transform: var(--case); line-height: 1.3;
-    transition: color var(--t-hover) var(--ease-out); }
-  .toc a:hover { color: var(--ink-2); }
-  .toc__n { min-width: 1.75em; color: var(--ink-2); font-variant-numeric: tabular-nums; }
-  /* chapters (D74): a rule across the row, the number and name on the rail, the chapter's own words on the
-     copy axis; its first plate follows close, so the words stay with the evidence they describe */
+  /* the chapter rail (D115), from 80rem where the margin beside the 1280px canvas holds it: a dash per chapter on the
+     right edge, the current one longer and in ink; a dash names its chapter in the frosted pill under the pointer or
+     the keyboard. It stands in the chapters' own box (sticky, no height), so it comes and goes with them */
+  .rail { display: none; }
+  @media (min-width: 80rem) {
+    .rail { display: block; position: sticky; top: 50svh; z-index: 5; height: 0; }
+    .rail ol { position: absolute; right: var(--site-edge); top: 0; translate: 0 -50%; display: grid; justify-items: end; margin: 0; padding: 0; list-style: none; }
+    .rail a { position: relative; display: flex; align-items: center; justify-content: flex-end; min-width: 2rem; min-height: 1.5rem; color: var(--ink-2); text-decoration: none; }
+    .rail a::after { content: ""; width: 0.875rem; height: 1px; background: currentColor; transition: width var(--t-ui) var(--ease-out); }
+    .rail a[aria-current] { color: var(--ink); }
+    .rail a[aria-current]::after { width: 1.75rem; }
+    .rail__t { position: absolute; right: calc(100% + 0.25rem); padding: 0.2rem 0.75rem; border: 1px solid var(--line); border-radius: var(--r-pill);
+      background: color-mix(in srgb, var(--bg) 86%, transparent); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
+      color: var(--ink); font-size: var(--fs-label); line-height: 1.5; white-space: nowrap; pointer-events: none;
+      opacity: 0; translate: 6px 0; transition: opacity var(--t-hover) var(--ease-out), translate var(--t-hover) var(--ease-out); }
+    .rail a:is(:hover, :focus-visible) .rail__t { opacity: 1; translate: none; }
+    .rail__n { color: var(--ink-2); font-variant-numeric: tabular-nums; }
+  }
+  /* chapters (D74, D116): a rule across the row, the number and name on the rail, the chapter's own words on the
+     copy axis; its first plate follows close (2.5rem), so the words stay with the evidence they describe */
   .ch { margin-top: var(--gap-chapter); }
   .ch__bar { border-top: 1px solid var(--line); }
   .ch__t { margin-top: var(--s4); font-size: var(--fs-ch); letter-spacing: var(--tr-display); line-height: 1.2; }
   .ch__n { display: block; margin-bottom: var(--s2); font-size: var(--fs-label); letter-spacing: var(--tr-caps); color: var(--ink-2); font-variant-numeric: tabular-nums; }
   .ch__text { margin-top: var(--s4); }
-  .ch__head + .fig { margin-top: var(--s7); }
+  .ch__head + .fig { margin-top: 2.5rem; }
+  @media (min-width: 64rem) { .page-case .fig + .fig { margin-top: 4.5rem; } }
   .role { display: grid; gap: var(--s4); }
   .role li { position: relative; padding-left: var(--s5); }
   .role li::before { content: ""; position: absolute; left: 0; top: 0.8em; width: 0.625rem; height: 1px; background: var(--ink-2); }
@@ -860,17 +879,11 @@
     .page-case .fig--dock > .fig__plate { grid-row: 1; }
     .page-case .g > .cap--side { grid-column: 1 / span 3; grid-row: 1; margin-top: 0; }
   }
-  /* next project: the index, the name at display size (it morphs into the next page's title), the plate */
-  .next .ch__bar { border-top: 1px solid var(--line); }
+  /* next project: its place in the series, then its composition from the home (it morphs into the next page's hero) */
+  .next { margin-top: var(--gap-chapter); }
   .next__label { margin-top: var(--s4); }
   .next__i { margin-left: var(--s3); font-variant-numeric: tabular-nums; }
-  .next__t { margin-top: var(--s3); }
-  .next__t a { display: inline-block; font-family: var(--sans); font-weight: var(--w-label); font-size: var(--fs-display); letter-spacing: var(--tr-display);
-    line-height: 1.05; text-transform: var(--case); text-decoration: none; transition: color var(--t-hover) var(--ease-out); }
-  .next__t a:hover { color: var(--ink-2); }
-  .next__meta { margin-top: var(--s4); }
-  .next__media { margin-top: var(--s7); }
-  .next__all { margin-top: var(--s4); }
+  .next__all { margin-top: var(--s6); text-align: center; }
 
   /* research */
   .book__ar { font-size: var(--fs-lead); line-height: 1.6; color: var(--ink-2); }
@@ -983,10 +996,37 @@
     html.fx .reel__stage { filter: blur(calc(max(var(--in), var(--out)) * 16px)); }
     html.fx .reel__l { will-change: translate, scale; }
   }
-  html.fx .rail { display: grid; gap: 0.625rem; position: absolute; right: var(--site-edge); top: 50%; translate: 0 -50%; margin: 0; padding: 0; list-style: none; }
-  .rail > li { justify-self: end; width: 0.875rem; height: 1px; background: var(--ink); opacity: 0.35;
-    transition: width var(--t-ui) var(--ease-out), opacity var(--t-ui) var(--ease-out); }
-  .rail > li.is-on { width: 1.75rem; opacity: 1; }
+
+  /* orientation, hierarchy (D115): a case study opens on a track whose stage stands still for 90svh of scroll (where a
+     desktop screen holds the opening: 64rem wide, 46rem tall). Its hero frame is laid out near full-bleed in the band
+     between the edges, at the opening's ratio, never wider than its render's pixels; over the first three quarters of
+     the track it settles into its slot by a move and a scale (measured by site.js, eased in and out here), and the
+     words, the caption and the facts arrive after it on the house's text grammar (opacity, 12px), each from its --s.
+     The last quarter holds the settled composition. A function of --p, so it runs back when the reader scrolls up. */
+  @media (min-width: 64rem) and (min-height: 46rem) {
+    html.fx .op { height: 190svh; margin-top: calc(-1 * var(--head-h)); }   /* the stage is the whole screen, under the fixed header */
+    html.fx .op__stage { position: sticky; top: 0; height: 100svh; display: grid; align-content: center; padding-block: var(--edge-top) var(--edge-bottom); container-type: inline-size; }
+    html.fx .op__in { padding-top: 0; }
+    html.fx .op__media { --band: calc(100svh - var(--edge-top) - var(--edge-bottom)); --aw: min(100cqw - 2 * var(--site-edge), var(--band) * var(--ar), var(--nw, 100cqw));
+      position: absolute; z-index: 2; inset-inline: 0; top: calc(var(--edge-top) + (var(--band) - var(--aw) / var(--ar)) / 2);
+      width: var(--aw); height: calc(var(--aw) / var(--ar)); margin-inline: auto;
+      --h: clamp(0, var(--p, 0) / 0.75, 1); --E: calc(var(--h) * var(--h) * (3 - 2 * var(--h)));
+      transform-origin: 0 0; translate: calc(var(--tx, 0px) * var(--E)) calc(var(--ty, 0px) * var(--E)); scale: calc(1 + (var(--k, 1) - 1) * var(--E)); will-change: translate, scale; }
+    html.fx :is(.op__text > *, .op__cap, .op__facts) { --a: clamp(0, (var(--p, 0) - var(--s, 0)) / 0.3, 1); opacity: var(--a); translate: 0 calc((1 - var(--a)) * 12px); }
+    html.fx .op .op__t { view-transition-name: none !important; }   /* hidden as the page arrives: the hero alone carries the morph */
+  }
+
+  /* orientation, hierarchy (D115): a case study's plates and the heads of its chapters arrive as they enter the screen,
+     a function of --e (site.js: 1 as the top enters at the bottom, 0 once it is 45% up the screen, whatever the
+     height), so they run back too. A plate comes into focus (fine pointer), rises 3rem and grows from 94%; the cells of
+     a series start stacked at their line's centre and fan out to their places (12 columns only); a chapter's rule
+     draws from the left; the words that belong to a plate or a head follow it (opacity, 12px). */
+  html.fx [data-fx="enter"] { --o: calc(1 - var(--e, 0)); --o2: clamp(0, (var(--o) - 0.35) / 0.65, 1); }
+  html.fx .fig[data-fx] > :is(.fig__plate, .cells) { opacity: clamp(0, var(--o) * 1.6, 1); translate: 0 calc(var(--e, 0) * 3rem); scale: calc(0.94 + 0.06 * var(--o)); }
+  html.fx .fig[data-fx] > :is(.cap, .key), html.fx :is(.ch__head, .next__head)[data-fx] > :not(.ch__bar) { opacity: var(--o2); translate: 0 calc((1 - var(--o2)) * 12px); }
+  html.fx :is(.ch__head, .next__head)[data-fx] > .ch__bar { transform-origin: left; scale: var(--o) 1; }
+  @media (min-width: 64rem) { html.fx .fig[data-fx] :is(.row, .cells) > .cell { translate: calc(var(--c, 0) * -90% * var(--e, 0)) 0; } }
+  @media (hover: hover) and (pointer: fine) { html.fx .fig[data-fx] > :is(.fig__plate, .cells) { filter: blur(calc(var(--e, 0) * 8px)); } }
 
   /* orientation (D98): a tile of the index rises 46px and settles from 94% as it enters at the bottom of the screen
      (--d from 1 to 0.35): dmcg's grid entry, scrubbed by the scroll so it runs back too. A tile a filter brings
@@ -1012,9 +1052,6 @@
   }
   @keyframes about-in { from { opacity: 0; translate: 0 12px; filter: blur(var(--about-blur, 0px)); } }
 
-  /* orientation (D100): a case study's plate rises to its place as it enters the screen and goes back down the same way
-     when the reader scrolls back (--d from 1 to 0.4), so the document itself follows the wheel, not only its arrivals */
-  html.fx .fig[data-fx] { translate: 0 calc(clamp(0, var(--d, 0) - 0.4, 0.6) * 90px); }
   /* the pointer's label (D109, feedback): dmcg's frosted pill following the cursor, the name in ink and the
      category in grey. The frost is the field at 86%, so the grey keeps 4.5:1 over the darkest render under it */
   .pill-label { position: fixed; left: 0; top: 0; z-index: 30; display: flex; align-items: baseline; gap: 0.45em; padding: 0.3rem 0.85rem;
@@ -1025,8 +1062,6 @@
   .pill-label__c:empty { display: none; }
   .pill-label.is-on { opacity: 1; scale: 1; }
 
-  /* orientation (D88): a case study's hero group drifts 16px against the page, so the plate reads as standing behind its words */
-  html.fx .fx-drift { translate: 0 calc((var(--p, 0.5) - 0.5) * 32px); }
 
 
   /* state: the menu fades, its items rise in order */

@@ -45,10 +45,17 @@ let gateFails = 0;
   // column sets the first part in ink and the rest in grey (D114)
   const on = (hay, s) => norm(s).split(' | ').every((x) => hay.includes(x));
   for (const s of strings(site.person)) if (!on(page('index.html'), s)) missing.push(`index.html: ${s.slice(0, 60)}`);
-  // strings left out of a page on purpose, each with its decision (none at present; D116 adds the case studies' repeats)
-  const unused = {};
-  for (const [src, rel] of map) { const hay = page(rel); for (const s of strings((unused[src] || ((d) => d))(rd(src)))) if (!on(hay, s)) missing.push(`${rel}: ${s.slice(0, 70)}`); }
-  console.log(missing.length ? `FAIL content coverage: ${missing.length} missing\n  ${missing.slice(0, 20).join('\n  ')}` : 'ok   content coverage: every content string is on its page');
+  // strings left out of a page on purpose (D116): a case study leaves out what its project's `$omit` names, because a
+  // field the page shows already says it (the build reads the same list); every other string must be on its page
+  let left = 0;
+  const unused = (d) => {
+    const o = new Set(d.$omit || []); if (!o.size) return d;
+    const out = { ...d, run: o.has('run') ? null : d.run, tag: o.has('tag') ? null : d.tag, spec: d.spec.filter((s) => !o.has(`spec:${s.label}`)), narrative: o.has('overview') ? d.narrative.filter((t) => t.chapter) : d.narrative };
+    left += strings(d).length - strings(out).length;
+    return out;
+  };
+  for (const [src, rel] of map) { const hay = page(rel); for (const s of strings(unused(rd(src)))) if (!on(hay, s)) missing.push(`${rel}: ${s.slice(0, 70)}`); }
+  console.log(missing.length ? `FAIL content coverage: ${missing.length} missing\n  ${missing.slice(0, 20).join('\n  ')}` : `ok   content coverage: every content string is on its page (${left} left out by $omit, D116)`);
   gateFails += missing.length;
 }
 const axeSrc = fs.readFileSync(path.join(here, '..', 'node_modules/axe-core/axe.min.js'), 'utf8');
@@ -373,7 +380,7 @@ async function runScrollPass() {
       await page.mouse.wheel(0, -300);
       await page.waitForTimeout(900);
       if (!(await page.evaluate(() => { const r = document.querySelector('.site-header').getBoundingClientRect(); return getComputedStyle(document.querySelector('.site-header')).position === 'fixed' && r.top === 0; }))) fail('the fixed header (D93) left the top of the screen');
-      const link = page.locator('.toc a').last();
+      const link = page.locator('.rail a').last();
       if (await link.count()) {
         const id = (await link.getAttribute('href')).slice(1);
         await page.evaluate(() => scrollTo({ top: 0, behavior: 'instant' }));
@@ -381,8 +388,8 @@ async function runScrollPass() {
         await link.click();
         await page.waitForTimeout(1900);
         const r = await page.evaluate((id) => { const el = document.getElementById(id); return { top: el.getBoundingClientRect().top, pad: parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop), hash: location.hash, focus: document.activeElement === el }; }, id);
-        if (Math.abs(r.top - r.pad) > 2) fail(`a contents link stopped ${Math.round(r.top)}px from the top, not ${r.pad}px`);
-        if (r.hash !== `#${id}` || !r.focus) fail('a contents link did not update the address or move focus');
+        if (Math.abs(r.top - r.pad) > 2) fail(`a rail link stopped ${Math.round(r.top)}px from the top, not ${r.pad}px`);
+        if (r.hash !== `#${id}` || !r.focus) fail('a rail link did not update the address or move focus');
       }
       const opener = page.locator('[data-viewer]').nth(2);
       await opener.scrollIntoViewIfNeeded();
@@ -745,10 +752,100 @@ const aboutFailures = await runAboutPass();
 gateFails += aboutFailures.length;
 if (aboutFailures.length) console.log(`FAIL about: ${aboutFailures.join(' | ')}`);
 else console.log('ok   about: the sheet opens from three pages (focus, inert page, still page, column scrolls, header unmoved); X, Esc, outside click close it and return focus; a dragged selection keeps it; Esc closes its chip first; axe open; instant under reduced motion; from the phone menu; about.html alone; a link without the script');
+// The case-study reel (D115), at 1440 with motion and a fine pointer, on every case study: the opening stands near
+// full-bleed with its words hidden; at the end of its track the frame sits in its slot and the words, caption and facts
+// are shown; back at the top it is near full-bleed again (a function of the scroll). The rail marks the chapter whose
+// top has passed the middle of the screen, and the one before until it has. Read to the end, every plate and chapter
+// head above the reading line has arrived (no fade, offset, scale or blur left). Under reduced motion the opening is
+// a still page (no track, nothing moved) and a chapter reached by its address stands clear of the header; on a phone
+// the opening stacks with no track.
+async function runCasePass() {
+  const failures = [];
+  const cases = urls.filter((u) => /project-[a-z-]+\.html$/.test(u));
+  const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 }, deviceScaleFactor: 1, colorScheme: 'light', reducedMotion: 'no-preference' });
+  const opening = () => { const m = document.querySelector('.op__media').getBoundingClientRect(), s = document.querySelector('.op__slot').getBoundingClientRect(); const t = getComputedStyle(document.querySelector('.op__t')); return { m: [m.left, m.top, m.width, m.height], s: [s.left, s.top, s.width, s.height], t: +t.opacity, facts: +getComputedStyle(document.querySelector('.op__facts')).opacity }; };
+  for (const url of cases) {
+    const name = url.replace(/^.*\//, '');
+    const page = await ctx.newPage();
+    const fail = (s) => failures.push(`${name}: ${s}`);
+    try {
+      await page.goto(url, { waitUntil: 'load' });
+      await page.waitForTimeout(500);
+      const a = await page.evaluate(opening);
+      if (!(a.m[2] >= 0.8 * 1440 || a.m[3] >= 0.7 * 900) || a.t > 0.05) fail(`the opening does not stand near full-bleed with its words hidden (${Math.round(a.m[2])}x${Math.round(a.m[3])}, title ${a.t})`);
+      await page.evaluate(() => { const op = document.querySelector('.op'); scrollTo({ top: op.getBoundingClientRect().top + scrollY + op.offsetHeight - innerHeight, behavior: 'instant' }); });
+      await page.waitForTimeout(500);
+      const b = await page.evaluate(opening);
+      if (b.m.some((v, i) => Math.abs(v - b.s[i]) > 2)) fail(`at the end of the track the frame is not in its slot (${b.m.map(Math.round)} vs ${b.s.map(Math.round)})`);
+      if (b.t !== 1 || b.facts !== 1) fail(`at the end of the track the words are not shown (title ${b.t}, facts ${b.facts})`);
+      await page.evaluate(() => scrollTo({ top: 0, behavior: 'instant' }));
+      await page.waitForTimeout(500);
+      const c = await page.evaluate(opening);
+      if (c.m.some((v, i) => Math.abs(v - a.m[i]) > 2)) fail('back at the top the opening is not as it was (the motion is not a function of the scroll)');
+      // the rail: the chapter whose top has passed the middle is current, the one before it until then
+      const rail = await page.evaluate(async () => {
+        const links = [...document.querySelectorAll('.rail a')]; if (links.length < 2) return null;
+        const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+        const k = Math.min(2, links.length - 1); const ch = document.querySelector(links[k].getAttribute('href'));
+        const at = async (dy) => { scrollTo({ top: ch.getBoundingClientRect().top + scrollY - innerHeight / 2 + dy, behavior: 'instant' }); await sleep(400); return links.map((l) => l.getAttribute('aria-current')); };
+        const past = await at(30), before = await at(-30);
+        const box = document.querySelector('.rail ol').getBoundingClientRect();
+        return { k, past, before, shown: box.top >= 0 && box.bottom <= innerHeight && box.width > 0 };
+      });
+      if (rail) {
+        if (rail.past.filter(Boolean).length !== 1 || rail.past[rail.k] !== 'location') fail(`the rail does not mark chapter ${rail.k + 1} once its top passes the middle (${rail.past})`);
+        if (rail.before[rail.k - 1] !== 'location') fail(`the rail does not keep chapter ${rail.k} until the next passes the middle (${rail.before})`);
+        if (!rail.shown) fail('the rail is not on screen while the chapters pass');
+      }
+      // read to the end: everything above the reading line has arrived
+      const left = await page.evaluate(async () => {
+        const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+        for (let y = 0; y < document.documentElement.scrollHeight; y += innerHeight * 0.8) { scrollTo({ top: y, behavior: 'instant' }); await sleep(80); }
+        scrollTo({ top: document.documentElement.scrollHeight, behavior: 'instant' }); await sleep(400);
+        const out = [];
+        for (const el of document.querySelectorAll('[data-fx="enter"]')) {
+          if (el.getBoundingClientRect().top > innerHeight * 0.45) continue;
+          for (const k of el.querySelectorAll(':scope > :is(.fig__plate, .cells, .cap, .key, .ch__t, .ch__text, .next__label), :scope .cell')) {
+            const cs = getComputedStyle(k);
+            if (cs.opacity !== '1' || !/^(none|0(px|%)?( 0(px|%)?)?)$/.test(cs.translate) || !['none', '1'].includes(cs.scale) || !['none', 'blur(0px)'].includes(cs.filter)) out.push(`${k.className} in ${el.id || el.className}: ${cs.opacity} ${cs.translate} ${cs.scale} ${cs.filter}`);
+          }
+        }
+        return out;
+      });
+      if (left.length) fail(`not arrived after reading: ${left.slice(0, 3).join(' ; ')}`);
+    } catch (e) { fail(e.message.split('\n')[0]); }
+    await page.close();
+  }
+  await ctx.close();
+  // still: reduced motion at 1440 (and a chapter by its address), and a phone
+  for (const [vp, opts] of [[{ width: 1440, height: 900 }, {}], [{ width: 375, height: 812 }, { isMobile: true, hasTouch: true }]]) {
+    const sc = await browser.newContext({ viewport: vp, deviceScaleFactor: 1, reducedMotion: vp.width === 375 ? 'no-preference' : 'reduce', ...opts });
+    const page = await sc.newPage();
+    const url = cases.find((u) => u.includes('project-al-arg')) || cases[0];
+    const fail = (s) => failures.push(`${vp.width === 375 ? 'phone' : 'reduced motion'}: ${s}`);
+    try {
+      const id = await (async () => { await page.goto(url, { waitUntil: 'load' }); return page.evaluate(() => [...document.querySelectorAll('.ch')].pop()?.id); })();
+      const s = await page.evaluate(() => { const st = getComputedStyle(document.querySelector('.op__stage')), m = getComputedStyle(document.querySelector('.op__media')); return { sticky: st.position, tall: document.querySelector('.op').offsetHeight > innerHeight * 1.5, pos: m.position, moved: m.translate !== 'none' || m.scale !== 'none', t: getComputedStyle(document.querySelector('.op__t')).opacity }; });
+      if (s.sticky === 'sticky' || s.tall || s.pos === 'absolute' || s.moved || s.t !== '1') fail(`the opening is not a still page (${JSON.stringify(s)})`);
+      if (vp.width === 1440 && id) {
+        await page.goto(`${url}#${id}`, { waitUntil: 'load' });
+        await page.waitForTimeout(400);
+        const r = await page.evaluate((id) => ({ top: document.getElementById(id).getBoundingClientRect().top, head: document.querySelector('.site-header').getBoundingClientRect().bottom }), id);
+        if (r.top < r.head - 1 || r.top > r.head + 48) fail(`a chapter reached by its address stands at ${Math.round(r.top)}px, the header ends at ${Math.round(r.head)}px`);
+      }
+    } catch (e) { fail(e.message.split('\n')[0]); }
+    await sc.close();
+  }
+  return failures;
+}
+const caseFailures = await runCasePass();
+gateFails += caseFailures.length;
+if (caseFailures.length) console.log(`FAIL case studies: ${caseFailures.length} issue(s)\n  ${caseFailures.slice(0, 20).join('\n  ')}`);
+else console.log('ok   case studies: the opening settles from near full-bleed into its slot and back (a function of the scroll), words after it; the rail marks the chapter past the middle; every plate and head arrived after reading; still under reduced motion and on a phone; a chapter by its address clear of the header');
 const scrollFailures = await runScrollPass();
 gateFails += scrollFailures.length;
 if (scrollFailures.length) console.log(`FAIL smooth scroll: ${scrollFailures.join(' | ')}`);
-else console.log('ok   smooth scroll: wheel glides and settles, keyboard followed, contents glide, dialog holds, native under reduced motion');
+else console.log('ok   smooth scroll: wheel glides and settles, keyboard followed, rail links glide, dialog holds, native under reduced motion');
 const motionFailures = await runMotionPass();
 gateFails += motionFailures.length;
 if (motionFailures.length) console.log(`FAIL motion (no-preference): ${motionFailures.length} issue(s)\n  ${motionFailures.slice(0, 20).join('\n  ')}`);
@@ -825,8 +922,8 @@ for (const url of urls) {
       // palette: no background colour outside the active Field tokens. Rendered scenes are skipped;
       // they carry their authored colour and do not define interface surfaces.
       const ok = theme === 'dark'
-        ? new Set(['rgba(0, 0, 0, 0)', 'rgb(18, 19, 17)', 'rgb(247, 245, 239)', 'rgb(69, 70, 63)', 'rgba(18, 19, 17, 0.88)', 'rgba(18, 19, 17, 0.86)', 'rgb(26, 27, 25)', 'color(srgb 0.0705882 0.0745098 0.0666667 / 0.55)'])
-        : new Set(['rgba(0, 0, 0, 0)', 'rgb(255, 255, 255)', 'rgb(17, 17, 17)', 'rgba(255, 255, 255, 0.86)', 'rgb(245, 245, 243)', 'color(srgb 1 1 1 / 0.55)']);   // last: the sheet's veil, the field at 55% (D113; Chrome writes a color-mix() this way)
+        ? new Set(['rgba(0, 0, 0, 0)', 'rgb(18, 19, 17)', 'rgb(247, 245, 239)', 'rgb(69, 70, 63)', 'rgba(18, 19, 17, 0.88)', 'rgba(18, 19, 17, 0.86)', 'rgb(26, 27, 25)', 'color(srgb 0.0705882 0.0745098 0.0666667 / 0.55)', 'color(srgb 0.0705882 0.0745098 0.0666667 / 0.86)'])
+        : new Set(['rgba(0, 0, 0, 0)', 'rgb(255, 255, 255)', 'rgb(17, 17, 17)', 'rgba(255, 255, 255, 0.86)', 'rgb(245, 245, 243)', 'color(srgb 1 1 1 / 0.55)', 'color(srgb 1 1 1 / 0.86)']);   // the sheet's veil, the field at 55% (D113), and the frosted pill, the field at 86% (D109, the rail D115): Chrome writes a color-mix() this way
       // an element with data-ground stands on its project's declared ground (D86, A10: from its render, per scheme)
       const rgb = (h) => `rgb(${[1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16)).join(', ')})`;
       const ground = (el) => el.matches('[data-ground]') && rgb(getComputedStyle(el).getPropertyValue(theme === 'dark' ? '--g-dark' : '--g-light').trim());
