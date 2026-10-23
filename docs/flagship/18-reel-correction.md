@@ -11,7 +11,7 @@
 | P1b | Email chip, form removal, theme sync + reveal | done | commit "Plan 18 P1b" (D107, D108); chip beside Contact only from 105 rem (measured: at the plan's 64 rem it covers the name); CV regenerated now as well as in P4 |
 | P2a | Home compositions (content only) | done | commit "Plan 18 P2a" (D120); `home.json` `reel` (15 items, choices table under §4 P2a); old keys marked `$remove` for P2b; QA coverage gate skips `layout`/`layers`/`why`/`$…`; home QA all gates pass |
 | P2b | Home build and motion | done | commit "Plan 18 P2b" (D103–D105, D109, D112 gate); widest empty band 24vh at 1440 (gap 1.5 rem, rise 6vh, drift 8vh, measured); home LCP 1.36 s, CLS 0; frames at 1× 60 fps, at 4× CPU ~30 fps (logged in D105 with the recommendation); full QA 28/28 ok (file: base, 404 checks skipped) |
-| P3 | Index: tree first, rebuilt; grid without margins | todo | |
+| P3 | Index: tree first, rebuilt; grid without margins | done | commit "Plan 18 P3" (D110–D112 as built, D121); families 15/132/78/3 = 228; tree from 64 rem (not 48: pills collide, measured); leaves by `tree-layout.mjs` (12 tests); switch measured in headless Chrome (interruptions settle, no errors); two small renders stand whole (no enlargement); phone header under 375 px and phone bar fixed; full QA 29/29 ok (file: base, 404 checks skipped), index re-run after the last change ok; perf not run (needs the server; P7) |
 | P4 | About sheet and about.html | todo | |
 | P5a | Case-study reel: engine, template, 4 reference projects | todo | |
 | P5b | Case-study reel: remaining 11 | todo | |

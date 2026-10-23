@@ -458,36 +458,87 @@
     });
   });
 
-  /* ------------------------------------------------------------ the index's views and families (state, D98)
-     The page holds the grid, the tree and the list; the bar shows one view and one family (dmcg's catalog) and
-     keeps both in the address, so a link or Back returns to the same view. The tree needs room: under 48rem it
-     gives way to the grid. A tile a filter brings back rises into place once (feedback). */
+  /* ------------------------------------------------------------ the index's views and families (state, D98, D110)
+     The page holds the tree, the grid and the list; the bar shows one view and one family (dmcg's catalog) and
+     keeps both in the address, so a link or Back returns to the same view. It opens on the tree where the tree
+     has room (64rem; its pills would meet below), on the grid elsewhere. The tree has no "all" (228 leaves would
+     be specks): there it shows the projects. A tile a filter brings back rises into place once (feedback). */
   var ixBar = document.querySelector('.ix-bar');
   if (ixBar) {
     var ixViews = slice(document.querySelectorAll('[data-view]'));
     var ixTiles = slice(document.querySelectorAll('.tile'));
-    var ixWide = window.matchMedia('(min-width: 48rem)');
-    var ixState = { view: 'grid', family: 'all' };
+    var ixBranches = slice(document.querySelectorAll('[data-branch]'));
+    var ixWide = window.matchMedia('(min-width: 64rem)');
+    var ixFams = slice(ixBar.querySelectorAll('[data-family]')).map(function (b) { return b.getAttribute('data-family'); });
+    var ixState = { view: ixWide.matches ? 'tree' : 'grid', family: 'all' };
     var ixStatus = document.querySelector('[data-ix-status]');
     var ixQuery = new URLSearchParams(location.search);
     if (/^(grid|tree|list)$/.test(ixQuery.get('view'))) ixState.view = ixQuery.get('view');
-    if (/^(all|drawing|render|film)$/.test(ixQuery.get('family'))) ixState.family = ixQuery.get('family');
+    if (ixFams.indexOf(ixQuery.get('family')) >= 0) ixState.family = ixQuery.get('family');
+
+    /* the branch switch (orientation, D111): the leaves on screen fold into the old family's pill while the new
+       family's fan out of its own, the nearest first, and its connectors draw out from the pill. Leaves off
+       screen simply change. A new choice mid-way settles the last one at once. */
+    var ixOn = null, ixAnims = [], ixGen = 0;
+    var treeSettle = function () { ixAnims.forEach(function (a) { a.cancel(); }); ixAnims = []; ixGen++; };
+    var centre = function (el) { var r = el.getBoundingClientRect(); return { x: r.left + r.width / 2, y: r.top + r.height / 2 }; };
+    var onScreen = function (el) { var r = el.getBoundingClientRect(); return r.width > 0 && r.bottom > 0 && r.top < window.innerHeight; };
+    var pillOf = function (b) { return document.querySelector('.tree__fam[data-family="' + b.getAttribute('data-branch') + '"]'); };
+    var treeSwitch = function (from, to) {
+      treeSettle();
+      var gen = ixGen;
+      ixBranches.forEach(function (b) { b.hidden = b !== from && b !== to; });
+      var out = centre(pillOf(from)), into = centre(pillOf(to));
+      var fold = slice(from.querySelectorAll('.leaf')).filter(onScreen).map(function (l) {
+        var c = centre(l);
+        return l.animate([{ transform: 'none', opacity: 1 }, { transform: 'translate(' + (out.x - c.x) + 'px, ' + (out.y - c.y) + 'px) scale(0.3)', opacity: 0 }],
+          { duration: 380, easing: 'cubic-bezier(0.55, 0, 1, 0.45)', fill: 'forwards' });
+      });
+      fold.push(from.querySelector('.tree__lines').animate([{ opacity: 1 }, { opacity: 0 }], { duration: 380, easing: 'ease-in', fill: 'forwards' }));
+      var fan = slice(to.querySelectorAll('.leaf')).filter(onScreen).map(function (l) { var c = centre(l); return { l: l, dx: into.x - c.x, dy: into.y - c.y, d: Math.hypot(into.x - c.x, into.y - c.y) }; });
+      var far = Math.max.apply(null, fan.map(function (f) { return f.d; }).concat(1));
+      var ease = css('--ease-out') || 'cubic-bezier(0.22, 1, 0.36, 1)';
+      var grow = fan.map(function (f) {
+        return f.l.animate([{ transform: 'translate(' + f.dx + 'px, ' + f.dy + 'px) scale(0.3)', opacity: 0 }, { transform: 'none', opacity: 1 }],
+          { duration: 560, delay: 160 + Math.round(280 * f.d / far), easing: ease, fill: 'backwards' });
+      });
+      grow.push(to.querySelector('.tree__lines').animate([{ clipPath: 'inset(0 100% 0 0)' }, { clipPath: 'inset(0 0 0 0)' }], { duration: 840, delay: 160, easing: ease, fill: 'backwards' }));
+      ixAnims = fold.concat(grow);
+      Promise.all(fold.map(function (a) { return a.finished; })).then(function () {
+        if (gen !== ixGen) return;
+        from.hidden = true;
+        fold.forEach(function (a) { a.cancel(); });
+      }, function () {});
+    };
+    // a leaf under the pointer or focus darkens its connector (feedback)
+    var hot = function (on) { return function (e) { var l = e.target.closest && e.target.closest('.leaf'); if (!l) return;
+      var p = l.parentNode.querySelectorAll('.tree__lines path')[+l.getAttribute('data-i')]; if (p) p.classList.toggle('is-hot', on); }; };
+    var ixTree = document.querySelector('.tree');
+    if (ixTree) ['pointerover', 'focusin', 'pointerout', 'focusout'].forEach(function (t, i) { ixTree.addEventListener(t, hot(i < 2)); });
+
     var ixApply = function (first) {
       var view = ixState.view === 'tree' && !ixWide.matches ? 'grid' : ixState.view;
+      if (view === 'tree' && ixState.family === 'all') ixState.family = ixBranches[0].getAttribute('data-branch');
       ixViews.forEach(function (v) { v.hidden = v.getAttribute('data-view') !== view; });
       document.body.setAttribute('data-ix-view', view);
       ixTiles.forEach(function (t) {
-        var on = ixState.family === 'all' || t.getAttribute('data-kind') === ixState.family;
+        var on = ixState.family === 'all' || t.getAttribute('data-fam') === ixState.family;
         if (on && t.hidden && !first && !reduce.matches) { t.classList.remove('is-entering'); void t.offsetWidth; t.classList.add('is-entering'); }
         t.hidden = !on;
       });
-      slice(document.querySelectorAll('[data-branch]')).forEach(function (b) { b.hidden = b.getAttribute('data-branch') !== ixState.family; });
+      var want = ixBranches.filter(function (b) { return b.getAttribute('data-branch') === ixState.family; })[0] || null;
+      if (want && ixOn && want !== ixOn && view === 'tree' && !first && !reduce.matches) treeSwitch(ixOn, want);
+      else { treeSettle(); ixBranches.forEach(function (b) { b.hidden = b !== want; }); }
+      ixOn = want;
+      slice(document.querySelectorAll('[data-trunk]')).forEach(function (t) { t.classList.toggle('is-on', t.getAttribute('data-trunk') === ixState.family); });
       var shown = ixTiles.filter(function (t) { return !t.hidden; }), seen = {};
       ixTiles.forEach(function (t) { if (t.id) t.removeAttribute('id'); });
       shown.forEach(function (t) { var l = t.getAttribute('data-l'); if (!seen[l]) { seen[l] = 1; t.id = 'az-' + l; } });
       slice(document.querySelectorAll('.az li')).forEach(function (li) { li.hidden = !seen[li.textContent.trim()]; });
       if (!first && ixStatus) ixStatus.textContent = (view === 'list' ? document.querySelectorAll('.ix-table tbody tr').length + ' projects, list view' : shown.length + ' images, ' + (ixState.family === 'all' ? 'all kinds' : ixState.family + 's') + ', ' + view + ' view');
       slice(document.querySelectorAll('button[data-family]')).forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-family') === ixState.family)); });
+      var chosen = ixBar.querySelector('[data-family][aria-pressed="true"]');   // a phone's families scroll: keep the chosen one in sight
+      if (chosen && chosen.parentNode.scrollWidth > chosen.parentNode.clientWidth) chosen.scrollIntoView({ block: 'nearest', inline: 'nearest' });
       slice(document.querySelectorAll('[data-view-btn]')).forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-view-btn') === view)); });
       if (!first) {
         var u = new URLSearchParams(location.search); u.set('view', view); u.set('family', ixState.family);

@@ -333,6 +333,12 @@
     .site-header .nav, .site-header .views { display: none; }
     .site-header .menu-button { margin-right: calc(-1 * var(--s2)); }
   }
+  /* narrower than 375px the centred name would run into the scheme button (measured at 320): it stands at the start */
+  @media (max-width: 23.4rem) {
+    .site-header__in { grid-template-columns: minmax(0, 1fr) auto; }
+    .brand { grid-column: 1; justify-items: start; padding-inline: 0; text-align: left; }
+    .site-header__tools { grid-column: 2; }
+  }
   @media (min-width: 48rem) { .site-header .menu-button { display: none; } }
 
   /* the edge (D93): three backdrop blurs under stepped masks and a wash of the field, strongest at the
@@ -635,18 +641,23 @@
   .pill:active { scale: 0.98; }
   .pill__n { color: var(--ink-2); font-size: var(--fs-label); font-variant-numeric: tabular-nums; }
 
-  /* index ("Reel", D98): dmcg's catalog. The grid shows every image of the work on its project's ground, each
-     whole at its own ratio inside a 4:3 tile (D32, A10); the tree runs from the families to the projects; the list
-     is for reading. The letters on the left and the bar below choose; the corner captions give way to the bar
-     where both would not fit. */
+  /* index ("Reel, corrected", D110-D112): dmcg's catalog. Where there is room it opens on the tree: the root, the
+     four families and every picture of the chosen one as a leaf at its own ratio. The grid shows every picture in
+     a 4:3 tile, a render or film covering it (the whole picture is one click away) and a drawing whole on its
+     raised sheet; the list is for reading. The letters on the left and the bar below choose; the corner captions
+     give way to the bar where both would not fit. */
   .ix-head { display: grid; justify-items: center; gap: var(--s2); padding: var(--s6) var(--site-edge) 0; text-align: center; }
+  body[data-ix-view="tree"] .ix-head { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }   /* the root pill says it */
   .ix-lead { font-size: var(--fs-cap); color: var(--ink-2); }
   .tiles { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s5) 12px; padding: var(--s7) var(--site-edge) calc(var(--edge-bottom) + 5rem); }
   @media (min-width: 56.25rem) { .tiles { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 3vw 2.8vw; padding-inline: 6.2vw 4.8vw; } }
   .tile__fig { margin: 0; }
   .tile__frame { display: grid; place-items: center; aspect-ratio: 4 / 3; border-radius: var(--r-tile); background: var(--g-light); overflow: clip; text-decoration: none; }
-  html[data-theme="dark"] .tile__frame { background: var(--g-dark); }
-  .tile[data-kind="drawing"] .tile__frame { background: var(--bg); box-shadow: inset 0 0 0 1px var(--line); }
+  html[data-theme="dark"] .tile__frame { background: var(--g-dark); }   /* under a cover crop the ground only shows while the picture loads */
+  .tile__frame--sheet, html[data-theme="dark"] .tile__frame--sheet { background: var(--bg-raised); }
+  .tile__frame[data-crop] { display: block; }
+  .tile__frame[data-crop] :is(a, picture, img) { display: block; width: 100%; height: 100%; }
+  .tile__frame[data-crop] img { object-fit: cover; }
   .tile__img { display: block; }
   .tile__img :is(a, picture:not(.nw__keep), img) { display: block; width: 100%; height: auto; }
   .tile__cap { margin-top: var(--s2); display: flex; flex-wrap: wrap; align-items: center; gap: 0 var(--s2); font-size: var(--fs-label); line-height: 1.45; color: var(--ink-2); }
@@ -660,26 +671,48 @@
     .az a:hover { color: var(--ink); }
   }
   body:is([data-ix-view="tree"], [data-ix-view="list"]) .az { display: none; }
-  .ix-tree, .ix-list { padding: var(--s6) var(--site-edge) calc(var(--edge-bottom) + 5rem); }
-  .tree { position: relative; aspect-ratio: 1200 / 640; width: min(100%, 90rem, calc((100svh - var(--head-h) - 9rem) * 1.875)); margin-inline: auto; }
-  .tree__branch { position: absolute; inset: 0; }
-  .tree__lines { position: absolute; inset: 0; width: 100%; height: 100%; fill: none; stroke: var(--ink); stroke-opacity: 0.18; stroke-width: 1; }
-  .tree__lines path { vector-effect: non-scaling-stroke; }
-  .tree .pill { position: absolute; z-index: 1; translate: 0 -50%; }
-  .leaf { position: absolute; width: 8.5%; translate: -50% -50%; display: block; border-radius: var(--r-tile); overflow: clip; background: var(--bg); box-shadow: var(--shadow-card); }
-  .leaf :is(picture, img) { display: block; width: 100%; height: auto; }
-  @media (max-width: 47.99rem) { .ix-tree { display: none !important; } }
+  .ix-list { padding: var(--s6) var(--site-edge) calc(var(--edge-bottom) + 5rem); }
+  /* the tree (D110, D111): one canvas, 1200 units = its width = 100cqw, so the pills, the leaves and the connectors
+     the build placed on it keep together at any size. It is as wide as the first screen allows the projects'
+     branch to stand whole under the header (and never so narrow that the family pills meet). A branch is as tall
+     as its field (--h units); the pills stay at the middle of the first screen. */
+  .ix-tree { padding: var(--s2) var(--site-edge) calc(var(--edge-bottom) + 4rem); overflow-x: clip; }   /* an enlarged leaf at the edge never widens the page */
+  .tree { position: relative; display: grid; container-type: inline-size; margin-inline: auto; width: clamp(60rem, min(90rem, (100svh - var(--head-h) - 8rem) * 2), 100%); }
+  .tree__branch { grid-area: 1 / 1; position: relative; height: calc(var(--h) * 1cqw / 12); }
+  .tree__lines, .tree__trunk { position: absolute; left: 0; top: 0; width: 100%; height: 100%; overflow: visible; fill: none; stroke: var(--ink); stroke-opacity: 0.16; stroke-width: 1; }
+  .tree__trunk { height: 50cqw; }
+  :is(.tree__lines, .tree__trunk) path { vector-effect: non-scaling-stroke; transition: stroke-opacity var(--t-hover) var(--ease-out); }
+  .tree__lines path.is-hot, .tree__trunk path.is-on { stroke-opacity: 0.55; }
+  .tree__root, .tree__fam { position: absolute; z-index: 2; translate: 0 -50%; }
+  .tree__fam[aria-pressed="false"] { color: var(--ink-2); }   /* the other families are greyed, at 6.4:1 */
+  /* a leaf: a render or film as a small card, a drawing floating on the page's own ground (which hides the
+     connectors passing behind its linework). Under the pointer or focus it grows to 1.45, lifts, and its caption
+     tag shows under it; its connector darkens (site.js) */
+  .leaf { position: absolute; z-index: 1; display: block; }
+  .leaf:is(:hover, :focus-within) { z-index: 3; }
+  .leaf__in { display: block; border-radius: var(--r-tile); overflow: clip; background: var(--bg); box-shadow: var(--shadow-card);
+    transition: scale var(--t-ui) var(--ease-out), box-shadow var(--t-ui) var(--ease-out); }
+  .leaf--drawing .leaf__in { border-radius: 0; box-shadow: none; }
+  .leaf__in :is(a, picture:not(.nw__keep), img) { display: block; width: 100%; height: auto; }
+  .leaf:is(:hover, :focus-within) .leaf__in { scale: 1.45; }
+  .leaf:not(.leaf--drawing):is(:hover, :focus-within) .leaf__in { box-shadow: var(--shadow-lift); }
+  .leaf__cap { position: absolute; left: 50%; top: calc(122.5% + var(--s2)); translate: -50% 0; padding: 0.125rem 0.5rem; border-radius: var(--r-tile);
+    background: var(--bg); box-shadow: 0 0 0 1px var(--line), 0 4px 12px -4px rgb(0 0 0 / 0.12); font-size: var(--fs-label); line-height: 1.5; white-space: nowrap;
+    visibility: hidden; opacity: 0; transition: opacity var(--t-hover) var(--ease-out), visibility 0s linear var(--t-hover); }
+  .leaf--end .leaf__cap { left: auto; right: -22.5%; translate: none; }   /* near the right edge it hangs from the leaf's right */
+  .leaf:is(:hover, :focus-within) .leaf__cap { visibility: visible; opacity: 1; transition-delay: 0s; }
+  @media (max-width: 63.99rem) { .ix-tree { display: none !important; } }
   .ix-list { overflow-x: auto; }
   .ix-table { width: min(100%, 72rem); margin-inline: auto; border-collapse: collapse; font-size: var(--fs-cap); }
   .ix-table :is(th, td) { padding: var(--s3) var(--s4) var(--s3) 0; border-bottom: 1px solid var(--line); text-align: left; font-weight: 400; vertical-align: baseline; white-space: nowrap; }
   .ix-table thead th { color: var(--ink-2); font-size: var(--fs-label); }
   .ix-table td:first-child, .ix-table td:last-child { color: var(--ink-2); font-variant-numeric: tabular-nums; }
-  .ix-table a { display: inline-flex; align-items: center; min-height: 1.75rem; text-decoration: none; }
-  .ix-table a:hover { text-decoration: underline; }
+  .ix-table a { display: inline-flex; align-items: center; min-height: 1.75rem; padding-inline: var(--pill-x); margin-inline: calc(-1 * var(--pill-x)); color: var(--ink); text-decoration: none; }
   .ix-bar { position: fixed; z-index: 17; left: 50%; bottom: clamp(0.75rem, 1.5vw, 1.5rem); translate: -50% 0; display: flex; gap: var(--s4); align-items: center; }
   .ix-bar__group { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--s1); }
   html:has(.ix-bar) { scroll-padding-bottom: 8rem; }
-  body[data-ix-view="list"] .ix-bar__group:first-child { display: none; }   /* the list is of projects: no families (D101) */
+  /* the list is of projects (D101) and the tree chooses with its own pills: the bar's families are for the grid */
+  body:is([data-ix-view="list"], [data-ix-view="tree"]) .ix-bar__group:first-child { display: none; }
   @media (max-height: 32rem) {
     .site-header { position: absolute; }
     .ix-bar { position: static; translate: none; flex-wrap: wrap; justify-content: center; margin: var(--s4) var(--site-edge) 0; }
@@ -687,9 +720,13 @@
   .ix-bar .pill[aria-pressed="true"], .tree .pill[aria-pressed="true"] { border-color: var(--ink); }
   .pill--icon { width: 2.75rem; padding: 0; justify-content: center; }
   .pill--icon svg { width: 1.125rem; height: 1.125rem; fill: none; stroke: currentColor; stroke-width: 1.5; }
+  @media (max-width: 63.99rem) { .ix-bar [data-view-btn="tree"] { display: none; } }
+  /* a phone: one line, the families scrolling sideways beside the views (five pills wrapped to three lines) */
   @media (max-width: 47.99rem) {
-    .ix-bar { left: var(--site-edge); right: var(--site-edge); translate: none; flex-wrap: wrap; justify-content: center; gap: var(--s2); }
-    .ix-bar [data-view-btn="tree"] { display: none; }
+    .ix-bar { left: var(--site-edge); right: var(--site-edge); translate: none; justify-content: center; gap: var(--s2); }
+    .ix-bar__group:first-child { flex: 0 1 auto; min-width: 0; flex-wrap: nowrap; justify-content: flex-start; overflow-x: auto; scrollbar-width: none; padding: 3px; margin: -3px; }   /* the padding keeps focus rings whole */
+    .ix-bar__group:first-child .pill { flex: none; }
+    .ix-bar__group:last-child { flex: none; flex-wrap: nowrap; }
   }
   @media (max-width: 89.99rem) { .page-work .corner { display: none; } }
 

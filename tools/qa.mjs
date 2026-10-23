@@ -56,6 +56,8 @@ const sitemap = FILE ? fs.readFileSync(path.join(REPO, 'sitemap.xml'), 'utf8') :
 const LIVE = (({ origin, base }) => origin + base)(JSON.parse(fs.readFileSync(path.join(REPO, 'content/site.json'), 'utf8')));
 let urls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1].replace(LIVE, BASE))
   .map((u) => (FILE && u.endsWith('/') ? u + 'index.html' : u));   // the server answers a folder with its index.html
+// the index opens on the tree from 64rem (D110): its grid's tiles are checked at every width from their own address
+urls.push(...urls.filter((u) => u.endsWith('architecture.html')).map((u) => u + '?view=grid'));
 if (FILE) console.log('note  file: base, no server: 404.html and the missing-page check are not run');
 else urls.push(BASE + '404.html', BASE + 'does-not-exist/x.html');
 if (ONLY) urls = urls.filter((u) => u.includes(ONLY));
@@ -520,49 +522,92 @@ const homeFailures = await runHomePass();
 gateFails += homeFailures.length;
 if (homeFailures.length) console.log(`FAIL home reel: ${homeFailures.join(' | ')}`);
 else console.log('ok   home reel: assembled at load, entering scaled and blurred, centred assembled, reversible, film follows the scroll, label names project and category, bands under 25vh, links focus in view with captions, touch: captions, no blur, no film');
-// The index (D98): the count matches its tiles; a family chosen by keyboard shows exactly its tiles, is pressed and
-// written to the address; the viewer's gallery is the visible tiles and offers their project; the tree and the list
-// open from the bar; an address with a view and a family restores both.
+// The index (D98, D110-D112): it opens on the tree at 1440 (on the projects) and on the grid at 375. The families'
+// counts sum to the root, and each equals its leaves and its tiles. A family chosen by keyboard shows its branch, is
+// pressed and written to the address. No two leaves of a branch overlap and every leaf stays in the tree; a leaf
+// under the pointer grows, names itself and darkens its connector. The viewer's gallery is the branch's leaves, or
+// the grid's visible tiles, and offers the project. An address with a view and a family restores both.
 async function runIndexPass() {
   const failures = [];
-  const url = urls.find((u) => u.includes('architecture.html'));
+  const url = urls.find((u) => u.endsWith('architecture.html'));
   if (!url) return failures;
-  const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 }, deviceScaleFactor: 1, colorScheme: 'light', reducedMotion: 'reduce' });
-  const page = await ctx.newPage();
   const fail = (s) => failures.push(s);
-  try {
-    await page.goto(url, { waitUntil: 'load' });
-    const n = await page.evaluate(() => ({ all: document.querySelectorAll('.tile').length, said: +document.querySelector('.ix-head .col__count').textContent,
-      d: document.querySelectorAll('.tile[data-kind="drawing"]').length, bar: !document.querySelector('.ix-bar').hidden }));
-    if (n.all !== n.said) fail(`the index says ${n.said} and holds ${n.all} tiles`);
-    if (!n.bar) fail('the bar did not show');
-    await page.locator('.ix-bar button[data-family="drawing"]').focus();
-    await page.keyboard.press('Enter');
-    const s = await page.evaluate(() => ({ shown: [...document.querySelectorAll('.tile')].filter((t) => !t.hidden).length, q: location.search,
-      pressed: document.querySelector('.ix-bar button[data-family="drawing"]').getAttribute('aria-pressed') }));
-    if (s.shown !== n.d || !/family=drawing/.test(s.q) || s.pressed !== 'true') fail(`Drawings: ${s.shown} of ${n.d} tiles shown, address ${s.q}, pressed ${s.pressed}`);
-    await page.locator('.tile:not([hidden]) [data-viewer]').first().click();
+  const open = async (w, q = '') => {
+    const ctx = await browser.newContext({ viewport: { width: w, height: w < 768 ? 812 : 900 }, deviceScaleFactor: 1, colorScheme: 'light', reducedMotion: 'reduce' });
+    const page = await ctx.newPage(); await page.goto(url + q, { waitUntil: 'load' }); return { ctx, page };
+  };
+  const shownBranch = (page) => page.evaluate(() => [...document.querySelectorAll('[data-branch]')].filter((b) => !b.hidden).map((b) => b.dataset.branch).join());
+  const viewerCount = async (page, sel, n, where) => {
+    await page.locator(sel).first().click();
     await page.waitForTimeout(900);
     const v = await page.evaluate(() => { const a = document.querySelector('[data-viewer-project]'); return { count: document.querySelector('.viewer__count').textContent.trim(), hidden: a.hidden, href: a.getAttribute('href') }; });
-    if (!v.count.endsWith(`/ ${n.d}`)) fail(`the viewer counts ${v.count}, not of the ${n.d} visible tiles`);
-    if (v.hidden || !/projects\/project-/.test(v.href)) fail('the viewer does not offer the project');
+    if (!v.count.endsWith(`/ ${n}`)) fail(`${where}: the viewer counts ${v.count}, not of the ${n} shown`);
+    if (v.hidden || !/projects\/project-/.test(v.href)) fail(`${where}: the viewer does not offer the project`);
     await page.keyboard.press('Escape');
     await page.waitForTimeout(700);
-    for (const view of ['tree', 'list']) {
-      await page.locator(`.ix-bar [data-view-btn="${view}"]`).click();
-      if (!(await page.evaluate((view) => !document.querySelector(`[data-view="${view}"]`).hidden && document.querySelector('[data-view="grid"]').hidden, view))) fail(`the ${view} did not open`);
+  };
+  try {
+    { const { ctx, page } = await open(375); const v = await page.evaluate(() => document.body.dataset.ixView); if (v !== 'grid') fail(`375 opens on the ${v}, not the grid`); await ctx.close(); }
+    const { ctx, page } = await open(1440);
+    const t = await page.evaluate(() => ({ view: document.body.dataset.ixView, bar: !document.querySelector('.ix-bar').hidden,
+      root: +document.querySelector('.tree__root .pill__n').textContent, said: +document.querySelector('.ix-head .col__count').textContent, tiles: document.querySelectorAll('.tile').length,
+      fams: [...document.querySelectorAll('.tree__fam')].map((b) => ({ id: b.dataset.family, n: +b.querySelector('.pill__n').textContent,
+        leaves: document.querySelectorAll(`[data-branch="${b.dataset.family}"] .leaf`).length, tiles: document.querySelectorAll(`.tile[data-fam="${b.dataset.family}"]`).length })) }));
+    if (t.view !== 'tree' || !t.bar) fail(`1440 opens on the ${t.view}${t.bar ? '' : ' without its bar'}, not the tree`);
+    if (await shownBranch(page) !== 'project') fail(`the tree opens on ${await shownBranch(page) || 'nothing'}, not the projects`);
+    if (t.root !== t.said || t.tiles !== t.said) fail(`root ${t.root}, heading ${t.said}, tiles ${t.tiles}`);
+    if (t.fams.reduce((s, f) => s + f.n, 0) !== t.root) fail(`the families sum to ${t.fams.reduce((s, f) => s + f.n, 0)}, not the root's ${t.root}`);
+    for (const f of t.fams) if (f.n !== f.leaves || f.n !== f.tiles) fail(`${f.id}: pill ${f.n}, leaves ${f.leaves}, tiles ${f.tiles}`);
+    // the hover: the leaf grows to 1.45, its caption tag shows, its connector darkens
+    const leaf = page.locator('[data-branch="project"] .leaf').nth(4);
+    await leaf.hover();
+    const h = await leaf.evaluate((l) => ({ k: l.querySelector('.leaf__in').getBoundingClientRect().width / l.getBoundingClientRect().width,
+      cap: getComputedStyle(l.querySelector('.leaf__cap')).visibility, hot: l.parentNode.querySelectorAll('path.is-hot').length }));
+    if (Math.abs(h.k - 1.45) > 0.02 || h.cap !== 'visible' || h.hot !== 1) fail(`a leaf under the pointer: scale ${h.k.toFixed(2)}, caption ${h.cap}, ${h.hot} connector(s) lit`);
+    await page.mouse.move(5, 450);
+    // each branch: chosen by keyboard, written to the address, its leaves apart and inside the tree
+    for (const f of t.fams) {
+      await page.locator(`.tree__fam[data-family="${f.id}"]`).focus();
+      await page.keyboard.press('Enter');
+      const k = await page.evaluate((id) => {
+        const tree = document.querySelector('.tree').getBoundingClientRect();
+        const rs = [...document.querySelectorAll(`[data-branch="${id}"] .leaf`)].map((l) => l.getBoundingClientRect());
+        let overlap = 0, out = 0;
+        rs.forEach((r, i) => { if (r.left < tree.left - 1 || r.right > tree.right + 1 || r.top < tree.top - 1 || r.bottom > tree.bottom + 1) out++;
+          for (let j = i + 1; j < rs.length; j++) { const q = rs[j]; if (r.left < q.right - 0.5 && q.left < r.right - 0.5 && r.top < q.bottom - 0.5 && q.top < r.bottom - 0.5) overlap++; } });
+        return { q: location.search, pressed: document.querySelector(`.tree__fam[data-family="${id}"]`).getAttribute('aria-pressed'), overlap, out };
+      }, f.id);
+      const s = await shownBranch(page);
+      if (s !== f.id || !new RegExp(`family=${f.id}`).test(k.q) || k.pressed !== 'true') fail(`${f.id} by keyboard: shown ${s}, address ${k.q}, pressed ${k.pressed}`);
+      if (k.overlap || k.out) fail(`${f.id}: ${k.overlap} overlapping pair(s) of leaves, ${k.out} outside the tree`);
     }
-    await page.goto(url.split('?')[0] + '?view=list&family=film', { waitUntil: 'load' });
-    const r = await page.evaluate(() => ({ list: !document.querySelector('[data-view="list"]').hidden, film: document.querySelector('.ix-bar button[data-family="film"]').getAttribute('aria-pressed') }));
-    if (!r.list || r.film !== 'true') fail('an address with view=list&family=film did not restore both');
+    const dr = t.fams.find((f) => f.id === 'drawing').n;
+    await page.locator('.tree__fam[data-family="drawing"]').click();
+    await viewerCount(page, '[data-branch="drawing"] [data-viewer]', dr, 'from a leaf');
+    // the grid: a family by keyboard shows exactly its tiles; the viewer's gallery is those tiles
+    await page.locator('.ix-bar [data-view-btn="grid"]').click();
+    const re = t.fams.find((f) => f.id === 'render').n;
+    await page.locator('.ix-bar button[data-family="render"]').focus();
+    await page.keyboard.press('Enter');
+    const g = await page.evaluate(() => ({ view: document.body.dataset.ixView, shown: [...document.querySelectorAll('.tile')].filter((x) => !x.hidden).length, q: location.search }));
+    if (g.view !== 'grid' || g.shown !== re || !/view=grid&family=render/.test(g.q)) fail(`grid, Renders by keyboard: ${g.view}, ${g.shown} of ${re} tiles, address ${g.q}`);
+    await viewerCount(page, '.tile:not([hidden]) [data-viewer]', re, 'from the grid');
+    await page.locator('.ix-bar [data-view-btn="list"]').click();
+    if (!(await page.evaluate(() => !document.querySelector('[data-view="list"]').hidden && document.querySelector('[data-view="grid"]').hidden))) fail('the list did not open');
+    await ctx.close();
+    for (const [q, view, fam] of [['?view=tree&family=render', 'tree', 'render'], ['?view=list&family=film', 'list', 'film']]) {
+      const o = await open(1440, q);
+      const r = await o.page.evaluate((fam) => ({ view: document.body.dataset.ixView, pressed: document.querySelector(`.ix-bar button[data-family="${fam}"]`).getAttribute('aria-pressed') }), fam);
+      if (r.view !== view || r.pressed !== 'true' || (view === 'tree' && await shownBranch(o.page) !== fam)) fail(`the address ${q} did not restore both (${r.view}, pressed ${r.pressed})`);
+      await o.ctx.close();
+    }
   } catch (e) { fail(e.message); }
-  await ctx.close();
   return failures;
 }
 const indexFailures = await runIndexPass();
 gateFails += indexFailures.length;
 if (indexFailures.length) console.log(`FAIL index: ${indexFailures.join(' | ')}`);
-else console.log('ok   index views: count, family by keyboard and in the address, viewer of the visible tiles with its project, tree and list, address restored');
+else console.log('ok   index: tree at 1440 and grid at 375, families sum to the root and match leaves and tiles, branches by keyboard, leaves apart and inside, hover, viewer from leaves and tiles, list, addresses restored');
 // About (D99): with motion at 1440 the rail marks the chapter the reader is in and the header stands light over the
 // dark ground; the gathered word keeps its name; under reduced motion every chapter is there to read.
 async function runAboutPass() {
@@ -627,9 +672,15 @@ for (const url of urls) {
         if (cs.visibility === 'hidden' || el.closest('.vh,[hidden],dialog:not([open])')) continue; const fs = parseFloat(cs.fontSize); if (fs < 13) out.small.push(`${fs}px ${el.tagName.toLowerCase()}.${el.className}`); }
       for (const el of document.querySelectorAll('a[href], button, input, textarea, select, summary')) { if (el.closest('dialog:not([open]), [hidden], .vh, [inert]') || getComputedStyle(el).display === 'none') continue;
         const b = el.getBoundingClientRect(); if (b.width === 0) continue; if ((b.width < 24 || b.height < 24) && !el.closest('p, li, dd, figcaption, .cap__text')) out.targets.push(`${Math.round(b.width)}x${Math.round(b.height)} ${el.tagName.toLowerCase()}.${el.className}`); }
-      // chrome (D106, plan 18): with the full header (48rem and up) the centred name stands clear of the routes and the tools
+      // chrome (D106, plan 18): with the full header (48rem and up) the centred name stands clear of the routes and the
+      // tools; on a phone its words stand clear of the scheme and menu buttons
       out.chrome = [];
-      const nameBox = document.querySelector('.site-header .brand')?.getBoundingClientRect();
+      const brand = document.querySelector('.site-header .brand');
+      const nameBox = brand?.getBoundingClientRect();
+      if (innerWidth < 768 && brand) {
+        const words = document.createRange(); words.selectNodeContents(brand); const t = words.getBoundingClientRect(), b = document.querySelector('.site-header__tools').getBoundingClientRect();
+        if (t.right > b.left && b.right > t.left) out.chrome.push(`the name's words reach the header's buttons (${Math.round(t.right - b.left)}px)`);
+      }
       if (innerWidth >= 768 && nameBox) for (const sel of ['.site-header .nav ul', '.site-header__tools']) {
         const b = document.querySelector(sel)?.getBoundingClientRect();
         if (b && b.width && nameBox.left < b.right && b.left < nameBox.right && nameBox.top < b.bottom && b.top < nameBox.bottom) out.chrome.push(`the name overlaps ${sel} (${Math.round(Math.min(nameBox.right, b.right) - Math.max(nameBox.left, b.left))}px)`);

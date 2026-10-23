@@ -2,6 +2,7 @@
 // Every block sits on the one grid (.wrap.g) through a centred span class; images are placed by partials.mjs.
 import { html, raw, attrs, when } from '../lib/html.mjs';
 import { dims, shown, preloadFor, picture } from '../lib/images.mjs';
+import { placeLeaves, connector, TREE } from '../lib/tree-layout.mjs';
 import { icon, image, row, figure, hero, heroPartner, creditLine, heroCaption, sizesFor, spanFor, projectHref, vtTitle, vtHero, CASE, capSide, words, chaptersOf, scatter, reelItem, reelSizes } from './partials.mjs';
 
 const q = (s) => `“${s}”`;
@@ -18,17 +19,20 @@ const linked = (href, markup) => html`<a class="card" href="${href}" tabindex="-
 
 /* ------------------------------------------------------------------ the catalog (D97, P5): every image and film of the work */
 // one entry per published picture: each project's hero, every figure (or each item of a multi-image figure), and
-// the films of the motion page; the families are the kinds the content already records (drawing, render, film)
+// the films of the motion page. `kind` is what the content records (drawing, render, film); `fam` is the index's
+// family, a partition that sums to the root (D110): the heroes are the projects, every other picture its kind
 export function catalogOf(projects, films) {
   const out = [];
   for (const x of projects) {
-    out.push({ project: x, src: x.hero.src, alt: x.hero.alt, title: 'Lead image', kind: 'render', hero: true });
-    for (const f of x.figures) for (const it of f.items || [f]) out.push({ project: x, src: it.src, alt: it.alt, title: f.title, kind: f.kind === 'drawing' ? 'drawing' : 'render', fig: f });
+    out.push({ project: x, src: x.hero.src, alt: x.hero.alt, title: 'Lead image', kind: 'render', fam: 'project', hero: true });
+    for (const f of x.figures) for (const it of f.items || [f]) { const kind = f.kind === 'drawing' ? 'drawing' : 'render'; out.push({ project: x, src: it.src, alt: it.alt, title: f.title, kind, fam: kind, fig: f }); }
   }
-  for (const f of films) out.push({ project: null, film: f, title: f.title, kind: 'film' });
+  for (const f of films) out.push({ project: null, film: f, title: f.title, kind: 'film', fam: 'film' });
   return out;
 }
-export const FAMILIES = [{ id: 'drawing', label: 'Drawings' }, { id: 'render', label: 'Renders' }, { id: 'film', label: 'Films' }];
+export const FAMILIES = [{ id: 'project', label: 'Projects' }, { id: 'drawing', label: 'Drawings' }, { id: 'render', label: 'Renders' }, { id: 'film', label: 'Films' }];
+// the one count of a family (D110): the tree's pills, the home's mini tree and QA all read it
+export const countOf = (cat, fam) => cat.filter((e) => e.fam === fam).length;
 
 /* ------------------------------------------------------------------ home ("Reel, corrected", D103-D105) */
 // The page opens on the reel: one composition per project (reelItem), then the root of the index with its
@@ -45,7 +49,7 @@ export function home(site, d, projects, ctx) {
   const first = d.reel[0].layers.find((l) => l.role === 'main');
   if (!first) throw new Error('home: the first composition needs a main render (the page\'s largest paint)');
   const cat = catalogOf(projects, ctx.films);
-  const count = (k) => cat.filter((e) => e.kind === k).length;
+  const count = (k) => countOf(cat, k);
   // the root's connectors: from its middle to the middle of each family's row (equal rows, site.css)
   const n = FAMILIES.length;
   const lines = FAMILIES.map((f, i) => { const y = ((2 * i + 1) / (2 * n) * 100).toFixed(2); return `<path d="M0 50 C50 50, 50 ${y}, 100 ${y}"/>`; }).join('');
@@ -64,15 +68,19 @@ export function home(site, d, projects, ctx) {
     preload: preloadFor(first.src, reelSizes(d.reel[0].layout), p), bodyClass: 'page-home', jsonld: [ctx.websiteLd, ctx.personLd] } };
 }
 
-/* ------------------------------------------------------------------ index ("Reel", D98): dmcg's catalog of the work */
-// Every drawing, render and film in three views the page holds at once (grid, tree, list); the script only
+/* ------------------------------------------------------------------ index ("Reel, corrected", D110-D112): dmcg's catalog */
+// Every drawing, render and film in three views the page holds at once (tree, grid, list); the script only
 // chooses which one shows and which family, and keeps both in the address. Without it the grid stands alone.
-const TILE = 4 / 3;                       // the tiles' frame; each image keeps its own ratio inside it (D32, A10)
+const TILE = 4 / 3;                       // the tiles' frame: a render or film covers it, a drawing stands whole on its sheet (D112)
+const TILE_MAX = { w: 534, h: 400 };      // a tile at 1920 (3 columns): a render must cover it at its own size or less
 const plain = (s) => s.normalize('NFD').replace(/[̀-ͯ]/gu, '');
 const letterOf = (s) => plain(s).charAt(0).toUpperCase();
-// the tree's places for up to fifteen leaves: a 5 x 3 field right of the families, nudged by a fixed seed
-const leafAt = (i) => { const c = i % 5, r = Math.floor(i / 5); const j = Math.sin(i * 12.9898) * 43758.5453; const n = j - Math.floor(j);
-  return { x: 37 + c * 13.2 + (n - 0.5) * 4, y: 17 + r * 31 + ((n * 7) % 1 - 0.5) * 8 }; };
+// the tree's pills on the canvas of tools/lib/tree-layout.mjs (1200 units = the tree's width = 100cqw): the root at
+// the left, the families stacked at the middle of the first screen; a connector starts under its pill, so it
+// leaves the pill's right edge whatever the pill's width
+const TRUNK = { root: { x: 30, y: TREE.H0 / 2 }, famX: 180, step: 66 };
+const famAt = (i) => ({ x: TRUNK.famX + 30, y: TREE.H0 / 2 + (i - (FAMILIES.length - 1) / 2) * TRUNK.step });
+const cq = (v) => `${+(v / 12).toFixed(3)}cqw`;
 const VIEWS = [{ id: 'grid', label: 'Grid', svg: '<rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/>' },
   { id: 'tree', label: 'Tree', svg: '<circle cx="5" cy="12" r="2"/><circle cx="19" cy="5" r="2"/><circle cx="19" cy="12" r="2"/><circle cx="19" cy="19" r="2"/><path d="M7 12c6 0 6-7 10-7M7 12h10M7 12c6 0 6 7 10 7"/>' },
   { id: 'list', label: 'List', svg: '<path d="M3 6h18M3 12h18M3 18h18"/>' }];
@@ -83,46 +91,59 @@ export function work(site, projects, ctx) {
   const cat = catalogOf(projects, ctx.films).sort((a, b) => plain(key(a)).localeCompare(plain(key(b)), 'en', { sensitivity: 'base' }));
   const firstOf = new Map();
   cat.forEach((e, i) => { const l = letterOf(key(e)); if (!firstOf.has(l)) firstOf.set(l, i); });
-  const count = (k) => cat.filter((e) => e.kind === k).length;
+  const count = (k) => countOf(cat, k);
+  const relOf = (e) => (e.kind === 'drawing' ? shown(e.src, true) : e.src);
+  const poster = (e, sizes = '') => html`<img src="${p}videos/web/${e.film.slug}-poster.webp" alt="" width="${e.film.w}" height="${e.film.h}" loading="lazy" decoding="async"${sizes}>`;
 
+  // a tile: a render or a film covers its 4:3 frame (data-crop: the full picture is one click away); a drawing
+  // stands whole on its raised sheet, on the drawing's own ratio, with its dark treatment (D112)
   const tile = (e, i) => {
     const anchor = [...firstOf].find(([, k]) => k === i);
     const id = anchor ? html` id="az-${anchor[0]}"` : '';
+    const at = html` data-kind="${e.kind}" data-fam="${e.fam}" data-l="${letterOf(key(e))}" data-fx="centre"${id}`;
     if (e.film) {
-      const href = `${p}motion.html#${e.film.id}`;
-      const r = e.film.w / e.film.h, fw = r >= TILE ? 100 : 100 * r / TILE;
-      return html`<li class="tile" data-kind="film" data-l="${letterOf(key(e))}" data-fx="centre"${id}><figure class="tile__fig">
-<a class="tile__frame tile__frame--film" href="${href}" data-label="${e.title}" data-ground style="--g-light: #1D1D1B; --g-dark: #050505"><span class="tile__img" style="width: ${fw.toFixed(2)}%"><img src="${p}videos/web/${e.film.slug}-poster.webp" alt="" width="${e.film.w}" height="${e.film.h}" loading="lazy" decoding="async"></span><span class="vh">${e.title}, film</span></a>
+      return html`<li class="tile"${at}><figure class="tile__fig">
+<a class="tile__frame tile__frame--film" href="${p}motion.html#${e.film.id}" data-label="${e.title}" data-cat="Film" data-ground data-crop style="--g-light: #1D1D1B; --g-dark: #050505">${poster(e)}<span class="vh">${e.title}, film</span></a>
 <figcaption class="tile__cap"><span class="tile__p">${e.title}</span> <span>Film</span></figcaption></figure></li>`;
     }
-    const x = e.project; const rel = e.kind === 'drawing' ? shown(e.src, true) : e.src;
-    const fill = e.kind === 'drawing' ? 90 : 100;
-    const { w, h } = dims(rel); const r = w / h, fw = r >= TILE ? fill : fill * r / TILE;
+    const x = e.project; const rel = relOf(e);
+    const pic = image(rel, { alt: e.alt, sz: '(min-width: 56.25rem) 26vw, 44vw', prefix: p, zoom: true, title: `${x.title}: ${e.title}`, project: projectHref(x, p), priority: i < 6, upto: 1200 });
     const g = ctx.grounds[x.slug];
-    return html`<li class="tile" data-kind="${e.kind}" data-l="${letterOf(key(e))}" data-fx="centre"${id}><figure class="tile__fig">
-<span class="tile__frame" data-ground style="--g-light: ${g.light}; --g-dark: ${g.dark}"><span class="tile__img" style="width: ${fw.toFixed(2)}%" data-label="${x.title}">${image(rel, { alt: e.alt, sz: '(min-width: 56.25rem) 26vw, 44vw', prefix: p, zoom: true, title: `${x.title}: ${e.title}`, project: projectHref(x, p), priority: i < 6, upto: 1200 })}</span></span>
+    // a render too small to cover the largest tile is never enlarged (D112): it stands whole, at most at its own
+    // size, on its project's ground, like a drawing on its sheet
+    const { w, h } = dims(rel); const r = w / h;
+    const lab = html` data-label="${x.title}" data-cat="${x.descriptor.split(' | ')[0]}"`;   // the pointer's label: name and category (D109)
+    const whole = (fill) => html`<span class="tile__img" style="width: ${(r >= TILE ? fill : fill * r / TILE).toFixed(2)}%"${lab}>${pic}</span>`;
+    let frame;
+    if (e.kind === 'drawing') frame = html`<span class="tile__frame tile__frame--sheet">${whole(86)}</span>`;
+    else if (Math.max(TILE_MAX.w / w, TILE_MAX.h / h) > 1) frame = html`<span class="tile__frame" data-ground style="--g-light: ${g.light}; --g-dark: ${g.dark}">${whole(100)}</span>`;
+    else frame = html`<span class="tile__frame" data-ground data-crop style="--g-light: ${g.light}; --g-dark: ${g.dark}"${lab}>${pic}</span>`;
+    return html`<li class="tile"${at}><figure class="tile__fig">
+${frame}
 <figcaption class="tile__cap"><a class="tile__p" href="${projectHref(x, p)}">${x.title}</a> <span>${e.title}</span></figcaption></figure></li>`;
   };
 
-  // the tree: the root, the three families, then the projects of the chosen family (each by its first image of it)
-  const leaves = (fam) => fam === 'film' ? cat.filter((e) => e.kind === 'film')
-    : projects.map((x) => cat.find((e) => e.project === x && (fam === 'all' ? e.hero : e.kind === fam && !e.hero))).filter(Boolean);
-  const famY = { all: 50, drawing: 30, render: 50, film: 70 };
-  const branch = (fam) => {
-    const from = fam === 'all' ? { x: 9, y: 50 } : { x: 27, y: famY[fam] };
-    const ls = leaves(fam);
-    if (ls.length > 15) throw new Error(`index: the tree has room for 15 leaves, ${fam} has ${ls.length}`);
-    const paths = ls.map((e, i) => { const t = leafAt(i); const mx = (from.x + t.x) / 2; return `M ${from.x * 12} ${from.y * 6.4} C ${mx * 12} ${from.y * 6.4}, ${mx * 12} ${t.y * 6.4}, ${t.x * 12 - 40} ${t.y * 6.4}`; });
-    const leaf = (e, i) => {
-      const t = leafAt(i); const href = e.film ? `${p}motion.html#${e.film.id}` : projectHref(e.project, p);
-      const pic = e.film ? html`<img src="${p}videos/web/${e.film.slug}-poster.webp" alt="" width="${e.film.w}" height="${e.film.h}" loading="lazy" decoding="async">`
-        : picture(e.kind === 'drawing' ? shown(e.src, true) : e.src, { alt: '', sizes: '8rem', prefix: p, upto: 480 });
-      return html`<a class="leaf" href="${href}" style="left: ${t.x}%; top: ${t.y}%" data-label="${key(e)}">${pic}<span class="vh">${key(e)}</span></a>`;
+  // the tree (D110): the root, the four families, then every picture of the chosen family as a leaf, A to Z by
+  // project like the grid, placed by tree-layout at its own ratio. An image leaf opens the viewer (which offers its
+  // project); a film leaf goes to the film. The caption tag names it under the pointer or focus.
+  const branch = (f, i) => {
+    const ls = cat.filter((e) => e.fam === f.id);
+    const { h, leaves } = placeLeaves(ls.map((e) => (e.film ? e.film.w / e.film.h : (({ w, h: hh }) => w / hh)(dims(relOf(e))))), { seed: 7 + i });
+    const from = famAt(i);
+    const leaf = (e, k) => {
+      const l = leaves[k];
+      const sz = html` sizes="${Math.ceil(l.w * 1.2 * 1.45)}px"`;   // its width at the 90rem cap, enlarged under the pointer
+      const name = e.film ? e.title : e.hero ? e.project.title : `${e.project.title} · ${e.title}`;
+      const inner = e.film ? html`<a class="leaf__film" href="${p}motion.html#${e.film.id}">${poster(e, sz)}<span class="vh">${e.title}, film</span></a>`
+        : image(relOf(e), { alt: e.alt, sz: `${Math.ceil(l.w * 1.2 * 1.45)}px`, prefix: p, zoom: true, title: `${e.project.title}: ${e.title}`, project: projectHref(e.project, p), upto: 480 });
+      const cls = `leaf${e.kind === 'drawing' ? ' leaf--drawing' : ''}${l.x + l.w / 2 > 1000 ? ' leaf--end' : ''}`;
+      return html`<span class="${cls}" data-i="${k}" style="left: ${cq(l.x)}; top: ${cq(l.y)}; width: ${cq(l.w)}"><span class="leaf__in">${inner}</span><span class="leaf__cap" aria-hidden="true">${name}</span></span>`;
     };
-    return html`<div class="tree__branch" data-branch="${fam}"${attrs({ hidden: fam !== 'all' })}><svg class="tree__lines" viewBox="0 0 1200 640" preserveAspectRatio="none" aria-hidden="true">${raw(paths.map((d) => `<path d="${d}"/>`).join(''))}</svg>${ls.map(leaf)}</div>`;
+    return html`<div class="tree__branch" data-branch="${f.id}" style="--h: ${h}"${attrs({ hidden: i !== 0 })}><svg class="tree__lines" viewBox="0 0 ${TREE.W} ${h}" aria-hidden="true" focusable="false">${raw(leaves.map((l) => `<path d="${connector(from, l)}"/>`).join(''))}</svg>${ls.map(leaf)}</div>`;
   };
+  const trunk = FAMILIES.map((f, i) => { const t = famAt(i), r = TRUNK.root, mx = (r.x + t.x) / 2; return `<path data-trunk="${f.id}" d="M${r.x} ${r.y}C${mx} ${r.y} ${mx} ${t.y} ${t.x} ${t.y}"/>`; }).join('');
 
-  const rows = projects.map((x, i) => html`<tr><td>${pad(i + 1)}</td><th scope="row"><a href="${projectHref(x, p)}" data-label="${x.title}">${x.title}</a></th><td>${x.place}</td><td>${x.year}</td><td>${x.descriptor.split(' | ')[0]}</td><td>${x.office || 'ENAU, academic'}</td><td>${cat.filter((e) => e.project === x).length}</td></tr>`);
+  const rows = projects.map((x, i) => html`<tr><td>${pad(i + 1)}</td><th scope="row"><a class="ctl" href="${projectHref(x, p)}" data-label="${x.title}">${x.title}</a></th><td>${x.place}</td><td>${x.year}</td><td>${x.descriptor.split(' | ')[0]}</td><td>${x.office || 'ENAU, academic'}</td><td>${cat.filter((e) => e.project === x).length}</td></tr>`);
 
   const body = html`
 <header class="ix-head"><h1 class="col__h" id="ix-h">Index <span class="col__count">${cat.length}</span></h1>
@@ -136,10 +157,10 @@ export function work(site, projects, ctx) {
 <section class="ix-view ix-grid" data-view="grid" aria-labelledby="ix-h"><ol class="tiles" role="list">${cat.map(tile)}</ol></section>
 <section class="ix-view ix-tree" data-view="tree" aria-label="The index as a tree" hidden>
 <div class="tree">
-<button class="pill pill--root tree__root" type="button" data-family="all" aria-pressed="true" style="left: 1%; top: 50%">Index <span class="pill__n">${cat.length}</span></button>
-${FAMILIES.map((f) => html`<button class="pill tree__fam" type="button" data-family="${f.id}" aria-pressed="false" style="left: 17%; top: ${famY[f.id]}%">${f.label} <span class="pill__n">${count(f.id)}</span></button>`)}
-<svg class="tree__lines" viewBox="0 0 1200 640" preserveAspectRatio="none" aria-hidden="true">${raw(FAMILIES.map((f) => `<path d="M 108 320 C 156 320, 156 ${famY[f.id] * 6.4}, 204 ${famY[f.id] * 6.4}"/>`).join(''))}</svg>
-${['all', ...FAMILIES.map((f) => f.id)].map(branch)}
+<span class="pill tree__root" style="left: 0; top: ${cq(TRUNK.root.y)}">Index <span class="pill__n">${cat.length}</span></span>
+<svg class="tree__trunk" viewBox="0 0 ${TREE.W} ${TREE.H0}" aria-hidden="true" focusable="false">${raw(trunk)}</svg>
+<div role="group" aria-label="Families">${FAMILIES.map((f, i) => html`<button class="pill tree__fam" type="button" data-family="${f.id}" aria-pressed="${i ? 'false' : 'true'}" style="left: ${cq(TRUNK.famX)}; top: ${cq(famAt(i).y)}">${f.label} <span class="pill__n">${count(f.id)}</span></button>`)}</div>
+${FAMILIES.map(branch)}
 </div>
 </section>
 <section class="ix-view ix-list" data-view="list" aria-label="The projects as a list" hidden>
