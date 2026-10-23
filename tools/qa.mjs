@@ -758,6 +758,145 @@ const filterFailures = await runFilterPass();
 gateFails += filterFailures.length;
 if (filterFailures.length) console.log(`FAIL filters: ${filterFailures.join(' | ')}`);
 else console.log('ok   filters: every choice counts and shows exactly its tiles, address and result line, cleared by a second press; two combine; out of reach not acted on, 4.5:1; Clear all; outside click; keyboard (Tab, Space, Esc to the pill); tree dims in place with family counts; list rows; address and Back restore; axe open; 320/375 on screen, targets ≥ 24px, instant; no console errors');
+// The ways into the Index (D129): the home's places and each case study's place, types and years. Every one opens the
+// Index on the projects with one facet set, and its count is the number of projects whose built values hold it; a case
+// study's are exactly its own project's values, in that order. One, followed, opens the Index with that choice pressed
+// and that many projects lit in the tree.
+async function runWaysPass() {
+  const failures = [];
+  const ix = urls.find((u) => u.endsWith('architecture.html'));
+  const pages = urls.filter((u) => /^(index\.html)?$/.test(u.replace(BASE, '')) || /project-[\w-]+\.html$/.test(u));
+  if (!ix || !pages.length) return null;
+  const fail = (s) => failures.push(s);
+  const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 }, reducedMotion: 'reduce' });
+  const page = await ctx.newPage();
+  try {
+    await page.goto(ix + '?view=grid', { waitUntil: 'domcontentloaded' });
+    const built = await page.evaluate(() => [...document.querySelectorAll('.tile[data-fam="project"]')].map((t) => ({ href: t.querySelector('a.tile__p').getAttribute('href'),
+      place: t.dataset.place || '', type: t.dataset.type || '', year: t.dataset.year || '' })));
+    const held = (k, v) => built.filter((b) => b[k].split(' ').includes(v)).length;
+    let follow = null;
+    for (const u of pages) {
+      await page.goto(u, { waitUntil: 'domcontentloaded' });
+      const ways = await page.evaluate(() => [...document.querySelectorAll('.tree-root__places a, .ways a')].map((a) => ({ href: a.getAttribute('href'), n: parseInt(a.querySelector('.pill__n').textContent, 10) })));
+      const where = u.split('/').pop() || 'index.html';
+      if (!ways.length) { fail(`${where}: no ways into the Index`); continue; }
+      const got = [];
+      for (const w of ways) {
+        const q = new URL(w.href, u).searchParams, keys = [...q.keys()].filter((k) => k !== 'family');
+        if (q.get('family') !== 'project' || keys.length !== 1) { fail(`${where}: ${w.href} is not one facet of the projects`); continue; }
+        const k = keys[0], v = q.get(k);
+        got.push(`${k}=${v}`);
+        if (!w.n || held(k, v) !== w.n) fail(`${where}: ${k}=${v} says ${w.n}, the Index holds ${held(k, v)}`);
+        follow ||= { url: new URL(w.href, u).href, k, v, n: w.n };
+      }
+      if (/project-/.test(where)) {
+        const me = built.find((b) => b.href.endsWith(where));
+        const want = me ? ['place', 'type', 'year'].flatMap((k) => me[k].split(' ').filter(Boolean).map((v) => `${k}=${v}`)) : [];
+        if (want.join() !== got.join()) fail(`${where}: ways ${got.join(' ')}, its values ${want.join(' ') || 'not found'}`);
+      }
+    }
+    if (follow) {
+      await page.goto(follow.url, { waitUntil: 'load' });
+      const r = await page.evaluate(({ k, v }) => ({ pressed: document.querySelector(`[data-facet="${k}"][data-value="${v}"]`).getAttribute('aria-pressed'),
+        lit: document.querySelectorAll('[data-branch="project"] .leaf:not(.is-off)').length, view: document.body.dataset.ixView }), follow);
+      if (r.pressed !== 'true' || r.lit !== follow.n) fail(`followed ${follow.k}=${follow.v}: pressed ${r.pressed}, ${r.lit} project(s) lit in the ${r.view}, not ${follow.n}`);
+    }
+  } catch (e) { fail(e.message); }
+  await ctx.close();
+  return failures;
+}
+const waysFailures = await runWaysPass();
+if (!waysFailures) console.log('note  ways into the Index: the Index, the home or the case studies are not in this run (--only), not checked');
+else if (waysFailures.length) { gateFails += waysFailures.length; console.log(`FAIL ways into the Index: ${waysFailures.join(' | ')}`); }
+else console.log('ok   ways into the Index: home places and every case study\'s place, types and years count what the Index holds, one facet of the projects each, a case study\'s are its own values; one followed opens pressed with that many lit');
+// The Index's motion (D128, D131), with motion allowed, at 1440 and 375. A filter, a family and a view each end in
+// exactly the state they ask for, nothing left moving or faded, also when a second press interrupts the first; a change
+// made deep in the grid returns to its head; at 1440 the tree's first showing fans out its leaves, and a filter dims
+// them in place (mid-way, then .14); the panel turns mid-way and closes by Esc; the bar arrives without a layout shift;
+// no errors in the console.
+async function runIndexMotionPass() {
+  const failures = [];
+  const url = urls.find((u) => u.endsWith('architecture.html'));
+  if (!url) return failures;
+  const fail = (s) => failures.push(s);
+  const wait = (ms) => new Promise((r) => setTimeout(r, ms));
+  for (const w of [1440, 375]) {
+    const ctx = await browser.newContext({ viewport: { width: w, height: w < 768 ? 812 : 900 }, deviceScaleFactor: 1, colorScheme: 'light', reducedMotion: 'no-preference' });
+    const page = await ctx.newPage();
+    const errors = []; page.on('pageerror', (e) => errors.push(e.message)); page.on('console', (m) => { if (m.type() === 'error') errors.push(m.text()); });
+    await page.addInitScript(() => { window.__barShift = 0; new PerformanceObserver((l) => l.getEntries().forEach((e) => { if ((e.sources || []).some((s) => s.node && s.node.closest && s.node.closest('.ix-bar'))) window.__barShift += e.value; })).observe({ type: 'layout-shift', buffered: true }); });
+    const at = `${w}`;
+    try {
+      await page.goto(url + '?view=grid', { waitUntil: 'load' });
+      await wait(700);
+      // the bar's arrival, read before any press (the presses below are synthetic, so a shift after one, such as the
+      // Filter pill widening for its count, would not count as following input)
+      const bar = await page.evaluate(() => window.__barShift);
+      if (bar > 0) fail(`${at} the bar shifted as it arrived (${bar.toFixed(4)})`);
+      const state = () => page.evaluate(() => {
+        const has = (el, k, v) => (el.getAttribute(`data-${k}`) || '').split(' ').includes(v);
+        const chosen = [...document.querySelectorAll('[data-facet][aria-pressed="true"]')].map((b) => [b.dataset.facet, b.dataset.value]);
+        const famB = document.querySelector('.ix-bar [data-family][aria-pressed="true"]'), fam = famB ? famB.dataset.family : 'all';
+        const want = [...document.querySelectorAll('.tile')].filter((t) => (fam === 'all' || t.dataset.fam === fam) && chosen.every(([k, v]) => has(t, k, v)));
+        const shown = [...document.querySelectorAll('.tile')].filter((t) => !t.hidden);
+        const moving = document.getAnimations().filter((a) => a.playState === 'running' && a.effect?.target?.closest?.('.ix-view, .ix-filter') && !(a instanceof CSSTransition)).length;
+        const view = [...document.querySelectorAll('[data-view]')].find((v) => !v.hidden);
+        return { right: shown.length === want.length && want.every((t) => !t.hidden), shown: shown.length, want: want.length, moving,
+          faded: shown.filter((t) => +getComputedStyle(t).opacity < 0.99).length + (+getComputedStyle(view).opacity < 0.99 ? 1 : 0), y: Math.round(scrollY), view: document.body.dataset.ixView };
+      });
+      const press = (sel) => page.evaluate((s) => document.querySelector(s).click(), sel);
+      const settled = async (what, more = {}) => {
+        await wait(1100);
+        const s = await state();
+        if (!s.right || s.moving || s.faded || (more.y != null && s.y !== more.y) || (more.view && s.view !== more.view)) fail(`${at} ${what}: ${s.shown} shown of ${s.want}, ${s.moving} moving, ${s.faded} faded, at y ${s.y}, ${s.view}`);
+      };
+      await press('[data-filter-open]'); await wait(500);
+      await press('[data-facet="place"][data-value="france"]');
+      await wait(60);
+      const early = await state();
+      if (early.shown === early.want) fail(`${at} a filter: changed at once, with no out-phase`);
+      await settled('a filter');
+      await press('[data-facet="place"][data-value="france"]'); await wait(40); await press('[data-facet="place"][data-value="morocco"]');
+      await settled('a filter interrupted by another');
+      await press('[data-facet="place"][data-value="morocco"]'); await settled('a filter cleared');
+      await page.mouse.click(5, 300); await wait(500);
+      await page.evaluate(() => window.scrollTo(0, 4000)); await wait(300);
+      await press('.ix-bar [data-family="render"]');
+      await settled('a family deep in the grid', { y: 0 });
+      await press('.ix-bar [data-view-btn="list"]'); await wait(60); await press('.ix-bar [data-view-btn="grid"]'); await wait(30); await press('.ix-bar [data-view-btn="list"]');
+      await settled('three view presses', { view: 'list' });
+      await press('.ix-bar [data-view-btn="grid"]'); await press('.ix-bar [data-family="all"]');
+      await settled('the grid and All');
+      if (w >= 1024) {
+        await press('.ix-bar [data-view-btn="tree"]'); await wait(300);
+        const fan = await page.evaluate(() => document.getAnimations().filter((a) => a.effect?.target?.classList?.contains('leaf')).length);
+        if (!fan) fail(`${at} the tree's first showing: no leaf fans out`);
+        await wait(1200);
+        await press('[data-filter-open]'); await wait(500);
+        await press('[data-facet="place"][data-value="tunisia"]'); await wait(150);
+        const mid = await page.evaluate(() => +getComputedStyle(document.querySelector('[data-branch]:not([hidden]) .leaf.is-off')).opacity);
+        await wait(700);
+        const end = await page.evaluate(() => +getComputedStyle(document.querySelector('[data-branch]:not([hidden]) .leaf.is-off')).opacity);
+        if (!(mid > 0.15 && mid < 1) || Math.abs(end - 0.14) > 0.01) fail(`${at} the tree dims: ${mid} mid-way, ${end} at the end (not .14)`);
+        await press('[data-facet="place"][data-value="tunisia"]'); await wait(700);
+        await page.keyboard.press('Escape'); await wait(500);
+      }
+      await press('[data-filter-open]'); await wait(150); await press('[data-filter-open]'); await wait(100); await press('[data-filter-open]'); await wait(700);
+      const p = await page.evaluate(() => { const f = document.getElementById('ix-filter'); return { exp: document.querySelector('[data-filter-open]').getAttribute('aria-expanded'), hidden: f.hidden, inert: f.inert, clip: getComputedStyle(f).clipPath, o: getComputedStyle(f.firstElementChild).opacity }; });
+      if (p.exp !== 'true' || p.hidden || p.inert || p.clip !== 'none' || p.o !== '1') fail(`${at} the panel opened, closed and opened mid-way: expanded ${p.exp}, hidden ${p.hidden}, inert ${p.inert}, clip ${p.clip}, opacity ${p.o}`);
+      await page.keyboard.press('Escape'); await wait(500);
+      if (!(await page.evaluate(() => document.getElementById('ix-filter').hidden))) fail(`${at} Esc left the panel showing`);
+    } catch (e) { fail(`${at}: ${e.message}`); }
+    if (errors.length) fail(`${at} console: ${[...new Set(errors)].slice(0, 3).join(' | ')}`);
+    await ctx.close();
+  }
+  return failures;
+}
+const ixMotionFailures = await runIndexMotionPass();
+gateFails += ixMotionFailures.length;
+if (ixMotionFailures.length) console.log(`FAIL index motion: ${ixMotionFailures.join(' | ')}`);
+else console.log('ok   index motion: the bar arrives without a shift; filter, interrupted filter, cleared, a family deep in the grid back to the head, three view presses, All, each settled exactly; the tree fans out and dims to .14; the panel turns mid-way and closes by Esc; at 1440 and 375; no console errors');
 // About (D113): the sheet. With motion at 1440 (scrollbars shown, so a shift of the header would show), About opens it
 // from three pages: the column comes in, its heading takes focus, the page behind is inert and stays still under the
 // wheel while the column scrolls, and the header does not move. X, Esc and a click on the veil each close it and
