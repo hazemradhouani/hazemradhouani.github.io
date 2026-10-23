@@ -10,6 +10,8 @@
   "$omit": ["run", "tag", "spec:Type", "spec:Office", "spec:Location"],
   "summary": "Guard pavilion at the entry threshold of Casablanca Finance City, in perforated steel, at Yassir Khalil Studio.",
   "place": "Casablanca Finance City",
+  "country": "Morocco",
+  "countrySource": "spec Location \"Casablanca Finance City\" (D125)",
   "year": "2024",
   "descriptor": "Small scale | guard pavilion",
   "office": "Yassir Khalil Studio",

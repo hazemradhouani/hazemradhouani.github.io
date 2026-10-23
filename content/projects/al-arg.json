@@ -11,6 +11,8 @@
   "$omit": ["run", "tag", "spec:Project type", "spec:School"],
   "summary": "Heritage conservation and rehabilitation of an abandoned raw-earth village in the Tunisian Jérid. Architecture thesis, ENAU, Highest Honours.",
   "place": "Hammat Djérid, Tunisia",
+  "country": "Tunisia",
+  "countrySource": "spec Location \"Al-Arg, Hammat Djérid, Tozeur Governorate, Tunisia\" (D125)",
   "year": "2023-2024",
   "descriptor": "Heritage conservation | rehabilitation",
   "quote": {

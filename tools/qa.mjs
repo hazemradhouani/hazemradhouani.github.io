@@ -26,7 +26,7 @@ let gateFails = 0;
   const rd = (p) => JSON.parse(fs.readFileSync(path.join(REPO, p), 'utf8'));
   const SKIP = new Set(['source', 'sources', 'og', 'id', 'slug', 'group', 'filters', 'order', 'kind', 'size', 'fit', 'lang', 'film', 'knowsAbout',
     'project', 'coverSource', 'abstractSource', 'date', 'action', 'href', 'case',
-    'at', 'align', 'swatch', 'mark', 'dir', 'layout', 'layers', 'why']);  // label anchors, alignment, key colours and marks, composition data and its reasons are not visible copy
+    'at', 'align', 'swatch', 'mark', 'dir', 'layout', 'layers', 'why', 'country']);  // label anchors, alignment, key colours and marks, composition data and its reasons, the Index's facets (D125) are not visible copy
   const strings = (v, key = '', out = []) => {
     if (SKIP.has(key) || key.startsWith('$') || /Source$/.test(key)) return out;
     if (typeof v === 'string') { if (v.length > 2 && !/^(images|videos|files|projects)\/|\.(jpe?g|png|webp|mp4)$/i.test(v)) out.push(v); }
@@ -618,6 +618,146 @@ const indexFailures = await runIndexPass();
 gateFails += indexFailures.length;
 if (indexFailures.length) console.log(`FAIL index: ${indexFailures.join(' | ')}`);
 else console.log('ok   index: tree at 1440 and grid at 375, families sum to the root and match leaves and tiles, branches by keyboard, leaves apart and inside, hover, viewer from leaves and tiles, list, addresses restored');
+// The filters (D125-D127). On the grid at 1440, each choice of each facet counts, before it is pressed, exactly the
+// tiles whose built values hold it, and pressed it shows exactly those, says so in the result line and the address,
+// and a second press clears it. Two facets combine, a choice out of reach is not acted on, Clear all empties both.
+// By keyboard alone the pill opens the panel, Tab reaches the first choice, Space presses it, Esc closes the panel
+// and returns focus to the pill. The tree dims what does not match and puts it out of reach, its family pills
+// counting the rest; the list leaves out its rows. An address restores the choices, and so does Back from a project.
+// axe passes with the panel open. At 320 and 375 it stays on the screen with no sideways scroll, every choice at
+// least 24px. Under reduced motion it shows at once. No errors in the console.
+async function runFilterPass() {
+  const failures = [];
+  const url = urls.find((u) => u.endsWith('architecture.html'));
+  if (!url) return failures;
+  const fail = (s) => failures.push(s);
+  const errors = [];
+  const open = async (w, q = '', h = w < 768 ? 812 : 900) => {
+    const ctx = await browser.newContext({ viewport: { width: w, height: h }, deviceScaleFactor: 1, colorScheme: 'light', reducedMotion: 'reduce' });
+    const page = await ctx.newPage();
+    page.on('pageerror', (e) => errors.push(e.message)); page.on('console', (m) => { if (m.type() === 'error') errors.push(m.text()); });
+    await page.goto(url + q, { waitUntil: 'load' }); return { ctx, page };
+  };
+  // what the grid shows against what the built values say it should
+  const grid = (page) => page.evaluate(() => {
+    const has = (el, k, v) => (el.getAttribute(`data-${k}`) || '').split(' ').includes(v);
+    const chosen = [...document.querySelectorAll('[data-facet][aria-pressed="true"]')].map((b) => [b.dataset.facet, b.dataset.value]);
+    const fam = document.querySelector('.ix-bar [data-family][aria-pressed="true"]').dataset.family;
+    const tiles = [...document.querySelectorAll('.tile')].filter((t) => fam === 'all' || t.dataset.fam === fam);
+    const want = tiles.filter((t) => chosen.every(([k, v]) => has(t, k, v)));
+    const shown = [...document.querySelectorAll('.tile')].filter((t) => !t.hidden);
+    const r = document.querySelector('[data-ix-result]');
+    return { q: location.search, chosen: chosen.map((c) => c.join('=')).join('&'), want: want.length, of: tiles.length, shown: shown.length,
+      same: shown.length === want.length && want.every((t) => !t.hidden), result: r.hidden ? '' : r.firstElementChild.textContent };
+  });
+  const press = (page, k, v) => page.locator(`[data-facet="${k}"][data-value="${v}"]`).click({ force: true });   // force: Playwright waits out aria-disabled
+  try {
+    {
+      const { ctx, page } = await open(1440, '?view=grid');
+      await page.locator('[data-filter-open]').click();
+      if (await page.locator('#ix-filter').isHidden()) fail('the Filter pill did not open the panel');
+      const choices = await page.evaluate(() => [...document.querySelectorAll('[data-facet]')].map((b) => ({ k: b.dataset.facet, v: b.dataset.value, n: +b.querySelector('.pill__n').textContent })));
+      for (const c of choices) {
+        await press(page, c.k, c.v);
+        const s = await grid(page);
+        if (!s.same || s.shown !== c.n || !s.result.endsWith(`${c.n} of ${s.of}`) || !s.q.includes(`${c.k}=${c.v}`)) fail(`${c.k}=${c.v}: counted ${c.n}, shows ${s.shown} of the ${s.want} it should; result "${s.result}", address ${s.q}`);
+        await press(page, c.k, c.v);
+        const z = await grid(page);
+        if (z.chosen || z.shown !== z.of || z.result || z.q.includes(`${c.k}=`)) fail(`${c.k}=${c.v} pressed again: still ${z.chosen || 'set'}, ${z.shown} shown, address ${z.q}`);
+      }
+      // two facets, a choice out of reach, Clear all
+      await press(page, 'place', 'france'); await press(page, 'type', 'residential');
+      const two = await grid(page);
+      if (!two.same || two.chosen !== 'place=france&type=residential' || !/place=france/.test(two.q) || !/type=residential/.test(two.q)) fail(`France and Residential: ${two.chosen}, ${two.shown} shown of ${two.want}, address ${two.q}`);
+      const off = await page.locator('[data-facet][aria-disabled="true"]').first();
+      if (!(await off.count())) fail('France and Residential leave no choice out of reach (Tunisia should be)');
+      else {
+        await off.click({ force: true });
+        const after = await grid(page);
+        if (after.chosen !== two.chosen || after.shown !== two.shown) fail(`a choice out of reach acted: ${after.chosen}`);
+      }
+      const dimmed = await page.evaluate(() => { const b = document.querySelector('[data-facet][aria-disabled="true"]'); const s = getComputedStyle(b);
+        const rgb = (c) => c.match(/[\d.]+/g).slice(0, 3).map(Number); const L = (c) => { const [r, g, bl] = rgb(c).map((x) => { x /= 255; return x <= 0.03928 ? x / 12.92 : ((x + 0.055) / 1.055) ** 2.4; }); return 0.2126 * r + 0.7152 * g + 0.0722 * bl; };
+        const a = L(s.color), z = L(s.backgroundColor); return (Math.max(a, z) + 0.05) / (Math.min(a, z) + 0.05); });
+      if (dimmed < 4.5) fail(`a choice out of reach reads at ${dimmed.toFixed(2)}:1, under 4.5:1`);
+      await page.addScriptTag({ content: axeSrc });
+      const ax = await page.evaluate(async () => (await window.axe.run(document, { runOnly: ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa'] })).violations.map((v) => `${v.id} x${v.nodes.length}: ${v.nodes[0].target.join(' ')}`));
+      if (ax.length) fail(`axe with the panel open: ${ax.join(' ; ')}`);
+      await page.locator('.ix-filter__clear').click();
+      const none = await grid(page);
+      if (none.chosen || none.shown !== none.of || /place=|type=/.test(none.q)) fail(`Clear all left ${none.chosen || 'nothing chosen'} with ${none.shown} of ${none.of} shown, address ${none.q}`);
+      // a click outside closes it
+      await page.mouse.click(5, 300);
+      if (await page.locator('#ix-filter').isVisible()) fail('a click outside left the panel open');
+      await ctx.close();
+    }
+    {
+      const { ctx, page } = await open(1440, '?view=grid');
+      await page.locator('[data-filter-open]').focus();
+      await page.keyboard.press('Enter');
+      const shown = await page.locator('#ix-filter').isVisible();
+      await page.keyboard.press('Tab');
+      const first = await page.evaluate(() => { const a = document.activeElement; return a.dataset.facet ? `${a.dataset.facet}=${a.dataset.value}` : a.outerHTML.slice(0, 60); });
+      await page.keyboard.press('Space');
+      const s = await grid(page);
+      await page.keyboard.press('Escape');
+      const k = await page.evaluate(() => ({ hidden: document.getElementById('ix-filter').hidden, focus: document.activeElement.hasAttribute('data-filter-open'), exp: document.querySelector('[data-filter-open]').getAttribute('aria-expanded'), badge: document.querySelector('[data-filter-n]').textContent }));
+      if (!shown || first !== 'place=tunisia' || s.chosen !== 'place=tunisia' || !s.same) fail(`by keyboard: panel ${shown ? 'open' : 'closed'}, Tab reached ${first}, Space chose ${s.chosen || 'nothing'}`);
+      if (!k.hidden || !k.focus || k.exp !== 'false' || k.badge !== '1') fail(`Esc: panel ${k.hidden ? 'closed' : 'open'}, focus ${k.focus ? 'on' : 'not on'} the pill, expanded ${k.exp}, badge "${k.badge}"`);
+      await ctx.close();
+    }
+    {
+      // the tree: what does not match dims in place, out of reach; the family pills count the rest
+      const { ctx, page } = await open(1440, '?place=tunisia');
+      const t = await page.evaluate(() => {
+        const leaves = [...document.querySelectorAll('[data-branch="project"] .leaf')];
+        const bad = leaves.filter((l) => (l.dataset.place === 'tunisia') === (l.classList.contains('is-off') || l.inert || +getComputedStyle(l).opacity < 0.5));
+        const fams = [...document.querySelectorAll('.tree__fam')].map((b) => [+b.querySelector('.pill__n').textContent, document.querySelectorAll(`[data-branch="${b.dataset.family}"] .leaf[data-place="tunisia"]`).length]);
+        return { view: document.body.dataset.ixView, bad: bad.length, fams, pressed: document.querySelector('[data-facet="place"][data-value="tunisia"]').getAttribute('aria-pressed') };
+      });
+      if (t.view !== 'tree' || t.pressed !== 'true' || t.bad) fail(`tree, Tunisia: ${t.view}, pressed ${t.pressed}, ${t.bad} leaf/leaves dimmed wrongly`);
+      if (t.fams.some(([n, m]) => n !== m)) fail(`tree, Tunisia: family pills ${t.fams.map(([n, m]) => `${n}/${m}`).join(' ')}`);
+      await ctx.close();
+    }
+    {
+      const { ctx, page } = await open(1440, '?view=list&practice=academic');
+      const l = await page.evaluate(() => ({ rows: [...document.querySelectorAll('.ix-table tbody tr')].filter((r) => !r.hidden).map((r) => r.dataset.practice), cap: document.querySelector('[data-list-n]').textContent }));
+      if (l.rows.length !== 3 || l.rows.some((p) => p !== 'academic') || l.cap !== '3 of 15') fail(`list, Academic: ${l.rows.length} rows (${l.rows}), caption "${l.cap}"`);
+      await ctx.close();
+    }
+    {
+      // an address restores the choices; so does Back from a project
+      const { ctx, page } = await open(1440, '?view=grid&place=morocco&scale=up-to-1000');
+      const a = await grid(page);
+      if (a.chosen !== 'place=morocco&scale=up-to-1000' || !a.same || !a.result) fail(`the address restored ${a.chosen || 'nothing'}, ${a.shown} shown of ${a.want}`);
+      await page.locator('.tile:not([hidden]) a.tile__p').first().click();
+      await page.waitForURL(/project-/);
+      await page.goBack({ waitUntil: 'load' });
+      const b = await grid(page);
+      if (b.chosen !== a.chosen || b.shown !== a.shown) fail(`Back from a project: ${b.chosen || 'nothing chosen'}, ${b.shown} shown (was ${a.shown})`);
+      await ctx.close();
+    }
+    for (const [w, h] of [[320, 640], [375, 812]]) {
+      const { ctx, page } = await open(w, '', h);
+      await page.locator('[data-filter-open]').click();
+      const m = await page.evaluate(() => {
+        const p = document.getElementById('ix-filter').getBoundingClientRect();
+        const small = [...document.querySelectorAll('#ix-filter button')].filter((b) => { const r = b.getBoundingClientRect(); return r.width < 24 || r.height < 24; }).length;
+        return { sw: document.documentElement.scrollWidth, vw: innerWidth, vh: innerHeight, p: [p.left, p.right, p.top, p.bottom].map(Math.round), small, op: getComputedStyle(document.getElementById('ix-filter')).opacity };
+      });
+      if (m.sw > m.vw || m.p[0] < 0 || m.p[1] > m.vw || m.p[2] < 0 || m.p[3] > m.vh) fail(`${w}: page ${m.sw} wide, panel at ${m.p}`);
+      if (m.small) fail(`${w}: ${m.small} choice(s) under 24px`);
+      if (m.op !== '1') fail(`${w}, reduced motion: the panel shows at opacity ${m.op}, not at once`);
+      await ctx.close();
+    }
+  } catch (e) { fail(e.message); }
+  if (errors.length) fail(`console: ${[...new Set(errors)].slice(0, 3).join(' | ')}`);
+  return failures;
+}
+const filterFailures = await runFilterPass();
+gateFails += filterFailures.length;
+if (filterFailures.length) console.log(`FAIL filters: ${filterFailures.join(' | ')}`);
+else console.log('ok   filters: every choice counts and shows exactly its tiles, address and result line, cleared by a second press; two combine; out of reach not acted on, 4.5:1; Clear all; outside click; keyboard (Tab, Space, Esc to the pill); tree dims in place with family counts; list rows; address and Back restore; axe open; 320/375 on screen, targets ≥ 24px, instant; no console errors');
 // About (D113): the sheet. With motion at 1440 (scrollbars shown, so a shift of the header would show), About opens it
 // from three pages: the column comes in, its heading takes focus, the page behind is inert and stays still under the
 // wheel while the column scrolls, and the header does not move. X, Esc and a click on the veil each close it and

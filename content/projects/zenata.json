@@ -11,6 +11,8 @@
   "$omit": ["run", "tag", "spec:Type", "spec:Office"],
   "summary": "Regional rail station and multimodal interchange for the Casablanca metropolitan network, developed at Yassir Khalil Studio.",
   "place": "Casablanca",
+  "country": "Morocco",
+  "countrySource": "spec Location \"Casablanca, Zenata eco-city\" (D125)",
   "year": "2025",
   "descriptor": "Infrastructure | regional rail station",
   "office": "Yassir Khalil Studio",

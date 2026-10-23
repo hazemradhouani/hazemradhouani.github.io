@@ -30,6 +30,42 @@ export const FAMILIES = [{ id: 'project', label: 'Projects' }, { id: 'drawing', 
 // the one count of a family (D110): the tree's pills, the home's mini tree and QA all read it
 export const countOf = (cat, fam) => cat.filter((e) => e.fam === fam).length;
 
+/* ------------------------------------------------------------------ the index's filters (D125): facets from content only */
+const PRACTICE = ['professional', 'academic'];
+const idOf = (s) => s.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+// a Surface or Area in m²: "2 800 m²", "Village: 1.4 ha" (× 10 000); any space groups the thousands
+export const surfaceOf = (v) => {
+  const m = /^(?:[^:\d]+:\s*)?(\d[\d\s]*(?:\.\d+)?)\s*(m²|ha)$/u.exec(v.trim());
+  if (!m) throw new Error(`facets: unparsable surface "${v}"`);
+  return +m[1].replace(/\s/g, '') * (m[2] === 'ha' ? 10000 : 1);
+};
+// "2025-2026" is both years
+export const yearsOf = (y) => {
+  const m = /^(\d{4})(?:-(\d{4}))?$/.exec(y); const a = m && +m[1], b = m && +(m[2] || m[1]);
+  if (!m || b < a) throw new Error(`facets: unparsable year "${y}"`);
+  return Array.from({ length: b - a + 1 }, (_, i) => String(a + i));
+};
+// one project's values, each a list of ids; a project without the data is in no band of that facet (Sentry and
+// Avenir state no surface), never guessed. An unknown country or tag fails the build.
+export function facetsOf(x, site) {
+  if (!site.places.includes(x.country)) throw new Error(`facets: ${x.slug}: country "${x.country}" is not in site.json places`);
+  const known = new Set(site.filters.map((f) => f.id).filter((id) => id !== 'all'));
+  for (const t of x.filters) if (!known.has(t)) throw new Error(`facets: ${x.slug}: unknown tag "${t}"`);
+  const practice = x.filters.filter((t) => PRACTICE.includes(t));
+  if (practice.length !== 1) throw new Error(`facets: ${x.slug}: needs one practice, has ${practice}`);
+  const s = x.spec.find((r) => r.label === 'Surface' || r.label === 'Area');
+  const m2 = s ? surfaceOf(s.value) : null;
+  return { place: [idOf(x.country)], type: x.filters.filter((t) => !PRACTICE.includes(t)),
+    scale: m2 == null ? [] : [site.scales.find((b) => b.max == null || m2 <= b.max).id], year: yearsOf(x.year), practice };
+}
+// the panel's five rows, in the reader's order: where, what, how big, when, for whom
+export const facetRows = (site, projects) => [
+  { id: 'place', label: 'Place', opts: site.places.map((l) => ({ id: idOf(l), label: l })) },
+  { id: 'type', label: 'Type', opts: site.filters.filter((f) => f.id !== 'all' && !PRACTICE.includes(f.id)) },
+  { id: 'scale', label: 'Scale', opts: site.scales },
+  { id: 'year', label: 'Year', opts: [...new Set(projects.flatMap((x) => yearsOf(x.year)))].sort().map((y) => ({ id: y, label: y })) },
+  { id: 'practice', label: 'Practice', opts: site.filters.filter((f) => PRACTICE.includes(f.id)) }];
+
 /* ------------------------------------------------------------------ home ("Reel, corrected", D103-D105) */
 // The page opens on the reel: one composition per project (reelItem), then the root of the index with its
 // families. Who and what stand in the fixed header and the corner captions; the identity block is for readers
@@ -88,6 +124,10 @@ export function work(site, projects, ctx) {
   const firstOf = new Map();
   cat.forEach((e, i) => { const l = letterOf(key(e)); if (!firstOf.has(l)) firstOf.set(l, i); });
   const count = (k) => countOf(cat, k);
+  // the filters (D125, D126): every tile, leaf and row carries its project's values; a film carries none, so it
+  // shows only while no filter is set
+  const facets = new Map(projects.map((x) => [x, facetsOf(x, site)]));
+  const fa = (x) => raw(x ? Object.entries(facets.get(x)).filter(([, v]) => v.length).map(([k, v]) => ` data-${k}="${v.join(' ')}"`).join('') : '');
   const relOf = (e) => (e.kind === 'drawing' ? shown(e.src, true) : e.src);
   const poster = (e, sizes = '') => html`<img src="${p}videos/web/${e.film.slug}-poster.webp" alt="" width="${e.film.w}" height="${e.film.h}" loading="lazy" decoding="async"${sizes}>`;
 
@@ -96,7 +136,7 @@ export function work(site, projects, ctx) {
   const tile = (e, i) => {
     const anchor = [...firstOf].find(([, k]) => k === i);
     const id = anchor ? html` id="az-${anchor[0]}"` : '';
-    const at = html` data-kind="${e.kind}" data-fam="${e.fam}" data-l="${letterOf(key(e))}" data-fx="centre"${id}`;
+    const at = html` data-kind="${e.kind}" data-fam="${e.fam}"${fa(e.project)} data-l="${letterOf(key(e))}" data-fx="centre"${id}`;
     if (e.film) {
       return html`<li class="tile"${at}><figure class="tile__fig">
 <a class="tile__frame tile__frame--film" href="${p}motion.html#${e.film.id}" data-label="${e.title}" data-cat="Film" data-ground data-crop style="--g-light: #1D1D1B; --g-dark: #050505">${poster(e)}<span class="vh">${e.title}, film</span></a>
@@ -133,19 +173,25 @@ ${frame}
       const inner = e.film ? html`<a class="leaf__film" href="${p}motion.html#${e.film.id}">${poster(e, sz)}<span class="vh">${e.title}, film</span></a>`
         : image(relOf(e), { alt: e.alt, sz: `${Math.ceil(l.w * 1.2 * 1.45)}px`, prefix: p, zoom: true, title: `${e.project.title}: ${e.title}`, project: projectHref(e.project, p), upto: 480 });
       const cls = `leaf${e.kind === 'drawing' ? ' leaf--drawing' : ''}${l.x + l.w / 2 > 1000 ? ' leaf--end' : ''}`;
-      return html`<span class="${cls}" data-i="${k}" style="left: ${cq(l.x)}; top: ${cq(l.y)}; width: ${cq(l.w)}"><span class="leaf__in">${inner}</span><span class="leaf__cap" aria-hidden="true">${name}</span></span>`;
+      return html`<span class="${cls}" data-i="${k}"${fa(e.project)} style="left: ${cq(l.x)}; top: ${cq(l.y)}; width: ${cq(l.w)}"><span class="leaf__in">${inner}</span><span class="leaf__cap" aria-hidden="true">${name}</span></span>`;
     };
     return html`<div class="tree__branch" data-branch="${f.id}" style="--h: ${h}"${attrs({ hidden: i !== 0 })}><svg class="tree__lines" viewBox="0 0 ${TREE.W} ${h}" aria-hidden="true" focusable="false">${raw(leaves.map((l) => `<path d="${connector(from, l)}"/>`).join(''))}</svg>${ls.map(leaf)}</div>`;
   };
   const trunk = FAMILIES.map((f, i) => { const t = famAt(i), r = TRUNK.root, mx = (r.x + t.x) / 2; return `<path data-trunk="${f.id}" d="M${r.x} ${r.y}C${mx} ${r.y} ${mx} ${t.y} ${t.x} ${t.y}"/>`; }).join('');
 
-  const rows = projects.map((x, i) => html`<tr><td>${pad(i + 1)}</td><th scope="row"><a class="ctl" href="${projectHref(x, p)}" data-label="${x.title}">${x.title}</a></th><td>${x.place}</td><td>${x.year}</td><td>${x.descriptor.split(' | ')[0]}</td><td>${x.office || 'ENAU, academic'}</td><td>${cat.filter((e) => e.project === x).length}</td></tr>`);
+  const rows = projects.map((x, i) => html`<tr${fa(x)}><td>${pad(i + 1)}</td><th scope="row"><a class="ctl" href="${projectHref(x, p)}" data-label="${x.title}">${x.title}</a></th><td>${x.place}</td><td>${x.year}</td><td>${x.descriptor.split(' | ')[0]}</td><td>${x.office || 'ENAU, academic'}</td><td>${cat.filter((e) => e.project === x).length}</td></tr>`);
 
   const body = html`
 <header class="ix-head"><h1 class="col__h" id="ix-h">Index <span class="col__count">${cat.length}</span></h1>
 <p class="ix-lead">Every drawing, render and film of the ${projects.length} projects, A to Z.</p></header>
+<p class="ix-result" data-ix-result hidden><span data-ix-result-t></span> <button class="pill" type="button" data-filter-clear>Clear</button></p>
 <div class="ix-bar" hidden>
 <div class="ix-bar__group" role="group" aria-label="Show work by type"><button class="pill" type="button" data-family="all" aria-pressed="true">All</button>${FAMILIES.map((f) => html`<button class="pill" type="button" data-family="${f.id}" aria-pressed="false">${f.label}</button>`)}</div>
+<button class="pill ix-bar__filter" type="button" data-filter-open aria-expanded="false" aria-controls="ix-filter">Filter <span class="pill__n" data-filter-n hidden></span></button>
+<div class="ix-filter" id="ix-filter" data-lenis-prevent hidden><div class="ix-filter__in">
+${facetRows(site, projects).map((r) => html`<div class="ix-filter__row" role="group" aria-labelledby="fl-${r.id}"><span class="ix-filter__h" id="fl-${r.id}">${r.label}</span><div class="ix-filter__opts">${r.opts.map((o) => html`<button class="pill" type="button" data-facet="${r.id}" data-value="${o.id}" aria-pressed="false">${o.label} <span class="pill__n"></span></button>`)}</div></div>`)}
+<button class="pill ix-filter__clear" type="button" data-filter-clear>Clear all</button>
+</div></div>
 <div class="ix-bar__group" role="group" aria-label="View">${VIEWS.map((v) => html`<button class="pill pill--icon" type="button" data-view-btn="${v.id}" aria-pressed="${v.id === 'grid' ? 'true' : 'false'}"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">${raw(v.svg)}</svg><span class="vh">${v.label}</span></button>`)}</div>
 </div>
 <p class="vh" role="status" data-ix-status></p>
@@ -160,7 +206,7 @@ ${FAMILIES.map(branch)}
 </div>
 </section>
 <section class="ix-view ix-list" data-view="list" aria-label="The projects as a list" hidden>
-<table class="ix-table"><caption class="vh">The ${projects.length} projects, with place, year, type, office and the number of images</caption>
+<table class="ix-table"><caption class="vh">The <span data-list-n>${projects.length}</span> projects, with place, year, type, office and the number of images</caption>
 <thead><tr><th scope="col">No.</th><th scope="col">Project</th><th scope="col">Place</th><th scope="col">Year</th><th scope="col">Type</th><th scope="col">Office</th><th scope="col">Images</th></tr></thead>
 <tbody>${rows}</tbody></table>
 </section>

@@ -12,6 +12,8 @@
   "$omit": ["run", "tag", "spec:Project type", "spec:Office"],
   "summary": "Housing over a corner shop and a semi-buried car park in Villeneuve-la-Garenne: Studio BELEM building-permit drawings, December 2025.",
   "place": "Villeneuve-la-Garenne",
+  "country": "France",
+  "countrySource": "spec Location \"2 rue de l'Avenir, Villeneuve-la-Garenne\" (D125)",
   "year": "2025",
   "descriptor": "New construction | residential and commercial",
   "office": "Studio BELEM",

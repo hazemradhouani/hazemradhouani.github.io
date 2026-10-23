@@ -11,6 +11,8 @@
   "$omit": ["run", "spec:Location"],
   "summary": "Competition entry for a new two-headed train station in the Aïn Sebaâ industrial zone of Casablanca, linked by an urban footbridge.",
   "place": "Casablanca",
+  "country": "Morocco",
+  "countrySource": "spec Location \"Casablanca, Aïn Sebaâ industrial zone\" (D125)",
   "year": "2025",
   "descriptor": "Infrastructure | train station, competition",
   "spec": [

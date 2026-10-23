@@ -715,6 +715,7 @@
   @media (max-height: 32rem) {
     .site-header { position: absolute; }
     .ix-bar { position: static; translate: none; flex-wrap: wrap; justify-content: center; margin: var(--s4) var(--site-edge) 0; }
+    .ix-bar .ix-filter { position: fixed; z-index: 21; top: var(--s4); bottom: auto; max-height: calc(100svh - 2rem); }   /* the bar stands in the page: the panel holds the screen */
   }
   .ix-bar .pill[aria-pressed="true"], .tree .pill[aria-pressed="true"] { border-color: var(--ink); }
   .pill--icon { width: 2.75rem; padding: 0; justify-content: center; }
@@ -727,6 +728,31 @@
     .ix-bar__group:first-child .pill { flex: none; }
     .ix-bar__group:last-child { flex: none; flex-wrap: nowrap; }
   }
+  /* the filters (D125-D127): the bar's Filter pill (with the number of choices made) opens a frosted panel just
+     above the bar, the pointer label's surface (the field at 86%, so the grey row names keep 4.5:1 over the
+     darkest render under it): five rows of pills, a choice's count beside it. One out of reach loses its ring
+     and goes grey (6.4:1 on its own ground). A phone's panel spans the bar and its rows stack. The line under
+     the heading says what is chosen and how much it leaves; the tree dims what does not match, in place */
+  .ix-bar__filter { flex: none; }
+  .ix-filter { position: absolute; left: 50%; bottom: calc(100% + var(--s2)); translate: -50% 0; width: min(46rem, 100vw - 2 * var(--site-edge));
+    max-height: calc(100svh - var(--head-h) - 6rem); overflow-y: auto; overscroll-behavior: contain;
+    border: 1px solid var(--line); border-radius: var(--r-card); background: color-mix(in srgb, var(--bg) 86%, transparent);
+    -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); box-shadow: var(--shadow-lift); }
+  .ix-filter__in { display: grid; gap: var(--s3); padding: var(--s4); }
+  .ix-filter__row { display: grid; grid-template-columns: 5rem minmax(0, 1fr); align-items: start; gap: var(--s1) var(--s3); }
+  .ix-filter__h { padding-top: 0.55rem; font-size: var(--fs-label); line-height: 1.2; color: var(--ink-2); }
+  .ix-filter__opts { display: flex; flex-wrap: wrap; gap: var(--s1); }
+  .ix-filter .pill { white-space: nowrap; }
+  @media (pointer: fine) { .ix-filter .pill { min-height: 2.25rem; padding-inline: var(--s3); } }   /* 36px: a dense field for a mouse; touch keeps 44px */
+  .ix-filter .pill[aria-pressed="true"] { border-color: var(--ink); }
+  .pill[aria-disabled="true"] { border-color: transparent; color: var(--ink-2); cursor: default; }
+  .pill[aria-disabled="true"]:hover { background-color: var(--bg); }
+  .pill[aria-disabled="true"]:active { scale: none; }
+  .ix-filter__clear { justify-self: end; }
+  @media (max-width: 47.99rem) { .ix-filter__row { grid-template-columns: minmax(0, 1fr); } .ix-filter__h { padding-top: 0; } }
+  .ix-result { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: var(--s2) var(--s3); padding: var(--s4) var(--site-edge) 0; font-size: var(--fs-cap); text-align: center; }
+  .leaf.is-off { opacity: 0.14; }
+  .tree__lines path.is-off { stroke-opacity: 0.04; }
   @media (max-width: 89.99rem) { .page-work .corner { display: none; } }
 
   /* about (D113, D114): dmcg's About, one column in the one voice at the header's size, on the field. Entries are

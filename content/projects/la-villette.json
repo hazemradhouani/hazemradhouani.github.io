@@ -12,6 +12,8 @@
   "$omit": ["run", "spec:Project type", "spec:Phase", "spec:Office"],
   "summary": "PRO and DCE construction drawings for the rehabilitation of a block of three buildings in Paris 19th, including an ABF-listed building.",
   "place": "Paris 19th",
+  "country": "France",
+  "countrySource": "spec Location \"190 av. Jean Jaurès, Paris 19th\" (D125)",
   "year": "2025-2026",
   "descriptor": "Rehabilitation | PRO/DCE drawings",
   "office": "Studio BELEM",

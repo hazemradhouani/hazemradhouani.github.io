@@ -446,6 +446,7 @@
      About is a link to about.html, the same column as a page. */
   var sheet = document.getElementById('about');
   var sheetClose = function () {};
+  var filterEsc = function () { return false; };   // the index's filter panel (below): closes on Esc and says it did
   if (sheet && typeof sheet.show === 'function') {
     var sheetScroll = sheet.querySelector('.about__scroll'), sheetCol = sheet.querySelector('.about__col'), sheetHead = sheet.querySelector('#about-h');
     var sheetLinks = slice(document.querySelectorAll('a[data-about]'));
@@ -500,8 +501,9 @@
     sheet.addEventListener('click', function (e) { if (downOut && !sheetCol.contains(e.target)) sheetClose(); downOut = false; });
   }
 
-  /* Esc, one ordered handler (D107, D113): an open chip closes first (a dialog around it stays open); then a
-     modal dialog (menu, viewer) keeps its own Esc; then the sheet closes */
+  /* Esc, one ordered handler (D107, D113, D126): an open chip closes first (a dialog around it stays open); then a
+     modal dialog (menu, viewer) keeps its own Esc; then the index's filter panel, unless the sheet stands over it;
+     then the sheet closes */
   document.addEventListener('keydown', function (e) {
     if (e.key !== 'Escape') return;
     var m = mails.filter(function (x) { return x.classList.contains('is-open'); })[0];
@@ -513,6 +515,7 @@
       return;
     }
     if (slice(document.querySelectorAll('dialog[open]')).some(function (d) { return d !== sheet; })) return;
+    if (!(sheet && sheet.open) && filterEsc()) { e.preventDefault(); return; }
     if (sheet && sheet.open) { e.preventDefault(); sheetClose(); }
   }, true);
 
@@ -559,6 +562,38 @@
     if (/^(grid|tree|list)$/.test(ixQuery.get('view'))) ixState.view = ixQuery.get('view');
     if (ixFams.indexOf(ixQuery.get('family')) >= 0) ixState.family = ixQuery.get('family');
 
+    /* the filters (D125-D127, state): five facets of the projects, one value each, combined with the family and the
+       view and kept in the address. Each choice counts what it would show with the other facets as they are; one
+       that would show nothing is out of reach (read and focused, never acted on). The grid and the list leave out
+       what does not match; the tree dims it in place and out of reach, its leaves having been placed at build time. */
+    var FACETS = ['place', 'type', 'scale', 'year', 'practice'];
+    var ixPanel = document.getElementById('ix-filter'), ixOpen = ixBar.querySelector('[data-filter-open]');
+    var ixChoices = slice(ixPanel.querySelectorAll('[data-facet]'));
+    var ixResult = document.querySelector('[data-ix-result]');
+    var itemsOf = function (sel) {
+      return slice(document.querySelectorAll(sel)).map(function (el) {
+        var f = {}, b = el.closest('[data-branch]');
+        FACETS.forEach(function (k) { var v = el.getAttribute('data-' + k); f[k] = v ? v.split(' ') : []; });
+        return { el: el, f: f, b: b && b.getAttribute('data-branch'), path: b && b.querySelectorAll('.tree__lines path')[+el.getAttribute('data-i')] };
+      });
+    };
+    var ixT = itemsOf('.tile'), ixL = itemsOf('.leaf'), ixR = itemsOf('.ix-table tbody tr');
+    FACETS.forEach(function (k) {
+      var v = ixQuery.get(k);
+      ixState[k] = ixChoices.some(function (b) { return b.getAttribute('data-facet') === k && b.getAttribute('data-value') === v; }) ? v : null;
+    });
+    // an item matches when it holds every chosen value, the facet a count is asked for aside
+    var hit = function (it, but) { return FACETS.every(function (k) { return k === but || !ixState[k] || it.f[k].indexOf(ixState[k]) >= 0; }); };
+    var inFam = function (it) { return ixState.family === 'all' || it.el.getAttribute('data-fam') === ixState.family; };
+    var panelSet = function (on) { ixPanel.hidden = !on; ixOpen.setAttribute('aria-expanded', String(on)); };
+    filterEsc = function () {
+      if (ixPanel.hidden) return false;
+      var inside = ixPanel.contains(document.activeElement);
+      panelSet(false);
+      if (inside) ixOpen.focus({ preventScroll: true });
+      return true;
+    };
+
     /* the branch switch (orientation, D111): the leaves on screen fold into the old family's pill while the new
        family's fan out of its own, the nearest first, and its connectors draw out from the pill. Leaves off
        screen simply change. A new choice mid-way settles the last one at once. */
@@ -604,11 +639,13 @@
       if (view === 'tree' && ixState.family === 'all') ixState.family = ixBranches[0].getAttribute('data-branch');
       ixViews.forEach(function (v) { v.hidden = v.getAttribute('data-view') !== view; });
       document.body.setAttribute('data-ix-view', view);
-      ixTiles.forEach(function (t) {
-        var on = ixState.family === 'all' || t.getAttribute('data-fam') === ixState.family;
+      ixT.forEach(function (it) {
+        var t = it.el, on = inFam(it) && hit(it);
         if (on && t.hidden && !first && !reduce.matches) { t.classList.remove('is-entering'); void t.offsetWidth; t.classList.add('is-entering'); }
         t.hidden = !on;
       });
+      ixL.forEach(function (it) { var off = !hit(it); it.el.classList.toggle('is-off', off); it.el.inert = off; if (it.path) it.path.classList.toggle('is-off', off); });
+      ixR.forEach(function (it) { it.el.hidden = !hit(it); });
       var want = ixBranches.filter(function (b) { return b.getAttribute('data-branch') === ixState.family; })[0] || null;
       if (want && ixOn && want !== ixOn && view === 'tree' && !first && !reduce.matches) treeSwitch(ixOn, want);
       else { treeSettle(); ixBranches.forEach(function (b) { b.hidden = b !== want; }); }
@@ -618,19 +655,58 @@
       ixTiles.forEach(function (t) { if (t.id) t.removeAttribute('id'); });
       shown.forEach(function (t) { var l = t.getAttribute('data-l'); if (!seen[l]) { seen[l] = 1; t.id = 'az-' + l; } });
       slice(document.querySelectorAll('.az li')).forEach(function (li) { li.hidden = !seen[li.textContent.trim()]; });
-      if (!first && ixStatus) ixStatus.textContent = (view === 'list' ? document.querySelectorAll('.ix-table tbody tr').length + ' projects, list view' : shown.length + ' images, ' + (ixState.family === 'all' ? 'all kinds' : ixState.family + 's') + ', ' + view + ' view');
+      // what the view holds (the family's tiles or leaves, or the projects) and what each choice would leave of it
+      var pool = view === 'list' ? ixR : view === 'tree' ? ixL.filter(function (it) { return it.b === ixState.family; }) : ixT.filter(inFam);
+      ixChoices.forEach(function (b) {
+        var k = b.getAttribute('data-facet'), v = b.getAttribute('data-value'), on = ixState[k] === v;
+        var n = pool.filter(function (it) { return it.f[k].indexOf(v) >= 0 && hit(it, k); }).length;
+        b.lastElementChild.textContent = n;
+        b.setAttribute('aria-pressed', String(on));
+        if (n || on) b.removeAttribute('aria-disabled'); else b.setAttribute('aria-disabled', 'true');
+      });
+      var sum = 0;   // the tree's families count what they hold now, the root their sum
+      slice(document.querySelectorAll('.tree__fam')).forEach(function (b) {
+        var id = b.getAttribute('data-family'), n = ixL.filter(function (it) { return it.b === id && hit(it); }).length;
+        sum += n; b.querySelector('.pill__n').textContent = n;
+      });
+      var rootN = document.querySelector('.tree__root .pill__n'); if (rootN) rootN.textContent = sum;
+      var chosen = ixChoices.filter(function (b) { return b.getAttribute('aria-pressed') === 'true'; }).map(function (b) { return b.firstChild.nodeValue.trim(); });
+      var held = pool.filter(function (it) { return hit(it); }).length, rowsOn = ixR.filter(function (it) { return hit(it); }).length;
+      var badge = ixOpen.lastElementChild; badge.hidden = !chosen.length; badge.textContent = chosen.length || '';
+      ixResult.hidden = !chosen.length;
+      ixResult.firstElementChild.textContent = chosen.concat(held + ' of ' + pool.length).join(' · ');
+      slice(document.querySelectorAll('.ix-filter__clear')).forEach(function (b) { if (chosen.length) b.removeAttribute('aria-disabled'); else b.setAttribute('aria-disabled', 'true'); });
+      var listN = document.querySelector('[data-list-n]'); if (listN) listN.textContent = chosen.length ? rowsOn + ' of ' + ixR.length : ixR.length;
+      if (!first && ixStatus) ixStatus.textContent = (view === 'list' ? rowsOn + ' projects, list view' : shown.length + ' images, ' + (ixState.family === 'all' ? 'all kinds' : ixState.family + 's') + ', ' + view + ' view')
+        + (chosen.length ? ', filtered by ' + chosen.join(', ') : '');
       slice(document.querySelectorAll('button[data-family]')).forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-family') === ixState.family)); });
       var chosen = ixBar.querySelector('[data-family][aria-pressed="true"]');   // a phone's families scroll: keep the chosen one in sight
       if (chosen && chosen.parentNode.scrollWidth > chosen.parentNode.clientWidth) chosen.scrollIntoView({ block: 'nearest', inline: 'nearest' });
       slice(document.querySelectorAll('[data-view-btn]')).forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-view-btn') === view)); });
       if (!first) {
         var u = new URLSearchParams(location.search); u.set('view', view); u.set('family', ixState.family);
+        FACETS.forEach(function (k) { if (ixState[k]) u.set(k, ixState[k]); else u.delete(k); });
         history.replaceState(null, '', location.pathname + '?' + u.toString() + location.hash);
       }
       if (typeof measureSoon === 'function') measureSoon();   // the engine measures what is shown now
     };
     document.addEventListener('click', function (e) {
-      var b = e.target.closest && e.target.closest('button[data-family], button[data-view-btn]');
+      if (!e.target.closest) return;
+      if (!ixPanel.hidden && !ixPanel.contains(e.target) && !ixOpen.contains(e.target)) panelSet(false);   // a click outside closes it
+      var f = e.target.closest('[data-facet], [data-filter-clear], [data-filter-open]');
+      if (f) {
+        if (f.hasAttribute('data-filter-open')) { panelSet(ixPanel.hidden); return; }
+        if (f.getAttribute('aria-disabled') === 'true') return;
+        if (f.hasAttribute('data-filter-clear')) FACETS.forEach(function (k) { ixState[k] = null; });
+        else { var k = f.getAttribute('data-facet'), v = f.getAttribute('data-value'); ixState[k] = ixState[k] === v ? null : v; }
+        ixApply(false);
+        if (ixResult.contains(f)) ixOpen.focus({ preventScroll: true });   // the line it stood in is gone
+        // what is left of a grid or list scrolled past stands above the screen: back to the head (orientation)
+        var at = ixViews.filter(function (x) { return !x.hidden; })[0];
+        if (document.body.getAttribute('data-ix-view') !== 'tree' && at && at.getBoundingClientRect().top < 0) jump(0);
+        return;
+      }
+      var b = e.target.closest('button[data-family], button[data-view-btn]');
       if (!b) return;
       if (b.hasAttribute('data-view-btn')) ixState.view = b.getAttribute('data-view-btn'); else ixState.family = b.getAttribute('data-family');
       ixApply(false);

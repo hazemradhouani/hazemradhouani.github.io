@@ -11,6 +11,8 @@
   "$omit": ["run"],
   "summary": "Urban train station in Casablanca whose folded, origami-like roof structures the building and modulates daylight.",
   "place": "Casablanca",
+  "country": "Morocco",
+  "countrySource": "spec Location \"Casablanca, Nouvelle Medina district\" (D125)",
   "year": "2025",
   "descriptor": "Infrastructure | urban train station, competition",
   "spec": [

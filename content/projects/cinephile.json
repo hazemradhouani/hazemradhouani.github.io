@@ -11,6 +11,8 @@
   "$omit": ["run", "tag", "spec:Type", "spec:School"],
   "summary": "Cinema complex in central Tunis designed around a covered interior street, an academic project at ENAU.",
   "place": "Tunis, Belvédère",
+  "country": "Tunisia",
+  "countrySource": "spec Location \"Tunis, Belvédère\" (D125)",
   "year": "2022",
   "descriptor": "Cultural | cinema complex",
   "spec": [

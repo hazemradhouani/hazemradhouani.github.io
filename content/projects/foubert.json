@@ -12,6 +12,8 @@
   "$omit": ["run", "tag", "spec:Project type", "spec:Office"],
   "summary": "New residential building in dense Paris fabric: facade design and detailing in aged red eco-brick at Studio BELEM.",
   "place": "Paris 13th",
+  "country": "France",
+  "countrySource": "spec Location \"1bis-3 passage Foubert, Paris 13th\" (D125)",
   "year": "2026",
   "descriptor": "New construction | residential",
   "office": "Studio BELEM",
