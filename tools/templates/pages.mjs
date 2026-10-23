@@ -321,49 +321,65 @@ ${chs.map((c) => chapterOf(c, numbered, c.id === 'film' ? filmFig : c.figs.map((
     preload: preloadFor(x.hero.src, op.lcpSizes, p), bodyClass: 'page-case' } };
 }
 
-/* ------------------------------------------------------------------ research */
-// further views of the printed book (optional): one justified row, every view whole
-const gallery = (b, p) => {
-  if (!b.gallery?.length) return '';
-  const r = row(b.gallery.map((g) => ({ rel: g.src, alt: g.alt })), { prefix: p, max: 'wide' });
-  return html`<div class="s-${r.span} block" data-rv>${r.html}</div>`;
+/* ------------------------------------------------------------------ research ("Reel, corrected", P6) */
+// A still composition on the home reel's stage (D104, D105, D138): the first layer is the main one, the others are
+// placed here in stage widths, each at its own ratio, so nothing is cropped (a cutout book stands whole on the
+// field, a photograph fills its card). It assembles and leaves by the reel's centre motion. Not a link: the
+// pictures keep their alt, they are the content here.
+const stillSz = (w) => `(min-width: 64rem) ${Math.ceil(0.46 * w * 1.28)}vw, (min-width: 48rem) ${Math.ceil(0.72 * w)}vw, ${Math.ceil(w)}vw`;
+const still = (layers, { p, priority = false }) => {
+  const ls = layers.map((l) => { const { w, h } = dims(l.src); return { ...l, h: +(l.w / (w / h)).toFixed(3) }; });
+  const [m] = ls;
+  const layer = (l, k) => {
+    const obj = l.src.startsWith('images/cut/');
+    const pic = obj ? image(l.src, { alt: l.alt, sz: stillSz(l.w), prefix: p, priority: priority && !k }) : picture(l.src, { alt: l.alt, sizes: stillSz(l.w), prefix: p, priority: priority && !k });
+    const role = k ? `side${l.front ? ' reel__l--front' : ''}` : 'main';
+    return html`<span class="reel__l reel__l--${role}${obj ? ' reel__l--obj' : ''}"${k ? raw(` style="--l: ${l.l}; --t: ${l.t}; --w: ${l.w}; --h: ${l.h}"`) : ''}${obj ? '' : raw(' data-crop')}>${pic}</span>`;
+  };
+  return html`<div class="reel__it" data-fx="centre" style="--sh: 80; --ml: ${m.l}; --mt: ${m.t}; --mw: ${m.w}; --mh: ${m.h}"><div class="reel__a"><span class="reel__stage">${ls.map(layer)}</span></div></div>`;
 };
-// priority: the first book is above the fold and is the page's largest paint, so it loads eagerly at high priority
-const book = (b, p, { id, extra = '', after = '', priority = false }) => {
-  const { w, h } = dims(b.cover);
-  const span = spanFor(w, h, { max: 'narrow' });
-  return html`<article class="chapter wrap g" aria-labelledby="${id}">
-<div class="s-${span}" data-rv>${image(b.cover, { alt: b.coverAlt, sz: sizesFor(span), prefix: p, priority })}</div>
-<div class="s-text center chapter__text">
-<p class="label">${b.label}</p>
+const bookHead = (b, id, extra = '') => html`<p class="label">${b.label}</p>
 <h2 class="h1 in" id="${id}">${b.title}</h2>
 <p class="lead in">${b.subtitle}</p>
-${extra}
-${spec(b.spec)}
-</div>
-${after}
-${gallery(b, p)}
-<div class="s-narrow block"><div class="prose">${b.text.map((t) => html`<p>${t.text}</p>`)}${when(b.honour, () => html`<p class="label honour">${b.honour}</p>`)}</div></div>
-<p class="s-text center in actions">${more(b.read, 'Read online', p, { ext: true, of: b.title })}${when(b.case, () => more(p + b.case, 'Al-Arg case study', p))}</p>
-</article>`;
-};
+${extra}${spec(b.spec)}`;
+const bookText = (b) => html`<div class="prose">${b.text.map((t) => html`<p>${t.text}</p>`)}${when(b.honour, () => html`<p class="label honour">${b.honour}</p>`)}</div>`;
 export function research(site, d, ctx) {
   const p = ctx.prefix;
-  const t = d.thesis; const r = d.report;
+  const t = d.thesis; const r = d.report; const s = d.sakura;
+  // the thesis as its three printed copies: the open spread in front (the page's largest paint), the cover and the
+  // renders' spread behind it; then Japan as the programme's group, the certificate and the shrine (about.json's photos)
+  const books = [{ src: t.cover, alt: t.coverAlt, l: 19, t: 15, w: 62 }, { ...t.gallery[0], l: 0, t: 2, w: 40 }, { ...t.gallery[1], l: 58, t: 46, w: 42 }];
+  const [group, shrine, cert] = ctx.about.photos.japan;
+  const japan = [{ ...group, l: 2, t: 18, w: 60 }, { ...cert, l: 66, t: 2, w: 30 }, { ...shrine, l: 56, t: 47, w: 30, front: true }];
+  const { w: rw, h: rh } = dims(r.cover);
   const body = html`
+<div class="reel reel--still">${still(books, { p, priority: true })}</div>
 <header class="intro wrap g"><div class="s-text center"><h1 class="h1">${words('Research')}</h1><p class="lead in">${d.intro}</p></div></header>
-${book(t, p, { id: 'thesis-h', priority: true, extra: html`<p class="book__ar in" lang="ar" dir="rtl">${t.titleAr}</p>`,
-    after: html`<div class="s-narrow block"><div class="prose"><p class="abstract">${t.abstract}</p></div></div>` })}
-${book(r, p, { id: 'report-h' })}
-<article class="chapter wrap g" aria-labelledby="sakura-h">
-<div class="s-text center"><p class="label">${d.sakura.label}</p><h2 class="h1 in" id="sakura-h">${d.sakura.title}</h2><p class="lead in">${d.sakura.subtitle}</p><p class="label in honour">${d.sakura.award}</p></div>
-<div class="s-narrow block"><div class="prose"><p>${d.sakura.text}</p></div></div>
-<p class="s-text center in actions">${more(d.sakura.site, 'Programme site', p, { ext: true, of: d.sakura.title.split(' | ')[0] })}</p>
+<article class="chapter wrap g" aria-labelledby="thesis-h">
+<div class="s-text center">${bookHead(t, 'thesis-h', html`<p class="book__ar in" lang="ar" dir="rtl">${t.titleAr}</p>`)}</div>
+<div class="s-narrow block"><div class="prose"><p class="abstract">${t.abstract}</p></div></div>
+<div class="s-narrow block">${bookText(t)}</div>
+<p class="s-text center in actions">${more(t.read, 'Read online', p, { ext: true, of: t.title })}${more(p + t.case, 'Al-Arg case study', p)}</p>
+</article>
+<article class="chapter wrap g" aria-labelledby="report-h">
+<div class="s-wide duo">
+<div class="duo__m" style="--r: ${(rw / rh).toFixed(4)}" data-rv>${image(r.cover, { alt: r.coverAlt, sz: '(min-width: 64rem) 30vw, (min-width: 48rem) 40vw, 80vw', prefix: p })}</div>
+<div class="duo__t">${bookHead(r, 'report-h')}<div class="block">${bookText(r)}</div><p class="actions">${more(r.read, 'Read online', p, { ext: true, of: r.title })}</p></div>
+</div>
+</article>
+<article class="chapter" aria-labelledby="sakura-h">
+<div class="reel reel--still reel--in">${still(japan, { p })}</div>
+<div class="wrap g">
+<div class="s-text center"><p class="label">${s.label}</p><h2 class="h1 in" id="sakura-h">${s.title}</h2><p class="lead in">${s.subtitle}</p><p class="label in honour">${s.award}</p></div>
+<div class="s-narrow block"><div class="prose"><p>${s.text}</p></div></div>
+<p class="s-text center in actions">${more(s.site, 'Programme site', p, { ext: true, of: s.title.split(' | ')[0] })}</p>
+</div>
 </article>`;
   const jsonld = [{ '@context': 'https://schema.org', '@type': 'Thesis', name: t.title, alternateName: t.subtitle,
     author: { '@type': 'Person', '@id': `${site.origin}${site.base}#person`, name: site.person.name },
     sourceOrganization: { '@type': 'CollegeOrUniversity', name: 'ENAU, Université de Carthage' }, datePublished: '2024-06', url: t.read }];
-  return { body, viewer: false, page: { path: 'books.html', nav: 'research', navExact: true, title: d.title, description: d.description, og: d.og, jsonld, bodyClass: 'page-research' } };
+  return { body, viewer: false, page: { path: 'books.html', nav: 'research', navExact: true, title: d.title, description: d.description, og: d.og, jsonld,
+    preload: preloadFor(t.cover, stillSz(books[0].w), p), bodyClass: 'page-research' } };
 }
 
 /* ------------------------------------------------------------------ about ("Reel, corrected", D113, D114) */
@@ -384,17 +400,13 @@ export function motion(site, d, projects, ctx) {
   const p = ctx.prefix;
   const by = Object.fromEntries(projects.map((x) => [x.slug, x]));
   const player = (f) => html`<video controls preload="none" playsinline poster="${p}videos/web/${f.slug}-poster.webp" width="${f.w}" height="${f.h}" aria-labelledby="${f.id}-h" aria-describedby="${f.id}-desc"><source src="${p}videos/web/${f.slug}.mp4" type="video/mp4"><a href="${p}videos/web/${f.slug}.mp4">Download the film (MP4)</a></video>`;
-  const thirds = ['s-third-a', 's-third-b', 's-third-c'];
+  // films and reels in one grid of 16:9 cover cards (P6, D138): each card's label says which it is, so the two
+  // section titles are left out ($omit); a fine pointer previews the film muted while it rests on the card (site.js)
+  const card = (f) => html`<li class="fcard" id="${f.id}"><div class="fcard__v">${player(f)}</div>
+<h2 class="title" id="${f.id}-h">${f.title}</h2><p class="label">${f.label}</p><p class="meta" id="${f.id}-desc">${f.text}</p>${when(f.project && by[f.project], () => html`<p>${more(projectHref(by[f.project], p), 'The project', p, { of: f.title })}</p>`)}</li>`;
   const body = html`
-<header class="intro wrap g"><div class="s-text center"><h1 class="h1">${words('Films and motion')}</h1><p class="lead in">${d.intro}</p></div></header>
-<section id="films" aria-labelledby="films-h">
-<div class="chapter wrap g"><div class="head s-text"><h2 class="h1" id="films-h">${d.filmsTitle}</h2><p class="meta measure">${d.filmsIntro}</p></div></div>
-${d.films.map((f) => html`<article class="block wrap g" id="${f.id}" aria-labelledby="${f.id}-h" data-rv><div class="s-${spanFor(f.w, f.h, { max: 'wide' })} film">${player(f)}</div><div class="s-text center in"><h3 class="title" id="${f.id}-h">${f.title}</h3><p class="label">${f.label}</p><p class="meta in measure" id="${f.id}-desc">${f.text}</p>${when(f.project && by[f.project], () => html`<p>${more(projectHref(by[f.project], p), 'The project', p)}</p>`)}</div></article>`)}
-</section>
-<section id="reels" aria-labelledby="reels-h">
-<div class="chapter wrap g"><div class="head s-text"><h2 class="h1" id="reels-h">${d.reelsTitle}</h2></div></div>
-<ul class="block wrap g" role="list" data-rv>${d.reels.map((f, k) => html`<li class="${thirds[k % 3]} film stack-s" id="${f.id}">${player(f)}<h3 class="title" id="${f.id}-h">${f.title}</h3><p class="label">${f.label}</p><p class="meta" id="${f.id}-desc">${f.text}</p></li>`)}</ul>
-</section>
+<header class="intro wrap g"><div class="s-text center"><h1 class="h1">${words('Films and motion')}</h1><p class="lead in">${d.intro}</p><p class="meta in">${d.filmsIntro}</p></div></header>
+<div class="block wrap"><ul class="fgrid" role="list" data-rv>${[...d.films, ...d.reels].map(card)}</ul></div>
 <section class="chapter wrap g" aria-labelledby="mabout-h">
 <div class="s-text center"><h2 class="h1" id="mabout-h">${d.aboutTitle}</h2></div>
 <div class="s-narrow block"><div class="prose">${d.about.map((t) => html`<p>${t}</p>`)}</div></div>

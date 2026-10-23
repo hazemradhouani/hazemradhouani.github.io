@@ -50,7 +50,8 @@ let gateFails = 0;
   let left = 0;
   const unused = (d) => {
     const o = new Set(d.$omit || []); if (!o.size) return d;
-    const out = { ...d, run: o.has('run') ? null : d.run, tag: o.has('tag') ? null : d.tag, spec: d.spec.filter((s) => !o.has(`spec:${s.label}`)), narrative: o.has('overview') ? d.narrative.filter((t) => t.chapter) : d.narrative };
+    // a page (not a project) names its top-level keys: the films page's two section titles (D138)
+    const out = !d.spec ? Object.fromEntries(Object.entries(d).filter(([k]) => !o.has(k))) : { ...d, run: o.has('run') ? null : d.run, tag: o.has('tag') ? null : d.tag, spec: d.spec.filter((s) => !o.has(`spec:${s.label}`)), narrative: o.has('overview') ? d.narrative.filter((t) => t.chapter) : d.narrative };
     left += strings(d).length - strings(out).length;
     return out;
   };

@@ -341,6 +341,30 @@
     root.addEventListener('pointerleave', function () { pill.classList.remove('is-on'); });
   }
 
+  /* ------------------------------------------------------------ the films' preview (feedback, D138)
+     On a fine pointer a film card plays its film muted, from the start, while the pointer rests on it, and returns
+     to its poster when the pointer leaves; its controls step aside meanwhile, and a click plays it from the start
+     with sound and controls. Touch, reduced motion (read at each hover) and no script keep the poster until the
+     reader presses play (WCAG 2.2.2). Nothing is fetched before the first hover (preload="none"). */
+  if (fineQ.matches) slice(document.querySelectorAll('.fcard video')).forEach(function (v) {
+    var card = v.closest('.fcard'), preview = false;
+    card.addEventListener('pointerenter', function () {
+      if (reduce.matches || !v.paused || v.dataset.on) return;
+      preview = true; v.muted = true; v.controls = false;
+      v.play().catch(function () {});
+    });
+    card.addEventListener('pointerleave', function () {
+      if (!preview) return;
+      preview = false; v.pause(); v.controls = true; v.muted = false;
+      v.load();   // back to the poster (preload none: nothing new is fetched)
+    });
+    v.addEventListener('click', function () {
+      if (!preview) return;
+      preview = false; v.dataset.on = '1'; v.controls = true; v.muted = false; v.currentTime = 0;
+      v.play().catch(function () {});
+    });
+  });
+
   /* ------------------------------------------------------------ arrival (hierarchy, D76)
      Groups that start below the fold arrive once, after their images decode: each plate rises from its
      ground line inside its own frame, the cells of a row or series in order, and the words that belong to

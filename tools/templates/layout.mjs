@@ -92,7 +92,7 @@ ${when(page.corners, () => html`${edge('bottom')}<p class="corner corner--l">${s
 <div class="wrap">
 <div class="menu__top">${brand(false)}<div class="menu__controls">${themeButton('menu')}<form method="dialog"><button class="menu__close ctl" type="submit" autofocus>close</button></form></div></div>
 <nav aria-label="Main"><ul class="menu__list" role="list">${[...site.views, ...site.nav].map(navItem)}</ul></nav>
-<p class="menu__contact"><a href="${P.linkedin}" target="_blank" rel="noopener">LinkedIn<span class="vh"> (opens in a new tab)</span></a></p>
+<p class="menu__contact"><a class="ctl" href="${P.linkedin}" target="_blank" rel="noopener">LinkedIn<span class="vh"> (opens in a new tab)</span></a><a class="ctl" href="${href('files/hazem-radhouani-cv.pdf')}">CV (PDF)</a><a class="ctl" href="${href('motion.html')}"${attrs({ 'aria-current': page.path === 'motion.html' ? 'page' : null })}>Films and motion</a></p>
 </div>
 </dialog>
 ${when(ctx.viewer, () => html`<dialog class="viewer" id="viewer" aria-labelledby="viewer-title" data-lenis-prevent>

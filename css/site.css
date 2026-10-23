@@ -374,8 +374,8 @@
   .menu__list a { display: inline-block; padding: var(--s2) var(--s4); font-size: clamp(2rem, 9vw, 2.75rem); line-height: 1.2;
     text-transform: var(--case); text-decoration: none; color: var(--ink-2); border-radius: 14px; }
   .menu__list a:hover, .menu__list a[aria-current] { color: var(--ink); }
-  .menu__contact { margin-top: calc(var(--s7) + var(--s4)); display: grid;   /* room for the chip under Contact */ justify-items: center; gap: var(--s1); }
-  .menu__contact a { min-height: 2.75rem; display: inline-flex; align-items: center; }
+  .menu__contact { margin-top: calc(var(--s7) + var(--s4));   /* room for the chip under Contact */ display: flex; flex-wrap: wrap; justify-content: center; gap: var(--s1); }
+  .menu__contact a { min-height: 2.75rem; display: inline-flex; align-items: center; padding-inline: var(--pill-x); text-decoration: none; color: var(--ink); }
 
   /* figures: images at their natural ratio, never cropped, never above native pixels (--nw) */
   .nw { display: block; width: 100%; max-width: var(--nw, 100%); margin-inline: auto; }
@@ -603,7 +603,15 @@
   .reel__l[data-crop] img { object-fit: cover; object-position: var(--pos, 50% 50%); }
   .reel__v { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 400ms var(--ease-out); }
   .is-live > .reel__v { opacity: 1; }
-  .reel__a:hover .reel__l { box-shadow: var(--shadow-lift); }   /* feedback: the composition lifts under the pointer */
+  a.reel__a:hover .reel__l { box-shadow: var(--shadow-lift); }   /* feedback: the composition lifts under the pointer */
+  /* a still composition (Research, D138): the same stage, its layers placed by the page at their own ratios; it is
+     not a link, so it does not lift. A cutout book stands on the field itself (its own shadow is in its pixels) */
+  .page-research { padding-top: 0; }
+  .reel--in { padding: var(--s6) var(--site-edge) 0; }
+  .reel__l--front { z-index: 3; }
+  .reel__l--obj { border-radius: 0; overflow: visible; box-shadow: none; }
+  .reel__l--obj :is(.nw, picture, img) { display: block; width: 100%; height: 100%; max-width: none; }
+  .reel__l--obj img { object-fit: contain; }
   .reel__cap { display: flex; flex-wrap: wrap; justify-content: center; gap: 0 var(--s3); margin-top: var(--s4); font-size: var(--fs-cap); line-height: 1.5; text-align: center; }
   .reel__m { color: var(--ink-2); }
   /* a fine pointer reads the name from the label that follows it (D109): the caption steps out of the flow and out
@@ -623,6 +631,8 @@
   /* a case study's next project (D115): the home's own composition, its caption always shown (no label follows the
      pointer there: the caption is the next page's name, read before the click) */
   .reel--next { padding: var(--s6) var(--site-edge) 0; }
+  /* Research opens assembled on phones too: its one composition stands at the screen's centre, in the dead zone */
+  @media (max-width: 47.99rem) { .reel--still { padding-top: calc((100svh - var(--stage-w) * 0.8) / 2); } .reel--still.reel--in { padding-top: var(--s6); } }
   @media (hover: hover) and (pointer: fine) and (min-width: 48rem) { .reel--next .reel__cap { position: static; opacity: 1; } }
 
   /* the end of the page: the index's root joined to its families by curves, as dmcg's catalog tree begins */
@@ -958,6 +968,13 @@
   /* research */
   .book__ar { font-size: var(--fs-lead); line-height: 1.6; color: var(--ink-2); }
   .abstract { font-style: italic; }
+  /* the report as a duo (D138): its cover card beside its words from 64rem, above them below */
+  .duo { display: grid; gap: var(--s6); align-items: center; }
+  .duo__m { width: min(100%, 22rem); justify-self: center; }
+  .duo__m .nw { border-radius: var(--r-card); overflow: clip; box-shadow: var(--shadow-card); }
+  .duo__t .spec { margin-top: var(--s4); }
+  .duo__t .actions { justify-content: flex-start; margin-top: var(--s4); }
+  @media (min-width: 64rem) { .duo { grid-template-columns: 5fr 7fr; gap: var(--gutter); } .duo__m { width: 100%; } }
 
   /* about: a CV whose two columns sit on grid lines (subgrid of the text span) */
   .cv { display: grid; grid-template-columns: subgrid; }
@@ -975,6 +992,13 @@
 
   /* films */
   .film video { width: 100%; height: auto; background: var(--ink); }
+  /* the films page (D138): films and reels in one grid of 16:9 cover cards; the title, its label and its words under each */
+  .fgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 22rem), 1fr)); gap: var(--s7) var(--gutter); margin: 0; padding: 0; list-style: none; }
+  .fcard > * + * { margin-top: var(--s2); }
+  .fcard > .fcard__v + * { margin-top: var(--s4); }
+  .fcard__v { aspect-ratio: 16 / 9; border-radius: var(--r-card); overflow: clip; box-shadow: var(--shadow-card); background: var(--ink); transition: box-shadow var(--t-hover) var(--ease-out); }
+  .fcard__v:hover { box-shadow: var(--shadow-lift); }
+  .fcard video { display: block; width: 100%; height: 100%; object-fit: cover; }
 }
 
 /* ------------------------------------------------------------------ motion (purpose in 08-direction.md) */
@@ -1059,7 +1083,7 @@
   html.fx .reel__l--main { --o: 0; scale: calc(1 + var(--grow) * var(--in)); }
   html.fx .reel__l--side { --lag: 0.62; --k: 1.5; }
   html.fx .reel__l--drawing { --lag: 0.4; --k: 0.9; }
-  html.fx :is(.reel__l--drawing, .reel__it--duo .reel__l--side) { opacity: calc(1 - var(--o)); }   /* above the main card: it fades in as it leaves the centre */
+  html.fx :is(.reel__l--drawing, .reel__it--duo .reel__l--side, .reel__l--front) { opacity: calc(1 - var(--o)); }   /* above the main card: it fades in as it leaves the centre */
   @media (max-width: 47.99rem) { html.fx .reel__it { --grow: 0.12; } }
   html.fx .reel__it:focus-within { --in: 0; --out: 0; }   /* reached by the keyboard: assembled and sharp, its focus ring never faded (WCAG 2.4.7) */
   @media (hover: hover) and (pointer: fine) {
