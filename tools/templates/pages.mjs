@@ -301,6 +301,7 @@ ${book(r, p, { id: 'report-h' })}
 <article class="chapter wrap g" aria-labelledby="sakura-h">
 <div class="s-text center"><p class="label">${d.sakura.label}</p><h2 class="h1 in" id="sakura-h">${d.sakura.title}</h2><p class="lead in">${d.sakura.subtitle}</p><p class="label in honour">${d.sakura.award}</p></div>
 <div class="s-narrow block"><div class="prose"><p>${d.sakura.text}</p></div></div>
+<p class="s-text center in actions">${more(d.sakura.site, 'Programme site', p, { ext: true, of: d.sakura.title.split(' | ')[0] })}</p>
 </article>`;
   const jsonld = [{ '@context': 'https://schema.org', '@type': 'Thesis', name: t.title, alternateName: t.subtitle,
     author: { '@type': 'Person', '@id': `${site.origin}${site.base}#person`, name: site.person.name },

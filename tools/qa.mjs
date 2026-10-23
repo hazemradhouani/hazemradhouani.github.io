@@ -62,7 +62,7 @@ const axeSrc = fs.readFileSync(path.join(here, '..', 'node_modules/axe-core/axe.
 // a file: base runs the gates without the local server, straight from the built files; the two 404 checks
 // need the server's routing (the 404 page links from the site root) and are skipped, and said so
 const FILE = BASE.startsWith('file:');
-const sitemap = FILE ? fs.readFileSync(path.join(REPO, 'sitemap.xml'), 'utf8') : await (await fetch(BASE + 'sitemap.xml')).text();
+const sitemap = FILE ? fs.readFileSync(path.join(REPO, 'sitemap-site.xml'), 'utf8') : await (await fetch(BASE + 'sitemap-site.xml')).text();
 const LIVE = (({ origin, base }) => origin + base)(JSON.parse(fs.readFileSync(path.join(REPO, 'content/site.json'), 'utf8')));
 let urls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1].replace(LIVE, BASE))
   .map((u) => (FILE && u.endsWith('/') ? u + 'index.html' : u));   // the server answers a folder with its index.html
@@ -762,6 +762,7 @@ else console.log('ok   about: the sheet opens from three pages (focus, inert pag
 async function runCasePass() {
   const failures = [];
   const cases = urls.filter((u) => /project-[a-z-]+\.html$/.test(u));
+  if (!cases.length) return null;   // --only left no case study in the run
   const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 }, deviceScaleFactor: 1, colorScheme: 'light', reducedMotion: 'no-preference' });
   const opening = () => { const m = document.querySelector('.op__media').getBoundingClientRect(), s = document.querySelector('.op__slot').getBoundingClientRect(); const t = getComputedStyle(document.querySelector('.op__t')); return { m: [m.left, m.top, m.width, m.height], s: [s.left, s.top, s.width, s.height], t: +t.opacity, facts: +getComputedStyle(document.querySelector('.op__facts')).opacity }; };
   for (const url of cases) {
@@ -839,8 +840,9 @@ async function runCasePass() {
   return failures;
 }
 const caseFailures = await runCasePass();
-gateFails += caseFailures.length;
-if (caseFailures.length) console.log(`FAIL case studies: ${caseFailures.length} issue(s)\n  ${caseFailures.slice(0, 20).join('\n  ')}`);
+gateFails += caseFailures?.length || 0;
+if (!caseFailures) console.log('note  case studies: none in this run (--only), not checked');
+else if (caseFailures.length) console.log(`FAIL case studies: ${caseFailures.length} issue(s)\n  ${caseFailures.slice(0, 20).join('\n  ')}`);
 else console.log('ok   case studies: the opening settles from near full-bleed into its slot and back (a function of the scroll), words after it; the rail marks the chapter past the middle; every plate and head arrived after reading; still under reduced motion and on a phone; a chapter by its address clear of the header');
 const scrollFailures = await runScrollPass();
 gateFails += scrollFailures.length;

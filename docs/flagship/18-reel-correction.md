@@ -1,7 +1,8 @@
-# Plan 18 "Reel, corrected": deep correction to flagship level, in eleven resumable phases
+# Plan 18 "Reel, corrected": deep correction to flagship level, in fifteen resumable phases
 
 > Approved 2026-10-22. Source plan: `C:\Users\Hazem\.claude\plans\enhance-this-prompt-for-keen-frog.md` (copied here, P1a).
-> **Resume:** read this file's Progress table, start the first unticked phase, view the matching `docs/ref/` frames (gitignored; re-extract with the ffmpeg commands in §2 if missing).
+> **Amendment A** approved 2026-10-23 (source: `C:\Users\Hazem\.claude\plans\enhance-this-prompt-for-elegant-reef.md`): repo sync and push rule, the sitemap rename, the Sakura link, Index filters, the case-study and Index motion finish. Brief in §1b, decisions D122–D131, phases S0, P5c, F1, F2.
+> **Resume:** `git fetch origin` and merge `origin/main` if it has commits the branch lacks; read this file's Progress table (rows run in table order), start the first row not "done", view the matching `docs/ref/` frames (gitignored; re-extract with the ffmpeg commands in §2 if missing). **Push after every commit.**
 
 ## Progress
 
@@ -14,7 +15,11 @@
 | P3 | Index: tree first, rebuilt; grid without margins | done | commit "Plan 18 P3" (D110–D112 as built, D121); families 15/132/78/3 = 228; tree from 64 rem (not 48: pills collide, measured); leaves by `tree-layout.mjs` (12 tests); switch measured in headless Chrome (interruptions settle, no errors); two small renders stand whole (no enlargement); phone header under 375 px and phone bar fixed; full QA 29/29 ok (file: base, 404 checks skipped), index re-run after the last change ok; perf not run (needs the server; P7) |
 | P4 | About sheet and about.html | done | commit "Plan 18 P4" (D113, D114 as built); X in the header row and no `scrollbar-gutter` (both measured, logged in D113); new `runAboutPass` (3 pages, X/Esc/outside, drag-select, chip-then-sheet Esc, axe open, header unmoved with scrollbars shown, reduced motion, phone menu, about.html alone, no-JS link); CV regenerated (2 A4 pages); full QA 21/21 ok (file: base, 404 checks skipped); perf not run (needs the server; P7) |
 | P5a | Case-study reel: engine, template, 4 reference projects | done | commit "Plan 18 P5a" (D115, D116 as built); the template serves all 15 (the 11 keep every field until P5b's `$omit` pass); engine kinds `enter` and `rail`, the opening's measured FLIP; new QA `runCasePass` (all 15: full-bleed → slot → back, rail, arrivals, reduced motion, phone, anchors); test `case-opening.test.mjs`; montages 375/1024/1440 both themes; perf on the file: base, headless (Al-Arg, Belhomme: LCP 0.29–1.06 s, CLS 0, median frame 16.7 ms at 1× and 4× CPU, p95 33 ms at 4×); network-throttled `npm run perf` not run (needs the server; P7); full QA 21/21 ok (file: base, 404 checks skipped) |
+| S0 | Repo sync and push, sitemap rename, Sakura link, amendment A, draft PR | done | commit "Plan 18 S0" (D122–D124); 8 unpushed commits pushed; `origin/main` (owner's e0c0dca, 700642d) merged cleanly; build writes `sitemap-site.xml` (20 URLs) and its robots line; Sakura pill in the About sheet, about.html and Research (HTTP 200, status only; `no-print`, CV unchanged); QA fix: the case pass reports "not checked" when `--only` leaves no case study; tests 65/65; QA about/books/index/al-arg ok (file: base) |
 | P5b | Case-study reel: remaining 11 | todo | |
+| P5c | Case-study finish: composition, surfaces, motion across all 15 (D130) | todo | |
+| F1 | Index filters: facets, markup, state, URL, panel, QA (D125–D127, D129) | todo | |
+| F2 | Filter and Index motion finish; entry points on the home and case studies (D128, D129, D131) | todo | |
 | P6 | Research, Films, 404, phone menu | todo | |
 | P7 | Whole-site coherence (QA, perf, OG, WebKit) | todo | |
 | P8 | Independent review | todo | |
@@ -50,6 +55,26 @@ The owner supplied three screen recordings of dmcg.co as the target feel (§2). 
 > 7. **Everywhere:** tight rhythm, only the text that explains, deliberate scale hierarchy, both themes, six widths, WCAG 2.2 AA, LCP < 2.5 s, CLS < 0.1, INP < 200 ms. No AI imagery or text.
 >
 > CLAUDE.md rules stay in force: no invented content, the decision log, the flagship-upgrade branch, PR then merge after QA, no new dependencies, and honest test reports.
+
+## 1b. Amendment A (2026-10-23, the owner's additions, rewritten for execution)
+
+> Before resuming plan 18 at P5b, fold in these additions. Each one is built to the plan's flagship bar (§1) and recorded in the decision log.
+>
+> 1. **Repository.** Push every commit to `origin/flagship-upgrade` as soon as it is made. Fetch before each phase and merge the owner's own commits on `main` into the branch, never overwriting them. Keep a draft PR to `main` current throughout, and merge it at P9 after QA. No force-push, no direct commits to `main`.
+> 2. **Sitemap.** The owner renamed `sitemap.xml` to `sitemap-site.xml` on GitHub and pointed robots.txt at it. The build must generate exactly that file and that robots line. Remove the old file and log the removal. QA, tests and docs must read the new name.
+> 3. **Sakura Science Program link.** `https://sagaunissp2025.my.canva.site/` is the programme's own site, supplied by the owner. Present it as an external pill wherever the programme is presented: the About column's Japan section (sheet and about.html) and the Research page's Sakura chapter. It opens in a new tab with an accessible name. Say nothing about its contents beyond what the repo already says.
+> 4. **Index filters.** On the Index, the reader narrows the work by **Place** (country), **Type** (programme), **Scale** (surface band), **Year** and **Practice** (professional / academic).
+>    - Facets come only from project content. A project without the data is left out of that facet, never guessed.
+>    - Filters combine with the family and with every view (tree, grid, list). They live in the URL and are fully keyboard-operable.
+>    - Each choice shows a live count, empty choices are disabled, and one action clears everything.
+>    - Motion uses the house curves and is instant under reduced motion: the grid reflows by FLIP, the tree dims what does not match, the list collapses its rows.
+>    - The home's index root and every case study's end link into filtered views.
+> 5. **Case studies.** Give all 15 pages a composition and motion finish pass: deliberate layout, the reel grammar on every plate, shadows and translucency from the token family, and eased transitions between chapters and into the next project. Every part is measured, reversible and smooth.
+> 6. **Index motion.** Review every transition on the Index from the smallest detail up: view switch, family switch, filter, hover, viewer, A–Z jump and the bar. Tune each to the same grammar and measure it.
+>
+> CLAUDE.md stays in force: no invented content, honest test reports, no new dependencies.
+
+**Interpretation (D129).** The owner wrote "on the index page or the main page". The filters live on the **Index** (`architecture.html`, the catalog of all 228 items). The home stays the curated reel, because the first screen must say who and what within 10 s, with no controls between the reader and the work. The home's closing index root gains Place pills as its entry into filtered views. Rejected: a filter on the home reel. It would put controls on the first screen, and a reel filtered down to 3 items breaks the pacing of the 15 compositions.
 
 ---
 
@@ -102,6 +127,16 @@ The owner supplied three screen recordings of dmcg.co as the target feel (§2). 
 | D117 | **Footer** = one compact line in Instrument Sans: © 2026 name · email chip · LinkedIn · CV (PDF) · Films. The Garamond sentence is removed | One voice, less text | — |
 | D118 | **Motion and surface tokens.** `--ease-out` (.22,1,.36,1) for arrivals and feedback; `--ease-in-out` (.77,0,.175,1) for travel and theme. Hover 200 ms, chip 420 ms, sheet 600/450 ms, theme 950 ms, leaves 380/560 ms. `--shadow-card` `0 1px 2px rgb(0 0 0/.04), 0 24px 48px -16px rgb(0 0 0/.16)` and `--shadow-lift`; dark scheme uses a hairline `rgb(255 255 255/.06)`. `--bg-raised` #F5F5F3 / #1A1B19. New surfaces (raised, veil wash, frosted pill) are added to the QA palette allowlist | One family, written once | — |
 | D119 | `docs/Recording*.mp4` and `docs/ref/` (reference montages) are gitignored; originals untouched | Large binaries, reference only | Committing them |
+| D122 | **Sitemap = `sitemap-site.xml`** (the owner's rename on `main`, e0c0dca/700642d). `build.mjs` writes it and `Sitemap: …/sitemap-site.xml`. Tracked `sitemap.xml` removed (by the merge). `qa.mjs`, `redirects.test.mjs` (which now also asserts one sitemap and the robots line) and `tools/README.md` read the new name | Keep the owner's GitHub change; one source of truth | Keeping both files (two sitemaps of the same URLs) |
+| D123 | **Sakura programme link.** about.json Sakura experience gets `href`, and research.json gets `sakura.site` (source `owner:2026-10-23`). Rendered as an external pill "Programme site": `.ctl` in the About column (`no-print`, so the CV is unchanged), and `more(…, {ext:true, of})` in Research. It opens in a new tab and its vh text names the programme and "(opens in a new tab)" | Owner's request; reuses the existing patterns | Embedding the Canva site (third-party iframe, perf, a11y) |
+| D124 | **Push every commit; draft PR open from S0** (`gh pr create --draft`); fetch and merge `main` before each phase; merge commits only, no rebase of pushed history, no force | Owner: "the GitHub repo updated with every change" | Merging `main` per phase (unreviewed half-states go live) |
+| D125 | **Facets from content only.** Place = new explicit `country` field per project (France 5, Morocco 7, Tunisia 3; source: each spec's Location), list in site.json `places`. Type = existing `filters` tags without professional/academic, labels from site.json `filters` (Heritage and rehabilitation 4, Residential 6, Infrastructure 4, New build 2, Cultural 2, Healthcare 1; multi-valued). Practice = professional 12 / academic 3. Year = every year in the `year` range ("2025-2026" matches both; 2022–2026). Scale = the Surface/Area spec parsed to m² (ha × 10 000) and banded by site.json `scales`: under 1 000 (8), 1 000–10 000 (3), over 10 000 (2). Sentry and Avenir state no surface, so they are in no scale band. Films carry no facets, so they match only when no facet is set. The build fails on an unknown country, tag or unparsable surface | Truth rule; deterministic and testable | Guessing Sentry's surface from "Small scale" |
+| D126 | **Filter UI.** A "Filter" pill in `.ix-bar` (shows the active count) opens a frosted, non-modal panel (cursor-label surface: `--bg` 72 % + blur 14 px, hairline, `--shadow-lift`, `--r-card`). It rises above the bar on desktop and is fixed to the bottom edge on phones. It has five labelled rows of pills (`aria-pressed`, single choice per facet, a second press clears it). Live counts per choice are computed with the other facets applied; a choice at 0 gets `aria-disabled` and dimmed text that still meets 4.5:1. "Clear all". A visible result line under the Index heading ("France · Residential · 23 of 228" + Clear) and the polite `[data-ix-status]`. Esc (added to the one ordered handler: chip → modal → **filter panel** → sheet), an outside click or the pill closes it, and focus returns. The URL keys `place`, `type`, `scale`, `year`, `practice` are restored on load and Back | dmcg pill grammar; orientation; WCAG 2.2 | Dropdown selects; multi-select (more complexity than the request warrants) |
+| D127 | **Per-view behaviour.** Grid: non-matching tiles are hidden. Tree: non-matching leaves dim (opacity .14, `inert`) and their connectors fade, so the layout stays stable and the subset reads in place. Family pills show live counts. List: non-matching rows are hidden and the caption gives the count. If the grid's top is above the viewport after a change, Lenis scrolls to the Index head | Stable tree layout; no empty holes; orientation | Re-running tree-layout in the browser (its layout is placed at build time) |
+| D128 | **Filter motion** (purpose: orientation). Leaving tiles fade and scale to .96 (160 ms, ease-in). Then the remaining on-screen tiles FLIP to their new places (560 ms, `--ease-out`), and newcomers use the existing `is-entering` rise. Tree dimming transitions opacity over 420 ms. The panel opens with `grid-template-rows` 0fr → 1fr and contents rise 8 px (420 ms) and closes in 300 ms. A new change settles the running one at once (as `treeSettle`). Only on-screen elements animate. Reduced motion: instant | One grammar (D118); INP < 200 ms | Animating all 228 tiles |
+| D129 | **Filters on the Index, entry points elsewhere** (§1b interpretation). The home's `.tree-root` gains Place pills → `architecture.html?place=…`. Each case study gets one line of pills before the next project (its country, types and year) → the filtered Index | Coherent integration without cluttering the home | Home reel filter |
+| D130 | **Case-study finish (P5c).** Renders become cards (`--r-card`, `--shadow-card`, lift on hover only where they open the viewer). Drawings stay whole on `--bg-raised` sheets with a hairline. The rail is a frosted pill where it crosses images. Chapter heads: the rule draws by `--e` and the heading rises ≤ 12 px. The next-project composition uses the shared `reelItem()` and the VT morph. Each page is measured: widest empty band ≤ 25 vh at 1440, median frame ≤ 16.7 ms at 1× and p95 ≤ 33 ms at 4× CPU, CLS 0, reversible on scroll-up, static under reduced motion | Owner: "transparency and shadows, premium layout"; one family with the home | Per-page bespoke motion |
+| D131 | **Index motion finish (F2).** View switch: the old view fades out (160 ms) and the new one fades in with an 8 px rise (420 ms); the tree's first show fans out like a branch switch. Family switch in the grid uses the D128 FLIP. A–Z jump uses `lenis.scrollTo` (900 ms, `--ease-in-out`) and focuses the target. The bar arrives once on load. Tile and leaf hover follow D106/D111. Each one is checked in headless Playwright: frames, interrupt-safety, no layout shift of the bar | "Smooth, eased, from smallest to biggest" | — |
 
 ---
 
@@ -118,7 +153,7 @@ The owner supplied three screen recordings of dmcg.co as the target feel (§2). 
 3. `node tools/qa.mjs --base=file:///C:/Users/Hazem/Desktop/portfolio-main/` (`--only=` for the pages touched; a full run at the end of P1b, P3, P4, P5b and P9).
 4. Review a screenshot montage of both themes at 375 and 1440 (scratchpad Playwright script with the installed Chrome).
 5. Log decisions, tick Progress, update memory.
-6. Make small commits on `flagship-upgrade`.
+6. Make small commits on `flagship-upgrade` and **push each one** (`git push origin flagship-upgrade`, D124); the draft PR follows the branch.
 7. Report what was done, what was tested and how, and what was not; then: **"Run /clear, then type resume."**
 
 **Known quirks.** The GateGuard hook asks for facts before the first Bash command and before the first edit of each file. Python is broken (use Node and ffmpeg). Measure motion in headless Playwright, not the DevTools window. Don't start a background server unasked; use the file: base.
@@ -255,12 +290,65 @@ Rejected after the preview: Nouvelle Medina exploded structure, Sentry section B
 4. Apply to Al-Arg, Zenata, Belhomme and Hay Mohammadi: both themes at 375, 1024 and 1440; duplicate text omitted and listed per D116.
 5. Perf for Al-Arg and Belhomme.
 
+### S0: Sync, sitemap, Sakura, amendment A (done 2026-10-23)
+1. Pushed the 8 unpushed commits. Fetched, then merged `origin/main` (the owner's e0c0dca rename and 700642d robots line; clean, git carried the rename).
+2. `tools/build.mjs` writes `sitemap-site.xml` and its robots line. `qa.mjs`, `redirects.test.mjs` and `tools/README.md` read it, and the test asserts one sitemap and the robots line.
+3. Sakura pill (D123) in `aboutColumn()` and `research()`.
+4. This amendment. D122–D124 in the decision log, and the ledger entries.
+5. Build, tests, QA on the pages touched, screenshots. Then commit, push and open the draft PR.
+
 ### P5b: Case-study reel (the remaining 11)
 1. Projects: Ain Sebaâ, Avenir, Bolivar, Cinephile, Corallum, Foubert, La Villette, Nouvelle Medina, Papillon, Sentry, Tamansourt.
 2. For each: the hero `pos`, render crops where they help the rhythm, a de-duplication pass, and one montage per theme.
 3. Run `node tools/qa.mjs --only=projects/project-<slug>.html --shots` for each.
 4. Re-check the four from P5a after any template fix.
 5. Full QA run.
+
+### P5c: Case-study finish (all 15, D130)
+1. Make a montage of all 15 at 375/1024/1440 in both themes (scratchpad Playwright script with the installed Chrome) and audit each against D130 and the R1/R2 frames.
+2. Fix at the template level once (`css/site.css` case section, `figure()`/`row()`/`opening()` in partials.mjs). Fix per project only through content (`hero.pos`, `crop`, `$omit`).
+3. Measure on every page (headless Playwright, rAF sampler; rewrite the scratchpad band and perf probes): widest empty band, frames at 1× and 4× CPU, reversibility, reduced motion.
+4. Run `runCasePass` and the scroll and motion passes for all 15. Re-check the 4 pages from P5a.
+
+### F1: Index filters (structure, D125–D127)
+1. Content:
+   - `country` in the 15 project JSONs (with a source note);
+   - site.json `places` and `scales`;
+   - a ledger note.
+2. `facetsOf(project, site)` in `tools/templates/pages.mjs`, next to `catalogOf`. It feeds the `data-place`, `data-type`, `data-scale`, `data-year` and `data-practice` attributes on tiles (`tile()`), leaves (`leaf()` in `branch`) and list rows. `countOf` stays the single count source.
+3. The panel markup in `work()` (the `.ix-bar`, and the result line under `.ix-head`).
+4. `js/site.js` index module ("the index's views and families"):
+   - `ixState` gains the facets, and the URL is read and written as today;
+   - `ixApply` computes matches and live counts and sets `aria-disabled`;
+   - the panel opens and closes with the focus handling;
+   - the filter panel joins the one Esc handler;
+   - empty-state handling for URL-only combinations.
+5. CSS: the panel, the result line, dimmed leaves and disabled pills (contrast checked in QA), and the phone bottom-edge panel.
+6. Tests: `tools/tests/facets.test.mjs`. It checks surface parsing (m², "Village: 1.4 ha", narrow spaces), year ranges, every project's country being allowed, that each facet's counts never exceed the projects, and the band counts 8/3/2.
+7. QA: a new `runFilterPass` in `tools/qa.mjs`:
+   - each facet changes the visible counts to the expected numbers (computed from the built data attributes);
+   - combinations and Clear;
+   - URL restore and Back;
+   - keyboard only (Tab, Enter/Space, Esc returns focus);
+   - disabled choices are not actionable;
+   - tree leaves dimmed and inert, list rows;
+   - axe with the panel open;
+   - no overflow at 320/375, targets ≥ 24 px;
+   - reduced motion instant;
+   - no console errors.
+
+### F2: Filter and Index motion, entry points (D128, D129, D131)
+1. Implement the D128 animations and the D131 finish in the index module. Reuse the `treeSettle` pattern for interruption and `measureSoon()` after every reflow, and resize Lenis when the height changes.
+2. Entry points (D129):
+   - Place pills in the home `.tree-root` (`home()`);
+   - the case-study facet line before the next project in `project()`.
+   - QA coverage and the home/case passes are updated for them.
+3. Measurements in headless Playwright:
+   - frames during a filter change and a view switch at 1× and 4× CPU;
+   - INP proxy (input to next frame) < 200 ms;
+   - CLS 0 for the bar;
+   - each animation interrupted mid-way settles without errors.
+   - Montage: before and after for one filter combination in each view, both themes.
 
 ### P6: Research, Films, 404, phone menu
 1. Research:
@@ -281,7 +369,8 @@ Rejected after the preview: Nouvelle Medina exploded structure, Sentry section B
 2. `npm run perf` (median of 3) for every page type.
 3. `npm run og` to regenerate the cards.
 4. Playwright WebKit (2359, installed): try the theme VT and the scrub film; record the result or mark it UNVERIFIED.
-5. Fix whatever these runs find.
+5. Amendment A: `runFilterPass` at all 6 widths × 2 themes; `npm run perf` also on `architecture.html?place=france&view=grid`; the sitemap check reads `sitemap-site.xml`.
+6. Fix whatever these runs find.
 
 ### P8: Independent review
 Run parallel read-only subagents and adopt their findings or log the declines:
@@ -290,12 +379,14 @@ Run parallel read-only subagents and adopt their findings or log the declines:
 - code (`ecc:code-reviewer`);
 - performance (`ecc:performance-optimizer`).
 
+The design and a11y reviewers also cover the filter panel and the entry points (amendment A).
+
 Then update the decision log, the ledger, tools/README and memory.
 
 ### P9: PR and merge
-1. Push. Open a PR to `main` (`gh pr create`) with the summary, QA evidence, perf table and the UNVERIFIED list.
+1. Fetch and merge `origin/main` if it moved. Push. Update the draft PR's body (opened in S0): the summary, QA evidence, perf table, the UNVERIFIED list and the content gaps. Mark it ready (`gh pr ready`).
 2. Merge once every gate passes (delegated by CLAUDE.md).
-3. Check the live site (home, index tree, About sheet, theme sync), then send the final report.
+3. Check the live site (home, index tree and filters, About sheet, theme sync; `robots.txt` → `sitemap-site.xml`), then send the final report.
 
 ---
 
@@ -311,6 +402,7 @@ Then update the decision log, the ledger, tools/README and memory.
 - QA: `tools/qa.mjs` (palette, crop gate, home, index, about, scroll and case passes), `tools/tests/theme.test.mjs`.
 - Docs: `docs/flagship/18-reel-correction.md`, `decision-log.md`, `content-ledger.md`, `.gitignore`.
 - `files/hazem-radhouani-cv.pdf` (regenerated).
+- Amendment A: `tools/build.mjs` (sitemap), new `tools/tests/facets.test.mjs`, `runFilterPass` in `tools/qa.mjs`, `facetsOf` in pages.mjs, `content/site.json` (`places`, `scales`), `country` in `content/projects/*.json`.
 
 **Reuse rather than rebuild:**
 - the engine: `fxItems` with the `centre`/`track` kinds, `data-steps="auto"`, `naturalTop`, `measureSoon`, and the Lenis `hold` observer;
@@ -326,6 +418,12 @@ Then update the decision log, the ledger, tools/README and memory.
 - New email: supplied by the owner on 2026-10-22, recorded in the ledger. Category labels come from the existing descriptors. Sheet copy comes only from `about.json`. Any section with no source is marked [CONTENT NEEDED] in the progress doc.
 - Conflict: D89 ("name centred at 32–60 px") against removing the hero. Resolved: the name stays centred in the header (dmcg's name block, accepted in plan 17), and the hero goes at the owner's request. Logged in D103.
 - Conflict: D32/A10 (no crop) against "no margins / you can crop". Resolved by D112: crops only in thumbnails, compositions and declared render crops. Drawings are never cropped, and enlargement still fails QA.
+- Amendment A, the Sakura programme site: supplied by the owner on 2026-10-23 (`owner:2026-10-23`). Its contents are not described on the site.
+- Amendment A, gaps for the filters (D125), published as absences and never guessed:
+  - [CONTENT NEEDED: built surface for Sentry (guard pavilion), to place it in a scale band]
+  - [CONTENT NEEDED: total surface for Avenir (R+7 and R+5), to place it in a scale band]
+  - [CONTENT NEEDED: programme type for Sentry, if the owner wants it under a Type filter; today it matches Practice, Place and Year only]
+- Amendment A, interpretation: "index page or the main page" read as the Index (D129, §1b).
 
 ## 7. Verification (end to end)
 - **Build and tests:** the build has no errors, and `tools/tests/*.test.mjs` (theme, tree-layout, chapters, images, identity, redirects, vendor) pass.

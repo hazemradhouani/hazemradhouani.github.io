@@ -348,6 +348,7 @@ ${fig(d.photos.graduation, COL)}</section>
 <div class="about__card">${rows(d.experience.filter((r) => r !== sakura).map((r) => ({ k: head(r.what), when: r.when, v: html`<p>${dot(r.role)}</p><p class="about__g">${r.text}</p>` })))}</div></section>
 <section class="about__s" aria-labelledby="about-japan-h">${H(2, 'about-japan-h', prog)}
 <p class="about__g">${country} · ${sakura.when} · ${dot(sakura.role)}</p><p>${sakura.text}</p>
+${when(sakura.href, () => html`<p class="about__links no-print"><a class="ctl" href="${sakura.href}" target="_blank" rel="noopener">Programme site<span class="vh">: ${prog} (opens in a new tab)</span></a></p>`)}
 ${fig(d.photos.japan[0], COL)}
 <div class="row about__pair">${pair.map((x) => html`<div class="cell" style="--r: ${x.r.toFixed(4)}">${fig(x.ph, '(min-width: 40rem) 20rem, 60vw')}</div>`)}</div></section>
 <section class="about__s" aria-labelledby="about-dist-h">${H(2, 'about-dist-h', 'Distinctions')}

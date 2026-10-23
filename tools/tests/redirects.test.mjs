@@ -11,8 +11,10 @@ test('every page that lived under /portfolio/ redirects to its address at the ho
   const site = JSON.parse(read('content/site.json'));
   assert.equal(site.base, '/', 'Google gives site names and favicons per host, so the site lives at the root');
   const live = site.origin + site.base;
-  const locs = [...read('sitemap.xml').matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
+  const locs = [...read('sitemap-site.xml').matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
   assert.ok(locs.length > 10);
+  assert.ok(!fs.existsSync(path.join(ROOT, 'sitemap.xml')), 'one sitemap, under the owner\'s name (D122)');
+  assert.match(read('robots.txt'), new RegExp(`^Sitemap: ${live}sitemap-site\\.xml$`, 'mu'), 'robots.txt names it');
   const pages = [...locs.map((u) => u.slice(live.length) || 'index.html'), 'videos.html'];
   for (const rel of pages) {
     const to = live + (rel === 'index.html' ? '' : rel);
