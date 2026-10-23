@@ -7,6 +7,7 @@
   ],
   "title": "Sentry",
   "run": "Yassir Khalil Studio | Casablanca",
+  "$omit": ["run", "tag", "spec:Type", "spec:Office", "spec:Location"],
   "summary": "Guard pavilion at the entry threshold of Casablanca Finance City, in perforated steel, at Yassir Khalil Studio.",
   "place": "Casablanca Finance City",
   "year": "2024",

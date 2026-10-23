@@ -8,6 +8,7 @@
   ],
   "title": "Cinephile",
   "run": "ENAU | Tunis",
+  "$omit": ["run", "tag", "spec:Type", "spec:School"],
   "summary": "Cinema complex in central Tunis designed around a covered interior street, an academic project at ENAU.",
   "place": "Tunis, Belvédère",
   "year": "2022",

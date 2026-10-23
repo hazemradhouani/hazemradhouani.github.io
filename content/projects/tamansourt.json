@@ -8,6 +8,7 @@
   ],
   "title": "Tamansourt Campus",
   "run": "Yassir Khalil Studio | Tamansourt",
+  "$omit": ["run", "tag", "spec:Type", "spec:Office"],
   "summary": "Hospital and wellness campus organised around a landscaped spine, at feasibility and schematic design level, Yassir Khalil Studio.",
   "place": "Tamansourt",
   "year": "2024",

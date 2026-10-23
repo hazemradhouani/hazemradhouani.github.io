@@ -9,6 +9,7 @@
   ],
   "title": "Bolivar",
   "run": "Studio BELEM | Paris 19th",
+  "$omit": ["run", "spec:Project type", "spec:Office"],
   "summary": "Heavy rehabilitation of a dense Paris block into a hotel and student residence, carried to the 2026 building permit at Studio BELEM.",
   "place": "Paris 19th",
   "year": "2026",

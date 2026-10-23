@@ -8,6 +8,7 @@
   ],
   "title": "Aïn Sebaâ Station",
   "run": "Yassir Khalil Studio | Casablanca",
+  "$omit": ["run", "spec:Location"],
   "summary": "Competition entry for a new two-headed train station in the Aïn Sebaâ industrial zone of Casablanca, linked by an urban footbridge.",
   "place": "Casablanca",
   "year": "2025",

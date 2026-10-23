@@ -9,6 +9,7 @@
   ],
   "title": "La Villette",
   "run": "Studio BELEM | Paris 19th",
+  "$omit": ["run", "spec:Project type", "spec:Phase", "spec:Office"],
   "summary": "PRO and DCE construction drawings for the rehabilitation of a block of three buildings in Paris 19th, including an ABF-listed building.",
   "place": "Paris 19th",
   "year": "2025-2026",

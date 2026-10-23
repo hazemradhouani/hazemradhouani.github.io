@@ -8,6 +8,7 @@
   ],
   "title": "Villa Papillon",
   "run": "Yassir Khalil Studio | Marrakech",
+  "$omit": ["run", "tag", "spec:Type", "spec:Office", "spec:Location"],
   "summary": "Contemporary villa in the Marrakech Palmeraie, developed in Revit at Yassir Khalil Studio.",
   "place": "Marrakech, Palmeraie",
   "year": "2024",

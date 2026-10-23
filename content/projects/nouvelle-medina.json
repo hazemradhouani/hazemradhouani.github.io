@@ -8,6 +8,7 @@
   ],
   "title": "Nouvelle Medina Station",
   "run": "Yassir Khalil Studio | Casablanca",
+  "$omit": ["run"],
   "summary": "Urban train station in Casablanca whose folded, origami-like roof structures the building and modulates daylight.",
   "place": "Casablanca",
   "year": "2025",
