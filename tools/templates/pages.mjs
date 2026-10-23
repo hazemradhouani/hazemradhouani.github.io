@@ -208,10 +208,11 @@ ${frame}
 <div class="ix-bar" hidden>
 <div class="ix-bar__group" role="group" aria-label="Show work by type"><button class="pill" type="button" data-family="all" aria-pressed="true">All</button>${FAMILIES.map((f) => html`<button class="pill" type="button" data-family="${f.id}" aria-pressed="false">${f.label}</button>`)}</div>
 <button class="pill ix-bar__filter" type="button" data-filter-open aria-expanded="false" aria-controls="ix-filter"><svg class="ix-bar__ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 7h9M17 7h3M4 17h3M11 17h9"/><circle cx="15" cy="7" r="2"/><circle cx="9" cy="17" r="2"/></svg><span class="ix-bar__t">Filter</span> <span class="pill__n" data-filter-n hidden></span></button>
-<div class="ix-filter" id="ix-filter" data-lenis-prevent hidden><div class="ix-filter__in">
+<div class="ix-filter" id="ix-filter" hidden><div class="ix-filter__in" data-lenis-prevent>
 ${facetRows(site, projects).map((r) => html`<div class="ix-filter__row" role="group" aria-labelledby="fl-${r.id}"><span class="ix-filter__h" id="fl-${r.id}">${r.label}</span><div class="ix-filter__opts">${r.opts.map((o) => html`<button class="pill" type="button" data-facet="${r.id}" data-value="${o.id}" aria-pressed="false">${o.label} <span class="pill__n"></span></button>`)}</div></div>`)}
+</div>
 <button class="pill ix-filter__clear" type="button" data-filter-clear>Clear all</button>
-</div></div>
+</div>
 <div class="ix-bar__group" role="group" aria-label="View">${VIEWS.map((v) => html`<button class="pill pill--icon" type="button" data-view-btn="${v.id}" aria-pressed="${v.id === 'grid' ? 'true' : 'false'}"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">${raw(v.svg)}</svg><span class="vh">${v.label}</span></button>`)}</div>
 </div>
 <p class="vh" role="status" data-ix-status></p>

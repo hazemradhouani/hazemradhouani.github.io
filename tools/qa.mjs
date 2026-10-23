@@ -572,12 +572,12 @@ async function runIndexPass() {
     if (t.root !== t.said || t.tiles !== t.said) fail(`root ${t.root}, heading ${t.said}, tiles ${t.tiles}`);
     if (t.fams.reduce((s, f) => s + f.n, 0) !== t.root) fail(`the families sum to ${t.fams.reduce((s, f) => s + f.n, 0)}, not the root's ${t.root}`);
     for (const f of t.fams) if (f.n !== f.leaves || f.n !== f.tiles) fail(`${f.id}: pill ${f.n}, leaves ${f.leaves}, tiles ${f.tiles}`);
-    // the hover: the leaf grows to 1.45, its caption tag shows, its connector darkens
+    // the hover: the leaf grows to 1.3, its caption tag shows, its connector darkens
     const leaf = page.locator('[data-branch="project"] .leaf').nth(4);
     await leaf.hover();
     const h = await leaf.evaluate((l) => ({ k: l.querySelector('.leaf__in').getBoundingClientRect().width / l.getBoundingClientRect().width,
       cap: getComputedStyle(l.querySelector('.leaf__cap')).visibility, hot: l.parentNode.querySelectorAll('path.is-hot').length }));
-    if (Math.abs(h.k - 1.45) > 0.02 || h.cap !== 'visible' || h.hot !== 1) fail(`a leaf under the pointer: scale ${h.k.toFixed(2)}, caption ${h.cap}, ${h.hot} connector(s) lit`);
+    if (Math.abs(h.k - 1.3) > 0.02 || h.cap !== 'visible' || h.hot !== 1) fail(`a leaf under the pointer: scale ${h.k.toFixed(2)}, caption ${h.cap}, ${h.hot} connector(s) lit`);
     await page.mouse.move(5, 450);
     // each branch: chosen by keyboard, written to the address, its leaves apart and inside the tree
     for (const f of t.fams) {
@@ -887,7 +887,7 @@ async function runIndexMotionPass() {
         const mid = await page.evaluate(() => +getComputedStyle(document.querySelector('[data-branch]:not([hidden]) .leaf.is-off')).opacity);
         await wait(700);
         const end = await page.evaluate(() => +getComputedStyle(document.querySelector('[data-branch]:not([hidden]) .leaf.is-off')).opacity);
-        if (!(mid > 0.15 && mid < 1) || Math.abs(end - 0.14) > 0.01) fail(`${at} the tree dims: ${mid} mid-way, ${end} at the end (not .14)`);
+        if (!(mid > 0.15 && mid < 1) || Math.abs(end - 0.2) > 0.01) fail(`${at} the tree dims: ${mid} mid-way, ${end} at the end (not .2)`);
         await press('[data-facet="place"][data-value="tunisia"]'); await wait(700);
         await page.keyboard.press('Escape'); await wait(500);
       }
@@ -905,7 +905,7 @@ async function runIndexMotionPass() {
 const ixMotionFailures = await runIndexMotionPass();
 gateFails += ixMotionFailures.length;
 if (ixMotionFailures.length) console.log(`FAIL index motion: ${ixMotionFailures.join(' | ')}`);
-else console.log('ok   index motion: the bar arrives without a shift; filter, interrupted filter, cleared, a family deep in the grid back to the head, three view presses, All, each settled exactly; the tree fans out and dims to .14; the panel turns mid-way and closes by Esc; at 1440 and 375; no console errors');
+else console.log('ok   index motion: the bar arrives without a shift; filter, interrupted filter, cleared, a family deep in the grid back to the head, three view presses, All, each settled exactly; the tree fans out and dims to .2; the panel turns mid-way and closes by Esc; at 1440 and 375; no console errors');
 // About (D113): the sheet. With motion at 1440 (scrollbars shown, so a shift of the header would show), About opens it
 // from three pages: the column comes in, its heading takes focus, the page behind is inert and stays still under the
 // wheel while the column scrolls, and the header does not move. X, Esc and a click on the veil each close it and
