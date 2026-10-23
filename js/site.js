@@ -765,6 +765,7 @@
         var show = [];
         ixT.forEach(function (it) { if (tileOn(it)) show.push(it.el); else it.el.hidden = true; });
         showTiles(show, still);
+        var pre = document.getElementById('ix-pre'); if (pre) pre.remove();   // the address's first pass (pages.mjs)
         ixL.forEach(function (it) { var off = !hit(it); it.el.classList.toggle('is-off', off); it.el.inert = off; if (it.path) it.path.classList.toggle('is-off', off); });
         ixR.forEach(function (it) { it.el.hidden = !hit(it); });
         ixBranches.forEach(function (b) { b.hidden = b !== want; });

@@ -269,7 +269,8 @@ export function heroPartner(x) {
 // the opening of a case study (D115): the hero, with its partner beside a portrait, in one frame at 16:9 (a panorama
 // keeps its own ratio up to 2.4:1, so it loses little). Each render covers its share of the frame, by its own ratio,
 // at the content's pos (data-crop); the frame is laid out near full-bleed and settles into its slot (site.css). `ar`
-// and `nw` (the largest the frame may be: a lone render never wider than its pixels) go on the opening
+// and `nw` (the largest the frame may be: a lone render never wider than its pixels) go on the opening. Both
+// pictures are on the first screen, and the partner of a portrait hero is the larger, so neither waits (LCP)
 export function opening(x, ctx) {
   const p = ctx.prefix;
   const partner = heroPartner(x);
@@ -278,7 +279,7 @@ export function opening(x, ctx) {
   const sum = r.reduce((a, b) => a + b, 0);
   const ar = partner ? 16 / 9 : Math.min(2.4, Math.max(16 / 9, r[0]));
   const sizes = r.map((rk) => `(min-width: 64rem) ${Math.ceil(94 * rk / sum)}vw, ${Math.ceil(92 * rk / sum)}vw`);
-  const frames = items.map((it, k) => html`<span class="op__f" data-crop style="--r: ${r[k].toFixed(4)}; --pos: ${it.pos || '50% 50%'}">${image(it.src, { alt: it.alt, sz: sizes[k], prefix: p, priority: k === 0, zoom: true, title: it.title, vt: it.vt })}</span>`);
+  const frames = items.map((it, k) => html`<span class="op__f" data-crop style="--r: ${r[k].toFixed(4)}; --pos: ${it.pos || '50% 50%'}">${image(it.src, { alt: it.alt, sz: sizes[k], prefix: p, priority: true, zoom: true, title: it.title, vt: it.vt })}</span>`);
   return { partner, ar, nw: partner ? null : dims(x.hero.src).w, lcpSizes: sizes[0], html: html`<div class="op__media">${frames}</div>` };
 }
 
