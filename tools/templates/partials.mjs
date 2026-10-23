@@ -269,7 +269,8 @@ export function heroPartner(x) {
 // the opening of a case study (D115): the hero, with its partner beside a portrait, in one frame at 16:9 (a panorama
 // keeps its own ratio up to 2.4:1, so it loses little). Each render covers its share of the frame, by its own ratio,
 // at the content's pos (data-crop); the frame is laid out near full-bleed and settles into its slot (site.css). `ar`
-// and `nw` (the largest the frame may be: a lone render never wider than its pixels) go on the opening
+// and `nw` (the largest the frame may be: a lone render never wider than its pixels) go on the opening. Both
+// pictures are on the first screen, and the partner of a portrait hero is the larger, so neither waits (LCP)
 export function opening(x, ctx) {
   const p = ctx.prefix;
   const partner = heroPartner(x);
@@ -278,7 +279,7 @@ export function opening(x, ctx) {
   const sum = r.reduce((a, b) => a + b, 0);
   const ar = partner ? 16 / 9 : Math.min(2.4, Math.max(16 / 9, r[0]));
   const sizes = r.map((rk) => `(min-width: 64rem) ${Math.ceil(94 * rk / sum)}vw, ${Math.ceil(92 * rk / sum)}vw`);
-  const frames = items.map((it, k) => html`<span class="op__f" data-crop style="--r: ${r[k].toFixed(4)}; --pos: ${it.pos || '50% 50%'}">${image(it.src, { alt: it.alt, sz: sizes[k], prefix: p, priority: k === 0, zoom: true, title: it.title, vt: it.vt })}</span>`);
+  const frames = items.map((it, k) => html`<span class="op__f" data-crop style="--r: ${r[k].toFixed(4)}; --pos: ${it.pos || '50% 50%'}">${image(it.src, { alt: it.alt, sz: sizes[k], prefix: p, priority: true, zoom: true, title: it.title, vt: it.vt })}</span>`);
   return { partner, ar, nw: partner ? null : dims(x.hero.src).w, lcpSizes: sizes[0], html: html`<div class="op__media">${frames}</div>` };
 }
 
@@ -341,7 +342,7 @@ export function aboutColumn(site, d, p, { page = false } = {}) {
   const pair = d.photos.japan.slice(1).map((ph) => { const { w, h } = dims(ph.src); return { ph, r: w / h }; });
   return html`<div class="about__col">
 ${when(page, () => html`<p class="print-only print-name">${P.name} | ${P.jobTitle}</p>
-<p class="print-only">${P.line} ${P.email} | ${P.linkedin.replace('https://www.', '')} | ${site.origin.replace('https://', '')}${site.base}</p>`)}
+<p class="print-only">${P.line} ${P.email} | ${site.origin.replace('https://', '')}${site.base}</p>`)}
 <header class="about__s">${H(1, 'about-h', P.name, page ? '' : ' tabindex="-1" autofocus')}<p>${d.bio}</p></header>
 <figure class="about__fig about__portrait">${image(d.portrait, { alt: d.portraitAlt, sz: PORTRAIT, prefix: p, priority: page })}</figure>
 <section class="about__s" aria-labelledby="about-edu-h">${H(2, 'about-edu-h', 'Education')}
@@ -361,6 +362,6 @@ ${rows(d.skills.map((s) => ({ k: html`<b>${s.group}</b>`, v: html`<p>${s.items.j
 <section class="about__s" aria-labelledby="about-lang-h">${H(2, 'about-lang-h', 'Languages')}
 ${rows(d.languages.map((l) => ({ k: html`<b>${l.name}</b>`, v: html`<p>${l.level}</p>` })))}</section>
 <section class="about__s about__contact"${page ? raw(' id="contact"') : ''} aria-labelledby="about-contact-h">${H(2, 'about-contact-h', 'Contact')}
-<p class="about__links">${mailChip(P.email, 'Email')}<a class="ctl" href="${P.linkedin}" target="_blank" rel="noopener">LinkedIn<span class="vh"> (opens in a new tab)</span></a><a class="ctl" href="${p}files/hazem-radhouani-cv.pdf">CV (PDF)</a></p></section>
+<p class="about__links">${mailChip(P.email, 'Email')}<a class="ctl" href="${p}files/hazem-radhouani-cv.pdf">CV (PDF)</a></p></section>
 </div>`;
 }

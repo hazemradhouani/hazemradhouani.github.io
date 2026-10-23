@@ -23,8 +23,7 @@
     ],
     "credential": "National Architecture Diploma, Highest Honours | ENAU 2026",
     "email": "radhouani.hazem@enau.ucar.tn",
-    "linkedin": "https://www.linkedin.com/in/hazem-radhouani-b36616319/",
-    "sources": { "line": "owner:2026-10-13", "knowsAbout": "owner:2026-10-13 + site", "credential": "site:about + answer:F01", "email": "owner:2026-10-22", "linkedin": "site + pdf2025:p48" }
+    "sources": { "line": "owner:2026-10-13", "knowsAbout": "owner:2026-10-13 + site", "credential": "site:about + answer:F01", "email": "owner:2026-10-22" }
   },
   "$nav": "D93: the reader's routes stand left of the name, the two views of the work right of it (dmcg's frame). D107: Contact is the email chip, a mailto: link to person.email without the script",
   "nav": [

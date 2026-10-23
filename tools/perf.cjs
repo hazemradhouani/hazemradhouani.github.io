@@ -2,7 +2,7 @@
 // Lab substitute (not Lighthouse): Chrome LCP/CLS observers, mobile 412x823, slow 4G (150 ms RTT, 1.6 Mbps down), 4x CPU. Median of 3.
 const { chromium } = require('playwright-core');
 const BASE = 'http://127.0.0.1:8090/';
-const pages = ['', 'architecture.html', 'projects/project-al-arg.html', 'projects/project-belhomme.html', 'projects/project-zenata.html', 'books.html', 'about.html', 'motion.html'];
+const pages = ['', 'architecture.html', 'architecture.html?place=france&view=grid', 'projects/project-al-arg.html', 'projects/project-belhomme.html', 'projects/project-zenata.html', 'books.html', 'about.html', 'motion.html'];
 (async () => {
   const b = await chromium.launch({ executablePath: process.env.CHROME_PATH || "C:/Program Files/Google/Chrome/Application/chrome.exe" });
   for (const pg of pages) {

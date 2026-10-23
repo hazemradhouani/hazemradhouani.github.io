@@ -31,7 +31,7 @@ if (digital.length && !site.nav.some((n) => n.id === 'digital')) site.nav.splice
 const abs = (rel) => site.origin + site.base + rel;
 const personLd = {
   '@context': 'https://schema.org', '@type': 'Person', '@id': abs('#person'), name: site.person.name, jobTitle: site.person.jobTitle,
-  description: site.person.line, url: abs(''), email: `mailto:${site.person.email}`, image: abs('images/about/portrait-sitting.jpg'), sameAs: [site.person.linkedin],
+  description: site.person.line, url: abs(''), email: `mailto:${site.person.email}`, image: abs('images/about/portrait-sitting.jpg'),
   alumniOf: { '@type': 'CollegeOrUniversity', name: 'École Nationale d’Architecture et d’Urbanisme de Tunis (ENAU), Université de Carthage' },
   knowsAbout: site.person.knowsAbout,
   knowsLanguage: ['ar', 'fr', 'en'],
@@ -76,11 +76,11 @@ write('videos.html', `<!DOCTYPE html>
 `);
 
 // sitemap, manifest, robots; the sitemap's name is the owner's (renamed on GitHub, D122)
+// no lastmod: the build date would claim every page changed at every build (P8 review, D140)
 const SITEMAP = 'sitemap-site.xml';
-const today = new Date().toISOString().slice(0, 10);
 write(SITEMAP, `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${out.filter((p) => !p.noindex).map((p) => `  <url><loc>${abs(p.path === 'index.html' ? '' : p.path)}</loc><lastmod>${today}</lastmod></url>`).join('\n')}
+${out.filter((p) => !p.noindex).map((p) => `  <url><loc>${abs(p.path === 'index.html' ? '' : p.path)}</loc></url>`).join('\n')}
 </urlset>
 `);
 write('site.webmanifest', JSON.stringify({ name: site.siteName, short_name: 'H. Radhouani', start_url: site.base, scope: site.base, display: 'browser',

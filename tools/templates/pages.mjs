@@ -3,14 +3,13 @@
 import { html, raw, attrs, when } from '../lib/html.mjs';
 import { dims, shown, preloadFor, picture } from '../lib/images.mjs';
 import { placeLeaves, connector, TREE } from '../lib/tree-layout.mjs';
-import { icon, image, row, figure, opening, heroCaption, sizesFor, spanFor, projectHref, vtTitle, CASE, capSide, words, chaptersOf, reelItem, reelSizes, aboutColumn, PORTRAIT } from './partials.mjs';
+import { icon, image, figure, opening, heroCaption, spanFor, projectHref, vtTitle, CASE, capSide, words, chaptersOf, reelItem, reelSizes, aboutColumn, PORTRAIT } from './partials.mjs';
 
 const q = (s) => `“${s}”`;
 // `of`: what a repeated label leads to, read after the visible words (WCAG 2.4.4, 2.5.3)
 const more = (href, label, p, { dir = 'right', ext = false, of = '' } = {}) => dir === 'left'
   ? html`<a class="more" href="${href}">${icon('arrow-left', p)}<span>${label}</span></a>`
   : html`<a class="more" href="${href}"${attrs({ target: ext ? '_blank' : null, rel: ext ? 'noopener' : null })}><span>${label}</span>${when(of, () => html`<span class="vh">: ${of}</span>`)}${icon(ext ? 'arrow-up-right' : 'arrow-right', p)}${when(ext, () => html`<span class="vh"> (opens in a new tab)</span>`)}</a>`;
-const lines = (...xs) => xs.filter(Boolean).map((x, i) => html`${i ? html`<br>` : ''}${x}`);
 const spec = (rows) => html`<dl class="spec in">${rows.map((s) => html`<dt>${s.label}</dt><dd${attrs({ lang: s.lang })}>${s.value}</dd>`)}</dl>`;
 
 /* ------------------------------------------------------------------ the catalog (D97, P5): every image and film of the work */
@@ -97,9 +96,9 @@ export function home(site, d, projects, ctx) {
 <ol class="reel" role="list">${items}</ol>
 </section>
 <nav class="tree-root" aria-label="The index of the work">
-<a class="pill pill--root" href="${p}architecture.html">Index <span class="pill__n">${cat.length}</span></a>
+<a class="pill pill--root" href="${p}architecture.html">Index <span class="pill__n">${cat.length}<span class="vh"> works</span></span></a>
 <svg class="tree-root__lines" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true" focusable="false">${raw(lines)}</svg>
-<ul class="tree-root__fam" role="list">${FAMILIES.map((fam) => html`<li${when(fam.id === 'project', () => raw(' class="tree-root__on"'))}><a class="pill" href="${p}architecture.html?family=${fam.id}">${fam.label} <span class="pill__n">${count(fam.id)}</span></a></li>`)}</ul>
+<ul class="tree-root__fam" role="list" aria-label="Kinds of work">${FAMILIES.map((fam) => html`<li${when(fam.id === 'project', () => raw(' class="tree-root__on"'))}><a class="pill" href="${p}architecture.html?family=${fam.id}">${fam.label} <span class="pill__n">${count(fam.id)}</span></a></li>`)}</ul>
 <svg class="tree-root__lines tree-root__lines--place" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true" focusable="false">${raw(placeLines)}</svg>
 <ul class="tree-root__fam tree-root__places" role="list" aria-label="Projects by place">${site.places.map((l) => html`<li>${intoIndex(site, projects, 'place', idOf(l), l, p)}</li>`)}</ul>
 </nav>`;
@@ -188,7 +187,21 @@ ${frame}
 
   const rows = projects.map((x, i) => html`<tr${fa(x)}><td>${pad(i + 1)}</td><th scope="row"><a class="ctl" href="${projectHref(x, p)}" data-label="${x.title}">${x.title}</a></th><td>${x.place}</td><td>${x.year}</td><td>${x.descriptor.split(' | ')[0]}</td><td>${x.office || 'ENAU, academic'}</td><td>${cat.filter((e) => e.project === x).length}</td></tr>`);
 
-  const body = html`
+  // the address's choices hide the grid's other tiles before the first layout, so their lazy images are never fetched
+  // ahead of the ones shown (LCP); site.js removes the style once it has applied the same choices
+  // With one choice, the first tile it shows is preloaded too: it sits deep in the page, past what a phone reaches first
+  const tiles = cat.map(tile), lead = {};
+  for (const t of tiles.map(String)) {
+    const src = t.match(/<source type="image\/avif" srcset="([^"]+)" sizes="([^"]+)"/);
+    if (!src) continue;
+    const keys = [`fam=${t.match(/data-fam="([^"]+)"/)[1]}`];
+    for (const [, k, v] of t.matchAll(/data-(place|type|scale|year|practice)="([^"]+)"/g)) for (const w of v.split(' ')) keys.push(`${k}=${w}`);
+    for (const k of keys) lead[k] ??= [src[1], src[2]];
+  }
+  const pre = `<script>(function(){var L=${JSON.stringify(lead)},q=new URLSearchParams(location.search),c=[],one;['place','type','scale','year','practice'].forEach(function(k){var v=q.get(k);if(v&&/^[a-z0-9-]+$/.test(v)){c.push('.tile:not([data-'+k+'~="'+v+'"])');one=k+'='+v;}});var f=q.get('family');if(f&&f!=='all'&&/^[a-z]+$/.test(f)){c.push('.tile:not([data-fam="'+f+'"])');one='fam='+f;}if(!c.length)return;var s=document.createElement('style');s.id='ix-pre';window.ixPre=c.join(',');s.textContent=window.ixPre+'{display:none}';document.head.appendChild(s);var p=c.length===1&&L[one];if(p){var l=document.createElement('link');l.rel='preload';l.as='image';l.type='image/avif';l.setAttribute('imagesrcset',p[0]);l.setAttribute('imagesizes',p[1]);l.fetchPriority='high';document.head.appendChild(l);}}());</script>`;
+  // and the first row it shows (two tiles on a phone) loads at once, ahead of the rest
+  const promote = `<script>(function(){var c=window.ixPre;if(!c)return;[].slice.call(document.querySelectorAll('.tile')).filter(function(t){return !t.matches(c);}).slice(0,2).forEach(function(t){var i=t.querySelector('img');if(i){i.loading='eager';i.fetchPriority='high';}});}());</script>`;
+  const body = html`${raw(pre)}
 <header class="ix-head"><h1 class="col__h" id="ix-h">Index <span class="col__count">${cat.length}</span></h1>
 <p class="ix-lead">Every drawing, render and film of the ${projects.length} projects, A to Z.</p></header>
 <p class="ix-result" data-ix-result hidden><span data-ix-result-t></span> <button class="pill" type="button" data-filter-clear>Clear</button></p>
@@ -203,7 +216,7 @@ ${facetRows(site, projects).map((r) => html`<div class="ix-filter__row" role="gr
 </div>
 <p class="vh" role="status" data-ix-status></p>
 <nav class="az" aria-label="Projects A to Z" data-view-only="grid"><ul role="list">${[...firstOf.keys()].map((l) => html`<li><a href="#az-${l}">${l}</a></li>`)}</ul></nav>
-<section class="ix-view ix-grid" data-view="grid" aria-labelledby="ix-h"><ol class="tiles" role="list">${cat.map(tile)}</ol></section>
+<section class="ix-view ix-grid" data-view="grid" aria-labelledby="ix-h"><ol class="tiles" role="list">${tiles}</ol></section>${raw(promote)}
 <section class="ix-view ix-tree" data-view="tree" aria-label="The index as a tree" hidden>
 <div class="tree">
 <span class="pill tree__root" style="left: 0; top: ${cq(TRUNK.root.y)}">Index <span class="pill__n">${cat.length}</span></span>
@@ -406,7 +419,7 @@ export function motion(site, d, projects, ctx) {
 <h2 class="title" id="${f.id}-h">${f.title}</h2><p class="label">${f.label}</p><p class="meta" id="${f.id}-desc">${f.text}</p>${when(f.project && by[f.project], () => html`<p>${more(projectHref(by[f.project], p), 'The project', p, { of: f.title })}</p>`)}</li>`;
   const body = html`
 <header class="intro wrap g"><div class="s-text center"><h1 class="h1">${words('Films and motion')}</h1><p class="lead in">${d.intro}</p><p class="meta in">${d.filmsIntro}</p></div></header>
-<div class="block wrap"><ul class="fgrid" role="list" data-rv>${[...d.films, ...d.reels].map(card)}</ul></div>
+<div class="block wrap"><ul class="fgrid" id="films" role="list" data-rv>${[...d.films, ...d.reels].map(card)}</ul></div>
 <section class="chapter wrap g" aria-labelledby="mabout-h">
 <div class="s-text center"><h2 class="h1" id="mabout-h">${d.aboutTitle}</h2></div>
 <div class="s-narrow block"><div class="prose">${d.about.map((t) => html`<p>${t}</p>`)}</div></div>

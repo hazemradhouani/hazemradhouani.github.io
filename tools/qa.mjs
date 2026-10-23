@@ -152,10 +152,13 @@ async function runThemeInteractions() {
         const b = document.querySelector('[data-theme-scope="header"]'); let vts = 0;
         const orig = document.startViewTransition.bind(document); document.startViewTransition = (f) => { vts++; return orig(f); };
         let k = 0;
-        const next = () => { b.click(); if (++k < clicks) setTimeout(next, k === 1 ? 450 : 150); else setTimeout(() => {
+        // the circle starts at the transition's ready, which over HTTP can come later than 100ms: look for up to 600ms
+        const look = (t0) => {
           const a = document.getAnimations().find((x) => x.effect && x.effect.pseudoElement === '::view-transition-new(root)' && x.playState === 'running');
+          if (!a && performance.now() - t0 < 600) { requestAnimationFrame(() => look(t0)); return; }
           document.startViewTransition = orig; res({ vts, rate: a ? a.playbackRate : 0, vt: document.documentElement.classList.contains('theme-vt') });
-        }, 100); };
+        };
+        const next = () => { b.click(); if (++k < clicks) setTimeout(next, k === 1 ? 450 : 150); else setTimeout(() => look(performance.now()), 100); };
         next();
       }), clicks);
       if (!mid.vt || mid.vts !== 1 || mid.rate !== (clicks % 2 ? 1 : -1)) failures.push(`motion, ${clicks} click(s): ${mid.vts} transition(s), circle rate ${mid.rate}, theme-vt ${mid.vt}`);
@@ -633,8 +636,8 @@ async function runFilterPass() {
   if (!url) return failures;
   const fail = (s) => failures.push(s);
   const errors = [];
-  const open = async (w, q = '', h = w < 768 ? 812 : 900) => {
-    const ctx = await browser.newContext({ viewport: { width: w, height: h }, deviceScaleFactor: 1, colorScheme: 'light', reducedMotion: 'reduce' });
+  const open = async (w, q = '', h = w < 768 ? 812 : 900, colorScheme = 'light') => {
+    const ctx = await browser.newContext({ viewport: { width: w, height: h }, deviceScaleFactor: 1, colorScheme, reducedMotion: 'reduce' });
     const page = await ctx.newPage();
     page.on('pageerror', (e) => errors.push(e.message)); page.on('console', (m) => { if (m.type() === 'error') errors.push(m.text()); });
     await page.goto(url + q, { waitUntil: 'load' }); return { ctx, page };
@@ -738,17 +741,22 @@ async function runFilterPass() {
       if (b.chosen !== a.chosen || b.shown !== a.shown) fail(`Back from a project: ${b.chosen || 'nothing chosen'}, ${b.shown} shown (was ${a.shown})`);
       await ctx.close();
     }
-    for (const [w, h] of [[320, 640], [375, 812]]) {
-      const { ctx, page } = await open(w, '', h);
+    // every width in both schemes, with a choice out of reach on show: on screen, targets, instant, axe (contrast included)
+    for (const w of WIDTHS) for (const scheme of ['light', 'dark']) {
+      const at = `${w} ${scheme}`;
+      const { ctx, page } = await open(w, '?place=france&type=residential', w === 320 ? 640 : undefined, scheme);
       await page.locator('[data-filter-open]').click();
       const m = await page.evaluate(() => {
         const p = document.getElementById('ix-filter').getBoundingClientRect();
         const small = [...document.querySelectorAll('#ix-filter button')].filter((b) => { const r = b.getBoundingClientRect(); return r.width < 24 || r.height < 24; }).length;
         return { sw: document.documentElement.scrollWidth, vw: innerWidth, vh: innerHeight, p: [p.left, p.right, p.top, p.bottom].map(Math.round), small, op: getComputedStyle(document.getElementById('ix-filter')).opacity };
       });
-      if (m.sw > m.vw || m.p[0] < 0 || m.p[1] > m.vw || m.p[2] < 0 || m.p[3] > m.vh) fail(`${w}: page ${m.sw} wide, panel at ${m.p}`);
-      if (m.small) fail(`${w}: ${m.small} choice(s) under 24px`);
-      if (m.op !== '1') fail(`${w}, reduced motion: the panel shows at opacity ${m.op}, not at once`);
+      if (m.sw > m.vw || m.p[0] < 0 || m.p[1] > m.vw || m.p[2] < 0 || m.p[3] > m.vh) fail(`${at}: page ${m.sw} wide, panel at ${m.p}`);
+      if (m.small) fail(`${at}: ${m.small} choice(s) under 24px`);
+      if (m.op !== '1') fail(`${at}, reduced motion: the panel shows at opacity ${m.op}, not at once`);
+      await page.addScriptTag({ content: axeSrc });
+      const ax = await page.evaluate(async () => (await window.axe.run(document, { runOnly: ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa'] })).violations.map((v) => `${v.id} x${v.nodes.length}: ${v.nodes[0].target.join(' ')}`));
+      if (ax.length) fail(`${at}, axe with the panel open: ${ax.join(' ; ')}`);
       await ctx.close();
     }
   } catch (e) { fail(e.message); }
@@ -758,7 +766,7 @@ async function runFilterPass() {
 const filterFailures = await runFilterPass();
 gateFails += filterFailures.length;
 if (filterFailures.length) console.log(`FAIL filters: ${filterFailures.join(' | ')}`);
-else console.log('ok   filters: every choice counts and shows exactly its tiles, address and result line, cleared by a second press; two combine; out of reach not acted on, 4.5:1; Clear all; outside click; keyboard (Tab, Space, Esc to the pill); tree dims in place with family counts; list rows; address and Back restore; axe open; 320/375 on screen, targets ≥ 24px, instant; no console errors');
+else console.log('ok   filters: every choice counts and shows exactly its tiles, address and result line, cleared by a second press; two combine; out of reach not acted on, 4.5:1; Clear all; outside click; keyboard (Tab, Space, Esc to the pill); tree dims in place with family counts; list rows; address and Back restore; axe open; 6 widths × 2 schemes on screen, targets ≥ 24px, instant, axe; no console errors');
 // The ways into the Index (D129): the home's places and each case study's place, types and years. Every one opens the
 // Index on the projects with one facet set, and its count is the number of projects whose built values hold it; a case
 // study's are exactly its own project's values, in that order. One, followed, opens the Index with that choice pressed

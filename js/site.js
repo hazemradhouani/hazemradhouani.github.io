@@ -336,8 +336,10 @@
       var t = e.target.closest && e.target.closest('[data-label]');
       if (t) { pillName.textContent = t.getAttribute('data-label'); pillCat.textContent = t.getAttribute('data-cat') || ''; }
       pill.classList.toggle('is-on', !!t);
+      if (t) pillW = pill.offsetWidth;   // read once per label, never per move
     });
-    document.addEventListener('pointermove', function (e) { pill.style.translate = (e.clientX + 16) + 'px ' + (e.clientY + 18) + 'px'; }, { passive: true });
+    var pillW = 0;   // near the right edge the label stops short of it instead of running off the screen
+    document.addEventListener('pointermove', function (e) { pill.style.translate = Math.min(e.clientX + 16, innerWidth - pillW - 8) + 'px ' + (e.clientY + 18) + 'px'; }, { passive: true });
     root.addEventListener('pointerleave', function () { pill.classList.remove('is-on'); });
   }
 
@@ -362,6 +364,14 @@
       if (!preview) return;
       preview = false; v.dataset.on = '1'; v.controls = true; v.muted = false; v.currentTime = 0;
       v.play().catch(function () {});
+    });
+  });
+  // a film the reader plays (with sound: the hover preview is always muted) counts once per visit (D141)
+  slice(document.querySelectorAll('video[controls]')).forEach(function (v) {
+    v.addEventListener('play', function () {
+      if (v.muted || v.dataset.counted || !window.gtag) return;
+      v.dataset.counted = '1';
+      window.gtag('event', 'video_start', { video_title: v.closest('.fcard') ? v.closest('.fcard').querySelector('.title').textContent : document.title, video_url: v.currentSrc });
     });
   });
 
@@ -765,6 +775,7 @@
         var show = [];
         ixT.forEach(function (it) { if (tileOn(it)) show.push(it.el); else it.el.hidden = true; });
         showTiles(show, still);
+        var pre = document.getElementById('ix-pre'); if (pre) pre.remove();   // the address's first pass (pages.mjs)
         ixL.forEach(function (it) { var off = !hit(it); it.el.classList.toggle('is-off', off); it.el.inert = off; if (it.path) it.path.classList.toggle('is-off', off); });
         ixR.forEach(function (it) { it.el.hidden = !hit(it); });
         ixBranches.forEach(function (b) { b.hidden = b !== want; });
@@ -810,7 +821,7 @@
       ixResult.firstElementChild.textContent = chosen.concat(held + ' of ' + pool.length).join(' · ');
       slice(document.querySelectorAll('.ix-filter__clear')).forEach(function (b) { if (chosen.length) b.removeAttribute('aria-disabled'); else b.setAttribute('aria-disabled', 'true'); });
       var listN = document.querySelector('[data-list-n]'); if (listN) listN.textContent = chosen.length ? rowsOn + ' of ' + ixR.length : ixR.length;
-      if (!first && ixStatus) ixStatus.textContent = (view === 'list' ? rowsOn + ' projects, list view' : shown.length + ' images, ' + (ixState.family === 'all' ? 'all kinds' : ixState.family + 's') + ', ' + view + ' view')
+      if (!first && ixStatus) ixStatus.textContent = (view === 'list' ? rowsOn + ' projects, list view' : held + ' images, ' + (ixState.family === 'all' ? 'all kinds' : ixState.family + 's') + ', ' + view + ' view')
         + (chosen.length ? ', filtered by ' + chosen.join(', ') : '');
       slice(document.querySelectorAll('button[data-family]')).forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-family') === ixState.family)); });
       var fam = ixBar.querySelector('[data-family][aria-pressed="true"]');   // a phone's families scroll: keep the chosen one in sight
@@ -840,6 +851,8 @@
       if (b.hasAttribute('data-view-btn')) ixState.view = b.getAttribute('data-view-btn'); else ixState.family = b.getAttribute('data-family');
       ixApply(false);
     });
+    // focus leaving the bar closes the panel, so it never stands over the tile the keyboard reached (WCAG 2.4.11)
+    ixBar.addEventListener('focusout', function (e) { if (panelOn && e.relatedTarget && !ixBar.contains(e.relatedTarget)) panelSet(false); });
     if (ixWide.addEventListener) ixWide.addEventListener('change', function () { ixApply(true); });
     ixBar.hidden = false;
     ixApply(true);
@@ -927,6 +940,8 @@
       vToggle.hidden = fit(it).s >= 1;
       var proj = it.a.getAttribute('data-href');   // the index's tiles open their project from the viewer (A6)
       if (vProject) { vProject.hidden = !proj; if (proj) vProject.href = proj; }
+      // every image shown full size counts as viewed (D141); gtag queues until GA has loaded, and is absent on opt-out
+      if (window.gtag) window.gtag('event', 'view_image', { image_title: it.title, image_url: new URL(it.full, document.baseURI).pathname });
     };
     var animate = function (el, from, to, dur) {
       el.style.transform = tf(to);
@@ -994,7 +1009,7 @@
       if (!a || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
       e.preventDefault();
       // the gallery is what the reader can see: a filtered index leaves its hidden tiles out (A6)
-      links = slice(document.querySelectorAll('[data-viewer]')).filter(function (x) { return x.getClientRects().length > 0; });
+      links = slice(document.querySelectorAll('[data-viewer]')).filter(function (x) { return x.getClientRects().length > 0 && !x.closest('[inert]'); });
       open(links.indexOf(a));
     });
     vClose.addEventListener('click', function (e) { e.preventDefault(); closeViewer(); });
@@ -1053,5 +1068,7 @@
     };
     var idle = function () { if ('requestIdleCallback' in window) window.requestIdleCallback(loadGa, { timeout: 4000 }); else setTimeout(loadGa, 2000); };
     if (document.readyState === 'complete') idle(); else window.addEventListener('load', idle, { once: true });
+    // Back and Forward restore a page from the browser's cache without loading it: GA would not see that visit (D141)
+    window.addEventListener('pageshow', function (e) { if (e.persisted) window.gtag('event', 'page_view'); });
   }
 })();
