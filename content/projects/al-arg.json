@@ -8,6 +8,7 @@
   ],
   "title": "Al-Arg",
   "run": "Architecture thesis",
+  "$omit": ["run", "tag", "spec:Project type", "spec:School"],
   "summary": "Heritage conservation and rehabilitation of an abandoned raw-earth village in the Tunisian Jérid. Architecture thesis, ENAU, Highest Honours.",
   "place": "Hammat Djérid, Tunisia",
   "year": "2023-2024",

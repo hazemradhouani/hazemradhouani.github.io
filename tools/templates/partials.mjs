@@ -1,7 +1,7 @@
 // Shared building blocks for every page ("Field", docs/flagship/08-direction.md).
 // Every image is placed at build time on the largest centred span that neither enlarges it nor makes it
 // taller than MAX_H at the 1280px canvas, so its edges fall on grid lines and nothing is cropped (D32).
-import { html, raw, inline, when } from '../lib/html.mjs';
+import { html, raw, esc, inline, when } from '../lib/html.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -17,6 +17,11 @@ const cutOrFail = (src) => { const rel = shown(src, true); if (rel === src && !E
 export const words = (text) => html`${String(text).split(/\s+/u).filter(Boolean).map((w, i) => html`${i ? ' ' : ''}<span class="w"><span class="w__i" style="--w: ${i}">${w}</span></span>`)}`;
 
 export const icon = (name, p) => raw(`<svg class="icon" width="16" height="16" aria-hidden="true" focusable="false"><use href="${p}images/icons.svg#${name}"></use></svg>`);
+
+// the email chip (D107): without the script "Contact" is a mailto: link; site.js makes it open a chip whose button
+// copies the address. Id-free, so the header, the menu and the footer each hold one (site.js gives the ids)
+const CHECK = raw('<svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5l3.2 3.1L13 4.6" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>');
+export const mailChip = (email, label = 'Contact') => html`<span class="mail"><a class="ctl mail__a" href="mailto:${email}">${label}</a><span class="mail__chip" hidden><button class="mail__b" type="button"><span class="mail__e">${email}</span><span class="mail__c" data-mail-copy>Copy</span><span class="mail__c" data-mail-done hidden>Copied${CHECK}</span></button></span><span class="vh" role="status" data-mail-status></span></span>`;
 
 /* ---------------------------------------------------------- geometry, mirrored from css/site.css */
 const CANVAS = 1280, GUT = 32, COLW = (CANVAS - 11 * GUT) / 12;
@@ -80,7 +85,8 @@ export function row(items, { prefix, max = 'full', zoom = false, after = () => '
     const r = it.w / it.h, frac = free * r / sum;
     const sz = sizesFor(span, frac, stack ? 1 : frac); sizes.push(sz);
     const pic = image(it.rel, { alt: it.alt, sz, prefix, priority: it.priority, zoom, title: it.title, vt: it.vt });
-    return html`<div class="cell" style="--r: ${(r * 100).toFixed(2)}">${it.href ? html`<a class="card" href="${it.href}">${pic}${it.label || ''}</a>` : pic}${after(it, k)}</div>`;
+    // --c: the cell's place from the row's centre, in cells (a figure assembles from it, D115)
+    return html`<div class="cell" style="--r: ${(r * 100).toFixed(2)}; --c: ${k - (items.length - 1) / 2}">${it.href ? html`<a class="card" href="${it.href}">${pic}${it.label || ''}</a>` : pic}${after(it, k)}</div>`;
   });
   return { span, sizes, html: html`<div class="row${stack ? ' row--stack' : ''}">${out}</div>` };
 }
@@ -96,7 +102,8 @@ export function cells(items, { prefix, zoom = true, after = null, cls = '', scal
   const out = items.map((it, i) => {
     const f = scale ? dims(it.rel).w / maxW : 1;   // one scale across a series: each drawing as wide as its pixels say
     const pic = image(it.rel, { alt: it.alt, sz: sizesFor('full', f / n, f, f / n8), prefix, zoom, title: it.title });
-    return html`<div class="cell"${scale ? html` style="--sc: ${(f * 100).toFixed(2)}%"` : ''}>${pic}${after ? after(it, i) : ''}</div>`;
+    // --c: its place from the centre of its line on the 12 columns (n to a line)
+    return html`<div class="cell" style="--c: ${i % n - (n - 1) / 2}${scale ? `; --sc: ${(f * 100).toFixed(2)}%` : ''}">${pic}${after ? after(it, i) : ''}</div>`;
   });
   return html`<div class="s-full cells${after ? ' cells--2' : ''}${scale ? ' cells--scale' : ''}${cls ? ' ' + cls : ''}" style="--n: ${n}; --n8: ${n8}; --n4: 1"${rv ? html` data-rv` : ''}>${out}</div>`;
 }
@@ -194,14 +201,17 @@ const SIDE_MAX = 240;
 export const capSide = (span, text) => span !== 'full' && !!text && text.length <= SIDE_MAX;
 export const capOf = (f, span, side) => (f.title || f.caption || f.credit)
   ? html`<figcaption class="cap s-${span}${side ? ' cap--side' : ''}">${when(f.title, () => html`<span class="cap__t">${f.title}</span>`)}${when(f.caption || f.credit, () => html` <span class="cap__x">${inline(f.caption || '')}${when(f.credit, () => html` <span class="credit">${f.credit}.</span>`)}</span>`)}</figcaption>` : '';
-const plate = (f, n, span, body, { rv = true, key = '' } = {}) => {
+// a plate comes into focus, rises and assembles as it enters the screen, its words after it (D115: site.css, --e)
+const plate = (f, n, span, body, { key = '' } = {}) => {
   const side = capSide(span, `${f.title || ''}${f.caption || ''}`);
-  return html`<figure class="fig block wrap g${side ? ' fig--dock' : ''}" id="fig-${n}" data-fx="centre"${rv ? html` data-rv` : ''}>${body}${key}${capOf(f, span, side)}</figure>`;
+  return html`<figure class="fig block wrap g${side ? ' fig--dock' : ''}" id="fig-${n}" data-fx="enter">${body}${key}${capOf(f, span, side)}</figure>`;
 };
 
 export function figure(f, n, ctx) {
   const p = ctx.prefix; const ladder = ctx.ladder;
   const drawing = f.kind === 'drawing';
+  // a render may declare a crop { ratio, pos } where its frame helps the page's rhythm; a drawing never (D112, D115)
+  if (f.crop && (drawing || f.items)) throw new Error(`"${f.title}": a crop is for a single render, never a drawing or a series (D115)`);
   if (f.items) {
     const items = f.items.map((it, k) => ({ rel: drawing ? cutOrFail(it.src) : it.src, alt: it.alt, drawing, title: `${f.title} (${k + 1} of ${f.items.length})` }));
     if (drawing) return plate(f, n, 'full', cells(items, { prefix: p, scale: true, rv: false }), { key: keyOf(f) });
@@ -210,9 +220,12 @@ export function figure(f, n, ctx) {
   }
   const rel = drawing ? cutOrFail(f.src) : f.src;
   const { w, h } = dims(rel);
+  // the frame of a crop at most as large as the render covers at its own size, so it is never enlarged
+  const cw = f.crop ? Math.min(w, h * f.crop.ratio) : w;
   // a tall drawing may allow a little more height (at most 820px) where its legibility needs a wider span
-  const span = spanFor(w, h, { ladder, ...(f.maxH ? { maxH: Math.min(820, f.maxH) } : {}) });
-  const pic = image(rel, { alt: f.alt, sz: sizesFor(span), prefix: p, zoom: true, title: f.title });
+  const span = spanFor(cw, f.crop ? cw / f.crop.ratio : h, { ladder, ...(f.maxH ? { maxH: Math.min(820, f.maxH) } : {}) });
+  const img = image(rel, { alt: f.alt, sz: sizesFor(span), prefix: p, zoom: true, title: f.title });
+  const pic = f.crop ? html`<span class="crop" data-crop style="--ar: ${f.crop.ratio}; --pos: ${f.crop.pos || '50% 50%'}">${img}</span>` : img;
   const labels = drawing ? labelsFor(rel, f.labels) : [];
   return plate(f, n, span, html`<div class="s-${span} fig__plate">${labels.length ? labelled(pic, rel, labels, f.title) : pic}</div>`, { key: keyOf(f) });
 }
@@ -250,21 +263,49 @@ export function heroPartner(x) {
   return x.figures.find((f) => f.kind === 'render' && f.src && f.src !== x.hero.src) || null;
 }
 
-// the hero of a project: one plate, or a justified pair with its partner (no crop, never enlarged)
-export function hero(x, ctx, { priority = false, max = 'full', zoom = false, vt = true } = {}) {
-  const p = ctx.prefix; const ladder = ctx.ladder;
+// the opening of a case study (D115): the hero, with its partner beside a portrait, in one frame at 16:9 (a panorama
+// keeps its own ratio up to 2.4:1, so it loses little). Each render covers its share of the frame, by its own ratio,
+// at the content's pos (data-crop); the frame is laid out near full-bleed and settles into its slot (site.css). `ar`
+// and `nw` (the largest the frame may be: a lone render never wider than its pixels) go on the opening
+export function opening(x, ctx) {
+  const p = ctx.prefix;
   const partner = heroPartner(x);
-  if (partner) {
-    const items = [
-      { rel: x.hero.src, alt: x.hero.alt, title: x.title, vt: vt ? vtHero(x) : null, priority },
-      { rel: partner.src, alt: partner.alt, title: partner.title || x.title }];
-    const r = row(items, { prefix: p, max, zoom, ladder });
-    return { span: r.span, html: r.html, partner, lcpSizes: r.sizes[0] };
-  }
-  const { w, h } = dims(x.hero.src);
-  const span = spanFor(w, h, { max, ladder });
-  const sz = sizesFor(span);
-  return { span, html: image(x.hero.src, { alt: x.hero.alt, sz, prefix: p, priority, zoom, title: x.title, vt: vt ? vtHero(x) : null }), partner: null, lcpSizes: sz };
+  const items = [{ src: x.hero.src, alt: x.hero.alt, pos: x.hero.pos, title: x.title, vt: vtHero(x) }, ...(partner ? [{ src: partner.src, alt: partner.alt, title: partner.title || x.title }] : [])];
+  const r = items.map((it) => { const d = dims(it.src); return d.w / d.h; });
+  const sum = r.reduce((a, b) => a + b, 0);
+  const ar = partner ? 16 / 9 : Math.min(2.4, Math.max(16 / 9, r[0]));
+  const sizes = r.map((rk) => `(min-width: 64rem) ${Math.ceil(94 * rk / sum)}vw, ${Math.ceil(92 * rk / sum)}vw`);
+  const frames = items.map((it, k) => html`<span class="op__f" data-crop style="--r: ${r[k].toFixed(4)}; --pos: ${it.pos || '50% 50%'}">${image(it.src, { alt: it.alt, sz: sizes[k], prefix: p, priority: k === 0, zoom: true, title: it.title, vt: it.vt })}</span>`);
+  return { partner, ar, nw: partner ? null : dims(x.hero.src).w, lcpSizes: sizes[0], html: html`<div class="op__media">${frames}</div>` };
+}
+
+/* ---------------------------------------------------------- a project as one composition (D104, D105, D120) */
+// One stage, one scale system: the main render, a second view and a key drawing, placed by their layout in
+// site.css. Renders are cropped to their frame (data-crop) at the content's pos; a drawing stands whole on its
+// sheet, sized by its ratio (--r). The pictures are decorative here: the caption names the link.
+// `sizes` allow for the main card's 1.28 entry scale; a phone never shows (so never fetches) the drawing.
+const LAYOUTS = ['trio', 'trio-m', 'duo-p', 'film', 'duo'];
+const SZ = { main: '(min-width: 64rem) 41vw, (min-width: 48rem) 65vw, 100vw', 'main-p': '(min-width: 64rem) 30vw, (min-width: 48rem) 46vw, 82vw',
+  side: '(min-width: 64rem) 21vw, (min-width: 48rem) 33vw, 48vw', drawing: '(min-width: 64rem) 20vw, (min-width: 48rem) 32vw, 1px' };
+export const reelSizes = (layout) => SZ[layout === 'duo-p' ? 'main-p' : 'main'];
+export function reelItem(x, c, { prefix: p, priority = false }) {
+  if (!LAYOUTS.includes(c.layout)) throw new Error(`${x.slug}: layout "${c.layout}" is not one of ${LAYOUTS.join(', ')} (D104)`);
+  const layer = (l) => {
+    if (l.role === 'film') return html`<span class="reel__l reel__l--main reel__film">${picture(l.poster, { alt: '', sizes: SZ.main, prefix: p })}<video class="reel__v" data-scrub data-src="${p}${l.desktop}" data-src-small="${p}${l.mobile}" muted playsinline preload="none" aria-hidden="true" tabindex="-1"></video></span>`;
+    if (l.role === 'drawing') {
+      if (!l.src.startsWith('images/cut/')) throw new Error(`${x.slug}: drawing ${l.src} is not a cutout in images/cut/ (A8)`);
+      const { w, h } = dims(l.src);
+      return html`<span class="reel__l reel__l--drawing" style="--r: ${(w / h).toFixed(4)}">${image(l.src, { alt: '', sz: SZ.drawing, prefix: p })}</span>`;
+    }
+    return html`<span class="reel__l reel__l--${l.role}" data-crop style="--pos: ${l.pos || '50% 50%'}">${picture(l.src, { alt: '', sizes: l.role === 'main' ? reelSizes(c.layout) : SZ.side, prefix: p, priority: priority && l.role === 'main' })}</span>`;
+  };
+  const cat = x.descriptor.split(' | ')[0];
+  return html`<li class="reel__it reel__it--${c.layout}" data-fx="centre">
+<a class="reel__a" href="${projectHref(x, p)}" data-label="${x.title}" data-cat="${cat}">
+<span class="reel__stage">${c.layers.map(layer)}</span>
+<span class="reel__cap"><span class="reel__t">${x.title}</span> <span class="reel__m">${cat} · ${x.place} · ${x.year}</span></span>
+</a>
+</li>`;
 }
 
 // render credits of what the hero shows, once each
@@ -276,11 +317,47 @@ export const heroCaption = (x) => {
   return parts.length || credit ? html`${inline(parts.join(' '))}${when(credit, () => html`${parts.length ? ' ' : ''}<span class="credit">${credit}</span>`)}` : '';
 };
 
-/* ---------------------------------------------------------- a word that gathers (D99, A12) */
-// The word is read once, from hidden text; its letters are drawn apart by a fixed seed (mulberry32 of the word), so
-// the page is the same on every visit, and CSS brings them together as the reader scrolls (--q from 1 to 0).
-export const scatter = (word) => {
-  let a = [...word].reduce((h, c) => Math.imul(h ^ c.charCodeAt(0), 2654435761) >>> 0, 1779033703);
-  const rnd = () => { a = (a + 0x6D2B79F5) | 0; let t = Math.imul(a ^ (a >>> 15), 1 | a); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
-  return html`<span class="sc"><span class="vh">${word}</span>${[...word].map((c) => html`<span class="sc__l" aria-hidden="true" style="--x: ${((rnd() - 0.5) * 16).toFixed(2)}; --y: ${((rnd() - 0.5) * 10).toFixed(2)}; --r: ${((rnd() - 0.5) * 60).toFixed(1)}">${c}</span>`)}</span>`;
-};
+/* ---------------------------------------------------------- the about column (D113, D114) */
+// dmcg's About in this site's own words: one column in the one voice on the light field, its entries as rows (the
+// practice on a raised card), the photographs between them. The same column is about.html (page: an h1, the
+// portrait as the page's largest paint, the CV's print lines) and the sheet every other page opens over itself (an
+// h2 that takes focus; nothing fetched until it opens). Only about.json's words; a "|" field shows its first part
+// in ink and the rest in grey.
+const COL = '(min-width: 40rem) 34rem, calc(100vw - 2.5rem)';
+export const PORTRAIT = '(min-width: 22.5rem) 20rem, calc(100vw - 2.5rem)';   // about.html preloads it with these sizes
+export function aboutColumn(site, d, p, { page = false } = {}) {
+  const P = site.person;
+  const H = (n, id, text, extra = '') => raw(`<h${n + (page ? 0 : 1)} class="${n === 1 ? 'about__name' : 'about__h'}" id="${id}"${extra}>${esc(text)}</h${n + (page ? 0 : 1)}>`);
+  const parts = (s) => s.split(' | ');
+  const head = (s, href) => { const [a, ...b] = parts(s); return html`${href ? html`<a href="${p}${href}">${a}</a>` : html`<b>${a}</b>`}${b.map((x) => html` <span class="about__g">${x}</span>`)}`; };
+  const rows = (items) => html`<dl class="about__rows">${items.map((r) => html`<div class="about__row"><dt>${r.k}${when(r.when, () => html`<span class="about__g">${r.when}</span>`)}</dt><dd>${r.v}</dd></div>`)}</dl>`;
+  const dot = (s) => parts(s).join(' · ');
+  const fig = (ph, sz) => html`<figure class="about__fig">${image(ph.src, { alt: ph.alt, sz, prefix: p })}<figcaption>${ph.caption}</figcaption></figure>`;
+  const sakura = d.experience.find((r) => /Sakura/u.test(r.what));
+  const [prog, country] = parts(sakura.what);
+  const pair = d.photos.japan.slice(1).map((ph) => { const { w, h } = dims(ph.src); return { ph, r: w / h }; });
+  return html`<div class="about__col">
+${when(page, () => html`<p class="print-only print-name">${P.name} | ${P.jobTitle}</p>
+<p class="print-only">${P.line} ${P.email} | ${P.linkedin.replace('https://www.', '')} | ${site.origin.replace('https://', '')}${site.base}</p>`)}
+<header class="about__s">${H(1, 'about-h', P.name, page ? '' : ' tabindex="-1" autofocus')}<p>${d.bio}</p></header>
+<figure class="about__fig about__portrait">${image(d.portrait, { alt: d.portraitAlt, sz: PORTRAIT, prefix: p, priority: page })}</figure>
+<section class="about__s" aria-labelledby="about-edu-h">${H(2, 'about-edu-h', 'Education')}
+${rows(d.education.map((r) => ({ k: head(r.what, r.href), when: r.when, v: html`<p>${dot(r.role)}</p><p>${r.text}</p>` })))}
+${fig(d.photos.graduation, COL)}</section>
+<section class="about__s" aria-labelledby="about-practice-h">${H(2, 'about-practice-h', 'Practice')}
+<div class="about__card">${rows(d.experience.filter((r) => r !== sakura).map((r) => ({ k: head(r.what), when: r.when, v: html`<p>${dot(r.role)}</p><p class="about__g">${r.text}</p>` })))}</div></section>
+<section class="about__s" aria-labelledby="about-japan-h">${H(2, 'about-japan-h', prog)}
+<p class="about__g">${country} · ${sakura.when} · ${dot(sakura.role)}</p><p>${sakura.text}</p>
+${when(sakura.href, () => html`<p class="about__links no-print"><a class="ctl" href="${sakura.href}" target="_blank" rel="noopener">Programme site<span class="vh">: ${prog} (opens in a new tab)</span></a></p>`)}
+${fig(d.photos.japan[0], COL)}
+<div class="row about__pair">${pair.map((x) => html`<div class="cell" style="--r: ${x.r.toFixed(4)}">${fig(x.ph, '(min-width: 40rem) 20rem, 60vw')}</div>`)}</div></section>
+<section class="about__s" aria-labelledby="about-dist-h">${H(2, 'about-dist-h', 'Distinctions')}
+${rows(d.distinctions.map((r) => ({ k: head(r.what), when: r.when, v: html`<p>${dot(r.role)}</p>` })))}</section>
+<section class="about__s" aria-labelledby="about-tools-h">${H(2, 'about-tools-h', 'Tools')}
+${rows(d.skills.map((s) => ({ k: html`<b>${s.group}</b>`, v: html`<p>${s.items.join(' · ')}</p>` })))}</section>
+<section class="about__s" aria-labelledby="about-lang-h">${H(2, 'about-lang-h', 'Languages')}
+${rows(d.languages.map((l) => ({ k: html`<b>${l.name}</b>`, v: html`<p>${l.level}</p>` })))}</section>
+<section class="about__s about__contact"${page ? raw(' id="contact"') : ''} aria-labelledby="about-contact-h">${H(2, 'about-contact-h', 'Contact')}
+<p class="about__links">${mailChip(P.email, 'Email')}<a class="ctl" href="${P.linkedin}" target="_blank" rel="noopener">LinkedIn<span class="vh"> (opens in a new tab)</span></a><a class="ctl" href="${p}files/hazem-radhouani-cv.pdf">CV (PDF)</a></p></section>
+</div>`;
+}

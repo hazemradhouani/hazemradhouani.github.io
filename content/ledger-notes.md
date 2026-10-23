@@ -10,6 +10,8 @@ Every fact on the site comes from one of these sources (precedence in `05-brief.
 | `pdf2025:pN` | `2025 - Porfolio.pdf`, physical page N |
 | `claude-md` | The identity instruction in `CLAUDE.md`; its former heritage/earthen-specialist wording is superseded for identity claims by `owner:2026-10-13` |
 | `owner:2026-10-13` | The owner's current direct instruction: broad project-work identity and permission to derive/publish suitable assets from the supplied HQ library; it does not establish a project-specific personal role, author or credit |
+| `owner:2026-10-22` | The owner's plan-18 brief: the contact address is radhouani.hazem@enau.ucar.tn (replaces the former address everywhere: header and menu chip, footer, about page, JSON-LD, CV; the contact form is removed, D107) |
+| `owner:2026-10-23` | The owner's amendment A to plan 18: the Sakura Science Program's own site, `https://sagaunissp2025.my.canva.site/`, linked as "Programme site" from the About column and the Research page (D123; its contents are not described on the site); the sitemap is `sitemap-site.xml` (the owner's rename on GitHub, D122) |
 
 Translations from French are literal and marked "(translated from French)". Line-break hyphens and obvious typos in the PDFs are normalised and marked.
 
@@ -51,6 +53,8 @@ Translations from French are literal and marked "(translated from French)". Line
 6. Where you are based (C18).
 7. Links and material for your website and app, when ready.
 8. A short project text for La Villette, in your words: its case study now reads in four chapters (D74), but the conflicting site paragraphs were dropped (C07), so the chapters run on the captions alone. Nothing is published in their place.
+9. Index filters (D125): the total surface of Avenir (R+7 and R+5), to place it in a scale band; Sentry's surface (item 1) does the same for Sentry. Until then both stand in no scale band.
+10. Index filters (D125): a programme type for Sentry (guard pavilion), if you want it under a Type filter; today it matches Practice, Place and Year only.
 Resolved on 2026-10-16 under the owner's rule of that day (D72): renders and photographs carry no author line (every render is the owner's), which closes the credit questions, including the cover photograph's author (C17; the photograph is not published, D37); Al-Arg Structure 03 takes the owner's pdf2026:p26 caption; Tamansourt is near Marrakech (geography); the remaining project questions (roles, scales, room details, Corallum's site and structure, Hotel W, Poutres Al and others listed in D72) are closed as not needed, with nothing published in their place.
 
 Resolved by the owner on 2026-10-12: surfaces, Sakura wording, Zenata ranking, supervisors, Studio BELEM dates, Nouvelle Medina and Aïn Sebaâ office, publication permission for office drawings (the owner produced them). Resolved by the owner on 2026-10-13: the broad identity wording and authority to derive/publish a suitable supplied HQ asset, subject to the project-specific evidence rules above.

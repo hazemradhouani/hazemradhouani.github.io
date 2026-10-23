@@ -1,6 +1,6 @@
 /* Hazem Radhouani · site.js ("Field", docs/flagship/08-direction.md)
    Progressive enhancement only: every page reads, navigates, opens full-size images and plays films
-   without it. Modules: theme, menu dialog, scroll progress, arrival, smooth scroll, figure viewer, contact form, analytics.
+   without it. Modules: theme, menu dialog, email chip, scroll engine, arrival, smooth scroll, figure viewer, analytics.
    Every motion has a stated purpose and is skipped under prefers-reduced-motion. No dependencies. */
 (function () {
   'use strict';
@@ -13,9 +13,9 @@
   var slice = function (list) { return Array.prototype.slice.call(list); };
 
   /* ------------------------------------------------------------ theme (preference, state)
-     The inline bootstrap sets data-theme before CSS is parsed. This controller only synchronises
-     the two controls (header, menu), persists an explicit choice when storage is available, and keeps
-     the browser chrome colour in step. A failed storage read/write is deliberately non-fatal. */
+     The inline bootstrap sets data-theme before CSS is parsed. This controller synchronises the two
+     controls (header, menu) and every open page, persists an explicit choice when storage is available, and
+     keeps the browser chrome colour in step. A failed storage read/write is deliberately non-fatal. */
   var themeControls = slice(document.querySelectorAll('[data-theme-toggle]'));
   var themeMeta = document.getElementById('theme-color');
   var themeMedia = window.matchMedia('(prefers-color-scheme: dark)');
@@ -25,7 +25,11 @@
     if (savedTheme === 'light' || savedTheme === 'dark') explicitTheme = savedTheme;
   } catch (e) {}
   var currentTheme = function () { return root.getAttribute('data-theme') === 'dark' ? 'dark' : 'light'; };
-  var applyTheme = function (theme, persist) {
+  var saveTheme = function (theme) {
+    explicitTheme = theme;
+    try { window.localStorage.setItem('hazem-theme', theme); } catch (e) {}
+  };
+  var applyTheme = function (theme) {
     var dark = theme === 'dark';
     root.setAttribute('data-theme', dark ? 'dark' : 'light');
     root.style.colorScheme = dark ? 'dark' : 'light';
@@ -37,16 +41,57 @@
       var action = button.querySelector('[data-theme-action]');
       if (action) action.textContent = ', switch to ' + (dark ? 'light' : 'dark');
     });
-    if (persist) {
-      explicitTheme = dark ? 'dark' : 'light';
-      try { window.localStorage.setItem('hazem-theme', explicitTheme); } catch (e) {}
-    }
   };
-  applyTheme(currentTheme(), false);
+  applyTheme(currentTheme());
+  /* the change spreads from its button in a feathered circle (D108; state): a view transition whose new picture is
+     masked by a circle growing over 950ms on the in-out curve. The page stays live under it, so a click before it
+     ends runs the circle back. The scheme the reader wants is `wanted`, never read back from the page: mid-reveal
+     the page already wears the new scheme. A keeper animation holds the transition open until the circle lands,
+     then the page is set to `wanted` and the transition skipped, so no frame shows the wrong scheme. Reduced
+     motion, or a browser without view transitions, switches at once. */
+  var wanted = currentTheme();
+  var reveal = null;
+  var revealDone = function (run) {
+    if (reveal !== run) return;
+    reveal = null;
+    if (currentTheme() !== wanted) applyTheme(wanted);
+    run.t.skipTransition();
+    run.t.finished.then(function () { if (!reveal) root.classList.remove('theme-vt'); });
+  };
+  var swapTheme = function (button) {
+    wanted = wanted === 'dark' ? 'light' : 'dark';
+    saveTheme(wanted);
+    if (reveal) { if (reveal.anim) reveal.anim.reverse(); return; }
+    if (reduce.matches || typeof document.startViewTransition !== 'function') { applyTheme(wanted); return; }
+    var b = button.getBoundingClientRect(), x = b.left + b.width / 2, y = b.top + b.height / 2;
+    var r = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y)) + 6 * parseFloat(getComputedStyle(root).fontSize);
+    root.style.setProperty('--vt-x', x + 'px'); root.style.setProperty('--vt-y', y + 'px');
+    root.classList.add('theme-vt');
+    var to = wanted;
+    var run = { t: document.startViewTransition(function () { applyTheme(to); }), anim: null };
+    reveal = run;
+    run.t.ready.then(function () {
+      if (reveal !== run) return;
+      root.animate({ opacity: [1, 1] }, { duration: 1000, iterations: Infinity, pseudoElement: '::view-transition-old(root)' });
+      run.anim = root.animate({ '--vt-r': ['0px', r + 'px'] }, { duration: 950, easing: css('--ease-in-out'), fill: 'both', pseudoElement: '::view-transition-new(root)' });
+      if (wanted !== to) run.anim.reverse();   // a second click landed before the circle began
+      run.anim.finished.then(function () { revealDone(run); }, function () { revealDone(run); });
+    }, function () { revealDone(run); });
+  };
   themeControls.forEach(function (button) {
-    button.addEventListener('click', function () { applyTheme(currentTheme() === 'dark' ? 'light' : 'dark', true); });
+    button.addEventListener('click', function () { swapTheme(button); });
   });
-  var followSystemTheme = function (event) { if (!explicitTheme) applyTheme(event.matches ? 'dark' : 'light', false); };
+  // every open page follows: another tab's choice (storage) and a page restored by Back or Forward (pageshow)
+  var adopt = function (theme) {
+    if (theme !== 'light' && theme !== 'dark') return;
+    explicitTheme = wanted = theme;
+    if (reveal) { var run = reveal; reveal = null; run.t.skipTransition(); root.classList.remove('theme-vt'); }
+    if (currentTheme() !== theme) applyTheme(theme);
+  };
+  window.addEventListener('storage', function (e) { if (e.key === 'hazem-theme') adopt(e.newValue); });
+  window.addEventListener('pageshow', function (e) { if (e.persisted) { try { adopt(window.localStorage.getItem('hazem-theme')); } catch (err) {} } });
+  window.addEventListener('pagehide', function () { if (reveal) adopt(wanted); });
+  var followSystemTheme = function (event) { if (!explicitTheme) { wanted = event.matches ? 'dark' : 'light'; applyTheme(wanted); } };
   if (themeMedia.addEventListener) themeMedia.addEventListener('change', followSystemTheme);
   else if (themeMedia.addListener) themeMedia.addListener(followSystemTheme);
 
@@ -61,12 +106,50 @@
     menuButtons.forEach(function (b) {
       b.addEventListener('click', function () { opener = b; if (!nativeCommand && !menu.open) menu.showModal(); });
     });
-    menu.addEventListener('click', function (e) { if (e.target.closest('a')) menu.close(); });
+    menu.addEventListener('click', function (e) { if (e.target.closest('a:not(.mail__a)')) menu.close(); });
     menu.addEventListener('close', function () { (opener && !opener.closest('[inert]') ? opener : menuButtons[0]).focus(); });
     var wide = window.matchMedia('(min-width: 48rem)');
     var onWide = function () { if (wide.matches && menu.open) menu.close(); };
     if (wide.addEventListener) wide.addEventListener('change', onWide);
   }
+
+  /* ------------------------------------------------------------ the email chip (feedback, D107)
+     Contact opens a chip beside it whose button copies the address and says so ("Copied", and the polite status).
+     A modified click still follows the mailto: link. Esc or a click outside closes the chip. */
+  var mails = slice(document.querySelectorAll('.mail'));
+  var setChip = function (m, open) { m.classList.toggle('is-open', open); m.querySelector('.mail__a').setAttribute('aria-expanded', String(open)); };
+  mails.forEach(function (m, i) {
+    var a = m.querySelector('.mail__a'), chip = m.querySelector('.mail__chip'), status = m.querySelector('[data-mail-status]');
+    var copy = m.querySelector('[data-mail-copy]'), done = m.querySelector('[data-mail-done]'), address = a.getAttribute('href').slice(7);
+    chip.id = 'mail-chip-' + i; chip.hidden = false;
+    a.setAttribute('aria-controls', chip.id); setChip(m, false);
+    a.addEventListener('click', function (e) {
+      if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+      e.preventDefault();
+      var open = !m.classList.contains('is-open');
+      mails.forEach(function (o) { setChip(o, false); });
+      setChip(m, open);
+    });
+    var timer = 0;
+    var say = function (copied, words) {
+      copy.hidden = copied; done.hidden = !copied; status.textContent = words;
+      clearTimeout(timer); timer = setTimeout(function () { copy.hidden = false; done.hidden = true; status.textContent = ''; }, 2400);
+    };
+    // the clipboard, then the older copy command, then the address left selected for the reader's own copy
+    var fallback = function () {
+      var range = document.createRange(), sel = window.getSelection(), ok = false;
+      range.selectNodeContents(m.querySelector('.mail__e')); sel.removeAllRanges(); sel.addRange(range);
+      try { ok = document.execCommand('copy'); } catch (e) {}
+      if (ok) { sel.removeAllRanges(); say(true, 'Address copied'); } else status.textContent = 'Address selected';
+    };
+    m.querySelector('.mail__b').addEventListener('click', function () {
+      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(address).then(function () { say(true, 'Address copied'); }, fallback);
+      else fallback();
+    });
+  });
+  if (mails.length) document.addEventListener('click', function (e) {
+    mails.forEach(function (m) { if (m.classList.contains('is-open') && !m.contains(e.target)) setChip(m, false); });
+  });
 
   /* ------------------------------------------------------------ scroll engine (orientation, hierarchy: D83, D96)
      One measured list of [data-fx] elements, read in the frame the page moves (Lenis on a fine pointer, the
@@ -78,6 +161,9 @@
                          reaches the bottom: its sticky stage moves only while it stands (A1); data-steps
                          ("0,.25,.5,.75") give data-chapter, and the steps of its rail [data-rail="id"] follow
        data-fx="centre": --d, the element's centre against the screen's centre: 1 entering, 0 centred, -1 leaving
+       data-fx="enter":  --e, 1 as the element's top enters at the bottom of the screen, 0 once it is 45% up the
+                         screen (whatever the element's height, so a tall plate is settled before it is read)
+       data-fx="rail":   no value: only the data-chapter steps of a long section, for its rail (D115)
      html.fx (set in the head before the first paint) is on whenever motion is allowed, touch included; without
      it nothing is written and all stands settled. A rail follows the reading position either way. Positions are
      where an element stands without sticking or moving, so a stuck stage keeps counting. */
@@ -98,16 +184,27 @@
     var auto = el.getAttribute('data-steps') === 'auto';   // steps measured from the rail's own targets (D99)
     var steps = auto ? [] : (el.getAttribute('data-steps') || '').split(',').filter(Boolean).map(Number);
     var rail = el.id ? slice(document.querySelectorAll('[data-rail="' + el.id + '"] [data-step]')) : [];
-    return { el: el, kind: kind, steps: steps, auto: auto, rail: rail, dark: el.hasAttribute('data-dark'), ch: -1, y: 0, h: 0, p: -1, d: 2, scrub: null };
+    // a case study's opening (D115): its hero frame is laid out near full-bleed and settles into its slot by a move
+    // and a scale (--tx, --ty, --k), measured here from layout boxes, never from the moving frame's screen box
+    var slot = el.querySelector('.op__slot'), frame = slot && slot.firstElementChild;
+    var fit = frame ? function () {
+      el.style.setProperty('--k', (slot.offsetWidth / Math.max(1, frame.offsetWidth)).toFixed(4));
+      el.style.setProperty('--tx', (slot.offsetLeft - frame.offsetLeft) + 'px');
+      el.style.setProperty('--ty', (slot.offsetTop - frame.offsetTop) + 'px');
+    } : null;
+    return { el: el, kind: kind, steps: steps, auto: auto, rail: rail, fit: fit, ch: -1, y: 0, h: 0, p: -1, d: 2, scrub: null };
   });
   var fxUpdate = function () {};
   var scrubKick = function () {};
   if (fxItems.length) {
-    var headH = 0;
+    var vhM = 0;
     var measure = function () {
-      var hd = document.querySelector('.site-header'); headH = hd ? hd.offsetHeight : 0;
+      // clientHeight: the layout viewport, steady while a phone's toolbar shows and hides (A1); read here, never in
+      // the frame, where a layout read after the frame's writes would force a second style pass
+      vhM = document.documentElement.clientHeight;
       fxItems.forEach(function (it) {
         it.y = naturalTop(it.el); it.h = it.el.offsetHeight; it.p = -1; it.d = 2;
+        if (it.fit && FX) it.fit();
         // a chapter is current once its top passes the middle of the screen, wherever the layout put it
         if (it.auto) { var vh0 = document.documentElement.clientHeight; it.steps = it.rail.map(function (a, i) { var t = document.getElementById(a.getAttribute('href').slice(1)); return i && t ? clamp((naturalTop(t) - vh0 / 2 - it.y) / Math.max(1, it.h - vh0), 0, 1) : 0; }); it.ch = -1; }
       });
@@ -124,12 +221,9 @@
       });
     };
     fxUpdate = function () {
-      // clientHeight: the layout viewport, steady while a phone's toolbar shows and hides (A1)
-      var y = window.scrollY, vh = document.documentElement.clientHeight, band = y + headH / 2;
+      var y = window.scrollY, vh = vhM;
       fxItems.forEach(function (it) {
         if (!it.h) return;   // a hidden view of a page (display: none) has nothing to move
-        // a dark ground (D99) under the header's middle turns the header to the ground's colours (CSS: html.on-dark)
-        if (it.dark) root.classList.toggle('on-dark', band >= it.y && band < it.y + it.h);
         if (it.kind === 'centre') {
           var d = clamp((it.y + it.h / 2 - y - vh / 2) / ((vh + it.h) / 2), -1, 1);
           if (Math.abs(d - it.d) < 0.001) return;
@@ -137,13 +231,19 @@
           if (it.scrub) it.scrub.to((1 - d) / 2);
           return;
         }
-        var p = it.kind === 'track' ? (y - it.y) / Math.max(1, it.h - vh)
+        if (it.kind === 'enter') {
+          var e = clamp((it.y - y - 0.55 * vh) / (0.45 * vh), 0, 1);
+          if (Math.abs(e - it.d) < 0.001) return;
+          it.d = e; it.el.style.setProperty('--e', e.toFixed(4));
+          return;
+        }
+        var p = it.kind === 'track' || it.kind === 'rail' ? (y - it.y) / Math.max(1, it.h - vh)
           : (y + vh - it.y) / (vh + it.h);
         p = clamp(p, 0, 1);
         if (it.steps.length) chapter(it, p);
         if (Math.abs(p - it.p) < 0.001) return;
         it.p = p;
-        if (FX) it.el.style.setProperty('--p', p.toFixed(4));
+        if (FX && it.kind !== 'rail') it.el.style.setProperty('--p', p.toFixed(4));
         if (it.scrub) it.scrub.to(p);
       });
     };
@@ -222,16 +322,19 @@
     if (document.readyState === 'complete') whenIdle(); else window.addEventListener('load', whenIdle, { once: true });
   }
 
-  /* ------------------------------------------------------------ the label that follows the pointer (feedback, D97)
-     dmcg's pill: on a fine pointer, an element with data-label names itself beside the cursor. Decorative
-     (aria-hidden): the link it sits on already carries the same name. */
+  /* ------------------------------------------------------------ the label that follows the pointer (feedback, D109)
+     dmcg's pill: on a fine pointer, an element with data-label names itself beside the cursor, with its category
+     (data-cat) after it in grey. Decorative (aria-hidden): the link it sits on already carries the same name. */
   if (FX && fineQ.matches && document.querySelector('[data-label]')) {
     var pill = document.createElement('div');
     pill.className = 'pill-label'; pill.setAttribute('aria-hidden', 'true');
+    var pillName = document.createElement('span'), pillCat = document.createElement('span');
+    pillCat.className = 'pill-label__c';
+    pill.appendChild(pillName); pill.appendChild(pillCat);
     document.body.appendChild(pill);
     document.addEventListener('pointerover', function (e) {
       var t = e.target.closest && e.target.closest('[data-label]');
-      if (t) pill.textContent = t.getAttribute('data-label');
+      if (t) { pillName.textContent = t.getAttribute('data-label'); pillCat.textContent = t.getAttribute('data-cat') || ''; }
       pill.classList.toggle('is-on', !!t);
     });
     document.addEventListener('pointermove', function (e) { pill.style.translate = (e.clientX + 16) + 'px ' + (e.clientY + 18) + 'px'; }, { passive: true });
@@ -334,6 +437,85 @@
     document.head.appendChild(lenisScript);
   }
 
+  /* ------------------------------------------------------------ the About sheet (orientation, D113)
+     About opens the about column over the page it was asked from, as dmcg's does: the page blurs behind a veil and
+     falls inert, the header stays crisp and usable (the name gives way to the column; X takes its place in the
+     row), the column scrolls on its own, gliding as the page does, and its sections come into focus as they enter
+     (CSS). X, Esc or a click on the veil closes it (a text selection dragged out of the column does not); focus
+     returns to the link that opened it. From the phone menu it opens once the menu has closed. Without the script
+     About is a link to about.html, the same column as a page. */
+  var sheet = document.getElementById('about');
+  var sheetClose = function () {};
+  if (sheet && typeof sheet.show === 'function') {
+    var sheetScroll = sheet.querySelector('.about__scroll'), sheetCol = sheet.querySelector('.about__col'), sheetHead = sheet.querySelector('#about-h');
+    var sheetLinks = slice(document.querySelectorAll('a[data-about]'));
+    var behind = slice(document.querySelectorAll('main, .site-footer, .corner'));
+    var sheetFrom = null, sheetTimer = 0, sheetGlide = null, fromMenu = false, downOut = false;
+    var sheetState = function (on) {
+      root.classList.toggle('sheet-open', on);
+      sheetLinks.forEach(function (a) { a.setAttribute('aria-expanded', String(on)); });
+    };
+    sheetLinks.forEach(function (a) { a.setAttribute('aria-controls', 'about'); });
+    sheetState(false);
+    var sheetOpen = function (from) {
+      clearTimeout(sheetTimer); sheetTimer = 0;
+      sheetFrom = from;
+      if (!sheet.open) {
+        sheetScroll.scrollTop = 0;
+        sheet.show();
+        behind.forEach(function (el) { el.inert = true; });
+        if (typeof window.Lenis === 'function' && fineQ.matches && !reduce.matches) sheetGlide = new window.Lenis({ wrapper: sheetScroll, content: sheetCol, autoRaf: true, lerp: 0.08 });
+        void sheet.offsetWidth;   // the closed look is styled once, so the veil and the column come in from it
+      }
+      sheet.classList.add('is-in');
+      sheetState(true);
+      sheetHead.focus({ preventScroll: true });
+    };
+    sheetClose = function () {
+      if (!sheet.open || sheetTimer) return;
+      sheet.classList.remove('is-in');
+      sheetState(false);
+      sheetTimer = setTimeout(function () { sheetTimer = 0; sheet.close(); }, reduce.matches ? 0 : parseFloat(css('--t-sheet-out')) || 450);
+    };
+    sheet.addEventListener('close', function () {
+      clearTimeout(sheetTimer); sheetTimer = 0;
+      sheet.classList.remove('is-in'); sheetState(false);
+      behind.forEach(function (el) { el.inert = false; });
+      if (sheetGlide) { sheetGlide.destroy(); sheetGlide = null; }
+      var to = sheetFrom && sheetFrom.getClientRects().length ? sheetFrom : sheetLinks.filter(function (a) { return a.getClientRects().length; })[0];
+      sheetFrom = null;
+      if (to) to.focus({ preventScroll: true });
+    });
+    document.addEventListener('click', function (e) {
+      var a = e.target.closest && e.target.closest('a[data-about]');
+      if (!a || e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+      e.preventDefault();
+      if (menu && menu.contains(a)) { fromMenu = true; if (menu.open) menu.close(); return; }   // the menu's own handler has closed it
+      if (sheet.open && !sheetTimer) sheetClose(); else sheetOpen(a);
+    });
+    if (menu) menu.addEventListener('close', function () { if (fromMenu) { fromMenu = false; sheetOpen(menuButtons[0]); } });
+    slice(document.querySelectorAll('[data-sheet-close]')).forEach(function (b) { b.addEventListener('click', sheetClose); });
+    // outside: both ends of the click on the veil, never on the scrollbar
+    sheet.addEventListener('pointerdown', function (e) { downOut = !sheetCol.contains(e.target) && e.clientX < sheetScroll.getBoundingClientRect().left + sheetScroll.clientWidth; });
+    sheet.addEventListener('click', function (e) { if (downOut && !sheetCol.contains(e.target)) sheetClose(); downOut = false; });
+  }
+
+  /* Esc, one ordered handler (D107, D113): an open chip closes first (a dialog around it stays open); then a
+     modal dialog (menu, viewer) keeps its own Esc; then the sheet closes */
+  document.addEventListener('keydown', function (e) {
+    if (e.key !== 'Escape') return;
+    var m = mails.filter(function (x) { return x.classList.contains('is-open'); })[0];
+    if (m) {
+      e.preventDefault();
+      var inside = m.contains(document.activeElement);
+      setChip(m, false);
+      if (inside) m.querySelector('.mail__a').focus();
+      return;
+    }
+    if (slice(document.querySelectorAll('dialog[open]')).some(function (d) { return d !== sheet; })) return;
+    if (sheet && sheet.open) { e.preventDefault(); sheetClose(); }
+  }, true);
+
   // reduced motion switched on during the visit: the scroll-linked styles let go (everything returns to its
   // settled place)
   if (reduce.addEventListener) reduce.addEventListener('change', function (e) {
@@ -343,52 +525,103 @@
     scrubVideos.forEach(function (v) { v.pause(); v.removeAttribute('src'); v.load(); v.parentNode.classList.remove('is-live'); });
   });
 
-  /* ------------------------------------------------------------ the column's way into a project (orientation, D97)
-     Leaving the home for a project, only the chosen item's render and title take the names that carry them into
-     the project's page (dmcg's genie): names on all fifteen would capture every item for the transition. */
+  /* ------------------------------------------------------------ the reel's way into a project (orientation, D97, D105)
+     Leaving the home for a project, only the chosen composition's main render (and its caption's title, where the
+     caption shows) take the names that carry them into the project's page (dmcg's genie): names on all fifteen
+     would capture every item for the transition. */
   window.addEventListener('pageswap', function (e) {
     var to = e.viewTransition && e.activation && e.activation.entry && e.activation.entry.url;
     if (!to) return;
-    slice(document.querySelectorAll('a.col__a')).forEach(function (a) {
+    slice(document.querySelectorAll('a.reel__a')).forEach(function (a) {
       if (a.href !== to) return;
       var slug = to.replace(/^.*project-|\.html.*$/g, '');
-      var card = a.querySelector('.col__card:not(.col__film)'), t = a.querySelector('.col__t');
-      if (card) card.style.viewTransitionName = 'hero-' + slug;
-      t.style.viewTransitionName = 'title-' + slug;
-      t.style.viewTransitionClass = 'vt-title';
+      var main = a.querySelector('.reel__l--main:not(.reel__film)'), t = a.querySelector('.reel__t');
+      if (main) main.style.viewTransitionName = 'hero-' + slug;
+      if (t.checkVisibility({ opacityProperty: true })) { t.style.viewTransitionName = 'title-' + slug; t.style.viewTransitionClass = 'vt-title'; }
     });
   });
 
-  /* ------------------------------------------------------------ the index's views and families (state, D98)
-     The page holds the grid, the tree and the list; the bar shows one view and one family (dmcg's catalog) and
-     keeps both in the address, so a link or Back returns to the same view. The tree needs room: under 48rem it
-     gives way to the grid. A tile a filter brings back rises into place once (feedback). */
+  /* ------------------------------------------------------------ the index's views and families (state, D98, D110)
+     The page holds the tree, the grid and the list; the bar shows one view and one family (dmcg's catalog) and
+     keeps both in the address, so a link or Back returns to the same view. It opens on the tree where the tree
+     has room (64rem; its pills would meet below), on the grid elsewhere. The tree has no "all" (228 leaves would
+     be specks): there it shows the projects. A tile a filter brings back rises into place once (feedback). */
   var ixBar = document.querySelector('.ix-bar');
   if (ixBar) {
     var ixViews = slice(document.querySelectorAll('[data-view]'));
     var ixTiles = slice(document.querySelectorAll('.tile'));
-    var ixWide = window.matchMedia('(min-width: 48rem)');
-    var ixState = { view: 'grid', family: 'all' };
+    var ixBranches = slice(document.querySelectorAll('[data-branch]'));
+    var ixWide = window.matchMedia('(min-width: 64rem)');
+    var ixFams = slice(ixBar.querySelectorAll('[data-family]')).map(function (b) { return b.getAttribute('data-family'); });
+    var ixState = { view: ixWide.matches ? 'tree' : 'grid', family: 'all' };
     var ixStatus = document.querySelector('[data-ix-status]');
     var ixQuery = new URLSearchParams(location.search);
     if (/^(grid|tree|list)$/.test(ixQuery.get('view'))) ixState.view = ixQuery.get('view');
-    if (/^(all|drawing|render|film)$/.test(ixQuery.get('family'))) ixState.family = ixQuery.get('family');
+    if (ixFams.indexOf(ixQuery.get('family')) >= 0) ixState.family = ixQuery.get('family');
+
+    /* the branch switch (orientation, D111): the leaves on screen fold into the old family's pill while the new
+       family's fan out of its own, the nearest first, and its connectors draw out from the pill. Leaves off
+       screen simply change. A new choice mid-way settles the last one at once. */
+    var ixOn = null, ixAnims = [], ixGen = 0;
+    var treeSettle = function () { ixAnims.forEach(function (a) { a.cancel(); }); ixAnims = []; ixGen++; };
+    var centre = function (el) { var r = el.getBoundingClientRect(); return { x: r.left + r.width / 2, y: r.top + r.height / 2 }; };
+    var onScreen = function (el) { var r = el.getBoundingClientRect(); return r.width > 0 && r.bottom > 0 && r.top < window.innerHeight; };
+    var pillOf = function (b) { return document.querySelector('.tree__fam[data-family="' + b.getAttribute('data-branch') + '"]'); };
+    var treeSwitch = function (from, to) {
+      treeSettle();
+      var gen = ixGen;
+      ixBranches.forEach(function (b) { b.hidden = b !== from && b !== to; });
+      var out = centre(pillOf(from)), into = centre(pillOf(to));
+      var fold = slice(from.querySelectorAll('.leaf')).filter(onScreen).map(function (l) {
+        var c = centre(l);
+        return l.animate([{ transform: 'none', opacity: 1 }, { transform: 'translate(' + (out.x - c.x) + 'px, ' + (out.y - c.y) + 'px) scale(0.3)', opacity: 0 }],
+          { duration: 380, easing: 'cubic-bezier(0.55, 0, 1, 0.45)', fill: 'forwards' });
+      });
+      fold.push(from.querySelector('.tree__lines').animate([{ opacity: 1 }, { opacity: 0 }], { duration: 380, easing: 'ease-in', fill: 'forwards' }));
+      var fan = slice(to.querySelectorAll('.leaf')).filter(onScreen).map(function (l) { var c = centre(l); return { l: l, dx: into.x - c.x, dy: into.y - c.y, d: Math.hypot(into.x - c.x, into.y - c.y) }; });
+      var far = Math.max.apply(null, fan.map(function (f) { return f.d; }).concat(1));
+      var ease = css('--ease-out') || 'cubic-bezier(0.22, 1, 0.36, 1)';
+      var grow = fan.map(function (f) {
+        return f.l.animate([{ transform: 'translate(' + f.dx + 'px, ' + f.dy + 'px) scale(0.3)', opacity: 0 }, { transform: 'none', opacity: 1 }],
+          { duration: 560, delay: 160 + Math.round(280 * f.d / far), easing: ease, fill: 'backwards' });
+      });
+      grow.push(to.querySelector('.tree__lines').animate([{ clipPath: 'inset(0 100% 0 0)' }, { clipPath: 'inset(0 0 0 0)' }], { duration: 840, delay: 160, easing: ease, fill: 'backwards' }));
+      ixAnims = fold.concat(grow);
+      Promise.all(fold.map(function (a) { return a.finished; })).then(function () {
+        if (gen !== ixGen) return;
+        from.hidden = true;
+        fold.forEach(function (a) { a.cancel(); });
+      }, function () {});
+    };
+    // a leaf under the pointer or focus darkens its connector (feedback)
+    var hot = function (on) { return function (e) { var l = e.target.closest && e.target.closest('.leaf'); if (!l) return;
+      var p = l.parentNode.querySelectorAll('.tree__lines path')[+l.getAttribute('data-i')]; if (p) p.classList.toggle('is-hot', on); }; };
+    var ixTree = document.querySelector('.tree');
+    if (ixTree) ['pointerover', 'focusin', 'pointerout', 'focusout'].forEach(function (t, i) { ixTree.addEventListener(t, hot(i < 2)); });
+
     var ixApply = function (first) {
       var view = ixState.view === 'tree' && !ixWide.matches ? 'grid' : ixState.view;
+      if (view === 'tree' && ixState.family === 'all') ixState.family = ixBranches[0].getAttribute('data-branch');
       ixViews.forEach(function (v) { v.hidden = v.getAttribute('data-view') !== view; });
       document.body.setAttribute('data-ix-view', view);
       ixTiles.forEach(function (t) {
-        var on = ixState.family === 'all' || t.getAttribute('data-kind') === ixState.family;
+        var on = ixState.family === 'all' || t.getAttribute('data-fam') === ixState.family;
         if (on && t.hidden && !first && !reduce.matches) { t.classList.remove('is-entering'); void t.offsetWidth; t.classList.add('is-entering'); }
         t.hidden = !on;
       });
-      slice(document.querySelectorAll('[data-branch]')).forEach(function (b) { b.hidden = b.getAttribute('data-branch') !== ixState.family; });
+      var want = ixBranches.filter(function (b) { return b.getAttribute('data-branch') === ixState.family; })[0] || null;
+      if (want && ixOn && want !== ixOn && view === 'tree' && !first && !reduce.matches) treeSwitch(ixOn, want);
+      else { treeSettle(); ixBranches.forEach(function (b) { b.hidden = b !== want; }); }
+      ixOn = want;
+      slice(document.querySelectorAll('[data-trunk]')).forEach(function (t) { t.classList.toggle('is-on', t.getAttribute('data-trunk') === ixState.family); });
       var shown = ixTiles.filter(function (t) { return !t.hidden; }), seen = {};
       ixTiles.forEach(function (t) { if (t.id) t.removeAttribute('id'); });
       shown.forEach(function (t) { var l = t.getAttribute('data-l'); if (!seen[l]) { seen[l] = 1; t.id = 'az-' + l; } });
       slice(document.querySelectorAll('.az li')).forEach(function (li) { li.hidden = !seen[li.textContent.trim()]; });
       if (!first && ixStatus) ixStatus.textContent = (view === 'list' ? document.querySelectorAll('.ix-table tbody tr').length + ' projects, list view' : shown.length + ' images, ' + (ixState.family === 'all' ? 'all kinds' : ixState.family + 's') + ', ' + view + ' view');
       slice(document.querySelectorAll('button[data-family]')).forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-family') === ixState.family)); });
+      var chosen = ixBar.querySelector('[data-family][aria-pressed="true"]');   // a phone's families scroll: keep the chosen one in sight
+      if (chosen && chosen.parentNode.scrollWidth > chosen.parentNode.clientWidth) chosen.scrollIntoView({ block: 'nearest', inline: 'nearest' });
       slice(document.querySelectorAll('[data-view-btn]')).forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-view-btn') === view)); });
       if (!first) {
         var u = new URLSearchParams(location.search); u.set('view', view); u.set('family', ixState.family);
@@ -597,61 +830,6 @@
     });
     stage.addEventListener('pointercancel', function () { drag = null; stage.classList.remove('is-dragging'); });
   }
-
-  /* ------------------------------------------------------------ contact form (feedback)
-     Same FormSubmit endpoint and payload as before; inline field errors, a busy state and a polite status. */
-  var EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  slice(document.querySelectorAll('form[data-contact]')).forEach(function (form) {
-    var statusEl = form.querySelector('.form__status');
-    var btn = form.querySelector('button[type="submit"]');
-    var btnLabel = btn.querySelector('span');
-    var get = function (n) { return form.elements.namedItem(n); };
-    var fields = ['name', 'email', 'subject', 'message'];
-    var messages = { name: 'Enter your name.', email: 'Enter your email address.', subject: 'Enter a subject.', message: 'Enter your message.' };
-    var setError = function (input, msg) {
-      var err = document.getElementById(input.id + '-err');
-      if (msg) { input.setAttribute('aria-invalid', 'true'); err.textContent = msg; err.hidden = false; }
-      else { input.removeAttribute('aria-invalid'); err.textContent = ''; err.hidden = true; }
-    };
-    var say = function (msg, isError) { statusEl.textContent = msg; statusEl.classList.toggle('is-error', !!isError); };
-    fields.forEach(function (n) {
-      get(n).addEventListener('input', function () { if (this.getAttribute('aria-invalid') === 'true') setError(this, ''); });
-    });
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-      if (form.getAttribute('aria-busy') === 'true') return;
-      var hp = get('_honey');
-      if (hp && hp.value) { say('Message sent.', false); return; }
-      var values = {}; var firstBad = null;
-      fields.forEach(function (n) {
-        var input = get(n); var v = input.value.trim(); values[n] = v; var msg = '';
-        if (!v) msg = messages[n];
-        else if (n === 'email' && !EMAIL.test(v)) msg = 'Enter a valid email address, like name@example.com.';
-        setError(input, msg);
-        if (msg && !firstBad) firstBad = input;
-      });
-      if (firstBad) {
-        var onlyEmail = values.name && values.subject && values.message && values.email;
-        say(onlyEmail ? 'Please enter a valid email address.' : 'Please fill in all fields.', true);
-        firstBad.focus();
-        return;
-      }
-      var data = new FormData();
-      data.append('name', values.name); data.append('email', values.email);
-      data.append('subject', values.subject); data.append('message', values.message);
-      data.append('_subject', (form.getAttribute('data-subject-prefix') || 'Portfolio enquiry from ') + values.name + ': ' + values.subject);
-      data.append('_template', 'none'); data.append('_captcha', 'false'); data.append('_replyto', values.email);
-      form.setAttribute('aria-busy', 'true'); btn.setAttribute('aria-disabled', 'true'); btnLabel.textContent = 'Sending…'; say('', false);
-      var done = function (msg, isError) { form.removeAttribute('aria-busy'); btn.removeAttribute('aria-disabled'); btnLabel.textContent = 'Send'; say(msg, isError); };
-      fetch(form.getAttribute('action'), { method: 'POST', headers: { Accept: 'application/json' }, body: data })
-        .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, body: j }; }); })
-        .then(function (res) {
-          if (res.ok && (res.body.success === 'true' || res.body.success === true)) { form.reset(); done('Message sent. I will be in touch shortly.', false); }
-          else done('Something went wrong. Please email hazemradhouani@gmail.com directly.', true);
-        })
-        .catch(function () { done('Network error. Please email hazemradhouani@gmail.com directly.', true); });
-    });
-  });
 
   /* ------------------------------------------------------------ analytics
      GA4 is loaded once the page is idle, so it never competes with the first render. */

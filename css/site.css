@@ -1,17 +1,11 @@
 /* Hazem Radhouani · site.css · "Reel" (docs/flagship/17-reel-direction.md), on the "Field" grid
    One quiet field in light or dark; the work laid out at its true proportion on one centred grid.
-   One voice (D91): Instrument Sans in sentence case for everything; EB Garamond tracked capitals only
-   where a page tells a story (the about narrative, a film's chapters). */
+   One voice (D91): Instrument Sans in sentence case for everything; EB Garamond italic only for the
+   architect's own words quoted in a case study. */
 
 @layer reset, tokens, base, layout, components, pages, motion, utilities;
 
 /* ------------------------------------------------------------------ fonts */
-@font-face { font-family: "EB Garamond"; font-style: normal; font-weight: 400 800; font-display: swap;
-  src: url("../fonts/eb-garamond-latin-wght-normal.woff2") format("woff2");
-  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
-@font-face { font-family: "EB Garamond"; font-style: normal; font-weight: 400 800; font-display: swap;
-  src: url("../fonts/eb-garamond-latin-ext-wght-normal.woff2") format("woff2");
-  unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF; }
 @font-face { font-family: "EB Garamond"; font-style: italic; font-weight: 400 800; font-display: swap;
   src: url("../fonts/eb-garamond-latin-wght-italic.woff2") format("woff2");
   unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
@@ -36,6 +30,10 @@
 @property --bg { syntax: "<color>"; inherits: true; initial-value: #FFFFFF; }
 @property --ink { syntax: "<color>"; inherits: true; initial-value: #111111; }
 @property --ink-2 { syntax: "<color>"; inherits: true; initial-value: #5E5E5E; }
+/* the radius of the change of scheme (D108), a length so site.js can animate it */
+@property --vt-r { syntax: "<length>"; inherits: false; initial-value: 0px; }
+/* the scroll engine's position (site.js) and what the reel derives from it, typed and not inherited: a change restyles
+   only the parts that move, never the pictures inside them (measured: 46 elements a frame became the moving few, D105) */
 
 /* ------------------------------------------------------------------ reset */
 @layer reset {
@@ -60,13 +58,11 @@
     --ink-2: #5E5E5E;          /* 6.4:1: metadata, captions, hover */
     --line: #E6E6E6;           /* hairlines, never text */
     --ui: #8A8A8A;             /* form borders and link underlines: 3.5:1 non-text contrast */
-    --error: #A61B1B;          /* 7.3:1: form errors only */
     /* A drawing keeps its authored black linework on a deliberate inspection field in dark mode. */
     --drawing-bg: #FFFFFF;
 
     /* type (D91): one sans voice in sentence case, as dmcg's; labels differ by size and ink, never by capitals.
-       --case, --tr-caps and --w-label keep the old roles' hooks, now set to the plain voice. The Garamond
-       capitals of a told story are a separate role (--tr-tale). */
+       --case, --tr-caps and --w-label keep the old roles' hooks, now set to the plain voice. */
     --serif: "EB Garamond", "Garamond Fallback", Garamond, "Times New Roman", serif;
     --sans: "Instrument Sans", "Instrument Fallback", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
     --arabic: "Noto Naskh Arabic", "Amiri", "Geeza Pro", "Traditional Arabic", "Segoe UI", serif;
@@ -84,10 +80,14 @@
     --fs-brand: clamp(1rem, 0.94rem + 0.25vw, 1.25rem);       /* 16 to 20px: the name block in the header */
     --tr-caps: 0;
     --tr-display: -0.01em;
-    --tr-tale: 0.3em;                                         /* Garamond capitals of a told story (P6) */
-    /* surfaces (D92): tiles 6px, cards and the viewer 8px, pills fully round; one soft shadow for a card on the field */
-    --r-tile: 6px; --r-card: 8px; --r-pill: 999px;
-    --shadow-card: 0 1px 2px rgb(0 0 0 / 0.06), 0 12px 32px -12px rgb(0 0 0 / 0.18);
+    /* surfaces (D92, D118): tiles 6px, cards and the viewer 8px, controls 10px (dmcg's rounded-rect pill), chips
+       fully round; one very soft, wide shadow for a card on the field and a lifted one for a card under the pointer;
+       a raised fill for chips and sheets */
+    --r-tile: 6px; --r-card: 8px; --r-ctl: 10px; --r-pill: 999px;
+    --shadow-card: 0 1px 2px rgb(0 0 0 / 0.04), 0 24px 48px -16px rgb(0 0 0 / 0.16);
+    --shadow-lift: 0 2px 4px rgb(0 0 0 / 0.05), 0 32px 64px -20px rgb(0 0 0 / 0.24);
+    --bg-raised: #F5F5F3;
+    --pill-x: clamp(0.5rem, 0.9vw, 0.875rem);                 /* a control's pill reaches this far past its words */
     /* the fixed chrome (D93): the header and the corner captions stand on the field's own edge, which melts
        the moving page under them (dmcg's progressive edge) */
     --site-edge: max(1rem, 2.2vw);
@@ -100,8 +100,8 @@
     --margin: clamp(1.25rem, 5vw, 5rem);
     --gutter: clamp(1rem, 0.55rem + 1.8vw, 2rem);             /* 16 to 32px */
     /* vertical rhythm: inside a group (the gutter), between groups, between chapters */
-    --gap-group: 4rem;
-    --gap-chapter: 7rem;
+    --gap-group: 3rem;
+    --gap-chapter: 5rem;
     --s1: 0.25rem; --s2: 0.5rem; --s3: 0.75rem; --s4: 1rem; --s5: 1.5rem; --s6: 2rem; --s7: 3rem;
     --measure: 36rem;                                         /* about 65 characters of Garamond at 19px */
     --bar-h: 3.5rem;
@@ -115,7 +115,8 @@
     --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
     --spring: var(--ease-out);
     --spring-dur: 660ms;
-    --t-press: 120ms; --t-hover: 160ms; --t-ui: 240ms; --t-bar: 320ms; --t-arrive: 700ms;
+    --t-press: 120ms; --t-hover: 200ms; --t-ui: 240ms; --t-bar: 320ms; --t-arrive: 700ms;
+    --t-chip: 420ms; --t-sheet: 600ms; --t-sheet-out: 450ms; --t-theme: 950ms;
     --t-rise: 700ms; --t-plate: 1100ms; --stagger: 90ms;
   }
   html[data-theme="dark"] {
@@ -124,14 +125,18 @@
     --ink-2: #C9C7C0;          /* 11.4:1, including captions and metadata */
     --line: #45463F;
     --ui: #B4B1A9;
-    --error: #FFB4AB;
     --drawing-bg: #F7F5EF;
+    --bg-raised: #1A1B19;
+    /* a shadow does not read on charcoal: a card stands on a hairline instead */
+    --shadow-card: 0 0 0 1px rgb(255 255 255 / 0.06), 0 24px 48px -16px rgb(0 0 0 / 0.5);
+    --shadow-lift: 0 0 0 1px rgb(255 255 255 / 0.09), 0 32px 64px -20px rgb(0 0 0 / 0.6);
   }
   @supports (transition-timing-function: linear(0, 1)) {
     :root { --spring: linear(0, 0.079 5%, 0.236 10%, 0.403 15%, 0.551 20%, 0.672 25%, 0.764 30%, 0.833 35%, 0.884 40%, 0.919 45%, 0.945 50%, 0.962 55%, 0.974 60%, 0.983 65%, 0.988 70%, 0.992 75%, 0.995 80%, 0.997 85%, 0.998 90%, 1); }
   }
-  @media (min-width: 48rem) { :root { --cols: 8; --gap-group: 5rem; --gap-chapter: 9rem; } }
-  @media (min-width: 64rem) { :root { --cols: 12; --gap-group: 6rem; --gap-chapter: 12rem; } }
+  /* D116: no empty band without need; between chapters 7.5rem, between groups 4rem on a desktop */
+  @media (min-width: 48rem) { :root { --cols: 8; --gap-group: 3.5rem; --gap-chapter: 6rem; } }
+  @media (min-width: 64rem) { :root { --cols: 12; --gap-group: 4rem; --gap-chapter: 7.5rem; } }
 }
 
 /* ------------------------------------------------------------------ base */
@@ -146,10 +151,10 @@
     min-height: 100svh; display: flex; flex-direction: column; overflow-x: clip;
     padding-top: var(--head-h);   /* the fixed header's room (D93) */
   }
-  /* Include off-screen validation controls: native dark form chrome must never introduce a third surface. */
-  input, textarea, select { background: var(--bg); color: var(--ink); }
   main { flex: 1 0 auto; outline: none; }
-  html:has(dialog[open]) { overflow: hidden; }
+  /* a modal dialog takes the page's scrollbar; the About sheet leaves it, so the fixed header never shifts (D113): the
+     column holds the wheel (overscroll contained, and the page's glide skips it) */
+  html:has(dialog[open]:not(#about)) { overflow: hidden; }
   h1, h2, h3, h4 { font-family: var(--sans); font-weight: var(--w-label); line-height: 1.25; letter-spacing: -0.005em;
     text-wrap: balance; font-size: var(--fs-title); }
   p, li, dd, figcaption { text-wrap: pretty; }
@@ -165,7 +170,7 @@
   /* smooth scroll (D79), from Lenis 1.3.26's lenis.css: the page keeps native scrolling underneath; a stopped
      instance (a dialog is open) holds the page still; a dialog scrolls on its own, never the page behind */
   html.lenis, html.lenis body { height: auto; }
-  .lenis.lenis-stopped { overflow: clip; }
+  .lenis.lenis-stopped:not(:has(#about[open])) { overflow: clip; }
   .lenis [data-lenis-prevent] { overscroll-behavior: contain; }
   .lenis.lenis-smooth iframe { pointer-events: none; }
 }
@@ -245,14 +250,52 @@
   .stack-s > * + * { margin-top: var(--s2); }
   .credit { color: var(--ink-2); }
 
-  /* action link: a hairline that draws to full ink from the left (feedback) */
-  .more { display: inline-flex; align-items: center; gap: var(--s2); min-height: 2.75rem; color: var(--ink);
+  /* the pill (D106, dmcg's controls; feedback): a control at rest is its words; under the pointer or focus a
+     rounded pill with a hairline fades in around them, a press sinks it 2%, and the current page keeps it.
+     Words inside running text keep their underline (WCAG 1.4.1), so only controls take the pill. */
+  .ctl { border: 1px solid transparent; border-radius: var(--r-ctl); background-clip: padding-box;
+    transition: border-color var(--t-hover) var(--ease-out), background-color var(--t-hover) var(--ease-out),
+      box-shadow var(--t-hover) var(--ease-out), scale var(--t-press) var(--ease-out); }
+  .ctl:hover, .ctl:focus-visible { border-color: var(--line); background-color: var(--bg); box-shadow: 0 1px 2px rgb(0 0 0 / 0.04); }
+  .ctl:active { scale: 0.98; }
+  /* the current place keeps its pill, its edge at 3:1 or more so the state reads without the pointer (1.4.11) */
+  .ctl[aria-current], .ctl[aria-current]:hover { border-color: var(--ui); background-color: var(--bg); }
+
+  /* the email chip (D107, dmcg's; feedback): Contact opens a round chip beside it in the header where there is
+     room (under it below 105rem, where beside it would reach the name), above it in the footer and centred under it in the
+     menu. It uncovers from the link's side over 420ms while its words come into focus; its button copies the
+     address. The clip reaches 6px past the chip so a focus ring is never cut. */
+  .mail { position: relative; display: inline-flex; }
+  .ctl[aria-expanded="true"] { border-color: var(--line); background-color: var(--bg); }   /* open: Contact (its chip), About (its sheet) keep their pill */
+  .mail__chip { position: absolute; z-index: 2; left: 0; top: calc(100% + var(--s1)); visibility: hidden; opacity: 0;
+    clip-path: inset(-6px calc(100% - 2.75rem) -6px -6px round var(--r-pill));
+    transition: clip-path var(--t-chip) var(--ease-out), opacity var(--t-chip) var(--ease-out), visibility 0s linear var(--t-chip); }
+  .mail.is-open .mail__chip { visibility: visible; opacity: 1; clip-path: inset(-6px round var(--r-pill)); transition-delay: 0s; }
+  .mail__b { display: inline-flex; align-items: center; gap: var(--s3); min-height: 2.75rem; padding: 0 1rem; white-space: nowrap;
+    border: 1px solid var(--line); border-radius: var(--r-pill); background: var(--bg); color: var(--ink); font-size: var(--fs-brand);
+    transition: background-color var(--t-hover) var(--ease-out), scale var(--t-press) var(--ease-out); }
+  .mail__b:hover { background-color: var(--bg-raised); }
+  .mail__b:active { scale: 0.98; }
+  .mail__e { user-select: text; }
+  .mail__c { display: inline-flex; align-items: center; gap: 0.25rem; font-size: var(--fs-label); color: var(--ink-2); }
+  .mail__c svg { width: 0.875rem; height: 0.875rem; }
+  .mail__b > * { opacity: 0; transition: opacity var(--t-chip) var(--ease-out), filter var(--t-chip) var(--ease-out); }
+  .mail.is-open .mail__b > * { opacity: 1; transition-delay: 120ms; }
+  @media (hover: hover) and (pointer: fine) { .mail__b > * { filter: blur(6px); } .mail.is-open .mail__b > * { filter: none; } }
+  @media (min-width: 105rem) { .site-header .mail__chip { left: calc(100% + var(--s2)); top: 0; } }
+  :is(.site-footer, .menu) .mail__chip { left: 50%; translate: -50% 0; clip-path: inset(-6px calc(50% - 1.375rem) round var(--r-pill)); }
+  /* in the footer the chip stands over the middle of the whole line, so it stays on screen wherever Contact wraps */
+  .site-footer .mail { position: static; }
+  .site-footer .mail__chip { top: auto; bottom: calc(100% + var(--s1)); }
+  .site-footer .mail__b { font-size: var(--fs-cap); }
+
+  /* action link: a chip whose pill reaches past its words, so its words still stand on the text's own edge */
+  .more { display: inline-flex; align-items: center; gap: var(--s2); min-height: 2.75rem; padding-inline: var(--pill-x);
+    margin-inline: calc(-1 * var(--pill-x)); border: 1px solid transparent; border-radius: var(--r-pill); color: var(--ink);
     font-family: var(--sans); font-size: var(--fs-label); font-weight: var(--w-label); letter-spacing: var(--tr-caps); text-transform: var(--case);
-    text-decoration: none; }
-  .more > span { padding-block: 2px; background: linear-gradient(var(--ink), var(--ink)) 0 100% / 0% 1px no-repeat,
-      linear-gradient(var(--ui), var(--ui)) 0 100% / 100% 1px no-repeat;
-    transition: background-size var(--t-ui) var(--ease-out); }
-  .more:hover > span, .more:focus-visible > span { background-size: 100% 1px, 100% 1px; }
+    text-decoration: none; transition: border-color var(--t-hover) var(--ease-out), background-color var(--t-hover) var(--ease-out), scale var(--t-press) var(--ease-out); }
+  .more:hover, .more:focus-visible { border-color: var(--line); background-color: var(--bg-raised); }
+  .more:active { scale: 0.98; }
   .more svg { width: 0.875rem; height: 0.875rem; flex: none; transition: transform var(--t-ui) var(--ease-out); }
   /* feedback: the arrow leans 3px the way the link goes (only where a pointer hovers) */
   @media (hover: hover) and (pointer: fine) {
@@ -270,29 +313,26 @@
   .site-header__in > * { pointer-events: auto; }
   .brand { grid-column: 2; display: grid; justify-items: center; align-content: center; min-height: 2.75rem; padding-inline: var(--s2);
     color: var(--ink); text-decoration: none; font-size: var(--fs-brand); line-height: 1.12; text-align: center; white-space: nowrap; }
-  .nav ul { display: flex; flex-wrap: wrap; gap: 0 clamp(0.75rem, 1.8vw, 2rem); }
-  .nav a, .views a { display: inline-flex; align-items: center; min-height: 2.75rem; color: var(--ink); text-decoration: none;
-    font-size: var(--fs-brand); position: relative; }
+  /* the routes and the views of the work are pills (D106): the pointer's route and the current one stand in one */
+  .nav ul, .views ul { display: flex; flex-wrap: wrap; gap: 0 clamp(0.125rem, 0.5vw, 0.5rem); }
+  .nav a, .views a { display: inline-flex; align-items: center; min-height: 2.75rem; padding-inline: var(--pill-x); color: var(--ink);
+    text-decoration: none; font-size: var(--fs-brand); }
   .site-header .nav { grid-column: 1; justify-self: start; }
-  /* feedback: a hairline draws under the route the pointer is on, and stays under the current one */
-  .nav a::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0.6rem; height: 1px; background: currentColor;
-    transform: scaleX(0); transform-origin: left; transition: transform var(--t-ui) var(--ease-out); }
-  .nav a:hover::after, .nav a[aria-current]::after { transform: scaleX(1); }
   .site-header__tools { grid-column: 3; justify-self: end; display: flex; align-items: center; gap: var(--s2); }
-  /* the two views of the work, as dmcg's switch: the current one stands in a pill on the field */
-  .views ul { display: flex; gap: var(--s1); }
-  .views a { padding-inline: var(--s4); border-radius: var(--r-pill); border: 1px solid transparent;
-    transition: border-color var(--t-hover) var(--ease-out), background-color var(--t-hover) var(--ease-out); }
-  .views a:hover { border-color: var(--line); }
-  .views a[aria-current] { border-color: var(--ui); background: var(--bg); box-shadow: 0 1px 2px rgb(0 0 0 / 0.05); }
   .theme-button, .menu-button { display: inline-flex; align-items: center; justify-content: center; min-height: 2.75rem; min-width: 2.75rem;
-    padding: 0 var(--s2); background: none; border: 0; color: var(--ink); font-size: var(--fs-brand); }
+    padding: 0 var(--s2); background: none; color: var(--ink); font-size: var(--fs-brand); }
   .theme-button svg { width: 1.25rem; height: 1.25rem; transition: rotate var(--t-ui) var(--ease-out); }
   html[data-theme="dark"] .theme-button svg { rotate: 180deg; }   /* state: the lit half turns to the other side */
   .site-header__tools, .menu__controls { display: flex; align-items: center; gap: var(--s1); }
   @media (max-width: 47.99rem) {
     .site-header .nav, .site-header .views { display: none; }
     .site-header .menu-button { margin-right: calc(-1 * var(--s2)); }
+  }
+  /* narrower than 375px the centred name would run into the scheme button (measured at 320): it stands at the start */
+  @media (max-width: 23.4rem) {
+    .site-header__in { grid-template-columns: minmax(0, 1fr) auto; }
+    .brand { grid-column: 1; justify-items: start; padding-inline: 0; text-align: left; }
+    .site-header__tools { grid-column: 2; }
   }
   @media (min-width: 48rem) { .site-header .menu-button { display: none; } }
 
@@ -315,6 +355,7 @@
   /* the corner captions (D93): who and where at a glance, fixed in the bottom corners of the home and the
      index (dmcg's "Brand & software design" and "Made in New York"); from 48rem, where they never cover work */
   .corner { display: none; }
+  @media (max-width: 47.99rem) { .edge--bottom { display: none; } }   /* its corner captions are hidden here; it only veiled the footer */
   @media (min-width: 48rem) {
     .corner { display: block; position: fixed; z-index: 16; bottom: clamp(0.75rem, 1.5vw, 1.5rem); margin: 0;
       font-size: var(--fs-cap); line-height: 1.3; color: var(--ink); pointer-events: none; }
@@ -328,12 +369,12 @@
   .menu__top { display: flex; align-items: center; justify-content: space-between; min-height: var(--bar-h); }
   .menu__controls form { display: flex; }
   .menu__close { display: inline-flex; align-items: center; min-height: 2.75rem; padding: 0 var(--s3); margin-right: calc(-1 * var(--s3));
-    background: none; border: 0; font-size: 1.1875rem; text-transform: var(--case); }
+    background: none; font-size: 1.1875rem; text-transform: var(--case); }
   .menu__list { padding-top: var(--s7); display: grid; gap: var(--s2); text-align: center; }
-  .menu__list a { display: inline-block; padding-block: var(--s2); font-size: clamp(2rem, 9vw, 2.75rem); line-height: 1.2;
-    text-transform: var(--case); text-decoration: none; color: var(--ink-2); }
-  .menu__list a[aria-current] { color: var(--ink); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.18em; }
-  .menu__contact { margin-top: var(--s7); display: grid; justify-items: center; gap: var(--s1); }
+  .menu__list a { display: inline-block; padding: var(--s2) var(--s4); font-size: clamp(2rem, 9vw, 2.75rem); line-height: 1.2;
+    text-transform: var(--case); text-decoration: none; color: var(--ink-2); border-radius: 14px; }
+  .menu__list a:hover, .menu__list a[aria-current] { color: var(--ink); }
+  .menu__contact { margin-top: calc(var(--s7) + var(--s4)); display: grid;   /* room for the chip under Contact */ justify-items: center; gap: var(--s1); }
   .menu__contact a { min-height: 2.75rem; display: inline-flex; align-items: center; }
 
   /* figures: images at their natural ratio, never cropped, never above native pixels (--nw) */
@@ -502,53 +543,20 @@
   .viewer__count { font-family: var(--sans); font-size: var(--fs-label); letter-spacing: var(--tr-caps); color: var(--ink-2); min-width: 4.5rem;
     font-variant-numeric: tabular-nums; }
   .viewer__btn { display: inline-flex; align-items: center; justify-content: center; gap: var(--s2); min-height: 2.75rem; min-width: 2.75rem;
-    padding: 0 var(--s3); background: none; border: 0; color: var(--ink); font-size: 1.0625rem; text-transform: var(--case);
-    transition: color var(--t-hover) var(--ease-out), transform var(--t-press) var(--ease-out); }
-  .viewer__btn:hover { color: var(--ink-2); }
-  .viewer__btn:active { transform: scale(0.98); }
+    padding: 0 var(--s3); background: none; color: var(--ink); font-size: 1.0625rem; text-transform: var(--case); text-decoration: none; }
   .viewer__btn[aria-disabled="true"] { opacity: 0.35; cursor: default; }
   .viewer__stage:focus-visible { outline-offset: -4px; }
   .viewer__btn svg { width: 1.125rem; height: 1.125rem; }
   .viewer__nav { display: flex; gap: var(--s2); min-width: 4.5rem; justify-content: flex-end; }
 
-  /* buttons: one kind, for the form */
-  .btn { display: inline-flex; align-items: center; justify-content: center; gap: var(--s2); min-height: 3rem; padding: 0 var(--s6);
-    border: 1px solid var(--ink); background: var(--ink); color: var(--bg); font-family: var(--sans); font-size: var(--fs-label);
-    font-weight: var(--w-label); letter-spacing: var(--tr-caps); text-transform: var(--case); text-decoration: none;
-    transition: background-color var(--t-hover) var(--ease-out), color var(--t-hover) var(--ease-out), transform var(--t-press) var(--ease-out); }
-  .btn:hover { background: var(--bg); color: var(--ink); }
-  .btn:active { transform: scale(0.98); }
-  .btn[aria-disabled="true"] { opacity: 0.6; cursor: progress; }
-
-  /* forms */
-  .form { display: grid; gap: var(--s5); }
-  .field { display: grid; gap: var(--s2); }
-  .field label { font-family: var(--sans); font-size: var(--fs-label); font-weight: var(--w-label); letter-spacing: var(--tr-caps); text-transform: var(--case); }
-  .field label span { color: var(--ink-2); font-weight: 400; letter-spacing: 0.04em; text-transform: none; }
-  .field input, .field textarea { width: 100%; min-height: 3rem; padding: var(--s3) var(--s4); background: var(--bg);
-    border: 1px solid var(--ui); border-radius: 0; color: var(--ink); font-size: var(--fs-body); }
-  .field textarea { min-height: 10rem; resize: vertical; line-height: 1.5; }
-  .field input:focus-visible, .field textarea:focus-visible { outline: 2px solid var(--ink); outline-offset: 0; border-color: var(--ink); }
-  .field [aria-invalid="true"] { border-color: var(--error); border-width: 2px; }
-  .field__error { font-size: var(--fs-cap); color: var(--error); }
-  .form__status { font-size: var(--fs-cap); min-height: 1.6em; }
-  .form__status.is-error { color: var(--error); }
-  .form__hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
-
-  /* footer (D94): Michael Gatt's sentence of routes. The routes are words in the told-story voice (Garamond
-     tracked capitals), the words between them stay small, so the page ends on one sentence, not a link grid.
-     Under it, the practical lines: mail, LinkedIn, the CV, the films, the year. */
-  .site-footer { margin-top: var(--gap-chapter); padding-block: var(--gap-group) var(--s6); text-align: center; }
-  .tale-nav { max-width: 46rem; margin-inline: auto; padding-inline: var(--site-edge); font-size: var(--fs-cap); line-height: 2.2;
-    color: var(--ink-2); text-wrap: balance; }
-  .tale-nav a { display: inline-flex; align-items: center; min-height: 2.75rem; padding-inline: 0.15em; vertical-align: middle;
-    font-family: var(--serif); font-size: clamp(1.25rem, 1rem + 1.1vw, 2rem); letter-spacing: var(--tr-tale); text-transform: uppercase;
-    color: var(--ink); text-decoration-color: var(--ui); text-underline-offset: 0.3em; margin-right: calc(-1 * var(--tr-tale)); }
-  .tale-nav a:hover { text-decoration-color: var(--ink); }
-  .site-footer__base { margin-top: var(--s7); display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 0 var(--s5);
-    padding-inline: var(--site-edge); font-size: var(--fs-cap); color: var(--ink-2); }
-  .site-footer__base a { min-height: 2.75rem; display: inline-flex; align-items: center; color: var(--ink-2); text-decoration: none; }
-  .site-footer__base a:hover { color: var(--ink); }
+  /* footer (D117): one quiet line in the one voice, the practical routes as pills (the reading routes are in
+     the header and the menu): the year and name, the address, LinkedIn, the CV, the films */
+  .site-footer { margin-top: var(--gap-group); padding: var(--s6) var(--site-edge); text-align: center; }
+  .site-footer__base { position: relative; display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 0 var(--s1);
+    font-size: var(--fs-cap); color: var(--ink-2); }
+  .site-footer__base > span { padding-inline: var(--pill-x); }
+  .site-footer__base a { min-height: 2.75rem; display: inline-flex; align-items: center; padding-inline: var(--pill-x); color: var(--ink-2); text-decoration: none; }
+  .site-footer__base a:hover, .site-footer__base a:focus-visible { color: var(--ink); }
   /* where the corner captions stand, the footer's last line stays above them */
   @media (min-width: 48rem) { body:has(.corner) .site-footer { padding-bottom: calc(var(--edge-bottom) + var(--s4)); } }
 }
@@ -556,70 +564,97 @@
 /* ------------------------------------------------------------------ pages */
 @layer pages {
   .intro { padding-top: clamp(2.5rem, 6vw, 5rem); }
-  .lead-fig { margin-top: clamp(2.5rem, 5vw, 4.5rem); }
 
-  /* home, "Reel" (D97). The film stands centred on the field as a card and opens towards the screen's width as
-     the reader scrolls, its time following the wheel; under it the chapters say who and where, one at a time.
-     Then the column: one project at a time on the field, its render opening beside its own drawing as it
-     crosses the centre. The home has no top padding: the film's stage keeps the header's room itself, so the
-     film moves from the first pixel of scroll. */
+  /* home, "Reel, corrected" (D104): one composition per project, one at a time on the centre axis. The stage is
+     5:4 at min(46vw, 60rem) (72vw on tablets) and never taller than the band between the header and the corner
+     captions, so a composition stands whole on one screen; the first is centred in the first. Every layer is
+     placed in stage widths (cqw), so the proportions hold at any size: main 70% (a portrait main 50%), side 46%,
+     the drawing's sheet at most 44% wide and 36% tall at the drawing's own ratio (--r). Renders are cropped to
+     their frame (16:10, a portrait 4:5) at the content's pos; the film is 16:9 and a drawing stands whole on a
+     raised sheet, so neither is cropped. --fx and --fy are each layer's offset to the main card's centre, where
+     it waits before it slides out (motion layer). Phones stack main and side; the drawing waits for the project. */
   .page-home { padding-top: 0; }
-  .film__stage { position: relative; display: grid; justify-items: center; align-content: start; gap: var(--s5);
-    padding: calc(var(--head-h) + var(--s5)) var(--site-edge) var(--s7); }
-  .film__frame { position: relative; width: min(100%, var(--nw), (100svh - var(--head-h) - 13rem) * 1.7778); border-radius: var(--r-card); overflow: clip; box-shadow: var(--shadow-card); }
-  .film__frame img, .film__frame picture { display: block; width: 100%; height: 100%; }
-  .film__v { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 400ms var(--ease-out); }
-  .is-live > .film__v { opacity: 1; }
-  .film__ch { display: grid; gap: var(--s3); max-width: 44rem; text-align: center; font-size: var(--fs-lead); line-height: 1.35; text-wrap: balance; }
-  .film__name { font-size: var(--fs-h1); font-weight: 400; letter-spacing: var(--tr-display); line-height: 1.15; }
-  .film__sub, .film__credit { margin-top: var(--s2); font-size: var(--fs-cap); line-height: 1.5; color: var(--ink-2); }
-  .film__credit { margin-top: 0; }
-  .rail { display: none; }
-
-  /* the column */
-  .col { margin-top: var(--gap-group); }
   .col__h { text-align: center; font-size: var(--fs-cap); font-weight: 400; color: var(--ink-2); }
   .col__count { margin-left: 0.35em; font-variant-numeric: tabular-nums; }
-  .col__list { display: grid; gap: clamp(5rem, 16svh, 11rem); margin-top: var(--gap-group); }
-  .col__it { display: grid; justify-items: center; padding-inline: var(--site-edge); }
-  .col__a { display: grid; justify-items: center; gap: var(--s4); width: min(100%, 64rem); color: var(--ink); text-decoration: none; }
-  .col__stage { display: grid; grid-template-columns: minmax(0, 58fr) minmax(0, 38fr); column-gap: 4%; align-items: center; width: 100%; }
-  .col__card { position: relative; display: block; width: 100%; max-width: var(--nw, 100%); justify-self: center; border-radius: var(--r-card);
-    overflow: clip; box-shadow: var(--shadow-card); }
-  .col__card img, .col__card picture { display: block; width: 100%; height: 100%; }
-  .col__key { display: block; }
-  .col__card { max-width: min(var(--nw, 100%), calc(62svh * var(--r, 1.5))); }   /* the band between header and captions (D101) */
-  .col__key .nw { width: min(100%, calc(62svh * var(--kr, 1))); }
-  .col__it--single .col__stage, .col__it--film .col__stage { grid-template-columns: minmax(0, 1fr); width: min(100%, 46rem); }
-  .col__cap { display: flex; flex-wrap: wrap; justify-content: center; gap: 0 var(--s3); align-items: baseline; font-size: var(--fs-cap); line-height: 1.5; }
-  .col__n, .col__m { color: var(--ink-2); font-variant-numeric: tabular-nums; }
-  .col__t { text-decoration: underline; text-decoration-color: transparent; text-underline-offset: 0.2em; transition: text-decoration-color var(--t-hover) var(--ease-out); }
-  .col__a:hover .col__t, .col__a:focus-visible .col__t { text-decoration-color: currentColor; }
-  .col__a:focus-visible { outline-offset: 8px; }
-  @media (max-width: 47.99rem) { .col__stage { grid-template-columns: minmax(0, 1fr); } .col__key { display: none; } }
+  .reel { --share: 46vw; --stage-w: max(15rem, min(var(--share), 60rem, (100svh - var(--head-h) - var(--edge-bottom) - 4rem) * 1.25)); --sh: 80;
+    --gap: 1.5rem;   /* measured: the widest empty band while compositions pass stays at or under 25vh (D105) */
+    display: grid; gap: var(--gap); margin: 0; padding: calc((100svh - var(--stage-w) * 0.8) / 2) var(--site-edge) 0; list-style: none; }
+  @media (min-width: 48rem) and (max-width: 63.99rem) { .reel { --share: 72vw; } }
+  .reel__it { --ml: 0; --mt: 18.125; --mw: 70; --mh: 43.75; display: grid; justify-items: center; }
+  .reel__it--film { --mt: 20.3125; --mh: 39.375; }
+  .reel__it--duo { --mt: 8; }
+  .reel__it--duo-p { --ml: 8; --mt: 8.75; --mw: 50; --mh: 62.5; }
+  .reel__a { position: relative; display: block; color: var(--ink); text-decoration: none; border-radius: var(--r-card); }
+  .reel__a:focus-visible { outline-offset: 10px; }
+  .reel__stage { position: relative; display: block; width: var(--stage-w); aspect-ratio: 100 / var(--sh); container-type: inline-size; }
+  .reel__l { --lx: var(--l); position: absolute; left: calc(var(--lx) * 1cqw); top: calc(var(--t) * 1cqw); width: calc(var(--w) * 1cqw); height: calc(var(--h) * 1cqw);
+    --fx: calc(var(--ml) + var(--mw) / 2 - var(--l) - var(--w) / 2); --fy: calc(var(--mt) + var(--mh) / 2 - var(--t) - var(--h) / 2);
+    display: block; border-radius: var(--r-card); overflow: clip; box-shadow: var(--shadow-card); transition: box-shadow var(--t-hover) var(--ease-out); }
+  .reel__it--trio-m .reel__l { --lx: calc(100 - var(--l) - var(--w)); --fx: calc(var(--l) + var(--w) / 2 - var(--ml) - var(--mw) / 2); }
+  .reel__l--main { --l: var(--ml); --t: var(--mt); --w: var(--mw); --h: var(--mh); z-index: 2; }
+  .reel__l--side { --l: 54; --t: 0; --w: 46; --h: 28.75; z-index: 1; }
+  .reel__it--duo .reel__l--side { --t: 47.25; z-index: 3; }
+  .reel__l--drawing { --pad: 2.5; --w: min(44, (36 - 2 * var(--pad)) * var(--r) + 2 * var(--pad)); --h: calc((var(--w) - 2 * var(--pad)) / var(--r) + 2 * var(--pad));
+    --l: calc(98 - var(--w)); --t: calc(80 - var(--h)); z-index: 3; padding: calc(var(--pad) * 1cqw); background: var(--bg-raised); }
+  .reel__it--duo-p .reel__l--drawing { --t: calc(74 - var(--h)); }
+  :is(.reel__l[data-crop], .reel__film) :is(picture, img) { display: block; width: 100%; height: 100%; }   /* a drawing keeps its own .nw rules (and its dark-only keep layer) */
+  .reel__l[data-crop] img { object-fit: cover; object-position: var(--pos, 50% 50%); }
+  .reel__v { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 400ms var(--ease-out); }
+  .is-live > .reel__v { opacity: 1; }
+  .reel__a:hover .reel__l { box-shadow: var(--shadow-lift); }   /* feedback: the composition lifts under the pointer */
+  .reel__cap { display: flex; flex-wrap: wrap; justify-content: center; gap: 0 var(--s3); margin-top: var(--s4); font-size: var(--fs-cap); line-height: 1.5; text-align: center; }
+  .reel__m { color: var(--ink-2); }
+  /* a fine pointer reads the name from the label that follows it (D109): the caption steps out of the flow and out
+     of sight, stays the link's name, and shows again under a keyboard's focus */
+  @media (hover: hover) and (pointer: fine) and (min-width: 48rem) {
+    .reel__cap { position: absolute; inset: 100% 0 auto; opacity: 0; transition: opacity var(--t-hover) var(--ease-out); }
+    .reel__a:focus-visible .reel__cap { opacity: 1; }
+  }
+  @media (max-width: 47.99rem) {
+    .reel { --stage-w: calc(100vw - 2 * var(--site-edge)); --gap: var(--s6); padding-top: calc(var(--head-h) + var(--s4)); }
+    .reel__it { --sh: 74.25; --mt: 0; --mw: 86; --mh: 53.75; }
+    .reel__it--film { --sh: 68.875; --mh: 48.375; }
+    .reel__it--duo-p { --sh: 87.5; --ml: 15; --mw: 70; --mh: 87.5; }
+    .reel__l--side, .reel__it--duo .reel__l--side { --l: 48; --t: calc(var(--sh) - 32.5); --w: 52; --h: 32.5; }
+    .reel__l--drawing { display: none; }
+  }
+  /* a case study's next project (D115): the home's own composition, its caption always shown (no label follows the
+     pointer there: the caption is the next page's name, read before the click) */
+  .reel--next { padding: var(--s6) var(--site-edge) 0; }
+  @media (hover: hover) and (pointer: fine) and (min-width: 48rem) { .reel--next .reel__cap { position: static; opacity: 1; } }
 
-  /* the codas: practice, research, and the root of the index (dmcg's tree, its first branch) */
-  .coda { margin-top: var(--gap-chapter); }
+  /* the end of the page: the index's root joined to its families by curves, as dmcg's catalog tree begins */
+  .tree-root { display: grid; grid-template-columns: auto clamp(2.5rem, 7vw, 6rem) auto; align-items: center; justify-content: center;
+    margin-top: var(--gap-group); padding-inline: var(--site-edge); }
+  .tree-root__lines { align-self: stretch; width: 100%; height: 100%; min-height: 0; fill: none; stroke: var(--ui); opacity: 0.6; }
+  .tree-root__lines path { vector-effect: non-scaling-stroke; }
+  .tree-root__fam { display: grid; grid-auto-rows: 1fr; margin: 0; padding: 0; list-style: none; }
+  .tree-root__fam > li { display: flex; align-items: center; padding-block: var(--s1); }
+  /* filters and the tree's nodes keep their pill at rest (dmcg's catalog): under the pointer it fills */
   .pill { display: inline-flex; align-items: center; gap: 0.5em; min-height: 2.75rem; padding: 0 var(--s4); border: 1px solid var(--line);
-    border-radius: var(--r-pill); background: var(--bg); color: var(--ink); font-size: var(--fs-cap); text-decoration: none;
-    transition: border-color var(--t-hover) var(--ease-out); }
-  .pill:hover { border-color: var(--ink-2); }
+    border-radius: var(--r-ctl); background: var(--bg); color: var(--ink); font-size: var(--fs-cap); text-decoration: none;
+    transition: border-color var(--t-hover) var(--ease-out), background-color var(--t-hover) var(--ease-out), scale var(--t-press) var(--ease-out); }
+  .pill:hover { border-color: var(--ui); background-color: var(--bg-raised); }
+  .pill:active { scale: 0.98; }
   .pill__n { color: var(--ink-2); font-size: var(--fs-label); font-variant-numeric: tabular-nums; }
-  .tree-root { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: var(--s3) var(--s5); padding-inline: var(--site-edge); }
-  .tree-root__fam { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--s2); }
 
-  /* index ("Reel", D98): dmcg's catalog. The grid shows every image of the work on its project's ground, each
-     whole at its own ratio inside a 4:3 tile (D32, A10); the tree runs from the families to the projects; the list
-     is for reading. The letters on the left and the bar below choose; the corner captions give way to the bar
-     where both would not fit. */
+  /* index ("Reel, corrected", D110-D112): dmcg's catalog. Where there is room it opens on the tree: the root, the
+     four families and every picture of the chosen one as a leaf at its own ratio. The grid shows every picture in
+     a 4:3 tile, a render or film covering it (the whole picture is one click away) and a drawing whole on its
+     raised sheet; the list is for reading. The letters on the left and the bar below choose; the corner captions
+     give way to the bar where both would not fit. */
   .ix-head { display: grid; justify-items: center; gap: var(--s2); padding: var(--s6) var(--site-edge) 0; text-align: center; }
+  body[data-ix-view="tree"] .ix-head { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }   /* the root pill says it */
   .ix-lead { font-size: var(--fs-cap); color: var(--ink-2); }
   .tiles { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s5) 12px; padding: var(--s7) var(--site-edge) calc(var(--edge-bottom) + 5rem); }
   @media (min-width: 56.25rem) { .tiles { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 3vw 2.8vw; padding-inline: 6.2vw 4.8vw; } }
   .tile__fig { margin: 0; }
   .tile__frame { display: grid; place-items: center; aspect-ratio: 4 / 3; border-radius: var(--r-tile); background: var(--g-light); overflow: clip; text-decoration: none; }
-  html[data-theme="dark"] .tile__frame { background: var(--g-dark); }
-  .tile[data-kind="drawing"] .tile__frame { background: var(--bg); box-shadow: inset 0 0 0 1px var(--line); }
+  html[data-theme="dark"] .tile__frame { background: var(--g-dark); }   /* under a cover crop the ground only shows while the picture loads */
+  .tile__frame--sheet, html[data-theme="dark"] .tile__frame--sheet { background: var(--bg-raised); }
+  .tile__frame[data-crop] { display: block; }
+  .tile__frame[data-crop] :is(a, picture, img) { display: block; width: 100%; height: 100%; }
+  .tile__frame[data-crop] img { object-fit: cover; }
   .tile__img { display: block; }
   .tile__img :is(a, picture:not(.nw__keep), img) { display: block; width: 100%; height: auto; }
   .tile__cap { margin-top: var(--s2); display: flex; flex-wrap: wrap; align-items: center; gap: 0 var(--s2); font-size: var(--fs-label); line-height: 1.45; color: var(--ink-2); }
@@ -633,26 +668,48 @@
     .az a:hover { color: var(--ink); }
   }
   body:is([data-ix-view="tree"], [data-ix-view="list"]) .az { display: none; }
-  .ix-tree, .ix-list { padding: var(--s6) var(--site-edge) calc(var(--edge-bottom) + 5rem); }
-  .tree { position: relative; aspect-ratio: 1200 / 640; width: min(100%, 90rem, calc((100svh - var(--head-h) - 9rem) * 1.875)); margin-inline: auto; }
-  .tree__branch { position: absolute; inset: 0; }
-  .tree__lines { position: absolute; inset: 0; width: 100%; height: 100%; fill: none; stroke: var(--ink); stroke-opacity: 0.18; stroke-width: 1; }
-  .tree__lines path { vector-effect: non-scaling-stroke; }
-  .tree .pill { position: absolute; z-index: 1; translate: 0 -50%; }
-  .leaf { position: absolute; width: 8.5%; translate: -50% -50%; display: block; border-radius: var(--r-tile); overflow: clip; background: var(--bg); box-shadow: var(--shadow-card); }
-  .leaf :is(picture, img) { display: block; width: 100%; height: auto; }
-  @media (max-width: 47.99rem) { .ix-tree { display: none !important; } }
+  .ix-list { padding: var(--s6) var(--site-edge) calc(var(--edge-bottom) + 5rem); }
+  /* the tree (D110, D111): one canvas, 1200 units = its width = 100cqw, so the pills, the leaves and the connectors
+     the build placed on it keep together at any size. It is as wide as the first screen allows the projects'
+     branch to stand whole under the header (and never so narrow that the family pills meet). A branch is as tall
+     as its field (--h units); the pills stay at the middle of the first screen. */
+  .ix-tree { padding: var(--s2) var(--site-edge) calc(var(--edge-bottom) + 4rem); overflow-x: clip; }   /* an enlarged leaf at the edge never widens the page */
+  .tree { position: relative; display: grid; container-type: inline-size; margin-inline: auto; width: clamp(60rem, min(90rem, (100svh - var(--head-h) - 8rem) * 2), 100%); }
+  .tree__branch { grid-area: 1 / 1; position: relative; height: calc(var(--h) * 1cqw / 12); }
+  .tree__lines, .tree__trunk { position: absolute; left: 0; top: 0; width: 100%; height: 100%; overflow: visible; fill: none; stroke: var(--ink); stroke-opacity: 0.16; stroke-width: 1; }
+  .tree__trunk { height: 50cqw; }
+  :is(.tree__lines, .tree__trunk) path { vector-effect: non-scaling-stroke; transition: stroke-opacity var(--t-hover) var(--ease-out); }
+  .tree__lines path.is-hot, .tree__trunk path.is-on { stroke-opacity: 0.55; }
+  .tree__root, .tree__fam { position: absolute; z-index: 2; translate: 0 -50%; }
+  .tree__fam[aria-pressed="false"] { color: var(--ink-2); }   /* the other families are greyed, at 6.4:1 */
+  /* a leaf: a render or film as a small card, a drawing floating on the page's own ground (which hides the
+     connectors passing behind its linework). Under the pointer or focus it grows to 1.45, lifts, and its caption
+     tag shows under it; its connector darkens (site.js) */
+  .leaf { position: absolute; z-index: 1; display: block; }
+  .leaf:is(:hover, :focus-within) { z-index: 3; }
+  .leaf__in { display: block; border-radius: var(--r-tile); overflow: clip; background: var(--bg); box-shadow: var(--shadow-card);
+    transition: scale var(--t-ui) var(--ease-out), box-shadow var(--t-ui) var(--ease-out); }
+  .leaf--drawing .leaf__in { border-radius: 0; box-shadow: none; }
+  .leaf__in :is(a, picture:not(.nw__keep), img) { display: block; width: 100%; height: auto; }
+  .leaf:is(:hover, :focus-within) .leaf__in { scale: 1.45; }
+  .leaf:not(.leaf--drawing):is(:hover, :focus-within) .leaf__in { box-shadow: var(--shadow-lift); }
+  .leaf__cap { position: absolute; left: 50%; top: calc(122.5% + var(--s2)); translate: -50% 0; padding: 0.125rem 0.5rem; border-radius: var(--r-tile);
+    background: var(--bg); box-shadow: 0 0 0 1px var(--line), 0 4px 12px -4px rgb(0 0 0 / 0.12); font-size: var(--fs-label); line-height: 1.5; white-space: nowrap;
+    visibility: hidden; opacity: 0; transition: opacity var(--t-hover) var(--ease-out), visibility 0s linear var(--t-hover); }
+  .leaf--end .leaf__cap { left: auto; right: -22.5%; translate: none; }   /* near the right edge it hangs from the leaf's right */
+  .leaf:is(:hover, :focus-within) .leaf__cap { visibility: visible; opacity: 1; transition-delay: 0s; }
+  @media (max-width: 63.99rem) { .ix-tree { display: none !important; } }
   .ix-list { overflow-x: auto; }
   .ix-table { width: min(100%, 72rem); margin-inline: auto; border-collapse: collapse; font-size: var(--fs-cap); }
   .ix-table :is(th, td) { padding: var(--s3) var(--s4) var(--s3) 0; border-bottom: 1px solid var(--line); text-align: left; font-weight: 400; vertical-align: baseline; white-space: nowrap; }
   .ix-table thead th { color: var(--ink-2); font-size: var(--fs-label); }
   .ix-table td:first-child, .ix-table td:last-child { color: var(--ink-2); font-variant-numeric: tabular-nums; }
-  .ix-table a { display: inline-flex; align-items: center; min-height: 1.75rem; text-decoration: none; }
-  .ix-table a:hover { text-decoration: underline; }
+  .ix-table a { display: inline-flex; align-items: center; min-height: 1.75rem; padding-inline: var(--pill-x); margin-inline: calc(-1 * var(--pill-x)); color: var(--ink); text-decoration: none; }
   .ix-bar { position: fixed; z-index: 17; left: 50%; bottom: clamp(0.75rem, 1.5vw, 1.5rem); translate: -50% 0; display: flex; gap: var(--s4); align-items: center; }
   .ix-bar__group { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--s1); }
   html:has(.ix-bar) { scroll-padding-bottom: 8rem; }
-  body[data-ix-view="list"] .ix-bar__group:first-child { display: none; }   /* the list is of projects: no families (D101) */
+  /* the list is of projects (D101) and the tree chooses with its own pills: the bar's families are for the grid */
+  body:is([data-ix-view="list"], [data-ix-view="tree"]) .ix-bar__group:first-child { display: none; }
   @media (max-height: 32rem) {
     .site-header { position: absolute; }
     .ix-bar { position: static; translate: none; flex-wrap: wrap; justify-content: center; margin: var(--s4) var(--site-edge) 0; }
@@ -660,72 +717,58 @@
   .ix-bar .pill[aria-pressed="true"], .tree .pill[aria-pressed="true"] { border-color: var(--ink); }
   .pill--icon { width: 2.75rem; padding: 0; justify-content: center; }
   .pill--icon svg { width: 1.125rem; height: 1.125rem; fill: none; stroke: currentColor; stroke-width: 1.5; }
+  @media (max-width: 63.99rem) { .ix-bar [data-view-btn="tree"] { display: none; } }
+  /* a phone: one line, the families scrolling sideways beside the views (five pills wrapped to three lines) */
   @media (max-width: 47.99rem) {
-    .ix-bar { left: var(--site-edge); right: var(--site-edge); translate: none; flex-wrap: wrap; justify-content: center; gap: var(--s2); }
-    .ix-bar [data-view-btn="tree"] { display: none; }
+    .ix-bar { left: var(--site-edge); right: var(--site-edge); translate: none; justify-content: center; gap: var(--s2); }
+    .ix-bar__group:first-child { flex: 0 1 auto; min-width: 0; flex-wrap: nowrap; justify-content: flex-start; overflow-x: auto; scrollbar-width: none; padding: 3px; margin: -3px; }   /* the padding keeps focus rings whole */
+    .ix-bar__group:first-child .pill { flex: none; }
+    .ix-bar__group:last-child { flex: none; flex-wrap: nowrap; }
   }
   @media (max-width: 89.99rem) { .page-work .corner { display: none; } }
 
-  /* about ("Reel", D99): Michael Gatt's told story on the dark ground in both schemes (A11), then the CV on the
-     field. Key words in Garamond capitals tracked .3em, the words between them small (--connector, 5.4:1 on the
-     ground, measured); six short chapters, the chapter rail on the right; the header turns light over the ground. */
-  .page-about { padding-top: 0; }
-  .tale { --bg: #111111; --ink: #F7F5EF; --ink-2: #C9C7C0; --line: #45463F; --ui: #B4B1A9; --connector: #8D8B85;
-    position: relative; background: var(--bg); color: var(--ink); }
-  html[data-theme="dark"] .tale { --bg: #121311; }
-  .tale__stage { display: grid; justify-items: center; align-content: center; gap: var(--s5); min-height: 100svh;
-    padding: calc(var(--head-h) + var(--s6)) var(--site-edge) var(--s7); text-align: center; }
-  .tale__line { margin: 0; max-width: 60rem; font-family: var(--serif); font-weight: 400; font-size: clamp(1.375rem, 1rem + 1.6vw, 2.5rem);
-    line-height: 1.55; letter-spacing: var(--tr-tale); text-transform: uppercase; text-wrap: balance; }
-  .tale__k { color: var(--ink); text-decoration: none; }
-  .tale__c { margin-inline: 0.35em; font-family: var(--sans); font-size: 0.8125rem; letter-spacing: 0.04em; text-transform: none; color: var(--connector); vertical-align: middle; }
-  .tale__link { text-decoration: underline; text-decoration-thickness: 1px; text-decoration-color: var(--ui); text-underline-offset: 0.25em; }
-  .tale__link:hover { text-decoration-color: var(--ink); }
-  .sc { display: inline-block; white-space: nowrap; }
-  .sc__l { display: inline-block; }
-  .tale__sub { max-width: 44rem; font-size: var(--fs-cap); line-height: 1.6; color: var(--ink-2); text-wrap: balance; }
-  .tale__prize { color: var(--ink); }
-  .tale__text { max-width: 36rem; font-size: var(--fs-lead); line-height: 1.5; text-align: left; color: var(--ink-2); }
-  .tale__ch--who .tale__stage { grid-template-columns: minmax(0, 1fr); }
-  .tale__portrait { width: min(70vw, 26rem, calc(68svh * 1442 / 2560)); }
-  .tale__portrait :is(picture, img) { display: block; width: 100%; height: auto; }
-  .tale__copy { display: grid; gap: var(--s5); justify-items: center; }
-  @media (min-width: 64rem) {
-    .tale__ch--who .tale__stage { grid-template-columns: auto minmax(0, 36rem); column-gap: clamp(2rem, 6vw, 6rem); justify-content: center; text-align: left; }
-    .tale__ch--who .tale__copy { justify-items: start; }
-    .tale__ch--who .tale__line { text-align: left; }
-  }
-  .tale__fig { margin: 0; display: grid; gap: var(--s2); }
-  .tale__fig figcaption { font-size: var(--fs-label); color: var(--ink-2); }
-  .tale__fig--wide { width: min(100%, 64rem); }
-  .tale__fig :is(picture, img) { display: block; width: 100%; height: auto; }
-  .tale__list { display: grid; gap: var(--s4); margin: 0; padding: 0; }
-  .tale__list li { display: grid; gap: var(--s1); justify-items: center; }
-  .tale__list .tale__k { font-family: var(--serif); font-size: clamp(1.25rem, 1rem + 1.1vw, 2rem); letter-spacing: var(--tr-tale); text-transform: uppercase; }
-  .tale__m { font-size: var(--fs-cap); color: var(--ink-2); }
-  .tale__photos { display: grid; gap: var(--s5); width: min(100%, 64rem); }
-  @media (min-width: 48rem) {
-    .tale__photos { position: relative; height: min(52svh, 30rem); }
-    .tale__pic { position: absolute; width: min(24rem, 34%); padding: 0.5rem 0.5rem 0.75rem; background: #FFFFFF; box-shadow: 0 12px 32px -12px rgb(0 0 0 / 0.6); }
-    html[data-theme="dark"] .tale__pic { background: #F7F5EF; }
-    .tale__pic figcaption { color: #3A3A37; }
-    .tale__pic--1 { left: 2%; top: 6%; rotate: -4deg; }
-    .tale__pic--2 { left: 36%; top: 22%; rotate: 3deg; z-index: 1; }
-    .tale__pic--3 { right: 2%; top: 0; width: min(18rem, 26%); rotate: -2deg; }
-  }
-  .tale-rail { display: none; }
-  @media (min-width: 80rem) {
-    .tale-rail { display: block; position: sticky; top: 0; z-index: 5; height: 0; }
-    .tale-rail ol { position: absolute; right: var(--site-edge); top: 50svh; translate: 0 -50%; display: grid; gap: var(--s1); margin: 0; padding: 0; list-style: none; text-align: right; }
-    .tale-rail a { display: inline-flex; align-items: center; justify-content: flex-end; gap: var(--s2); min-height: 1.75rem; font-size: var(--fs-label); color: var(--connector); text-decoration: none;
-      transition: color var(--t-ui) var(--ease-out); }
-    .tale-rail a::after { content: ""; width: 0.875rem; height: 1px; background: currentColor; transition: width var(--t-ui) var(--ease-out); }
-    .tale-rail a:hover, .tale-rail a[aria-current] { color: var(--ink); }
-    .tale-rail a[aria-current]::after { width: 1.75rem; }
-  }
-  /* the header over the ground (D99): its words and edge turn to the ground's own colours while it stands over it */
-  .site-header { transition: --bg 300ms var(--ease-out), --ink 300ms var(--ease-out), --ink-2 300ms var(--ease-out); }
-  html.on-dark:not([data-theme="dark"]) .site-header { --bg: #111111; --ink: #F7F5EF; --ink-2: #C9C7C0; --line: #45463F; --ui: #B4B1A9; color: var(--ink); }
+  /* about (D113, D114): dmcg's About, one column in the one voice at the header's size, on the field. Entries are
+     rows (the name in ink and its date in grey, then what it was); the practice stands on a raised card that reaches
+     past the words, so they keep one left edge; photographs stand whole on the tiles' radius. */
+  .about__col { width: min(100% - 2 * var(--margin), 34rem); margin-inline: auto; padding-block: var(--s6) var(--gap-group);
+    display: grid; gap: var(--s7); font-size: var(--fs-brand); line-height: 1.55; }
+  .about__s { display: grid; gap: var(--s4); }
+  .about__name, .about__h { font-size: inherit; font-weight: 600; letter-spacing: 0; line-height: 1.4; }
+  .about__name:focus { outline: none; }   /* the sheet's starting point for reading: a heading, never a control */
+  .about__g { color: var(--ink-2); }
+  .about__rows { display: grid; gap: var(--s5); }
+  .about__row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); gap: var(--s1) var(--s5); }
+  @media (max-width: 29.99rem) { .about__row { grid-template-columns: minmax(0, 1fr); } }
+  .about__row dt :is(b, a) { font-weight: 600; }
+  .about__row dt a { display: inline-block; }   /* its whole line box is the target, 24px or more (WCAG 2.5.8) */
+  .about__row dt .about__g { display: block; font-variant-numeric: tabular-nums; }
+  .about__row dd { display: grid; align-content: start; gap: var(--s2); margin: 0; }
+  .about__card { --card-x: min(var(--s6), var(--margin) - 0.5rem); margin-inline: calc(-1 * var(--card-x)); padding: var(--s6) var(--card-x);
+    border-radius: var(--r-card); background: var(--bg-raised); }
+  .about__fig { display: grid; gap: var(--s2); }
+  .about__fig :is(picture, img) { display: block; width: 100%; height: auto; border-radius: var(--r-tile); }
+  .about__fig figcaption { font-size: var(--fs-label); line-height: 1.4; color: var(--ink-2); }
+  .about__portrait { width: min(100%, 20rem); }
+  .about__pair { gap: var(--s4); }
+  @media (max-width: 29.99rem) { .about__pair { flex-direction: column; } .about__pair > .cell { flex: none; width: 100%; } }
+  .about__links { display: flex; flex-wrap: wrap; gap: 0 var(--s1); margin-inline: calc(-1 * var(--pill-x)); }
+  .about__links > a, .about__links .mail__a { display: inline-flex; align-items: center; min-height: 2.75rem; padding-inline: var(--pill-x); color: var(--ink); text-decoration: none; }
+
+  /* the sheet (D113): a dialog under the fixed header (z 18 < 20) and not modal, so the header stays crisp and usable
+     over it. The veil blurs the page behind and washes it with the field (dmcg's grey cloud); the column scrolls on
+     its own and passes under the header's edge as the page does. While it is open the name gives way to it, X stands
+     in the header row (beside the column where there is room, else first among the tools) and About keeps its pill. */
+  .about { position: fixed; inset: 0; z-index: 18; width: auto; height: auto; margin: 0; overflow: hidden; background: none; color: var(--ink); }
+  .about__veil { position: absolute; inset: 0; background: color-mix(in srgb, var(--bg) 55%, transparent);
+    -webkit-backdrop-filter: blur(48px); backdrop-filter: blur(48px); }
+  @media (prefers-reduced-transparency: reduce) { .about__veil { background: var(--bg); -webkit-backdrop-filter: none; backdrop-filter: none; } }
+  .about__scroll { position: absolute; inset: 0; overflow-y: auto; overscroll-behavior: contain; padding-top: var(--head-h); }
+  .sheet-x { display: none; align-items: center; justify-content: center; min-width: 2.75rem; min-height: 2.75rem; padding: 0; background: none; color: var(--ink); }
+  html.sheet-open .sheet-x { display: inline-flex; }
+  .sheet-x svg { width: 1.25rem; height: 1.25rem; }
+  @media (min-width: 80rem) { html.sheet-open .sheet-x { position: absolute; top: clamp(0.5rem, 1.3vw, 1.25rem); left: calc(50% + 17rem + var(--s5)); } }
+  .site-header .brand { transition: opacity var(--t-sheet) var(--ease-out), visibility 0s; }
+  html.sheet-open .site-header .brand { opacity: 0; visibility: hidden; transition: opacity var(--t-hover) var(--ease-out), visibility 0s linear var(--t-hover); }
 
   /* section heads: a title and its link, centred */
   .head { display: grid; justify-items: center; gap: var(--s1); text-align: center; }
@@ -763,45 +806,61 @@
     .page-case .g > .s-narrow { grid-column: 4 / span 6; }
     .page-case .g > .s-four { grid-column: 4 / span 4; }
   }
-  /* the opening: who and where, the name, then what it is in one plain sentence (the 10-second test) */
-  .case-run, .case-name { grid-column: 1 / -1; }
-  .case-name { margin-top: var(--s4); }
-  .case-title { width: fit-content; max-width: 100%; font-size: var(--fs-display); letter-spacing: var(--tr-display); line-height: 1.05; }
-  .case-lead { margin-top: var(--s5); }
-  .case-lead .honour { margin-top: var(--s4); }
-  /* the title block: type and status on a strip under a full rule, then the specification in cells of three
-     columns, each under a hairline (an architect's title block: the facts in fixed fields) */
-  .tb { margin-top: var(--s7); }
-  .tb__strip { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--s1) var(--s5); padding-top: var(--s3); border-top: 1px solid var(--ink); }
-  .tb__cells { display: grid; grid-template-columns: subgrid; row-gap: var(--s5); margin-top: var(--s5); }
-  .tb__cell { grid-column: span 2; padding-top: var(--s3); border-top: 1px solid var(--line); }
-  @media (max-width: 29.99rem) { .tb__cell { grid-column: 1 / -1; } }
-  @media (min-width: 64rem) { .tb__cell { grid-column: span 3; } }
-  .tb__cell dt { font-family: var(--sans); font-size: var(--fs-label); font-weight: var(--w-label); letter-spacing: var(--tr-caps); text-transform: var(--case); color: var(--ink-2); line-height: 1.5; }
-  .tb__cell dd { margin-top: var(--s1); font-size: var(--fs-cap); line-height: 1.5; }
-  @media (min-width: 64rem) { .case-quote { grid-column: 4 / -1; } }
-  /* contents: the chapters as numbered links, on the copy axis in two columns of three grid columns */
-  .toc { display: grid; grid-template-columns: subgrid; margin-top: var(--s6); }
-  .toc > * { grid-column: 1 / -1; }
-  .toc__list { margin-top: var(--s2); display: grid; column-gap: var(--gutter); }
-  @media (min-width: 48rem) { .toc__list { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  /* the opening (D115): the project's words on the left, its hero, caption and facts on the right (7 of 12 columns, so
+     the hero's plate is 58% of the row); below 64rem they stack, words first. The hero frame keeps the opening's ratio
+     (--ar) everywhere and each render covers its share of it (data-crop); a declared figure crop works the same way */
+  .op__in { padding-top: clamp(2.5rem, 6vw, 5rem); row-gap: var(--s6); }
+  .op__k { color: var(--ink-2); }
+  .op__t { margin-top: var(--s3); font-size: var(--fs-display); letter-spacing: var(--tr-display); line-height: 1.05; }
+  .op__lead { margin-top: var(--s5); }
+  .op__x { margin-top: var(--s4); }
+  .op__x + .op__x { margin-top: var(--s2); }
+  .op__slot { aspect-ratio: var(--ar); }
+  .op__media { display: flex; gap: var(--s2); width: 100%; height: 100%; }
+  .op__f { flex: var(--r) 1 0%; min-width: 0; overflow: clip; }
+  .crop { display: block; aspect-ratio: var(--ar); overflow: clip; }
+  :is(.op__f, .crop) :is(.nw, picture, img) { display: block; width: 100%; height: 100%; max-width: none; }
+  :is(.op__f, .crop) img { object-fit: cover; object-position: var(--pos, 50% 50%); }
+  .op__cap { margin-top: var(--s4); }
+  /* the facts as an architect's title block: fixed fields, each under a hairline */
+  .op__facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s4) var(--gutter); margin-top: var(--s5); }
+  @media (min-width: 48rem) { .op__facts { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+  .op__fact { padding-top: var(--s2); border-top: 1px solid var(--line); }
+  .op__fact dt { font-size: var(--fs-label); color: var(--ink-2); line-height: 1.5; }
+  .op__fact dd { margin-top: var(--s1); font-size: var(--fs-cap); line-height: 1.45; }
   @media (min-width: 64rem) {
-    .toc > .toc__h { grid-column: 1 / span 3; padding-top: 0.75rem; }
-    .toc > .toc__list { grid-column: 4 / span 6; margin-top: 0; }
+    .op__in { align-items: center; }
+    .g > .op__text { grid-column: 1 / span 5; }
+    .g > .op__side { grid-column: 6 / -1; }
+    .case-quote { grid-column: 4 / -1; }
   }
-  .toc a { display: flex; align-items: center; gap: var(--s3); min-height: 2.75rem; color: var(--ink); text-decoration: none; font-family: var(--sans);
-    font-size: var(--fs-title); font-weight: var(--w-label); letter-spacing: var(--tr-caps); text-transform: var(--case); line-height: 1.3;
-    transition: color var(--t-hover) var(--ease-out); }
-  .toc a:hover { color: var(--ink-2); }
-  .toc__n { min-width: 1.75em; color: var(--ink-2); font-variant-numeric: tabular-nums; }
-  /* chapters (D74): a rule across the row, the number and name on the rail, the chapter's own words on the
-     copy axis; its first plate follows close, so the words stay with the evidence they describe */
+  /* the chapter rail (D115), from 80rem where the margin beside the 1280px canvas holds it: a dash per chapter on the
+     right edge, the current one longer and in ink; a dash names its chapter in the frosted pill under the pointer or
+     the keyboard. It stands in the chapters' own box (sticky, no height), so it comes and goes with them */
+  .rail { display: none; }
+  @media (min-width: 80rem) {
+    .rail { display: block; position: sticky; top: 50svh; z-index: 5; height: 0; }
+    .rail ol { position: absolute; right: var(--site-edge); top: 0; translate: 0 -50%; display: grid; justify-items: end; margin: 0; padding: 0; list-style: none; }
+    .rail a { position: relative; display: flex; align-items: center; justify-content: flex-end; min-width: 2rem; min-height: 1.5rem; color: var(--ink-2); text-decoration: none; }
+    .rail a::after { content: ""; width: 0.875rem; height: 1px; background: currentColor; transition: width var(--t-ui) var(--ease-out); }
+    .rail a[aria-current] { color: var(--ink); }
+    .rail a[aria-current]::after { width: 1.75rem; }
+    .rail__t { position: absolute; right: calc(100% + 0.25rem); padding: 0.2rem 0.75rem; border: 1px solid var(--line); border-radius: var(--r-pill);
+      background: color-mix(in srgb, var(--bg) 86%, transparent); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
+      color: var(--ink); font-size: var(--fs-label); line-height: 1.5; white-space: nowrap; pointer-events: none;
+      opacity: 0; translate: 6px 0; transition: opacity var(--t-hover) var(--ease-out), translate var(--t-hover) var(--ease-out); }
+    .rail a:is(:hover, :focus-visible) .rail__t { opacity: 1; translate: none; }
+    .rail__n { color: var(--ink-2); font-variant-numeric: tabular-nums; }
+  }
+  /* chapters (D74, D116): a rule across the row, the number and name on the rail, the chapter's own words on the
+     copy axis; its first plate follows close (2.5rem), so the words stay with the evidence they describe */
   .ch { margin-top: var(--gap-chapter); }
   .ch__bar { border-top: 1px solid var(--line); }
   .ch__t { margin-top: var(--s4); font-size: var(--fs-ch); letter-spacing: var(--tr-display); line-height: 1.2; }
   .ch__n { display: block; margin-bottom: var(--s2); font-size: var(--fs-label); letter-spacing: var(--tr-caps); color: var(--ink-2); font-variant-numeric: tabular-nums; }
   .ch__text { margin-top: var(--s4); }
-  .ch__head + .fig { margin-top: var(--s7); }
+  .ch__head + .fig { margin-top: 2.5rem; }
+  @media (min-width: 64rem) { .page-case .fig + .fig { margin-top: 4.5rem; } }
   .role { display: grid; gap: var(--s4); }
   .role li { position: relative; padding-left: var(--s5); }
   .role li::before { content: ""; position: absolute; left: 0; top: 0.8em; width: 0.625rem; height: 1px; background: var(--ink-2); }
@@ -820,17 +879,11 @@
     .page-case .fig--dock > .fig__plate { grid-row: 1; }
     .page-case .g > .cap--side { grid-column: 1 / span 3; grid-row: 1; margin-top: 0; }
   }
-  /* next project: the index, the name at display size (it morphs into the next page's title), the plate */
-  .next .ch__bar { border-top: 1px solid var(--line); }
+  /* next project: its place in the series, then its composition from the home (it morphs into the next page's hero) */
+  .next { margin-top: var(--gap-chapter); }
   .next__label { margin-top: var(--s4); }
   .next__i { margin-left: var(--s3); font-variant-numeric: tabular-nums; }
-  .next__t { margin-top: var(--s3); }
-  .next__t a { display: inline-block; font-family: var(--sans); font-weight: var(--w-label); font-size: var(--fs-display); letter-spacing: var(--tr-display);
-    line-height: 1.05; text-transform: var(--case); text-decoration: none; transition: color var(--t-hover) var(--ease-out); }
-  .next__t a:hover { color: var(--ink-2); }
-  .next__meta { margin-top: var(--s4); }
-  .next__media { margin-top: var(--s7); }
-  .next__all { margin-top: var(--s4); }
+  .next__all { margin-top: var(--s6); text-align: center; }
 
   /* research */
   .book__ar { font-size: var(--fs-lead); line-height: 1.6; color: var(--ink-2); }
@@ -867,6 +920,16 @@
   @keyframes vt-out { to { opacity: 0; } }
   @keyframes vt-in { from { opacity: 0; transform: translateY(12px); } }
   @keyframes vt-fade { from { opacity: 0; } }
+
+  /* state (D108): a change of scheme spreads from its button in a feathered circle (site.js animates --vt-r on the
+     new picture); the old picture stands still under it, nothing else travels, and the page under the pictures
+     takes the pointer, so a second click can run the circle back */
+  html.theme-vt::view-transition { pointer-events: none; }
+  html.theme-vt::view-transition-old(root), html.theme-vt::view-transition-new(root) { animation: none; mix-blend-mode: normal; }
+  html.theme-vt::view-transition-new(root) {
+    -webkit-mask-image: radial-gradient(circle at var(--vt-x) var(--vt-y), #000 calc(var(--vt-r) - 6rem), transparent var(--vt-r));
+    mask-image: radial-gradient(circle at var(--vt-x) var(--vt-y), #000 calc(var(--vt-r) - 6rem), transparent var(--vt-r)); }
+  html.theme-vt [style*="view-transition-name"] { view-transition-name: none !important; }
 
   /* orientation (D93): on a page's first load the frame comes into focus, routes, then name, then tools (dmcg's
      intro: blur 6px to sharp in 500ms, staggered 120 / 170 / 280ms); a page reached through a view transition
@@ -912,41 +975,58 @@
   @keyframes draw { from { transform: scaleX(0); } }
 
 
-  /* orientation (D96, D97): the home's film and column, scroll-linked under html.fx from --p and --d (site.js).
-     The film's track is three screens tall (two on phones); its stage stands while the frame opens from a
-     card to the screen's width over the first 35% and the chapters pass one at a time, each fully in view at
-     its own --c. The column's items open as they cross the centre (--s: 0 away, 1 centred): the render steps
-     left and settles to its size while its drawing comes in beside it, and both close again as they leave;
-     items fade towards the edges, and on a fine pointer they also blur there, as dmcg's do. */
-  html.fx .film { height: 320svh; }
-  @media (max-width: 47.99rem) { html.fx .film { height: 220svh; } }
-  html.fx .film__stage { position: sticky; top: 0; height: 100svh; grid-template-rows: minmax(0, 1fr) auto; align-content: stretch;
-    padding-bottom: calc(var(--edge-bottom) + var(--s3)); contain: layout; }
-  html.fx .film__frame { --g: clamp(0, var(--p, 0) / 0.35, 1);
-    --w0: min(50vw, 60rem, var(--nw)); --w1: min(100vw - 2 * var(--site-edge), var(--nw), (100svh - var(--head-h) - 15rem) * 1.7778);
-    align-self: center; width: calc(var(--w0) + (var(--w1) - var(--w0)) * var(--g)); }
-  @media (max-width: 47.99rem) { html.fx .film__frame { --w0: calc(100vw - 2 * var(--site-edge) - 3rem); } }   /* a phone starts near its width */
-  html.fx .film__ch { grid-template-areas: "c"; min-height: 6.5rem; align-items: start; }
-  html.fx .film__ch > li { grid-area: c; opacity: clamp(0, 1 - max(var(--p, 0) - var(--c), var(--c) - var(--p, 0)) * 9, 1);
-    translate: 0 calc((var(--c) - var(--p, 0)) * 48px); }
-  html.fx .rail { display: grid; gap: 0.625rem; position: absolute; right: var(--site-edge); top: 50%; translate: 0 -50%; margin: 0; padding: 0; list-style: none; }
-  .rail > li { justify-self: end; width: 0.875rem; height: 1px; background: var(--ink); opacity: 0.35;
-    transition: width var(--t-ui) var(--ease-out), opacity var(--t-ui) var(--ease-out); }
-  .rail > li.is-on { width: 1.75rem; opacity: 1; }
-  html.fx .col__it { --ad: max(var(--d, 0), -1 * var(--d, 0)); --s: clamp(0, 1 - var(--ad) * 2.4, 1); opacity: clamp(0, 1.7 - var(--ad) * 1.6, 1); }
-  @media (min-width: 48rem) {
-    html.fx .col__it--pair .col__card { translate: calc(36% * (1 - var(--s))) 0; scale: calc(1 + 0.25 * (1 - var(--s))); }
-    html.fx .col__it--pair .col__key { opacity: var(--s); translate: calc(12% * (1 - var(--s))) 0; }
-    html.fx :is(.col__it--single, .col__it--film) .col__card { scale: calc(1.06 - 0.06 * var(--s)); }
+  /* orientation, hierarchy (D105): each composition passes through the screen as a function of its --d (site.js:
+     1 entering at the bottom, 0 centred, -1 leaving at the top), so it runs backwards when the reader scrolls up.
+     Within |d| < 0.14 it stands assembled. Entering, it rises 6vh into place while the main card shrinks from
+     1.28 into its frame and the other layers slide out from behind it (the side first, the drawing after it;
+     both land as the dead zone begins). Leaving, the layers drift up at their own rates (side 1.5, main 1.2,
+     drawing 0.9) and fade. On a fine pointer the stage alone blurs in both bands: one filter per composition.
+     Layers keep their compositor layer there (will-change), so their shadows are never repainted mid-scroll. */
+  html.fx .reel__it { --grow: 0.28; --rise: 6vh; --drift: 8vh; --in: clamp(0, (var(--d, 0) - 0.14) / 0.86, 1); --out: clamp(0, (-0.14 - var(--d, 0)) / 0.86, 1); }
+  html.fx .reel__a { translate: 0 calc(var(--in) * var(--rise)); opacity: calc(1 - 0.75 * max(var(--in), var(--out))); }   /* the caption travels with its stage */
+  html.fx .reel__l { --o: clamp(0, var(--in) / var(--lag, 1), 1); --k: 1.2; scale: calc(1 - 0.3 * var(--o));
+    translate: calc(var(--fx) * var(--o) * var(--o) * 1cqw) calc(var(--fy) * var(--o) * var(--o) * 1cqw - var(--out) * var(--k) * var(--drift)); }
+  html.fx .reel__l--main { --o: 0; scale: calc(1 + var(--grow) * var(--in)); }
+  html.fx .reel__l--side { --lag: 0.62; --k: 1.5; }
+  html.fx .reel__l--drawing { --lag: 0.4; --k: 0.9; }
+  html.fx :is(.reel__l--drawing, .reel__it--duo .reel__l--side) { opacity: calc(1 - var(--o)); }   /* above the main card: it fades in as it leaves the centre */
+  @media (max-width: 47.99rem) { html.fx .reel__it { --grow: 0.12; } }
+  html.fx .reel__it:focus-within { --in: 0; --out: 0; }   /* reached by the keyboard: assembled and sharp, its focus ring never faded (WCAG 2.4.7) */
+  @media (hover: hover) and (pointer: fine) {
+    html.fx .reel__stage { filter: blur(calc(max(var(--in), var(--out)) * 16px)); }
+    html.fx .reel__l { will-change: translate, scale; }
   }
-  @media (hover: hover) and (pointer: fine) { html.fx .col__stage { filter: blur(calc(max(0, var(--ad, 0) - 0.55) * 16px)); } }
-  /* hierarchy: on its first load the film comes into focus in the frame it already fills (dmcg's card intro, blur
-     only: the poster is the largest paint and stays visible from the first frame) */
-  @media (prefers-reduced-motion: no-preference) {
-    .film__frame > picture { animation: focus-card 1200ms var(--ease-out) 120ms backwards; }
-    .vt-arrived .film__frame > picture { animation: none; }
+
+  /* orientation, hierarchy (D115): a case study opens on a track whose stage stands still for 90svh of scroll (where a
+     desktop screen holds the opening: 64rem wide, 46rem tall). Its hero frame is laid out near full-bleed in the band
+     between the edges, at the opening's ratio, never wider than its render's pixels; over the first three quarters of
+     the track it settles into its slot by a move and a scale (measured by site.js, eased in and out here), and the
+     words, the caption and the facts arrive after it on the house's text grammar (opacity, 12px), each from its --s.
+     The last quarter holds the settled composition. A function of --p, so it runs back when the reader scrolls up. */
+  @media (min-width: 64rem) and (min-height: 46rem) {
+    html.fx .op { height: 190svh; margin-top: calc(-1 * var(--head-h)); }   /* the stage is the whole screen, under the fixed header */
+    html.fx .op__stage { position: sticky; top: 0; height: 100svh; display: grid; align-content: center; padding-block: var(--edge-top) var(--edge-bottom); container-type: inline-size; }
+    html.fx .op__in { padding-top: 0; }
+    html.fx .op__media { --band: calc(100svh - var(--edge-top) - var(--edge-bottom)); --aw: min(100cqw - 2 * var(--site-edge), var(--band) * var(--ar), var(--nw, 100cqw));
+      position: absolute; z-index: 2; inset-inline: 0; top: calc(var(--edge-top) + (var(--band) - var(--aw) / var(--ar)) / 2);
+      width: var(--aw); height: calc(var(--aw) / var(--ar)); margin-inline: auto;
+      --h: clamp(0, var(--p, 0) / 0.75, 1); --E: calc(var(--h) * var(--h) * (3 - 2 * var(--h)));
+      transform-origin: 0 0; translate: calc(var(--tx, 0px) * var(--E)) calc(var(--ty, 0px) * var(--E)); scale: calc(1 + (var(--k, 1) - 1) * var(--E)); will-change: translate, scale; }
+    html.fx :is(.op__text > *, .op__cap, .op__facts) { --a: clamp(0, (var(--p, 0) - var(--s, 0)) / 0.3, 1); opacity: var(--a); translate: 0 calc((1 - var(--a)) * 12px); }
+    html.fx .op .op__t { view-transition-name: none !important; }   /* hidden as the page arrives: the hero alone carries the morph */
   }
-  @keyframes focus-card { from { filter: blur(12px); scale: 1.012; } }
+
+  /* orientation, hierarchy (D115): a case study's plates and the heads of its chapters arrive as they enter the screen,
+     a function of --e (site.js: 1 as the top enters at the bottom, 0 once it is 45% up the screen, whatever the
+     height), so they run back too. A plate comes into focus (fine pointer), rises 3rem and grows from 94%; the cells of
+     a series start stacked at their line's centre and fan out to their places (12 columns only); a chapter's rule
+     draws from the left; the words that belong to a plate or a head follow it (opacity, 12px). */
+  html.fx [data-fx="enter"] { --o: calc(1 - var(--e, 0)); --o2: clamp(0, (var(--o) - 0.35) / 0.65, 1); }
+  html.fx .fig[data-fx] > :is(.fig__plate, .cells) { opacity: clamp(0, var(--o) * 1.6, 1); translate: 0 calc(var(--e, 0) * 3rem); scale: calc(0.94 + 0.06 * var(--o)); }
+  html.fx .fig[data-fx] > :is(.cap, .key), html.fx :is(.ch__head, .next__head)[data-fx] > :not(.ch__bar) { opacity: var(--o2); translate: 0 calc((1 - var(--o2)) * 12px); }
+  html.fx :is(.ch__head, .next__head)[data-fx] > .ch__bar { transform-origin: left; scale: var(--o) 1; }
+  @media (min-width: 64rem) { html.fx .fig[data-fx] :is(.row, .cells) > .cell { translate: calc(var(--c, 0) * -90% * var(--e, 0)) 0; } }
+  @media (hover: hover) and (pointer: fine) { html.fx .fig[data-fx] > :is(.fig__plate, .cells) { filter: blur(calc(var(--e, 0) * 8px)); } }
 
   /* orientation (D98): a tile of the index rises 46px and settles from 94% as it enters at the bottom of the screen
      (--d from 1 to 0.35): dmcg's grid entry, scrubbed by the scroll so it runs back too. A tile a filter brings
@@ -954,36 +1034,34 @@
   html.fx .tile { --e: clamp(0, var(--d, 0) - 0.35, 0.65); translate: 0 calc(var(--e) * 46px); scale: calc(1 - var(--e) * 0.09); }
   .tile.is-entering { animation: rise 420ms var(--ease-out) backwards; }
 
-  /* orientation, hierarchy (D99): the told story, scroll-linked from each chapter's --p (site.js). From 48rem and
-     40rem of height each chapter is a 170svh track whose stage stands while its words come into focus and leave;
-     the portrait takes its colour as the reader starts; the letters of Al-Arg gather by 45% of their chapter;
-     the three photographs of Japan drift at their own rates. The first chapter is in view from the first paint. */
-  @media (min-width: 48rem) and (min-height: 40rem) {
-    html.fx .tale__ch { height: 170svh; scroll-margin-top: -25svh; }
-    html.fx .tale__ch:focus-within .tale__stage > * { opacity: 1 !important; }   /* above the first and last chapters' own rules */
-    html.fx .tale__stage { position: sticky; top: 0; height: 100svh; min-height: 0; }
-    html.fx .tale__stage > * { opacity: clamp(0, min(var(--p, 0) * 8, (1 - var(--p, 0)) * 8), 1); translate: 0 calc((0.5 - var(--p, 0)) * 28px); }
-    html.fx #t-who .tale__stage > * { opacity: clamp(0, (1 - var(--p, 0)) * 8, 1); translate: 0 calc(var(--p, 0) * -28px); }
-    html.fx #t-tools .tale__stage > * { opacity: clamp(0, var(--p, 0) * 8, 1); translate: 0 calc((0.5 - min(var(--p, 0), 0.5)) * 28px); }
-    html.fx #t-who .tale__portrait img { filter: grayscale(calc(1 - min(1, var(--p, 0) * 4))); }
-    html.fx #t-thesis { --q: clamp(0, 1 - var(--p, 0) / 0.45, 1); }
-    html.fx .sc__l { translate: calc(var(--x) * var(--q, 0) * 1rem) calc(var(--y) * var(--q, 0) * 1rem); rotate: calc(var(--r) * var(--q, 0) * 1deg); }
-    html.fx .tale__pic--1 { translate: 0 calc((0.5 - var(--p, 0.5)) * 18svh); }
-    html.fx .tale__pic--2 { translate: 0 calc((0.5 - var(--p, 0.5)) * 30svh); }
-    html.fx .tale__pic--3 { translate: 0 calc((0.5 - var(--p, 0.5)) * 12svh); }
+  /* orientation (D113): the sheet comes in as its veil fades up and its column comes into focus from 12px below
+     (600ms), and leaves faster (450ms); transitions, so a close mid-way runs back from where it is. Blur on a fine
+     pointer only. Reduced motion: instant (the rule at the end of this layer). */
+  .about__veil { opacity: 0; transition: opacity var(--t-sheet-out) var(--ease-out); }
+  .about .about__col { opacity: 0; translate: 0 12px; transition: opacity var(--t-sheet-out) var(--ease-out), translate var(--t-sheet-out) var(--ease-out), filter var(--t-sheet-out) var(--ease-out); }
+  .about.is-in .about__veil { opacity: 1; transition-duration: var(--t-sheet); }
+  .about.is-in .about__col { opacity: 1; translate: none; filter: none; transition-duration: var(--t-sheet); }
+  @media (hover: hover) and (pointer: fine) { .about .about__col { filter: blur(6px); } .about__col { --about-blur: 6px; } }
+  /* hierarchy (D113): the column's words, rows and photographs come into focus over the first 12rem of their entry
+     into its scroller (the sheet's, or the page's on about.html): CSS scroll timelines, so they run back too; where
+     those are missing, or under reduced motion, they simply stand */
+  @media (prefers-reduced-motion: no-preference) {
+    @supports (animation-timeline: view()) {
+      :is(.about__s > :not(.about__rows, .about__card), .about__row, .about__portrait) { animation: about-in linear both; animation-timeline: view(); animation-range: entry 0% entry 12rem; }
+    }
   }
+  @keyframes about-in { from { opacity: 0; translate: 0 12px; filter: blur(var(--about-blur, 0px)); } }
 
-  /* orientation (D100): a case study's plate rises to its place as it enters the screen and goes back down the same way
-     when the reader scrolls back (--d from 1 to 0.4), so the document itself follows the wheel, not only its arrivals */
-  html.fx .fig[data-fx] { translate: 0 calc(clamp(0, var(--d, 0) - 0.4, 0.6) * 90px); }
-  /* the pointer's label (D97): dmcg's pill, following the cursor over a project */
-  .pill-label { position: fixed; left: 0; top: 0; z-index: 30; padding: 0.3rem 0.75rem; border-radius: var(--r-pill); background: var(--ink); color: var(--bg);
-    font-size: var(--fs-label); line-height: 1.4; white-space: nowrap; pointer-events: none; opacity: 0; scale: 0.9;
-    transition: opacity var(--t-hover) var(--ease-out), scale var(--t-hover) var(--ease-out); }
+  /* the pointer's label (D109, feedback): dmcg's frosted pill following the cursor, the name in ink and the
+     category in grey. The frost is the field at 86%, so the grey keeps 4.5:1 over the darkest render under it */
+  .pill-label { position: fixed; left: 0; top: 0; z-index: 30; display: flex; align-items: baseline; gap: 0.45em; padding: 0.3rem 0.85rem;
+    border: 1px solid var(--line); border-radius: var(--r-pill); background: color-mix(in srgb, var(--bg) 86%, transparent);
+    -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); color: var(--ink); font-size: var(--fs-brand); line-height: 1.35;
+    white-space: nowrap; pointer-events: none; opacity: 0; scale: 0.9; transition: opacity var(--t-hover) var(--ease-out), scale var(--t-hover) var(--ease-out); }
+  .pill-label__c { color: var(--ink-2); font-size: var(--fs-cap); }
+  .pill-label__c:empty { display: none; }
   .pill-label.is-on { opacity: 1; scale: 1; }
 
-  /* orientation (D88): a case study's hero group drifts 16px against the page, so the plate reads as standing behind its words */
-  html.fx .fx-drift { translate: 0 calc((var(--p, 0.5) - 0.5) * 32px); }
 
 
   /* state: the menu fades, its items rise in order */
@@ -1015,17 +1093,24 @@
   .muted { color: var(--ink-2); }
   .print-only { display: none; }
   @media print {
-    .site-header, .edge, .corner, .site-footer, .menu, .viewer, .skip, .no-print, .form, .about-contact, .about-portrait, .tale { display: none !important; }
+    .site-header, .edge, .corner, .site-footer, .menu, .viewer, .skip, .no-print, .about, .about__fig, .about__pair, .about__contact, .about__name { display: none !important; }
     @page { size: A4; margin: 16mm 16mm 18mm; }
-    :root { --bg: #FFFFFF; --ink: #111111; --ink-2: #5E5E5E; --line: #E6E6E6; --ui: #8A8A8A; --error: #A61B1B; --drawing-bg: #FFFFFF; --gap-group: 6mm; --gap-chapter: 8mm; --cols: 12; --gutter: 4mm; color-scheme: light; }
+    :root { --bg: #FFFFFF; --ink: #111111; --ink-2: #5E5E5E; --line: #E6E6E6; --ui: #8A8A8A; --drawing-bg: #FFFFFF; --gap-group: 6mm; --gap-chapter: 8mm; --cols: 12; --gutter: 4mm; color-scheme: light; }
     body { font-size: 10.5pt; line-height: 1.45; padding-top: 0; }
     .nw--drawing img, .key__c { filter: none !important; }  /* print shows every drawing as authored, black on white */
     .nw__keep { display: none !important; }
     .wrap { width: 100%; }
     .print-only { display: block; }
     .print-name { font-family: var(--sans); font-weight: var(--w-label); font-size: 18pt; letter-spacing: var(--tr-display); text-transform: var(--case); }
-    .about-head { text-align: left; }
-    .about-head .h1 { display: none; }
+    /* the CV (npm run cv prints about.html): the column across the page, its rows in two columns, no photographs */
+    .about__col { width: 100%; display: block; padding: 0; font-size: 10.5pt; }
+    .about__col > .print-only + .print-only { margin-bottom: 4mm; }
+    .about__s { gap: 2mm; margin-top: 5mm; }
+    .about__h { font-size: 10pt; padding-bottom: 1mm; border-bottom: 1px solid var(--line); break-after: avoid; }
+    .about__card { margin: 0; padding: 0; background: none; }
+    .about__rows { gap: 2mm; }
+    .about__row { grid-template-columns: minmax(0, 1fr) minmax(0, 3fr); break-inside: avoid; }
+    .about__row dd { gap: 0.5mm; }
     .g > .s-text, .g > .s-narrow { grid-column: 1 / -1; }
     .prose { max-width: none; margin: 0; }
     .cv__when { grid-column: 1 / span 3; font-size: 9.5pt; }

@@ -4,8 +4,8 @@
   "og": "images/og/about.jpg",
   "portrait": "images/about/portrait-sitting.jpg",
   "portraitAlt": "Hazem Radhouani seated on a low wooden bench against a wall of pale glazed tiles, beside a tall window full of daylight",
-  "tale": {
-    "$comment": "The told story (D99): photographs supplied by the owner for this page (docs/Images, 2026-10-22), re-encoded without metadata. People other than the owner are not named.",
+  "photos": {
+    "$comment": "The about column's photographs (D114; first published in the told story, D99): supplied by the owner for this page (docs/Images, 2026-10-22), re-encoded without metadata. People other than the owner are not named.",
     "graduation": { "src": "images/about/graduation-2026.jpg", "alt": "Five people smiling in front of a wall of architecture presentation boards: plans, elevations, diagrams and tables of project information", "caption": "ENAU, 2026" },
     "japan": [
       { "src": "images/about/japan-group.jpg", "alt": "A large group of participants in front of a traditional wooden gate with a tiled roof, wooded hills behind", "caption": "Sakura Science Program, Japan, 2025" },
@@ -28,7 +28,8 @@
       "what": "Sakura Science Program | Japan",
       "role": "Saga University & Waseda University | Invited researcher | Sole Tunisian representative",
       "text": "Competitive international selection, Japanese government-funded. Intensive workshops on historic district rehabilitation and adaptive reuse. Comparative analysis: North African medinas and Japanese machiya, focused on spatial identity and heritage resilience. Most Appreciated Research.",
-      "source": "site + answer:F02"
+      "href": "https://sagaunissp2025.my.canva.site/",
+      "source": "site + answer:F02; href owner:2026-10-23 (the programme's site, D123)"
     },
     {
       "when": "2024 - 2025",
@@ -65,6 +66,7 @@
       "what": "Final Year Architectural Thesis",
       "role": "ENAU, Université de Carthage | 14 June 2024",
       "text": "Thesis: Between the Poetics of Place and the Value of Heritage. Unanimous jury. Highest Honours",
+      "href": "projects/project-al-arg.html",
       "source": "site + answer:F01"
     },
     {
@@ -149,9 +151,5 @@
       "name": "English",
       "level": "Fluent"
     }
-  ],
-  "form": {
-    "action": "https://formsubmit.co/ajax/hazemradhouani@gmail.com",
-    "subjectPrefix": "Portfolio enquiry from "
-  }
+  ]
 }

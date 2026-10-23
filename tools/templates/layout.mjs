@@ -1,6 +1,6 @@
-// Document shell ("Reel", D93): head metadata, the fixed header on its edge, the corner captions, the sentence footer, dialogs.
+// Document shell ("Reel", D93): head metadata, the fixed header on its edge, the corner captions, the one-line footer, dialogs.
 import { html, raw, attrs, when } from '../lib/html.mjs';
-import { icon } from './partials.mjs';
+import { icon, mailChip, aboutColumn } from './partials.mjs';
 
 const abs = (site, rel) => site.origin + site.base + rel.replace(/^\.\//, '').replace(/^index\.html$/, '');
 
@@ -11,16 +11,21 @@ export function layout(site, page, body, ctx) {
   const v = ctx.versions;
   const P = site.person;
   const ld = (page.jsonld || []).map((o) => raw(`<script type="application/ld+json">${JSON.stringify(o).replace(/</g, '\\u003c')}</script>`));
+  // the About sheet (D113): on every page but about.html itself; About stays a link to about.html, the script opens the sheet
+  const sheet = !!ctx.about && page.nav !== 'about';
   const navItem = (n, i) => {
     const cur = page.nav === n.id ? (page.navExact ? 'page' : 'true') : null;
-    return html`<li style="--i: ${i}"><a href="${p}${n.href}"${attrs({ 'aria-current': cur })}>${n.label}</a></li>`;
+    if (n.id === 'contact') return html`<li style="--i: ${i}">${mailChip(P.email, n.label)}</li>`;
+    return html`<li style="--i: ${i}"><a class="ctl" href="${p}${n.href}"${attrs({ 'aria-current': cur, 'data-about': sheet && n.id === 'about' })}>${n.label}</a></li>`;
   };
+  // the sheet's close, in the header row so it stays crisp above the header's edge (shown only while the sheet is open)
+  const sheetX = html`<button class="sheet-x ctl" type="button" data-sheet-close aria-controls="about"><svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 3l10 10M13 3L3 13" fill="none" stroke="currentColor" stroke-width="1.25"/></svg><span class="vh">Close About</span></button>`;
   const home = p || './';
   const brand = (cur) => html`<a class="brand" href="${home}"${attrs({ 'aria-current': cur && page.nav === 'home' ? 'page' : null })}><span>${P.name}</span><span>${P.jobTitle}</span></a>`;
-  const menuButton = html`<button class="menu-button" type="button" commandfor="menu" command="show-modal" aria-haspopup="dialog" aria-controls="menu">Menu</button>`;
+  const menuButton = html`<button class="menu-button ctl" type="button" commandfor="menu" command="show-modal" aria-haspopup="dialog" aria-controls="menu">Menu</button>`;
   // an icon on screen (drawn for this site, inline so it also shows from file://); its name is still the state
   // followed by the action (D68), read from hidden words
-  const themeButton = (scope) => html`<button class="theme-button" type="button" data-theme-toggle data-theme-scope="${scope}"><svg viewBox="0 0 256 256" aria-hidden="true" focusable="false"><circle cx="128" cy="128" r="90" fill="none" stroke="currentColor" stroke-width="14"/><path fill="currentColor" d="M128 38a90 90 0 0 0 0 180Z"/></svg><span class="vh"><span data-theme-label>theme: light</span><span data-theme-action>, switch to dark</span></span></button>`;
+  const themeButton = (scope) => html`<button class="theme-button ctl" type="button" data-theme-toggle data-theme-scope="${scope}"><svg viewBox="0 0 256 256" aria-hidden="true" focusable="false"><circle cx="128" cy="128" r="90" fill="none" stroke="currentColor" stroke-width="14"/><path fill="currentColor" d="M128 38a90 90 0 0 0 0 180Z"/></svg><span class="vh"><span data-theme-label>theme: light</span><span data-theme-action>, switch to dark</span></span></button>`;
   const edge = (where) => html`<div class="edge${where === 'bottom' ? ' edge--bottom' : ''}" aria-hidden="true"><span class="edge__b1"></span><span class="edge__b2"></span><span class="edge__b3"></span><span class="edge__w"></span></div>`;
   const views = html`<nav class="views" aria-label="The work"><ul role="list">${site.views.map(navItem)}</ul></nav>`;
   const href = (rel) => p + rel;
@@ -72,28 +77,28 @@ ${edge('top')}
 <div class="site-header__in">
 <nav class="nav" aria-label="Main"><ul role="list">${site.nav.map(navItem)}</ul></nav>
 ${brand(true)}
-<div class="site-header__tools">${views}${themeButton('header')}${menuButton}</div>
+<div class="site-header__tools">${when(sheet, () => sheetX)}${views}${themeButton('header')}${menuButton}</div>
 </div>
 </header>
+${when(sheet, () => html`<dialog class="about" id="about" aria-label="About" data-lenis-prevent><div class="about__veil"></div><div class="about__scroll">${aboutColumn(site, ctx.about, p)}</div></dialog>`)}
 <main id="main" tabindex="-1">
 ${body}
 </main>
 <footer class="site-footer">
-<nav aria-label="Footer"><p class="tale-nav">See the <a href="${href('architecture.html')}">work</a>, the <a href="${href('books.html')}">research</a>, read <a href="${href('about.html')}">about</a> me, or <a href="${href('about.html#contact')}">get in touch</a>.</p></nav>
-<p class="site-footer__base"><a href="mailto:${P.email}">${P.email}</a><a href="${P.linkedin}" target="_blank" rel="noopener">LinkedIn<span class="vh"> (opens in a new tab)</span></a><a href="${href('files/hazem-radhouani-cv.pdf')}">CV (PDF)</a><a href="${href('motion.html')}">Films and motion</a><span>&copy; 2026 ${P.name}</span></p>
+<nav aria-label="Footer"><p class="site-footer__base"><span>&copy; 2026 ${P.name}</span>${mailChip(P.email)}<a class="ctl" href="${P.linkedin}" target="_blank" rel="noopener">LinkedIn<span class="vh"> (opens in a new tab)</span></a><a class="ctl" href="${href('files/hazem-radhouani-cv.pdf')}">CV (PDF)</a><a class="ctl" href="${href('motion.html')}">Films and motion</a></p></nav>
 </footer>
 ${when(page.corners, () => html`${edge('bottom')}<p class="corner corner--l">${site.corners[0]}</p><p class="corner corner--r">${site.corners[1]}</p>`)}
 <dialog class="menu" id="menu" aria-label="Site menu" data-lenis-prevent>
 <div class="wrap">
-<div class="menu__top">${brand(false)}<div class="menu__controls">${themeButton('menu')}<form method="dialog"><button class="menu__close" type="submit" autofocus>close</button></form></div></div>
+<div class="menu__top">${brand(false)}<div class="menu__controls">${themeButton('menu')}<form method="dialog"><button class="menu__close ctl" type="submit" autofocus>close</button></form></div></div>
 <nav aria-label="Main"><ul class="menu__list" role="list">${[...site.views, ...site.nav].map(navItem)}</ul></nav>
-<p class="menu__contact"><a href="mailto:${P.email}">${P.email}</a><a href="${P.linkedin}" target="_blank" rel="noopener">LinkedIn<span class="vh"> (opens in a new tab)</span></a></p>
+<p class="menu__contact"><a href="${P.linkedin}" target="_blank" rel="noopener">LinkedIn<span class="vh"> (opens in a new tab)</span></a></p>
 </div>
 </dialog>
 ${when(ctx.viewer, () => html`<dialog class="viewer" id="viewer" aria-labelledby="viewer-title" data-lenis-prevent>
-<div class="viewer__top"><span class="viewer__count" aria-hidden="true"></span><p class="viewer__title" id="viewer-title"></p><form method="dialog"><button class="viewer__btn" type="submit" autofocus>close${icon('x', p)}</button></form></div>
+<div class="viewer__top"><span class="viewer__count" aria-hidden="true"></span><p class="viewer__title" id="viewer-title"></p><form method="dialog"><button class="viewer__btn ctl" type="submit" autofocus>close${icon('x', p)}</button></form></div>
 <div class="viewer__stage" tabindex="0" role="group" aria-roledescription="image viewer" aria-label="Full-size image. Arrow keys: previous and next; double click or the actual size button: zoom"></div>
-<div class="viewer__bottom"><div class="viewer__nav"><button class="viewer__btn" type="button" data-viewer-toggle><span>actual size</span></button><a class="viewer__btn" data-viewer-project href="#" hidden>View project</a></div><div class="viewer__nav"><button class="viewer__btn" type="button" data-viewer-prev aria-label="Previous image">${icon('arrow-left', p)}</button><button class="viewer__btn" type="button" data-viewer-next aria-label="Next image">${icon('arrow-right', p)}</button></div></div>
+<div class="viewer__bottom"><div class="viewer__nav"><button class="viewer__btn ctl" type="button" data-viewer-toggle><span>actual size</span></button><a class="viewer__btn ctl" data-viewer-project href="#" hidden>View project</a></div><div class="viewer__nav"><button class="viewer__btn ctl" type="button" data-viewer-prev aria-label="Previous image">${icon('arrow-left', p)}</button><button class="viewer__btn ctl" type="button" data-viewer-next aria-label="Next image">${icon('arrow-right', p)}</button></div></div>
 </dialog>`)}
 </body>
 </html>

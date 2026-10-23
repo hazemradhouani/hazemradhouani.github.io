@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // Builds every page of the site from content/*.json. Zero dependencies (Node 20+).
-// Usage: node tools/build.mjs        (writes HTML, sitemap.xml, site.webmanifest, robots.txt)
+// Usage: node tools/build.mjs        (writes HTML, sitemap-site.xml, site.webmanifest, robots.txt)
 // The generated files are committed; GitHub Pages serves them as plain static files.
 import fs from 'node:fs';
 import path from 'node:path';
@@ -43,7 +43,9 @@ const ogFor = (name) => (fs.existsSync(path.join(ROOT, `images/og/${name}.jpg`))
 const versions = { css: hash('css/site.css'), js: hash('js/site.js') };
 const films = pages.motion.films;
 const grounds = read('content/grounds.json');   // the plates' grounds (D86), from node tools/grounds.mjs
-const ctxFor = (rel) => ({ prefix: rel.includes('/') ? '../' : '', versions, personLd, websiteLd, ogFor, films, grounds });
+// about: the column every page but about.html opens as a sheet (D113), built in so it also opens from file://;
+// reel: the home's compositions, one per project, which a case study shows as its next project (D115)
+const ctxFor = (rel) => ({ prefix: rel.includes('/') ? '../' : '', versions, personLd, websiteLd, ogFor, films, grounds, about: pages.about, reel: pages.home.reel });
 
 const out = [];
 const emit = (r, rel) => { const ctx = ctxFor(rel); ctx.viewer = r.viewer; write(rel, layout(site, r.page, r.body, ctx)); out.push(r.page); };
@@ -73,9 +75,10 @@ write('videos.html', `<!DOCTYPE html>
 </html>
 `);
 
-// sitemap, manifest, robots
+// sitemap, manifest, robots; the sitemap's name is the owner's (renamed on GitHub, D122)
+const SITEMAP = 'sitemap-site.xml';
 const today = new Date().toISOString().slice(0, 10);
-write('sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>
+write(SITEMAP, `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${out.filter((p) => !p.noindex).map((p) => `  <url><loc>${abs(p.path === 'index.html' ? '' : p.path)}</loc><lastmod>${today}</lastmod></url>`).join('\n')}
 </urlset>
@@ -85,7 +88,7 @@ write('site.webmanifest', JSON.stringify({ name: site.siteName, short_name: 'H. 
     { src: 'images/brand/icon-192.png', sizes: '192x192', type: 'image/png' },
     { src: 'images/brand/icon-512.png', sizes: '512x512', type: 'image/png' },
     { src: 'images/brand/icon-maskable-512.png', sizes: '512x512', type: 'image/png', purpose: 'maskable' }] }, null, 2) + '\n');
-write('robots.txt', `User-agent: *\nAllow: /\n\nSitemap: ${abs('sitemap.xml')}\n`);
+write('robots.txt', `User-agent: *\nAllow: /\n\nSitemap: ${abs(SITEMAP)}\n`);
 
 // the site moved from /portfolio/ to the host root (D81): every old page address answers with its new one
 // (no noindex: an instant refresh is read as a permanent redirect, and noindex would contradict it)

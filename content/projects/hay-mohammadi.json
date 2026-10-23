@@ -8,6 +8,7 @@
   ],
   "title": "Hay Mohammadi Station",
   "run": "Yassir Khalil Studio | Casablanca",
+  "$omit": ["run", "tag", "spec:Office", "spec:Location"],
   "summary": "Rapid transit station and covered public concourse in the Hay Mohammadi district of Casablanca, at Yassir Khalil Studio.",
   "place": "Casablanca",
   "year": "2025",

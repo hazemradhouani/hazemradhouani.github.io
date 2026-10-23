@@ -2,7 +2,8 @@
 // Every block sits on the one grid (.wrap.g) through a centred span class; images are placed by partials.mjs.
 import { html, raw, attrs, when } from '../lib/html.mjs';
 import { dims, shown, preloadFor, picture } from '../lib/images.mjs';
-import { icon, image, row, cells, figure, hero, heroPartner, creditLine, heroCaption, sizesFor, spanFor, projectHref, vtTitle, vtHero, CASE, capSide, words, chaptersOf, scatter } from './partials.mjs';
+import { placeLeaves, connector, TREE } from '../lib/tree-layout.mjs';
+import { icon, image, row, figure, opening, heroCaption, sizesFor, spanFor, projectHref, vtTitle, CASE, capSide, words, chaptersOf, reelItem, reelSizes, aboutColumn, PORTRAIT } from './partials.mjs';
 
 const q = (s) => `“${s}”`;
 // `of`: what a repeated label leads to, read after the visible words (WCAG 2.4.4, 2.5.3)
@@ -12,123 +13,70 @@ const more = (href, label, p, { dir = 'right', ext = false, of = '' } = {}) => d
 const lines = (...xs) => xs.filter(Boolean).map((x, i) => html`${i ? html`<br>` : ''}${x}`);
 const spec = (rows) => html`<dl class="spec in">${rows.map((s) => html`<dt>${s.label}</dt><dd${attrs({ lang: s.lang })}>${s.value}</dd>`)}</dl>`;
 
-// an image group that is also a link to its project: out of the tab order and the accessibility tree,
-// since the title link beside it carries the same destination and the name
-const linked = (href, markup) => html`<a class="card" href="${href}" tabindex="-1" aria-hidden="true">${markup}</a>`;
-
 /* ------------------------------------------------------------------ the catalog (D97, P5): every image and film of the work */
 // one entry per published picture: each project's hero, every figure (or each item of a multi-image figure), and
-// the films of the motion page; the families are the kinds the content already records (drawing, render, film)
+// the films of the motion page. `kind` is what the content records (drawing, render, film); `fam` is the index's
+// family, a partition that sums to the root (D110): the heroes are the projects, every other picture its kind
 export function catalogOf(projects, films) {
   const out = [];
   for (const x of projects) {
-    out.push({ project: x, src: x.hero.src, alt: x.hero.alt, title: 'Lead image', kind: 'render', hero: true });
-    for (const f of x.figures) for (const it of f.items || [f]) out.push({ project: x, src: it.src, alt: it.alt, title: f.title, kind: f.kind === 'drawing' ? 'drawing' : 'render', fig: f });
+    out.push({ project: x, src: x.hero.src, alt: x.hero.alt, title: 'Lead image', kind: 'render', fam: 'project', hero: true });
+    for (const f of x.figures) for (const it of f.items || [f]) { const kind = f.kind === 'drawing' ? 'drawing' : 'render'; out.push({ project: x, src: it.src, alt: it.alt, title: f.title, kind, fam: kind, fig: f }); }
   }
-  for (const f of films) out.push({ project: null, film: f, title: f.title, kind: 'film' });
+  for (const f of films) out.push({ project: null, film: f, title: f.title, kind: 'film', fam: 'film' });
   return out;
 }
-export const FAMILIES = [{ id: 'drawing', label: 'Drawings' }, { id: 'render', label: 'Renders' }, { id: 'film', label: 'Films' }];
+export const FAMILIES = [{ id: 'project', label: 'Projects' }, { id: 'drawing', label: 'Drawings' }, { id: 'render', label: 'Renders' }, { id: 'film', label: 'Films' }];
+// the one count of a family (D110): the tree's pills, the home's mini tree and QA all read it
+export const countOf = (cat, fam) => cat.filter((e) => e.fam === fam).length;
 
-/* ------------------------------------------------------------------ home ("Reel", D97) */
-// the film's chapters (D97): who, where, then what is on screen. The identity line is split where its own
-// comma falls, so the page still carries it whole; --c is where each chapter stands fully in view
-const CH = [0, 0.33, 0.64, 1];
-
+/* ------------------------------------------------------------------ home ("Reel, corrected", D103-D105) */
+// The page opens on the reel: one composition per project (reelItem), then the root of the index with its
+// families. Who and what stand in the fixed header and the corner captions; the identity block is for readers
+// of the page's text (screen readers, search) and stays visually hidden (D103).
 export function home(site, d, projects, ctx) {
   const p = ctx.prefix;
   const P = site.person;
   const by = Object.fromEntries(projects.map((x) => [x.slug, x]));
-  const f = d.film;
-  const fd = dims(f.poster);
-  const cut = P.line.indexOf(', and ');
-  const chapters = [
-    html`<h1 class="film__name" id="name">${P.name}</h1><p class="film__sub">${P.credential}</p>`,
-    html`<p>${P.line.slice(0, cut + 1)}</p>`,
-    html`<p>${P.line.slice(cut + 2)}</p>`,
-    html`<p class="film__credit">${f.caption}</p>`
-  ];
-  const steps = CH.map((c, i) => (i ? ((CH[i - 1] + c) / 2).toFixed(3) : '0')).join(',');
-  const filmSizes = '(min-width: 80rem) 1280px, 100vw';
-
-  // the column (D97): each project as an object on the field; its render opens beside its own drawing as it
-  // crosses the centre (the building as image and as drawing), a film runs with the scroll, a single render settles
-  const cols = d.column.map((c, i) => {
-    const x = by[c.project];
-    if (!x) throw new Error(`home: no project ${c.project}`);
-    if (c.mode === 'pair' && !c.key.startsWith('images/cut/')) throw new Error(`home: key drawing ${c.key} is not a cutout in images/cut/ (A8)`);
-    if (c.mode === 'pair') dims(c.key);   // throws when the file is missing (A8)
-    const { w, h } = dims(x.hero.src);
-    const card = c.mode === 'film'
-      ? html`<span class="col__card col__film" style="aspect-ratio: ${dims(c.poster).w} / ${dims(c.poster).h}">${picture(c.poster, { alt: '', sizes: '(min-width: 48rem) 46vw, 90vw', prefix: p })}<video class="film__v" data-scrub data-src="${p}${c.desktop}" data-src-small="${p}${c.mobile}" muted playsinline preload="none" aria-hidden="true" tabindex="-1"></video></span>`
-      : html`<span class="col__card" style="--nw: ${w}px; --r: ${(w / h).toFixed(4)}; aspect-ratio: ${w} / ${h}">${picture(x.hero.src, { alt: '', sizes: '(min-width: 64rem) 46vw, (min-width: 48rem) 60vw, 90vw', prefix: p })}</span>`;
-    const key = c.mode === 'pair' ? html`<span class="col__key" style="--kr: ${(dims(c.key).w / dims(c.key).h).toFixed(4)}">${image(c.key, { alt: '', sz: '(min-width: 48rem) 30vw, 1px', prefix: p })}</span>` : '';
-    return html`<li class="col__it col__it--${c.mode}" data-fx="centre">
-<a class="col__a" href="${projectHref(x, p)}" data-label="${x.title}">
-<span class="col__stage">${card}${key}</span>
-<span class="col__cap"><span class="col__n" aria-hidden="true">${pad(i + 1)}</span><span class="col__t">${x.title}</span><span class="col__m">${x.place} · ${x.year}</span></span>
-</a>
-</li>`;
+  const items = d.reel.map((c, i) => {
+    if (!by[c.project]) throw new Error(`home: no project ${c.project}`);
+    return reelItem(by[c.project], c, { prefix: p, priority: i === 0 });
   });
-
-  // practice: each capability proven by one document, standing on one line
-  const proofItems = d.proofs.map((x) => ({ rel: shown(x.image, x.kind === 'drawing'), alt: x.alt, title: x.name }));
-  const proofText = (it, i) => {
-    const x = d.proofs[i];
-    return html`<div class="stack-s"><h3 class="title">${x.name}</h3><p class="meta">${x.text}</p>${when(x.tools, () => html`<p class="meta">${x.tools}</p>`)}<p>${more(projectHref(by[x.project], p), x.context, p)}</p></div>`;
-  };
-  const book = dims(d.research.cover);
-  const bookSpan = spanFor(book.w, book.h, { max: 'four' });
+  const first = d.reel[0].layers.find((l) => l.role === 'main');
+  if (!first) throw new Error('home: the first composition needs a main render (the page\'s largest paint)');
   const cat = catalogOf(projects, ctx.films);
-  const count = (k) => cat.filter((e) => e.kind === k).length;
+  const count = (k) => countOf(cat, k);
+  // the root's connectors: from its middle to the middle of each family's row (equal rows, site.css)
+  const n = FAMILIES.length;
+  const lines = FAMILIES.map((f, i) => { const y = ((2 * i + 1) / (2 * n) * 100).toFixed(2); return `<path d="M0 50 C50 50, 50 ${y}, 100 ${y}"/>`; }).join('');
 
   const body = html`
-<section class="film" id="film" data-fx="track" data-steps="${steps}" aria-labelledby="name">
-<div class="film__stage">
-<div class="film__frame" style="--nw: ${fd.w}px; aspect-ratio: ${fd.w} / ${fd.h}">${picture(f.poster, { alt: f.alt, sizes: filmSizes, prefix: p, priority: true })}<video class="film__v" data-scrub data-src="${p}${f.desktop}" data-src-small="${p}${f.mobile}" muted playsinline preload="none" aria-hidden="true" tabindex="-1"></video></div>
-<ol class="film__ch" role="list">${chapters.map((c, i) => html`<li style="--c: ${CH[i]}">${c}</li>`)}</ol>
-<ol class="rail" data-rail="film" aria-hidden="true">${CH.map(() => html`<li data-step></li>`)}</ol>
-</div>
+<div class="vh"><h1>${P.name}</h1><p>${P.line}</p><p>${P.credential}</p></div>
+<section aria-labelledby="work-h"><h2 class="vh" id="work-h">Projects</h2>
+<ol class="reel" role="list">${items}</ol>
 </section>
-
-<section class="col" aria-labelledby="work-h">
-<h2 class="col__h" id="work-h">Projects <span class="col__count">${projects.length}</span></h2>
-<ol class="col__list" role="list">${cols}</ol>
-</section>
-
-<section class="coda wrap g" aria-labelledby="practice-h">
-<div class="s-text center"><h2 class="col__h" id="practice-h">Practice</h2></div>
-${cells(proofItems, { prefix: p, zoom: false, cls: 'block', after: proofText })}
-</section>
-
-<section class="coda wrap g" aria-labelledby="research-h">
-<div class="s-text center"><h2 class="col__h" id="research-h">Research</h2></div>
-<div class="s-${bookSpan} block" data-rv>${image(d.research.cover, { alt: d.research.coverAlt, sz: sizesFor(bookSpan), prefix: p })}</div>
-<div class="s-text center in">
-<h3 class="title">${d.research.title}</h3>
-<p class="book__ar in" lang="ar" dir="rtl">${d.research.titleAr}</p>
-<p class="meta in">${d.research.meta}<br>${d.research.award}</p>
-<p class="in">${more(p + 'books.html', 'Thesis, report and the Sakura programme', p)}</p>
-</div>
-</section>
-
-<nav class="coda tree-root" aria-label="The index of the work">
+<nav class="tree-root" aria-label="The index of the work">
 <a class="pill pill--root" href="${p}architecture.html">Index <span class="pill__n">${cat.length}</span></a>
+<svg class="tree-root__lines" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true" focusable="false">${raw(lines)}</svg>
 <ul class="tree-root__fam" role="list">${FAMILIES.map((fam) => html`<li><a class="pill" href="${p}architecture.html?family=${fam.id}">${fam.label} <span class="pill__n">${count(fam.id)}</span></a></li>`)}</ul>
 </nav>`;
   return { body, viewer: false, page: { path: 'index.html', nav: 'home', corners: true, title: d.title, description: d.description, og: d.og, verification: true,
-    preload: preloadFor(f.poster, filmSizes, p), bodyClass: 'page-home', jsonld: [ctx.websiteLd, ctx.personLd] } };
+    preload: preloadFor(first.src, reelSizes(d.reel[0].layout), p), bodyClass: 'page-home', jsonld: [ctx.websiteLd, ctx.personLd] } };
 }
 
-/* ------------------------------------------------------------------ index ("Reel", D98): dmcg's catalog of the work */
-// Every drawing, render and film in three views the page holds at once (grid, tree, list); the script only
+/* ------------------------------------------------------------------ index ("Reel, corrected", D110-D112): dmcg's catalog */
+// Every drawing, render and film in three views the page holds at once (tree, grid, list); the script only
 // chooses which one shows and which family, and keeps both in the address. Without it the grid stands alone.
-const TILE = 4 / 3;                       // the tiles' frame; each image keeps its own ratio inside it (D32, A10)
+const TILE = 4 / 3;                       // the tiles' frame: a render or film covers it, a drawing stands whole on its sheet (D112)
+const TILE_MAX = { w: 534, h: 400 };      // a tile at 1920 (3 columns): a render must cover it at its own size or less
 const plain = (s) => s.normalize('NFD').replace(/[̀-ͯ]/gu, '');
 const letterOf = (s) => plain(s).charAt(0).toUpperCase();
-// the tree's places for up to fifteen leaves: a 5 x 3 field right of the families, nudged by a fixed seed
-const leafAt = (i) => { const c = i % 5, r = Math.floor(i / 5); const j = Math.sin(i * 12.9898) * 43758.5453; const n = j - Math.floor(j);
-  return { x: 37 + c * 13.2 + (n - 0.5) * 4, y: 17 + r * 31 + ((n * 7) % 1 - 0.5) * 8 }; };
+// the tree's pills on the canvas of tools/lib/tree-layout.mjs (1200 units = the tree's width = 100cqw): the root at
+// the left, the families stacked at the middle of the first screen; a connector starts under its pill, so it
+// leaves the pill's right edge whatever the pill's width
+const TRUNK = { root: { x: 30, y: TREE.H0 / 2 }, famX: 180, step: 66 };
+const famAt = (i) => ({ x: TRUNK.famX + 30, y: TREE.H0 / 2 + (i - (FAMILIES.length - 1) / 2) * TRUNK.step });
+const cq = (v) => `${+(v / 12).toFixed(3)}cqw`;
 const VIEWS = [{ id: 'grid', label: 'Grid', svg: '<rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/>' },
   { id: 'tree', label: 'Tree', svg: '<circle cx="5" cy="12" r="2"/><circle cx="19" cy="5" r="2"/><circle cx="19" cy="12" r="2"/><circle cx="19" cy="19" r="2"/><path d="M7 12c6 0 6-7 10-7M7 12h10M7 12c6 0 6 7 10 7"/>' },
   { id: 'list', label: 'List', svg: '<path d="M3 6h18M3 12h18M3 18h18"/>' }];
@@ -139,46 +87,59 @@ export function work(site, projects, ctx) {
   const cat = catalogOf(projects, ctx.films).sort((a, b) => plain(key(a)).localeCompare(plain(key(b)), 'en', { sensitivity: 'base' }));
   const firstOf = new Map();
   cat.forEach((e, i) => { const l = letterOf(key(e)); if (!firstOf.has(l)) firstOf.set(l, i); });
-  const count = (k) => cat.filter((e) => e.kind === k).length;
+  const count = (k) => countOf(cat, k);
+  const relOf = (e) => (e.kind === 'drawing' ? shown(e.src, true) : e.src);
+  const poster = (e, sizes = '') => html`<img src="${p}videos/web/${e.film.slug}-poster.webp" alt="" width="${e.film.w}" height="${e.film.h}" loading="lazy" decoding="async"${sizes}>`;
 
+  // a tile: a render or a film covers its 4:3 frame (data-crop: the full picture is one click away); a drawing
+  // stands whole on its raised sheet, on the drawing's own ratio, with its dark treatment (D112)
   const tile = (e, i) => {
     const anchor = [...firstOf].find(([, k]) => k === i);
     const id = anchor ? html` id="az-${anchor[0]}"` : '';
+    const at = html` data-kind="${e.kind}" data-fam="${e.fam}" data-l="${letterOf(key(e))}" data-fx="centre"${id}`;
     if (e.film) {
-      const href = `${p}motion.html#${e.film.id}`;
-      const r = e.film.w / e.film.h, fw = r >= TILE ? 100 : 100 * r / TILE;
-      return html`<li class="tile" data-kind="film" data-l="${letterOf(key(e))}" data-fx="centre"${id}><figure class="tile__fig">
-<a class="tile__frame tile__frame--film" href="${href}" data-label="${e.title}" data-ground style="--g-light: #1D1D1B; --g-dark: #050505"><span class="tile__img" style="width: ${fw.toFixed(2)}%"><img src="${p}videos/web/${e.film.slug}-poster.webp" alt="" width="${e.film.w}" height="${e.film.h}" loading="lazy" decoding="async"></span><span class="vh">${e.title}, film</span></a>
+      return html`<li class="tile"${at}><figure class="tile__fig">
+<a class="tile__frame tile__frame--film" href="${p}motion.html#${e.film.id}" data-label="${e.title}" data-cat="Film" data-ground data-crop style="--g-light: #1D1D1B; --g-dark: #050505">${poster(e)}<span class="vh">${e.title}, film</span></a>
 <figcaption class="tile__cap"><span class="tile__p">${e.title}</span> <span>Film</span></figcaption></figure></li>`;
     }
-    const x = e.project; const rel = e.kind === 'drawing' ? shown(e.src, true) : e.src;
-    const fill = e.kind === 'drawing' ? 90 : 100;
-    const { w, h } = dims(rel); const r = w / h, fw = r >= TILE ? fill : fill * r / TILE;
+    const x = e.project; const rel = relOf(e);
+    const pic = image(rel, { alt: e.alt, sz: '(min-width: 56.25rem) 26vw, 44vw', prefix: p, zoom: true, title: `${x.title}: ${e.title}`, project: projectHref(x, p), priority: i < 6, upto: 1200 });
     const g = ctx.grounds[x.slug];
-    return html`<li class="tile" data-kind="${e.kind}" data-l="${letterOf(key(e))}" data-fx="centre"${id}><figure class="tile__fig">
-<span class="tile__frame" data-ground style="--g-light: ${g.light}; --g-dark: ${g.dark}"><span class="tile__img" style="width: ${fw.toFixed(2)}%" data-label="${x.title}">${image(rel, { alt: e.alt, sz: '(min-width: 56.25rem) 26vw, 44vw', prefix: p, zoom: true, title: `${x.title}: ${e.title}`, project: projectHref(x, p), priority: i < 6, upto: 1200 })}</span></span>
+    // a render too small to cover the largest tile is never enlarged (D112): it stands whole, at most at its own
+    // size, on its project's ground, like a drawing on its sheet
+    const { w, h } = dims(rel); const r = w / h;
+    const lab = html` data-label="${x.title}" data-cat="${x.descriptor.split(' | ')[0]}"`;   // the pointer's label: name and category (D109)
+    const whole = (fill) => html`<span class="tile__img" style="width: ${(r >= TILE ? fill : fill * r / TILE).toFixed(2)}%"${lab}>${pic}</span>`;
+    let frame;
+    if (e.kind === 'drawing') frame = html`<span class="tile__frame tile__frame--sheet">${whole(86)}</span>`;
+    else if (Math.max(TILE_MAX.w / w, TILE_MAX.h / h) > 1) frame = html`<span class="tile__frame" data-ground style="--g-light: ${g.light}; --g-dark: ${g.dark}">${whole(100)}</span>`;
+    else frame = html`<span class="tile__frame" data-ground data-crop style="--g-light: ${g.light}; --g-dark: ${g.dark}"${lab}>${pic}</span>`;
+    return html`<li class="tile"${at}><figure class="tile__fig">
+${frame}
 <figcaption class="tile__cap"><a class="tile__p" href="${projectHref(x, p)}">${x.title}</a> <span>${e.title}</span></figcaption></figure></li>`;
   };
 
-  // the tree: the root, the three families, then the projects of the chosen family (each by its first image of it)
-  const leaves = (fam) => fam === 'film' ? cat.filter((e) => e.kind === 'film')
-    : projects.map((x) => cat.find((e) => e.project === x && (fam === 'all' ? e.hero : e.kind === fam && !e.hero))).filter(Boolean);
-  const famY = { all: 50, drawing: 30, render: 50, film: 70 };
-  const branch = (fam) => {
-    const from = fam === 'all' ? { x: 9, y: 50 } : { x: 27, y: famY[fam] };
-    const ls = leaves(fam);
-    if (ls.length > 15) throw new Error(`index: the tree has room for 15 leaves, ${fam} has ${ls.length}`);
-    const paths = ls.map((e, i) => { const t = leafAt(i); const mx = (from.x + t.x) / 2; return `M ${from.x * 12} ${from.y * 6.4} C ${mx * 12} ${from.y * 6.4}, ${mx * 12} ${t.y * 6.4}, ${t.x * 12 - 40} ${t.y * 6.4}`; });
-    const leaf = (e, i) => {
-      const t = leafAt(i); const href = e.film ? `${p}motion.html#${e.film.id}` : projectHref(e.project, p);
-      const pic = e.film ? html`<img src="${p}videos/web/${e.film.slug}-poster.webp" alt="" width="${e.film.w}" height="${e.film.h}" loading="lazy" decoding="async">`
-        : picture(e.kind === 'drawing' ? shown(e.src, true) : e.src, { alt: '', sizes: '8rem', prefix: p, upto: 480 });
-      return html`<a class="leaf" href="${href}" style="left: ${t.x}%; top: ${t.y}%" data-label="${key(e)}">${pic}<span class="vh">${key(e)}</span></a>`;
+  // the tree (D110): the root, the four families, then every picture of the chosen family as a leaf, A to Z by
+  // project like the grid, placed by tree-layout at its own ratio. An image leaf opens the viewer (which offers its
+  // project); a film leaf goes to the film. The caption tag names it under the pointer or focus.
+  const branch = (f, i) => {
+    const ls = cat.filter((e) => e.fam === f.id);
+    const { h, leaves } = placeLeaves(ls.map((e) => (e.film ? e.film.w / e.film.h : (({ w, h: hh }) => w / hh)(dims(relOf(e))))), { seed: 7 + i });
+    const from = famAt(i);
+    const leaf = (e, k) => {
+      const l = leaves[k];
+      const sz = html` sizes="${Math.ceil(l.w * 1.2 * 1.45)}px"`;   // its width at the 90rem cap, enlarged under the pointer
+      const name = e.film ? e.title : e.hero ? e.project.title : `${e.project.title} · ${e.title}`;
+      const inner = e.film ? html`<a class="leaf__film" href="${p}motion.html#${e.film.id}">${poster(e, sz)}<span class="vh">${e.title}, film</span></a>`
+        : image(relOf(e), { alt: e.alt, sz: `${Math.ceil(l.w * 1.2 * 1.45)}px`, prefix: p, zoom: true, title: `${e.project.title}: ${e.title}`, project: projectHref(e.project, p), upto: 480 });
+      const cls = `leaf${e.kind === 'drawing' ? ' leaf--drawing' : ''}${l.x + l.w / 2 > 1000 ? ' leaf--end' : ''}`;
+      return html`<span class="${cls}" data-i="${k}" style="left: ${cq(l.x)}; top: ${cq(l.y)}; width: ${cq(l.w)}"><span class="leaf__in">${inner}</span><span class="leaf__cap" aria-hidden="true">${name}</span></span>`;
     };
-    return html`<div class="tree__branch" data-branch="${fam}"${attrs({ hidden: fam !== 'all' })}><svg class="tree__lines" viewBox="0 0 1200 640" preserveAspectRatio="none" aria-hidden="true">${raw(paths.map((d) => `<path d="${d}"/>`).join(''))}</svg>${ls.map(leaf)}</div>`;
+    return html`<div class="tree__branch" data-branch="${f.id}" style="--h: ${h}"${attrs({ hidden: i !== 0 })}><svg class="tree__lines" viewBox="0 0 ${TREE.W} ${h}" aria-hidden="true" focusable="false">${raw(leaves.map((l) => `<path d="${connector(from, l)}"/>`).join(''))}</svg>${ls.map(leaf)}</div>`;
   };
+  const trunk = FAMILIES.map((f, i) => { const t = famAt(i), r = TRUNK.root, mx = (r.x + t.x) / 2; return `<path data-trunk="${f.id}" d="M${r.x} ${r.y}C${mx} ${r.y} ${mx} ${t.y} ${t.x} ${t.y}"/>`; }).join('');
 
-  const rows = projects.map((x, i) => html`<tr><td>${pad(i + 1)}</td><th scope="row"><a href="${projectHref(x, p)}" data-label="${x.title}">${x.title}</a></th><td>${x.place}</td><td>${x.year}</td><td>${x.descriptor.split(' | ')[0]}</td><td>${x.office || 'ENAU, academic'}</td><td>${cat.filter((e) => e.project === x).length}</td></tr>`);
+  const rows = projects.map((x, i) => html`<tr><td>${pad(i + 1)}</td><th scope="row"><a class="ctl" href="${projectHref(x, p)}" data-label="${x.title}">${x.title}</a></th><td>${x.place}</td><td>${x.year}</td><td>${x.descriptor.split(' | ')[0]}</td><td>${x.office || 'ENAU, academic'}</td><td>${cat.filter((e) => e.project === x).length}</td></tr>`);
 
   const body = html`
 <header class="ix-head"><h1 class="col__h" id="ix-h">Index <span class="col__count">${cat.length}</span></h1>
@@ -192,10 +153,10 @@ export function work(site, projects, ctx) {
 <section class="ix-view ix-grid" data-view="grid" aria-labelledby="ix-h"><ol class="tiles" role="list">${cat.map(tile)}</ol></section>
 <section class="ix-view ix-tree" data-view="tree" aria-label="The index as a tree" hidden>
 <div class="tree">
-<button class="pill pill--root tree__root" type="button" data-family="all" aria-pressed="true" style="left: 1%; top: 50%">Index <span class="pill__n">${cat.length}</span></button>
-${FAMILIES.map((f) => html`<button class="pill tree__fam" type="button" data-family="${f.id}" aria-pressed="false" style="left: 17%; top: ${famY[f.id]}%">${f.label} <span class="pill__n">${count(f.id)}</span></button>`)}
-<svg class="tree__lines" viewBox="0 0 1200 640" preserveAspectRatio="none" aria-hidden="true">${raw(FAMILIES.map((f) => `<path d="M 108 320 C 156 320, 156 ${famY[f.id] * 6.4}, 204 ${famY[f.id] * 6.4}"/>`).join(''))}</svg>
-${['all', ...FAMILIES.map((f) => f.id)].map(branch)}
+<span class="pill tree__root" style="left: 0; top: ${cq(TRUNK.root.y)}">Index <span class="pill__n">${cat.length}</span></span>
+<svg class="tree__trunk" viewBox="0 0 ${TREE.W} ${TREE.H0}" aria-hidden="true" focusable="false">${raw(trunk)}</svg>
+<div role="group" aria-label="Families">${FAMILIES.map((f, i) => html`<button class="pill tree__fam" type="button" data-family="${f.id}" aria-pressed="${i ? 'false' : 'true'}" style="left: ${cq(TRUNK.famX)}; top: ${cq(famAt(i).y)}">${f.label} <span class="pill__n">${count(f.id)}</span></button>`)}</div>
+${FAMILIES.map(branch)}
 </div>
 </section>
 <section class="ix-view ix-list" data-view="list" aria-label="The projects as a list" hidden>
@@ -211,64 +172,79 @@ ${['all', ...FAMILIES.map((f) => f.id)].map(branch)}
     jsonld: [{ '@context': 'https://schema.org', '@type': 'CollectionPage', name: 'Index', url: `${site.origin}${site.base}architecture.html`, mainEntity: { '@type': 'ItemList', itemListElement: items } }] } };
 }
 
-/* ------------------------------------------------------------------ case study ("rail and copy", D73) */
-// the key facts as a drawing's title block: type and status on a strip, then the specification in cells
-// (the strip stands outside the dl, which may only hold dt/dd groups)
+/* ------------------------------------------------------------------ case study ("Reel, corrected", D115, D116) */
 const pad = (k) => String(k).padStart(2, '0');
-// the chapters as numbered links, from three chapters (fewer need no table of contents)
-const toc = (chs) => (chs.length < 3 ? '' : html`<nav class="toc" aria-labelledby="toc-h"><p class="label toc__h" id="toc-h">Contents</p><ol class="toc__list" role="list">${chs.map((c) => html`<li><a href="#ch-${c.id}"><span class="toc__n" aria-hidden="true">${pad(c.n)}</span>${c.title}</a></li>`)}</ol></nav>`);
-const titleBlock = (x, chs) => html`<div class="tb wrap g">
-<div class="tb__strip"><p class="label">${x.descriptor}</p><p class="label">${x.tag}</p></div>
-<dl class="tb__cells">${x.spec.map((s) => html`<div class="tb__cell"><dt>${s.label}</dt><dd${attrs({ lang: s.lang })}>${s.value}</dd></div>`)}</dl>
-${toc(chs)}
-</div>`;
 // a chapter (D74): a rule across the row, the number and name on the rail, its own words on the copy axis,
-// then its plates; a single chapter carries no number
+// then its plates; a single chapter carries no number. Its head rises into place as it enters (D115)
 const chapterOf = (c, numbered, plates) => html`<section class="ch" id="ch-${c.id}" aria-labelledby="ch-${c.id}-h">
-<div class="ch__head wrap g" data-rv><div class="ch__bar"></div><h2 class="ch__t s-rail" id="ch-${c.id}-h">${when(numbered, () => html`<span class="ch__n" aria-hidden="true">${pad(c.n)}</span>`)}${c.title}</h2>${when(c.text.length, () => html`<div class="prose s-copy ch__text">${c.text.map((t) => html`<p>${t.text}</p>`)}</div>`)}</div>
+<div class="ch__head wrap g" data-fx="enter"><div class="ch__bar"></div><h2 class="ch__t s-rail" id="ch-${c.id}-h">${when(numbered, () => html`<span class="ch__n" aria-hidden="true">${pad(c.n)}</span>`)}${c.title}</h2>${when(c.text.length, () => html`<div class="prose s-copy ch__text">${c.text.map((t) => html`<p>${t.text}</p>`)}</div>`)}</div>
 ${plates}
 </section>`;
+// D116: each fact once per page. A project's `$omit` names what its page leaves out because a field it shows already
+// says it: "run", "tag", "overview" (the paragraphs outside the chapters) or "spec:<label>". The strings stay in the
+// JSON, and QA's coverage leaves them out the same way
+const OMITTABLE = new Set(['run', 'tag', 'overview']);
+function omitsOf(x) {
+  const o = new Set(x.$omit || []);
+  for (const k of o) if (!OMITTABLE.has(k) && !(k.startsWith('spec:') && x.spec.some((s) => `spec:${s.label}` === k))) throw new Error(`${x.slug}: $omit "${k}" is not one of run, tag, overview, spec:<a label of its spec> (D116)`);
+  return o;
+}
 
 export function project(site, x, projects, ctx0) {
   const ctx = { ...ctx0, ladder: CASE };
   const p = ctx.prefix;
   const i = projects.indexOf(x);
   const next = projects[(i + 1) % projects.length];
-  const h = hero(x, ctx, { priority: true, zoom: true });
-  const figs = x.figures.filter((f) => f !== h.partner);
+  const omit = omitsOf(x);
+  const op = opening(x, ctx);
+  const figs = x.figures.filter((f) => f !== op.partner);
   const cap = heroCaption(x);
-  const capSideHero = capSide(h.span, [x.hero.caption, h.partner?.caption].filter(Boolean).join(' '));
   const film = x.film ? ctx.films.find((f) => f.slug === x.film) : null;
-  const nh = hero(next, ctx, { max: 'narrow' });
   const filmSpan = film ? spanFor(film.w, film.h, { max: 'nine', ladder: CASE }) : null;
   const filmSide = film && capSide(filmSpan, film.text);
-  const overview = x.narrative.filter((t) => !t.chapter);
+  const overview = omit.has('overview') ? [] : x.narrative.filter((t) => !t.chapter);
+  const facts = x.spec.filter((s) => !omit.has(`spec:${s.label}`));
+  const meta = [omit.has('run') ? '' : x.run, omit.has('tag') ? '' : x.tag].filter(Boolean);
+  const comp = ctx.reel.find((c) => c.project === next.slug);
+  if (!comp) throw new Error(`${x.slug}: the next project, ${next.slug}, has no composition in home.json (D115)`);
   // the film closes the case study as its last chapter
   const chs = [...chaptersOf(x, figs), ...(film ? [{ title: 'Film', id: 'film', figs: [], text: [] }] : [])].map((c, k) => ({ ...c, n: k + 1 }));
   const numbered = chs.length > 1;
-  const filmFig = film && html`<div class="fig block wrap g${filmSide ? ' fig--dock' : ''}" data-rv><div class="s-${filmSpan} fig__plate film"><video controls preload="none" playsinline poster="${p}videos/web/${film.slug}-poster.webp" width="${film.w}" height="${film.h}" aria-labelledby="ch-film-h" aria-describedby="film-desc"><source src="${p}videos/web/${film.slug}.mp4" type="video/mp4"><a href="${p}videos/web/${film.slug}.mp4">Download the film (MP4)</a></video></div><p class="cap s-${filmSpan}${filmSide ? ' cap--side' : ''}"><span class="cap__t">${film.label}</span> <span class="cap__x" id="film-desc">${film.text}</span></p></div>`;
+  const filmFig = film && html`<div class="fig block wrap g${filmSide ? ' fig--dock' : ''}" data-fx="enter"><div class="s-${filmSpan} fig__plate film"><video controls preload="none" playsinline poster="${p}videos/web/${film.slug}-poster.webp" width="${film.w}" height="${film.h}" aria-labelledby="ch-film-h" aria-describedby="film-desc"><source src="${p}videos/web/${film.slug}.mp4" type="video/mp4"><a href="${p}videos/web/${film.slug}.mp4">Download the film (MP4)</a></video></div><p class="cap s-${filmSpan}${filmSide ? ' cap--side' : ''}"><span class="cap__t">${film.label}</span> <span class="cap__x" id="film-desc">${film.text}</span></p></div>`;
+  // the opening (D115): a track whose stage stands still while the hero settles from near full-bleed into its slot
+  // beside the words, and the words, the caption and the facts arrive (site.css; --s: when each starts). The chapter
+  // rail stands in the chapters' own box (sticky), so it shows only while they pass; site.js marks the current one
   const body = html`
 <article class="case">
-<header class="case-head">
-<div class="intro wrap g">
-<p class="label case-run">${x.run}</p>
-<div class="case-name"><h1 class="h1 case-title" style="view-transition-class: vt-title; view-transition-name: ${vtTitle(x)}">${words(x.title)}</h1></div>
-<div class="s-copy case-lead"><p class="lead">${x.summary}</p>${when(x.honour, () => html`<p class="label honour">${x.honour}</p>`)}</div>
+<header class="op" data-fx="track" style="--ar: ${op.ar.toFixed(4)}${op.nw ? `; --nw: ${op.nw}px` : ''}">
+<div class="op__stage">
+<div class="op__in wrap g">
+<div class="op__text">
+<p class="label op__k" style="--s: .06">${x.descriptor}</p>
+<h1 class="h1 op__t" style="--s: .1; view-transition-class: vt-title; view-transition-name: ${vtTitle(x)}">${words(x.title)}</h1>
+<p class="lead op__lead" style="--s: .18">${x.summary}</p>
+${when(x.honour, () => html`<p class="label honour op__x" style="--s: .26">${x.honour}</p>`)}
+${meta.map((m) => html`<p class="label op__x" style="--s: .3">${m}</p>`)}
 </div>
-<div class="lead-fig wrap g fx-drift${capSideHero ? ' fig--dock' : ''}" data-fx><div class="s-${h.span} fig__plate">${h.html}</div>${when(cap, () => html`<p class="cap s-${h.span}${capSideHero ? ' cap--side' : ''}"><span class="cap__x">${cap}</span></p>`)}</div>
-${titleBlock(x, chs)}
+<div class="op__side">
+<div class="op__slot">${op.html}</div>
+${when(cap, () => html`<p class="cap op__cap" style="--s: .34"><span class="cap__x">${cap}</span></p>`)}
+<dl class="op__facts" style="--s: .4">${facts.map((s) => html`<div class="op__fact"><dt>${s.label}</dt><dd${attrs({ lang: s.lang })}>${s.value}</dd></div>`)}</dl>
+</div>
+</div>
+</div>
 </header>
 ${when(x.quote, () => html`<section class="block wrap g" aria-label="In the architect's words"><blockquote class="case-quote"><p class="quote">${q(x.quote.text)}</p></blockquote></section>`)}
 ${when(x.role.length, () => html`<section class="block wrap g" aria-labelledby="role-h"><h2 class="label s-rail" id="role-h">Role</h2><ul class="role s-copy" role="list">${x.role.map((r) => html`<li>${r.text}</li>`)}</ul></section>`)}
 ${when(overview.length, () => html`<section class="block wrap g" aria-labelledby="about-h"><h2 class="label s-rail" id="about-h">Project</h2><div class="prose s-copy">${overview.map((t) => html`<p>${t.text}</p>`)}</div></section>`)}
+<div class="chs" id="chs" data-fx="rail" data-steps="auto">
+${when(numbered, () => html`<nav class="rail" data-rail="chs" aria-label="Chapters"><ol role="list">${chs.map((c) => html`<li><a href="#ch-${c.id}" data-step><span class="rail__t"><span class="rail__n">${pad(c.n)}</span> ${c.title}</span></a></li>`)}</ol></nav>`)}
 ${chs.map((c) => chapterOf(c, numbered, c.id === 'film' ? filmFig : c.figs.map((f) => figure(f, figs.indexOf(f) + 1, ctx))))}
-<nav class="next chapter wrap g" aria-label="Next project">
-<div class="ch__bar"></div>
-<p class="label s-rail next__label">Next project <span class="next__i">${pad((i + 1) % projects.length + 1)} / ${pad(projects.length)}</span></p>
-<p class="next__t"><a href="${projectHref(next, p)}" rel="next" style="view-transition-class: vt-title; view-transition-name: ${vtTitle(next)}">${next.title}</a></p>
-<p class="meta s-copy next__meta">${next.descriptor}<br>${next.place} | ${next.year}</p>
-<div class="s-${nh.span} next__media fx-drift" data-fx data-rv>${linked(projectHref(next, p), nh.html)}</div>
-<p class="s-copy next__all">${more(p + 'architecture.html', 'All work', p, { dir: 'left' })}</p>
+</div>
+<nav class="next" aria-label="Next project">
+<div class="next__head wrap g" data-fx="enter"><div class="ch__bar"></div><p class="label s-rail next__label">Next project <span class="next__i">${pad((i + 1) % projects.length + 1)} / ${pad(projects.length)}</span></p></div>
+<ol class="reel reel--next" role="list">${reelItem(next, comp, { prefix: p })}</ol>
+<p class="next__all">${more(p + 'architecture.html', 'All work', p, { dir: 'left' })}</p>
 </nav>
 </article>`;
   const url = `${site.origin}${site.base}projects/project-${x.slug}.html`;
@@ -285,7 +261,7 @@ ${chs.map((c) => chapterOf(c, numbered, c.id === 'film' ? filmFig : c.figs.map((
     { '@type': 'ListItem', position: 3, name: x.title, item: url }] }];
   return { body, viewer: true, page: { path: `projects/project-${x.slug}.html`, nav: 'work', title: `${x.title} | ${x.descriptor.split(' | ')[0]} | Hazem Radhouani`,
     description: x.summary, og: ctx.ogFor(`project-${x.slug}`), ogType: 'article', ogAlt: x.hero.alt, jsonld,
-    preload: preloadFor(x.hero.src, h.lcpSizes, p), bodyClass: 'page-case' } };
+    preload: preloadFor(x.hero.src, op.lcpSizes, p), bodyClass: 'page-case' } };
 }
 
 /* ------------------------------------------------------------------ research */
@@ -325,6 +301,7 @@ ${book(r, p, { id: 'report-h' })}
 <article class="chapter wrap g" aria-labelledby="sakura-h">
 <div class="s-text center"><p class="label">${d.sakura.label}</p><h2 class="h1 in" id="sakura-h">${d.sakura.title}</h2><p class="lead in">${d.sakura.subtitle}</p><p class="label in honour">${d.sakura.award}</p></div>
 <div class="s-narrow block"><div class="prose"><p>${d.sakura.text}</p></div></div>
+<p class="s-text center in actions">${more(d.sakura.site, 'Programme site', p, { ext: true, of: d.sakura.title.split(' | ')[0] })}</p>
 </article>`;
   const jsonld = [{ '@context': 'https://schema.org', '@type': 'Thesis', name: t.title, alternateName: t.subtitle,
     author: { '@type': 'Person', '@id': `${site.origin}${site.base}#person`, name: site.person.name },
@@ -332,74 +309,18 @@ ${book(r, p, { id: 'report-h' })}
   return { body, viewer: false, page: { path: 'books.html', nav: 'research', navExact: true, title: d.title, description: d.description, og: d.og, jsonld, bodyClass: 'page-research' } };
 }
 
-/* ------------------------------------------------------------------ about ("Reel", D99): a told story, then the CV */
-// a CV list on the text span; its two columns are subgrid tracks, so they sit on grid lines
+/* ------------------------------------------------------------------ about ("Reel, corrected", D113, D114) */
+// the about column as a page: the column every other page opens as a sheet (partials.mjs), here with its portrait
+// as the page's largest paint and the print lines of the CV (npm run cv prints this page)
+export function about(site, d, ctx) {
+  const p = ctx.prefix;
+  const jsonld = [{ '@context': 'https://schema.org', '@type': 'ProfilePage', url: `${site.origin}${site.base}about.html`, mainEntity: { '@id': `${site.origin}${site.base}#person` } }, ctx.personLd];
+  return { body: aboutColumn(site, d, p, { page: true }), viewer: false, page: { path: 'about.html', nav: 'about', navExact: true, title: d.title, description: d.description, og: d.og, ogType: 'profile', jsonld,
+    preload: preloadFor(d.portrait, PORTRAIT, p), bodyClass: 'page-about' } };
+}
+// a CV list on the text span; its two columns are subgrid tracks, so they sit on grid lines (the films' tools)
 const cvBlock = (id, title, rows) => html`<section class="s-text cv" aria-labelledby="${id}"><h2 class="label cv__h" id="${id}">${title}</h2>
 <ol class="cv" role="list">${rows.map((r) => html`<li class="cv__row"><span class="cv__when">${r.when}</span><div class="cv__what">${r.what}</div></li>`)}</ol></section>`;
-// Michael Gatt's register (D99): the key words in Garamond capitals, the words between them small
-const tk = (s) => html`<span class="tale__k">${s}</span>`;
-const tc = (s) => html`<span class="tale__c">${s}</span>`;
-export function about(site, d, ctx) {
-  const p = ctx.prefix; const P = site.person; const t = d.tale;
-  const field = (id, label, type = 'text', extra = {}) => html`<div class="field"><label for="cf-${id}">${label} <span>(required)</span></label>${type === 'textarea'
-    ? html`<textarea id="cf-${id}" name="${id}" required aria-describedby="cf-${id}-err"></textarea>`
-    : html`<input id="cf-${id}" name="${id}" type="${type}" required aria-describedby="cf-${id}-err"${attrs(extra)}>`}<p class="field__error" id="cf-${id}-err" hidden></p></div>`;
-  const what = (r) => html`<b>${r.what}</b>${when(r.role, () => html`<p>${r.role}</p>`)}${when(r.text, () => html`<p>${r.text}</p>`)}`;
-  const sakura = d.experience.find((r) => /Sakura/u.test(r.what));
-  const practice = d.experience.filter((r) => r !== sakura);
-  const [dna, thesis] = d.education;
-  const prize = d.distinctions.find((r) => /Sakura/u.test(r.role));
-  const fig = (ph, sz, cls = '') => html`<figure class="tale__fig ${cls}">${image(ph.src, { alt: ph.alt, sz, prefix: p })}<figcaption>${ph.caption}</figcaption></figure>`;
-  const portraitSizes = '(min-width: 64rem) 26rem, (min-width: 48rem) 40vw, 70vw';
-  const chs = [
-    { id: 'who', label: 'Architect', body: html`<div class="tale__portrait">${image(d.portrait, { alt: d.portraitAlt, sz: portraitSizes, prefix: p, priority: true })}</div>
-<div class="tale__copy"><h1 class="tale__line" id="t-who-h">${tk(P.name)} ${tc('is an')} ${tk(P.jobTitle)}</h1><p class="tale__text">${d.bio}</p></div>` },
-    { id: 'diploma', label: 'Diploma', body: html`<h2 class="tale__line" id="t-diploma-h">${tk(dna.what.split(' (')[0])} ${tc('with')} ${tk(dna.text)}</h2><p class="tale__sub">${dna.role}</p>${fig(t.graduation, '(min-width: 64rem) 64rem, 92vw', 'tale__fig--wide')}` },
-    { id: 'thesis', label: 'Thesis', body: html`<h2 class="tale__line" id="t-thesis-h">${tc('the thesis')} <a class="tale__k tale__link" href="${p}projects/project-al-arg.html">${scatter('Al-Arg')}</a></h2><p class="tale__sub">${thesis.what} | ${thesis.role}</p><p class="tale__sub">${thesis.text}</p>` },
-    { id: 'practice', label: 'Practice', body: html`<h2 class="tale__line" id="t-practice-h">${tc('practice in')} ${tk('Tunisia, France, Morocco')}</h2>
-<ol class="tale__list" role="list">${practice.map((r) => { const [org, city] = r.what.split(' | '); return html`<li>${tk(city || org)}<span class="tale__m">${city ? `${org} · ` : ''}${r.when} · ${r.role}</span></li>`; })}</ol>` },
-    { id: 'japan', label: 'Japan', body: html`<h2 class="tale__line" id="t-japan-h">${tk('Sakura Science Program')} ${tc('Japan,')} ${tk(sakura.when)}</h2><p class="tale__sub">${sakura.role}</p><p class="tale__sub tale__prize">${prize.what}</p>
-<div class="tale__photos">${t.japan.map((ph, i) => fig(ph, '(min-width: 48rem) 24rem, 80vw', `tale__pic tale__pic--${i + 1}`))}</div>` },
-    { id: 'tools', label: 'Tools', body: html`<h2 class="tale__line" id="t-tools-h">${tc('drawn and built with')}</h2>
-<ol class="tale__list" role="list">${d.skills.map((s) => html`<li>${tk(s.group)}<span class="tale__m">${s.items.join(' · ')}</span></li>`)}</ol>` }
-  ];
-  const body = html`
-<div class="tale" id="tale" data-fx="track" data-steps="auto" data-dark>
-<nav class="tale-rail" aria-label="About chapters"><ol role="list" data-rail="tale">${chs.map((c) => html`<li><a data-step href="#t-${c.id}">${c.label}</a></li>`)}</ol></nav>
-${chs.map((c) => html`<section class="tale__ch tale__ch--${c.id}" id="t-${c.id}" data-fx="track" aria-labelledby="t-${c.id}-h"><div class="tale__stage">${c.body}</div></section>`)}
-</div>
-<header class="intro about-head wrap g" id="cv">
-<div class="s-text center">
-<p class="print-only print-name">${P.name} | ${P.jobTitle}</p>
-<p class="print-only">${P.line} ${P.email} | ${P.linkedin.replace('https://www.', '')} | ${site.origin.replace('https://', '')}${site.base}</p>
-<h2 class="h1">Curriculum vitae</h2>
-</div>
-<div class="s-narrow block print-only"><div class="prose"><p>${d.bio}</p></div></div>
-<p class="s-text center in no-print">${more(p + 'files/hazem-radhouani-cv.pdf', 'Download CV (PDF)', p)}</p>
-</header>
-<div class="wrap g block">
-${cvBlock('exp-h', 'Experience', d.experience.map((r) => ({ when: r.when, what: what(r) })))}
-${cvBlock('edu-h', 'Education', d.education.map((r) => ({ when: r.when, what: what(r) })))}
-${cvBlock('dist-h', 'Distinctions', d.distinctions.map((r) => ({ when: r.when, what: what(r) })))}
-${cvBlock('skills-h', 'Skills', d.skills.map((s) => ({ when: s.group, what: s.items.join(' | ') })))}
-${cvBlock('lang-h', 'Languages', d.languages.map((l) => ({ when: l.level, what: l.name })))}
-</div>
-<section class="chapter wrap g about-contact" id="contact" aria-labelledby="contact-h">
-<div class="s-text center"><h2 class="h1" id="contact-h">Contact</h2><p class="site-footer__mail in"><a href="mailto:${P.email}">${P.email}</a></p><p><a href="${P.linkedin}" target="_blank" rel="noopener">LinkedIn<span class="vh"> (opens in a new tab)</span></a></p></div>
-<form class="s-narrow block form" action="${d.form.action}" method="post" data-contact data-subject-prefix="${d.form.subjectPrefix}" novalidate>
-<div class="form__hp" aria-hidden="true"><label for="cf-hp">Leave this field empty</label><input id="cf-hp" name="_honey" type="text" tabindex="-1" autocomplete="off"></div>
-${field('name', 'Name', 'text', { autocomplete: 'name' })}
-${field('email', 'Email', 'email', { autocomplete: 'email' })}
-${field('subject', 'Subject')}
-${field('message', 'Message', 'textarea')}
-<p><button class="btn" type="submit"><span>Send</span></button></p>
-<p class="form__status" role="status"></p>
-</form>
-</section>`;
-  const jsonld = [{ '@context': 'https://schema.org', '@type': 'ProfilePage', url: `${site.origin}${site.base}about.html`, mainEntity: { '@id': `${site.origin}${site.base}#person` } }, ctx.personLd];
-  return { body, viewer: false, page: { path: 'about.html', nav: 'about', navExact: true, title: d.title, description: d.description, og: d.og, ogType: 'profile', jsonld,
-    preload: preloadFor(d.portrait, portraitSizes, p), bodyClass: 'page-about' } };
-}
 
 /* ------------------------------------------------------------------ films */
 export function motion(site, d, projects, ctx) {

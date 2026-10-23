@@ -1,85 +1,79 @@
 {
-  "$comment": "Home, \"Reel\" (plan 17, D95-D97): a film scrubbed by the scroll, the column of projects, then practice, research and the index. Chapters come from site.person; every other string is here.",
+  "$comment": "Home, \"Reel, corrected\" (plan 18, D103-D105): the page opens on the reel, one composition per project, and ends on the index root. Identity comes from site.person (a visually hidden h1 block); every other string is here.",
   "title": "HAZEM RADHOUANI",
   "description": "Architect with international experience: project work in Tunisia, France and Morocco, and research experience in Japan.",
   "og": "images/og/home.jpg",
-  "film": {
-    "title": "Sidi Maarouf Station",
-    "caption": "Sidi Maarouf Station, Casablanca. Architectural film, 2025.",
-    "poster": "images/film/sidi-maarouf-scrub.jpg",
-    "desktop": "videos/scrub/sidi-maarouf-desktop.mp4",
-    "mobile": "videos/scrub/sidi-maarouf-mobile.mp4",
-    "alt": "Aerial view at dusk of a single-storey station under a wide white roof beside the railway: platforms with canopies, trains, palm trees and car parks; the camera circles the building as the page scrolls",
-    "source": "videos/sidi-maarouf.mp4, 30.9 to 40.4 s, one continuous aerial take (D96); facts from content/pages/motion.json film-sidi-maarouf"
-  },
-  "column": [
-    { "project": "zenata", "mode": "pair", "key": "images/cut/zenata/zenata-site-access.png" },
-    { "project": "bolivar", "mode": "pair", "key": "images/cut/bolivar/bolivar-axo-retained.png" },
-    { "project": "al-arg", "mode": "pair", "key": "images/cut/al-arg/al-arg-past-present-future.png" },
-    { "project": "nouvelle-medina", "mode": "pair", "key": "images/cut/nouvelle-medina/nouvelle-medina-structure-exploded.png" },
-    { "project": "foubert", "mode": "pair", "key": "images/cut/foubert/foubert-west-facade.png" },
-    { "project": "la-villette", "mode": "pair", "key": "images/cut/la-villette/la-villette-facade-module-axo.png" },
-    { "project": "sentry", "mode": "film", "poster": "images/film/sentry-scrub.jpg", "desktop": "videos/scrub/sentry-desktop.mp4", "mobile": "videos/scrub/sentry-mobile.mp4" },
-    { "project": "belhomme", "mode": "pair", "key": "images/cut/belhomme/belhomme-facade-rue-belhomme.png" },
-    { "project": "corallum", "mode": "pair", "key": "images/cut/corallum/corallum-volume-helical.png" },
-    { "project": "ain-sebaa", "mode": "pair", "key": "images/cut/ain-sebaa/ain-sebaa-structure.png" },
-    { "project": "avenir", "mode": "pair", "key": "images/cut/avenir/avenir-south-elevation.png" },
-    { "project": "cinephile", "mode": "pair", "key": "images/cut/cinephile/cinephile-sketch.png" },
-    { "project": "hay-mohammadi", "mode": "single" },
-    { "project": "papillon", "mode": "pair", "key": "images/cut/papillon/papillon-site-plan.png" },
-    { "project": "tamansourt", "mode": "pair", "key": "images/cut/tamansourt/tamansourt-site-plan.png" }
-  ],
-  "cover": {
-    "image": "images/cover/alley.jpg",
-    "alt": "Black and white photograph of an earthen alley between rubble walls, with two lit doorways, in a ruined village",
-    "source": "pdf2026:p1 (cover photograph, uncredited)"
-  },
-  "proofs": [
-    {
-      "name": "Survey and documentation",
-      "text": "Facades. Complete existing elevation | reading of architectural mouldings, gutters, chimneys, and joinery. Survey base prior to selective demolition.",
-      "context": "Belhomme, Paris 18th | Studio BELEM",
-      "project": "belhomme",
-      "image": "images/belhomme/belhomme-existing-facades-survey.jpg",
-      "alt": "Existing facade survey elevations and selective demolition plans of the Belhomme building",
-      "kind": "drawing",
-      "source": "pdf2026:p10"
-    },
-    {
-      "name": "BIM delivery",
-      "text": "Development of the DCE detail booklet: interior and exterior joinery, systematic indexing of secondary works elements.",
-      "context": "La Villette, Paris 19th | Studio BELEM",
-      "tools": "Revit | ArchiCAD | Rhino | Grasshopper",
-      "project": "la-villette",
-      "image": "images/la-villette/la-villette-access-gate-annotated.png",
-      "alt": "Construction elevation and section of the access gate and entry door, north elevation of building A, with its French callouts on leader lines",
-      "kind": "drawing",
-      "source": "pdf2026:p3, pdf2026:p28 (tools)"
-    },
-    {
-      "name": "Visualisation",
-      "text": "Courtyard threshold, arched entry, merlonated perimeter wall, dry vegetation and ancient stone.",
-      "context": "Al-Arg | architecture thesis",
-      "tools": "D5 Render | Unreal Engine",
-      "project": "al-arg",
-      "image": "images/al-arg/al-arg-render-courtyard.jpg",
-      "alt": "Render of a courtyard threshold with an arched entry and a merlonated perimeter wall",
-      "kind": "render",
-      "source": "site:project-al-arg (caption), pdf2026:p28 (tools)"
-    }
-  ],
-  "research": {
-    "title": "Between the Poetics of Place and the Value of Heritage",
-    "titleAr": "بين شاعرية المكان و قيمة الأثر",
-    "meta": "Architecture thesis | ENAU, University of Carthage | Highest Honours, unanimous jury, June 2024",
-    "award": "Sakura Science Program, Japan 2025 | Most Appreciated Research",
-    "cover": "images/cut/books/thesis-mockup-1.png",
-    "coverAlt": "The printed thesis Between the Poetics of Place and the Value of Heritage, laid open face down to show its cover: the Arabic title over a photograph of a rubble-stone wall",
-    "sources": {
-      "title": "site:books + pdf2025:p3",
-      "titleAr": "pdf2025:p46",
-      "meta": "site:books + answer:F01",
-      "award": "answer:F02"
-    }
-  }
+  "$reel": "D104/D120. layout: trio (main left, side top right, drawing bottom right), trio-m (mirrored), duo-p (portrait main 4:5 plus drawing), film (trio with the scrub film as main), duo (two renders; Hay Mohammadi has no drawing). Renders (main, side) are cropped 16:10 by object-fit at pos; drawings are cutouts in images/cut, whole on a sheet card, never cropped. why = the reason for the choice (not published).",
+  "reel": [
+    { "project": "zenata", "layout": "trio", "layers": [
+      { "role": "main", "src": "images/zenata/zenata-platform-render.jpg", "pos": "50% 55%" },
+      { "role": "side", "src": "images/zenata/zenata-dusk-corner.jpg", "pos": "50% 50%" },
+      { "role": "drawing", "src": "images/cut/zenata/zenata-site-access.png" } ],
+      "why": "The case-study hero (day, platform) against the lit station at dusk; the access axonometric shows the hall bridging the tracks." },
+    { "project": "bolivar", "layout": "duo-p", "layers": [
+      { "role": "main", "src": "images/bolivar/bolivar-courtyard-render-hq.jpg", "pos": "50% 50%" },
+      { "role": "drawing", "src": "images/cut/bolivar/bolivar-axo-raised-lowered.png" } ],
+      "why": "Portrait hero, so duo-p; the raised and lowered volumes are the project's strategy in one drawing." },
+    { "project": "al-arg", "layout": "trio-m", "layers": [
+      { "role": "main", "src": "images/al-arg/al-arg-aerial-sunset-hq.jpg", "pos": "50% 50%" },
+      { "role": "side", "src": "images/al-arg/al-arg-render-shade-frame.jpg", "pos": "50% 50%" },
+      { "role": "drawing", "src": "images/cut/al-arg/al-arg-structure-01.png" } ],
+      "why": "Three scales: the site from the air, a shaded courtyard at eye level, the wall and timber shade structure as a detail." },
+    { "project": "nouvelle-medina", "layout": "trio", "layers": [
+      { "role": "main", "src": "images/nouvelle-medina/nouvelle-medina-night-section-hq.jpg", "pos": "50% 50%" },
+      { "role": "side", "src": "images/nouvelle-medina/nouvelle-medina-aerial.jpg", "pos": "50% 50%" },
+      { "role": "drawing", "src": "images/cut/nouvelle-medina/nouvelle-medina-flows.png" } ],
+      "why": "Night section against the daytime aerial; the passenger-flow axonometric reads at card size (the exploded structure was too faint)." },
+    { "project": "foubert", "layout": "trio-m", "layers": [
+      { "role": "main", "src": "images/foubert/foubert-brick-render-hq.jpg", "pos": "50% 60%" },
+      { "role": "side", "src": "images/foubert/foubert-rear-render-hq.jpg", "pos": "50% 50%" },
+      { "role": "drawing", "src": "images/cut/foubert/foubert-west-facade.png" } ],
+      "why": "Street and courtyard, the project's only two renders; the brick west facade drawn beside the brick render." },
+    { "project": "la-villette", "layout": "duo-p", "layers": [
+      { "role": "main", "src": "images/la-villette/la-villette-street-render-hq.jpg", "pos": "50% 50%" },
+      { "role": "drawing", "src": "images/cut/la-villette/la-villette-facade-module-axo.png" } ],
+      "why": "Portrait hero, so duo-p; a PRO/DCE project, so its constructive facade-module axonometric is the drawing." },
+    { "project": "sentry", "layout": "film", "layers": [
+      { "role": "film", "poster": "images/film/sentry-scrub.jpg", "desktop": "videos/scrub/sentry-desktop.mp4", "mobile": "videos/scrub/sentry-mobile.mp4" },
+      { "role": "side", "src": "images/sentry/sentry-window-counter.jpg", "pos": "50% 50%" },
+      { "role": "drawing", "src": "images/cut/sentry/sentry-elevation-roof.png" } ],
+      "why": "The existing scrub film (D96) as main; the figures at the window give the pavilion's scale; the roof elevation's hatch reads at card size." },
+    { "project": "belhomme", "layout": "duo-p", "layers": [
+      { "role": "main", "src": "images/belhomme/belhomme-corner-render-hq.jpg", "pos": "50% 50%" },
+      { "role": "drawing", "src": "images/cut/belhomme/belhomme-section-cc.png" } ],
+      "why": "Portrait hero, so duo-p; the cross-section's black cut shows the floors at card size." },
+    { "project": "corallum", "layout": "trio", "layers": [
+      { "role": "main", "src": "images/corallum/corallum-corner.jpg", "pos": "50% 50%" },
+      { "role": "side", "src": "images/corallum/corallum-interior-ramp.jpg", "pos": "50% 50%" },
+      { "role": "drawing", "src": "images/cut/corallum/corallum-volume-restrict.png" } ],
+      "why": "Outside and inside; a formal-research volume, the bold one of the series at card size." },
+    { "project": "ain-sebaa", "layout": "trio-m", "layers": [
+      { "role": "main", "src": "images/ain-sebaa/ain-sebaa-render-screen-hq.jpg", "pos": "50% 50%" },
+      { "role": "side", "src": "images/ain-sebaa/ain-sebaa-platform-view.jpg", "pos": "50% 50%" },
+      { "role": "drawing", "src": "images/cut/ain-sebaa/ain-sebaa-plan-main.png" } ],
+      "why": "The screen facade close and the hall across the tracks; the ground-floor plan reads at card size (the structural concept was too faint)." },
+    { "project": "avenir", "layout": "duo-p", "layers": [
+      { "role": "main", "src": "images/avenir/avenir-avenue-de-verdun-render.jpg", "pos": "35% 50%" },
+      { "role": "drawing", "src": "images/cut/avenir/avenir-south-elevation.png" } ],
+      "why": "A 16:10 crop would cut the top of the building, so a 4:5 portrait crop (duo-p); the south elevation is the face the render shows." },
+    { "project": "cinephile", "layout": "trio", "layers": [
+      { "role": "main", "src": "images/cinephile/cinephile-foyer.jpg", "pos": "50% 50%" },
+      { "role": "side", "src": "images/cinephile/cinephile-facade-render.jpg", "pos": "50% 50%" },
+      { "role": "drawing", "src": "images/cut/cinephile/cinephile-sketch.png" } ],
+      "why": "The red foyer and the facade at dusk; the sketch of the ideas beside them." },
+    { "project": "hay-mohammadi", "layout": "duo", "layers": [
+      { "role": "main", "src": "images/hay-mohammadi/hay-mohammadi-aerial.jpg", "pos": "45% 50%" },
+      { "role": "side", "src": "images/hay-mohammadi/hay-mohammadi-front.jpg", "pos": "30% 50%" } ],
+      "why": "No drawing in the content, so two renders: the aerial as main (the 2.85:1 front loses its ends at 16:10), the front cropped to keep the station's sign." },
+    { "project": "papillon", "layout": "trio-m", "layers": [
+      { "role": "main", "src": "images/papillon/papillon-pool.jpg", "pos": "40% 50%" },
+      { "role": "side", "src": "images/papillon/papillon-facade-front.jpg", "pos": "50% 50%" },
+      { "role": "drawing", "src": "images/cut/papillon/papillon-plans.png" } ],
+      "why": "Pool side and front; the plans read at card size (the site plan was too faint)." },
+    { "project": "tamansourt", "layout": "trio", "layers": [
+      { "role": "main", "src": "images/tamansourt/tamansourt-path.jpg", "pos": "50% 50%" },
+      { "role": "side", "src": "images/tamansourt/tamansourt-aerial.jpg", "pos": "50% 50%" },
+      { "role": "drawing", "src": "images/cut/tamansourt/tamansourt-site-plan.png" } ],
+      "why": "The path between the wings at eye level and the campus from the air; the site plan places the wings." }
+  ]
 }

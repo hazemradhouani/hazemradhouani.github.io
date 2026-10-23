@@ -8,6 +8,7 @@
   ],
   "title": "Zenata Station",
   "run": "Yassir Khalil Studio | Casablanca",
+  "$omit": ["run", "tag", "spec:Type", "spec:Office"],
   "summary": "Regional rail station and multimodal interchange for the Casablanca metropolitan network, developed at Yassir Khalil Studio.",
   "place": "Casablanca",
   "year": "2025",

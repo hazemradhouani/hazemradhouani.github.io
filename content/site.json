@@ -22,15 +22,15 @@
       "Rail infrastructure"
     ],
     "credential": "National Architecture Diploma, Highest Honours | ENAU 2026",
-    "email": "hazemradhouani@gmail.com",
+    "email": "radhouani.hazem@enau.ucar.tn",
     "linkedin": "https://www.linkedin.com/in/hazem-radhouani-b36616319/",
-    "sources": { "line": "owner:2026-10-13", "knowsAbout": "owner:2026-10-13 + site", "credential": "site:about + answer:F01", "email": "site", "linkedin": "site + pdf2025:p48" }
+    "sources": { "line": "owner:2026-10-13", "knowsAbout": "owner:2026-10-13 + site", "credential": "site:about + answer:F01", "email": "owner:2026-10-22", "linkedin": "site + pdf2025:p48" }
   },
-  "$nav": "D93: the reader's routes stand left of the name, the two views of the work right of it (dmcg's frame)",
+  "$nav": "D93: the reader's routes stand left of the name, the two views of the work right of it (dmcg's frame). D107: Contact is the email chip, a mailto: link to person.email without the script",
   "nav": [
     { "id": "about", "label": "About", "href": "about.html" },
     { "id": "research", "label": "Research", "href": "books.html" },
-    { "id": "contact", "label": "Contact", "href": "about.html#contact" }
+    { "id": "contact", "label": "Contact" }
   ],
   "views": [
     { "id": "home", "label": "Projects", "href": "index.html" },
