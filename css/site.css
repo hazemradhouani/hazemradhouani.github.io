@@ -374,8 +374,8 @@
   .menu__list a { display: inline-block; padding: var(--s2) var(--s4); font-size: clamp(2rem, 9vw, 2.75rem); line-height: 1.2;
     text-transform: var(--case); text-decoration: none; color: var(--ink-2); border-radius: 14px; }
   .menu__list a:hover, .menu__list a[aria-current] { color: var(--ink); }
-  .menu__contact { margin-top: calc(var(--s7) + var(--s4)); display: grid;   /* room for the chip under Contact */ justify-items: center; gap: var(--s1); }
-  .menu__contact a { min-height: 2.75rem; display: inline-flex; align-items: center; }
+  .menu__contact { margin-top: calc(var(--s7) + var(--s4));   /* room for the chip under Contact */ display: flex; flex-wrap: wrap; justify-content: center; gap: var(--s1); }
+  .menu__contact a { min-height: 2.75rem; display: inline-flex; align-items: center; padding-inline: var(--pill-x); text-decoration: none; color: var(--ink); }
 
   /* figures: images at their natural ratio, never cropped, never above native pixels (--nw) */
   .nw { display: block; width: 100%; max-width: var(--nw, 100%); margin-inline: auto; }
@@ -603,7 +603,15 @@
   .reel__l[data-crop] img { object-fit: cover; object-position: var(--pos, 50% 50%); }
   .reel__v { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 400ms var(--ease-out); }
   .is-live > .reel__v { opacity: 1; }
-  .reel__a:hover .reel__l { box-shadow: var(--shadow-lift); }   /* feedback: the composition lifts under the pointer */
+  a.reel__a:hover .reel__l { box-shadow: var(--shadow-lift); }   /* feedback: the composition lifts under the pointer */
+  /* a still composition (Research, D138): the same stage, its layers placed by the page at their own ratios; it is
+     not a link, so it does not lift. A cutout book stands on the field itself (its own shadow is in its pixels) */
+  .page-research { padding-top: 0; }
+  .reel--in { padding: var(--s6) var(--site-edge) 0; }
+  .reel__l--front { z-index: 3; }
+  .reel__l--obj { border-radius: 0; overflow: visible; box-shadow: none; }
+  .reel__l--obj :is(.nw, picture, img) { display: block; width: 100%; height: 100%; max-width: none; }
+  .reel__l--obj img { object-fit: contain; }
   .reel__cap { display: flex; flex-wrap: wrap; justify-content: center; gap: 0 var(--s3); margin-top: var(--s4); font-size: var(--fs-cap); line-height: 1.5; text-align: center; }
   .reel__m { color: var(--ink-2); }
   /* a fine pointer reads the name from the label that follows it (D109): the caption steps out of the flow and out
@@ -623,15 +631,26 @@
   /* a case study's next project (D115): the home's own composition, its caption always shown (no label follows the
      pointer there: the caption is the next page's name, read before the click) */
   .reel--next { padding: var(--s6) var(--site-edge) 0; }
+  /* Research opens assembled on phones too: its one composition stands at the screen's centre, in the dead zone */
+  @media (max-width: 47.99rem) { .reel--still { padding-top: calc((100svh - var(--stage-w) * 0.8) / 2); } .reel--still.reel--in { padding-top: var(--s6); } }
   @media (hover: hover) and (pointer: fine) and (min-width: 48rem) { .reel--next .reel__cap { position: static; opacity: 1; } }
 
   /* the end of the page: the index's root joined to its families by curves, as dmcg's catalog tree begins */
-  .tree-root { display: grid; grid-template-columns: auto clamp(2.5rem, 7vw, 6rem) auto; align-items: center; justify-content: center;
+  .tree-root { display: grid; grid-template-columns: auto clamp(2.5rem, 7vw, 6rem) auto clamp(2.5rem, 7vw, 6rem) auto; align-items: center; justify-content: center;
     margin-top: var(--gap-group); padding-inline: var(--site-edge); }
   .tree-root__lines { align-self: stretch; width: 100%; height: 100%; min-height: 0; fill: none; stroke: var(--ui); opacity: 0.6; }
   .tree-root__lines path { vector-effect: non-scaling-stroke; }
   .tree-root__fam { display: grid; grid-auto-rows: 1fr; margin: 0; padding: 0; list-style: none; }
   .tree-root__fam > li { display: flex; align-items: center; padding-block: var(--s1); }
+  /* the projects branch out once more, by place (D129): Projects' connector runs on past its pill to the column's edge,
+     where the curves to its places begin. A phone has no room for a third level: the places stand in a row below */
+  .tree-root__on::after { content: ""; flex: 1; height: 1px; background: var(--ui); opacity: 0.6; }
+  .tree-root__places { align-self: stretch; }
+  @media (max-width: 47.99rem) {
+    .tree-root { grid-template-columns: auto clamp(2.5rem, 7vw, 6rem) auto; }
+    .tree-root__lines--place, .tree-root__on::after { display: none; }
+    .tree-root__places { grid-column: 1 / -1; display: flex; flex-wrap: wrap; justify-content: center; gap: var(--s2); margin-top: var(--s4); }
+  }
   /* filters and the tree's nodes keep their pill at rest (dmcg's catalog): under the pointer it fills */
   .pill { display: inline-flex; align-items: center; gap: 0.5em; min-height: 2.75rem; padding: 0 var(--s4); border: 1px solid var(--line);
     border-radius: var(--r-ctl); background: var(--bg); color: var(--ink); font-size: var(--fs-cap); text-decoration: none;
@@ -651,6 +670,11 @@
   .tiles { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s5) 12px; padding: var(--s7) var(--site-edge) calc(var(--edge-bottom) + 5rem); }
   @media (min-width: 56.25rem) { .tiles { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 3vw 2.8vw; padding-inline: 6.2vw 4.8vw; } }
   .tile__fig { margin: 0; }
+  /* feedback (D131, D130's cards): under a mouse a tile's frame lifts, since every frame opens the viewer or the film */
+  @media (hover: hover) and (pointer: fine) {
+    .tile__frame { transition: box-shadow var(--t-hover) var(--ease-out); }
+    .tile__frame:hover { box-shadow: var(--shadow-lift); }
+  }
   .tile__frame { display: grid; place-items: center; aspect-ratio: 4 / 3; border-radius: var(--r-tile); background: var(--g-light); overflow: clip; text-decoration: none; }
   html[data-theme="dark"] .tile__frame { background: var(--g-dark); }   /* under a cover crop the ground only shows while the picture loads */
   .tile__frame--sheet, html[data-theme="dark"] .tile__frame--sheet { background: var(--bg-raised); }
@@ -734,6 +758,14 @@
      and goes grey (6.4:1 on its own ground). A phone's panel spans the bar and its rows stack. The line under
      the heading says what is chosen and how much it leaves; the tree dims what does not match, in place */
   .ix-bar__filter { flex: none; }
+  /* a phone: Filter is an icon like the views beside it, so the families keep one more pill in sight (at 320px they
+     had about one); its name stays for assistive technology */
+  .ix-bar__ico { display: none; }
+  @media (max-width: 47.99rem) {
+    .ix-bar__filter { min-width: 2.75rem; padding-inline: calc((2.75rem - 1.125rem) / 2 - 1px); justify-content: center; }
+    .ix-bar__ico { display: block; flex: none; width: 1.125rem; height: 1.125rem; fill: none; stroke: currentColor; stroke-width: 1.5; }
+    .ix-bar__t { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  }
   .ix-filter { position: absolute; left: 50%; bottom: calc(100% + var(--s2)); translate: -50% 0; width: min(46rem, 100vw - 2 * var(--site-edge));
     max-height: calc(100svh - var(--head-h) - 6rem); overflow-y: auto; overscroll-behavior: contain;
     border: 1px solid var(--line); border-radius: var(--r-card); background: color-mix(in srgb, var(--bg) 86%, transparent);
@@ -751,8 +783,10 @@
   .ix-filter__clear { justify-self: end; }
   @media (max-width: 47.99rem) { .ix-filter__row { grid-template-columns: minmax(0, 1fr); } .ix-filter__h { padding-top: 0; } }
   .ix-result { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: var(--s2) var(--s3); padding: var(--s4) var(--site-edge) 0; font-size: var(--fs-cap); text-align: center; }
+  .leaf { transition: opacity 420ms var(--ease-out); }   /* dims in place, slowly enough to be seen going (D128) */
   .leaf.is-off { opacity: 0.14; }
-  .tree__lines path.is-off { stroke-opacity: 0.04; }
+  .tree__lines path { transition: stroke-opacity var(--t-hover) var(--ease-out), opacity 420ms var(--ease-out); }
+  .tree__lines path.is-off { opacity: 0.25; }   /* .16 x .25 = .04: with its leaf, both ways at the same pace */
   @media (max-width: 89.99rem) { .page-work .corner { display: none; } }
 
   /* about (D113, D114): dmcg's About, one column in the one voice at the header's size, on the field. Entries are
@@ -920,6 +954,12 @@
     .page-case .g > .cap--side { grid-column: 1 / span 3; grid-row: 1; margin-top: 0; }
   }
   /* next project: its place in the series, then its composition from the home (it morphs into the next page's hero) */
+  /* its place, types and years as ways into the Index (D129): a head like a chapter's, the pills on the copy axis; the
+     next project follows close, the two being the page's way on */
+  .ways { margin-top: var(--gap-chapter); align-items: start; }
+  .ways__h { margin-top: var(--s4); padding-top: calc((2.75rem - 1lh) / 2); }
+  .ways__l { display: flex; flex-wrap: wrap; gap: var(--s2); margin-top: var(--s4); }
+  .ways + .next { margin-top: var(--gap-group); }
   .next { margin-top: var(--gap-chapter); }
   .next__label { margin-top: var(--s4); }
   .next__i { margin-left: var(--s3); font-variant-numeric: tabular-nums; }
@@ -928,6 +968,13 @@
   /* research */
   .book__ar { font-size: var(--fs-lead); line-height: 1.6; color: var(--ink-2); }
   .abstract { font-style: italic; }
+  /* the report as a duo (D138): its cover card beside its words from 64rem, above them below */
+  .duo { display: grid; gap: var(--s6); align-items: center; }
+  .duo__m { width: min(100%, 22rem); justify-self: center; }
+  .duo__m .nw { border-radius: var(--r-card); overflow: clip; box-shadow: var(--shadow-card); }
+  .duo__t .spec { margin-top: var(--s4); }
+  .duo__t .actions { justify-content: flex-start; margin-top: var(--s4); }
+  @media (min-width: 64rem) { .duo { grid-template-columns: 5fr 7fr; gap: var(--gutter); } .duo__m { width: 100%; } }
 
   /* about: a CV whose two columns sit on grid lines (subgrid of the text span) */
   .cv { display: grid; grid-template-columns: subgrid; }
@@ -945,6 +992,13 @@
 
   /* films */
   .film video { width: 100%; height: auto; background: var(--ink); }
+  /* the films page (D138): films and reels in one grid of 16:9 cover cards; the title, its label and its words under each */
+  .fgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 22rem), 1fr)); gap: var(--s7) var(--gutter); margin: 0; padding: 0; list-style: none; }
+  .fcard > * + * { margin-top: var(--s2); }
+  .fcard > .fcard__v + * { margin-top: var(--s4); }
+  .fcard__v { aspect-ratio: 16 / 9; border-radius: var(--r-card); overflow: clip; box-shadow: var(--shadow-card); background: var(--ink); transition: box-shadow var(--t-hover) var(--ease-out); }
+  .fcard__v:hover { box-shadow: var(--shadow-lift); }
+  .fcard video { display: block; width: 100%; height: 100%; object-fit: cover; }
 }
 
 /* ------------------------------------------------------------------ motion (purpose in 08-direction.md) */
@@ -1029,7 +1083,7 @@
   html.fx .reel__l--main { --o: 0; scale: calc(1 + var(--grow) * var(--in)); }
   html.fx .reel__l--side { --lag: 0.62; --k: 1.5; }
   html.fx .reel__l--drawing { --lag: 0.4; --k: 0.9; }
-  html.fx :is(.reel__l--drawing, .reel__it--duo .reel__l--side) { opacity: calc(1 - var(--o)); }   /* above the main card: it fades in as it leaves the centre */
+  html.fx :is(.reel__l--drawing, .reel__it--duo .reel__l--side, .reel__l--front) { opacity: calc(1 - var(--o)); }   /* above the main card: it fades in as it leaves the centre */
   @media (max-width: 47.99rem) { html.fx .reel__it { --grow: 0.12; } }
   html.fx .reel__it:focus-within { --in: 0; --out: 0; }   /* reached by the keyboard: assembled and sharp, its focus ring never faded (WCAG 2.4.7) */
   @media (hover: hover) and (pointer: fine) {
@@ -1063,16 +1117,16 @@
      draws from the left; the words that belong to a plate or a head follow it (opacity, 12px). */
   html.fx [data-fx="enter"] { --o: calc(1 - var(--e, 0)); --o2: clamp(0, (var(--o) - 0.35) / 0.65, 1); }
   html.fx .fig[data-fx] > :is(.fig__plate, .cells) { opacity: clamp(0, var(--o) * 1.6, 1); translate: 0 calc(var(--e, 0) * 3rem); scale: calc(0.94 + 0.06 * var(--o)); }
-  html.fx .fig[data-fx] > :is(.cap, .key), html.fx :is(.ch__head, .next__head)[data-fx] > :not(.ch__bar) { opacity: var(--o2); translate: 0 calc((1 - var(--o2)) * 12px); }
-  html.fx :is(.ch__head, .next__head)[data-fx] > .ch__bar { transform-origin: left; scale: var(--o) 1; }
+  html.fx .fig[data-fx] > :is(.cap, .key), html.fx :is(.ch__head, .next__head, .ways)[data-fx] > :not(.ch__bar) { opacity: var(--o2); translate: 0 calc((1 - var(--o2)) * 12px); }
+  html.fx :is(.ch__head, .next__head, .ways)[data-fx] > .ch__bar { transform-origin: left; scale: var(--o) 1; }
   @media (min-width: 64rem) { html.fx .fig[data-fx] :is(.row, .cells) > .cell { translate: calc(var(--c, 0) * -90% * var(--e, 0)) 0; } }
   @media (hover: hover) and (pointer: fine) { html.fx .fig[data-fx] > :is(.fig__plate, .cells) { filter: blur(calc(var(--e, 0) * 8px)); } }
 
   /* orientation (D98): a tile of the index rises 46px and settles from 94% as it enters at the bottom of the screen
-     (--d from 1 to 0.35): dmcg's grid entry, scrubbed by the scroll so it runs back too. A tile a filter brings
-     back rises once (feedback). */
+     (--d from 1 to 0.35): dmcg's grid entry, scrubbed by the scroll so it runs back too. What a filter or a family
+     changes moves by site.js (D128). The bar arrives once, with the page (D131) */
   html.fx .tile { --e: clamp(0, var(--d, 0) - 0.35, 0.65); translate: 0 calc(var(--e) * 46px); scale: calc(1 - var(--e) * 0.09); }
-  .tile.is-entering { animation: rise 420ms var(--ease-out) backwards; }
+  @media (prefers-reduced-motion: no-preference) { .ix-bar { animation: rise 420ms var(--ease-out) backwards; } }
 
   /* orientation (D113): the sheet comes in as its veil fades up and its column comes into focus from 12px below
      (600ms), and leaves faster (450ms); transitions, so a close mid-way runs back from where it is. Blur on a fine

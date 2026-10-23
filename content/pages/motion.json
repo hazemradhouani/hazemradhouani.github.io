@@ -1,4 +1,5 @@
 {
+  "$omit": ["filmsTitle", "reelsTitle"],
   "title": "Films and motion | Hazem Radhouani",
   "description": "Architectural films of the Sentry pavilion and the Sidi Maarouf and Zenata stations, and motion graphic reels by Hazem Radhouani, architect and motion designer.",
   "og": "images/og/motion.jpg",

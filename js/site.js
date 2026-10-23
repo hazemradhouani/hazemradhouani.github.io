@@ -341,6 +341,30 @@
     root.addEventListener('pointerleave', function () { pill.classList.remove('is-on'); });
   }
 
+  /* ------------------------------------------------------------ the films' preview (feedback, D138)
+     On a fine pointer a film card plays its film muted, from the start, while the pointer rests on it, and returns
+     to its poster when the pointer leaves; its controls step aside meanwhile, and a click plays it from the start
+     with sound and controls. Touch, reduced motion (read at each hover) and no script keep the poster until the
+     reader presses play (WCAG 2.2.2). Nothing is fetched before the first hover (preload="none"). */
+  if (fineQ.matches) slice(document.querySelectorAll('.fcard video')).forEach(function (v) {
+    var card = v.closest('.fcard'), preview = false;
+    card.addEventListener('pointerenter', function () {
+      if (reduce.matches || !v.paused || v.dataset.on) return;
+      preview = true; v.muted = true; v.controls = false;
+      v.play().catch(function () {});
+    });
+    card.addEventListener('pointerleave', function () {
+      if (!preview) return;
+      preview = false; v.pause(); v.controls = true; v.muted = false;
+      v.load();   // back to the poster (preload none: nothing new is fetched)
+    });
+    v.addEventListener('click', function () {
+      if (!preview) return;
+      preview = false; v.dataset.on = '1'; v.controls = true; v.muted = false; v.currentTime = 0;
+      v.play().catch(function () {});
+    });
+  });
+
   /* ------------------------------------------------------------ arrival (hierarchy, D76)
      Groups that start below the fold arrive once, after their images decode: each plate rises from its
      ground line inside its own frame, the cells of a row or series in order, and the words that belong to
@@ -548,7 +572,7 @@
      The page holds the tree, the grid and the list; the bar shows one view and one family (dmcg's catalog) and
      keeps both in the address, so a link or Back returns to the same view. It opens on the tree where the tree
      has room (64rem; its pills would meet below), on the grid elsewhere. The tree has no "all" (228 leaves would
-     be specks): there it shows the projects. A tile a filter brings back rises into place once (feedback). */
+     be specks): there it shows the projects. How each change moves is set out below (D128, D131). */
   var ixBar = document.querySelector('.ix-bar');
   if (ixBar) {
     var ixViews = slice(document.querySelectorAll('[data-view]'));
@@ -585,44 +609,129 @@
     // an item matches when it holds every chosen value, the facet a count is asked for aside
     var hit = function (it, but) { return FACETS.every(function (k) { return k === but || !ixState[k] || it.f[k].indexOf(ixState[k]) >= 0; }); };
     var inFam = function (it) { return ixState.family === 'all' || it.el.getAttribute('data-fam') === ixState.family; };
-    var panelSet = function (on) { ixPanel.hidden = !on; ixOpen.setAttribute('aria-expanded', String(on)); };
+    var EASE_IN = 'cubic-bezier(0.55, 0, 1, 0.45)';
+    var easeOut = function () { return css('--ease-out') || 'cubic-bezier(0.22, 1, 0.36, 1)'; };
+    /* the panel (state, D128): it unfolds out of the bar (a clip opening away from it, 420ms) while its rows rise 8px,
+       and folds back faster (300ms); a press mid-way turns it from where it is. The clip reaches past the box so its
+       shadow is never cut. Reduced motion: at once */
+    var panelOn = false, panelAnims = [];
+    var panelSet = function (on) {
+      if (on === panelOn) return;
+      panelOn = on;
+      ixOpen.setAttribute('aria-expanded', String(on));
+      var inn = ixPanel.firstElementChild, mid = panelAnims.length > 0;
+      var at = { clip: getComputedStyle(ixPanel).clipPath, o: getComputedStyle(inn).opacity, t: getComputedStyle(inn).transform };
+      panelAnims.forEach(function (a) { a.cancel(); }); panelAnims = [];
+      ixPanel.inert = !on;   // folding away, it takes no more presses
+      if (on) ixPanel.hidden = false;
+      if (reduce.matches) { ixPanel.hidden = !on; return; }
+      // above the bar it opens upward; held at the top of a short screen, downward
+      var up = ixPanel.getBoundingClientRect().top < ixOpen.getBoundingClientRect().top;
+      var shut = up ? 'inset(100% -4rem -4rem -4rem)' : 'inset(-4rem -4rem 100% -4rem)', whole = 'inset(-4rem)';
+      var o = { duration: on ? 420 : 300, easing: on ? easeOut() : EASE_IN, fill: 'forwards' };
+      var a = ixPanel.animate({ clipPath: [mid ? at.clip : on ? shut : whole, on ? whole : shut] }, o);
+      panelAnims = [a, inn.animate({ opacity: [mid ? at.o : on ? 0 : 1, on ? 1 : 0], transform: [mid ? at.t : on ? 'translateY(8px)' : 'none', on ? 'none' : 'translateY(8px)'] }, o)];
+      a.finished.then(function () {
+        if (!on) ixPanel.hidden = true;
+        panelAnims.forEach(function (x) { x.cancel(); }); panelAnims = [];
+      }, function () {});
+    };
     filterEsc = function () {
-      if (ixPanel.hidden) return false;
+      if (!panelOn) return false;
       var inside = ixPanel.contains(document.activeElement);
       panelSet(false);
       if (inside) ixOpen.focus({ preventScroll: true });
       return true;
     };
 
-    /* the branch switch (orientation, D111): the leaves on screen fold into the old family's pill while the new
-       family's fan out of its own, the nearest first, and its connectors draw out from the pill. Leaves off
-       screen simply change. A new choice mid-way settles the last one at once. */
-    var ixOn = null, ixAnims = [], ixGen = 0;
-    var treeSettle = function () { ixAnims.forEach(function (a) { a.cancel(); }); ixAnims = []; ixGen++; };
+    /* every change moves (orientation, D128, D131), and only what is on screen: a view gives way to another (out in
+       160ms, the new one in from 8px below over 420ms); on the grid and the list what leaves fades and shrinks to .96,
+       then what stays glides from where it stood (FLIP, 560ms) and what comes onto the screen rises; the tree dims in
+       place (site.css, 420ms) and switches branch as below. A reader past the top of a grid or list is taken back to
+       its head while it is faded out. A new change settles the running one at once. Reduced motion: at once. */
+    var ixOn = null, ixAnims = [], ixGen = 0, ixLater = null, ixTimer = 0, ixShown = null;
+    var ixSettle = function () {
+      clearTimeout(ixTimer);
+      var swap = ixLater; ixLater = null;
+      ixAnims.forEach(function (a) { a.cancel(); }); ixAnims = []; ixGen++;
+      if (swap) swap();   // the change still held back is made now
+    };
+    // the change itself (swap) once what leaves has faded (ms), then what arrives moves (then). At the soonest it waits
+    // for the next paint: the press, the counts and the address show at once, and laying out what the change shows
+    // follows in its own task, outside the press's response (INP)
+    var later = function (swap, then, ms) {
+      var gen = ixGen;
+      var go = function () { if (gen !== ixGen) return; ixLater = null; swap(); then(); };
+      ixLater = swap;
+      if (ms) ixTimer = setTimeout(go, ms);
+      else requestAnimationFrame(function () { ixTimer = setTimeout(go, 0); });
+    };
+    // tiles come back a slice at a time (INP): showing 150 at once took one 263ms task at 4x CPU (style and layout,
+    // measured), which held up the press's own paint. The first 24 show at once, then 24 to a task. Reduced motion
+    // and the first showing take them all at once.
+    // shortcut: 24 tiles fill the first two screens at every width checked (3 x 8 at 1440, 2 x 12 at 375); a taller
+    // screen would see its last rows arrive a task or two late
+    var ixSlice = 0;
+    var showTiles = function (want, all) {
+      clearTimeout(ixSlice);
+      var k = 0, step = function () {
+        for (var end = all ? want.length : k + 24; k < end && k < want.length; k++) want[k].hidden = false;
+        if (k < want.length) ixSlice = setTimeout(step, 0);
+      };
+      step();
+    };
     var centre = function (el) { var r = el.getBoundingClientRect(); return { x: r.left + r.width / 2, y: r.top + r.height / 2 }; };
     var onScreen = function (el) { var r = el.getBoundingClientRect(); return r.width > 0 && r.bottom > 0 && r.top < window.innerHeight; };
+    var rise = function (el, px, ms) { ixAnims.push(el.animate([{ opacity: 0, transform: 'translateY(' + px + 'px)' }, { opacity: 1, transform: 'none' }], { duration: ms, easing: easeOut(), fill: 'backwards' })); };
+    var cut = function (oldEl, newEl, swap, then) {
+      var out = oldEl.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 160, easing: EASE_IN, fill: 'forwards' });
+      ixAnims.push(out);
+      later(swap, function () { out.cancel(); rise(newEl, 8, 420); then(); }, 160);
+    };
+    var reflow = function (items, on, swap) {
+      var out = items.filter(function (it) { return !it.el.hidden && !on(it) && onScreen(it.el); }).map(function (it) {
+        return it.el.animate([{ opacity: 1, transform: 'none' }, { opacity: 0, transform: 'scale(0.96)' }], { duration: 160, easing: EASE_IN, fill: 'forwards' });
+      });
+      ixAnims = ixAnims.concat(out);
+      var from = [];
+      later(function () {
+        from = items.filter(function (it) { return !it.el.hidden && on(it) && onScreen(it.el); }).map(function (it) { return { el: it.el, r: it.el.getBoundingClientRect() }; });
+        swap();
+      }, function () {
+        out.forEach(function (a) { a.cancel(); });
+        var moved = from.map(function (f) { return f.el; });
+        from.forEach(function (f) {
+          var r = f.el.getBoundingClientRect(), dx = f.r.left - r.left, dy = f.r.top - r.top;
+          if (Math.abs(dx) + Math.abs(dy) >= 1) ixAnims.push(f.el.animate([{ transform: 'translate(' + dx + 'px, ' + dy + 'px)' }, { transform: 'none' }], { duration: 560, easing: easeOut() }));
+        });
+        items.forEach(function (it) { if (!it.el.hidden && moved.indexOf(it.el) < 0 && onScreen(it.el)) rise(it.el, 12, 420); });
+      }, out.length ? 160 : 0);
+    };
+
+    /* the branch switch (orientation, D111): the leaves on screen fold into the old family's pill while the new
+       family's fan out of its own, the nearest first, and its connectors draw out from the pill. Leaves off
+       screen simply change. The tree's first showing fans out the same way, with nothing to fold (D131). */
     var pillOf = function (b) { return document.querySelector('.tree__fam[data-family="' + b.getAttribute('data-branch') + '"]'); };
     var treeSwitch = function (from, to) {
-      treeSettle();
       var gen = ixGen;
       ixBranches.forEach(function (b) { b.hidden = b !== from && b !== to; });
-      var out = centre(pillOf(from)), into = centre(pillOf(to));
-      var fold = slice(from.querySelectorAll('.leaf')).filter(onScreen).map(function (l) {
+      var into = centre(pillOf(to)), out = from && centre(pillOf(from));
+      var fold = !from ? [] : slice(from.querySelectorAll('.leaf')).filter(onScreen).map(function (l) {
         var c = centre(l);
         return l.animate([{ transform: 'none', opacity: 1 }, { transform: 'translate(' + (out.x - c.x) + 'px, ' + (out.y - c.y) + 'px) scale(0.3)', opacity: 0 }],
-          { duration: 380, easing: 'cubic-bezier(0.55, 0, 1, 0.45)', fill: 'forwards' });
+          { duration: 380, easing: EASE_IN, fill: 'forwards' });
       });
-      fold.push(from.querySelector('.tree__lines').animate([{ opacity: 1 }, { opacity: 0 }], { duration: 380, easing: 'ease-in', fill: 'forwards' }));
+      if (from) fold.push(from.querySelector('.tree__lines').animate([{ opacity: 1 }, { opacity: 0 }], { duration: 380, easing: 'ease-in', fill: 'forwards' }));
       var fan = slice(to.querySelectorAll('.leaf')).filter(onScreen).map(function (l) { var c = centre(l); return { l: l, dx: into.x - c.x, dy: into.y - c.y, d: Math.hypot(into.x - c.x, into.y - c.y) }; });
       var far = Math.max.apply(null, fan.map(function (f) { return f.d; }).concat(1));
-      var ease = css('--ease-out') || 'cubic-bezier(0.22, 1, 0.36, 1)';
+      var ease = easeOut(), wait = from ? 160 : 0;
       var grow = fan.map(function (f) {
         return f.l.animate([{ transform: 'translate(' + f.dx + 'px, ' + f.dy + 'px) scale(0.3)', opacity: 0 }, { transform: 'none', opacity: 1 }],
-          { duration: 560, delay: 160 + Math.round(280 * f.d / far), easing: ease, fill: 'backwards' });
+          { duration: 560, delay: wait + Math.round(280 * f.d / far), easing: ease, fill: 'backwards' });
       });
-      grow.push(to.querySelector('.tree__lines').animate([{ clipPath: 'inset(0 100% 0 0)' }, { clipPath: 'inset(0 0 0 0)' }], { duration: 840, delay: 160, easing: ease, fill: 'backwards' }));
-      ixAnims = fold.concat(grow);
-      Promise.all(fold.map(function (a) { return a.finished; })).then(function () {
+      grow.push(to.querySelector('.tree__lines').animate([{ clipPath: 'inset(0 100% 0 0)' }, { clipPath: 'inset(0 0 0 0)' }], { duration: 840, delay: wait, easing: ease, fill: 'backwards' }));
+      ixAnims = ixAnims.concat(fold, grow);
+      if (from) Promise.all(fold.map(function (a) { return a.finished; })).then(function () {
         if (gen !== ixGen) return;
         from.hidden = true;
         fold.forEach(function (a) { a.cancel(); });
@@ -634,24 +743,50 @@
     var ixTree = document.querySelector('.tree');
     if (ixTree) ['pointerover', 'focusin', 'pointerout', 'focusout'].forEach(function (t, i) { ixTree.addEventListener(t, hot(i < 2)); });
 
+    var viewOf = function (id) { return ixViews.filter(function (v) { return v.getAttribute('data-view') === id; })[0] || null; };
     var ixApply = function (first) {
+      ixSettle();
       var view = ixState.view === 'tree' && !ixWide.matches ? 'grid' : ixState.view;
       if (view === 'tree' && ixState.family === 'all') ixState.family = ixBranches[0].getAttribute('data-branch');
-      ixViews.forEach(function (v) { v.hidden = v.getAttribute('data-view') !== view; });
-      document.body.setAttribute('data-ix-view', view);
-      ixT.forEach(function (it) {
-        var t = it.el, on = inFam(it) && hit(it);
-        if (on && t.hidden && !first && !reduce.matches) { t.classList.remove('is-entering'); void t.offsetWidth; t.classList.add('is-entering'); }
-        t.hidden = !on;
-      });
-      ixL.forEach(function (it) { var off = !hit(it); it.el.classList.toggle('is-off', off); it.el.inert = off; if (it.path) it.path.classList.toggle('is-off', off); });
-      ixR.forEach(function (it) { it.el.hidden = !hit(it); });
+      var was = ixShown, oldEl = viewOf(was), newEl = viewOf(view);
+      ixShown = view;
+      var tileOn = function (it) { return inFam(it) && hit(it); };
       var want = ixBranches.filter(function (b) { return b.getAttribute('data-branch') === ixState.family; })[0] || null;
-      if (want && ixOn && want !== ixOn && view === 'tree' && !first && !reduce.matches) treeSwitch(ixOn, want);
-      else { treeSettle(); ixBranches.forEach(function (b) { b.hidden = b !== want; }); }
-      ixOn = want;
+      var from = ixOn; ixOn = want;
+      // a reader past the top of what they were reading returns to the head (the tree dims in place instead)
+      var deep = !first && oldEl && !(was === 'tree' && view === 'tree') && oldEl.getBoundingClientRect().top < 0;
+      var chosen = ixChoices.filter(function (b) { return ixState[b.getAttribute('data-facet')] === b.getAttribute('data-value'); }).map(function (b) { return b.firstChild.nodeValue.trim(); });
+      // what every view shows: made at once, or once what leaves has faded; the engine measures it in the same task, so
+      // nothing it moves by the scroll jumps after the glide
+      var still = first || reduce.matches;
+      var swap = function () {
+        ixViews.forEach(function (v) { v.hidden = v !== newEl; });
+        document.body.setAttribute('data-ix-view', view);
+        var show = [];
+        ixT.forEach(function (it) { if (tileOn(it)) show.push(it.el); else it.el.hidden = true; });
+        showTiles(show, still);
+        ixL.forEach(function (it) { var off = !hit(it); it.el.classList.toggle('is-off', off); it.el.inert = off; if (it.path) it.path.classList.toggle('is-off', off); });
+        ixR.forEach(function (it) { it.el.hidden = !hit(it); });
+        ixBranches.forEach(function (b) { b.hidden = b !== want; });
+        ixResult.hidden = !chosen.length;   // the line under the head moves what follows: with the change, never before it
+        if (deep) jump(0);
+        if (typeof measure === 'function') measure();
+      };
+      if (still) swap();
+      else if (oldEl !== newEl || deep) cut(oldEl, newEl, swap, function () { if (view === 'tree' && was !== 'tree' && want) treeSwitch(null, want); });
+      else if (view === 'grid') reflow(ixT, tileOn, swap);
+      else if (view === 'list') reflow(ixR, hit, swap);
+      else {
+        // the tree: what does not match dims in place; the result line coming or going moves the tree, so it glides
+        var t0 = 0;
+        later(function () { t0 = newEl.getBoundingClientRect().top; swap(); }, function () {
+          var dy = t0 - newEl.getBoundingClientRect().top;
+          if (dy) ixAnims.push(newEl.animate([{ transform: 'translateY(' + dy + 'px)' }, { transform: 'none' }], { duration: 560, easing: easeOut() }));
+          if (want && from && want !== from) treeSwitch(from, want);
+        }, 0);
+      }
       slice(document.querySelectorAll('[data-trunk]')).forEach(function (t) { t.classList.toggle('is-on', t.getAttribute('data-trunk') === ixState.family); });
-      var shown = ixTiles.filter(function (t) { return !t.hidden; }), seen = {};
+      var shown = ixT.filter(tileOn).map(function (it) { return it.el; }), seen = {};
       ixTiles.forEach(function (t) { if (t.id) t.removeAttribute('id'); });
       shown.forEach(function (t) { var l = t.getAttribute('data-l'); if (!seen[l]) { seen[l] = 1; t.id = 'az-' + l; } });
       slice(document.querySelectorAll('.az li')).forEach(function (li) { li.hidden = !seen[li.textContent.trim()]; });
@@ -670,40 +805,34 @@
         sum += n; b.querySelector('.pill__n').textContent = n;
       });
       var rootN = document.querySelector('.tree__root .pill__n'); if (rootN) rootN.textContent = sum;
-      var chosen = ixChoices.filter(function (b) { return b.getAttribute('aria-pressed') === 'true'; }).map(function (b) { return b.firstChild.nodeValue.trim(); });
       var held = pool.filter(function (it) { return hit(it); }).length, rowsOn = ixR.filter(function (it) { return hit(it); }).length;
       var badge = ixOpen.lastElementChild; badge.hidden = !chosen.length; badge.textContent = chosen.length || '';
-      ixResult.hidden = !chosen.length;
       ixResult.firstElementChild.textContent = chosen.concat(held + ' of ' + pool.length).join(' · ');
       slice(document.querySelectorAll('.ix-filter__clear')).forEach(function (b) { if (chosen.length) b.removeAttribute('aria-disabled'); else b.setAttribute('aria-disabled', 'true'); });
       var listN = document.querySelector('[data-list-n]'); if (listN) listN.textContent = chosen.length ? rowsOn + ' of ' + ixR.length : ixR.length;
       if (!first && ixStatus) ixStatus.textContent = (view === 'list' ? rowsOn + ' projects, list view' : shown.length + ' images, ' + (ixState.family === 'all' ? 'all kinds' : ixState.family + 's') + ', ' + view + ' view')
         + (chosen.length ? ', filtered by ' + chosen.join(', ') : '');
       slice(document.querySelectorAll('button[data-family]')).forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-family') === ixState.family)); });
-      var chosen = ixBar.querySelector('[data-family][aria-pressed="true"]');   // a phone's families scroll: keep the chosen one in sight
-      if (chosen && chosen.parentNode.scrollWidth > chosen.parentNode.clientWidth) chosen.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+      var fam = ixBar.querySelector('[data-family][aria-pressed="true"]');   // a phone's families scroll: keep the chosen one in sight
+      if (fam && fam.parentNode.scrollWidth > fam.parentNode.clientWidth) fam.scrollIntoView({ block: 'nearest', inline: 'nearest' });
       slice(document.querySelectorAll('[data-view-btn]')).forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-view-btn') === view)); });
       if (!first) {
         var u = new URLSearchParams(location.search); u.set('view', view); u.set('family', ixState.family);
         FACETS.forEach(function (k) { if (ixState[k]) u.set(k, ixState[k]); else u.delete(k); });
         history.replaceState(null, '', location.pathname + '?' + u.toString() + location.hash);
       }
-      if (typeof measureSoon === 'function') measureSoon();   // the engine measures what is shown now
     };
     document.addEventListener('click', function (e) {
       if (!e.target.closest) return;
-      if (!ixPanel.hidden && !ixPanel.contains(e.target) && !ixOpen.contains(e.target)) panelSet(false);   // a click outside closes it
+      if (panelOn && !ixPanel.contains(e.target) && !ixOpen.contains(e.target)) panelSet(false);   // a click outside closes it
       var f = e.target.closest('[data-facet], [data-filter-clear], [data-filter-open]');
       if (f) {
-        if (f.hasAttribute('data-filter-open')) { panelSet(ixPanel.hidden); return; }
+        if (f.hasAttribute('data-filter-open')) { panelSet(!panelOn); return; }
         if (f.getAttribute('aria-disabled') === 'true') return;
         if (f.hasAttribute('data-filter-clear')) FACETS.forEach(function (k) { ixState[k] = null; });
         else { var k = f.getAttribute('data-facet'), v = f.getAttribute('data-value'); ixState[k] = ixState[k] === v ? null : v; }
         ixApply(false);
-        if (ixResult.contains(f)) ixOpen.focus({ preventScroll: true });   // the line it stood in is gone
-        // what is left of a grid or list scrolled past stands above the screen: back to the head (orientation)
-        var at = ixViews.filter(function (x) { return !x.hidden; })[0];
-        if (document.body.getAttribute('data-ix-view') !== 'tree' && at && at.getBoundingClientRect().top < 0) jump(0);
+        if (ixResult.contains(f)) ixOpen.focus({ preventScroll: true });   // the line it stood in is going
         return;
       }
       var b = e.target.closest('button[data-family], button[data-view-btn]');
