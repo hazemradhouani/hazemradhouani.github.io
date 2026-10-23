@@ -88,6 +88,7 @@
     --shadow-lift: 0 2px 4px rgb(0 0 0 / 0.05), 0 32px 64px -20px rgb(0 0 0 / 0.24);
     --bg-raised: #F5F5F3;
     --pill-x: clamp(0.5rem, 0.9vw, 0.875rem);                 /* a control's pill reaches this far past its words */
+    --ctl-h: 2.5rem; --ctl-px: 0.875rem;                      /* a button: 40px tall (D143), above WCAG 2.2's 24px floor and still an easy touch target */
     /* the fixed chrome (D93): the header and the corner captions stand on the field's own edge, which melts
        the moving page under them (dmcg's progressive edge) */
     --site-edge: max(1rem, 2.2vw);
@@ -271,8 +272,8 @@
     clip-path: inset(-6px calc(100% - 2.75rem) -6px -6px round var(--r-pill));
     transition: clip-path var(--t-chip) var(--ease-out), opacity var(--t-chip) var(--ease-out), visibility 0s linear var(--t-chip); }
   .mail.is-open .mail__chip { visibility: visible; opacity: 1; clip-path: inset(-6px round var(--r-pill)); transition-delay: 0s; }
-  .mail__b { display: inline-flex; align-items: center; gap: var(--s3); min-height: 2.75rem; padding: 0 1rem; white-space: nowrap;
-    border: 1px solid var(--line); border-radius: var(--r-pill); background: var(--bg); color: var(--ink); font-size: var(--fs-brand);
+  .mail__b { display: inline-flex; align-items: center; gap: var(--s3); min-height: var(--ctl-h); padding: 0 var(--ctl-px); white-space: nowrap;
+    border: 1px solid var(--line); border-radius: var(--r-pill); background: var(--bg); color: var(--ink); font-size: var(--fs-cap);
     transition: background-color var(--t-hover) var(--ease-out), scale var(--t-press) var(--ease-out); }
   .mail__b:hover { background-color: var(--bg-raised); }
   .mail__b:active { scale: 0.98; }
@@ -290,7 +291,7 @@
   .site-footer .mail__b { font-size: var(--fs-cap); }
 
   /* action link: a chip whose pill reaches past its words, so its words still stand on the text's own edge */
-  .more { display: inline-flex; align-items: center; gap: var(--s2); min-height: 2.75rem; padding-inline: var(--pill-x);
+  .more { display: inline-flex; align-items: center; gap: var(--s2); min-height: var(--ctl-h); padding-inline: var(--pill-x);
     margin-inline: calc(-1 * var(--pill-x)); border: 1px solid transparent; border-radius: var(--r-pill); color: var(--ink);
     font-family: var(--sans); font-size: var(--fs-label); font-weight: var(--w-label); letter-spacing: var(--tr-caps); text-transform: var(--case);
     text-decoration: none; transition: border-color var(--t-hover) var(--ease-out), background-color var(--t-hover) var(--ease-out), scale var(--t-press) var(--ease-out); }
@@ -319,7 +320,7 @@
     text-decoration: none; font-size: var(--fs-brand); }
   .site-header .nav { grid-column: 1; justify-self: start; }
   .site-header__tools { grid-column: 3; justify-self: end; display: flex; align-items: center; gap: var(--s2); }
-  .theme-button, .menu-button { display: inline-flex; align-items: center; justify-content: center; min-height: 2.75rem; min-width: 2.75rem;
+  .theme-button, .menu-button { display: inline-flex; align-items: center; justify-content: center; min-height: var(--ctl-h); min-width: var(--ctl-h);
     padding: 0 var(--s2); background: none; color: var(--ink); font-size: var(--fs-brand); }
   .theme-button svg { width: 1.25rem; height: 1.25rem; transition: rotate var(--t-ui) var(--ease-out); }
   html[data-theme="dark"] .theme-button svg { rotate: 180deg; }   /* state: the lit half turns to the other side */
@@ -368,7 +369,7 @@
   .menu::backdrop { background: var(--bg); }
   .menu__top { display: flex; align-items: center; justify-content: space-between; min-height: var(--bar-h); }
   .menu__controls form { display: flex; }
-  .menu__close { display: inline-flex; align-items: center; min-height: 2.75rem; padding: 0 var(--s3); margin-right: calc(-1 * var(--s3));
+  .menu__close { display: inline-flex; align-items: center; min-height: var(--ctl-h); padding: 0 var(--s3); margin-right: calc(-1 * var(--s3));
     background: none; font-size: 1.1875rem; text-transform: var(--case); }
   .menu__list { padding-top: var(--s7); display: grid; gap: var(--s2); text-align: center; }
   .menu__list a { display: inline-block; padding: var(--s2) var(--s4); font-size: clamp(2rem, 9vw, 2.75rem); line-height: 1.2;
@@ -544,7 +545,7 @@
   .viewer__title { flex: 1; min-width: 0; text-align: center; font-size: var(--fs-cap); line-height: 1.3; color: var(--ink-2); overflow-wrap: anywhere; }
   .viewer__count { font-family: var(--sans); font-size: var(--fs-label); letter-spacing: var(--tr-caps); color: var(--ink-2); min-width: 4.5rem;
     font-variant-numeric: tabular-nums; }
-  .viewer__btn { display: inline-flex; align-items: center; justify-content: center; gap: var(--s2); min-height: 2.75rem; min-width: 2.75rem;
+  .viewer__btn { display: inline-flex; align-items: center; justify-content: center; gap: var(--s2); min-height: var(--ctl-h); min-width: var(--ctl-h);
     padding: 0 var(--s3); background: none; color: var(--ink); font-size: 1.0625rem; text-transform: var(--case); text-decoration: none; }
   .viewer__btn[aria-disabled="true"] { opacity: 0.35; cursor: default; }
   .viewer__stage:focus-visible { outline-offset: -4px; }
@@ -652,8 +653,8 @@
     .tree-root__places { grid-column: 1 / -1; display: flex; flex-wrap: wrap; justify-content: center; gap: var(--s2); margin-top: var(--s4); }
   }
   /* filters and the tree's nodes keep their pill at rest (dmcg's catalog): under the pointer it fills */
-  .pill { display: inline-flex; align-items: center; gap: 0.5em; min-height: 2.75rem; padding: 0 var(--s4); border: 1px solid var(--line);
-    border-radius: var(--r-ctl); background: var(--bg); color: var(--ink); font-size: var(--fs-cap); text-decoration: none;
+  .pill { display: inline-flex; align-items: center; gap: 0.5em; min-height: var(--ctl-h); padding: 0 var(--ctl-px); border: 1px solid var(--line);
+    border-radius: var(--r-ctl); background: var(--bg); color: var(--ink); font-size: 0.875rem; text-decoration: none;
     transition: border-color var(--t-hover) var(--ease-out), background-color var(--t-hover) var(--ease-out), scale var(--t-press) var(--ease-out); }
   .pill:hover { border-color: var(--ui); background-color: var(--bg-raised); }
   .pill:active { scale: 0.98; }
@@ -709,21 +710,21 @@
   .tree__root, .tree__fam { position: absolute; z-index: 2; translate: 0 -50%; }
   .tree__fam[aria-pressed="false"] { color: var(--ink-2); }   /* the other families are greyed, at 6.4:1 */
   /* a leaf: a render or film as a small card, a drawing floating on the page's own ground (which hides the
-     connectors passing behind its linework). Under the pointer or focus it grows to 1.45, lifts, and its caption
+     connectors passing behind its linework). Under the pointer or focus it grows to 1.3, lifts, and its caption
      tag shows under it; its connector darkens (site.js) */
   .leaf { position: absolute; z-index: 1; display: block; }
   .leaf:is(:hover, :focus-within) { z-index: 3; }
   .leaf__in { display: block; border-radius: var(--r-tile); overflow: clip; background: var(--bg); box-shadow: var(--shadow-card);
-    transition: scale var(--t-ui) var(--ease-out), box-shadow var(--t-ui) var(--ease-out); }
+    transition: scale 360ms var(--ease-out), box-shadow 360ms var(--ease-out); }
   .leaf--drawing .leaf__in { border-radius: 0; box-shadow: none; }
   .leaf__in :is(a, picture:not(.nw__keep), img) { display: block; width: 100%; height: auto; }
-  .leaf:is(:hover, :focus-within) .leaf__in { scale: 1.45; }
+  .leaf:is(:hover, :focus-within) .leaf__in { scale: 1.3; }
   .leaf:not(.leaf--drawing):is(:hover, :focus-within) .leaf__in { box-shadow: var(--shadow-lift); }
   .leaf__cap { position: absolute; left: 50%; top: calc(122.5% + var(--s2)); translate: -50% 0; padding: 0.125rem 0.5rem; border-radius: var(--r-tile);
     background: var(--bg); box-shadow: 0 0 0 1px var(--line), 0 4px 12px -4px rgb(0 0 0 / 0.12); font-size: var(--fs-label); line-height: 1.5; white-space: nowrap;
-    visibility: hidden; opacity: 0; transition: opacity var(--t-hover) var(--ease-out), visibility 0s linear var(--t-hover); }
+    visibility: hidden; opacity: 0; transition: opacity var(--t-ui) var(--ease-out), visibility 0s linear var(--t-ui); }
   .leaf--end .leaf__cap { left: auto; right: -22.5%; translate: none; }   /* near the right edge it hangs from the leaf's right */
-  .leaf:is(:hover, :focus-within) .leaf__cap { visibility: visible; opacity: 1; transition-delay: 0s; }
+  .leaf:is(:hover, :focus-within) .leaf__cap { visibility: visible; opacity: 1; transition-delay: 90ms, 0s; }   /* the tag follows once the leaf has begun to settle */
   @media (max-width: 63.99rem) { .ix-tree { display: none !important; } }
   .ix-list { overflow-x: auto; }
   .ix-table { width: min(100%, 72rem); margin-inline: auto; border-collapse: collapse; font-size: var(--fs-cap); }
@@ -746,7 +747,7 @@
     .ix-bar .ix-filter { position: fixed; z-index: 21; top: var(--s4); bottom: auto; max-height: calc(100svh - 2rem); }   /* the bar stands in the page: the panel holds the screen */
   }
   .ix-bar .pill[aria-pressed="true"], .tree .pill[aria-pressed="true"] { border-color: var(--ink); }
-  .pill--icon { width: 2.75rem; padding: 0; justify-content: center; }
+  .pill--icon { width: var(--ctl-h); padding: 0; justify-content: center; }
   .pill--icon svg { width: 1.125rem; height: 1.125rem; fill: none; stroke: currentColor; stroke-width: 1.5; }
   @media (max-width: 63.99rem) { .ix-bar [data-view-btn="tree"] { display: none; } }
   /* a phone: one line, the families scrolling sideways beside the views (five pills wrapped to three lines) */
@@ -767,30 +768,30 @@
      had about one); its name stays for assistive technology */
   .ix-bar__ico { display: none; }
   @media (max-width: 47.99rem) {
-    .ix-bar__filter { min-width: 2.75rem; padding-inline: calc((2.75rem - 1.125rem) / 2 - 1px); justify-content: center; }
+    .ix-bar__filter { min-width: var(--ctl-h); padding-inline: calc((var(--ctl-h) - 1.125rem) / 2 - 1px); justify-content: center; }
     .ix-bar__ico { display: block; flex: none; width: 1.125rem; height: 1.125rem; fill: none; stroke: currentColor; stroke-width: 1.5; }
     .ix-bar__t { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
   }
   .ix-filter { position: absolute; left: 50%; bottom: calc(100% + var(--s2)); translate: -50% 0; width: min(46rem, 100vw - 2 * var(--site-edge));
-    max-height: calc(100svh - var(--head-h) - 6rem); overflow-y: auto; overscroll-behavior: contain;
+    max-height: calc(100svh - var(--head-h) - 6rem); display: flex; flex-direction: column; overflow: clip;
     border: 1px solid var(--line); border-radius: var(--r-card); background: color-mix(in srgb, var(--bg) 86%, transparent);
     -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); box-shadow: var(--shadow-lift); }
-  .ix-filter__in { display: grid; gap: var(--s3); padding: var(--s4); }
+  .ix-filter__in { display: grid; gap: var(--s3); padding: var(--s4); min-height: 0; overflow-y: auto; overscroll-behavior: contain; }
   .ix-filter__row { display: grid; grid-template-columns: 5rem minmax(0, 1fr); align-items: start; gap: var(--s1) var(--s3); }
   .ix-filter__h { padding-top: 0.55rem; font-size: var(--fs-label); line-height: 1.2; color: var(--ink-2); }
   .ix-filter__opts { display: flex; flex-wrap: wrap; gap: var(--s1); }
   .ix-filter .pill { white-space: nowrap; }
-  @media (pointer: fine) { .ix-filter .pill { min-height: 2.25rem; padding-inline: var(--s3); } }   /* 36px: a dense field for a mouse; touch keeps 44px */
+  @media (pointer: fine) { .ix-filter .pill { min-height: 2rem; padding-inline: var(--s3); } }   /* 32px: a dense field for a mouse; touch keeps the 40px button */
   .ix-filter .pill[aria-pressed="true"] { border-color: var(--ink); }
   .pill[aria-disabled="true"] { border-color: transparent; color: var(--ink-2); cursor: default; }
   .pill[aria-disabled="true"]:hover { background-color: var(--bg); }
   .pill[aria-disabled="true"]:active { scale: none; }
-  .ix-filter__clear { justify-self: end; position: sticky; bottom: 0; background-color: var(--bg); }   /* on a short phone the panel scrolls: Clear all stays in reach and covers the rows that go on */
+  .ix-filter__clear { flex: none; align-self: flex-end; margin: 0 var(--s4) var(--s4); }   /* on a short phone the rows scroll and Clear all stands below them: in reach, and never over a choice (D143) */
   @media (max-width: 47.99rem) { .ix-filter__row { grid-template-columns: minmax(0, 1fr); } .ix-filter__h { padding-top: 0; } }
   .ix-result { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: var(--s2) var(--s3); padding: var(--s4) var(--site-edge) 0; font-size: var(--fs-cap); text-align: center; }
-  .leaf { transition: opacity 420ms var(--ease-out); }   /* dims in place, slowly enough to be seen going (D128) */
-  .leaf.is-off { opacity: 0.14; }
-  .tree__lines path { transition: stroke-opacity var(--t-hover) var(--ease-out), opacity 420ms var(--ease-out); }
+  .leaf { transition: opacity 480ms var(--ease-out); }   /* dims in place, slowly enough to be seen going (D128, D143) */
+  .leaf.is-off { opacity: 0.2; }
+  .tree__lines path { transition: stroke-opacity var(--t-hover) var(--ease-out), opacity 480ms var(--ease-out); }
   .tree__lines path.is-off { opacity: 0.25; }   /* .16 x .25 = .04: with its leaf, both ways at the same pace */
   @media (max-width: 89.99rem) { .page-work .corner { display: none; } }
 

@@ -731,15 +731,15 @@
         return l.animate([{ transform: 'none', opacity: 1 }, { transform: 'translate(' + (out.x - c.x) + 'px, ' + (out.y - c.y) + 'px) scale(0.3)', opacity: 0 }],
           { duration: 380, easing: EASE_IN, fill: 'forwards' });
       });
-      if (from) fold.push(from.querySelector('.tree__lines').animate([{ opacity: 1 }, { opacity: 0 }], { duration: 380, easing: 'ease-in', fill: 'forwards' }));
+      if (from) fold.push(from.querySelector('.tree__lines').animate([{ opacity: 1 }, { opacity: 0 }], { duration: 380, easing: EASE_IN, fill: 'forwards' }));
       var fan = slice(to.querySelectorAll('.leaf')).filter(onScreen).map(function (l) { var c = centre(l); return { l: l, dx: into.x - c.x, dy: into.y - c.y, d: Math.hypot(into.x - c.x, into.y - c.y) }; });
       var far = Math.max.apply(null, fan.map(function (f) { return f.d; }).concat(1));
       var ease = easeOut(), wait = from ? 160 : 0;
       var grow = fan.map(function (f) {
         return f.l.animate([{ transform: 'translate(' + f.dx + 'px, ' + f.dy + 'px) scale(0.3)', opacity: 0 }, { transform: 'none', opacity: 1 }],
-          { duration: 560, delay: wait + Math.round(280 * f.d / far), easing: ease, fill: 'backwards' });
+          { duration: 640, delay: wait + Math.round(220 * f.d / far), easing: ease, fill: 'backwards' });
       });
-      grow.push(to.querySelector('.tree__lines').animate([{ clipPath: 'inset(0 100% 0 0)' }, { clipPath: 'inset(0 0 0 0)' }], { duration: 840, delay: wait, easing: ease, fill: 'backwards' }));
+      grow.push(to.querySelector('.tree__lines').animate([{ clipPath: 'inset(0 100% 0 0)' }, { clipPath: 'inset(0 0 0 0)' }], { duration: 860, delay: wait, easing: ease, fill: 'backwards' }));   // ends with the last leaf (220 + 640)
       ixAnims = ixAnims.concat(fold, grow);
       if (from) Promise.all(fold.map(function (a) { return a.finished; })).then(function () {
         if (gen !== ixGen) return;
