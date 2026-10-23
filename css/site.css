@@ -732,13 +732,17 @@
   .ix-table td:first-child, .ix-table td:last-child { color: var(--ink-2); font-variant-numeric: tabular-nums; }
   .ix-table a { display: inline-flex; align-items: center; min-height: 1.75rem; padding-inline: var(--pill-x); margin-inline: calc(-1 * var(--pill-x)); color: var(--ink); text-decoration: none; }
   .ix-bar { position: fixed; z-index: 17; left: 50%; bottom: clamp(0.75rem, 1.5vw, 1.5rem); translate: -50% 0; display: flex; gap: var(--s4); align-items: center; }
+  /* one frosted ground under the bar's pills (P8 review, D140): tile captions no longer read through and between them;
+     a pseudo-element, so the panel inside the bar keeps its own blur and its fixed position on short screens */
+  .ix-bar::before { content: ''; position: absolute; z-index: -1; inset: calc(-1 * var(--s1)); border: 1px solid var(--line); border-radius: calc(var(--r-ctl) + var(--s1));
+    background: color-mix(in srgb, var(--bg) 86%, transparent); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); }
   .ix-bar__group { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--s1); }
   html:has(.ix-bar) { scroll-padding-bottom: 8rem; }
   /* the list is of projects (D101) and the tree chooses with its own pills: the bar's families are for the grid */
   body:is([data-ix-view="list"], [data-ix-view="tree"]) .ix-bar__group:first-child { display: none; }
   @media (max-height: 32rem) {
     .site-header { position: absolute; }
-    .ix-bar { position: static; translate: none; flex-wrap: wrap; justify-content: center; margin: var(--s4) var(--site-edge) 0; }
+    .ix-bar { position: relative; translate: none; flex-wrap: wrap; justify-content: center; margin: var(--s4) var(--site-edge) 0; }
     .ix-bar .ix-filter { position: fixed; z-index: 21; top: var(--s4); bottom: auto; max-height: calc(100svh - 2rem); }   /* the bar stands in the page: the panel holds the screen */
   }
   .ix-bar .pill[aria-pressed="true"], .tree .pill[aria-pressed="true"] { border-color: var(--ink); }
@@ -748,7 +752,8 @@
   /* a phone: one line, the families scrolling sideways beside the views (five pills wrapped to three lines) */
   @media (max-width: 47.99rem) {
     .ix-bar { left: var(--site-edge); right: var(--site-edge); translate: none; justify-content: center; gap: var(--s2); }
-    .ix-bar__group:first-child { flex: 0 1 auto; min-width: 0; flex-wrap: nowrap; justify-content: flex-start; overflow-x: auto; scrollbar-width: none; padding: 3px; margin: -3px; }   /* the padding keeps focus rings whole */
+    .ix-bar__group:first-child { flex: 0 1 auto; min-width: 0; flex-wrap: nowrap; justify-content: flex-start; overflow-x: auto; scrollbar-width: none; padding: 3px; margin: -3px;   /* the padding keeps focus rings whole */
+      -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 1.5rem), transparent); mask-image: linear-gradient(90deg, #000 calc(100% - 1.5rem), transparent); }   /* the cut edge says the families go on */
     .ix-bar__group:first-child .pill { flex: none; }
     .ix-bar__group:last-child { flex: none; flex-wrap: nowrap; }
   }
@@ -780,7 +785,7 @@
   .pill[aria-disabled="true"] { border-color: transparent; color: var(--ink-2); cursor: default; }
   .pill[aria-disabled="true"]:hover { background-color: var(--bg); }
   .pill[aria-disabled="true"]:active { scale: none; }
-  .ix-filter__clear { justify-self: end; }
+  .ix-filter__clear { justify-self: end; position: sticky; bottom: 0; background-color: var(--bg); }   /* on a short phone the panel scrolls: Clear all stays in reach and covers the rows that go on */
   @media (max-width: 47.99rem) { .ix-filter__row { grid-template-columns: minmax(0, 1fr); } .ix-filter__h { padding-top: 0; } }
   .ix-result { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: var(--s2) var(--s3); padding: var(--s4) var(--site-edge) 0; font-size: var(--fs-cap); text-align: center; }
   .leaf { transition: opacity 420ms var(--ease-out); }   /* dims in place, slowly enough to be seen going (D128) */

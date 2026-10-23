@@ -336,8 +336,10 @@
       var t = e.target.closest && e.target.closest('[data-label]');
       if (t) { pillName.textContent = t.getAttribute('data-label'); pillCat.textContent = t.getAttribute('data-cat') || ''; }
       pill.classList.toggle('is-on', !!t);
+      if (t) pillW = pill.offsetWidth;   // read once per label, never per move
     });
-    document.addEventListener('pointermove', function (e) { pill.style.translate = (e.clientX + 16) + 'px ' + (e.clientY + 18) + 'px'; }, { passive: true });
+    var pillW = 0;   // near the right edge the label stops short of it instead of running off the screen
+    document.addEventListener('pointermove', function (e) { pill.style.translate = Math.min(e.clientX + 16, innerWidth - pillW - 8) + 'px ' + (e.clientY + 18) + 'px'; }, { passive: true });
     root.addEventListener('pointerleave', function () { pill.classList.remove('is-on'); });
   }
 
@@ -811,7 +813,7 @@
       ixResult.firstElementChild.textContent = chosen.concat(held + ' of ' + pool.length).join(' · ');
       slice(document.querySelectorAll('.ix-filter__clear')).forEach(function (b) { if (chosen.length) b.removeAttribute('aria-disabled'); else b.setAttribute('aria-disabled', 'true'); });
       var listN = document.querySelector('[data-list-n]'); if (listN) listN.textContent = chosen.length ? rowsOn + ' of ' + ixR.length : ixR.length;
-      if (!first && ixStatus) ixStatus.textContent = (view === 'list' ? rowsOn + ' projects, list view' : shown.length + ' images, ' + (ixState.family === 'all' ? 'all kinds' : ixState.family + 's') + ', ' + view + ' view')
+      if (!first && ixStatus) ixStatus.textContent = (view === 'list' ? rowsOn + ' projects, list view' : held + ' images, ' + (ixState.family === 'all' ? 'all kinds' : ixState.family + 's') + ', ' + view + ' view')
         + (chosen.length ? ', filtered by ' + chosen.join(', ') : '');
       slice(document.querySelectorAll('button[data-family]')).forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-family') === ixState.family)); });
       var fam = ixBar.querySelector('[data-family][aria-pressed="true"]');   // a phone's families scroll: keep the chosen one in sight
@@ -841,6 +843,8 @@
       if (b.hasAttribute('data-view-btn')) ixState.view = b.getAttribute('data-view-btn'); else ixState.family = b.getAttribute('data-family');
       ixApply(false);
     });
+    // focus leaving the bar closes the panel, so it never stands over the tile the keyboard reached (WCAG 2.4.11)
+    ixBar.addEventListener('focusout', function (e) { if (panelOn && e.relatedTarget && !ixBar.contains(e.relatedTarget)) panelSet(false); });
     if (ixWide.addEventListener) ixWide.addEventListener('change', function () { ixApply(true); });
     ixBar.hidden = false;
     ixApply(true);
@@ -995,7 +999,7 @@
       if (!a || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
       e.preventDefault();
       // the gallery is what the reader can see: a filtered index leaves its hidden tiles out (A6)
-      links = slice(document.querySelectorAll('[data-viewer]')).filter(function (x) { return x.getClientRects().length > 0; });
+      links = slice(document.querySelectorAll('[data-viewer]')).filter(function (x) { return x.getClientRects().length > 0 && !x.closest('[inert]'); });
       open(links.indexOf(a));
     });
     vClose.addEventListener('click', function (e) { e.preventDefault(); closeViewer(); });

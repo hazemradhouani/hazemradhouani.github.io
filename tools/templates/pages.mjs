@@ -3,14 +3,13 @@
 import { html, raw, attrs, when } from '../lib/html.mjs';
 import { dims, shown, preloadFor, picture } from '../lib/images.mjs';
 import { placeLeaves, connector, TREE } from '../lib/tree-layout.mjs';
-import { icon, image, row, figure, opening, heroCaption, sizesFor, spanFor, projectHref, vtTitle, CASE, capSide, words, chaptersOf, reelItem, reelSizes, aboutColumn, PORTRAIT } from './partials.mjs';
+import { icon, image, figure, opening, heroCaption, spanFor, projectHref, vtTitle, CASE, capSide, words, chaptersOf, reelItem, reelSizes, aboutColumn, PORTRAIT } from './partials.mjs';
 
 const q = (s) => `“${s}”`;
 // `of`: what a repeated label leads to, read after the visible words (WCAG 2.4.4, 2.5.3)
 const more = (href, label, p, { dir = 'right', ext = false, of = '' } = {}) => dir === 'left'
   ? html`<a class="more" href="${href}">${icon('arrow-left', p)}<span>${label}</span></a>`
   : html`<a class="more" href="${href}"${attrs({ target: ext ? '_blank' : null, rel: ext ? 'noopener' : null })}><span>${label}</span>${when(of, () => html`<span class="vh">: ${of}</span>`)}${icon(ext ? 'arrow-up-right' : 'arrow-right', p)}${when(ext, () => html`<span class="vh"> (opens in a new tab)</span>`)}</a>`;
-const lines = (...xs) => xs.filter(Boolean).map((x, i) => html`${i ? html`<br>` : ''}${x}`);
 const spec = (rows) => html`<dl class="spec in">${rows.map((s) => html`<dt>${s.label}</dt><dd${attrs({ lang: s.lang })}>${s.value}</dd>`)}</dl>`;
 
 /* ------------------------------------------------------------------ the catalog (D97, P5): every image and film of the work */
@@ -97,9 +96,9 @@ export function home(site, d, projects, ctx) {
 <ol class="reel" role="list">${items}</ol>
 </section>
 <nav class="tree-root" aria-label="The index of the work">
-<a class="pill pill--root" href="${p}architecture.html">Index <span class="pill__n">${cat.length}</span></a>
+<a class="pill pill--root" href="${p}architecture.html">Index <span class="pill__n">${cat.length}<span class="vh"> works</span></span></a>
 <svg class="tree-root__lines" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true" focusable="false">${raw(lines)}</svg>
-<ul class="tree-root__fam" role="list">${FAMILIES.map((fam) => html`<li${when(fam.id === 'project', () => raw(' class="tree-root__on"'))}><a class="pill" href="${p}architecture.html?family=${fam.id}">${fam.label} <span class="pill__n">${count(fam.id)}</span></a></li>`)}</ul>
+<ul class="tree-root__fam" role="list" aria-label="Kinds of work">${FAMILIES.map((fam) => html`<li${when(fam.id === 'project', () => raw(' class="tree-root__on"'))}><a class="pill" href="${p}architecture.html?family=${fam.id}">${fam.label} <span class="pill__n">${count(fam.id)}</span></a></li>`)}</ul>
 <svg class="tree-root__lines tree-root__lines--place" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true" focusable="false">${raw(placeLines)}</svg>
 <ul class="tree-root__fam tree-root__places" role="list" aria-label="Projects by place">${site.places.map((l) => html`<li>${intoIndex(site, projects, 'place', idOf(l), l, p)}</li>`)}</ul>
 </nav>`;
@@ -420,7 +419,7 @@ export function motion(site, d, projects, ctx) {
 <h2 class="title" id="${f.id}-h">${f.title}</h2><p class="label">${f.label}</p><p class="meta" id="${f.id}-desc">${f.text}</p>${when(f.project && by[f.project], () => html`<p>${more(projectHref(by[f.project], p), 'The project', p, { of: f.title })}</p>`)}</li>`;
   const body = html`
 <header class="intro wrap g"><div class="s-text center"><h1 class="h1">${words('Films and motion')}</h1><p class="lead in">${d.intro}</p><p class="meta in">${d.filmsIntro}</p></div></header>
-<div class="block wrap"><ul class="fgrid" role="list" data-rv>${[...d.films, ...d.reels].map(card)}</ul></div>
+<div class="block wrap"><ul class="fgrid" id="films" role="list" data-rv>${[...d.films, ...d.reels].map(card)}</ul></div>
 <section class="chapter wrap g" aria-labelledby="mabout-h">
 <div class="s-text center"><h2 class="h1" id="mabout-h">${d.aboutTitle}</h2></div>
 <div class="s-narrow block"><div class="prose">${d.about.map((t) => html`<p>${t}</p>`)}</div></div>
