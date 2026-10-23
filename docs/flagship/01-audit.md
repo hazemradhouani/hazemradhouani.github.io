@@ -145,7 +145,7 @@ Metadata is quoted from each page's meta block (`projects/*.html:151-175`). Coun
 
 **Experience**
 - 2025–present · Studio BELEM, Paris · "Architectural Intern · Ongoing" (`:134-138`)
-- 2025 · Sakura Science Program, Japan · "Saga University & Waseda University · Invited researcher · Sole Tunisian representative", with the distinction "Most Appreciated Research" (`:142-147`)
+- 2025 · Sakura Science Program, Japan · "Saga University & Waseda University · Invited researcher", with the distinction "Most Appreciated Research" (`:142-147`)
 - 2024–2025 · Yassir Khalil Studio, Casablanca · "Architectural Intern · Full time" (`:151-155`)
 - 2023 · 2ADP Salim Ben Rejeb Architectes, Tunis · "Architectural Intern" (`:159-163`)
 - 2020–2021 · Société de Préservation du Village d'ARG · "Intern & Volunteer": "Field surveys and heritage assessment of an abandoned village, foundational documentation for the award-winning thesis." (`:167-171`)

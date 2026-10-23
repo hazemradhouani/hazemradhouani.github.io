@@ -70,7 +70,7 @@ Resolved by the owner on 2026-10-12: surfaces, Sakura wording, Zenata ranking, s
 | Quote | Look before building. | pdf2026:p23 |
 | Role 1 | A village in the Tunisian Jérid region / raw earth architecture never previously documented. Multiple on-site… | pdf2026:p23 |
 | Role 2 | Complete reconstruction of the spatial logic / siting, natural ventilation, hierarchy of spaces. It led to a … | pdf2026:p23 (translated from French; year omitted, see ledger C03) |
-| Role 3 | International distinction: Most Appreciated Research / Sakura Science Program, Tokyo 2025. The only Tunisian … | pdf2026:p23 (translated from French; award name per answer F02) |
+| Role 3 | International distinction: Most Appreciated Research / Sakura Science Program, Tokyo 2025. | pdf2026:p23 (translated from French; award name per answer F02) |
 | Project type | Heritage Conservation / Rehabilitation | pdf2026:p23 |
 | Year | 2023-2024 / Published | pdf2026:p23 |
 | Location | Al-Arg, Hammat Djérid, Tozeur Governorate, Tunisia | pdf2026:p23 |
