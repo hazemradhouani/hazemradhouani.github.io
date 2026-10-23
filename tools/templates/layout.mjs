@@ -1,6 +1,6 @@
 // Document shell ("Reel", D93): head metadata, the fixed header on its edge, the corner captions, the one-line footer, dialogs.
 import { html, raw, attrs, when } from '../lib/html.mjs';
-import { icon, mailChip } from './partials.mjs';
+import { icon, mailChip, aboutColumn } from './partials.mjs';
 
 const abs = (site, rel) => site.origin + site.base + rel.replace(/^\.\//, '').replace(/^index\.html$/, '');
 
@@ -11,11 +11,15 @@ export function layout(site, page, body, ctx) {
   const v = ctx.versions;
   const P = site.person;
   const ld = (page.jsonld || []).map((o) => raw(`<script type="application/ld+json">${JSON.stringify(o).replace(/</g, '\\u003c')}</script>`));
+  // the About sheet (D113): on every page but about.html itself; About stays a link to about.html, the script opens the sheet
+  const sheet = !!ctx.about && page.nav !== 'about';
   const navItem = (n, i) => {
     const cur = page.nav === n.id ? (page.navExact ? 'page' : 'true') : null;
     if (n.id === 'contact') return html`<li style="--i: ${i}">${mailChip(P.email, n.label)}</li>`;
-    return html`<li style="--i: ${i}"><a class="ctl" href="${p}${n.href}"${attrs({ 'aria-current': cur })}>${n.label}</a></li>`;
+    return html`<li style="--i: ${i}"><a class="ctl" href="${p}${n.href}"${attrs({ 'aria-current': cur, 'data-about': sheet && n.id === 'about' })}>${n.label}</a></li>`;
   };
+  // the sheet's close, in the header row so it stays crisp above the header's edge (shown only while the sheet is open)
+  const sheetX = html`<button class="sheet-x ctl" type="button" data-sheet-close aria-controls="about"><svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 3l10 10M13 3L3 13" fill="none" stroke="currentColor" stroke-width="1.25"/></svg><span class="vh">Close About</span></button>`;
   const home = p || './';
   const brand = (cur) => html`<a class="brand" href="${home}"${attrs({ 'aria-current': cur && page.nav === 'home' ? 'page' : null })}><span>${P.name}</span><span>${P.jobTitle}</span></a>`;
   const menuButton = html`<button class="menu-button ctl" type="button" commandfor="menu" command="show-modal" aria-haspopup="dialog" aria-controls="menu">Menu</button>`;
@@ -73,9 +77,10 @@ ${edge('top')}
 <div class="site-header__in">
 <nav class="nav" aria-label="Main"><ul role="list">${site.nav.map(navItem)}</ul></nav>
 ${brand(true)}
-<div class="site-header__tools">${views}${themeButton('header')}${menuButton}</div>
+<div class="site-header__tools">${when(sheet, () => sheetX)}${views}${themeButton('header')}${menuButton}</div>
 </div>
 </header>
+${when(sheet, () => html`<dialog class="about" id="about" aria-label="About" data-lenis-prevent><div class="about__veil"></div><div class="about__scroll">${aboutColumn(site, ctx.about, p)}</div></dialog>`)}
 <main id="main" tabindex="-1">
 ${body}
 </main>

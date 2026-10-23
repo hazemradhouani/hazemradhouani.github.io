@@ -1,7 +1,7 @@
 // Shared building blocks for every page ("Field", docs/flagship/08-direction.md).
 // Every image is placed at build time on the largest centred span that neither enlarges it nor makes it
 // taller than MAX_H at the 1280px canvas, so its edges fall on grid lines and nothing is cropped (D32).
-import { html, raw, inline, when } from '../lib/html.mjs';
+import { html, raw, esc, inline, when } from '../lib/html.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -310,11 +310,46 @@ export const heroCaption = (x) => {
   return parts.length || credit ? html`${inline(parts.join(' '))}${when(credit, () => html`${parts.length ? ' ' : ''}<span class="credit">${credit}</span>`)}` : '';
 };
 
-/* ---------------------------------------------------------- a word that gathers (D99, A12) */
-// The word is read once, from hidden text; its letters are drawn apart by a fixed seed (mulberry32 of the word), so
-// the page is the same on every visit, and CSS brings them together as the reader scrolls (--q from 1 to 0).
-export const scatter = (word) => {
-  let a = [...word].reduce((h, c) => Math.imul(h ^ c.charCodeAt(0), 2654435761) >>> 0, 1779033703);
-  const rnd = () => { a = (a + 0x6D2B79F5) | 0; let t = Math.imul(a ^ (a >>> 15), 1 | a); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
-  return html`<span class="sc"><span class="vh">${word}</span>${[...word].map((c) => html`<span class="sc__l" aria-hidden="true" style="--x: ${((rnd() - 0.5) * 16).toFixed(2)}; --y: ${((rnd() - 0.5) * 10).toFixed(2)}; --r: ${((rnd() - 0.5) * 60).toFixed(1)}">${c}</span>`)}</span>`;
-};
+/* ---------------------------------------------------------- the about column (D113, D114) */
+// dmcg's About in this site's own words: one column in the one voice on the light field, its entries as rows (the
+// practice on a raised card), the photographs between them. The same column is about.html (page: an h1, the
+// portrait as the page's largest paint, the CV's print lines) and the sheet every other page opens over itself (an
+// h2 that takes focus; nothing fetched until it opens). Only about.json's words; a "|" field shows its first part
+// in ink and the rest in grey.
+const COL = '(min-width: 40rem) 34rem, calc(100vw - 2.5rem)';
+export const PORTRAIT = '(min-width: 22.5rem) 20rem, calc(100vw - 2.5rem)';   // about.html preloads it with these sizes
+export function aboutColumn(site, d, p, { page = false } = {}) {
+  const P = site.person;
+  const H = (n, id, text, extra = '') => raw(`<h${n + (page ? 0 : 1)} class="${n === 1 ? 'about__name' : 'about__h'}" id="${id}"${extra}>${esc(text)}</h${n + (page ? 0 : 1)}>`);
+  const parts = (s) => s.split(' | ');
+  const head = (s, href) => { const [a, ...b] = parts(s); return html`${href ? html`<a href="${p}${href}">${a}</a>` : html`<b>${a}</b>`}${b.map((x) => html` <span class="about__g">${x}</span>`)}`; };
+  const rows = (items) => html`<dl class="about__rows">${items.map((r) => html`<div class="about__row"><dt>${r.k}${when(r.when, () => html`<span class="about__g">${r.when}</span>`)}</dt><dd>${r.v}</dd></div>`)}</dl>`;
+  const dot = (s) => parts(s).join(' · ');
+  const fig = (ph, sz) => html`<figure class="about__fig">${image(ph.src, { alt: ph.alt, sz, prefix: p })}<figcaption>${ph.caption}</figcaption></figure>`;
+  const sakura = d.experience.find((r) => /Sakura/u.test(r.what));
+  const [prog, country] = parts(sakura.what);
+  const pair = d.photos.japan.slice(1).map((ph) => { const { w, h } = dims(ph.src); return { ph, r: w / h }; });
+  return html`<div class="about__col">
+${when(page, () => html`<p class="print-only print-name">${P.name} | ${P.jobTitle}</p>
+<p class="print-only">${P.line} ${P.email} | ${P.linkedin.replace('https://www.', '')} | ${site.origin.replace('https://', '')}${site.base}</p>`)}
+<header class="about__s">${H(1, 'about-h', P.name, page ? '' : ' tabindex="-1" autofocus')}<p>${d.bio}</p></header>
+<figure class="about__fig about__portrait">${image(d.portrait, { alt: d.portraitAlt, sz: PORTRAIT, prefix: p, priority: page })}</figure>
+<section class="about__s" aria-labelledby="about-edu-h">${H(2, 'about-edu-h', 'Education')}
+${rows(d.education.map((r) => ({ k: head(r.what, r.href), when: r.when, v: html`<p>${dot(r.role)}</p><p>${r.text}</p>` })))}
+${fig(d.photos.graduation, COL)}</section>
+<section class="about__s" aria-labelledby="about-practice-h">${H(2, 'about-practice-h', 'Practice')}
+<div class="about__card">${rows(d.experience.filter((r) => r !== sakura).map((r) => ({ k: head(r.what), when: r.when, v: html`<p>${dot(r.role)}</p><p class="about__g">${r.text}</p>` })))}</div></section>
+<section class="about__s" aria-labelledby="about-japan-h">${H(2, 'about-japan-h', prog)}
+<p class="about__g">${country} · ${sakura.when} · ${dot(sakura.role)}</p><p>${sakura.text}</p>
+${fig(d.photos.japan[0], COL)}
+<div class="row about__pair">${pair.map((x) => html`<div class="cell" style="--r: ${x.r.toFixed(4)}">${fig(x.ph, '(min-width: 40rem) 20rem, 60vw')}</div>`)}</div></section>
+<section class="about__s" aria-labelledby="about-dist-h">${H(2, 'about-dist-h', 'Distinctions')}
+${rows(d.distinctions.map((r) => ({ k: head(r.what), when: r.when, v: html`<p>${dot(r.role)}</p>` })))}</section>
+<section class="about__s" aria-labelledby="about-tools-h">${H(2, 'about-tools-h', 'Tools')}
+${rows(d.skills.map((s) => ({ k: html`<b>${s.group}</b>`, v: html`<p>${s.items.join(' · ')}</p>` })))}</section>
+<section class="about__s" aria-labelledby="about-lang-h">${H(2, 'about-lang-h', 'Languages')}
+${rows(d.languages.map((l) => ({ k: html`<b>${l.name}</b>`, v: html`<p>${l.level}</p>` })))}</section>
+<section class="about__s about__contact"${page ? raw(' id="contact"') : ''} aria-labelledby="about-contact-h">${H(2, 'about-contact-h', 'Contact')}
+<p class="about__links">${mailChip(P.email, 'Email')}<a class="ctl" href="${P.linkedin}" target="_blank" rel="noopener">LinkedIn<span class="vh"> (opens in a new tab)</span></a><a class="ctl" href="${p}files/hazem-radhouani-cv.pdf">CV (PDF)</a></p></section>
+</div>`;
+}

@@ -41,10 +41,13 @@ let gateFails = 0;
   const map = [['content/pages/home.json', 'index.html'], ['content/pages/research.json', 'books.html'], ['content/pages/about.json', 'about.html'],
     ['content/pages/motion.json', 'motion.html'], ...fs.readdirSync(path.join(REPO, 'content/projects')).map((f) => [`content/projects/${f}`, `projects/project-${f.replace('.json', '')}.html`])];
   const missing = [];
-  for (const s of strings(site.person)) if (!page('index.html').includes(norm(s))) missing.push(`index.html: ${s.slice(0, 60)}`);
+  // a field of parts joined by " | " (a CV's "Studio BELEM | Paris") is on its page when every part is: the about
+  // column sets the first part in ink and the rest in grey (D114)
+  const on = (hay, s) => norm(s).split(' | ').every((x) => hay.includes(x));
+  for (const s of strings(site.person)) if (!on(page('index.html'), s)) missing.push(`index.html: ${s.slice(0, 60)}`);
   // strings left out of a page on purpose, each with its decision (none at present; D116 adds the case studies' repeats)
   const unused = {};
-  for (const [src, rel] of map) { const hay = page(rel); for (const s of strings((unused[src] || ((d) => d))(rd(src)))) if (!hay.includes(norm(s))) missing.push(`${rel}: ${s.slice(0, 70)}`); }
+  for (const [src, rel] of map) { const hay = page(rel); for (const s of strings((unused[src] || ((d) => d))(rd(src)))) if (!on(hay, s)) missing.push(`${rel}: ${s.slice(0, 70)}`); }
   console.log(missing.length ? `FAIL content coverage: ${missing.length} missing\n  ${missing.slice(0, 20).join('\n  ')}` : 'ok   content coverage: every content string is on its page');
   gateFails += missing.length;
 }
@@ -608,39 +611,140 @@ const indexFailures = await runIndexPass();
 gateFails += indexFailures.length;
 if (indexFailures.length) console.log(`FAIL index: ${indexFailures.join(' | ')}`);
 else console.log('ok   index: tree at 1440 and grid at 375, families sum to the root and match leaves and tiles, branches by keyboard, leaves apart and inside, hover, viewer from leaves and tiles, list, addresses restored');
-// About (D99): with motion at 1440 the rail marks the chapter the reader is in and the header stands light over the
-// dark ground; the gathered word keeps its name; under reduced motion every chapter is there to read.
+// About (D113): the sheet. With motion at 1440 (scrollbars shown, so a shift of the header would show), About opens it
+// from three pages: the column comes in, its heading takes focus, the page behind is inert and stays still under the
+// wheel while the column scrolls, and the header does not move. X, Esc and a click on the veil each close it and
+// return focus to About; a selection dragged out of the column does not; Esc closes an open chip in it first; axe
+// passes with it open. Under reduced motion it opens and closes at once. On a 375 touch screen it opens from the menu
+// and returns focus to the menu button. about.html stands alone (the column, no sheet); without the script About is
+// a link to it.
 async function runAboutPass() {
   const failures = [];
-  const url = urls.find((u) => u.includes('about.html'));
-  if (!url) return failures;
-  for (const motion of ['no-preference', 'reduce']) {
-    const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 }, deviceScaleFactor: 1, colorScheme: 'light', reducedMotion: motion });
-    await ctx.addInitScript(() => { try { localStorage.setItem('hazem-theme', 'light'); } catch (e) {} });
-    const page = await ctx.newPage();
-    try {
-      await page.goto(url, { waitUntil: 'load' });
-      await page.waitForTimeout(600);
-      const ids = await page.evaluate(() => [...document.querySelectorAll('.tale__ch')].map((c) => c.id));
-      for (const [i, id] of ids.entries()) {
-        await page.evaluate((id) => { const c = document.getElementById(id); scrollTo({ top: c.getBoundingClientRect().top + scrollY + c.offsetHeight * 0.3, behavior: 'instant' }); }, id);
-        await page.waitForTimeout(motion === 'reduce' ? 300 : 900);
-        const s = await page.evaluate(() => ({ cur: [...document.querySelectorAll('.tale-rail a')].findIndex((a) => a.getAttribute('aria-current') === 'location'), dark: document.documentElement.classList.contains('on-dark') }));
-        if (s.cur !== i) failures.push(`${motion}: in chapter ${i + 1} the rail marks ${s.cur + 1}`);
-        if (!s.dark) failures.push(`${motion}: the header is not light over chapter ${i + 1}`);
-      }
-      const word = await page.evaluate(() => { const sc = document.querySelector('.sc'); return { name: sc.querySelector('.vh').textContent, hidden: [...sc.querySelectorAll('.sc__l')].every((l) => l.getAttribute('aria-hidden') === 'true') }; });
-      if (word.name !== 'Al-Arg' || !word.hidden) failures.push(`${motion}: the gathered word reads "${word.name}"`);
-      if (motion === 'reduce' && await page.evaluate(() => [...document.querySelectorAll('.tale__stage > *')].some((el) => +getComputedStyle(el).opacity < 1))) failures.push('reduce: a chapter is hidden');
-    } catch (e) { failures.push(`${motion}: ${e.message}`); }
-    await ctx.close();
-  }
+  const fail = (s) => failures.push(s);
+  if (!urls.some((u) => u.includes('about.html'))) return failures;
+  const st = (page) => page.evaluate(() => {
+    const s = document.getElementById('about'), a = document.querySelector('.site-header a[data-about]');
+    return { open: !!s?.open, in: !!s?.classList.contains('is-in'), cls: document.documentElement.classList.contains('sheet-open'),
+      head: document.activeElement?.id === 'about-h', about: document.activeElement === a, inert: document.querySelector('main').inert,
+      expanded: a?.getAttribute('aria-expanded'), y: scrollY, sy: s ? s.querySelector('.about__scroll').scrollTop : 0,
+      tools: document.querySelector('.site-header .theme-button').getBoundingClientRect().left,
+      col: s ? getComputedStyle(s.querySelector('.about__col')).opacity : '', gutter: innerWidth - document.documentElement.clientWidth };
+  });
+  const shown = (s, where) => { if (!s.open || !s.in || !s.cls || !s.head || !s.inert || s.expanded !== 'true') fail(`${where}: open ${s.open}, in ${s.in}, header class ${s.cls}, heading focused ${s.head}, page inert ${s.inert}, About expanded ${s.expanded}`); };
+  const gone = (s, where) => { if (s.open || s.cls || !s.about || s.inert || s.expanded !== 'false') fail(`${where}: still open ${s.open}, header class ${s.cls}, focus back on About ${s.about}, page inert ${s.inert}, expanded ${s.expanded}`); };
+  // a browser that shows its scrollbars (the shared one hides them), so a header shift on open is measurable
+  const sb = await chromium.launch({ executablePath: process.env.CHROME_PATH || 'C:/Program Files/Google/Chrome/Application/chrome.exe', headless: true,
+    ignoreDefaultArgs: ['--hide-scrollbars'], args: FILE ? ['--allow-file-access-from-files'] : [] });
+  const ctx = await sb.newContext({ viewport: { width: 1440, height: 900 }, deviceScaleFactor: 1, colorScheme: 'light', reducedMotion: 'no-preference' });
+  await ctx.addInitScript(() => { try { localStorage.setItem('hazem-theme', 'light'); } catch (e) {} });
+  const page = await ctx.newPage();
+  const errors = [];
+  page.on('pageerror', (e) => errors.push(e.message.slice(0, 120)));
+  try {
+    for (const [i, rel] of ['index.html', 'architecture.html', 'projects/project-al-arg.html'].entries()) {
+      await page.goto(BASE + rel, { waitUntil: 'load' });
+      await page.waitForTimeout(700);
+      await page.evaluate(() => scrollTo({ top: 300, behavior: 'instant' }));
+      await page.waitForTimeout(300);
+      const before = await st(page);
+      if (!before.gutter) fail(`${rel}: no scrollbar shown, the header shift is not measured`);
+      await page.locator('.site-header a[data-about]').click();
+      await page.waitForTimeout(800);
+      const s = await st(page);
+      shown(s, `${rel} open`);
+      if (s.col !== '1') fail(`${rel}: the column stands at opacity ${s.col}`);
+      if (Math.abs(s.tools - before.tools) > 0.5) fail(`${rel}: the header moved ${(s.tools - before.tools).toFixed(1)}px on open`);
+      await page.mouse.move(720, 500);
+      await page.mouse.wheel(0, 600);
+      await page.waitForTimeout(1000);
+      const w = await st(page);
+      if (w.y !== before.y) fail(`${rel}: the page behind scrolled (${before.y} to ${w.y})`);
+      if (w.sy < 200) fail(`${rel}: the column scrolled ${w.sy}px under a 600px wheel`);
+      if (i === 0) await page.locator('[data-sheet-close]').click();
+      else if (i === 1) await page.keyboard.press('Escape');
+      else await page.mouse.click(60, 700);
+      await page.waitForTimeout(700);
+      gone(await st(page), `${rel} closed by ${['X', 'Esc', 'a click outside'][i]}`);
+      if ((await st(page)).y !== before.y) fail(`${rel}: the page did not stay where it was`);
+    }
+    // a selection dragged from the column onto the veil keeps it open; Esc closes an open chip in it before the sheet
+    await page.locator('.site-header a[data-about]').click();
+    await page.waitForTimeout(800);
+    const p = await page.locator('#about header.about__s p').boundingBox();
+    await page.mouse.move(p.x + 40, p.y + 10);
+    await page.mouse.down();
+    await page.mouse.move(40, 760, { steps: 6 });
+    await page.mouse.up();
+    await page.waitForTimeout(600);
+    if (!(await st(page)).open) fail('a text selection dragged out of the column closed the sheet');
+    await page.locator('#about .mail__a').click();
+    await page.keyboard.press('Escape');
+    await page.waitForTimeout(600);
+    const c = await page.evaluate(() => ({ chip: document.querySelector('#about .mail').classList.contains('is-open'), open: document.getElementById('about').open }));
+    if (c.chip || !c.open) fail(`Esc with the chip open in the sheet: chip open ${c.chip}, sheet open ${c.open}`);
+    // axe with the sheet open
+    await page.addScriptTag({ content: axeSrc });
+    const ax = await page.evaluate(async () => (await window.axe.run(document, { runOnly: ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa'] })).violations.map((v) => `${v.id} x${v.nodes.length}: ${v.nodes[0].target.join(' ')}`));
+    if (ax.length) fail(`axe with the sheet open: ${ax.join(' ; ')}`);
+    await page.keyboard.press('Escape');
+    await page.waitForTimeout(600);
+    gone(await st(page), 'closed by Esc after the chip');
+    // about.html: the column as a page, no sheet, About its current page
+    await page.goto(BASE + 'about.html', { waitUntil: 'load' });
+    const a = await page.evaluate(() => ({ sheet: !!document.getElementById('about'), h1: document.querySelector('h1')?.textContent, col: !!document.querySelector('main .about__col'),
+      cur: document.querySelector('.site-header .nav a[href$="about.html"]')?.getAttribute('aria-current'), x: !!document.querySelector('[data-sheet-close]') }));
+    if (a.sheet || a.x || !a.col || a.h1 !== 'Hazem Radhouani' || a.cur !== 'page') fail(`about.html: ${JSON.stringify(a)}`);
+  } catch (e) { fail(e.message); }
+  if (errors.length) fail(`page errors: ${errors.join(' ; ')}`);
+  await ctx.close();
+  await sb.close();
+  // reduced motion: at once, both ways
+  const rm = await browser.newContext({ viewport: { width: 1440, height: 900 }, colorScheme: 'light', reducedMotion: 'reduce' });
+  const rp = await rm.newPage();
+  try {
+    await rp.goto(BASE + 'architecture.html', { waitUntil: 'load' });
+    await rp.locator('.site-header a[data-about]').click();
+    await rp.waitForTimeout(60);
+    const s = await st(rp);
+    shown(s, 'reduced motion open');
+    if (s.col !== '1') fail(`reduced motion: the column stands at opacity ${s.col} 60ms after the click`);
+    await rp.keyboard.press('Escape');
+    await rp.waitForTimeout(60);
+    gone(await st(rp), 'reduced motion, Esc');
+  } catch (e) { fail(`reduced motion: ${e.message}`); }
+  await rm.close();
+  // the phone menu: About opens the sheet once the menu has closed; X returns focus to the menu button
+  const ph = await browser.newContext({ viewport: { width: 375, height: 812 }, deviceScaleFactor: 2, hasTouch: true, isMobile: true, colorScheme: 'light', reducedMotion: 'no-preference' });
+  const pp = await ph.newPage();
+  try {
+    await pp.goto(BASE + 'books.html', { waitUntil: 'load' });
+    await pp.locator('.site-header .menu-button').tap();
+    await pp.waitForTimeout(500);
+    await pp.locator('#menu a[data-about]').tap();
+    await pp.waitForTimeout(900);
+    const s = await pp.evaluate(() => { const x = document.querySelector('[data-sheet-close]').getBoundingClientRect(); return { menu: document.getElementById('menu').open, open: document.getElementById('about').open, head: document.activeElement?.id === 'about-h', x: [x.left, x.right, x.top, x.width] }; });
+    if (s.menu || !s.open || !s.head) fail(`phone: from the menu, menu open ${s.menu}, sheet open ${s.open}, heading focused ${s.head}`);
+    if (!(s.x[3] >= 44 && s.x[0] >= 0 && s.x[1] <= 375 && s.x[2] >= 0)) fail(`phone: X at ${s.x.map(Math.round).join(',')}`);
+    await pp.locator('[data-sheet-close]').tap();
+    await pp.waitForTimeout(700);
+    const g = await pp.evaluate(() => ({ open: document.getElementById('about').open, focus: document.activeElement?.classList.contains('menu-button') }));
+    if (g.open || !g.focus) fail(`phone: X left the sheet open ${g.open}, focus on the menu button ${g.focus}`);
+  } catch (e) { fail(`phone: ${e.message}`); }
+  await ph.close();
+  // without the script About is a link to about.html
+  const nj = await browser.newContext({ viewport: { width: 1440, height: 900 }, javaScriptEnabled: false });
+  const np = await nj.newPage();
+  try {
+    await np.goto(BASE + 'index.html', { waitUntil: 'load' });
+    await Promise.all([np.waitForURL(/about\.html$/u, { timeout: 5000 }), np.locator('.site-header a[data-about]').click()]);
+  } catch (e) { fail(`without the script, About did not lead to about.html: ${e.message.split('\n')[0]}`); }
+  await nj.close();
   return failures;
 }
 const aboutFailures = await runAboutPass();
 gateFails += aboutFailures.length;
 if (aboutFailures.length) console.log(`FAIL about: ${aboutFailures.join(' | ')}`);
-else console.log('ok   about: rail follows the chapters, header light over the ground, gathered word named, every chapter still under reduced motion');
+else console.log('ok   about: the sheet opens from three pages (focus, inert page, still page, column scrolls, header unmoved); X, Esc, outside click close it and return focus; a dragged selection keeps it; Esc closes its chip first; axe open; instant under reduced motion; from the phone menu; about.html alone; a link without the script');
 const scrollFailures = await runScrollPass();
 gateFails += scrollFailures.length;
 if (scrollFailures.length) console.log(`FAIL smooth scroll: ${scrollFailures.join(' | ')}`);
@@ -721,8 +825,8 @@ for (const url of urls) {
       // palette: no background colour outside the active Field tokens. Rendered scenes are skipped;
       // they carry their authored colour and do not define interface surfaces.
       const ok = theme === 'dark'
-        ? new Set(['rgba(0, 0, 0, 0)', 'rgb(18, 19, 17)', 'rgb(247, 245, 239)', 'rgb(69, 70, 63)', 'rgba(18, 19, 17, 0.88)', 'rgba(18, 19, 17, 0.86)', 'rgb(26, 27, 25)'])
-        : new Set(['rgba(0, 0, 0, 0)', 'rgb(255, 255, 255)', 'rgb(17, 17, 17)', 'rgba(255, 255, 255, 0.86)', 'rgb(245, 245, 243)']);
+        ? new Set(['rgba(0, 0, 0, 0)', 'rgb(18, 19, 17)', 'rgb(247, 245, 239)', 'rgb(69, 70, 63)', 'rgba(18, 19, 17, 0.88)', 'rgba(18, 19, 17, 0.86)', 'rgb(26, 27, 25)', 'color(srgb 0.0705882 0.0745098 0.0666667 / 0.55)'])
+        : new Set(['rgba(0, 0, 0, 0)', 'rgb(255, 255, 255)', 'rgb(17, 17, 17)', 'rgba(255, 255, 255, 0.86)', 'rgb(245, 245, 243)', 'color(srgb 1 1 1 / 0.55)']);   // last: the sheet's veil, the field at 55% (D113; Chrome writes a color-mix() this way)
       // an element with data-ground stands on its project's declared ground (D86, A10: from its render, per scheme)
       const rgb = (h) => `rgb(${[1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16)).join(', ')})`;
       const ground = (el) => el.matches('[data-ground]') && rgb(getComputedStyle(el).getPropertyValue(theme === 'dark' ? '--g-dark' : '--g-light').trim());

@@ -3,7 +3,7 @@
 import { html, raw, attrs, when } from '../lib/html.mjs';
 import { dims, shown, preloadFor, picture } from '../lib/images.mjs';
 import { placeLeaves, connector, TREE } from '../lib/tree-layout.mjs';
-import { icon, image, row, figure, hero, heroPartner, creditLine, heroCaption, sizesFor, spanFor, projectHref, vtTitle, vtHero, CASE, capSide, words, chaptersOf, scatter, reelItem, reelSizes } from './partials.mjs';
+import { icon, image, row, figure, hero, heroPartner, creditLine, heroCaption, sizesFor, spanFor, projectHref, vtTitle, vtHero, CASE, capSide, words, chaptersOf, reelItem, reelSizes, aboutColumn, PORTRAIT } from './partials.mjs';
 
 const q = (s) => `“${s}”`;
 // `of`: what a repeated label leads to, read after the visible words (WCAG 2.4.4, 2.5.3)
@@ -297,62 +297,18 @@ ${book(r, p, { id: 'report-h' })}
   return { body, viewer: false, page: { path: 'books.html', nav: 'research', navExact: true, title: d.title, description: d.description, og: d.og, jsonld, bodyClass: 'page-research' } };
 }
 
-/* ------------------------------------------------------------------ about ("Reel", D99): a told story, then the CV */
-// a CV list on the text span; its two columns are subgrid tracks, so they sit on grid lines
+/* ------------------------------------------------------------------ about ("Reel, corrected", D113, D114) */
+// the about column as a page: the column every other page opens as a sheet (partials.mjs), here with its portrait
+// as the page's largest paint and the print lines of the CV (npm run cv prints this page)
+export function about(site, d, ctx) {
+  const p = ctx.prefix;
+  const jsonld = [{ '@context': 'https://schema.org', '@type': 'ProfilePage', url: `${site.origin}${site.base}about.html`, mainEntity: { '@id': `${site.origin}${site.base}#person` } }, ctx.personLd];
+  return { body: aboutColumn(site, d, p, { page: true }), viewer: false, page: { path: 'about.html', nav: 'about', navExact: true, title: d.title, description: d.description, og: d.og, ogType: 'profile', jsonld,
+    preload: preloadFor(d.portrait, PORTRAIT, p), bodyClass: 'page-about' } };
+}
+// a CV list on the text span; its two columns are subgrid tracks, so they sit on grid lines (the films' tools)
 const cvBlock = (id, title, rows) => html`<section class="s-text cv" aria-labelledby="${id}"><h2 class="label cv__h" id="${id}">${title}</h2>
 <ol class="cv" role="list">${rows.map((r) => html`<li class="cv__row"><span class="cv__when">${r.when}</span><div class="cv__what">${r.what}</div></li>`)}</ol></section>`;
-// Michael Gatt's register (D99): the key words in Garamond capitals, the words between them small
-const tk = (s) => html`<span class="tale__k">${s}</span>`;
-const tc = (s) => html`<span class="tale__c">${s}</span>`;
-export function about(site, d, ctx) {
-  const p = ctx.prefix; const P = site.person; const t = d.tale;
-  const what = (r) => html`<b>${r.what}</b>${when(r.role, () => html`<p>${r.role}</p>`)}${when(r.text, () => html`<p>${r.text}</p>`)}`;
-  const sakura = d.experience.find((r) => /Sakura/u.test(r.what));
-  const practice = d.experience.filter((r) => r !== sakura);
-  const [dna, thesis] = d.education;
-  const prize = d.distinctions.find((r) => /Sakura/u.test(r.role));
-  const fig = (ph, sz, cls = '') => html`<figure class="tale__fig ${cls}">${image(ph.src, { alt: ph.alt, sz, prefix: p })}<figcaption>${ph.caption}</figcaption></figure>`;
-  const portraitSizes = '(min-width: 64rem) 26rem, (min-width: 48rem) 40vw, 70vw';
-  const chs = [
-    { id: 'who', label: 'Architect', body: html`<div class="tale__portrait">${image(d.portrait, { alt: d.portraitAlt, sz: portraitSizes, prefix: p, priority: true })}</div>
-<div class="tale__copy"><h1 class="tale__line" id="t-who-h">${tk(P.name)} ${tc('is an')} ${tk(P.jobTitle)}</h1><p class="tale__text">${d.bio}</p></div>` },
-    { id: 'diploma', label: 'Diploma', body: html`<h2 class="tale__line" id="t-diploma-h">${tk(dna.what.split(' (')[0])} ${tc('with')} ${tk(dna.text)}</h2><p class="tale__sub">${dna.role}</p>${fig(t.graduation, '(min-width: 64rem) 64rem, 92vw', 'tale__fig--wide')}` },
-    { id: 'thesis', label: 'Thesis', body: html`<h2 class="tale__line" id="t-thesis-h">${tc('the thesis')} <a class="tale__k tale__link" href="${p}projects/project-al-arg.html">${scatter('Al-Arg')}</a></h2><p class="tale__sub">${thesis.what} | ${thesis.role}</p><p class="tale__sub">${thesis.text}</p>` },
-    { id: 'practice', label: 'Practice', body: html`<h2 class="tale__line" id="t-practice-h">${tc('practice in')} ${tk('Tunisia, France, Morocco')}</h2>
-<ol class="tale__list" role="list">${practice.map((r) => { const [org, city] = r.what.split(' | '); return html`<li>${tk(city || org)}<span class="tale__m">${city ? `${org} · ` : ''}${r.when} · ${r.role}</span></li>`; })}</ol>` },
-    { id: 'japan', label: 'Japan', body: html`<h2 class="tale__line" id="t-japan-h">${tk('Sakura Science Program')} ${tc('Japan,')} ${tk(sakura.when)}</h2><p class="tale__sub">${sakura.role}</p><p class="tale__sub tale__prize">${prize.what}</p>
-<div class="tale__photos">${t.japan.map((ph, i) => fig(ph, '(min-width: 48rem) 24rem, 80vw', `tale__pic tale__pic--${i + 1}`))}</div>` },
-    { id: 'tools', label: 'Tools', body: html`<h2 class="tale__line" id="t-tools-h">${tc('drawn and built with')}</h2>
-<ol class="tale__list" role="list">${d.skills.map((s) => html`<li>${tk(s.group)}<span class="tale__m">${s.items.join(' · ')}</span></li>`)}</ol>` }
-  ];
-  const body = html`
-<div class="tale" id="tale" data-fx="track" data-steps="auto" data-dark>
-<nav class="tale-rail" aria-label="About chapters"><ol role="list" data-rail="tale">${chs.map((c) => html`<li><a data-step href="#t-${c.id}">${c.label}</a></li>`)}</ol></nav>
-${chs.map((c) => html`<section class="tale__ch tale__ch--${c.id}" id="t-${c.id}" data-fx="track" aria-labelledby="t-${c.id}-h"><div class="tale__stage">${c.body}</div></section>`)}
-</div>
-<header class="intro about-head wrap g" id="cv">
-<div class="s-text center">
-<p class="print-only print-name">${P.name} | ${P.jobTitle}</p>
-<p class="print-only">${P.line} ${P.email} | ${P.linkedin.replace('https://www.', '')} | ${site.origin.replace('https://', '')}${site.base}</p>
-<h2 class="h1">Curriculum vitae</h2>
-</div>
-<div class="s-narrow block print-only"><div class="prose"><p>${d.bio}</p></div></div>
-<p class="s-text center in no-print">${more(p + 'files/hazem-radhouani-cv.pdf', 'Download CV (PDF)', p)}</p>
-</header>
-<div class="wrap g block">
-${cvBlock('exp-h', 'Experience', d.experience.map((r) => ({ when: r.when, what: what(r) })))}
-${cvBlock('edu-h', 'Education', d.education.map((r) => ({ when: r.when, what: what(r) })))}
-${cvBlock('dist-h', 'Distinctions', d.distinctions.map((r) => ({ when: r.when, what: what(r) })))}
-${cvBlock('skills-h', 'Skills', d.skills.map((s) => ({ when: s.group, what: s.items.join(' | ') })))}
-${cvBlock('lang-h', 'Languages', d.languages.map((l) => ({ when: l.level, what: l.name })))}
-</div>
-<section class="chapter wrap g about-contact" id="contact" aria-labelledby="contact-h">
-<div class="s-text center"><h2 class="h1" id="contact-h">Contact</h2><p class="site-footer__mail in"><a href="mailto:${P.email}">${P.email}</a></p><p><a href="${P.linkedin}" target="_blank" rel="noopener">LinkedIn<span class="vh"> (opens in a new tab)</span></a></p></div>
-</section>`;
-  const jsonld = [{ '@context': 'https://schema.org', '@type': 'ProfilePage', url: `${site.origin}${site.base}about.html`, mainEntity: { '@id': `${site.origin}${site.base}#person` } }, ctx.personLd];
-  return { body, viewer: false, page: { path: 'about.html', nav: 'about', navExact: true, title: d.title, description: d.description, og: d.og, ogType: 'profile', jsonld,
-    preload: preloadFor(d.portrait, portraitSizes, p), bodyClass: 'page-about' } };
-}
 
 /* ------------------------------------------------------------------ films */
 export function motion(site, d, projects, ctx) {

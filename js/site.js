@@ -150,17 +150,6 @@
   if (mails.length) document.addEventListener('click', function (e) {
     mails.forEach(function (m) { if (m.classList.contains('is-open') && !m.contains(e.target)) setChip(m, false); });
   });
-  /* Esc, one ordered handler (D107, D113): an open chip closes first (a dialog around it stays open); then a
-     modal dialog keeps its own Esc */
-  document.addEventListener('keydown', function (e) {
-    if (e.key !== 'Escape') return;
-    var m = mails.filter(function (x) { return x.classList.contains('is-open'); })[0];
-    if (!m) return;
-    e.preventDefault();
-    var inside = m.contains(document.activeElement);
-    setChip(m, false);
-    if (inside) m.querySelector('.mail__a').focus();
-  }, true);
 
   /* ------------------------------------------------------------ scroll engine (orientation, hierarchy: D83, D96)
      One measured list of [data-fx] elements, read in the frame the page moves (Lenis on a fine pointer, the
@@ -192,14 +181,13 @@
     var auto = el.getAttribute('data-steps') === 'auto';   // steps measured from the rail's own targets (D99)
     var steps = auto ? [] : (el.getAttribute('data-steps') || '').split(',').filter(Boolean).map(Number);
     var rail = el.id ? slice(document.querySelectorAll('[data-rail="' + el.id + '"] [data-step]')) : [];
-    return { el: el, kind: kind, steps: steps, auto: auto, rail: rail, dark: el.hasAttribute('data-dark'), ch: -1, y: 0, h: 0, p: -1, d: 2, scrub: null };
+    return { el: el, kind: kind, steps: steps, auto: auto, rail: rail, ch: -1, y: 0, h: 0, p: -1, d: 2, scrub: null };
   });
   var fxUpdate = function () {};
   var scrubKick = function () {};
   if (fxItems.length) {
-    var headH = 0, vhM = 0;
+    var vhM = 0;
     var measure = function () {
-      var hd = document.querySelector('.site-header'); headH = hd ? hd.offsetHeight : 0;
       // clientHeight: the layout viewport, steady while a phone's toolbar shows and hides (A1); read here, never in
       // the frame, where a layout read after the frame's writes would force a second style pass
       vhM = document.documentElement.clientHeight;
@@ -221,11 +209,9 @@
       });
     };
     fxUpdate = function () {
-      var y = window.scrollY, vh = vhM, band = y + headH / 2;
+      var y = window.scrollY, vh = vhM;
       fxItems.forEach(function (it) {
         if (!it.h) return;   // a hidden view of a page (display: none) has nothing to move
-        // a dark ground (D99) under the header's middle turns the header to the ground's colours (CSS: html.on-dark)
-        if (it.dark) root.classList.toggle('on-dark', band >= it.y && band < it.y + it.h);
         if (it.kind === 'centre') {
           var d = clamp((it.y + it.h / 2 - y - vh / 2) / ((vh + it.h) / 2), -1, 1);
           if (Math.abs(d - it.d) < 0.001) return;
@@ -432,6 +418,85 @@
     };
     document.head.appendChild(lenisScript);
   }
+
+  /* ------------------------------------------------------------ the About sheet (orientation, D113)
+     About opens the about column over the page it was asked from, as dmcg's does: the page blurs behind a veil and
+     falls inert, the header stays crisp and usable (the name gives way to the column; X takes its place in the
+     row), the column scrolls on its own, gliding as the page does, and its sections come into focus as they enter
+     (CSS). X, Esc or a click on the veil closes it (a text selection dragged out of the column does not); focus
+     returns to the link that opened it. From the phone menu it opens once the menu has closed. Without the script
+     About is a link to about.html, the same column as a page. */
+  var sheet = document.getElementById('about');
+  var sheetClose = function () {};
+  if (sheet && typeof sheet.show === 'function') {
+    var sheetScroll = sheet.querySelector('.about__scroll'), sheetCol = sheet.querySelector('.about__col'), sheetHead = sheet.querySelector('#about-h');
+    var sheetLinks = slice(document.querySelectorAll('a[data-about]'));
+    var behind = slice(document.querySelectorAll('main, .site-footer, .corner'));
+    var sheetFrom = null, sheetTimer = 0, sheetGlide = null, fromMenu = false, downOut = false;
+    var sheetState = function (on) {
+      root.classList.toggle('sheet-open', on);
+      sheetLinks.forEach(function (a) { a.setAttribute('aria-expanded', String(on)); });
+    };
+    sheetLinks.forEach(function (a) { a.setAttribute('aria-controls', 'about'); });
+    sheetState(false);
+    var sheetOpen = function (from) {
+      clearTimeout(sheetTimer); sheetTimer = 0;
+      sheetFrom = from;
+      if (!sheet.open) {
+        sheetScroll.scrollTop = 0;
+        sheet.show();
+        behind.forEach(function (el) { el.inert = true; });
+        if (typeof window.Lenis === 'function' && fineQ.matches && !reduce.matches) sheetGlide = new window.Lenis({ wrapper: sheetScroll, content: sheetCol, autoRaf: true, lerp: 0.08 });
+        void sheet.offsetWidth;   // the closed look is styled once, so the veil and the column come in from it
+      }
+      sheet.classList.add('is-in');
+      sheetState(true);
+      sheetHead.focus({ preventScroll: true });
+    };
+    sheetClose = function () {
+      if (!sheet.open || sheetTimer) return;
+      sheet.classList.remove('is-in');
+      sheetState(false);
+      sheetTimer = setTimeout(function () { sheetTimer = 0; sheet.close(); }, reduce.matches ? 0 : parseFloat(css('--t-sheet-out')) || 450);
+    };
+    sheet.addEventListener('close', function () {
+      clearTimeout(sheetTimer); sheetTimer = 0;
+      sheet.classList.remove('is-in'); sheetState(false);
+      behind.forEach(function (el) { el.inert = false; });
+      if (sheetGlide) { sheetGlide.destroy(); sheetGlide = null; }
+      var to = sheetFrom && sheetFrom.getClientRects().length ? sheetFrom : sheetLinks.filter(function (a) { return a.getClientRects().length; })[0];
+      sheetFrom = null;
+      if (to) to.focus({ preventScroll: true });
+    });
+    document.addEventListener('click', function (e) {
+      var a = e.target.closest && e.target.closest('a[data-about]');
+      if (!a || e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+      e.preventDefault();
+      if (menu && menu.contains(a)) { fromMenu = true; if (menu.open) menu.close(); return; }   // the menu's own handler has closed it
+      if (sheet.open && !sheetTimer) sheetClose(); else sheetOpen(a);
+    });
+    if (menu) menu.addEventListener('close', function () { if (fromMenu) { fromMenu = false; sheetOpen(menuButtons[0]); } });
+    slice(document.querySelectorAll('[data-sheet-close]')).forEach(function (b) { b.addEventListener('click', sheetClose); });
+    // outside: both ends of the click on the veil, never on the scrollbar
+    sheet.addEventListener('pointerdown', function (e) { downOut = !sheetCol.contains(e.target) && e.clientX < sheetScroll.getBoundingClientRect().left + sheetScroll.clientWidth; });
+    sheet.addEventListener('click', function (e) { if (downOut && !sheetCol.contains(e.target)) sheetClose(); downOut = false; });
+  }
+
+  /* Esc, one ordered handler (D107, D113): an open chip closes first (a dialog around it stays open); then a
+     modal dialog (menu, viewer) keeps its own Esc; then the sheet closes */
+  document.addEventListener('keydown', function (e) {
+    if (e.key !== 'Escape') return;
+    var m = mails.filter(function (x) { return x.classList.contains('is-open'); })[0];
+    if (m) {
+      e.preventDefault();
+      var inside = m.contains(document.activeElement);
+      setChip(m, false);
+      if (inside) m.querySelector('.mail__a').focus();
+      return;
+    }
+    if (slice(document.querySelectorAll('dialog[open]')).some(function (d) { return d !== sheet; })) return;
+    if (sheet && sheet.open) { e.preventDefault(); sheetClose(); }
+  }, true);
 
   // reduced motion switched on during the visit: the scroll-linked styles let go (everything returns to its
   // settled place)

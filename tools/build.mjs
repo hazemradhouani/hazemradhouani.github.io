@@ -43,7 +43,8 @@ const ogFor = (name) => (fs.existsSync(path.join(ROOT, `images/og/${name}.jpg`))
 const versions = { css: hash('css/site.css'), js: hash('js/site.js') };
 const films = pages.motion.films;
 const grounds = read('content/grounds.json');   // the plates' grounds (D86), from node tools/grounds.mjs
-const ctxFor = (rel) => ({ prefix: rel.includes('/') ? '../' : '', versions, personLd, websiteLd, ogFor, films, grounds });
+// about: the column every page but about.html opens as a sheet (D113), built in so it also opens from file://
+const ctxFor = (rel) => ({ prefix: rel.includes('/') ? '../' : '', versions, personLd, websiteLd, ogFor, films, grounds, about: pages.about });
 
 const out = [];
 const emit = (r, rel) => { const ctx = ctxFor(rel); ctx.viewer = r.viewer; write(rel, layout(site, r.page, r.body, ctx)); out.push(r.page); };

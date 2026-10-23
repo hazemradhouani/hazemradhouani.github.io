@@ -1,17 +1,11 @@
 /* Hazem Radhouani · site.css · "Reel" (docs/flagship/17-reel-direction.md), on the "Field" grid
    One quiet field in light or dark; the work laid out at its true proportion on one centred grid.
-   One voice (D91): Instrument Sans in sentence case for everything; EB Garamond tracked capitals only
-   where a page tells a story (the about narrative, a film's chapters). */
+   One voice (D91): Instrument Sans in sentence case for everything; EB Garamond italic only for the
+   architect's own words quoted in a case study. */
 
 @layer reset, tokens, base, layout, components, pages, motion, utilities;
 
 /* ------------------------------------------------------------------ fonts */
-@font-face { font-family: "EB Garamond"; font-style: normal; font-weight: 400 800; font-display: swap;
-  src: url("../fonts/eb-garamond-latin-wght-normal.woff2") format("woff2");
-  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
-@font-face { font-family: "EB Garamond"; font-style: normal; font-weight: 400 800; font-display: swap;
-  src: url("../fonts/eb-garamond-latin-ext-wght-normal.woff2") format("woff2");
-  unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF; }
 @font-face { font-family: "EB Garamond"; font-style: italic; font-weight: 400 800; font-display: swap;
   src: url("../fonts/eb-garamond-latin-wght-italic.woff2") format("woff2");
   unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
@@ -68,8 +62,7 @@
     --drawing-bg: #FFFFFF;
 
     /* type (D91): one sans voice in sentence case, as dmcg's; labels differ by size and ink, never by capitals.
-       --case, --tr-caps and --w-label keep the old roles' hooks, now set to the plain voice. The Garamond
-       capitals of a told story are a separate role (--tr-tale). */
+       --case, --tr-caps and --w-label keep the old roles' hooks, now set to the plain voice. */
     --serif: "EB Garamond", "Garamond Fallback", Garamond, "Times New Roman", serif;
     --sans: "Instrument Sans", "Instrument Fallback", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
     --arabic: "Noto Naskh Arabic", "Amiri", "Geeza Pro", "Traditional Arabic", "Segoe UI", serif;
@@ -87,7 +80,6 @@
     --fs-brand: clamp(1rem, 0.94rem + 0.25vw, 1.25rem);       /* 16 to 20px: the name block in the header */
     --tr-caps: 0;
     --tr-display: -0.01em;
-    --tr-tale: 0.3em;                                         /* Garamond capitals of a told story (P6) */
     /* surfaces (D92, D118): tiles 6px, cards and the viewer 8px, controls 10px (dmcg's rounded-rect pill), chips
        fully round; one very soft, wide shadow for a card on the field and a lifted one for a card under the pointer;
        a raised fill for chips and sheets */
@@ -159,7 +151,9 @@
     padding-top: var(--head-h);   /* the fixed header's room (D93) */
   }
   main { flex: 1 0 auto; outline: none; }
-  html:has(dialog[open]) { overflow: hidden; }
+  /* a modal dialog takes the page's scrollbar; the About sheet leaves it, so the fixed header never shifts (D113): the
+     column holds the wheel (overscroll contained, and the page's glide skips it) */
+  html:has(dialog[open]:not(#about)) { overflow: hidden; }
   h1, h2, h3, h4 { font-family: var(--sans); font-weight: var(--w-label); line-height: 1.25; letter-spacing: -0.005em;
     text-wrap: balance; font-size: var(--fs-title); }
   p, li, dd, figcaption { text-wrap: pretty; }
@@ -175,7 +169,7 @@
   /* smooth scroll (D79), from Lenis 1.3.26's lenis.css: the page keeps native scrolling underneath; a stopped
      instance (a dialog is open) holds the page still; a dialog scrolls on its own, never the page behind */
   html.lenis, html.lenis body { height: auto; }
-  .lenis.lenis-stopped { overflow: clip; }
+  .lenis.lenis-stopped:not(:has(#about[open])) { overflow: clip; }
   .lenis [data-lenis-prevent] { overscroll-behavior: contain; }
   .lenis.lenis-smooth iframe { pointer-events: none; }
 }
@@ -271,7 +265,7 @@
      menu. It uncovers from the link's side over 420ms while its words come into focus; its button copies the
      address. The clip reaches 6px past the chip so a focus ring is never cut. */
   .mail { position: relative; display: inline-flex; }
-  .mail__a[aria-expanded="true"] { border-color: var(--line); background-color: var(--bg); }   /* open: Contact keeps its pill */
+  .ctl[aria-expanded="true"] { border-color: var(--line); background-color: var(--bg); }   /* open: Contact (its chip), About (its sheet) keep their pill */
   .mail__chip { position: absolute; z-index: 2; left: 0; top: calc(100% + var(--s1)); visibility: hidden; opacity: 0;
     clip-path: inset(-6px calc(100% - 2.75rem) -6px -6px round var(--r-pill));
     transition: clip-path var(--t-chip) var(--ease-out), opacity var(--t-chip) var(--ease-out), visibility 0s linear var(--t-chip); }
@@ -730,66 +724,48 @@
   }
   @media (max-width: 89.99rem) { .page-work .corner { display: none; } }
 
-  /* about ("Reel", D99): Michael Gatt's told story on the dark ground in both schemes (A11), then the CV on the
-     field. Key words in Garamond capitals tracked .3em, the words between them small (--connector, 5.4:1 on the
-     ground, measured); six short chapters, the chapter rail on the right; the header turns light over the ground. */
-  .page-about { padding-top: 0; }
-  .tale { --bg: #111111; --ink: #F7F5EF; --ink-2: #C9C7C0; --line: #45463F; --ui: #B4B1A9; --connector: #8D8B85;
-    position: relative; background: var(--bg); color: var(--ink); }
-  html[data-theme="dark"] .tale { --bg: #121311; }
-  .tale__stage { display: grid; justify-items: center; align-content: center; gap: var(--s5); min-height: 100svh;
-    padding: calc(var(--head-h) + var(--s6)) var(--site-edge) var(--s7); text-align: center; }
-  .tale__line { margin: 0; max-width: 60rem; font-family: var(--serif); font-weight: 400; font-size: clamp(1.375rem, 1rem + 1.6vw, 2.5rem);
-    line-height: 1.55; letter-spacing: var(--tr-tale); text-transform: uppercase; text-wrap: balance; }
-  .tale__k { color: var(--ink); text-decoration: none; }
-  .tale__c { margin-inline: 0.35em; font-family: var(--sans); font-size: 0.8125rem; letter-spacing: 0.04em; text-transform: none; color: var(--connector); vertical-align: middle; }
-  .tale__link { text-decoration: underline; text-decoration-thickness: 1px; text-decoration-color: var(--ui); text-underline-offset: 0.25em; }
-  .tale__link:hover { text-decoration-color: var(--ink); }
-  .sc { display: inline-block; white-space: nowrap; }
-  .sc__l { display: inline-block; }
-  .tale__sub { max-width: 44rem; font-size: var(--fs-cap); line-height: 1.6; color: var(--ink-2); text-wrap: balance; }
-  .tale__prize { color: var(--ink); }
-  .tale__text { max-width: 36rem; font-size: var(--fs-lead); line-height: 1.5; text-align: left; color: var(--ink-2); }
-  .tale__ch--who .tale__stage { grid-template-columns: minmax(0, 1fr); }
-  .tale__portrait { width: min(70vw, 26rem, calc(68svh * 1442 / 2560)); }
-  .tale__portrait :is(picture, img) { display: block; width: 100%; height: auto; }
-  .tale__copy { display: grid; gap: var(--s5); justify-items: center; }
-  @media (min-width: 64rem) {
-    .tale__ch--who .tale__stage { grid-template-columns: auto minmax(0, 36rem); column-gap: clamp(2rem, 6vw, 6rem); justify-content: center; text-align: left; }
-    .tale__ch--who .tale__copy { justify-items: start; }
-    .tale__ch--who .tale__line { text-align: left; }
-  }
-  .tale__fig { margin: 0; display: grid; gap: var(--s2); }
-  .tale__fig figcaption { font-size: var(--fs-label); color: var(--ink-2); }
-  .tale__fig--wide { width: min(100%, 64rem); }
-  .tale__fig :is(picture, img) { display: block; width: 100%; height: auto; }
-  .tale__list { display: grid; gap: var(--s4); margin: 0; padding: 0; }
-  .tale__list li { display: grid; gap: var(--s1); justify-items: center; }
-  .tale__list .tale__k { font-family: var(--serif); font-size: clamp(1.25rem, 1rem + 1.1vw, 2rem); letter-spacing: var(--tr-tale); text-transform: uppercase; }
-  .tale__m { font-size: var(--fs-cap); color: var(--ink-2); }
-  .tale__photos { display: grid; gap: var(--s5); width: min(100%, 64rem); }
-  @media (min-width: 48rem) {
-    .tale__photos { position: relative; height: min(52svh, 30rem); }
-    .tale__pic { position: absolute; width: min(24rem, 34%); padding: 0.5rem 0.5rem 0.75rem; background: #FFFFFF; box-shadow: 0 12px 32px -12px rgb(0 0 0 / 0.6); }
-    html[data-theme="dark"] .tale__pic { background: #F7F5EF; }
-    .tale__pic figcaption { color: #3A3A37; }
-    .tale__pic--1 { left: 2%; top: 6%; rotate: -4deg; }
-    .tale__pic--2 { left: 36%; top: 22%; rotate: 3deg; z-index: 1; }
-    .tale__pic--3 { right: 2%; top: 0; width: min(18rem, 26%); rotate: -2deg; }
-  }
-  .tale-rail { display: none; }
-  @media (min-width: 80rem) {
-    .tale-rail { display: block; position: sticky; top: 0; z-index: 5; height: 0; }
-    .tale-rail ol { position: absolute; right: var(--site-edge); top: 50svh; translate: 0 -50%; display: grid; gap: var(--s1); margin: 0; padding: 0; list-style: none; text-align: right; }
-    .tale-rail a { display: inline-flex; align-items: center; justify-content: flex-end; gap: var(--s2); min-height: 1.75rem; font-size: var(--fs-label); color: var(--connector); text-decoration: none;
-      transition: color var(--t-ui) var(--ease-out); }
-    .tale-rail a::after { content: ""; width: 0.875rem; height: 1px; background: currentColor; transition: width var(--t-ui) var(--ease-out); }
-    .tale-rail a:hover, .tale-rail a[aria-current] { color: var(--ink); }
-    .tale-rail a[aria-current]::after { width: 1.75rem; }
-  }
-  /* the header over the ground (D99): its words and edge turn to the ground's own colours while it stands over it */
-  .site-header { transition: --bg 300ms var(--ease-out), --ink 300ms var(--ease-out), --ink-2 300ms var(--ease-out); }
-  html.on-dark:not([data-theme="dark"]) .site-header { --bg: #111111; --ink: #F7F5EF; --ink-2: #C9C7C0; --line: #45463F; --ui: #B4B1A9; color: var(--ink); }
+  /* about (D113, D114): dmcg's About, one column in the one voice at the header's size, on the field. Entries are
+     rows (the name in ink and its date in grey, then what it was); the practice stands on a raised card that reaches
+     past the words, so they keep one left edge; photographs stand whole on the tiles' radius. */
+  .about__col { width: min(100% - 2 * var(--margin), 34rem); margin-inline: auto; padding-block: var(--s6) var(--gap-group);
+    display: grid; gap: var(--s7); font-size: var(--fs-brand); line-height: 1.55; }
+  .about__s { display: grid; gap: var(--s4); }
+  .about__name, .about__h { font-size: inherit; font-weight: 600; letter-spacing: 0; line-height: 1.4; }
+  .about__name:focus { outline: none; }   /* the sheet's starting point for reading: a heading, never a control */
+  .about__g { color: var(--ink-2); }
+  .about__rows { display: grid; gap: var(--s5); }
+  .about__row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); gap: var(--s1) var(--s5); }
+  @media (max-width: 29.99rem) { .about__row { grid-template-columns: minmax(0, 1fr); } }
+  .about__row dt :is(b, a) { font-weight: 600; }
+  .about__row dt a { display: inline-block; }   /* its whole line box is the target, 24px or more (WCAG 2.5.8) */
+  .about__row dt .about__g { display: block; font-variant-numeric: tabular-nums; }
+  .about__row dd { display: grid; align-content: start; gap: var(--s2); margin: 0; }
+  .about__card { --card-x: min(var(--s6), var(--margin) - 0.5rem); margin-inline: calc(-1 * var(--card-x)); padding: var(--s6) var(--card-x);
+    border-radius: var(--r-card); background: var(--bg-raised); }
+  .about__fig { display: grid; gap: var(--s2); }
+  .about__fig :is(picture, img) { display: block; width: 100%; height: auto; border-radius: var(--r-tile); }
+  .about__fig figcaption { font-size: var(--fs-label); line-height: 1.4; color: var(--ink-2); }
+  .about__portrait { width: min(100%, 20rem); }
+  .about__pair { gap: var(--s4); }
+  @media (max-width: 29.99rem) { .about__pair { flex-direction: column; } .about__pair > .cell { flex: none; width: 100%; } }
+  .about__links { display: flex; flex-wrap: wrap; gap: 0 var(--s1); margin-inline: calc(-1 * var(--pill-x)); }
+  .about__links > a, .about__links .mail__a { display: inline-flex; align-items: center; min-height: 2.75rem; padding-inline: var(--pill-x); color: var(--ink); text-decoration: none; }
+
+  /* the sheet (D113): a dialog under the fixed header (z 18 < 20) and not modal, so the header stays crisp and usable
+     over it. The veil blurs the page behind and washes it with the field (dmcg's grey cloud); the column scrolls on
+     its own and passes under the header's edge as the page does. While it is open the name gives way to it, X stands
+     in the header row (beside the column where there is room, else first among the tools) and About keeps its pill. */
+  .about { position: fixed; inset: 0; z-index: 18; width: auto; height: auto; margin: 0; overflow: hidden; background: none; color: var(--ink); }
+  .about__veil { position: absolute; inset: 0; background: color-mix(in srgb, var(--bg) 55%, transparent);
+    -webkit-backdrop-filter: blur(48px); backdrop-filter: blur(48px); }
+  @media (prefers-reduced-transparency: reduce) { .about__veil { background: var(--bg); -webkit-backdrop-filter: none; backdrop-filter: none; } }
+  .about__scroll { position: absolute; inset: 0; overflow-y: auto; overscroll-behavior: contain; padding-top: var(--head-h); }
+  .sheet-x { display: none; align-items: center; justify-content: center; min-width: 2.75rem; min-height: 2.75rem; padding: 0; background: none; color: var(--ink); }
+  html.sheet-open .sheet-x { display: inline-flex; }
+  .sheet-x svg { width: 1.25rem; height: 1.25rem; }
+  @media (min-width: 80rem) { html.sheet-open .sheet-x { position: absolute; top: clamp(0.5rem, 1.3vw, 1.25rem); left: calc(50% + 17rem + var(--s5)); } }
+  .site-header .brand { transition: opacity var(--t-sheet) var(--ease-out), visibility 0s; }
+  html.sheet-open .site-header .brand { opacity: 0; visibility: hidden; transition: opacity var(--t-hover) var(--ease-out), visibility 0s linear var(--t-hover); }
 
   /* section heads: a title and its link, centred */
   .head { display: grid; justify-items: center; gap: var(--s1); text-align: center; }
@@ -941,7 +917,6 @@
     -webkit-mask-image: radial-gradient(circle at var(--vt-x) var(--vt-y), #000 calc(var(--vt-r) - 6rem), transparent var(--vt-r));
     mask-image: radial-gradient(circle at var(--vt-x) var(--vt-y), #000 calc(var(--vt-r) - 6rem), transparent var(--vt-r)); }
   html.theme-vt [style*="view-transition-name"] { view-transition-name: none !important; }
-  html.theme-vt .site-header { transition: none; }   /* the header's own fade (a dark ground, D99) would lag the circle */
 
   /* orientation (D93): on a page's first load the frame comes into focus, routes, then name, then tools (dmcg's
      intro: blur 6px to sharp in 500ms, staggered 120 / 170 / 280ms); a page reached through a view transition
@@ -1019,24 +994,23 @@
   html.fx .tile { --e: clamp(0, var(--d, 0) - 0.35, 0.65); translate: 0 calc(var(--e) * 46px); scale: calc(1 - var(--e) * 0.09); }
   .tile.is-entering { animation: rise 420ms var(--ease-out) backwards; }
 
-  /* orientation, hierarchy (D99): the told story, scroll-linked from each chapter's --p (site.js). From 48rem and
-     40rem of height each chapter is a 170svh track whose stage stands while its words come into focus and leave;
-     the portrait takes its colour as the reader starts; the letters of Al-Arg gather by 45% of their chapter;
-     the three photographs of Japan drift at their own rates. The first chapter is in view from the first paint. */
-  @media (min-width: 48rem) and (min-height: 40rem) {
-    html.fx .tale__ch { height: 170svh; scroll-margin-top: -25svh; }
-    html.fx .tale__ch:focus-within .tale__stage > * { opacity: 1 !important; }   /* above the first and last chapters' own rules */
-    html.fx .tale__stage { position: sticky; top: 0; height: 100svh; min-height: 0; }
-    html.fx .tale__stage > * { opacity: clamp(0, min(var(--p, 0) * 8, (1 - var(--p, 0)) * 8), 1); translate: 0 calc((0.5 - var(--p, 0)) * 28px); }
-    html.fx #t-who .tale__stage > * { opacity: clamp(0, (1 - var(--p, 0)) * 8, 1); translate: 0 calc(var(--p, 0) * -28px); }
-    html.fx #t-tools .tale__stage > * { opacity: clamp(0, var(--p, 0) * 8, 1); translate: 0 calc((0.5 - min(var(--p, 0), 0.5)) * 28px); }
-    html.fx #t-who .tale__portrait img { filter: grayscale(calc(1 - min(1, var(--p, 0) * 4))); }
-    html.fx #t-thesis { --q: clamp(0, 1 - var(--p, 0) / 0.45, 1); }
-    html.fx .sc__l { translate: calc(var(--x) * var(--q, 0) * 1rem) calc(var(--y) * var(--q, 0) * 1rem); rotate: calc(var(--r) * var(--q, 0) * 1deg); }
-    html.fx .tale__pic--1 { translate: 0 calc((0.5 - var(--p, 0.5)) * 18svh); }
-    html.fx .tale__pic--2 { translate: 0 calc((0.5 - var(--p, 0.5)) * 30svh); }
-    html.fx .tale__pic--3 { translate: 0 calc((0.5 - var(--p, 0.5)) * 12svh); }
+  /* orientation (D113): the sheet comes in as its veil fades up and its column comes into focus from 12px below
+     (600ms), and leaves faster (450ms); transitions, so a close mid-way runs back from where it is. Blur on a fine
+     pointer only. Reduced motion: instant (the rule at the end of this layer). */
+  .about__veil { opacity: 0; transition: opacity var(--t-sheet-out) var(--ease-out); }
+  .about .about__col { opacity: 0; translate: 0 12px; transition: opacity var(--t-sheet-out) var(--ease-out), translate var(--t-sheet-out) var(--ease-out), filter var(--t-sheet-out) var(--ease-out); }
+  .about.is-in .about__veil { opacity: 1; transition-duration: var(--t-sheet); }
+  .about.is-in .about__col { opacity: 1; translate: none; filter: none; transition-duration: var(--t-sheet); }
+  @media (hover: hover) and (pointer: fine) { .about .about__col { filter: blur(6px); } .about__col { --about-blur: 6px; } }
+  /* hierarchy (D113): the column's words, rows and photographs come into focus over the first 12rem of their entry
+     into its scroller (the sheet's, or the page's on about.html): CSS scroll timelines, so they run back too; where
+     those are missing, or under reduced motion, they simply stand */
+  @media (prefers-reduced-motion: no-preference) {
+    @supports (animation-timeline: view()) {
+      :is(.about__s > :not(.about__rows, .about__card), .about__row, .about__portrait) { animation: about-in linear both; animation-timeline: view(); animation-range: entry 0% entry 12rem; }
+    }
   }
+  @keyframes about-in { from { opacity: 0; translate: 0 12px; filter: blur(var(--about-blur, 0px)); } }
 
   /* orientation (D100): a case study's plate rises to its place as it enters the screen and goes back down the same way
      when the reader scrolls back (--d from 1 to 0.4), so the document itself follows the wheel, not only its arrivals */
@@ -1084,7 +1058,7 @@
   .muted { color: var(--ink-2); }
   .print-only { display: none; }
   @media print {
-    .site-header, .edge, .corner, .site-footer, .menu, .viewer, .skip, .no-print, .about-contact, .about-portrait, .tale { display: none !important; }
+    .site-header, .edge, .corner, .site-footer, .menu, .viewer, .skip, .no-print, .about, .about__fig, .about__pair, .about__contact, .about__name { display: none !important; }
     @page { size: A4; margin: 16mm 16mm 18mm; }
     :root { --bg: #FFFFFF; --ink: #111111; --ink-2: #5E5E5E; --line: #E6E6E6; --ui: #8A8A8A; --drawing-bg: #FFFFFF; --gap-group: 6mm; --gap-chapter: 8mm; --cols: 12; --gutter: 4mm; color-scheme: light; }
     body { font-size: 10.5pt; line-height: 1.45; padding-top: 0; }
@@ -1093,8 +1067,15 @@
     .wrap { width: 100%; }
     .print-only { display: block; }
     .print-name { font-family: var(--sans); font-weight: var(--w-label); font-size: 18pt; letter-spacing: var(--tr-display); text-transform: var(--case); }
-    .about-head { text-align: left; }
-    .about-head .h1 { display: none; }
+    /* the CV (npm run cv prints about.html): the column across the page, its rows in two columns, no photographs */
+    .about__col { width: 100%; display: block; padding: 0; font-size: 10.5pt; }
+    .about__col > .print-only + .print-only { margin-bottom: 4mm; }
+    .about__s { gap: 2mm; margin-top: 5mm; }
+    .about__h { font-size: 10pt; padding-bottom: 1mm; border-bottom: 1px solid var(--line); break-after: avoid; }
+    .about__card { margin: 0; padding: 0; background: none; }
+    .about__rows { gap: 2mm; }
+    .about__row { grid-template-columns: minmax(0, 1fr) minmax(0, 3fr); break-inside: avoid; }
+    .about__row dd { gap: 0.5mm; }
     .g > .s-text, .g > .s-narrow { grid-column: 1 / -1; }
     .prose { max-width: none; margin: 0; }
     .cv__when { grid-column: 1 / span 3; font-size: 9.5pt; }
