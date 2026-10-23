@@ -484,6 +484,8 @@
   @media (max-width: 47.99rem) {
     .row--stack { flex-direction: column; gap: var(--s6); }
     .row--stack > .cell { flex: none; width: 100%; }
+    .row--pairs { flex-wrap: wrap; justify-content: center; }   /* a series reads as a set; each map opens full size */
+    .row--pairs > .cell { flex: 0 0 calc((100% - var(--gutter)) / 2); }
   }
 
   /* cells: a drawing series in equal invisible cells, contained, standing on one line */
@@ -713,6 +715,7 @@
   @media (max-height: 32rem) {
     .site-header { position: absolute; }
     .ix-bar { position: static; translate: none; flex-wrap: wrap; justify-content: center; margin: var(--s4) var(--site-edge) 0; }
+    .ix-bar .ix-filter { position: fixed; z-index: 21; top: var(--s4); bottom: auto; max-height: calc(100svh - 2rem); }   /* the bar stands in the page: the panel holds the screen */
   }
   .ix-bar .pill[aria-pressed="true"], .tree .pill[aria-pressed="true"] { border-color: var(--ink); }
   .pill--icon { width: 2.75rem; padding: 0; justify-content: center; }
@@ -725,6 +728,31 @@
     .ix-bar__group:first-child .pill { flex: none; }
     .ix-bar__group:last-child { flex: none; flex-wrap: nowrap; }
   }
+  /* the filters (D125-D127): the bar's Filter pill (with the number of choices made) opens a frosted panel just
+     above the bar, the pointer label's surface (the field at 86%, so the grey row names keep 4.5:1 over the
+     darkest render under it): five rows of pills, a choice's count beside it. One out of reach loses its ring
+     and goes grey (6.4:1 on its own ground). A phone's panel spans the bar and its rows stack. The line under
+     the heading says what is chosen and how much it leaves; the tree dims what does not match, in place */
+  .ix-bar__filter { flex: none; }
+  .ix-filter { position: absolute; left: 50%; bottom: calc(100% + var(--s2)); translate: -50% 0; width: min(46rem, 100vw - 2 * var(--site-edge));
+    max-height: calc(100svh - var(--head-h) - 6rem); overflow-y: auto; overscroll-behavior: contain;
+    border: 1px solid var(--line); border-radius: var(--r-card); background: color-mix(in srgb, var(--bg) 86%, transparent);
+    -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); box-shadow: var(--shadow-lift); }
+  .ix-filter__in { display: grid; gap: var(--s3); padding: var(--s4); }
+  .ix-filter__row { display: grid; grid-template-columns: 5rem minmax(0, 1fr); align-items: start; gap: var(--s1) var(--s3); }
+  .ix-filter__h { padding-top: 0.55rem; font-size: var(--fs-label); line-height: 1.2; color: var(--ink-2); }
+  .ix-filter__opts { display: flex; flex-wrap: wrap; gap: var(--s1); }
+  .ix-filter .pill { white-space: nowrap; }
+  @media (pointer: fine) { .ix-filter .pill { min-height: 2.25rem; padding-inline: var(--s3); } }   /* 36px: a dense field for a mouse; touch keeps 44px */
+  .ix-filter .pill[aria-pressed="true"] { border-color: var(--ink); }
+  .pill[aria-disabled="true"] { border-color: transparent; color: var(--ink-2); cursor: default; }
+  .pill[aria-disabled="true"]:hover { background-color: var(--bg); }
+  .pill[aria-disabled="true"]:active { scale: none; }
+  .ix-filter__clear { justify-self: end; }
+  @media (max-width: 47.99rem) { .ix-filter__row { grid-template-columns: minmax(0, 1fr); } .ix-filter__h { padding-top: 0; } }
+  .ix-result { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: var(--s2) var(--s3); padding: var(--s4) var(--site-edge) 0; font-size: var(--fs-cap); text-align: center; }
+  .leaf.is-off { opacity: 0.14; }
+  .tree__lines path.is-off { stroke-opacity: 0.04; }
   @media (max-width: 89.99rem) { .page-work .corner { display: none; } }
 
   /* about (D113, D114): dmcg's About, one column in the one voice at the header's size, on the field. Entries are
@@ -840,7 +868,11 @@
   .rail { display: none; }
   @media (min-width: 80rem) {
     .rail { display: block; position: sticky; top: 50svh; z-index: 5; height: 0; }
-    .rail ol { position: absolute; right: var(--site-edge); top: 0; translate: 0 -50%; display: grid; justify-items: end; margin: 0; padding: 0; list-style: none; }
+    .rail ol { position: absolute; right: var(--site-edge); top: 0; translate: 0 -50%; display: grid; justify-items: end; margin: 0; padding: 0.375rem 0.5rem; list-style: none; }
+    /* the dashes stand on a frosted pill, so they stay legible where a plate or the opening's hero passes under them
+       (D130); a pseudo-element carries the blur, so the dash's own label pill still frosts what lies behind it */
+    .rail ol::before { content: ""; position: absolute; inset: 0; z-index: -1; border-radius: var(--r-pill); box-shadow: 0 0 0 1px var(--line);
+      background: color-mix(in srgb, var(--bg) 86%, transparent); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); }
     .rail a { position: relative; display: flex; align-items: center; justify-content: flex-end; min-width: 2rem; min-height: 1.5rem; color: var(--ink-2); text-decoration: none; }
     .rail a::after { content: ""; width: 0.875rem; height: 1px; background: currentColor; transition: width var(--t-ui) var(--ease-out); }
     .rail a[aria-current] { color: var(--ink); }
@@ -861,6 +893,14 @@
   .ch__text { margin-top: var(--s4); }
   .ch__head + .fig { margin-top: 2.5rem; }
   @media (min-width: 64rem) { .page-case .fig + .fig { margin-top: 4.5rem; } }
+  /* surfaces (D130): a render is a card on the field (the house radius and soft shadow) that lifts under the pointer,
+     since it opens the viewer; the opening's frames and the film are cards too. A drawing lies flat and whole on a
+     raised sheet with a hairline, its re-set labels haloed in the sheet's tone. The two kinds read apart at a glance */
+  .page-case :is(.fig--render .fig__plate > :is(.nw, .crop), .fig--render .cell > .nw, .op__f, .op__f > .nw, .film video) { border-radius: var(--r-card); overflow: clip; }
+  .page-case :is(.fig--render .fig__plate > :is(.nw, .crop), .fig--render .cell > .nw, .op__f, .film video) { box-shadow: var(--shadow-card); transition: box-shadow var(--t-hover) var(--ease-out); }
+  .page-case :is(.fig--render .fig__plate > :is(.nw, .crop), .fig--render .cell > .nw, .op__f):hover { box-shadow: var(--shadow-lift); }
+  .fig--drawing > :is(.fig__plate, .cells) { padding: clamp(0.75rem, 2.5vw, 2.5rem); border-radius: var(--r-card); background: var(--bg-raised); box-shadow: 0 0 0 1px var(--line); }
+  .fig--drawing .lab:not(.lab--field) { --lab-paper: var(--bg-raised); }
   .role { display: grid; gap: var(--s4); }
   .role li { position: relative; padding-left: var(--s5); }
   .role li::before { content: ""; position: absolute; left: 0; top: 0.8em; width: 0.625rem; height: 1px; background: var(--ink-2); }

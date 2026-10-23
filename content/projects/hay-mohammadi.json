@@ -11,6 +11,8 @@
   "$omit": ["run", "tag", "spec:Office", "spec:Location"],
   "summary": "Rapid transit station and covered public concourse in the Hay Mohammadi district of Casablanca, at Yassir Khalil Studio.",
   "place": "Casablanca",
+  "country": "Morocco",
+  "countrySource": "spec Location \"Casablanca, Hay Mohammadi\" (D125)",
   "year": "2025",
   "descriptor": "Infrastructure | rapid transit station",
   "office": "Yassir Khalil Studio",

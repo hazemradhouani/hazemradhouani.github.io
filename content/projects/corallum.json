@@ -8,8 +8,11 @@
   ],
   "title": "Corallum",
   "run": "ENAU | Tabarka",
+  "$omit": ["run", "tag", "spec:Type", "spec:School"],
   "summary": "Coral research and exhibition centre on the northern Tunisian coast, an academic project at ENAU.",
   "place": "Tabarka, Tunisia",
+  "country": "Tunisia",
+  "countrySource": "spec Location \"Tabarka, Tunisia\" (D125)",
   "year": "2023",
   "descriptor": "Cultural | research and exhibition centre",
   "spec": [

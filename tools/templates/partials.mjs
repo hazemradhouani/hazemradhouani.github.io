@@ -73,22 +73,24 @@ export function image(rel, { alt, sz, prefix = '', priority = false, zoom = fals
   return html`<a class="zoom-link ${cls}" style="${style}" href="${prefix}${rel}" data-viewer data-title="${title}" data-alt="${alt}" data-w="${w}" data-h="${h}" data-webp="${big.webp}" data-avif="${big.avif}"${project ? html` data-href="${project}"` : ''}${dark ? html` data-dark="${dark}"` : ''}${keep ? html` data-keep="${largest(keep, prefix).webp}"` : ''}><span class="vh">Open full size: ${title || alt}</span>${picture(rel, { alt, sizes: sz, prefix, priority, upto })}${layer}</a>`;
 }
 
-// a row of images sharing one height; `stack`: one per line on phones (drawings, or more than two).
+// a row of images sharing one height; `stack`: one per line on phones (drawings, or more than two);
+// `pairs`: a series of four or more renders (a material's maps) stands two to a line on phones instead (D134).
 // An item with `href` becomes a card: the image and its `label` in one link.
 export function row(items, { prefix, max = 'full', zoom = false, after = () => '', maxH, ladder } = {}) {
   const dimsOf = items.map((it) => ({ ...it, ...dims(it.rel) }));
   const { span, sum } = planRow(dimsOf, { max, maxH, ladder });
-  const stack = items.length > 2 || sum > 2.4 || items.some((it) => it.drawing || it.href);
+  const pairs = items.length >= 4 && !items.some((it) => it.drawing || it.href);
+  const stack = !pairs && (items.length > 2 || sum > 2.4 || items.some((it) => it.drawing || it.href));
   const free = 1 - (items.length - 1) * GUT / spanPx(span);
   const sizes = [];
   const out = dimsOf.map((it, k) => {
     const r = it.w / it.h, frac = free * r / sum;
-    const sz = sizesFor(span, frac, stack ? 1 : frac); sizes.push(sz);
+    const sz = sizesFor(span, frac, pairs ? 0.5 : stack ? 1 : frac); sizes.push(sz);
     const pic = image(it.rel, { alt: it.alt, sz, prefix, priority: it.priority, zoom, title: it.title, vt: it.vt });
     // --c: the cell's place from the row's centre, in cells (a figure assembles from it, D115)
     return html`<div class="cell" style="--r: ${(r * 100).toFixed(2)}; --c: ${k - (items.length - 1) / 2}">${it.href ? html`<a class="card" href="${it.href}">${pic}${it.label || ''}</a>` : pic}${after(it, k)}</div>`;
   });
-  return { span, sizes, html: html`<div class="row${stack ? ' row--stack' : ''}">${out}</div>` };
+  return { span, sizes, html: html`<div class="row${stack ? ' row--stack' : pairs ? ' row--pairs' : ''}">${out}</div>` };
 }
 
 // a series in equal cells, each image contained at or under its native width, standing on one line;
@@ -201,10 +203,11 @@ const SIDE_MAX = 240;
 export const capSide = (span, text) => span !== 'full' && !!text && text.length <= SIDE_MAX;
 export const capOf = (f, span, side) => (f.title || f.caption || f.credit)
   ? html`<figcaption class="cap s-${span}${side ? ' cap--side' : ''}">${when(f.title, () => html`<span class="cap__t">${f.title}</span>`)}${when(f.caption || f.credit, () => html` <span class="cap__x">${inline(f.caption || '')}${when(f.credit, () => html` <span class="credit">${f.credit}.</span>`)}</span>`)}</figcaption>` : '';
-// a plate comes into focus, rises and assembles as it enters the screen, its words after it (D115: site.css, --e)
+// a plate comes into focus, rises and assembles as it enters the screen, its words after it (D115: site.css, --e);
+// its kind decides its surface: a drawing lies on a sheet, a render is a card (D130)
 const plate = (f, n, span, body, { key = '' } = {}) => {
   const side = capSide(span, `${f.title || ''}${f.caption || ''}`);
-  return html`<figure class="fig block wrap g${side ? ' fig--dock' : ''}" id="fig-${n}" data-fx="enter">${body}${key}${capOf(f, span, side)}</figure>`;
+  return html`<figure class="fig fig--${f.kind === 'drawing' ? 'drawing' : 'render'} block wrap g${side ? ' fig--dock' : ''}" id="fig-${n}" data-fx="enter">${body}${key}${capOf(f, span, side)}</figure>`;
 };
 
 export function figure(f, n, ctx) {

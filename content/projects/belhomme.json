@@ -12,6 +12,8 @@
   "$omit": ["run", "spec:Project type"],
   "summary": "Rehabilitation and rooftop extension of a corner building in Paris 18th, documented from a full survey of the existing facades.",
   "place": "Paris 18th",
+  "country": "France",
+  "countrySource": "spec Location \"1-3 rue Belhomme, Paris 18th\" (D125)",
   "year": "2025-2026",
   "descriptor": "Rehabilitation | residential and commercial",
   "office": "Studio BELEM",

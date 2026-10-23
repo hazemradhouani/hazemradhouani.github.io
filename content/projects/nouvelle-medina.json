@@ -8,8 +8,11 @@
   ],
   "title": "Nouvelle Medina Station",
   "run": "Yassir Khalil Studio | Casablanca",
+  "$omit": ["run"],
   "summary": "Urban train station in Casablanca whose folded, origami-like roof structures the building and modulates daylight.",
   "place": "Casablanca",
+  "country": "Morocco",
+  "countrySource": "spec Location \"Casablanca, Nouvelle Medina district\" (D125)",
   "year": "2025",
   "descriptor": "Infrastructure | urban train station, competition",
   "spec": [
@@ -77,6 +80,7 @@
       "caption": "1:1000. The station roof, marked +8.50, beside the railway cutting at −6.50, with car parks on either side.",
       "alt": "Rendered site plan seen from above: the white station roof between two car parks with parked cars, a road along the top, and the railway cutting with a train along the bottom, crossed by a walkway",
       "kind": "render",
+      "crop": { "ratio": 2.4, "pos": "50% 0%" },
       "source": "hq:Nouvelle Medina/A0 MEDINA F [1]_page-0001.jpg (rendered site plan; printed title 'Plan de masse 1-1000', 'Parking', levels +8.50 and -6.50; translated)"
     },
     {

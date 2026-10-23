@@ -9,8 +9,11 @@
   ],
   "title": "Rue de l'Avenir",
   "run": "Studio BELEM | Villeneuve-la-Garenne",
+  "$omit": ["run", "tag", "spec:Project type", "spec:Office"],
   "summary": "Housing over a corner shop and a semi-buried car park in Villeneuve-la-Garenne: Studio BELEM building-permit drawings, December 2025.",
   "place": "Villeneuve-la-Garenne",
+  "country": "France",
+  "countrySource": "spec Location \"2 rue de l'Avenir, Villeneuve-la-Garenne\" (D125)",
   "year": "2025",
   "descriptor": "New construction | residential and commercial",
   "office": "Studio BELEM",
@@ -68,6 +71,7 @@
   ],
   "hero": {
     "src": "images/avenir/avenir-avenue-de-verdun-render.jpg",
+    "pos": "50% 60%",
     "alt": "Render of the eight-storey corner building in pale brick, its curved balconies full of plants, seen across avenue de Verdun on a sunny day, a shop with white awnings and café tables at its foot, the lower block behind on the left and a white neighbouring building on the right",
     "caption": "The building from avenue de Verdun.",
     "source": "hq:Villneuve la garenne/PC40-2_DOCUMENTS DESCRIPTIFS SECURITE INCENDIE ERP_merge [141-160] [11-20]_page-0005.jpg (printed caption 'FIGURE 2. VUE DU BÂTIMENT DEPUIS L'AVENUE DE VERDUN.'; translated, D17)"

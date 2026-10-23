@@ -11,6 +11,8 @@
   "$omit": ["run", "tag", "spec:Project type", "spec:School"],
   "summary": "Heritage conservation and rehabilitation of an abandoned raw-earth village in the Tunisian Jérid. Architecture thesis, ENAU, Highest Honours.",
   "place": "Hammat Djérid, Tunisia",
+  "country": "Tunisia",
+  "countrySource": "spec Location \"Al-Arg, Hammat Djérid, Tozeur Governorate, Tunisia\" (D125)",
   "year": "2023-2024",
   "descriptor": "Heritage conservation | rehabilitation",
   "quote": {
@@ -27,7 +29,7 @@
       "source": "pdf2026:p23 (translated from French; year omitted, see ledger C03)"
     },
     {
-      "text": "International distinction: Most Appreciated Research | Sakura Science Program, Tokyo 2025. The only Tunisian participant selected.",
+      "text": "International distinction: Most Appreciated Research | Sakura Science Program, Tokyo 2025.",
       "source": "pdf2026:p23 (translated from French; award name per answer F02)"
     }
   ],
