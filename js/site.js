@@ -366,6 +366,14 @@
       v.play().catch(function () {});
     });
   });
+  // a film the reader plays (with sound: the hover preview is always muted) counts once per visit (D141)
+  slice(document.querySelectorAll('video[controls]')).forEach(function (v) {
+    v.addEventListener('play', function () {
+      if (v.muted || v.dataset.counted || !window.gtag) return;
+      v.dataset.counted = '1';
+      window.gtag('event', 'video_start', { video_title: v.closest('.fcard') ? v.closest('.fcard').querySelector('.title').textContent : document.title, video_url: v.currentSrc });
+    });
+  });
 
   /* ------------------------------------------------------------ arrival (hierarchy, D76)
      Groups that start below the fold arrive once, after their images decode: each plate rises from its
@@ -932,6 +940,8 @@
       vToggle.hidden = fit(it).s >= 1;
       var proj = it.a.getAttribute('data-href');   // the index's tiles open their project from the viewer (A6)
       if (vProject) { vProject.hidden = !proj; if (proj) vProject.href = proj; }
+      // every image shown full size counts as viewed (D141); gtag queues until GA has loaded, and is absent on opt-out
+      if (window.gtag) window.gtag('event', 'view_image', { image_title: it.title, image_url: new URL(it.full, document.baseURI).pathname });
     };
     var animate = function (el, from, to, dur) {
       el.style.transform = tf(to);
@@ -1058,5 +1068,7 @@
     };
     var idle = function () { if ('requestIdleCallback' in window) window.requestIdleCallback(loadGa, { timeout: 4000 }); else setTimeout(loadGa, 2000); };
     if (document.readyState === 'complete') idle(); else window.addEventListener('load', idle, { once: true });
+    // Back and Forward restore a page from the browser's cache without loading it: GA would not see that visit (D141)
+    window.addEventListener('pageshow', function (e) { if (e.persisted) window.gtag('event', 'page_view'); });
   }
 })();

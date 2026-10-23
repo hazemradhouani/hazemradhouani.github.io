@@ -85,14 +85,14 @@ ${when(sheet, () => html`<dialog class="about" id="about" aria-label="About" dat
 ${body}
 </main>
 <footer class="site-footer">
-<nav aria-label="Footer"><p class="site-footer__base"><span>&copy; 2026 ${P.name}</span>${mailChip(P.email)}<a class="ctl" href="${P.linkedin}" target="_blank" rel="noopener">LinkedIn<span class="vh"> (opens in a new tab)</span></a><a class="ctl" href="${href('files/hazem-radhouani-cv.pdf')}">CV (PDF)</a><a class="ctl" href="${href('motion.html')}">Films and motion</a></p></nav>
+<nav aria-label="Footer"><p class="site-footer__base"><span>&copy; 2026 ${P.name}</span>${mailChip(P.email)}<a class="ctl" href="${href('files/hazem-radhouani-cv.pdf')}">CV (PDF)</a><a class="ctl" href="${href('motion.html')}">Films and motion</a></p></nav>
 </footer>
 ${when(page.corners, () => html`${edge('bottom')}<p class="corner corner--l">${site.corners[0]}</p><p class="corner corner--r">${site.corners[1]}</p>`)}
 <dialog class="menu" id="menu" aria-label="Site menu" data-lenis-prevent>
 <div class="wrap">
 <div class="menu__top">${brand(false)}<div class="menu__controls">${themeButton('menu')}<form method="dialog"><button class="menu__close ctl" type="submit" autofocus>close</button></form></div></div>
 <nav aria-label="Main"><ul class="menu__list" role="list">${[...site.views, ...site.nav].map(navItem)}</ul></nav>
-<p class="menu__contact"><a class="ctl" href="${P.linkedin}" target="_blank" rel="noopener">LinkedIn<span class="vh"> (opens in a new tab)</span></a><a class="ctl" href="${href('files/hazem-radhouani-cv.pdf')}">CV (PDF)</a><a class="ctl" href="${href('motion.html')}"${attrs({ 'aria-current': page.path === 'motion.html' ? 'page' : null })}>Films and motion</a></p>
+<p class="menu__contact"><a class="ctl" href="${href('files/hazem-radhouani-cv.pdf')}">CV (PDF)</a><a class="ctl" href="${href('motion.html')}"${attrs({ 'aria-current': page.path === 'motion.html' ? 'page' : null })}>Films and motion</a></p>
 </div>
 </dialog>
 ${when(ctx.viewer, () => html`<dialog class="viewer" id="viewer" aria-labelledby="viewer-title" data-lenis-prevent>

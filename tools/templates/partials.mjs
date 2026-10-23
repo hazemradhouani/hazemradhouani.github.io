@@ -342,7 +342,7 @@ export function aboutColumn(site, d, p, { page = false } = {}) {
   const pair = d.photos.japan.slice(1).map((ph) => { const { w, h } = dims(ph.src); return { ph, r: w / h }; });
   return html`<div class="about__col">
 ${when(page, () => html`<p class="print-only print-name">${P.name} | ${P.jobTitle}</p>
-<p class="print-only">${P.line} ${P.email} | ${P.linkedin.replace('https://www.', '')} | ${site.origin.replace('https://', '')}${site.base}</p>`)}
+<p class="print-only">${P.line} ${P.email} | ${site.origin.replace('https://', '')}${site.base}</p>`)}
 <header class="about__s">${H(1, 'about-h', P.name, page ? '' : ' tabindex="-1" autofocus')}<p>${d.bio}</p></header>
 <figure class="about__fig about__portrait">${image(d.portrait, { alt: d.portraitAlt, sz: PORTRAIT, prefix: p, priority: page })}</figure>
 <section class="about__s" aria-labelledby="about-edu-h">${H(2, 'about-edu-h', 'Education')}
@@ -362,6 +362,6 @@ ${rows(d.skills.map((s) => ({ k: html`<b>${s.group}</b>`, v: html`<p>${s.items.j
 <section class="about__s" aria-labelledby="about-lang-h">${H(2, 'about-lang-h', 'Languages')}
 ${rows(d.languages.map((l) => ({ k: html`<b>${l.name}</b>`, v: html`<p>${l.level}</p>` })))}</section>
 <section class="about__s about__contact"${page ? raw(' id="contact"') : ''} aria-labelledby="about-contact-h">${H(2, 'about-contact-h', 'Contact')}
-<p class="about__links">${mailChip(P.email, 'Email')}<a class="ctl" href="${P.linkedin}" target="_blank" rel="noopener">LinkedIn<span class="vh"> (opens in a new tab)</span></a><a class="ctl" href="${p}files/hazem-radhouani-cv.pdf">CV (PDF)</a></p></section>
+<p class="about__links">${mailChip(P.email, 'Email')}<a class="ctl" href="${p}files/hazem-radhouani-cv.pdf">CV (PDF)</a></p></section>
 </div>`;
 }

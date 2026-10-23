@@ -552,7 +552,7 @@
   .viewer__nav { display: flex; gap: var(--s2); min-width: 4.5rem; justify-content: flex-end; }
 
   /* footer (D117): one quiet line in the one voice, the practical routes as pills (the reading routes are in
-     the header and the menu): the year and name, the address, LinkedIn, the CV, the films */
+     the header and the menu): the year and name, the address, the CV, the films */
   .site-footer { margin-top: var(--gap-group); padding: var(--s6) var(--site-edge); text-align: center; }
   .site-footer__base { position: relative; display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 0 var(--s1);
     font-size: var(--fs-cap); color: var(--ink-2); }
